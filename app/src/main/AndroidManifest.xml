@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.programmer.tbeacloudbusiness" >
+
+    <application
+        android:name=".activity.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name=".activity.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.scanCode.MainListActivity"/>
+
+        <activity android:name=".activity.scanCode.CreateSelectActivity"/>
+
+        <activity android:name=".activity.scanCode.TypeSelectActivity"/>
+        <activity android:name=".activity.scanCode.NormsSelectActivity"/>
+        <activity android:name=".activity.scanCode.CreateActivity"/>
+        <activity android:name=".activity.scanCode.HistoryListActivity"/>
+        <activity android:name=".activity.scanCode.StateListActivity"/>
+        <activity android:name=".activity.scanCode.ViewActivity"/>
+        <activity android:name=".activity.scanCode.WithdrawDepositDateActivity"/>
+        <activity android:name=".activity.scanCode.DateSelectActivity"/>
+        <activity android:name=".activity.scanCode.WithdrawDepositDateViewActivity"/>
+        <activity android:name=".activity.scanCode.ScanCodeRebateListActivity"/>
+        <activity android:name=".activity.scanCode.WithdrawDepositDateHistoryActivity"/>
+        <activity android:name=".activity.scanCode.RegionSelectActivity"/>
+        <activity android:name=".activity.plumberManage.MainListActivity"/>
+        <activity android:name=".activity.plumberManage.ScanCodeDateListActivity"/>
+        <activity android:name=".activity.plumberManage.SignHistoryListActivity"/>
+        <activity android:name=".activity.plumberManage.LoginDatailsActivity"/>
+        <activity android:name=".activity.plumberManage.LoginStatisticsActivity"/>
+        <activity android:name=".activity.plumberManage.PersonViewActivity"/>
+        <activity android:name=".activity.plumberManage.PersonManageActivity"/>
+
+        <activity android:name=".activity.plumberMeeting.MainListActivity"/>
+        <activity android:name=".activity.plumberMeeting.ListAllActivity"/>
+        <activity android:name=".activity.plumberMeeting.ViewActivity"/>
+        <activity android:name=".activity.plumberMeeting.ParticipantListActivity"/>
+        <activity android:name=".activity.plumberMeeting.SignInListActivity"/>
+
+
+    </application>
+
+</manifest>

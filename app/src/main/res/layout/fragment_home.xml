@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/mian_top"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/blue3"
+        android:orientation="horizontal"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <ImageView
+            android:id="@+id/mian_city_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="5dp"
+            android:src="@drawable/icon_message">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/expert_search_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/home_page_search_selector"
+            android:drawableLeft="@drawable/icon_search"
+            android:drawablePadding="5dp"
+            android:hint="输入关键字查询"
+            android:imeOptions="actionSearch"
+            android:padding="5dp"
+            android:maxLines="1"
+            android:textColor="@color/text_color"
+            android:textColorHint="@color/text_color"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/open_my_message"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center|left"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/icon_message" />
+
+
+    </LinearLayout>
+
+    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        android:id="@+id/rl_recyclerview_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/home_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:paddingBottom="0dp"
+            android:scrollbars="none" />
+    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+</LinearLayout>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/home_top1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="36.0dip"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_tbea1"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dip"
+                android:textColor="@color/text_color"
+                android:textSize="11.0sp"
+                android:text="特变电工"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="36.0dip"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_distribution"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dip"
+                android:textColor="@color/text_color"
+                android:textSize="11.0sp"
+                android:text="分销系统"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="36.0dip"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_store"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dip"
+                android:textColor="@color/text_color"
+                android:textSize="11.0sp"
+                android:text="商城系统"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/home_plumber_manage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/tab_icon"
+                android:layout_width="36.0dip"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_water_electrician_management"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:id="@+id/tab_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dip"
+                android:textColor="@color/text_color"
+                android:textSize="11.0sp"
+                android:text="水电工管理"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/home_top2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <LinearLayout
+            android:id="@+id/home_plumber_meeting"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="36.0dip"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_conference"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dip"
+                android:textColor="@color/text_color"
+                android:textSize="11.0sp"
+                android:text="水电工会议"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="36.0dip"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_bodyguard"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dip"
+                android:textColor="@color/text_color"
+                android:textSize="11.0sp"
+                android:text="特变卫士"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/home_scan_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="36.0dip"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_scan_code"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dip"
+                android:textColor="@color/text_color"
+                android:textSize="11.0sp"
+                android:text="扫码返利"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="36.0dip"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_other"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dip"
+                android:textColor="@color/text_color"
+                android:textSize="11.0sp"
+                android:text="其他应用"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

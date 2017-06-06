@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:drawablePadding="2dp"
+        android:drawableRight="@drawable/icon_arrow_gray"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="123"
+        android:textColor="@color/text_color"
+        />
+
+
+</merge>

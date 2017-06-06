@@ -1,0 +1,100 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <LinearLayout
+        android:id="@+id/scan_code_date_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:paddingRight="10dp"
+        android:layout_marginLeft="15dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+     >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.8"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/scan_code_history_scan_code"
+                android:layout_height="wrap_content"
+                android:text="扫码"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                />
+
+
+            <TextView
+                android:id="@+id/scan_code_history_withdraw_deposit"
+                android:textColor="@color/text_color"
+                android:text="提现"
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                />
+
+            <ImageView
+                android:id="@+id/scan_code_history_withdraw_iv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_click"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/scan_code_date_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#EA8733"
+            android:layout_weight="0.3"
+            android:text="2622.00"
+           android:textStyle="bold"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
+    <View
+        android:id="@+id/scan_code_date_title_view"
+        style="@style/horizontal_view"
+        android:visibility="gone"/>
+
+    <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
+        android:id="@+id/expandtab_view"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="8dp" />
+
+    <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
+        android:id="@+id/expandtab_view1"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="15dp"
+        android:visibility="gone"/>
+
+    <View style="@style/horizontal_view" />
+
+    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        android:id="@+id/rl_recyclerview_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none" />
+
+    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
+</LinearLayout>

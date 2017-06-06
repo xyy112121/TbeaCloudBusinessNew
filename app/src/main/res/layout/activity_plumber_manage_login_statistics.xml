@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_page_top" />
+
+        <LinearLayout
+            style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="登录次数"
+                android:textColor="@color/tab_text_normal" />
+
+            <TextView
+                android:id="@+id/login_number_tv"
+                style="@style/my_right_text_style"
+                android:text="265次"
+                android:textColor="@color/text_color" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="在线时长"
+                android:textColor="@color/tab_text_normal" />
+
+            <TextView
+                style="@style/my_right_text_style1"
+                android:text="71分钟"
+                android:textColor="@color/text_color" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="最近终端"
+                android:textColor="@color/tab_text_normal" />
+
+            <TextView
+                android:id="@+id/create_code_type_norms"
+                style="@style/my_right_text_style1"
+                android:text="JHSY-BHU-7"
+                android:textColor="@color/text_color" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="最近登录"
+                android:textColor="@color/tab_text_normal" />
+
+            <TextView
+                style="@style/my_right_text_style1"
+                android:text="四川省德阳市旌阳区长白山路2号"
+                android:textColor="@color/text_color" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+    </LinearLayout>
+
+
+</merge>

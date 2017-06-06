@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+        <TextView
+            android:id="@+id/plumber_meeting_all_list_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="会议列表"
+            android:textColor="@color/text_color"
+            android:drawableTop="@drawable/icon_water_metting"
+            android:drawablePadding="10dp"
+            />
+
+        <TextView
+            android:id="@+id/plumber_meeting_sign_in_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="水电工签到"
+            android:textColor="@color/text_color"
+            android:drawableTop="@drawable/icon_water_order"
+            android:drawablePadding="10dp"
+            android:layout_marginLeft="15dp"
+            />
+    </LinearLayout>
+    <View
+        style="@style/horizontal_view"
+        android:layout_height="8dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+
+       >
+
+        <TextView
+            android:id="@+id/top_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="最新会议"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="right"
+            android:src="@drawable/icon_more" />
+
+    </RelativeLayout>
+</LinearLayout>
+
+

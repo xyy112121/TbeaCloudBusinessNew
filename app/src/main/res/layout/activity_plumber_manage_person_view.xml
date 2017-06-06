@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_page_top" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+
+            android:background="@color/head_color"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="个人资料"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="姓名" />
+
+            <TextView
+                android:id="@+id/create_code_type_norms"
+                style="@style/my_right_text_style"
+                android:text="刘涛（13888697542）" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="性别" />
+
+            <TextView
+                style="@style/my_right_text_style"
+                android:text="男"
+                />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="年龄" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/my_right_text_style"
+                android:text="48"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+
+
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="认证状态" />
+
+            <TextView
+                style="@style/my_right_text_style1"
+                android:text="已认证" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="隶属" />
+
+            <TextView
+                style="@style/my_right_text_style1"
+                android:text="[分销商]四川省德阳市小明五金" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="个人介绍" />
+
+            <TextView
+                android:id="@+id/create_code_number"
+                style="@style/my_right_text_style1"
+                android:maxLines="20"
+                android:text="专业承接水电安装专业承接水电安装专业承接水电安装专业承接水电安装" />
+        </LinearLayout>
+        <View style="@style/horizontal_view" />
+    </LinearLayout>
+
+
+</RelativeLayout>
