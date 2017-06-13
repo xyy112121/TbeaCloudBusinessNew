@@ -52,6 +52,10 @@
         <activity android:name=".activity.plumberMeeting.ParticipantListActivity"/>
         <activity android:name=".activity.plumberMeeting.SignInListActivity"/>
 
+        <activity android:name=".activity.user.RegisterActivity"/>
+        <activity android:name=".activity.user.CompletionDataActivity"/>
+        <activity android:name=".activity.user.RegisterSuccessActivity"/>
+
 
     </application>
 

@@ -24,11 +24,6 @@ import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * User:Shine
- * Date:2015-10-29
- * Description:
- */
 public class MainNavigateTabBar extends LinearLayout implements View.OnClickListener {
 
     private static final String KEY_CURRENT_TAG = "com.startsmake.template。currentTag";

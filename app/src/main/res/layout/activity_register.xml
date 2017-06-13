@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/register_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00AAEF"
+  >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#00AAEF">
+
+            <ImageButton
+                android:id="@+id/top_left"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:scaleType="center"
+                android:src="@drawable/icon_back" />
+
+            <TextView
+                android:id="@+id/top_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="注册"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/editText_image_layout">
+
+                <ImageView
+                    style="@style/editText_image"
+                    android:src="@drawable/icon_login_usr_in_img" />
+
+                <EditText
+                    android:id="@+id/login_phone"
+                    style="@style/editText_image_center"
+                    android:hint="输入手机号"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="0.5dp" />
+
+            <LinearLayout style="@style/editText_image_layout">
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="18dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                   >
+                    <ImageView
+                        android:layout_width="20dp"
+                       android:layout_height="18dp"
+                        android:src="@drawable/icon_usercode"
+                       />
+                </LinearLayout>
+
+
+
+                <EditText
+
+                    style="@style/editText_image_center"
+                    android:hint="验证码"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
+                   />
+
+                <TextView
+                    style="@style/editText_image_right"
+                    android:layout_width="wrap_content"
+                    android:text="获取验证码"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+
+                    />
+            </LinearLayout>
+
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="0.5dp" />
+
+            <LinearLayout style="@style/editText_image_layout">
+
+                <ImageView
+                    style="@style/editText_image"
+                    android:src="@drawable/icon_userpwd" />
+
+                <EditText
+                    android:id="@+id/login_pwd"
+                    style="@style/editText_image_center"
+                    android:hint="密码"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone" />
+
+                <ImageView
+                    style="@style/editText_image_right"
+
+                    android:src="@drawable/icon_user_eye" />
+            </LinearLayout>
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="0.5dp" />
+
+            <LinearLayout style="@style/editText_image_layout">
+
+                <ImageView
+                    style="@style/editText_image"
+                    android:src="@drawable/icon_usertype" />
+
+                <TextView
+                    android:id="@+id/register_user_type"
+                    style="@style/editText_image_center"
+                    android:hint="用户类型"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
+                    android:gravity="center_vertical|left"/>
+
+                <ImageView
+                    style="@style/editText_image_right"
+
+                    android:src="@drawable/icon_user_arrow_gray" />
+            </LinearLayout>
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="0.5dp" />
+
+            <Button
+                android:id="@+id/register_btn"
+                style="@style/btn_white"
+                android:text="注册"
+                android:textColor="#00AAEF" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp">
+
+                <CheckBox
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    style="@style/register_ck_style"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="注册既同意用户协议"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
