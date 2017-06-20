@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">云商</string>
+    <string name="alert_text">为建设诚信商业平台，商家须补全资料并进行实名认证后才可以使用系统功能！</string>
 </resources>

@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.example.programmer.tbeacloudbusiness.R;
@@ -13,6 +15,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import java.util.ArrayList;
 
 import cn.qqtheme.framework.picker.AddressPicker;
+import cn.qqtheme.framework.popup.BottomPopup;
 
 /**
  * Created by programmer on 2017/6/10.
@@ -160,6 +163,13 @@ public class CustomAddressPicker extends AddressPicker {
 
     public CustomAddressPicker(Activity activity, ArrayList<Province> data) {
         super(activity, data);
+        setAnimationStyle(R.style.PopWindowAnimationFade);
+        setTopLineVisible(false);
+        setTextColor(ContextCompat.getColor(activity,R.color.text_color2),ContextCompat.getColor(activity,R.color.text_color));
+        setLineColor(ContextCompat.getColor(activity,R.color.text_color));
+        WindowManager m = activity.getWindowManager();
+        Display d = m.getDefaultDisplay(); // 获取屏幕宽、高用
+        setSize((int) (d.getWidth() * 0.9), BottomPopup.WRAP_CONTENT);
     }
 
     @Override

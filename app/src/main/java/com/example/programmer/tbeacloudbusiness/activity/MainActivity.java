@@ -4,11 +4,15 @@ import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.programmer.tbeacloudbusiness.R;
+import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.MainNavigateTabBar;
 import com.example.programmer.tbeacloudbusiness.fragment.MianFragment;
+import com.example.programmer.tbeacloudbusiness.fragment.TbMianFragment;
 
 import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
@@ -34,18 +38,23 @@ public class MainActivity extends TopActivity {
         mNavigateTabBar.onRestoreInstanceState(savedInstanceState);
 
         mNavigateTabBar.addTab(MianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_home, R.drawable.icon_home, "首页"));
-        mNavigateTabBar.addTab(MianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_tbea, R.drawable.icon_tbea, "特变电工"));
+        mNavigateTabBar.addTab(TbMianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_tbea, R.drawable.icon_tbea, "特变电工"));
         mNavigateTabBar.addTab(MianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_other, R.drawable.icon_other, "其他应用"));
         mNavigateTabBar.addTab(MianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_me, R.drawable.icon_me, "我的"));
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         listener();
         MyApplication.instance.addActivity(MainActivity.this);
     }
 
+
+
     private void listener(){
 
+
+    }
+
+    public void showTbMaianFragment(){
+       View view =  mNavigateTabBar.getChildAt(1);
+        view.performClick();
     }
 
 

@@ -93,6 +93,7 @@
                 android:text="头像" />
 
             <RelativeLayout
+                android:id="@+id/completion_data_header"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.7">

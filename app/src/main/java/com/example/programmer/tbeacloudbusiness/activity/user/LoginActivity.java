@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.example.programmer.tbeacloudbusiness.R;
+import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.component.picker.CustomAddressPicker;
 import com.example.programmer.tbeacloudbusiness.utils.AssetsUtils;
 
@@ -47,5 +48,14 @@ public class LoginActivity extends FragmentActivity {
                 startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
             }
         });
+
+        findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            }
+        });
     }
+
+
 }

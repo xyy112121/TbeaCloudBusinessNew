@@ -6,8 +6,10 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.example.programmer.tbeacloudbusiness.R;
@@ -15,10 +17,12 @@ import com.example.programmer.tbeacloudbusiness.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
 import cn.qqtheme.framework.picker.WheelPicker;
+import cn.qqtheme.framework.popup.BottomPopup;
 import cn.qqtheme.framework.util.DateUtils;
 
 /**
@@ -62,6 +66,13 @@ public class CustomDatePicker extends WheelPicker {
      */
     public CustomDatePicker(Activity activity) {
         this(activity, YEAR_MONTH_DAY);
+        WindowManager m = activity.getWindowManager();
+        Display d = m.getDefaultDisplay(); // 获取屏幕宽、高用
+        setSize((int) (d.getWidth() * 0.9), BottomPopup.WRAP_CONTENT);
+        setTextColor(ContextCompat.getColor(activity,R.color.text_color2),ContextCompat.getColor(activity,R.color.text_color));
+        setLineColor(ContextCompat.getColor(activity,R.color.text_color));
+        setTopLineVisible(false);
+       setAnimationStyle(R.style.PopWindowAnimationFade);
     }
 
     /**

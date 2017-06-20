@@ -14,7 +14,10 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.scanCode.MainListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.MainListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.user.RealNameAuthenticationActivity;
+import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
@@ -36,12 +39,32 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = (View) inflater.inflate(R.layout.fragment_home, null);
+        mView =  inflater.inflate(R.layout.fragment_home, null);
         mInflater = inflater;
         initView(mView);
 //        mRefreshLayout.beginRefreshing();
+//        showAlert();
         return mView;
     }
+
+    /**
+     * 显示警示框
+     */
+    private void showAlert(){
+        View parentLayout = mView.findViewById(R.id.parentLayout);
+        final CustomPopWindow1 popWindow1 = new CustomPopWindow1(getActivity());
+        popWindow1.init(parentLayout,R.layout.pop_window_header,
+                R.layout.pop_window_btn_layout,"功能受限",getResources().getString(R.string.alert_text),"前往认证");
+        popWindow1.setItemClick(new CustomPopWindow1.ItemClick() {
+            @Override
+            public void onItemClick(String text) {
+                Intent intent = new Intent(getActivity(), RealNameAuthenticationActivity.class);
+                startActivity(intent);
+
+            }
+        });
+    }
+
 
     private void initView(View view) {
         mRefreshLayout = getViewById(R.id.rl_recyclerview_refresh);
@@ -67,7 +90,7 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
             @Override
             public void onClick(View v) {
                 //水电工管理
-                startActivity(new Intent(getActivity(), com.example.programmer.tbeacloudbusiness.activity.plumberManage.MainListActivity.class));
+                startActivity(new Intent(getActivity(), com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.MainListActivity.class));
             }
         });
 
@@ -75,7 +98,14 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
             @Override
             public void onClick(View v) {
                 //水电工管理
-                startActivity(new Intent(getActivity(), com.example.programmer.tbeacloudbusiness.activity.plumberMeeting.MainListActivity.class));
+                startActivity(new Intent(getActivity(), com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.MainListActivity.class));
+            }
+        });
+
+        headView.findViewById(R.id.home_top_tb_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).showTbMaianFragment();
             }
         });
     }

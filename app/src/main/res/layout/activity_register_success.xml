@@ -58,14 +58,15 @@
         android:id="@+id/completion_finish"
         style="@style/style_next_btn"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_bg_blue"
         android:text="完成"/>
 
     <Button
         android:id="@+id/completion_data"
         style="@style/style_next_btn"
-        android:background="#2DCC70"
         android:text="前往补全资料"
         android:layout_above="@id/completion_finish"
+        android:background="@drawable/btn_bg_green"
 
         />
 

@@ -3,6 +3,7 @@ package com.example.programmer.tbeacloudbusiness.activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
@@ -21,6 +22,13 @@ public class TopActivity extends FragmentActivity {
 	protected ImageButton mBackBtn;
 	protected ImageButton mRightBtn;
 	public final int SET_REQEST = 1000;
+	protected Context mContext;
+
+	@Override
+	public void setContentView(@LayoutRes int layoutResID) {
+		super.setContentView(layoutResID);
+		mContext = this;
+	}
 
 	@Override
 	protected void onResume() {

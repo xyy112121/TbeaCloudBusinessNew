@@ -1,0 +1,8 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="mian_top_image_hight">125dp</dimen>
+    <dimen name="me_top_hight">30dp</dimen>
+    <dimen name="me_top_layout_hight">220dp</dimen>
+    <dimen name="discover_top_hight">20dp</dimen>
+    <dimen name="discover_top_layout_hight">65dp</dimen>
+</resources>

@@ -4,17 +4,20 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.location.LocationManager;
 import android.os.Environment;
-import android.provider.Settings;
-import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+
 
 import java.io.File;
 import java.lang.ref.SoftReference;
@@ -35,7 +38,7 @@ public class MyApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		instance=this;
-//		initUniversalImageLoader();
+		initUniversalImageLoader();
 	}
 
 	
@@ -109,37 +112,37 @@ public class MyApplication extends Application {
 //		dialog.show();
 //	}
 
-//	private void initUniversalImageLoader() {
-//		DisplayImageOptions options = new DisplayImageOptions.Builder()
+	private void initUniversalImageLoader() {
+		DisplayImageOptions options = new DisplayImageOptions.Builder()
 //				.showImageOnLoading(R.drawable.icon_defult)
 //				.showImageForEmptyUri(R.drawable.icon_defult)//设置图片Uri为空或是错误的时候显示的图片
 //				.showImageOnFail(R.drawable.icon_defult)  //设置图片加载/解码过程中错误时候显示的图片
-//				.resetViewBeforeLoading(true)
-//				.cacheInMemory(true)
-//				.cacheOnDisk(true)
-//				.considerExifParams(true)
-//				.imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
-//				.bitmapConfig(Bitmap.Config.RGB_565)
-//				.build();
-//
-//		int memClass = ((ActivityManager) getSystemService(Context.ACTIVITY_SERVICE))
-//				.getMemoryClass();
-//		int memCacheSize = 1024 * 1024 * memClass / 8;
-//
-//		File cacheDir = new File(Environment.getExternalStorageDirectory().getPath() + "/jiecao/cache");
-//		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
-//				.threadPoolSize(3)
-//				.threadPriority(Thread.NORM_PRIORITY - 2)
-//				.denyCacheImageMultipleSizesInMemory()
-//				.diskCacheFileNameGenerator(new Md5FileNameGenerator())
-//				.memoryCache(new UsingFreqLimitedMemoryCache(memCacheSize))
-//				.memoryCacheSize(memCacheSize)
-//				.diskCacheSize(50 * 1024 * 1024)
-//				.tasksProcessingOrder(QueueProcessingType.LIFO)
-//				.diskCache(new UnlimitedDiskCache(cacheDir))
-//				.imageDownloader(new BaseImageDownloader(this, 5 * 1000, 30 * 1000))
-//				.defaultDisplayImageOptions(options)
-//				.build();
-//		ImageLoader.getInstance().init(config);
-//	}
+				.resetViewBeforeLoading(true)
+				.cacheInMemory(true)
+				.cacheOnDisk(true)
+				.considerExifParams(true)
+//				.imageScaleType(ImageScxaleType.EXACTLY_STRETCHED)
+				.bitmapConfig(Bitmap.Config.RGB_565)
+				.build();
+
+		int memClass = ((ActivityManager) getSystemService(Context.ACTIVITY_SERVICE))
+				.getMemoryClass();
+		int memCacheSize = 1024 * 1024 * memClass / 8;
+
+		File cacheDir = new File(Environment.getExternalStorageDirectory().getPath() + "/jiecao/cache");
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+				.threadPoolSize(3)
+				.threadPriority(Thread.NORM_PRIORITY - 2)
+				.denyCacheImageMultipleSizesInMemory()
+				.diskCacheFileNameGenerator(new Md5FileNameGenerator())
+				.memoryCache(new UsingFreqLimitedMemoryCache(memCacheSize))
+				.memoryCacheSize(memCacheSize)
+				.diskCacheSize(50 * 1024 * 1024)
+				.tasksProcessingOrder(QueueProcessingType.LIFO)
+				.diskCache(new UnlimitedDiskCache(cacheDir))
+				.imageDownloader(new BaseImageDownloader(this, 5 * 1000, 30 * 1000))
+				.defaultDisplayImageOptions(options)
+				.build();
+		ImageLoader.getInstance().init(config);
+	}
 }

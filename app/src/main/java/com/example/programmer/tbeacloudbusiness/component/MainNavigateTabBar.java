@@ -190,12 +190,7 @@ public class MainNavigateTabBar extends LinearLayout implements View.OnClickList
                     mTabSelectListener.onTabSelected(holder);
                 }
             }
-
-
-
         }
-
-
     }
 
     /**

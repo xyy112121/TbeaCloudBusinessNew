@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:delay_time="4000"
+       />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            android:id="@+id/mian_top_company_intro_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/icon_tbeacominstroduce" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="公司简介"
+                android:textColor="#333333"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mian_top_news_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/icon_tbea_news" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="新闻资讯"
+                android:textColor="#333333"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mian_product_presentation_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/icon_tbea_product" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="产品介绍"
+                android:textColor="#333333"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/icon_tbea_contact" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="联系方式"
+                android:textColor="#333333"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        style="@style/horizontal_view"
+        android:background="@color/interval_color"
+        android:layout_height="8dp"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:drawableLeft="@drawable/icon_tbea_bells"
+        android:drawablePadding="8dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:drawableRight="@drawable/icon_arrow_right"
+        android:gravity="left|center_vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="55555555555555555555555555555555555555555555555" />
+    <View
+        style="@style/horizontal_view"
+        android:background="@color/interval_color"
+        android:layout_height="8dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/icon_arrow_right"
+        android:gravity="left|center_vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="最新产品"
+        android:textColor="@color/black"/>
+    <View
+       style="@style/horizontal_view"
+        android:layout_height="0.5dp"/>
+
+</LinearLayout>

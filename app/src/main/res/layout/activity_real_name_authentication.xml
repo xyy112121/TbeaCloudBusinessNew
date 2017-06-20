@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:text="企业信息"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/my_select_btn"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="名称" />
+
+                <EditText
+                    style="@style/my_right_text_style1"
+                    android:background="@null"
+                    android:hint="请填写营业执照上的企业名称" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/my_select_btn"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="注册号" />
+
+                <EditText
+                    style="@style/my_right_text_style1"
+                    android:background="@null"
+                    android:hint="请填写营业执照上的注册号" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/my_select_btn"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="所在地" />
+
+                <EditText
+                    style="@style/my_right_text_style1"
+                    android:background="@null"
+                    android:hint="请填写营业执照上的注册所在详细" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/my_select_btn"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="经营范围" />
+
+                <EditText
+                    style="@style/my_right_text_style1"
+                    android:background="@null"
+                    android:hint="请填写营业执照上的经营范围" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                style="@style/my_text_layout"
+                android:layout_height="90dp">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/my_text_style"
+                    android:text="营业执照" />
+
+                <RelativeLayout
+                    android:id="@+id/completion_data_header"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:src="@drawable/icon_user_addpic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="8dp"
+                        android:drawablePadding="10dp"
+                        android:drawableRight="@drawable/icon_arrow_right"
+                        android:text="示例"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp"
+                android:background="#E7E7E7" />
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:text="法人信息"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/my_select_btn"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="法人姓名" />
+
+                <EditText
+                    style="@style/my_right_text_style1"
+                    android:background="@null"
+                    android:hint="请输入与营业执照上一致的姓名" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/my_select_btn"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="身份证号" />
+
+                <EditText
+                    style="@style/my_right_text_style1"
+                    android:background="@null"
+                    android:hint="请输入与营业执照上一致的号码" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                style="@style/my_text_layout"
+                android:layout_height="90dp">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="个人信息面" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:src="@drawable/icon_user_addpic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="8dp"
+                        android:drawablePadding="10dp"
+                        android:drawableRight="@drawable/icon_arrow_right"
+                        android:text="示例"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                style="@style/my_text_layout"
+                android:layout_height="90dp">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="国徽面" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:src="@drawable/icon_user_addpic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="8dp"
+                        android:drawablePadding="10dp"
+                        android:drawableRight="@drawable/icon_arrow_right"
+                        android:text="示例"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp"
+                android:background="@color/interval_color" />
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:text="实景信息"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                style="@style/my_text_layout"
+                android:layout_height="90dp">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="实景照片" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:src="@drawable/icon_user_addpic" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:src="@drawable/icon_user_addpic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="8dp"
+                        android:drawablePadding="10dp"
+                        android:drawableRight="@drawable/icon_arrow_right"
+                        android:text="示例"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <Button
+                style="@style/style_next_btn"
+                android:background="@drawable/btn_bg_blue"
+                android:text="提交审核" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
