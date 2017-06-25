@@ -30,7 +30,7 @@ import cn.qqtheme.framework.picker.OptionPicker;
  * 产品介绍
  */
 
-public class ProductPresentationActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
+public class ProductPresentationListActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
 
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
@@ -43,7 +43,7 @@ public class ProductPresentationActivity extends TopActivity implements BGARefre
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_presentation);
-        initTopbar("登录详情");
+        initTopbar("产品介绍");
         mContext = this;
         mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter(mContext);
@@ -85,7 +85,7 @@ public class ProductPresentationActivity extends TopActivity implements BGARefre
                          .enableBackgroundDark(true) //弹出popWindow时，背景是否变暗
                          .setBgDarkAlpha(0.5f) // 控制亮度
                         .create()
-                        .showAsDropDown(v,-250,20);
+                        .showAsDropDown(v,-270,20);
             }
         });
     }
@@ -164,14 +164,14 @@ public class ProductPresentationActivity extends TopActivity implements BGARefre
             LayoutInflater layoutInflater = (LayoutInflater) context
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(
-                    R.layout.activity_plumber_manage_login_dateils_list_item, null);
+                    R.layout.activity_product_presentation_list_item, null);
 
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.setClass(mContext, LoginStatisticsActivity.class);
+                    intent.setClass(mContext, ProductPresentationInfoActivity.class);
                     startActivity(intent);
                 }
             });

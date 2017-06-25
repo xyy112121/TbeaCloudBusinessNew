@@ -6,26 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.CompanyIntroActivity;
-import com.example.programmer.tbeacloudbusiness.activity.tbea.ProductPresentationActivity;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.ProductPresentationContactInfoActivity;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.ProductPresentationListActivity;
 import com.example.programmer.tbeacloudbusiness.component.HeaderGridView;
 import com.example.programmer.tbeacloudbusiness.utils.BannerImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
@@ -73,6 +64,7 @@ public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefr
             mHeadView.findViewById(R.id.mian_top_news_layout).setOnClickListener(this);
             mHeadView.findViewById(R.id.mian_product_presentation_layout).setOnClickListener(this);
             mHeadView.findViewById(R.id.mian_top_company_intro_layout).setOnClickListener(this);
+            mHeadView.findViewById(R.id.mian_product_presentation_phone_layout).setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -130,9 +122,13 @@ public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefr
                 startActivity(intent);
                 break;
              case  R.id.mian_product_presentation_layout:
-                 intent = new Intent(getActivity(),ProductPresentationActivity.class);
+                 intent = new Intent(getActivity(),ProductPresentationListActivity.class);
                  startActivity(intent);
             break;
+            case  R.id.mian_product_presentation_phone_layout:
+                intent = new Intent(getActivity(),ProductPresentationContactInfoActivity.class);
+                startActivity(intent);
+                break;
 
         }
 

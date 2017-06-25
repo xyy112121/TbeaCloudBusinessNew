@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_page_top" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="60dp"
+            android:src="@drawable/icon_binding_finish" />
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="绑定成功"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <View
+            style="@style/horizontal_view"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:drawableLeft="@drawable/icon_useralert"
+            android:drawablePadding="8dp"
+            android:gravity="left|center_vertical"
+            android:text="提示"
+            android:textColor="@color/text_color"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:gravity="left|center_vertical"
+            android:text="更换手机号码成功后，请使用新号码登录系统。"
+            android:textColor="@color/text_color"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/binding_finish_login"
+        style="@style/style_next_btn"
+        android:background="@drawable/btn_bg_blue"
+        android:text="重新登录"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

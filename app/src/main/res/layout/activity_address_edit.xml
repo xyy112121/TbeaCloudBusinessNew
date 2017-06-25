@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="收货人"
+                android:textColor="@color/text_color" />
+
+            <EditText
+                android:id="@+id/addr_edit_contactperson"
+                style="@style/edit_style"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="0.74"
+                android:hint="请输入收货人姓名"
+                android:imeOptions="actionNext"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="手机号码"
+                android:textColor="@color/text_color" />
+
+            <EditText
+                android:id="@+id/addr_edit_contactmobile"
+                style="@style/edit_style"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="0.74"
+                android:hint="请输入手机号码"
+                android:imeOptions="actionNext"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout
+            android:id="@+id/addr_edit_provincial_city_layout"
+            style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="所在地区"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:id="@+id/addr_edit_provincial_city"
+                style="@style/edit_style"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.74"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/icon_arrow_right"
+                android:gravity="left|center"
+                android:hint="请选择"
+                android:imeOptions="actionNext"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="详细地址"
+                android:textColor="@color/text_color" />
+
+            <EditText
+                android:id="@+id/addr_edit_address"
+                style="@style/edit_style"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.74"
+                android:hint="请输入详细地址"
+                android:imeOptions="actionNext"
+                android:maxLines="4"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="默认地址"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:text="设置为默认收货地址"
+                android:textColor="@color/text_color" />
+
+            <CheckBox
+                android:id="@+id/addr_edit_isdefault"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/addr_is_defult_ck"
+                android:button="@null" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <Button
+            style="@style/style_next_btn_blue"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/btn_bg_blue"
+            android:text="保存" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

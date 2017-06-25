@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <LinearLayout
+        android:id="@+id/product_presentation_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+    <View style="@style/horizontal_view" />
+
+    <WebView
+        android:id="@+id/product_presentation_top_wb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/product_presentation_top_sl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/my_text_layout"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="产品名称" />
+
+                <TextView
+                    style="@style/my_right_text_style2"
+                    android:text="电工变电工特变电工特变电工特变电工特变电工特变电工" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="规格详情" />
+
+                <TextView
+                    style="@style/my_right_text_style1"
+                    android:text="JHSD-DDDD-88" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="产地" />
+
+                <TextView
+                    style="@style/my_right_text_style1"
+                    android:text="云南省 旌阳市" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="颜色" />
+
+                <TextView
+                    style="@style/my_right_text_style1"
+                    android:text="红 黄 白" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="重量" />
+
+                <TextView
+                    style="@style/my_right_text_style1"
+                    android:text="4.92kg/圈" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="长度" />
+
+                <TextView
+                    style="@style/my_right_text_style1"
+                    android:text="100米" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="内芯材质" />
+
+                <TextView
+                    style="@style/my_right_text_style1"
+                    android:text="JHSD-DDDD-88" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="标城截面" />
+
+                <TextView
+                    style="@style/my_right_text_style1"
+                    android:text="JHSD-DDDD-88" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="绝缘厚度" />
+
+                <TextView
+                    style="@style/my_right_text_style1"
+                    android:text="0.88mm" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="额定电压" />
+
+                <TextView
+                    style="@style/my_right_text_style1"
+                    android:text="450/750v" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="平均外径" />
+
+                <TextView
+                    style="@style/my_right_text_style1"
+                    android:text="0.88mm" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="专利号" />
+
+                <TextView
+                    style="@style/my_right_text_style1"
+                    android:text="0.88mm" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="执行标准" />
+
+                <TextView
+                    style="@style/my_right_text_style1"
+                    android:text="0.88mm" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                style="@style/my_text_layout"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="使用说明" />
+
+                <TextView
+                    style="@style/my_right_text_style2"
+                    android:text="调回调浩瀚的霍华德和点调回调浩瀚的霍华德和点和都会好的和都会好的和都会好的好的好回调回调浩瀚的霍华德和点好电话" />
+            </LinearLayout>
+            <View style="@style/horizontal_view"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_test_bg"
+            android:layout_marginTop="50dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp">
+            <Button
+                style="@style/style_next_btn"
+                android:background="@drawable/btn_bg_blue"
+                android:text="相册"/>
+
+            <Button
+                style="@style/style_next_btn"
+                android:background="@drawable/btn_bg_blue"
+                android:layout_marginTop="1dp"
+                android:text="拍照"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <LinearLayout style="@style/my_text_layout">
+
+        <TextView
+            style="@style/my_text_style"
+            android:text="手机号码" />
+
+        <TextView
+            android:id="@+id/set_phone"
+            style="@style/my_right_text_style"
+            android:gravity="right|center_vertical"
+            android:text="138****888"
+            android:textColor="@color/text_color" />
+
+    </LinearLayout>
+
+    <View style="@style/horizontal_view" />
+
+    <LinearLayout style="@style/my_text_layout">
+
+        <TextView
+            style="@style/my_text_style"
+            android:text="密码设置" />
+
+        <TextView
+            android:id="@+id/set_edit_pwd"
+            style="@style/my_right_text_style"
+          />
+
+    </LinearLayout>
+
+    <View style="@style/horizontal_view" />
+
+    <LinearLayout style="@style/my_text_layout">
+
+        <TextView
+            style="@style/my_text_style"
+            android:text="收货地址" />
+
+        <TextView
+            android:id="@+id/set_address"
+            style="@style/my_right_text_style"
+            android:gravity="right|center_vertical"
+            android:text="2"
+            />
+
+    </LinearLayout>
+
+    <View style="@style/horizontal_view" />
+
+    <LinearLayout style="@style/my_text_layout">
+
+        <TextView
+            style="@style/my_text_style"
+            android:text="背景图" />
+
+        <TextView
+            android:id="@+id/set_background"
+            style="@style/my_right_text_style"
+           />
+
+    </LinearLayout>
+
+    <View style="@style/horizontal_view" />
+
+    <LinearLayout style="@style/my_text_layout">
+
+        <TextView
+            style="@style/my_text_style"
+            android:text="通用" />
+
+        <TextView
+            android:id="@+id/set_general"
+            style="@style/my_right_text_style"
+          />
+
+    </LinearLayout>
+
+    <View style="@style/horizontal_view" />
+
+</LinearLayout>
+    <Button
+       style="@style/style_next_btn"
+        android:layout_alignParentBottom="true"
+        android:text="退出登录"
+        android:layout_marginTop="35dp"/>
+    </RelativeLayout>

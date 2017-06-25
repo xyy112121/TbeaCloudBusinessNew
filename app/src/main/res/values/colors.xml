@@ -20,4 +20,5 @@
     <color name="expand_tab_popview_item_press_color">#f4f4f4</color>
     <color name="no_color">#00000000</color>
     <color name="interval_color">#E7E7E7</color>
+    <color name="red">#F11618</color>
 </resources>

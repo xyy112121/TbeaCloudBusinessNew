@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_page_top" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:text="功能"
+                android:textColor="@color/tab_text_normal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="15dp"
+                android:text="事件"
+                android:textColor="@color/tab_text_normal" />
+        </RelativeLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:drawableLeft="@drawable/icon_my_scancode"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="扫码返利"
+                android:textColor="@color/tab_text_normal" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="查看"
+                    android:textColor="@color/tab_text_normal" />
+
+                <CheckBox style="@style/select_ck_style" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="操作"
+                    android:textColor="@color/tab_text_normal" />
+
+                <CheckBox style="@style/select_ck_style" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:drawableLeft="@drawable/icon_my_store"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="商城"
+                android:textColor="@color/tab_text_normal" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="查看"
+                    android:textColor="@color/tab_text_normal" />
+
+                <CheckBox style="@style/select_ck_style" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="操作"
+                    android:textColor="@color/tab_text_normal" />
+
+                <CheckBox style="@style/select_ck_style" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:drawableLeft="@drawable/icon_my_plumber"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="水电工"
+                android:textColor="@color/tab_text_normal" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="查看"
+                    android:textColor="@color/tab_text_normal" />
+
+                <CheckBox style="@style/select_ck_style" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="操作"
+                    android:textColor="@color/tab_text_normal" />
+
+                <CheckBox style="@style/select_ck_style" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:drawableLeft="@drawable/icon_my_plumber_metting"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="水电工会议"
+                android:textColor="@color/tab_text_normal" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="查看"
+                    android:textColor="@color/tab_text_normal" />
+
+                <CheckBox style="@style/select_ck_style" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="操作"
+                    android:textColor="@color/tab_text_normal" />
+
+                <CheckBox style="@style/select_ck_style" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:drawableLeft="@drawable/icon_my_distributor"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="分销商"
+                android:textColor="@color/tab_text_normal" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="查看"
+                    android:textColor="@color/tab_text_normal" />
+
+                <CheckBox style="@style/select_ck_style" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="操作"
+                    android:textColor="@color/tab_text_normal" />
+
+                <CheckBox style="@style/select_ck_style" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:drawableLeft="@drawable/icon_my_tbws"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="特变卫士"
+                android:textColor="@color/tab_text_normal" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="查看"
+                    android:textColor="@color/tab_text_normal" />
+
+                <CheckBox style="@style/select_ck_style" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="操作"
+                    android:textColor="@color/tab_text_normal" />
+
+                <CheckBox style="@style/select_ck_style" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+    </LinearLayout>
+    <Button
+        style="@style/style_next_btn"
+        android:background="@drawable/btn_bg_blue"
+        android:layout_alignParentBottom="true"
+        android:text="保存"
+        android:layout_marginBottom="20sp"/>
+</RelativeLayout>

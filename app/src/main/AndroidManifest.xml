@@ -60,8 +60,26 @@
         <activity android:name=".activity.user.RealNameAuthenticationActivity"/>
 
         <activity android:name=".activity.tbea.CompanyIntroActivity"/>
-        <activity android:name=".activity.tbea.ProductPresentationActivity"/>
+        <activity android:name=".activity.tbea.ProductPresentationListActivity"/>
+        <activity android:name=".activity.tbea.ProductPresentationInfoActivity"/>
+        <activity android:name=".activity.tbea.ProductPresentationContactInfoActivity"/>
 
+        <activity android:name=".activity.my.main.SetActivity"/>
+        <activity android:name=".activity.my.set.BindingNewPhoneActivity"/>
+        <activity android:name=".activity.my.set.EditBindingPhoneActivity"/>
+        <activity android:name=".activity.my.set.BindingNewPhoneFinishActivity"/>
+        <activity android:name=".activity.my.set.PwdEditActivity"/>
+        <activity android:name=".activity.my.set.AddressEditActivity"/>
+        <activity android:name=".activity.my.set.AddressEditListActivity"/>
+        <activity android:name=".activity.my.set.SetBackgroundActivity"/>
+        <activity android:name=".activity.my.set.GeneralActivity"/>
+        <activity android:name=".activity.my.main.RealNameAuthenticationPlumberActivity"/>
+        <activity android:name=".activity.my.main.RealNameAuthenticationDistributorActivity"/>
+        <activity android:name=".activity.my.main.MyAttentionActivity"/>
+        <activity android:name=".activity.my.main.MyFansActivity"/>
+        <activity android:name=".activity.my.main.BypassAccountManageListActivity"/>
+        <activity android:name=".activity.my.main.BypassAccountManageEditActivity"/>
+        <activity android:name=".activity.my.main.ByPassAccountAuthorizationFunctionsActivity"/>
     </application>
 
 </manifest>

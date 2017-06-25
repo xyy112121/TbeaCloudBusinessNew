@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
+
+        <ImageView
+            android:id="@+id/tb_mian_image"
+            android:layout_width="113dp"
+            android:layout_height="113dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_tbea_producttestpic" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="113dp"
+            android:layout_marginLeft="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="测试测测测试测测测试测测测试测测测试测测测试测测测试测测测试测测测试测测"
+                android:textColor="@color/tab_text_normal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:text="规格型号：JSVZ-HHH-88"
+                android:textColor="@color/text_color"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

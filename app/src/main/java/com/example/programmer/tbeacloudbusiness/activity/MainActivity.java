@@ -12,6 +12,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.MainNavigateTabBar;
 import com.example.programmer.tbeacloudbusiness.fragment.MianFragment;
+import com.example.programmer.tbeacloudbusiness.fragment.MyFragment;
 import com.example.programmer.tbeacloudbusiness.fragment.TbMianFragment;
 
 import kr.co.namee.permissiongen.PermissionFail;
@@ -40,7 +41,7 @@ public class MainActivity extends TopActivity {
         mNavigateTabBar.addTab(MianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_home, R.drawable.icon_home, "首页"));
         mNavigateTabBar.addTab(TbMianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_tbea, R.drawable.icon_tbea, "特变电工"));
         mNavigateTabBar.addTab(MianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_other, R.drawable.icon_other, "其他应用"));
-        mNavigateTabBar.addTab(MianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_me, R.drawable.icon_me, "我的"));
+        mNavigateTabBar.addTab(MyFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_me, R.drawable.icon_me, "我的"));
         listener();
         MyApplication.instance.addActivity(MainActivity.this);
     }

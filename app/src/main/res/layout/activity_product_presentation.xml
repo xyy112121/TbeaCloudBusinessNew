@@ -63,6 +63,7 @@
                 android:gravity="center"
                 android:text="规格"
                 android:drawableRight="@drawable/icon_arrow_gray"
+                android:drawablePadding="5dp"
                 android:textColor="@color/black" />
         </LinearLayout>
 
@@ -77,7 +78,8 @@
                 android:gravity="center"
                 android:text="型号"
                 android:drawableRight="@drawable/icon_arrow_gray"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:drawablePadding="5dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -90,7 +92,8 @@
                 android:gravity="center"
                 android:text="最新产品"
                 android:drawableRight="@drawable/icon_arrow_gray"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:drawablePadding="5dp"/>
         </LinearLayout>
 
     </LinearLayout>

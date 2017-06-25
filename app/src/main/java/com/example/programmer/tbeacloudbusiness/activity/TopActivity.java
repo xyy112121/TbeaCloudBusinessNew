@@ -107,23 +107,9 @@ public class TopActivity extends FragmentActivity {
 		});
 	}
 
-	/**
-	 * ���ú��˵��¼�
-	 */
-	protected void initTopbar(String text, OnClickListener listener, String flag) {
-		TextView tv = (TextView) findViewById(R.id.top_center);
-		mBackBtn = (ImageButton) findViewById(R.id.top_left);
-		mRightBtn = (ImageButton) findViewById(R.id.top_right);
-		// if(listener != null){
-		// mRightBtn.setVisibility(View.VISIBLE);
-		// mRightBtn.setOnClickListener(listener);
-		// }
-		tv.setText(text);
-		mBackBtn.setOnClickListener(listener);
-	}
 
 	/**
-	 * �����ұ�Ϊ����
+	 * 右边的文字
 	 */
 	protected void initTopbar(String text, String rightText,
 							  OnClickListener listener) {
