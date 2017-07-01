@@ -80,6 +80,8 @@
         <activity android:name=".activity.my.main.BypassAccountManageListActivity"/>
         <activity android:name=".activity.my.main.BypassAccountManageEditActivity"/>
         <activity android:name=".activity.my.main.ByPassAccountAuthorizationFunctionsActivity"/>
+       <activity android:name=".activity.administrator.realNameAuthentication.MemberListActivity"/>
+       <activity android:name=".activity.administrator.realNameAuthentication.PersonalDataActivity"/>
     </application>
 
 </manifest>

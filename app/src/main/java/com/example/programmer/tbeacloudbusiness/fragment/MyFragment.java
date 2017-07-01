@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.programmer.tbeacloudbusiness.R;
+import com.example.programmer.tbeacloudbusiness.activity.administrator.realNameAuthentication.MemberListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.BypassAccountManageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.MyAttentionActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.MyFansActivity;
@@ -36,6 +37,7 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         mView.findViewById(R.id.my_attention).setOnClickListener(this);
         mView.findViewById(R.id.my_fans).setOnClickListener(this);
         mView.findViewById(R.id.my_bypass_account_manage).setOnClickListener(this);
+        mView.findViewById(R.id.fragment_mian_account_layout).setOnClickListener(this);
     }
 
 
@@ -56,6 +58,9 @@ public class MyFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.my_bypass_account_manage:
                 startActivity(new Intent(getActivity(), BypassAccountManageListActivity.class));
+                break;
+            case R.id.fragment_mian_account_layout:
+                startActivity(new Intent(getActivity(), MemberListActivity.class));
                 break;
 
 

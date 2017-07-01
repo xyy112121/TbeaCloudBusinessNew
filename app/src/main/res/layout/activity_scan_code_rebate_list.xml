@@ -5,15 +5,16 @@
     android:orientation="vertical">
 
     <include layout="@layout/activity_page_top" />
+
     <LinearLayout
         android:id="@+id/mian_top"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:background="@color/head_color"
-        android:orientation="horizontal"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
 
 
         <TextView
@@ -29,8 +30,8 @@
             android:drawablePadding="5dp"
             android:hint="扫码返利查询"
             android:imeOptions="actionSearch"
-            android:padding="5dp"
             android:maxLines="1"
+            android:padding="5dp"
             android:textColor="@color/text_color"
             android:textColorHint="@color/text_color"
             android:textSize="12sp" />
@@ -38,45 +39,45 @@
     </LinearLayout>
 
     <LinearLayout
-       android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
         android:id="@+id/rebate_list_date_select_layout"
-        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:layout_marginLeft="15dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:text="时间选择"
-            android:drawablePadding="15dp"
-            android:drawableRight="@drawable/icon_click"
-            />
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color"
-            android:textSize="12sp"
+            android:drawablePadding="15dp"
+            android:drawableRight="@drawable/icon_click"
+            android:text="时间选择"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:text="系统默认统计时间为三个月"
-           android:layout_marginLeft="15dp"
-            />
+            android:textColor="@color/text_color"
+            android:textSize="12sp" />
     </LinearLayout>
+
     <View
         android:id="@+id/rebate_list_date_select_view"
-        style="@style/horizontal_view"/>
+        style="@style/horizontal_view" />
+
     <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
         android:id="@+id/expandtab_view"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginLeft="25dp"
         />
-    <View
-        style="@style/horizontal_view"/>
+
+    <View style="@style/horizontal_view" />
 
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout
         android:id="@+id/rl_recyclerview_refresh"
@@ -88,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:scrollbars="none"></ListView>
+            android:scrollbars="none" />
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
 </LinearLayout>
 
