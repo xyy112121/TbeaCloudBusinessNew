@@ -21,19 +21,11 @@ import kr.co.namee.permissiongen.PermissionGen;
 
 public class MainActivity extends TopActivity {
     private MainNavigateTabBar mNavigateTabBar;
-    /**
-     * 权限
-     */
-    private String[] mPermissions = new String[]{};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(Build.VERSION.SDK_INT >= 23){
-            mPermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.CALL_PHONE};
-            PermissionGen.needPermission(MainActivity.this,100,mPermissions);
-        }
         mNavigateTabBar = (MainNavigateTabBar) findViewById(R.id.mainTabBar);
 
         mNavigateTabBar.onRestoreInstanceState(savedInstanceState);
@@ -47,31 +39,13 @@ public class MainActivity extends TopActivity {
     }
 
 
-
     private void listener(){
-
 
     }
 
     public void showTbMaianFragment(){
        View view =  mNavigateTabBar.getChildAt(1);
         view.performClick();
-    }
-
-
-    @PermissionFail(requestCode = 100)
-    private void doFailSomething() {
-        for (int i = 0; i < mPermissions.length; i++) {
-            boolean isTip = ActivityCompat.shouldShowRequestPermissionRationale(this, mPermissions[i]);
-            if(isTip){
-                Toast.makeText(MainActivity.this,"你需要允许访问权限，才可正常使用该功能！",Toast.LENGTH_SHORT).show();
-                finish();
-                break;
-            }else {
-                showMissingPermissionDialog();
-                break;
-            }
-        }
     }
 
     @Override

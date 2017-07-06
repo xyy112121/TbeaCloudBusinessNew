@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 
+
 /**
  * Toast工具类
  * Created by Jorstin on 2015/3/17.

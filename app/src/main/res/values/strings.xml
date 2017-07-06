@@ -1,4 +1,14 @@
 <resources>
+    <string name="perm_tip">
+        当前应用缺少必要权限。\n请点击"设置"-"权限"-打开所需权限。\n最后点击两次后退按钮，即可返回。
+    </string>
+    <string name="ask_again">请给予应用必要权限，让程序可正常工作。</string>
+    <string name="cancel">取消</string>
+
     <string name="app_name">云商</string>
+    <string name="quit">退出</string>
+    <string name="settings">设置</string>
+    <string name="help">帮助</string>
+    <string name="string_gps_help_text">请点击“设置”开启GPS设置。\n最后点击后退按钮，即可返回.</string>
     <string name="alert_text">为建设诚信商业平台，商家须补全资料并进行实名认证后才可以使用系统功能！</string>
 </resources>

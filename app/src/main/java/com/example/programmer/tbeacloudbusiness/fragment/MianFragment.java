@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -17,7 +19,12 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.MainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.RealNameAuthenticationActivity;
+import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
+import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.example.programmer.tbeacloudbusiness.service.impl.UserAction;
+import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
+import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
@@ -45,6 +52,52 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
 //        mRefreshLayout.beginRefreshing();
 //        showAlert();
         return mView;
+    }
+
+    /**
+     * 从服务器获取数据
+     */
+    private void  getData(){
+        try {
+            final CustomDialog dialog = new CustomDialog(getActivity(), R.style.MyDialog, R.layout.tip_wait_dialog);
+            dialog.setText("请等待...");
+            dialog.show();
+            final Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    dialog.dismiss();
+                    switch (msg.what) {
+                        case ThreadState.SUCCESS:
+                            BaseResponseModel re = (BaseResponseModel) msg.obj;
+                            if (re.isSuccess()) {
+
+                            } else {
+                                ToastUtil.showMessage(re.getMsg());
+                            }
+                            break;
+                        case ThreadState.ERROR:
+                            ToastUtil.showMessage("操作失败！");
+                            break;
+                    }
+                }
+            };
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        UserAction userAction = new UserAction();
+                        String re = userAction.getMainData();
+                        handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
+                    } catch (Exception e) {
+                        handler.sendEmptyMessage(ThreadState.ERROR);
+                    }
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

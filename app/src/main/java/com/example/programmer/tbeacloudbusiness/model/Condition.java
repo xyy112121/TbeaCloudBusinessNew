@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.entity;
+package com.example.programmer.tbeacloudbusiness.model;
 
 /**
  * 附近的条件实体

@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.entity.Condition;
 import com.example.zhouwei.library.CustomPopWindow;
 
 import java.util.List;
