@@ -1,25 +1,16 @@
 package com.example.programmer.tbeacloudbusiness.activity;
 
-import android.Manifest;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.MainNavigateTabBar;
 import com.example.programmer.tbeacloudbusiness.fragment.MianFragment;
 import com.example.programmer.tbeacloudbusiness.fragment.MyFragment;
 import com.example.programmer.tbeacloudbusiness.fragment.TbMianFragment;
 
-import kr.co.namee.permissiongen.PermissionFail;
-import kr.co.namee.permissiongen.PermissionGen;
 
-
-public class MainActivity extends TopActivity {
+public class MainActivity extends BaseActivity {
     private MainNavigateTabBar mNavigateTabBar;
 
     @Override

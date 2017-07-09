@@ -126,7 +126,7 @@
         <View style="@style/horizontal_view" />
 
         <Button
-            style="@style/style_next_btn_blue"
+            style="@style/style_next_btn1"
             android:layout_alignParentBottom="true"
             android:background="@drawable/btn_bg_blue"
             android:text="保存" />

@@ -10,12 +10,11 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.picker.CustomAddressPicker;
 import com.example.programmer.tbeacloudbusiness.component.picker.CustomDatePicker;
 import com.example.programmer.tbeacloudbusiness.utils.AssetsUtils;
-import com.example.zhouwei.library.CustomPopWindow;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,7 +26,7 @@ import cn.qqtheme.framework.picker.AddressPicker;
  * Created by programmer on 2017/6/7.
  */
 
-public class CompletionDataActivity extends TopActivity {
+public class CompletionDataActivity extends BaseActivity {
     private String mProvince = "四川省";
     private String mCity = "德阳市";
     private String mCounty = "旌阳区";

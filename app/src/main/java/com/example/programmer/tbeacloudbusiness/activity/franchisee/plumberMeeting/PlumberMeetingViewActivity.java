@@ -7,13 +7,13 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
  * Created by programmer on 2017/6/4.
  */
 
-public class ViewActivity extends TopActivity {
+public class PlumberMeetingViewActivity extends BaseActivity {
     private Context mContext;
 
     @Override
@@ -29,7 +29,7 @@ public class ViewActivity extends TopActivity {
         findViewById(R.id.plumber_meeting_view_participant).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,ParticipantListActivity.class);
+                Intent intent = new Intent(mContext,PlumberMeetingParticipantListActivity.class);
                 startActivity(intent);
             }
         });
@@ -37,7 +37,7 @@ public class ViewActivity extends TopActivity {
         findViewById(R.id.plumber_meeting_view_sign_in).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,SignInListActivity.class);
+                Intent intent = new Intent(mContext,PlumberMeetingSignInListActivity.class);
                 intent.putExtra("flag","meetingSignIn");
                 startActivity(intent);
             }

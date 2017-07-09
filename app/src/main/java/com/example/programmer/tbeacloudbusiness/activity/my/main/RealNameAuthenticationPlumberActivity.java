@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
  *实名认证—水电工
  */
 
-public class RealNameAuthenticationPlumberActivity extends TopActivity {
+public class RealNameAuthenticationPlumberActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

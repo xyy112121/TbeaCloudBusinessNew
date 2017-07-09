@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include layout="@layout/activity_page_top"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
     <LinearLayout
         android:id="@+id/mian_top"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentTop="true"
-        android:background="@color/blue3"
-        android:orientation="horizontal"
+        android:background="@color/head_color"
         android:focusable="true"
-        android:focusableInTouchMode="true">
-
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/expert_search_text"
@@ -27,44 +29,19 @@
             android:drawablePadding="5dp"
             android:hint="扫码返利查询"
             android:imeOptions="actionSearch"
-            android:padding="5dp"
             android:maxLines="1"
+            android:padding="5dp"
             android:textColor="@color/text_color"
             android:textColorHint="@color/text_color"
             android:textSize="12sp" />
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/my_select_btn"
-        android:paddingRight="10dp"
-       >
 
-        <TextView
-            android:id="@+id/create_code_select_type_tv"
-            style="@style/my_text_style"
-            android:text="型号"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
-    </LinearLayout>
-    <View
-        style="@style/horizontal_view"/>
-    <LinearLayout
+    <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <include
-            layout="@layout/activty_create_code_select_type_list_item_head"
-            />
-        <ListView
-            android:id="@+id/listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:dividerHeight="0dp"
-            android:divider="@color/white"
-         />
-
-    </LinearLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none"/>
 
 </LinearLayout>

@@ -1,10 +1,12 @@
 package com.example.programmer.tbeacloudbusiness.model;
 
+import java.io.Serializable;
+
 /**
  * 附近的条件实体
  */
 
-public class Condition {
+public class Condition implements Serializable{
     private String  id;
     private String name;
 

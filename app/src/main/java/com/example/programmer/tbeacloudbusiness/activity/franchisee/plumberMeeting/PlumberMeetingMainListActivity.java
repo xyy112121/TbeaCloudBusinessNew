@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -30,7 +30,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 水电工会议
  */
 
-public class MainListActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
+public class PlumberMeetingMainListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
     private ExpandPopTabView expandTabView;
     private List<KeyValueBean> mNumberLists;//会议编码
     private List<KeyValueBean> mRegionLists;//区域
@@ -81,7 +81,7 @@ public class MainListActivity extends TopActivity implements BGARefreshLayout.BG
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(mContext,ListAllActivity.class);
+                intent.setClass(mContext,PlumberMeetingListAllActivity.class);
                 startActivity(intent);
             }
         });
@@ -91,7 +91,7 @@ public class MainListActivity extends TopActivity implements BGARefreshLayout.BG
             public void onClick(View v) {
                 //水电工签到列表
                 Intent intent = new Intent();
-                intent.setClass(mContext,SignInListActivity.class);
+                intent.setClass(mContext,PlumberMeetingSignInListActivity.class);
                 intent.putExtra("mFlag","plumberSignIn");
                 startActivity(intent);
             }

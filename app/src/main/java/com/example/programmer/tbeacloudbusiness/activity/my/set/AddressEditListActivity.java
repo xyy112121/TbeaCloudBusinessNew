@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -12,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
  *收货地址列表
  */
 
-public class AddressEditListActivity extends TopActivity implements View.OnClickListener{
+public class AddressEditListActivity extends BaseActivity implements View.OnClickListener{
     private ListView mListView;
     private MyAdapter mAdapter;
 

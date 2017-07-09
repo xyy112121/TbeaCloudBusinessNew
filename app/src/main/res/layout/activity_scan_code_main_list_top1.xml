@@ -23,19 +23,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="月排行"
+                android:text="提现排名"
                 android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/top_text1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@id/top_text"
-                android:gravity="center_vertical"
-                android:text="总排行"
-                android:textColor="@color/text_color" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -64,9 +54,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="3dp"
-                android:drawableRight="@drawable/icon_arrow_blue"
-                android:text="全部"
-                android:textColor="@color/text_color2"
+                android:text="水电工"
+                android:textColor="@color/text_color"
                 android:textSize="12sp" />
 
             <TextView
@@ -74,8 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:drawablePadding="3dp"
-                android:drawableRight="@drawable/icon_arrow_gray"
-                android:text="提现金额"
+                android:text="金额"
                 android:textColor="@color/text_color"
                 android:textSize="12sp" />
 

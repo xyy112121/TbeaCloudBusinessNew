@@ -16,8 +16,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ViewActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateViewActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
@@ -33,7 +33,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 扫码数据
  */
 
-public class ScanCodeDateListActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class PlumberManageScanCodeDateListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private ExpandPopTabView expandTabView;
     private ExpandPopTabView expandTabView1;
     private List<KeyValueBean> mDateLists;//时间
@@ -199,7 +199,7 @@ public class ScanCodeDateListActivity extends TopActivity implements BGARefreshL
                 public void onClick(View v) {
                     Intent intent = new Intent();
                     if(expandTabView1.getVisibility() == View.GONE){
-                        intent.setClass(mContext,ViewActivity.class);
+                        intent.setClass(mContext,ScanCodeViewActivity.class);
                     }else {
                         intent.setClass(mContext,WithdrawDepositDateViewActivity.class);
                     }

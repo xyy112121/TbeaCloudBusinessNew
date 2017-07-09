@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        >
+
+        <ImageView
+            android:id="@+id/top_imgae"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_distribution" />
+        <TextView
+            android:id="@+id/top_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提现数据"
+            android:textColor="@color/text_color1"
+            android:layout_toRightOf="@id/top_imgae"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:textSize="18sp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:src="@drawable/icon_more"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+</FrameLayout>

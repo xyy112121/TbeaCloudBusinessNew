@@ -1,18 +1,24 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
+import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
+import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +27,19 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 扫码返利
+ * 水电工会议
  */
 
-public class MainListActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate,View.OnClickListener{
+public class PlumberMeetingListAllActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
+    private ExpandPopTabView expandTabView;
+    private List<KeyValueBean> mNumberLists;//会议编码
+    private List<KeyValueBean> mRegionLists;//区域
+    private List<KeyValueBean> mStateLists;//状态
+    private List<KeyValueBean> mDateLists;//时间
+
+
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
-    private View mHeadView;
-    private View mHeadView1;
     private MyAdapter mAdapter;
     private  int mPage = 1;
     private int mPagesiz =10 ;
@@ -37,17 +48,16 @@ public class MainListActivity extends TopActivity implements BGARefreshLayout.BG
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_code_main_list);
+        setContentView(R.layout.activity_plumber_meeting_main_list);
         mContext = this;
-        initTopbar("扫码返利","生成",this);
+        initTopbar("水电工会议");
         intiView();
     }
 
     public  void intiView(){
         mListView = (ListView)findViewById(R.id.listview);
-        mHeadView = getLayoutInflater().inflate(R.layout.activity_scan_code_main_list_top,null);
-        mHeadView1 = getLayoutInflater().inflate(R.layout.activity_scan_code_main_list_top1,null);
-        mListView.addHeaderView(mHeadView);
+
+        View mHeadView1 = getLayoutInflater().inflate(R.layout.activity_plumber_meeting_main_list_top1,null);
         mListView.addHeaderView(mHeadView1);
         mAdapter = new MyAdapter(mContext);
         mListView.setAdapter(mAdapter);
@@ -55,32 +65,69 @@ public class MainListActivity extends TopActivity implements BGARefreshLayout.BG
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
 //        mRefreshLayout.beginRefreshing();
-        mHeadView.setOnClickListener(new View.OnClickListener() {
+
+        initDate();
+
+        expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
+        addItem(expandTabView, mNumberLists, "默认排序", "会议编码");
+        addItem(expandTabView, mRegionLists, "全部区域", "区域");
+        addItem(expandTabView, mStateLists, "默认排序", "状态");
+        addItem(expandTabView, mDateLists, "默认排序", "时间");
+
+    }
+
+    public void addItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
+        PopOneListView popOneListView = new PopOneListView(this);
+        popOneListView.setDefaultSelectByValue(defaultSelect);
+        popOneListView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(mContext,WithdrawDepositDateActivity.class);
-                startActivity(intent);
+            public void getValue(String key, String value) {
+                expandTabView.setViewColor(ContextCompat.getColor(mContext,R.color.blue));
+
+                Log.e("tag", "key :" + key + " ,value :" + value);
             }
         });
 
-        mHeadView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(mContext,ScanCodeRebateListActivity.class);
-                startActivity(intent);
-            }
-        });
+        int displayWidth = ((Activity) mContext).getWindowManager().getDefaultDisplay().getWidth();//屏幕的宽
+        if ("会议编码".equals(defaultShowText)){
+            double wid = displayWidth/3;
+            int width = (int)wid;
+            expandTabView.addItemToExpandTab(defaultShowText, popOneListView,width, Gravity.LEFT);
+        }else if ("时间".equals(defaultShowText)){
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent();
-                intent.setClass(mContext,WithdrawDepositDateHistoryActivity.class);
-                startActivity(intent);
-            }
-        });
+            expandTabView.addItemToExpandTab(defaultShowText, popOneListView, Gravity.RIGHT);
+        }
+        else {
+            expandTabView.addItemToExpandTab(defaultShowText, popOneListView);
+        }
+    }
+
+    private void initDate() {
+        try {
+            mDateLists = new ArrayList<>();
+            mDateLists.add(new KeyValueBean("","默认排序"));
+            mDateLists.add(new KeyValueBean("PositiveSequence","正序"));
+            mDateLists.add(new KeyValueBean("InvertedOrder","倒序"));
+            mDateLists.add(new KeyValueBean("Custom","自定义"));
+
+            mRegionLists = new ArrayList<>();
+            mRegionLists.add(new KeyValueBean("","全部区域"));
+            mRegionLists.add(new KeyValueBean("regionSelect","区域选择"));
+
+
+            mNumberLists = new ArrayList<>();
+            mNumberLists.add(new KeyValueBean("", "默认排序"));
+            mNumberLists.add(new KeyValueBean("user1", "编码1"));
+            mNumberLists.add(new KeyValueBean("user2", "编码2"));
+
+            mStateLists = new ArrayList<>();
+            mStateLists.add(new KeyValueBean("","默认排序"));
+            mStateLists.add(new KeyValueBean("yes","已激活"));
+            mStateLists.add(new KeyValueBean("no","未激活"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -147,14 +194,6 @@ public class MainListActivity extends TopActivity implements BGARefreshLayout.BG
         return true;
     }
 
-    @Override
-    public void onClick(View view) {
-        //生成
-        Intent intent = new Intent();
-        intent.setClass(mContext,CreateActivity.class);
-        startActivity(intent);
-    }
-
     private class MyAdapter extends BaseAdapter {
         /**
          * android 上下文环境
@@ -193,7 +232,15 @@ public class MainListActivity extends TopActivity implements BGARefreshLayout.BG
             LayoutInflater layoutInflater = (LayoutInflater) context
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
             FrameLayout view = (FrameLayout) layoutInflater.inflate(
-                    R.layout.activity_scan_code_main_list_item, null);
+                    R.layout.activity_plumber_meeting_main_list_item, null);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext,PlumberMeetingViewActivity.class);
+                    startActivity(intent);
+                }
+            });
             return view;
         }
 

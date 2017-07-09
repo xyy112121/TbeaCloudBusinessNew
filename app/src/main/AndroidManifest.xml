@@ -51,35 +51,36 @@
 
         </activity>
 
-        <activity android:name=".activity.franchisee.scanCode.MainListActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeMainListActivity"/>
 
-        <activity android:name=".activity.franchisee.scanCode.CreateSelectActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateSelectActivity"/>
 
-        <activity android:name=".activity.franchisee.scanCode.TypeSelectActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.NormsSelectActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.CreateActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.HistoryListActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.StateListActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.ViewActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeTypeSelectActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateSucceedActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeNormsSelectActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeHistoryListActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeStateListActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeViewActivity"/>
         <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateActivity"/>
         <activity android:name=".activity.franchisee.scanCode.DateSelectActivity"/>
         <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateViewActivity"/>
         <activity android:name=".activity.franchisee.scanCode.ScanCodeRebateListActivity"/>
         <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateHistoryActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.RegionSelectActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.MainListActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.ScanCodeDateListActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.SignHistoryListActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.LoginDatailsActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.LoginStatisticsActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.PersonViewActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeRegionSelectActivity"/>
+        <activity android:name=".activity.franchisee.plumberManage.PlumberManageMainListActivity"/>
+        <activity android:name=".activity.franchisee.plumberManage.PlumberManageScanCodeDateListActivity"/>
+        <activity android:name=".activity.franchisee.plumberManage.PlumberManageSignHistoryListActivity"/>
+        <activity android:name=".activity.franchisee.plumberManage.PlumberManageLoginDatailsActivity"/>
+        <activity android:name=".activity.franchisee.plumberManage.PlumberManageLoginStatisticsActivity"/>
+        <activity android:name=".activity.franchisee.plumberManage.PlumberManagePersonViewActivity"/>
         <activity android:name=".activity.franchisee.plumberManage.PersonManageActivity"/>
 
-        <activity android:name=".activity.franchisee.plumberMeeting.MainListActivity"/>
-        <activity android:name=".activity.franchisee.plumberMeeting.ListAllActivity"/>
-        <activity android:name=".activity.franchisee.plumberMeeting.ViewActivity"/>
-        <activity android:name=".activity.franchisee.plumberMeeting.ParticipantListActivity"/>
-        <activity android:name=".activity.franchisee.plumberMeeting.SignInListActivity"/>
+        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingMainListActivity"/>
+        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingListAllActivity"/>
+        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingViewActivity"/>
+        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingParticipantListActivity"/>
+        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingSignInListActivity"/>
 
         <activity android:name=".activity.user.RegisterActivity"/>
         <activity android:name=".activity.user.CompletionDataActivity"/>

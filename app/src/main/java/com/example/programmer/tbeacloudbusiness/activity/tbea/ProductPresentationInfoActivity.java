@@ -1,43 +1,29 @@
 package com.example.programmer.tbeacloudbusiness.activity.tbea;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.LoginStatisticsActivity;
-import com.example.programmer.tbeacloudbusiness.component.picker.CustomOptionPicker;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.zhouwei.library.CustomPopWindow;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
-import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
-import cn.qqtheme.framework.picker.OptionPicker;
-
 /**
  * 产品介绍
  */
 
-public class ProductPresentationInfoActivity extends TopActivity implements View.OnClickListener{
+public class ProductPresentationInfoActivity extends BaseActivity implements View.OnClickListener{
     private int mIndex = 0;
     private int mIndex2 = -1;//前一次点击的下标
     private List<FrameLayout> mListLayout = new ArrayList<>();

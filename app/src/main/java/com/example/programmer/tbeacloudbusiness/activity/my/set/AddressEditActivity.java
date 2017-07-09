@@ -6,14 +6,14 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 
 /**
  * 新增收货地址
  */
 
-public class AddressEditActivity extends TopActivity implements View.OnClickListener {
+public class AddressEditActivity extends BaseActivity implements View.OnClickListener {
     private Context mContext;
 //    private Address mObj = new Address();
 

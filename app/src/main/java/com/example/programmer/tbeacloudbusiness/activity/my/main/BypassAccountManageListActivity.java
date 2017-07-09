@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 子账号管理
  */
 
-public class BypassAccountManageListActivity extends TopActivity implements View.OnClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
+public class BypassAccountManageListActivity extends BaseActivity implements View.OnClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
     private ListView mListView;
     private MyAdapter mAdapter;
     private int mPage = 1;

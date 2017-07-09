@@ -99,7 +99,7 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="style_next_btn_blue">
+    <style name="style_next_btn1">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">35dp</item>
         <item name="android:layout_marginLeft">20dp</item>
@@ -222,5 +222,21 @@
         <item name="android:background">@drawable/addr_is_defult_ck</item>
         <item name="android:button">@null</item>
         <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="style0">
+
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+
+    </style>
+
+
+
+    <style name="style1">
+
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_gravity">top</item>
+
     </style>
 </resources>

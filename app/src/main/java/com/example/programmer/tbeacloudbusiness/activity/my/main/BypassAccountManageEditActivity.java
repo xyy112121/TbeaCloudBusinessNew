@@ -6,13 +6,13 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
  * 子账号管理增加
  */
 
-public class BypassAccountManageEditActivity extends TopActivity implements View.OnClickListener{
+public class BypassAccountManageEditActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

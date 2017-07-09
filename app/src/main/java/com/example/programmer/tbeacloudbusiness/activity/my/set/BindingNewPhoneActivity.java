@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
@@ -17,7 +17,7 @@ import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
  *Created by cy on 2017/1/19.更改绑定手机号(新的号码获取验证码)
  */
 
-public class BindingNewPhoneActivity extends TopActivity {
+public class BindingNewPhoneActivity extends BaseActivity {
     private Context mContext;
     private Button button;
     private MyCount mc;

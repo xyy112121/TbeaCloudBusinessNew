@@ -13,8 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.LoginStatisticsActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.component.picker.CustomOptionPicker;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.zhouwei.library.CustomPopWindow;
@@ -30,7 +29,7 @@ import cn.qqtheme.framework.picker.OptionPicker;
  * 产品介绍
  */
 
-public class ProductPresentationListActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
+public class ProductPresentationListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
 
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;

@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.DateSelectActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
@@ -28,7 +28,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 登录详情
  */
 
-public class LoginDatailsActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class PlumberManageLoginDatailsActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private ExpandPopTabView expandTabView;
     private List<KeyValueBean> mDateLists;//时间
 
@@ -134,7 +134,7 @@ public class LoginDatailsActivity extends TopActivity implements BGARefreshLayou
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.setClass(mContext, LoginStatisticsActivity.class);
+                    intent.setClass(mContext, PlumberManageLoginStatisticsActivity.class);
                     startActivity(intent);
                 }
             });

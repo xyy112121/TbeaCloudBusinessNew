@@ -6,13 +6,13 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
  * Created by programmer on 2017/6/4.
  */
 
-public class LoginStatisticsActivity extends TopActivity {
+public class PlumberManageLoginStatisticsActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +25,7 @@ public class LoginStatisticsActivity extends TopActivity {
         findViewById(R.id.login_number_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginStatisticsActivity.this,LoginDatailsActivity.class);
+                Intent intent = new Intent(PlumberManageLoginStatisticsActivity.this,PlumberManageLoginDatailsActivity.class);
                 startActivity(intent);
 
             }

@@ -1,8 +1,9 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -12,9 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.PlumberManageLoginStatisticsActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.DateSelectActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -25,42 +29,67 @@ import java.util.List;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
-
 /**
- * Created by programmer on 2017/5/28.
+ * 会议签到
  */
 
-public class StateListActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
+public class PlumberMeetingSignInListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
+
     private ExpandPopTabView expandTabView;
-    private List<KeyValueBean> mScanDateLists;//扫码时间
-    private List<KeyValueBean> mCodeLists;//编码
-    private List<KeyValueBean> mUserLists;//用户
+    private List<KeyValueBean> mNumberLists;//会议编码
+    private List<KeyValueBean> mRegionLists;//区域
+    private List<KeyValueBean> mDateLists;//时间
+
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;
-    private  int mPage = 1;
-    private int mPagesiz =10 ;
+    private int mPage = 1;
+    private int mPagesiz = 10;
     private Context mContext;
+    private String mFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_code_history_list);
-        initTopbar("已激活");
+        setContentView(R.layout.activity_plumber_meeting_sign_in_list);
+
         mContext = this;
-        mListView = (ListView)findViewById(R.id.listview);
+        initView();
+    }
+
+    private void initView(){
+
+        mFlag = getIntent().getStringExtra("mFlag");
+        View topView = findViewById(R.id.plumber_meeting_sign_top1);
+        View topView2 = findViewById(R.id.plumber_meeting_sign_top2);
+        if("meetingSignIn".equals(mFlag)){
+            topView.setVisibility(View.GONE);
+            initTopbar("会议签到");
+        }else {
+            topView2.setVisibility(View.GONE);
+            initTopbar("水电工签到列表");
+        }
+
+        mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter(mContext);
         mListView.setAdapter(mAdapter);
-        mRefreshLayout = (BGARefreshLayout)findViewById(R.id.rl_recyclerview_refresh);
+        mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
 //        mRefreshLayout.beginRefreshing();
         initDate();
 
+
+
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
-        addItem(expandTabView, mCodeLists, "默认排序", "编码");
-        addItem(expandTabView, mScanDateLists, "默认排序", "扫码时间");
-        addItem(expandTabView, mUserLists, "默认排序", "用户");
+        addItem(expandTabView, mNumberLists, "默认排序", "用户");
+        if("meetingSignIn".equals(mFlag)){
+            addItem(expandTabView, mRegionLists, "全部区域", "区域");
+        }else {
+            addItem(expandTabView, mRegionLists, "默认排序", "累计签到");
+        }
+
+        addItem(expandTabView, mDateLists, "默认排序", "时间");
     }
 
     public void addItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
@@ -70,16 +99,24 @@ public class StateListActivity extends TopActivity implements BGARefreshLayout.B
             @Override
             public void getValue(String key, String value) {
                 expandTabView.setViewColor(ContextCompat.getColor(mContext,R.color.blue));
+                if ("Custom".equals(key)) {//时间自定义
+                    Intent intent = new Intent(mContext, DateSelectActivity.class);
+                    startActivity(intent);
+                }
                 Log.e("tag", "key :" + key + " ,value :" + value);
             }
         });
         int displayWidth = ((Activity) mContext).getWindowManager().getDefaultDisplay().getWidth();//屏幕的宽
-        if ("编码".equals(defaultShowText)){
 
-            expandTabView.addItemToExpandTab(defaultShowText, popOneListView,displayWidth/2, Gravity.LEFT);
-        }else  if("扫码时间".equals(defaultShowText)){
-            expandTabView.addItemToExpandTab(defaultShowText, popOneListView,Gravity.LEFT);
-        }else {
+        if ("用户".equals(defaultShowText)) {
+            double wid = displayWidth/2.8;
+            int width = (int)wid;
+            expandTabView.addItemToExpandTab(defaultShowText, popOneListView,width, Gravity.LEFT);
+        } else if ("时间".equals(defaultShowText)) {
+            double wid = displayWidth/2.5;
+            int width = (int)wid;
+            expandTabView.addItemToExpandTab(defaultShowText, popOneListView,width, Gravity.RIGHT);
+        } else {
             expandTabView.addItemToExpandTab(defaultShowText, popOneListView);
         }
     }
@@ -107,8 +144,7 @@ public class StateListActivity extends TopActivity implements BGARefreshLayout.B
         /**
          * 构造函数
          *
-         * @param context
-         *            android上下文环境
+         * @param context android上下文环境
          */
         public MyAdapter(Context context) {
             this.context = context;
@@ -133,13 +169,20 @@ public class StateListActivity extends TopActivity implements BGARefreshLayout.B
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater layoutInflater = (LayoutInflater) context
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            View view =  layoutInflater.inflate(
-                    R.layout.activity_scan_code_history_state_list_item, null);
+            View view = layoutInflater.inflate(
+                    R.layout.activity_plumber_meeting_sign_in_list_item, null);
+            if(!"meetingSignIn".equals(mFlag)){
+                ((TextView )view.findViewById(R.id.scanCode_history_state_item_text2)).setText("12");
+                ((TextView )view.findViewById(R.id.scanCode_history_state_item_text2)).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            }
+
+
+
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.setClass(mContext,ViewActivity.class);
+                    intent.setClass(mContext, PlumberManageLoginStatisticsActivity.class);
                     startActivity(intent);
                 }
             });
@@ -155,7 +198,7 @@ public class StateListActivity extends TopActivity implements BGARefreshLayout.B
             }
         }
 
-        public void addAll(List<Object> list){
+        public void addAll(List<Object> list) {
             mList.addAll(list);
             notifyDataSetChanged();
         }
@@ -169,35 +212,38 @@ public class StateListActivity extends TopActivity implements BGARefreshLayout.B
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(expandTabView != null){
+        if (expandTabView != null) {
             expandTabView.onExpandPopView();
         }
     }
 
     private void initDate() {
         try {
-            mScanDateLists = new ArrayList<>();
-            mScanDateLists.add(new KeyValueBean("","默认排序"));
-            mScanDateLists.add(new KeyValueBean("PositiveSequence","正序"));
-            mScanDateLists.add(new KeyValueBean("InvertedOrder","倒序"));
-            mScanDateLists.add(new KeyValueBean("Custom","自定义"));
-
-            mCodeLists = new ArrayList<>();
-            mCodeLists.add(new KeyValueBean("","默认排序"));
-            mCodeLists.add(new KeyValueBean("PositiveSequence","从大到小"));
-            mCodeLists.add(new KeyValueBean("InvertedOrder","从小到大"));
-
-
-            mUserLists = new ArrayList<>();
-            mUserLists.add(new KeyValueBean("","默认排序"));
-            mUserLists.add(new KeyValueBean("user1","用户1"));
-            mUserLists.add(new KeyValueBean("user2","用户2"));
+            if("meetingSignIn".equals(mFlag)){
+                mRegionLists = new ArrayList<>();
+                mRegionLists.add(new KeyValueBean("", "全部区域"));
+                mRegionLists.add(new KeyValueBean("regionSelect", "区域选择"));
+            }else {
+                mRegionLists = new ArrayList<>();
+                mRegionLists.add(new KeyValueBean("", "默认排序"));
+                mRegionLists.add(new KeyValueBean("big", "从大到小"));
+                mRegionLists.add(new KeyValueBean("small", "从小到大"));
+            }
 
 
+            mDateLists = new ArrayList<>();
+            mDateLists.add(new KeyValueBean("", "默认排序"));
+            mDateLists.add(new KeyValueBean("PositiveSequence", "正序"));
+            mDateLists.add(new KeyValueBean("InvertedOrder", "倒序"));
+            mDateLists.add(new KeyValueBean("Custom", "自定义"));
+
+            mNumberLists = new ArrayList<>();
+            mNumberLists.add(new KeyValueBean("", "全部用户"));
+            mNumberLists.add(new KeyValueBean("user1", "隶属分销商"));
+            mNumberLists.add(new KeyValueBean("user2", "旗下水电工"));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

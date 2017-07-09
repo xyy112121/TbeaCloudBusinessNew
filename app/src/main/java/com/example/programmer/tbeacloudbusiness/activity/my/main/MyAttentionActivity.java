@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.attention.CommodityFragment;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.attention.StoreFragment;
 
@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 我的关注
  */
-public class MyAttentionActivity extends TopActivity implements View.OnClickListener {
+public class MyAttentionActivity extends BaseActivity implements View.OnClickListener {
     private List<FrameLayout> mListLayout = new ArrayList<>();
     private int mIndex = 0;
     private int mIndex2 = 0;//前一次点击的下标

@@ -13,10 +13,10 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
+import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.LoginUserModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
-import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.service.impl.Installation;
-import com.example.programmer.tbeacloudbusiness.service.impl.UserAction;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.DeviceIdUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
@@ -39,13 +39,18 @@ public class LoginActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mContext = this;
-        mDeviceId = DeviceIdUtil.getDeviceId();
-        //861138028941751
-        if(TextUtils.isEmpty(mDeviceId)){
-            mDeviceId = Installation.id(mContext);
+        if(ShareConfig.getConfigBoolean(mContext,Constants.ONLINE,false)){
+            Intent intent = new Intent(mContext, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            mDeviceId = DeviceIdUtil.getDeviceId();
+            //861138028941751
+            if(TextUtils.isEmpty(mDeviceId)){
+                mDeviceId = Installation.id(mContext);
+            }
+            listener();
         }
-
-        listener();
     }
 
     private void listener(){
@@ -80,15 +85,19 @@ public class LoginActivity extends FragmentActivity {
                         dialog.dismiss();
                         switch (msg.what) {
                             case ThreadState.SUCCESS:
-                                BaseResponseModel re = (BaseResponseModel) msg.obj;
+                                LoginUserModel re = (LoginUserModel) msg.obj;
                                 if (re.isSuccess()) {
-                                    Map<String,Object> data = (Map<String,Object>)re.getData();
-                                    Map<String,String> userinfo = (Map<String,String>)data.get("userinfo");
-                                    ShareConfig.setConfig(LoginActivity.this, Constants.ONLINE, true);
-                                    ShareConfig.setConfig(LoginActivity.this, Constants.USERID, userinfo.get("id"));
-                                    Intent intent = new Intent(mContext, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    LoginUserModel.User model = re.data;
+                                    if (model.userinfo != null){
+                                        ShareConfig.setConfig(LoginActivity.this, Constants.ONLINE, true);
+                                        ShareConfig.setConfig(LoginActivity.this, Constants.USERID, model.userinfo.id);
+                                        Intent intent = new Intent(mContext, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }else {
+                                        ToastUtil.showMessage("操作失败！");
+                                    }
+
                                 } else {
                                     ToastUtil.showMessage(re.getMsg());
                                 }
@@ -104,8 +113,8 @@ public class LoginActivity extends FragmentActivity {
                     @Override
                     public void run() {
                         try {
-                            UserAction userAction = new UserAction();
-                            BaseResponseModel re = userAction.login(mobile, pwd,mDeviceId);
+                            UserAction action = new UserAction();
+                            LoginUserModel re = action.login(mobile, pwd,mDeviceId);
                             handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                         } catch (Exception e) {
                             handler.sendEmptyMessage(ThreadState.ERROR);

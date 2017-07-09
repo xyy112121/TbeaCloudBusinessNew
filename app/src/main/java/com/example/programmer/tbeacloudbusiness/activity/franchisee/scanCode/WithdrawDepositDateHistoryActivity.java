@@ -16,7 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -31,7 +31,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 提现历史
  */
 
-public class WithdrawDepositDateHistoryActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
+public class WithdrawDepositDateHistoryActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;

@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -32,7 +32,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 扫码返利列表
  */
 
-public class ScanCodeRebateListActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class ScanCodeRebateListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;
@@ -74,7 +74,7 @@ public class ScanCodeRebateListActivity extends TopActivity implements BGARefres
             public void getValue(String key, String value) {
                 expandTabView.setViewColor(ContextCompat.getColor(mContext,R.color.blue));
                 if("regionSelect".equals(key)){
-                    Intent intent = new Intent(mContext,RegionSelectActivity.class);
+                    Intent intent = new Intent(mContext,ScanCodeRegionSelectActivity.class);
                     startActivity(intent);
                 }
                 else if("distributor".equals(key)){//分销商

@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * Created by programmer on 2017/6/25.
  */
 
-public class MyFansActivity extends TopActivity implements View.OnClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
+public class MyFansActivity extends BaseActivity implements View.OnClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
     private View mSelectAllLayout;
     private TextView rightView;
     private ListView mListView;

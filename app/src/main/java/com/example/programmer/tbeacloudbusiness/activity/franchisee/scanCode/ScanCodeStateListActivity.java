@@ -1,10 +1,12 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -25,15 +27,14 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 
 /**
- * 历史记录
+ * Created by programmer on 2017/5/28.
  */
 
-public class HistoryListActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
+public class ScanCodeStateListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
     private ExpandPopTabView expandTabView;
-    private List<KeyValueBean> mDateLists;//时间
-    private List<KeyValueBean> mMoneyLists;//金额
-    private List<KeyValueBean> mNumberLists;//数量
-    private List<KeyValueBean> mStateLists;//激活状态
+    private List<KeyValueBean> mScanDateLists;//扫码时间
+    private List<KeyValueBean> mCodeLists;//编码
+    private List<KeyValueBean> mUserLists;//用户
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;
@@ -45,7 +46,7 @@ public class HistoryListActivity extends TopActivity implements BGARefreshLayout
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_code_history_list);
-        initTopbar("历史记录");
+        initTopbar("已激活");
         mContext = this;
         mListView = (ListView)findViewById(R.id.listview);
         mAdapter = new MyAdapter(mContext);
@@ -57,10 +58,9 @@ public class HistoryListActivity extends TopActivity implements BGARefreshLayout
         initDate();
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
-        addItem(expandTabView, mDateLists, "默认排序", "时间");
-        addItem(expandTabView, mMoneyLists, "默认排序", "金额");
-        addItem(expandTabView, mNumberLists, "默认排序", "数量");
-        addItem(expandTabView, mStateLists, "默认排序", "激活");
+        addItem(expandTabView, mCodeLists, "默认排序", "编码");
+        addItem(expandTabView, mScanDateLists, "默认排序", "扫码时间");
+        addItem(expandTabView, mUserLists, "默认排序", "用户");
     }
 
     public void addItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
@@ -69,12 +69,19 @@ public class HistoryListActivity extends TopActivity implements BGARefreshLayout
         popOneListView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext,R
-                        .color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext,R.color.blue));
                 Log.e("tag", "key :" + key + " ,value :" + value);
             }
         });
-        expandTabView.addItemToExpandTab(defaultShowText, popOneListView);
+        int displayWidth = ((Activity) mContext).getWindowManager().getDefaultDisplay().getWidth();//屏幕的宽
+        if ("编码".equals(defaultShowText)){
+
+            expandTabView.addItemToExpandTab(defaultShowText, popOneListView,displayWidth/2, Gravity.LEFT);
+        }else  if("扫码时间".equals(defaultShowText)){
+            expandTabView.addItemToExpandTab(defaultShowText, popOneListView,Gravity.LEFT);
+        }else {
+            expandTabView.addItemToExpandTab(defaultShowText, popOneListView);
+        }
     }
 
     @Override
@@ -127,12 +134,12 @@ public class HistoryListActivity extends TopActivity implements BGARefreshLayout
             LayoutInflater layoutInflater = (LayoutInflater) context
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
             View view =  layoutInflater.inflate(
-                    R.layout.activity_scan_code_history_list_item, null);
+                    R.layout.activity_scan_code_history_state_list_item, null);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.setClass(mContext,StateListActivity.class);
+                    intent.setClass(mContext,ScanCodeViewActivity.class);
                     startActivity(intent);
                 }
             });
@@ -169,27 +176,24 @@ public class HistoryListActivity extends TopActivity implements BGARefreshLayout
 
     private void initDate() {
         try {
-            mDateLists = new ArrayList<>();
-            mDateLists.add(new KeyValueBean("","默认排序"));
-            mDateLists.add(new KeyValueBean("PositiveSequence","正序"));
-            mDateLists.add(new KeyValueBean("InvertedOrder","倒序"));
-            mDateLists.add(new KeyValueBean("Custom","自定义"));
+            mScanDateLists = new ArrayList<>();
+            mScanDateLists.add(new KeyValueBean("","默认排序"));
+            mScanDateLists.add(new KeyValueBean("PositiveSequence","正序"));
+            mScanDateLists.add(new KeyValueBean("InvertedOrder","倒序"));
+            mScanDateLists.add(new KeyValueBean("Custom","自定义"));
 
-            mMoneyLists = new ArrayList<>();
-            mMoneyLists.add(new KeyValueBean("","默认排序"));
-            mMoneyLists.add(new KeyValueBean("PositiveSequence","金额从大到小"));
-            mMoneyLists.add(new KeyValueBean("InvertedOrder","金额从小到大"));
+            mCodeLists = new ArrayList<>();
+            mCodeLists.add(new KeyValueBean("","默认排序"));
+            mCodeLists.add(new KeyValueBean("PositiveSequence","从大到小"));
+            mCodeLists.add(new KeyValueBean("InvertedOrder","从小到大"));
 
 
-            mNumberLists = new ArrayList<>();
-            mNumberLists.add(new KeyValueBean("","默认排序"));
-            mNumberLists.add(new KeyValueBean("PositiveSequence","数量从大到小"));
-            mNumberLists.add(new KeyValueBean("InvertedOrder","数量从小到大"));
+            mUserLists = new ArrayList<>();
+            mUserLists.add(new KeyValueBean("","默认排序"));
+            mUserLists.add(new KeyValueBean("user1","用户1"));
+            mUserLists.add(new KeyValueBean("user2","用户2"));
 
-            mStateLists = new ArrayList<>();
-            mStateLists.add(new KeyValueBean("","默认排序"));
-            mStateLists.add(new KeyValueBean("yes","已激活"));
-            mStateLists.add(new KeyValueBean("no","未激活"));
+
 
         } catch (Exception e) {
             e.printStackTrace();

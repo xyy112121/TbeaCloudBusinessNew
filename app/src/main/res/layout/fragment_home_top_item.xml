@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:id="@+id/home_top_tb_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:clickable="true"
+       >
+
+        <ImageView
+            android:id="@+id/home_top_item_image"
+            android:layout_width="36.0dip"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_tbea1"
+            android:scaleType="centerInside"/>
+
+        <TextView
+            android:id="@+id/home_top_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dip"
+            android:textColor="@color/text_color"
+            android:textSize="11.0sp"
+            android:text="特变电工"
+            android:layout_marginTop="4dp"/>
+    </LinearLayout>
+</LinearLayout>

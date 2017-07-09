@@ -7,13 +7,13 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
  * 注册成功
  */
 
-public class RegisterSuccessActivity extends TopActivity implements View.OnClickListener{
+public class RegisterSuccessActivity extends BaseActivity implements View.OnClickListener{
     private Context mContext;
 
     @Override

@@ -13,6 +13,7 @@
         >
 
         <TextView
+            android:id="@+id/scanCode_history_generatetime"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -22,6 +23,7 @@
             android:layout_marginLeft="15dp"/>
 
         <TextView
+            android:id="@+id/scanCode_history_money"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -33,6 +35,7 @@
             />
 
         <TextView
+            android:id="@+id/scanCode_history_generatenumber"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -43,6 +46,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/scanCode_history_activitynumber"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

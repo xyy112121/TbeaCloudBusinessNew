@@ -96,20 +96,22 @@ public class PopOneListView extends RelativeLayout {
     }
 
     public void setCallBackAndData(List<KeyValueBean> itemValues, ExpandPopTabView expandPopTabView, OnSelectListener selectListener) {
-        if(mDefaultParentText != null && !mDefaultParentText.equals("")){
-            mAdapter.setSelectorText(mDefaultParentText);
-        }else{
-            if(mDefaultParentkey != null && !mDefaultParentkey.equals("")) {
-                for (KeyValueBean keyValueBean : itemValues) {
-                    if (keyValueBean.getKey().equals(mDefaultParentkey)) {
-                        mAdapter.setSelectorText(keyValueBean.getValue());
-                        break;
+        if(itemValues != null){
+            if(mDefaultParentText != null && !mDefaultParentText.equals("")){
+                mAdapter.setSelectorText(mDefaultParentText);
+            }else{
+                if(mDefaultParentkey != null && !mDefaultParentkey.equals("")) {
+                    for (KeyValueBean keyValueBean : itemValues) {
+                        if (keyValueBean.getKey().equals(mDefaultParentkey)) {
+                            mAdapter.setSelectorText(keyValueBean.getValue());
+                            break;
+                        }
                     }
                 }
             }
+            mAdapter.setList(itemValues);
         }
-        mAdapter.setList(itemValues);
-        mOnSelectListener = selectListener;
         mExpandPopTabView = expandPopTabView;
+        mOnSelectListener = selectListener;
     }
 }

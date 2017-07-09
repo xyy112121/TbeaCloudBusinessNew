@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+   android:descendantFocusability="blocksDescendants"
+   >
 
     <LinearLayout
         android:id="@+id/mian_top"
@@ -69,6 +71,10 @@
             android:layout_marginTop="1dp"
             android:layout_weight="1"
             android:paddingBottom="0dp"
-            android:scrollbars="none" />
+            android:scrollbars="none"
+            android:divider="#00000000"
+            android:dividerHeight="0dp"
+            android:clickable="true"
+           />
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
 </LinearLayout>

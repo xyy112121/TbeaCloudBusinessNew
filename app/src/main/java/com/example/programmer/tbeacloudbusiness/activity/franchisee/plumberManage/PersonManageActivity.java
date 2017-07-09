@@ -7,13 +7,13 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
  * Created by programmer on 2017/6/4.
  */
 
-public class PersonManageActivity extends TopActivity{
+public class PersonManageActivity extends BaseActivity {
     private Context mContext;
 
     @Override
@@ -28,7 +28,7 @@ public class PersonManageActivity extends TopActivity{
         findViewById(R.id.person_manage_head).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,PersonViewActivity.class);
+                Intent intent = new Intent(mContext,PlumberManagePersonViewActivity.class);
                 startActivity(intent);
             }
         });
@@ -37,7 +37,7 @@ public class PersonManageActivity extends TopActivity{
             @Override
             public void onClick(View v) {
                 //扫码返利
-                Intent intent = new Intent(mContext,ScanCodeDateListActivity.class);
+                Intent intent = new Intent(mContext,PlumberManageScanCodeDateListActivity.class);
                 startActivity(intent);
             }
         });
@@ -46,7 +46,7 @@ public class PersonManageActivity extends TopActivity{
             @Override
             public void onClick(View v) {
                 //签到历史
-                Intent intent = new Intent(mContext,SignHistoryListActivity.class);
+                Intent intent = new Intent(mContext,PlumberManageSignHistoryListActivity.class);
                 startActivity(intent);
             }
         });
@@ -55,7 +55,7 @@ public class PersonManageActivity extends TopActivity{
             @Override
             public void onClick(View v) {
                 //登录统计
-                Intent intent = new Intent(mContext,LoginStatisticsActivity.class);
+                Intent intent = new Intent(mContext,PlumberManageLoginStatisticsActivity.class);
                 startActivity(intent);
             }
         });

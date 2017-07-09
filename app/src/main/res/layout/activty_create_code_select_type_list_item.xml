@@ -8,9 +8,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <include layout="@layout/activty_create_code_select_type_list_item_head" />
-
         <RelativeLayout
             android:id="@+id/list_item_layout"
             android:layout_width="match_parent"
@@ -38,8 +35,5 @@
                 android:layout_centerVertical="true"
                 android:visibility="gone"/>
         </RelativeLayout>
-
-        <View
-            style="@style/horizontal_view"/>
     </LinearLayout>
 </FrameLayout>

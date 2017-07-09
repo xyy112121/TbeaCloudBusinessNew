@@ -4,14 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ import java.util.List;
  * 公司简介/新闻资讯
  */
 
-public class CompanyIntroActivity extends TopActivity{
+public class CompanyIntroActivity extends BaseActivity {
     private int mIndex = 0;
     private int mIndex2 = -1;//前一次点击的下标
     private List<FrameLayout> mListLayout = new ArrayList<>();

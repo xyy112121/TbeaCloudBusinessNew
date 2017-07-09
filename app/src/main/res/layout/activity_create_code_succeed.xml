@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_page_top" />
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/icon_userdone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="生成成功"
+            android:textColor="@color/tab_text_normal" />
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/create_code_succeed_finish_bth"
+        style="@style/style_next_btn1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:text="完成"
+        android:background="@drawable/btn_bg_blue"/>
+
+</RelativeLayout>

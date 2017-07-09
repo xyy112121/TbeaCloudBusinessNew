@@ -14,7 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -30,7 +30,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  *提现数据列表
  */
 
-public class WithdrawDepositDateActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
+public class WithdrawDepositDateActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate{
     private ExpandPopTabView expandTabView;
     private List<KeyValueBean> mDateLists;//扫码时间
     private List<KeyValueBean> mUserLists;//用户

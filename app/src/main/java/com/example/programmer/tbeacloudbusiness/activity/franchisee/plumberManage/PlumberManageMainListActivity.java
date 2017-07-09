@@ -3,17 +3,22 @@ package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMana
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.TopActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.DateSelectActivity;
+import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeRegionSelectActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -25,51 +30,52 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 签到历史
+ *水电工列表
  */
 
-public class SignHistoryListActivity extends TopActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
-
-    private ExpandPopTabView expandTabView;
-    private List<KeyValueBean> mUserLists;//用户
-    private List<KeyValueBean> mRegionLists;//区域
-    private List<KeyValueBean> mDateLists;//时间
-
+public class PlumberManageMainListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate  {
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;
-    private int mPage = 1;
-    private int mPagesiz = 10;
+    private  int mPage = 1;
+    private int mPagesiz =10 ;
     private Context mContext;
 
+    private ExpandPopTabView expandTabView;
+    private List<KeyValueBean> mTypeLists;//类型
+    private List<KeyValueBean> mRegionLists;//区域
+    private List<KeyValueBean> mWithdrawDepositLists;//提现累计
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plumber_meeting_sign_in_list);
-        initTopbar("会议签到");
-        mContext = this;
+        setContentView(R.layout.activity_scan_code_rebate_list);
+        initTopbar("水电工列表");
         initView();
     }
 
-    private  void  initView(){
-        mListView = (ListView) findViewById(R.id.listview);
+    private void initView(){
+        ((TextView)findViewById(R.id.expert_search_text)).setHint("水电工查询");
+        mContext = this;
+        mListView = (ListView)findViewById(R.id.listview);
         mAdapter = new MyAdapter(mContext);
         mListView.setAdapter(mAdapter);
-        mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
+        mRefreshLayout = (BGARefreshLayout)findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
 //        mRefreshLayout.beginRefreshing();
         initDate();
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
-        addItem(expandTabView, mUserLists, "默认排序", "用户");
+        addItem(expandTabView, mTypeLists, "全部", "全部");
         addItem(expandTabView, mRegionLists, "全部区域", "区域");
-        addItem(expandTabView, mDateLists, "默认排序", "时间");
+        addItem(expandTabView, mWithdrawDepositLists, "默认排序", "提现累计");
 
-        findViewById(R.id.sign_history_person_layout).setOnClickListener(new View.OnClickListener() {
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext,PersonViewActivity.class);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(mContext,PersonManageActivity.class);
+//                Intent intent = new Intent(mContext,ScanCodeDateListActivity.class);
                 startActivity(intent);
             }
         });
@@ -81,17 +87,22 @@ public class SignHistoryListActivity extends TopActivity implements BGARefreshLa
         popOneListView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext,R.color.blue));
-                if ("Custom".equals(key)) {//时间自定义
-                    Intent intent = new Intent(mContext, DateSelectActivity.class);
+
+                if("regionSelect".equals(key)){
+                    Intent intent = new Intent(mContext,ScanCodeRegionSelectActivity.class);
                     startActivity(intent);
                 }
+
+                expandTabView.setViewColor(ContextCompat.getColor(mContext,R.color.blue));
                 Log.e("tag", "key :" + key + " ,value :" + value);
             }
         });
-//        int displayWidth = ((Activity) mContext).getWindowManager().getDefaultDisplay().getWidth();//屏幕的宽
-
+        if("全部".equals(defaultShowText)){
+            expandTabView.addItemToExpandTab(defaultShowText, popOneListView,Gravity.LEFT);
+        }else {
             expandTabView.addItemToExpandTab(defaultShowText, popOneListView);
+        }
+
 
     }
 
@@ -105,6 +116,36 @@ public class SignHistoryListActivity extends TopActivity implements BGARefreshLa
         return false;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(expandTabView != null){
+            expandTabView.onExpandPopView();
+        }
+    }
+
+    private void initDate() {
+        try {
+            mTypeLists = new ArrayList<>();
+            mTypeLists.add(new KeyValueBean("","全部"));
+            mTypeLists.add(new KeyValueBean("distributor","隶属分销商"));
+            mTypeLists.add(new KeyValueBean("plumber","旗下水电工"));
+
+            mRegionLists = new ArrayList<>();
+            mRegionLists.add(new KeyValueBean("","全部区域"));
+            mRegionLists.add(new KeyValueBean("regionSelect","区域选择"));
+
+
+            mWithdrawDepositLists = new ArrayList<>();
+            mWithdrawDepositLists.add(new KeyValueBean("","默认排序"));
+            mWithdrawDepositLists.add(new KeyValueBean("PositiveSequence","从大到小"));
+            mWithdrawDepositLists.add(new KeyValueBean("InvertedOrder","从小到大"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private class MyAdapter extends BaseAdapter {
         /**
          * android 上下文环境
@@ -112,13 +153,12 @@ public class SignHistoryListActivity extends TopActivity implements BGARefreshLa
         private Context context;
 
         public List<Object> mList = new ArrayList<>();
-//
-//        public List<CheckBox> ckList = new ArrayList<>();
 
         /**
          * 构造函数
          *
-         * @param context android上下文环境
+         * @param context
+         *            android上下文环境
          */
         public MyAdapter(Context context) {
             this.context = context;
@@ -143,19 +183,8 @@ public class SignHistoryListActivity extends TopActivity implements BGARefreshLa
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater layoutInflater = (LayoutInflater) context
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            View view = layoutInflater.inflate(
-                    R.layout.activity_plumber_manage_sign_history_list_item, null);
-
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.setClass(mContext, LoginStatisticsActivity.class);
-                    startActivity(intent);
-                }
-            });
-
+            FrameLayout view = (FrameLayout) layoutInflater.inflate(
+                    R.layout.activity_plumber_manage_list_item, null);
             return view;
         }
 
@@ -167,44 +196,14 @@ public class SignHistoryListActivity extends TopActivity implements BGARefreshLa
             }
         }
 
-        public void addAll(List<Object> list) {
-            mList.addAll(list);
-            notifyDataSetChanged();
-        }
+//        public void addAll(List<Collect> list){
+//            mList.addAll(list);
+//            notifyDataSetChanged();
+//        }
 
         public void removeAll() {
             mList.clear();
             notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (expandTabView != null) {
-            expandTabView.onExpandPopView();
-        }
-    }
-
-    private void initDate() {
-        try {
-            mRegionLists = new ArrayList<>();
-            mRegionLists.add(new KeyValueBean("", "全部区域"));
-            mRegionLists.add(new KeyValueBean("regionSelect", "区域选择"));
-
-            mDateLists = new ArrayList<>();
-            mDateLists.add(new KeyValueBean("", "默认排序"));
-            mDateLists.add(new KeyValueBean("PositiveSequence", "正序"));
-            mDateLists.add(new KeyValueBean("InvertedOrder", "倒序"));
-            mDateLists.add(new KeyValueBean("Custom", "自定义"));
-
-            mUserLists = new ArrayList<>();
-            mUserLists.add(new KeyValueBean("", "默认排序"));
-            mUserLists.add(new KeyValueBean("user1", "用户1"));
-            mUserLists.add(new KeyValueBean("user2", "用户2"));
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
