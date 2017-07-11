@@ -9,11 +9,13 @@
         android:orientation="horizontal">
 
         <com.example.programmer.tbeacloudbusiness.component.CircleImageView
+            android:id="@+id/person_info_head"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/icon_head" />
 
         <TextView
+            android:id="@+id/person_info_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="刘涛"
@@ -21,8 +23,9 @@
             android:textSize="16sp" />
 
         <ImageView
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/person_info_personjobtitle"
+            android:layout_width="30dp"
+            android:layout_height="15dp"
             android:layout_marginLeft="8dp"
             android:src="@drawable/icon_scanre_bateheader1" />
 

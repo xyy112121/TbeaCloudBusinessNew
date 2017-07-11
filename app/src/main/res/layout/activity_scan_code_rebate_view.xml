@@ -18,8 +18,8 @@
                 android:text="返利编码" />
 
             <TextView
-                style="@style/my_right_text_style1"
-                android:text="0111111111111111" />
+                android:id="@+id/scan_code_info_code"
+                style="@style/my_right_text_style1" />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -32,8 +32,8 @@
                 android:text="生成日期" />
 
             <TextView
-                style="@style/my_right_text_style1"
-                android:text="2015-07-08 15:20:20" />
+                android:id="@+id/scan_code_info_generatetime"
+                style="@style/my_right_text_style1" />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -46,9 +46,8 @@
                 android:text="规格型号" />
 
             <TextView
-                android:id="@+id/create_code_type_norms"
-                style="@style/my_right_text_style"
-                android:text="JHSY-BHU-7" />
+                android:id="@+id/scan_code_info_type"
+                style="@style/my_right_text_style1" />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -61,8 +60,8 @@
                 android:text="状态" />
 
             <TextView
-                style="@style/my_right_text_style"
-                android:text="已确认"
+                android:id="@+id/scan_code_info_confirmstatus"
+                style="@style/my_right_text_style1"
                 android:textColor="@color/blue3" />
         </LinearLayout>
 
@@ -76,13 +75,14 @@
                 android:text="金额" />
 
             <TextView
-                style="@style/my_right_text_style"
-                android:text="5.00" />
+                android:id="@+id/scan_code_info_money"
+                style="@style/my_right_text_style1" />
         </LinearLayout>
 
         <View
             style="@style/horizontal_view"
-            android:layout_height="8dp" />
+            android:layout_height="10dp"
+            android:background="@color/interval_color" />
 
 
         <LinearLayout style="@style/my_text_layout">
@@ -91,35 +91,8 @@
                 style="@style/my_text_style"
                 android:layout_height="wrap_content"
                 android:text="扫码用户" />
-            <include layout="@layout/activity_person_layout"/>
 
-            <!--<LinearLayout-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="0.8"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<com.example.programmer.tbeacloudbusiness.component.CircleImageView-->
-                    <!--android:layout_width="40dp"-->
-                    <!--android:layout_height="40dp"-->
-                    <!--android:src="@drawable/icon_head" />-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="刘涛"-->
-                    <!--android:textColor="@color/black"-->
-                    <!--android:textSize="16sp" />-->
-
-                <!--<ImageView-->
-                    <!--android:layout_width="10dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:src="@drawable/icon_scanre_bateheader1" />-->
-
-            <!--</LinearLayout>-->
-
+            <include layout="@layout/activity_person_layout" />
 
         </LinearLayout>
 
@@ -133,8 +106,8 @@
                 android:text="扫码时间" />
 
             <TextView
-                style="@style/my_right_text_style1"
-                android:text="2015-07-08 15:20:20" />
+                android:id="@+id/scan_code_info_activitytime"
+                style="@style/my_right_text_style1" />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -147,10 +120,11 @@
                 android:text="扫码地点" />
 
             <TextView
-                android:id="@+id/create_code_number"
-                style="@style/my_right_text_style1"
-                android:text="云南省德阳市旌阳区长白山北路3号" />
+                android:id="@+id/scan_code_info_activityplace"
+                style="@style/my_right_text_style1" />
         </LinearLayout>
+
+        <View style="@style/horizontal_view" />
     </LinearLayout>
 
 

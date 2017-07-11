@@ -83,14 +83,9 @@
 
                 <TextView
                     android:id="@+id/top_text4_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="top"
-                    android:text="￥"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:paddingTop="1dp"
-                    android:visibility="gone"/>
+                    style="@style/money_logo_style"
+                    android:visibility="gone"
+                    />
 
                 <TextView
                     android:id="@+id/top_text4"

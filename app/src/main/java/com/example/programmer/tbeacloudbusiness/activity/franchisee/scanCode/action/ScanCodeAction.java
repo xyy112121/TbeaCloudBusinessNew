@@ -1,12 +1,16 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action;
 
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.PayStatusResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.PayeeTypeResponeModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeActivityStatusResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeCreateResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeHistoryResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeNormsSelectReponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeStateListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeTypeSelectReponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.user.model.HomeMainResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateReponseModel;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
 import org.apache.http.NameValuePair;
@@ -99,5 +103,88 @@ public class ScanCodeAction extends BaseAction {
         return model;
     }
 
+    /**
+     * 获取以激活列表
+     * qrcodegenerateid    前一个页面的id
+     * orderitem    表示time
+     * order
+     * pagesize
+     * page
+     */
+    public ScanCodeStateListResponseModel getScanCodeStateList
+    (String qrcodegenerateid, String orderitem, String order, int page, int pagesize) throws Exception {
+        ScanCodeStateListResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("qrcodegenerateid", qrcodegenerateid));
+        pairs.add(new BasicNameValuePair("orderitem", orderitem));//规格id
+        pairs.add(new BasicNameValuePair("order", order));
+        pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
+        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
+        String result = sendRequest("TBEAYUN004002008000", pairs);
+        model = gson.fromJson(result, ScanCodeStateListResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 扫描详情
+     */
+    public ScanCodeInfoResponseModel getScanCodeInfo(String id) throws Exception {
+        ScanCodeInfoResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("qrcodeactivityid", id));
+        String result = sendRequest("TBEAYUN004002009000", pairs);
+        model = gson.fromJson(result, ScanCodeInfoResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 获取提现数据列表中的用户类型
+     */
+    public PayeeTypeResponeModel getPayeeType() throws Exception {
+        PayeeTypeResponeModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN001003001000", pairs);
+        model = gson.fromJson(result, PayeeTypeResponeModel.class);
+        return model;
+    }
+
+    /**
+     * 获取提现数据列表中的状态类型
+     */
+    public PayStatusResponseModel getPayStatus() throws Exception {
+        PayStatusResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN001003002000", pairs);
+        model = gson.fromJson(result, PayStatusResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 获取提现数据列表
+     * paystatusid  提现类型 通过TBEAYUN001003002000这个接口获取
+     * payeetypeid  提现用户类型通过TBEAYUN001003001000获取
+     * starttime     开始时间
+     * endtime      结束时间
+     * orderitem    排序项  time  money
+     * order         desc  asc
+     * pagesize
+     * page
+     */
+    public WithdrawDepositDateReponseModel getWithdrawDepositDateList(String paystatusid, String payeetypeid,
+                                                                      String starttime, String endtime, String orderitem, String order, int page, int pagesize) throws Exception {
+        WithdrawDepositDateReponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("paystatusid", paystatusid));
+        pairs.add(new BasicNameValuePair("payeetypeid", payeetypeid));
+        pairs.add(new BasicNameValuePair("starttime", starttime));
+        pairs.add(new BasicNameValuePair("endtime", endtime));
+        pairs.add(new BasicNameValuePair("orderitem", orderitem));
+        pairs.add(new BasicNameValuePair("order", order));
+        pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
+        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
+        String result = sendRequest("TBEAYUN004002004000", pairs);
+        model = gson.fromJson(result, WithdrawDepositDateReponseModel.class);
+        return model;
+    }
 
 }

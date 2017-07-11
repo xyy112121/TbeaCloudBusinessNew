@@ -63,14 +63,14 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, false));
         mRefreshLayout.beginRefreshing();
-//        mHeadView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(mContext,WithdrawDepositDateActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        mHeadView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(mContext,WithdrawDepositDateActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        mHeadView1.setOnClickListener(new View.OnClickListener() {
 //            @Override

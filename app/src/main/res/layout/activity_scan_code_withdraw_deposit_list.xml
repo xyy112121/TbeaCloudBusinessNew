@@ -9,35 +9,70 @@
         android:paddingRight="10dp">
 
         <TextView
+            android:id="@+id/take_money_pay_state1"
             style="@style/my_text_style"
             android:text="已支付"
             android:textColor="@color/black"
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/create_code_select_type_norms"
+            android:id="@+id/take_money_pay_state2"
             style="@style/my_right_text_style1"
             android:layout_weight="0.6"
             android:textColor="@color/text_color"
             android:text="待支付"
             />
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="￥5432.00"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:layout_height="match_parent">
+            <TextView
+                style="@style/money_logo_style"
+                android:gravity="center"
+                android:layout_marginBottom="3dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="5432.00"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
     </LinearLayout>
     <View
       style="@style/horizontal_view"/>
-    <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
-        android:id="@+id/expandtab_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginLeft="15dp"
-        />
+        android:orientation="horizontal">
+        <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
+            android:id="@+id/expandtab_view"
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_height="48dp"
+            android:layout_marginLeft="15dp"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="金额"
+              />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/icon_arrow_gray"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
     <View
         style="@style/horizontal_view"/>
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout

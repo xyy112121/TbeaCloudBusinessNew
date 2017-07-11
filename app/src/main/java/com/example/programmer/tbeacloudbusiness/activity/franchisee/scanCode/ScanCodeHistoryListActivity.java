@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action.ScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeActivityStatusResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeHistoryResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -57,7 +55,6 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
         initView();
         getActivityStatus();
         getListData();
-
     }
 
     private void initView(){
@@ -76,7 +73,7 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
         addStateItem(expandTabView, null, "", "激活");
     }
 
-    public void addDateItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
+    private void addDateItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
         mDateView = new PopOneListView(this);
         mDateView.setDefaultSelectByValue(defaultSelect);
         mDateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
@@ -93,13 +90,12 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
                     endtime = "";
                     mRefreshLayout.beginRefreshing();
                 }
-
             }
         });
         expandTabView.addItemToExpandTab(defaultShowText, mDateView);
     }
 
-    public void addMoneyItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
+    private void addMoneyItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
         mMoneyView = new PopOneListView(this);
         mMoneyView.setDefaultSelectByValue(defaultSelect);
         mMoneyView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
@@ -115,7 +111,7 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
 
     }
 
-    public void addNumberItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
+    private void addNumberItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
         mNumberView = new PopOneListView(this);
         mNumberView.setDefaultSelectByValue(defaultSelect);
         mNumberView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
@@ -130,7 +126,7 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
         expandTabView.addItemToExpandTab(defaultShowText, mNumberView);
     }
 
-    public void addStateItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
+    private void addStateItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
         mStateView = new PopOneListView(this);
         mStateView.setDefaultSelectByValue(defaultSelect);
         mStateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
@@ -318,7 +314,7 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(
                     R.layout.activity_scan_code_history_list_item, null);
-            ScanCodeHistoryResponseModel.RebateqrCode obj = mList.get(position);
+            final ScanCodeHistoryResponseModel.RebateqrCode obj = mList.get(position);
             ((TextView)view.findViewById(R.id.scanCode_history_generatetime)).setText(obj.generatetime);
             ((TextView)view.findViewById(R.id.scanCode_history_money)).setText("￥"+obj.money);
             ((TextView)view.findViewById(R.id.scanCode_history_activitynumber)).setText(obj.activitynumber);
@@ -328,6 +324,7 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
                 public void onClick(View v) {
                     Intent intent = new Intent();
                     intent.setClass(mContext, ScanCodeStateListActivity.class);
+                    intent.putExtra("id",obj.id);
                     startActivity(intent);
                 }
             });

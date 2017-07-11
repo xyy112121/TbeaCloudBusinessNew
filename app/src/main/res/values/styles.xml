@@ -224,19 +224,13 @@
         <item name="android:layout_gravity">center_vertical</item>
     </style>
 
-    <style name="style0">
-
-        <item name="android:textSize">18sp</item>
-        <item name="android:layout_gravity">center_vertical</item>
-
-    </style>
-
-
-
-    <style name="style1">
-
-        <item name="android:textSize">14sp</item>
-        <item name="android:layout_gravity">top</item>
-
-    </style>
+  <style name="money_logo_style">
+      <item name="android:layout_width">wrap_content</item>
+      <item name="android:layout_height">match_parent</item>
+      <item name="android:layout_gravity">top</item>
+      <item name="android:text">￥</item>
+      <item name="android:textColor">@color/black</item>
+      <item name="android:textSize">14sp</item>
+      <item name="android:paddingTop">1dp</item>
+  </style>
 </resources>
