@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,7 +95,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                 }
             }
         });
-        expandTabView.addItemToExpandTab(defaultShowText, mDateView);
+        expandTabView.addItemToExpandTab(defaultShowText, mDateView, Gravity.LEFT);
     }
 
     private void addUserItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
@@ -218,8 +219,8 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                         case ThreadState.SUCCESS:
                             WithdrawDepositDateReponseModel model = (WithdrawDepositDateReponseModel) msg.obj;
                             if (model.isSuccess()) {
-                                if (model.date != null)
-                                    mAdapter.addAll(model.date.takemoneylist);
+                                if (model.data != null)
+                                    mAdapter.addAll(model.data.takemoneylist);
 
                             } else {
                                 ToastUtil.showMessage(model.getMsg());

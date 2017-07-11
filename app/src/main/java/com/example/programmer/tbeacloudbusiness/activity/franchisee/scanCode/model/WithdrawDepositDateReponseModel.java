@@ -10,7 +10,7 @@ import java.util.List;
 
 public class WithdrawDepositDateReponseModel extends BaseResponseModel {
 
-    public WithdrawDepositDate date;
+    public WithdrawDepositDate data;
 
     public class WithdrawDepositDate {
         public List<TakeMoney> takemoneylist;
@@ -20,6 +20,7 @@ public class WithdrawDepositDateReponseModel extends BaseResponseModel {
     public class TakeMoney {
         public String money;
         public String payeename;
+        public String persontypeicon;
         public String personorcompany;
         public String takemoneyid;
         public String time;
