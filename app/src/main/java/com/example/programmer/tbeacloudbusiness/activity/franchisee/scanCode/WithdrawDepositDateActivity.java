@@ -39,17 +39,13 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 public class WithdrawDepositDateActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private ExpandPopTabView expandTabView;
     private List<KeyValueBean> mDateLists;//扫码时间
-    private List<KeyValueBean> mUserLists;//用户
 
     private PopOneListView mUserView, mDateView;
-
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;
     private int mPage = 1;
     private int mPagesiz = 10;
-    private Context mContext;
-
     private String paystatusid, payeetypeid, starttime, endtime, orderitem, order;
     private final int RESULT_DATA_SELECT = 1000;
 
@@ -108,15 +104,13 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
             @Override
             public void getValue(String key, String value) {
                 expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
-                orderitem = "money";
-                order = key;
+                payeetypeid = key;
                 mRefreshLayout.beginRefreshing();
             }
         });
         expandTabView.addItemToExpandTab(defaultShowText, mUserView);
 
     }
-
 
     /**
      * 获取用户类型
@@ -224,8 +218,8 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                         case ThreadState.SUCCESS:
                             WithdrawDepositDateReponseModel model = (WithdrawDepositDateReponseModel) msg.obj;
                             if (model.isSuccess()) {
-                                mAdapter.addAll(model.date.takemoneylist);
-
+                                if (model.date != null)
+                                    mAdapter.addAll(model.date.takemoneylist);
 
                             } else {
                                 ToastUtil.showMessage(model.getMsg());

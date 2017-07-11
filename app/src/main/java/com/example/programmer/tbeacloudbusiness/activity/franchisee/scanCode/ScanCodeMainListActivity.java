@@ -72,14 +72,14 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
             }
         });
 
-//        mHeadView1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(mContext,ScanCodeRebateListActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        mHeadView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(mContext,ScanCodeRebateListActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override

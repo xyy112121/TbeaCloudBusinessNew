@@ -13,39 +13,37 @@
             android:orientation="vertical">
 
             <com.example.programmer.tbeacloudbusiness.component.CircleImageView
+                android:id="@+id/person_info_head"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icon_head"/>
 
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="0.8"
+            android:layout_weight="0.5"
             android:gravity="center_vertical"
             android:orientation="vertical">
+
             <TextView
-                android:id="@+id/item_person_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="5dp"
-                android:ellipsize="end"
-                android:maxEms="13"
-                android:text="薄常亮"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:drawableRight="@drawable/icon_scanre_bateheader2"/>
-            <TextView
-                android:id="@+id/nearby_company_item_addr"
+                android:id="@+id/person_info_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:maxLines="2"
-                android:textColor="@color/gray"
-                android:textSize="12sp"
-                android:text="宜宾市俊焱商贸有限公司"/>
+                android:ellipsize="end"
+                android:maxEms="13"
+                android:text="薄常亮"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/person_info_personjobtitle"
+                android:layout_width="40dp"
+                android:layout_height="25dp"
+                android:scaleType="centerInside" />
 
 
         </LinearLayout>

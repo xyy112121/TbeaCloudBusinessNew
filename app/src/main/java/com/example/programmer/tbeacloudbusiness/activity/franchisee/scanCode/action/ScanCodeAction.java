@@ -8,6 +8,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.mod
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeNormsSelectReponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeRebateListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeStateListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeTypeSelectReponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateReponseModel;
@@ -184,6 +185,22 @@ public class ScanCodeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
         String result = sendRequest("TBEAYUN004002004000", pairs);
         model = gson.fromJson(result, WithdrawDepositDateReponseModel.class);
+        return model;
+    }
+
+    /**
+     * 获取提现排名
+     */
+    public ScanCodeRebateListResponseModel getWithdrawDepositDateList(String zoneids, String orderitem, String order, int page, int pagesize) throws Exception {
+        ScanCodeRebateListResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("zoneids", zoneids));
+        pairs.add(new BasicNameValuePair("orderitem", orderitem));
+        pairs.add(new BasicNameValuePair("order", order));
+        pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
+        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
+        String result = sendRequest("TBEAYUN004002002000", pairs);
+        model = gson.fromJson(result, ScanCodeRebateListResponseModel.class);
         return model;
     }
 

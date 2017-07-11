@@ -33,9 +33,6 @@
             android:layout_marginRight="8dp"/>
     </LinearLayout>
 
-
-
-
     <View style="@style/horizontal_view" />
 
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout

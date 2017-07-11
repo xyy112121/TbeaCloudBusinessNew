@@ -1,26 +1,33 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action.ScanCodeAction;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeRebateListResponseModel;
+import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
+import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
+import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,100 +43,140 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;
-    private  int mPage = 1;
-    private int mPagesiz =10 ;
-    private Context mContext;
-
-    private ExpandPopTabView expandTabView;
-    private List<KeyValueBean> mTypeLists;//类型
+    private int mPage = 1;
+    private int mPagesiz = 10;
+    private ExpandPopTabView mExpandTabView;
     private List<KeyValueBean> mRegionLists;//区域
-    private List<KeyValueBean> mWithdrawDepositLists;//提现累计
+    private PopOneListView mRegionView;
+    private String mRegionId;//区域id
+    private String mOrderitem, mOrder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_code_rebate_list);
-        initTopbar("扫码返利列表");
-        mContext = this;
-        mListView = (ListView)findViewById(R.id.listview);
+        initTopbar("提现排名");
+        initView();
+    }
+
+    private void initView() {
+        mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter(mContext);
         mListView.setAdapter(mAdapter);
-        mRefreshLayout = (BGARefreshLayout)findViewById(R.id.rl_recyclerview_refresh);
+        mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
-//        mRefreshLayout.beginRefreshing();
+        mRefreshLayout.beginRefreshing();
         initDate();
 
-        expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
-        addItem(expandTabView, mTypeLists, "全部", "全部");
-        addItem(expandTabView, mRegionLists, "默认排序", "区域");
-        addItem(expandTabView, mWithdrawDepositLists, "默认排序", "提现累计");
+        mExpandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
+        addItem(mExpandTabView, mRegionLists, "默认排序", "区域");
+
+        final ImageView moneyView = (ImageView) findViewById(R.id.scan_code_rebate_list_money_image);
+
+
+        findViewById(R.id.scan_code_rebate_list_money_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOrderitem = "money";
+                if ("".equals(mOrder) || "aes".equals(mOrder)) {//升
+                    mOrder = "desc";
+                    moneyView.setImageResource(R.drawable.icon_arraw_grayblue);
+                } else {
+                    mOrder = "aes";
+                    moneyView.setImageResource(R.drawable.icon_arraw_bluegray);
+                }
+                mRefreshLayout.beginRefreshing();
+            }
+        });
+    }
+
+    /**
+     * 从服务器获取数据
+     */
+    private void getListData() {
+        try {
+            final Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    mRefreshLayout.endRefreshing();
+                    mRefreshLayout.endLoadingMore();
+                    switch (msg.what) {
+                        case ThreadState.SUCCESS:
+                            ScanCodeRebateListResponseModel model = (ScanCodeRebateListResponseModel) msg.obj;
+                            if (model.isSuccess()) {
+                                mAdapter.addAll(model.data.takemoneyrankinglist);
+                            } else {
+                                ToastUtil.showMessage(model.getMsg());
+                            }
+                            break;
+                        case ThreadState.ERROR:
+                            ToastUtil.showMessage("操作失败！");
+                            break;
+                    }
+                }
+            };
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        ScanCodeAction action = new ScanCodeAction();
+                        ScanCodeRebateListResponseModel model = action.getWithdrawDepositDateList(mRegionId, mOrderitem, mOrder, mPage++, mPagesiz);
+                        handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+                    } catch (Exception e) {
+                        handler.sendEmptyMessage(ThreadState.ERROR);
+                    }
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void addItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-        PopOneListView popOneListView = new PopOneListView(this);
-        popOneListView.setDefaultSelectByValue(defaultSelect);
-        popOneListView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
+        mRegionView = new PopOneListView(this);
+        mRegionView.setDefaultSelectByValue(defaultSelect);
+        mRegionView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext,R.color.blue));
-                if("regionSelect".equals(key)){
-                    Intent intent = new Intent(mContext,ScanCodeRegionSelectActivity.class);
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                if ("regionSelect".equals(key)) {
+                    Intent intent = new Intent(mContext, ScanCodeRegionSelectActivity.class);
                     startActivity(intent);
                 }
-                else if("distributor".equals(key)){//分销商
-                  findViewById(R.id.rebate_list_date_select_layout).setVisibility(View.VISIBLE);
-                    findViewById(R.id.rebate_list_date_select_view).setVisibility(View.VISIBLE);
-                }else {
-                    findViewById(R.id.rebate_list_date_select_layout).setVisibility(View.GONE);
-                    findViewById(R.id.rebate_list_date_select_view).setVisibility(View.GONE);
-                }
-                Log.e("tag", "key :" + key + " ,value :" + value);
             }
         });
-        int displayWidth = ((Activity) mContext).getWindowManager().getDefaultDisplay().getWidth();//屏幕的宽
-        if ("全部".equals(defaultShowText)){
-            expandTabView.addItemToExpandTab(defaultShowText, popOneListView,displayWidth/2, Gravity.LEFT);
-        }
-        else {
-            expandTabView.addItemToExpandTab(defaultShowText, popOneListView);
-        }
+        expandTabView.addItemToExpandTab(defaultShowText, mRegionView);
     }
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-
+        mAdapter.removeAll();
+        mPage = 1;
+        getListData();
     }
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+        getListData();
         return false;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(expandTabView != null){
-            expandTabView.onExpandPopView();
+        if (mExpandTabView != null) {
+            mExpandTabView.onExpandPopView();
         }
     }
 
     private void initDate() {
         try {
-            mTypeLists = new ArrayList<>();
-            mTypeLists.add(new KeyValueBean("","全部"));
-            mTypeLists.add(new KeyValueBean("distributor","分销商"));
-            mTypeLists.add(new KeyValueBean("InvertedOrder","水电工"));
 
             mRegionLists = new ArrayList<>();
-            mRegionLists.add(new KeyValueBean("","全部区域"));
-            mRegionLists.add(new KeyValueBean("regionSelect","区域选择"));
-
-
-            mWithdrawDepositLists = new ArrayList<>();
-            mWithdrawDepositLists.add(new KeyValueBean("","默认排序"));
-            mWithdrawDepositLists.add(new KeyValueBean("PositiveSequence","从大到小"));
-            mWithdrawDepositLists.add(new KeyValueBean("InvertedOrder","从小到大"));
+            mRegionLists.add(new KeyValueBean("", "全部区域"));
+            mRegionLists.add(new KeyValueBean("regionSelect", "区域选择"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -142,13 +189,12 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
          */
         private Context context;
 
-        public List<Object> mList = new ArrayList<>();
+        public List<ScanCodeRebateListResponseModel.TakeMoneyranking> mList = new ArrayList<>();
 
         /**
          * 构造函数
          *
-         * @param context
-         *            android上下文环境
+         * @param context android上下文环境
          */
         public MyAdapter(Context context) {
             this.context = context;
@@ -156,7 +202,7 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
 
         @Override
         public int getCount() {
-            return 10;
+            return mList.size();
         }
 
         @Override
@@ -175,7 +221,17 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
             FrameLayout view = (FrameLayout) layoutInflater.inflate(
                     R.layout.activity_scan_code_rebate_list_item, null);
-            ((TextView)view.findViewById(R.id.item_person_name)).setTextColor(ContextCompat.getColor(mContext,R.color.text_color));
+            ScanCodeRebateListResponseModel.TakeMoneyranking obj = mList.get(position);
+            CircleImageView headView = (CircleImageView) view.findViewById(R.id.person_info_head);
+            ImageView jobImageView = (ImageView) view.findViewById(R.id.person_info_personjobtitle);
+            ((TextView) view.findViewById(R.id.person_info_name)).setText(obj.personname);
+            ((TextView) view.findViewById(R.id.scanCode_rebate_money)).setText(obj.personorcompany);
+            ((TextView) view.findViewById(R.id.scanCode_rebate_zone)).setText(obj.zone);
+            String url = MyApplication.instance.getImgPath();
+            ImageLoader.getInstance().displayImage(url + obj.thumbpicture, headView);
+            ImageLoader.getInstance().displayImage(url + obj.persontypeicon, jobImageView);
+
+
             return view;
         }
 
@@ -187,10 +243,10 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
             }
         }
 
-//        public void addAll(List<Collect> list){
-//            mList.addAll(list);
-//            notifyDataSetChanged();
-//        }
+        public void addAll(List<ScanCodeRebateListResponseModel.TakeMoneyranking> list) {
+            mList.addAll(list);
+            notifyDataSetChanged();
+        }
 
         public void removeAll() {
             mList.clear();
