@@ -5,7 +5,7 @@ import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import java.util.List;
 
 /**
- * Created by programmer on 2017/7/10.
+ * 提现数据列表
  */
 
 public class WithdrawDepositDateReponseModel extends BaseResponseModel {

@@ -36,7 +36,7 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 扫码返利列表
+ * 提现排名
  */
 
 public class ScanCodeRebateListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
@@ -173,7 +173,6 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
 
     private void initDate() {
         try {
-
             mRegionLists = new ArrayList<>();
             mRegionLists.add(new KeyValueBean("", "全部区域"));
             mRegionLists.add(new KeyValueBean("regionSelect", "区域选择"));
@@ -221,7 +220,7 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
             FrameLayout view = (FrameLayout) layoutInflater.inflate(
                     R.layout.activity_scan_code_rebate_list_item, null);
-            ScanCodeRebateListResponseModel.TakeMoneyranking obj = mList.get(position);
+            final ScanCodeRebateListResponseModel.TakeMoneyranking obj = mList.get(position);
             CircleImageView headView = (CircleImageView) view.findViewById(R.id.person_info_head);
             ImageView jobImageView = (ImageView) view.findViewById(R.id.person_info_personjobtitle);
             ((TextView) view.findViewById(R.id.person_info_name)).setText(obj.personname);
@@ -230,7 +229,15 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
             String url = MyApplication.instance.getImgPath();
             ImageLoader.getInstance().displayImage(url + obj.thumbpicture, headView);
             ImageLoader.getInstance().displayImage(url + obj.persontypeicon, jobImageView);
-
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext,WithdrawDepositDateHistoryActivity.class);
+                    intent.putExtra("personOrCompany",obj.personorcompany);
+                    intent.putExtra("payeeId ",obj.electricianid);
+                    startActivity(intent);
+                }
+            });
 
             return view;
         }

@@ -31,6 +31,15 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a'
+            universalApk true
+        }
+    }
 }
 
 dependencies {

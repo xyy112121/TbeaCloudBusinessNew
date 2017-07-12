@@ -3,7 +3,7 @@ package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.mo
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 
 /**
- * Created by programmer on 2017/7/10.
+ *扫描详情
  */
 
 public class ScanCodeInfoResponseModel extends BaseResponseModel {

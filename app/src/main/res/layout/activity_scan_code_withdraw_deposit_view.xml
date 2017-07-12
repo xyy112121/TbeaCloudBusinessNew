@@ -16,18 +16,22 @@
             <TextView
                 style="@style/my_text_style"
                 android:text="提现用户" />
+
             <LinearLayout
+                android:id="@+id/withdrow_deposit_view_ownerInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:layout_gravity="center_vertical">
-                <include layout="@layout/activity_person_layout"/>
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.5">
+
+                <include layout="@layout/activity_person_layout" />
             </LinearLayout>
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/icon_arrow_right"/>
+                android:src="@drawable/icon_arrow_right" />
 
 
         </LinearLayout>
@@ -42,18 +46,20 @@
                 android:text="隶属关系" />
 
             <LinearLayout
+                android:id="@+id/withdrow_deposit_view_payeeInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.25"
-                android:layout_gravity="center_vertical">
-                <include layout="@layout/activity_person_layout1"
-                    />
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.25">
+
+                <include layout="@layout/activity_person_layout1" />
             </LinearLayout>
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/icon_arrow_right"/>
+                android:src="@drawable/icon_arrow_right" />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -66,9 +72,8 @@
                 android:text="提现编码" />
 
             <TextView
-                android:id="@+id/create_code_type_norms"
-                style="@style/my_right_text_style"
-                android:text="01111111587864944794248" />
+                android:id="@+id/withdrow_deposit_view_takemoneycode"
+                style="@style/my_right_text_style" />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -81,9 +86,8 @@
                 android:text="生成日期" />
 
             <TextView
-                style="@style/my_right_text_style"
-                android:text="2017-01-20 17:50:00"
-                 />
+                android:id="@+id/withdrow_deposit_view_generatecodetime"
+                style="@style/my_right_text_style" />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -95,16 +99,29 @@
                 android:layout_height="wrap_content"
                 android:text="金额" />
 
-            <TextView
-                android:id="@+id/textView2"
-                style="@style/my_right_text_style"
-                android:text="￥100.00"
-                android:textStyle="bold"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.8">
+
+                <TextView
+                    style="@style/money_logo_style"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/withdrow_deposit_view_money"
+                    style="@style/my_right_text_style"
+                    android:layout_width="wrap_content" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <View
             style="@style/horizontal_view"
-            android:layout_height="8dp" />
+            android:layout_height="8dp"
+            android:background="@color/interval_color" />
 
 
         <LinearLayout style="@style/my_text_layout">
@@ -113,21 +130,22 @@
                 style="@style/my_text_style"
                 android:layout_height="wrap_content"
                 android:text="支付单位" />
+
             <LinearLayout
+                android:id="@+id/withdrow_deposit_view_paymoneyinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.22"
-                android:layout_gravity="center_vertical">
-                <include layout="@layout/activity_person_layout1"
-                    />
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.22">
+
+                <include layout="@layout/activity_person_layout1" />
             </LinearLayout>
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/icon_arrow_right"/>
-
-
+                android:src="@drawable/icon_arrow_right" />
 
 
         </LinearLayout>
@@ -142,8 +160,8 @@
                 android:text="扫码时间" />
 
             <TextView
-                style="@style/my_right_text_style1"
-                android:text="2015-07-08 15:20:20" />
+                android:id="@+id/withdrow_deposit_view_paytime"
+                style="@style/my_right_text_style1" />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -156,10 +174,10 @@
                 android:text="扫码地点" />
 
             <TextView
-                android:id="@+id/create_code_number"
-                style="@style/my_right_text_style1"
-                android:text="云南省德阳市旌阳区长白山北路3号" />
+                android:id="@+id/withdrow_deposit_view_payplace"
+                style="@style/my_right_text_style1" />
         </LinearLayout>
+
         <View style="@style/horizontal_view" />
     </LinearLayout>
 

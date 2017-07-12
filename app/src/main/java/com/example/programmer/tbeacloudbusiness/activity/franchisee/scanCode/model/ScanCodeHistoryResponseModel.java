@@ -5,7 +5,7 @@ import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import java.util.List;
 
 /**
- * Created by DELL on 2017/7/9.
+ * 扫码历史记录
  */
 
 public class ScanCodeHistoryResponseModel extends BaseResponseModel {

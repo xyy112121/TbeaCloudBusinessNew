@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.user;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
@@ -22,6 +24,7 @@ import com.example.programmer.tbeacloudbusiness.utils.DeviceIdUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.example.programmer.tbeacloudbusiness.utils.permissonutil.PermissionActivity;
 
 import java.util.Map;
 
@@ -29,7 +32,7 @@ import java.util.Map;
  * Created by programmer on 2017/6/5.
  */
 
-public class LoginActivity extends FragmentActivity {
+public class LoginActivity extends PermissionActivity {
     private Context mContext;
     private String mDeviceId;
 
@@ -44,11 +47,20 @@ public class LoginActivity extends FragmentActivity {
             startActivity(intent);
             finish();
         }else {
-            mDeviceId = DeviceIdUtil.getDeviceId();
-            //861138028941751
-            if(TextUtils.isEmpty(mDeviceId)){
-                mDeviceId = Installation.id(mContext);
-            }
+            //单个权限获取
+            checkPermission(new CheckPermListener() {
+                @Override
+                public void Granted() {
+                    mDeviceId = DeviceIdUtil.getDeviceId();
+                }
+
+                @Override
+                public void Denied() {
+                    mDeviceId = Installation.id(mContext);
+                    //检查是否选择了不再提醒
+                }
+            }, "请求获取电话权限", Manifest.permission.READ_PHONE_STATE);
+
             listener();
         }
     }

@@ -13,7 +13,7 @@
 
 
         <TextView
-            android:id="@+id/scanCode_history_state_item_text1"
+            android:id="@+id/scan_code_withdraw_deposit_history_list_item_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.7"
@@ -24,15 +24,29 @@
             />
 
 
-        <TextView
-            android:id="@+id/scanCode_history_state_item_text3"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
             android:layout_weight="0.3"
-            android:gravity="center"
-            android:text="￥2555"
-            android:textStyle="bold"
-            android:textColor="@color/tab_text_normal"
-            />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:gravity="right"
+            android:layout_marginRight="15dp"
+            >
+            <TextView
+               style="@style/money_logo_style"
+                android:gravity="top"
+                android:layout_gravity="top"
+                android:textSize="10sp"/>
+            <TextView
+                android:id="@+id/scan_code_withdraw_deposit_history_list_item_money"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2555"
+                android:textStyle="bold"
+                android:textColor="@color/tab_text_normal"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 </FrameLayout>

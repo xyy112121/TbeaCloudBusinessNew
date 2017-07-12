@@ -56,7 +56,7 @@ public class MyApplication extends Application implements BDLocationListener {
         instance = this;
         initUniversalImageLoader();
 //		isGps();
-        SDKInitializer.initialize(getApplicationContext());
+//        SDKInitializer.initialize(getApplicationContext());
         //百度定位
         mLocationClient = new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(this);
@@ -67,9 +67,9 @@ public class MyApplication extends Application implements BDLocationListener {
         option.setAddrType("all");// 返回的定位结果包含地址信息
         option.setCoorType("bd09ll"); // 设置坐标类型
         option.setScanSpan(60 * 1000);
-        mLocationClient.setLocOption(option);
-        mLocationClient.start();
-        mLocationClient.requestLocation();
+//        mLocationClient.setLocOption(option);
+//        mLocationClient.start();
+//        mLocationClient.requestLocation();
 
         //加载保存的位置信息
         loadLoaclInfo();

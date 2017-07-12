@@ -19,8 +19,6 @@
                 android:src="@drawable/icon_head"/>
 
         </LinearLayout>
-
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -35,7 +33,6 @@
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:maxEms="13"
-                android:text="薄常亮"
                 android:textColor="@color/tab_text_normal"
                 android:textSize="16sp" />
 

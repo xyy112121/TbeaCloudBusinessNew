@@ -6,7 +6,7 @@ import com.example.programmer.tbeacloudbusiness.model.Condition;
 import java.util.List;
 
 /**
- * Created by DELL on 2017/7/9.
+ * 规格选择
  */
 
 public class ScanCodeNormsSelectReponseModel extends BaseResponseModel {

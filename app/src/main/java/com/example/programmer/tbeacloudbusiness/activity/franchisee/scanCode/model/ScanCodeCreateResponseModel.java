@@ -3,7 +3,7 @@ package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.mo
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 
 /**
- * Created by DELL on 2017/7/9.
+ *生成二维码
  */
 
 public class ScanCodeCreateResponseModel extends BaseResponseModel {

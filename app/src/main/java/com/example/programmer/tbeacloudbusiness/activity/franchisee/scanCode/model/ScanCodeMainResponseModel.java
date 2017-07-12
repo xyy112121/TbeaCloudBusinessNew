@@ -5,7 +5,7 @@ import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import java.util.List;
 
 /**
- * Created by DELL on 2017/7/9.
+ * 扫码返利首页
  */
 
 public class ScanCodeMainResponseModel extends BaseResponseModel {
