@@ -24,7 +24,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * 提现详情
  */
 
-public class WithdrawDepositDateViewActivity extends BaseActivity {
+public class WithdrawDepositDateInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

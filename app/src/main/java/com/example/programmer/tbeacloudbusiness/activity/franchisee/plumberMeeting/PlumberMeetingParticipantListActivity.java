@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateViewActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateInfoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +108,7 @@ public class PlumberMeetingParticipantListActivity extends BaseActivity implemen
                 public void onClick(View v) {
                     Intent intent = new Intent();
 
-                        intent.setClass(mContext,WithdrawDepositDateViewActivity.class);
+                        intent.setClass(mContext,WithdrawDepositDateInfoActivity.class);
 
 
                     startActivity(intent);

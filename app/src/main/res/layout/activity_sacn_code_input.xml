@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@null"
+        android:hint="请输入编码"/>
+
+    <View
+        style="@style/horizontal_view"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp" />
+
+    <Button
+        android:id="@+id/sacn_code_input_btn"
+        style="@style/style_next_btn"
+        android:background="@drawable/btn_bg_blue"
+        android:text="确认" />
+
+</LinearLayout>

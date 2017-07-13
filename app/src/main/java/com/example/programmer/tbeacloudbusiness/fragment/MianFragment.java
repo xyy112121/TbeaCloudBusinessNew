@@ -30,7 +30,9 @@ import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.PlumberManageMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.PlumberMeetingMainListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.ScanCodeAcctivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeMainListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.StoreSetActtivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.RealNameAuthenticationActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.HomeMainResponseModel;
@@ -193,6 +195,14 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
             }
         });
 
+        mView.findViewById(R.id.open_my_sacncode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ScanCodeAcctivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -280,7 +290,13 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
                     } else if ("shuidiangonghuiyi".equals(obj.moduleid)) {
                         //水电工会议
                         startActivity(new Intent(getActivity(), PlumberMeetingMainListActivity.class));
+                    }else if ("shangchengxitong".equals(obj.moduleid)) {
+                        //商城管理
+//                        startActivity(new Intent(getActivity(), PlumberMeetingMainListActivity.class));
+                        startActivity(new Intent(getActivity(), StoreSetActtivity.class));
                     }
+
+
                 }
             });
             return view1;

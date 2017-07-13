@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:PublishTextRowViewIsBottomLineShow="true"
+        app:PublishTextRowViewIsSelect="true"
+        app:PublishTextRowViewText="形象图" />
+    <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:id="@+id/store_set_rotate_ad"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:PublishTextRowViewIsBottomLineShow="true"
+        app:PublishTextRowViewIsSelect="true"
+        app:PublishTextRowViewText="轮换广告" />
+    <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:PublishTextRowViewIsBottomLineShow="true"
+        app:PublishTextRowViewIsSelect="true"
+        app:PublishTextRowViewText="店铺二维码" />
+    <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:PublishTextRowViewIsBottomLineShow="true"
+        app:PublishTextRowViewIsSelect="true"
+        app:PublishTextRowViewText="店铺介绍" />
+    <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:PublishTextRowViewIsBottomLineShow="true"
+        app:PublishTextRowViewIsSelect="true"
+        app:PublishTextRowViewText="规格型号管理" />
+    <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:PublishTextRowViewIsBottomLineShow="true"
+        app:PublishTextRowViewIsSelect="true"
+        app:PublishTextRowViewText="收款账户" />
+
+</LinearLayout>

@@ -48,12 +48,12 @@
             android:textSize="12sp" />
 
         <ImageView
-            android:id="@+id/open_my_message"
+            android:id="@+id/open_my_sacncode"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center|left"
             android:layout_marginRight="10dp"
-            android:src="@drawable/icon_message" />
+            android:src="@drawable/icon_sacncode" />
 
 
     </LinearLayout>

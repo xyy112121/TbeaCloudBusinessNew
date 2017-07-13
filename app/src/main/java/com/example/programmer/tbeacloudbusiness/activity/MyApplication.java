@@ -31,6 +31,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.io.File;
 import java.lang.ref.SoftReference;
@@ -73,6 +74,9 @@ public class MyApplication extends Application implements BDLocationListener {
 
         //加载保存的位置信息
         loadLoaclInfo();
+
+        //初始化二维码工具类
+        ZXingLibrary.initDisplayOpinion(this);
 
     }
 

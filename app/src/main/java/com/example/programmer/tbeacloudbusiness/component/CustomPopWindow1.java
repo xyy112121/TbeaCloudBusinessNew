@@ -129,6 +129,51 @@ public class CustomPopWindow1 {
         }
     }
 
+    public void init(View parentLayout, int headerRes, int contentRes, String title, String content,String content1,String btnText) {
+        try {
+            LinearLayout parentView = (LinearLayout) ((Activity) mContext).getLayoutInflater().inflate(R.layout.pop_window_layout, null);
+            View headerView = ((Activity) mContext).getLayoutInflater().inflate(headerRes, null);
+            ((TextView) headerView.findViewById(R.id.picker_header_tv)).setText(title);
+            headerView.findViewById(R.id.picker_header_close).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPopWindow.dissmiss();
+                }
+            });
+
+            parentView.addView(headerView);
+
+            View contentView = ((Activity) mContext).getLayoutInflater().inflate(contentRes, null);
+            TextView textView = (TextView) contentView.findViewById(R.id.scan_code_pay_confirm_tip_user);
+            TextView moneyView = (TextView) contentView.findViewById(R.id.scan_code_pay_confirm_tip_money);
+            Button button = (Button) contentView.findViewById(R.id.pop_window_btn);
+            button.setText(btnText);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPopWindow.dissmiss();
+                    if (mItemClick != null) {
+                        mItemClick.onItemClick("");
+                    }
+                }
+            });
+            textView.setText(content);
+            moneyView.setText(content1);
+            parentView.addView(contentView);
+
+
+            mPopWindow = new CustomPopWindow.PopupWindowBuilder((mContext))
+                    .setView(parentView)
+                    .enableBackgroundDark(true) //弹出popWindow时，背景是否变暗
+                    .setBgDarkAlpha(0.5f) // 控制亮度
+                    .setAnimationStyle(R.style.PopWindowAnimationFade)
+                    .create()
+                    .showAtLocation(parentLayout, Gravity.CENTER, 0, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public interface ItemClick {
         void onItemClick(String text);
     }

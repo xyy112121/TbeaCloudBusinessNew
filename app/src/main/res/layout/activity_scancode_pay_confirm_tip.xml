@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+   <TextView
+       android:id="@+id/scan_code_pay_confirm_tip_user"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="支付用户："
+       android:textSize="12sp"
+       android:textColor="@color/tab_text_normal"
+       android:layout_marginLeft="15dp"
+       android:layout_marginRight="15dp"
+       android:layout_marginTop="15dp"/>
+    <TextView
+        android:id="@+id/scan_code_pay_confirm_tip_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="支付金额：￥555.00"
+        android:textSize="12sp"
+        android:textColor="@color/tab_text_normal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/pop_window_btn"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/btn_bg_red"
+        android:text="确认"
+        android:textColor="@color/white"/>
+</LinearLayout>

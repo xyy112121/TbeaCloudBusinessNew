@@ -14,6 +14,15 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".activity.MyApplication"
         android:allowBackup="true"
@@ -64,7 +73,7 @@
         <activity android:name=".activity.franchisee.scanCode.ScanCodeViewActivity"/>
         <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateActivity"/>
         <activity android:name=".activity.franchisee.scanCode.DateSelectActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateViewActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateInfoActivity"/>
         <activity android:name=".activity.franchisee.scanCode.ScanCodeRebateListActivity"/>
         <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateHistoryActivity"/>
         <activity android:name=".activity.franchisee.scanCode.ScanCodeRegionSelectActivity"/>
@@ -110,6 +119,17 @@
         <activity android:name=".activity.my.main.ByPassAccountAuthorizationFunctionsActivity"/>
        <activity android:name=".activity.administrator.realNameAuthentication.MemberListActivity"/>
        <activity android:name=".activity.administrator.realNameAuthentication.PersonalDataActivity"/>
+
+        <activity android:name=".activity.franchisee.scan.ScanCodeAcctivity"/>
+        <activity android:name=".activity.franchisee.scan.CodeBraceActivity"/>
+        <activity android:name=".activity.franchisee.scan.ScanCodeInputActivity"/>
+        <activity android:name=".activity.franchisee.scan.ScanCodePayConfirmActivity"/>
+        <activity android:name=".activity.franchisee.scan.ScanCodePaySucceedActivity"/>
+
+        <activity android:name=".activity.franchisee.storeManage.StoreManageMainActivity"/>
+        <activity android:name=".activity.franchisee.storeManage.StoreSetActtivity"/>
+        <activity android:name=".activity.franchisee.storeManage.RotateADListActivity"/>
+
     </application>
 
 </manifest>

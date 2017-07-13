@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeViewActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateViewActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateInfoActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -201,7 +201,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity implemen
                     if(expandTabView1.getVisibility() == View.GONE){
                         intent.setClass(mContext,ScanCodeViewActivity.class);
                     }else {
-                        intent.setClass(mContext,WithdrawDepositDateViewActivity.class);
+                        intent.setClass(mContext,WithdrawDepositDateInfoActivity.class);
                     }
 
                     startActivity(intent);

@@ -30,6 +30,7 @@ import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueB
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -94,7 +95,7 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
                             if (model.isSuccess()) {
                                 if (model.data != null)
                                     mAdapter.addAll(model.data.takemoneyrankinglist);
-                                   initPayeeInfo(model.data.payeeinfo);
+                                    initPayeeInfo(model.data.payeeinfo);
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
                             }
@@ -158,7 +159,7 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
             }
         });
 
-        int displayWidth = ((Activity) mContext).getWindowManager().getDefaultDisplay().getWidth();//屏幕的宽
+        float displayWidth = UtilAssistants.getWidth(mContext);
         double wid = displayWidth / 1.4;
         int width = (int) wid;
         expandTabView.addItemToExpandTab(defaultShowText, mDateView, width, Gravity.LEFT);
@@ -238,7 +239,7 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
 
         @Override
         public int getCount() {
-            return 10;
+            return mList.size();
         }
 
         @Override

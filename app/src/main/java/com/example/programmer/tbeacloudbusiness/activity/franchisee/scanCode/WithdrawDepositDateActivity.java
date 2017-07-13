@@ -23,7 +23,6 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.mod
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
-import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
@@ -354,7 +353,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, WithdrawDepositDateViewActivity.class);
+                    Intent intent = new Intent(mContext, WithdrawDepositDateInfoActivity.class);
                     intent.putExtra("takeMoneyId", obj.takemoneyid);
                     startActivity(intent);
                 }
