@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 产品介绍
+ * 产品详情
  */
 
 public class ProductPresentationInfoActivity extends BaseActivity implements View.OnClickListener{

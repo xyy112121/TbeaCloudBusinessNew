@@ -37,5 +37,6 @@
         <attr name="PublishTextRowViewTextColor" format="color"/>
         <attr name="PublishTextRowViewIsBottomLineShow" format="boolean"/>
         <attr name="PublishTextRowViewIsSelect" format="boolean"/>
+        <attr name="PublishTextRowViewLeftWidth" format="dimension"/>
     </declare-styleable>
 </resources>

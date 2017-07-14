@@ -15,32 +15,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 轮换广告列表
+ * 规格型号
  */
 
-public class RotateADListActivity extends BaseActivity implements View.OnClickListener {
-    private MyAdapter mAdapter;
-
-
+public class SpecificationsAndModelsListActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rotate_ad_list);
-        initTopbar("轮换广告", "添加", this);
+        setContentView(R.layout.activity_specifications_and_models_list);
+        initTopbar("规格型号","添加",this);
         initView();
-
     }
 
-    private void initView() {
-        ListView mListView = (ListView) findViewById(R.id.listview);
-        mAdapter = new MyAdapter();
-        mListView.setAdapter(mAdapter);
-
+    private void  initView(){
+        ListView listView = (ListView) findViewById(R.id.listview);
+        MyAdapter mAdapter = new MyAdapter();
+        listView.setAdapter(mAdapter);
     }
+
+
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(mContext,RotateADEditActivity.class);
+        Intent intent = new Intent(mContext,SpecificationsAndModelsEditActivity.class);
         startActivity(intent);
     }
 
@@ -64,18 +61,10 @@ public class RotateADListActivity extends BaseActivity implements View.OnClickLi
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.activity_rotate_ad_list_item, null);
-            return view;
-        }
-
-        public void addAll(List<Object> list) {
-            mList = list;
-            notifyDataSetChanged();
-        }
-
-        public void removeAll() {
-            mList.clear();
-            notifyDataSetChanged();
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.activity_specifications_and_models_list_item, null);
+            }
+            return convertView;
         }
     }
 }

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <LinearLayout
+        android:layout_below="@id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            app:PublishTextRowViewIsBottomLineShow="true"
+            app:PublishTextRowViewText="标题"
+            app:PublishTextRowViewTextColor="@color/text_color" />
+
+        <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+            android:id="@+id/rotate_ad_edit_link_page"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            app:PublishTextRowViewIsBottomLineShow="true"
+            app:PublishTextRowViewIsSelect="true"
+            app:PublishTextRowViewText="链接页面"
+            app:PublishTextRowViewTextColor="@color/text_color"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="155dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <include layout="@layout/activity_rotate_ad_edit_commodity_item" />
+
+            <include layout="@layout/activity_rotate_ad_edit_shop_dynamic_item" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/horizontal_view"
+            android:layout_marginTop="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_width="140dp"
+                android:text="图片" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="0.7"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_defult" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="修改"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/tab_text_normal" />
+        </LinearLayout>
+
+        <View
+            style="@style/horizontal_view"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+    <Button
+        android:layout_alignParentBottom="true"
+       style="@style/style_next_btn"
+        android:text="删除"/>
+</RelativeLayout>

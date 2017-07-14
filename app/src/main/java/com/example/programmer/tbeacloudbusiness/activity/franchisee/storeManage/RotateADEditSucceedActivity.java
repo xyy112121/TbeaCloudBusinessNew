@@ -7,13 +7,14 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
- * 店铺管理首页
+ * 轮换广告操作成功
  */
 
-public class StoreManageMainActivity extends BaseActivity {
+public class RotateADEditSucceedActivity extends BaseActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_manage_main);
+        setContentView(R.layout.activity_rotate_ad_edit_succeed);
+        initTopbar("轮换广告");
     }
 }

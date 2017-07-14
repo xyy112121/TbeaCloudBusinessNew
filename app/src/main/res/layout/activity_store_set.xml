@@ -21,23 +21,27 @@
         app:PublishTextRowViewIsSelect="true"
         app:PublishTextRowViewText="轮换广告" />
     <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:id="@+id/store_set_store_code"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:PublishTextRowViewIsBottomLineShow="true"
         app:PublishTextRowViewIsSelect="true"
         app:PublishTextRowViewText="店铺二维码" />
     <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:id="@+id/store_set_store_introduce"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:PublishTextRowViewIsBottomLineShow="true"
         app:PublishTextRowViewIsSelect="true"
         app:PublishTextRowViewText="店铺介绍" />
     <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:id="@+id/store_set_store_specifications_and_models"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:PublishTextRowViewIsBottomLineShow="true"
         app:PublishTextRowViewIsSelect="true"
         app:PublishTextRowViewText="规格型号管理" />
+
     <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
         android:layout_width="match_parent"
         android:layout_height="49dp"

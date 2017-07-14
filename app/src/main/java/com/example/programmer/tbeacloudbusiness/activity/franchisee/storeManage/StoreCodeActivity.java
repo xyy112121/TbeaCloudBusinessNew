@@ -7,13 +7,14 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
- * 店铺管理首页
+ * 店铺二维码
  */
 
-public class StoreManageMainActivity extends BaseActivity {
+public class StoreCodeActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_manage_main);
+        setContentView(R.layout.activity_store_code);
+        initTopbar("店铺二维码");
     }
 }

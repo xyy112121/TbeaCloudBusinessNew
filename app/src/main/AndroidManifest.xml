@@ -129,6 +129,13 @@
         <activity android:name=".activity.franchisee.storeManage.StoreManageMainActivity"/>
         <activity android:name=".activity.franchisee.storeManage.StoreSetActtivity"/>
         <activity android:name=".activity.franchisee.storeManage.RotateADListActivity"/>
+        <activity android:name=".activity.franchisee.storeManage.RotateADEditActivity"/>
+        <activity android:name=".activity.franchisee.storeManage.RotateADLinkPageListActivity"/>
+        <activity android:name=".activity.franchisee.storeManage.StoreCodeActivity"/>
+        <activity android:name=".activity.franchisee.storeManage.StoreIntroduceActivity"/>
+        <activity android:name=".activity.franchisee.storeManage.SpecificationsAndModelsListActivity"/>
+        <activity android:name=".activity.franchisee.storeManage.SpecificationsAndModelsEditActivity"/>
+        <activity android:name=".activity.franchisee.storeManage.OrderManageDeliverGoodsActivity"/>
 
     </application>
 

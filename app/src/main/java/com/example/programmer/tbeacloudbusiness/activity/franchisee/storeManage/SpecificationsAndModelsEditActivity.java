@@ -2,18 +2,25 @@ package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
- * 店铺管理首页
+ * Created by programmer on 2017/7/14.
  */
 
-public class StoreManageMainActivity extends BaseActivity {
+public class SpecificationsAndModelsEditActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_manage_main);
+        setContentView(R.layout.activity_specifications_and_models_edit);
+        initTopbar("添加规格型号", "保存", this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
