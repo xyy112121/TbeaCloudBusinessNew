@@ -48,6 +48,7 @@ public class StoreSetActtivity extends BaseActivity implements View.OnClickListe
 //                startActivity(intent);//
                 intent = new Intent(mContext, OrderManageDeliverGoodsActivity.class);
                 startActivity(intent);
+                //kkk
                 break;
         }
     }
