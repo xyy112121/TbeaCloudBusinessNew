@@ -46,7 +46,9 @@ public class StoreSetActtivity extends BaseActivity implements View.OnClickListe
             case R.id.store_set_store_specifications_and_models:
 //                intent = new Intent(mContext, SpecificationsAndModelsListActivity.class);
 //                startActivity(intent);//
-                intent = new Intent(mContext, OrderManageDeliverGoodsActivity.class);
+//                intent = new Intent(mContext, OrderManageDeliverGoodsActivity.class);
+//                intent = new Intent(mContext, StoreCommodityManageListActivity.class);
+                intent = new Intent(mContext, MarketInfoActivity.class);
                 startActivity(intent);
                 //kkk
                 break;

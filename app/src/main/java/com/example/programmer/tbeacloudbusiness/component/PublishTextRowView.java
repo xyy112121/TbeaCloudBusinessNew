@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,6 +31,7 @@ public class PublishTextRowView extends LinearLayout {
     private TextView mValueView;
     private ClearEditText mValueView2;
     private int mWidth;
+    private int mGravity;
 
     public PublishTextRowView(Context context) {
         this(context,null);
@@ -49,6 +51,7 @@ public class PublishTextRowView extends LinearLayout {
         mTextSize = a.getDimensionPixelSize(R.styleable.PublishTextRowView_PublishTextRowViewTextSize, DensityUtil.dip2px(context,12));
         mIsSelect = a.getBoolean(R.styleable.PublishTextRowView_PublishTextRowViewIsSelect,false);
         mWidth = a.getDimensionPixelSize(R.styleable.PublishTextRowView_PublishTextRowViewLeftWidth,DensityUtil.dip2px(context,140));
+        mGravity = a.getInt(R.styleable.PublishTextRowView_PublishTextRowViewGravity, 0);
         initView(context);
     }
 
@@ -65,7 +68,13 @@ public class PublishTextRowView extends LinearLayout {
     }
 
     public void initView(Context context){
-        View view = ((Activity)context).getLayoutInflater().inflate(R.layout.view_pulish_text_row,null);
+        View view;
+        if (mGravity == 0){
+             view = ((Activity)context).getLayoutInflater().inflate(R.layout.view_pulish_text_row,null);
+        }else {
+            view = ((Activity)context).getLayoutInflater().inflate(R.layout.view_pulish_text_row,null);
+        }
+
         TextView leftView = (TextView) view.findViewById(R.id.left);
         mValueView2 = (ClearEditText) view.findViewById(R.id.rowvalue);
         mValueView = (TextView) view.findViewById(R.id.row_value);
@@ -73,6 +82,8 @@ public class PublishTextRowView extends LinearLayout {
         ImageView rightView = (ImageView)view.findViewById(R.id.right_image);
         leftView.setText(mTitleText);
         mValueView2.setHint(mHiht);
+        mValueView.setHint(mHiht);
+        mValueView.setGravity(Gravity.RIGHT|Gravity.CENTER);
         leftView.setTextColor(mTextColor);
         LayoutParams params = new LayoutParams(mWidth,LayoutParams.MATCH_PARENT);
         leftView.setLayoutParams(params);

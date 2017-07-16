@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+   <include layout="@layout/activity_page_top"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <LinearLayout
+            android:id="@+id/store_commodity_intro_top_layout"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:layout_weight="0.75"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="价格"
+                android:textColor="@color/tab_text_normal" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:src="@drawable/icon_arraw_bluegray" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <View style="@style/horizontal_view"/>
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

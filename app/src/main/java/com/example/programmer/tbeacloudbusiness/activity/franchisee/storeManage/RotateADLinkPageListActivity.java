@@ -78,6 +78,7 @@ public class RotateADLinkPageListActivity extends BaseActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
+//                convertView = getLayoutInflater().inflate(R.layout.activity_rotate_ad_edit_shop_dynamic_item, null);
                 convertView = getLayoutInflater().inflate(R.layout.activity_rotate_ad_linkpage_list_commodity_item, null);
             }
             return convertView;

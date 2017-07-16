@@ -108,6 +108,31 @@ public class BaseActivity extends PermissionActivity {
 		});
 	}
 
+	protected void initTopbar(String text,String rightText, OnClickListener listener,
+							  int resource,OnClickListener listener2) {
+		TextView tv = (TextView) findViewById(R.id.top_center);
+		mBackBtn = (ImageButton) findViewById(R.id.top_left);
+		mRightBtn = (ImageButton) findViewById(R.id.top_right_text_image);
+		mRightBtn.setImageResource(resource);
+		if (listener != null) {
+			mRightBtn.setVisibility(View.VISIBLE);
+			mRightBtn.setOnClickListener(listener2);
+		}
+		tv.setText(text);
+		TextView rightTv = (TextView)findViewById(R.id.top_right_text);
+		rightTv.setText(rightText);
+		rightTv.setVisibility(View.VISIBLE);
+		rightTv.setOnClickListener(listener);
+
+		mBackBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+	}
+
+
 
 	/**
 	 * 右边的文字

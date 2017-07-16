@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_defult" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
+            android:layout_marginLeft="8dp">
+
+            <TextView
+                android:id="@+id/store_commodity_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="商品名称"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/store_commodity_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="商品价格："
+                    android:textSize="12sp"
+                    android:textColor="@color/text_color"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/money_logo_style"
+                        android:textColor="@color/red"
+                        android:textSize="10sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:text="112"
+                        android:textColor="@color/red"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/store_commodity_price"
+                android:layout_below="@id/store_commodity_name"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="已售出：3"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="已评价：3"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="推荐商品：是"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+</FrameLayout>
