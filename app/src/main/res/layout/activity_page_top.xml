@@ -30,32 +30,29 @@
         android:scaleType="center"
         android:visibility="gone" />
 
+    <ImageButton
+        android:id="@+id/top_right_text_image"
+        android:layout_width="10dp"
+        android:layout_height="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="5dp"
+        android:background="@null"
+        android:scaleType="center"
+        android:visibility="invisible" />
+
     <TextView
         android:id="@+id/top_right_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@id/top_right_text_image"
         android:ellipsize="end"
         android:maxEms="4"
         android:maxLines="1"
         android:textColor="#fff"
         android:textSize="14sp"
-        android:text="添加"
-        android:visibility="invisible"
-        />
-
-    <ImageButton
-        android:id="@+id/top_right_text_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:background="@null"
-        android:scaleType="center"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/top_right_text"
-        android:src="@drawable/icon_search"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </RelativeLayout>

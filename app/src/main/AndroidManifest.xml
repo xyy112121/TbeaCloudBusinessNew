@@ -136,13 +136,6 @@
         <activity android:name=".activity.franchisee.storeManage.SpecificationsAndModelsListActivity"/>
         <activity android:name=".activity.franchisee.storeManage.SpecificationsAndModelsEditActivity"/>
         <activity android:name=".activity.franchisee.storeManage.OrderManageDeliverGoodsActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.StoreCommodityManageListActivity"/>
-
-        <activity android:name=".activity.franchisee.storeManage.MarketInfoActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.MarketInfoBeSoldActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.MarketInfoBeRateActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.MarketInfoBeRateInfoActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.MarketInfoBeRateInfoReplyActivity"/>
 
     </application>
 

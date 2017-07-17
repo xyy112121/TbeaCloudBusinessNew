@@ -24,8 +24,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:layout_marginLeft="8dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/person_info_name"
@@ -35,8 +34,7 @@
                 android:ellipsize="end"
                 android:maxEms="13"
                 android:textColor="@color/tab_text_normal"
-                android:textSize="16sp"
-                android:text="名字"/>
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/person_info_personjobtitle"
