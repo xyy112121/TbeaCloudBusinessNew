@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/activity_page_top"/>
+
+    <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:id="@+id/store_set_store_specifications_and_models"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:PublishTextRowViewIsBottomLineShow="true"
+        app:PublishTextRowViewIsSelect="true"
+        app:PublishTextRowViewHiht="请输入标题内容"
+        app:PublishTextRowViewText="标题" />
+    <GridView
+        android:id="@+id/shop_dynamic_image_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="4"/>
+    <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:PublishTextRowViewIsBottomLineShow="true"
+        app:PublishTextRowViewIsSelect="true"
+        app:PublishTextRowViewHiht="请输入标题内容"
+        app:PublishTextRowViewText="标题" />
+</LinearLayout>

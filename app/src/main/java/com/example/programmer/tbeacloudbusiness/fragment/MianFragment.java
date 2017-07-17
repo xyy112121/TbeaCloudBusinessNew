@@ -13,13 +13,11 @@ import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.TextAppearanceSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -32,6 +30,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManag
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.PlumberMeetingMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.ScanCodeAcctivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeMainListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.StoreManageMainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.StoreSetActtivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.RealNameAuthenticationActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
@@ -292,8 +291,7 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
                         startActivity(new Intent(getActivity(), PlumberMeetingMainListActivity.class));
                     }else if ("shangchengxitong".equals(obj.moduleid)) {
                         //商城管理
-//                        startActivity(new Intent(getActivity(), PlumberMeetingMainListActivity.class));
-                        startActivity(new Intent(getActivity(), StoreSetActtivity.class));
+                        startActivity(new Intent(getActivity(), StoreManageMainActivity.class));
                     }
 
 
@@ -302,7 +300,6 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
             return view1;
         }
     }
-
 
     /**
      * 附近商家

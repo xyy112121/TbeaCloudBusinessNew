@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.programmer.tbeacloudbusiness" >
+    package="com.example.programmer.tbeacloudbusiness">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,17 +12,19 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- SD卡读取权限，用户写入离线定位数据-->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".activity.MyApplication"
         android:allowBackup="true"
@@ -30,17 +32,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <!--百度地图-->
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" >
+            android:process=":remote">
             <intent-filter>
-                <action android:name="com.baidu.location.service_v2.2" >
-                </action>
+                <action android:name="com.baidu.location.service_v2.2"></action>
             </intent-filter>
         </service>
 
@@ -48,7 +59,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="2F0QiqoWoGmYOlkhrqBTfGs9sQ9SEwiN" />
 
-        <activity android:name=".activity.user.LoginActivity" >
+        <activity android:name=".activity.user.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,86 +67,89 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.MainActivity" >
+        <activity android:name=".activity.MainActivity">
 
         </activity>
 
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeMainListActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeMainListActivity" />
 
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateSelectActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateSelectActivity" />
 
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeTypeSelectActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateSucceedActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeNormsSelectActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeHistoryListActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeStateListActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeViewActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.DateSelectActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateInfoActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeRebateListActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateHistoryActivity"/>
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeRegionSelectActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.PlumberManageMainListActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.PlumberManageScanCodeDateListActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.PlumberManageSignHistoryListActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.PlumberManageLoginDatailsActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.PlumberManageLoginStatisticsActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.PlumberManagePersonViewActivity"/>
-        <activity android:name=".activity.franchisee.plumberManage.PersonManageActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeTypeSelectActivity" />
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateSucceedActivity" />
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeNormsSelectActivity" />
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateActivity" />
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeHistoryListActivity" />
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeStateListActivity" />
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeViewActivity" />
+        <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateActivity" />
+        <activity android:name=".activity.franchisee.scanCode.DateSelectActivity" />
+        <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateInfoActivity" />
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeRebateListActivity" />
+        <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateHistoryActivity" />
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeRegionSelectActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.PlumberManageMainListActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.PlumberManageScanCodeDateListActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.PlumberManageSignHistoryListActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.PlumberManageLoginDatailsActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.PlumberManageLoginStatisticsActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.PlumberManagePersonViewActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.PersonManageActivity" />
 
-        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingMainListActivity"/>
-        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingListAllActivity"/>
-        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingViewActivity"/>
-        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingParticipantListActivity"/>
-        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingSignInListActivity"/>
+        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingMainListActivity" />
+        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingListAllActivity" />
+        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingViewActivity" />
+        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingParticipantListActivity" />
+        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingSignInListActivity" />
 
-        <activity android:name=".activity.user.RegisterActivity"/>
-        <activity android:name=".activity.user.CompletionDataActivity"/>
-        <activity android:name=".activity.user.RegisterSuccessActivity"/>
-        <activity android:name=".activity.user.RealNameAuthenticationActivity"/>
+        <activity android:name=".activity.user.RegisterActivity" />
+        <activity android:name=".activity.user.CompletionDataActivity" />
+        <activity android:name=".activity.user.RegisterSuccessActivity" />
+        <activity android:name=".activity.user.RealNameAuthenticationActivity" />
 
-        <activity android:name=".activity.tbea.CompanyIntroActivity"/>
-        <activity android:name=".activity.tbea.ProductPresentationListActivity"/>
-        <activity android:name=".activity.tbea.ProductPresentationInfoActivity"/>
-        <activity android:name=".activity.tbea.ProductPresentationContactInfoActivity"/>
+        <activity android:name=".activity.tbea.CompanyIntroActivity" />
+        <activity android:name=".activity.tbea.ProductPresentationListActivity" />
+        <activity android:name=".activity.tbea.ProductPresentationInfoActivity" />
+        <activity android:name=".activity.tbea.ProductPresentationContactInfoActivity" />
 
-        <activity android:name=".activity.my.main.SetActivity"/>
-        <activity android:name=".activity.my.set.BindingNewPhoneActivity"/>
-        <activity android:name=".activity.my.set.EditBindingPhoneActivity"/>
-        <activity android:name=".activity.my.set.BindingNewPhoneFinishActivity"/>
-        <activity android:name=".activity.my.set.PwdEditActivity"/>
-        <activity android:name=".activity.my.set.AddressEditActivity"/>
-        <activity android:name=".activity.my.set.AddressEditListActivity"/>
-        <activity android:name=".activity.my.set.SetBackgroundActivity"/>
-        <activity android:name=".activity.my.set.GeneralActivity"/>
-        <activity android:name=".activity.my.main.RealNameAuthenticationPlumberActivity"/>
-        <activity android:name=".activity.my.main.RealNameAuthenticationDistributorActivity"/>
-        <activity android:name=".activity.my.main.MyAttentionActivity"/>
-        <activity android:name=".activity.my.main.MyFansActivity"/>
-        <activity android:name=".activity.my.main.BypassAccountManageListActivity"/>
-        <activity android:name=".activity.my.main.BypassAccountManageEditActivity"/>
-        <activity android:name=".activity.my.main.ByPassAccountAuthorizationFunctionsActivity"/>
-       <activity android:name=".activity.administrator.realNameAuthentication.MemberListActivity"/>
-       <activity android:name=".activity.administrator.realNameAuthentication.PersonalDataActivity"/>
+        <activity android:name=".activity.my.main.SetActivity" />
+        <activity android:name=".activity.my.set.BindingNewPhoneActivity" />
+        <activity android:name=".activity.my.set.EditBindingPhoneActivity" />
+        <activity android:name=".activity.my.set.BindingNewPhoneFinishActivity" />
+        <activity android:name=".activity.my.set.PwdEditActivity" />
+        <activity android:name=".activity.my.set.AddressEditActivity" />
+        <activity android:name=".activity.my.set.AddressEditListActivity" />
+        <activity android:name=".activity.my.set.SetBackgroundActivity" />
+        <activity android:name=".activity.my.set.GeneralActivity" />
+        <activity android:name=".activity.my.main.RealNameAuthenticationPlumberActivity" />
+        <activity android:name=".activity.my.main.RealNameAuthenticationDistributorActivity" />
+        <activity android:name=".activity.my.main.MyAttentionActivity" />
+        <activity android:name=".activity.my.main.MyFansActivity" />
+        <activity android:name=".activity.my.main.BypassAccountManageListActivity" />
+        <activity android:name=".activity.my.main.BypassAccountManageEditActivity" />
+        <activity android:name=".activity.my.main.ByPassAccountAuthorizationFunctionsActivity" />
+        <activity android:name=".activity.administrator.realNameAuthentication.MemberListActivity" />
+        <activity android:name=".activity.administrator.realNameAuthentication.PersonalDataActivity" />
 
-        <activity android:name=".activity.franchisee.scan.ScanCodeAcctivity"/>
-        <activity android:name=".activity.franchisee.scan.CodeBraceActivity"/>
-        <activity android:name=".activity.franchisee.scan.ScanCodeInputActivity"/>
-        <activity android:name=".activity.franchisee.scan.ScanCodePayConfirmActivity"/>
-        <activity android:name=".activity.franchisee.scan.ScanCodePaySucceedActivity"/>
+        <activity android:name=".activity.franchisee.scan.ScanCodeAcctivity" />
+        <activity android:name=".activity.franchisee.scan.CodeBraceActivity" />
+        <activity android:name=".activity.franchisee.scan.ScanCodeInputActivity" />
+        <activity android:name=".activity.franchisee.scan.ScanCodePayConfirmActivity" />
+        <activity android:name=".activity.franchisee.scan.ScanCodePaySucceedActivity" />
 
-        <activity android:name=".activity.franchisee.storeManage.StoreManageMainActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.StoreSetActtivity"/>
-        <activity android:name=".activity.franchisee.storeManage.RotateADListActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.RotateADEditActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.RotateADLinkPageListActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.StoreCodeActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.StoreIntroduceActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.SpecificationsAndModelsListActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.SpecificationsAndModelsEditActivity"/>
-        <activity android:name=".activity.franchisee.storeManage.OrderManageDeliverGoodsActivity"/>
+        <activity android:name=".activity.franchisee.storeManage.StoreManageMainActivity" />
+        <activity android:name=".activity.franchisee.storeManage.StoreSetActtivity" />
+        <activity android:name=".activity.franchisee.storeManage.RotateADListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.RotateADEditActivity" />
+        <activity android:name=".activity.franchisee.storeManage.RotateADLinkPageListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.StoreCodeActivity" />
+        <activity android:name=".activity.franchisee.storeManage.StoreIntroduceActivity" />
+        <activity android:name=".activity.franchisee.storeManage.SpecificationsAndModelsListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.SpecificationsAndModelsEditActivity" />
+        <activity android:name=".activity.franchisee.storeManage.OrderManageDeliverGoodsActivity" />
+        <activity android:name=".activity.franchisee.storeManage.StoreCommodityManageListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.ShopDynamicListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.ShopDynamicAddActivity" />
 
     </application>
 

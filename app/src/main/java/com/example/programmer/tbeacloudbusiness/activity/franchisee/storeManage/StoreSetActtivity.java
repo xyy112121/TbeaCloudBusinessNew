@@ -9,7 +9,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
- * Created by programmer on 2017/7/13.
+ * 店铺设置
  */
 
 public class StoreSetActtivity extends BaseActivity implements View.OnClickListener {
@@ -44,13 +44,8 @@ public class StoreSetActtivity extends BaseActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.store_set_store_specifications_and_models:
-//                intent = new Intent(mContext, SpecificationsAndModelsListActivity.class);
-//                startActivity(intent);//
-//                intent = new Intent(mContext, OrderManageDeliverGoodsActivity.class);
-//                intent = new Intent(mContext, StoreCommodityManageListActivity.class);
-                intent = new Intent(mContext, MarketInfoActivity.class);
+                intent = new Intent(mContext, SpecificationsAndModelsListActivity.class);
                 startActivity(intent);
-                //kkk
                 break;
         }
     }

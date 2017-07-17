@@ -83,7 +83,7 @@ public class PublishTextRowView extends LinearLayout {
         leftView.setText(mTitleText);
         mValueView2.setHint(mHiht);
         mValueView.setHint(mHiht);
-        mValueView.setGravity(Gravity.RIGHT|Gravity.CENTER);
+//        mValueView.setGravity(Gravity.RIGHT|Gravity.CENTER);
         leftView.setTextColor(mTextColor);
         LayoutParams params = new LayoutParams(mWidth,LayoutParams.MATCH_PARENT);
         leftView.setLayoutParams(params);
