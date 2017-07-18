@@ -19,6 +19,7 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
+import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +89,7 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
             }
         });
 
-        int displayWidth = ((Activity) mContext).getWindowManager().getDefaultDisplay().getWidth();//屏幕的宽
+        int displayWidth = UtilAssistants.getDisplayWidth(mContext);
         if ("会议编码".equals(defaultShowText)){
             double wid = displayWidth/3;
             int width = (int)wid;

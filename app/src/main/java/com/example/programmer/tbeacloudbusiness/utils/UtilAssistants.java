@@ -1,6 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.utils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -229,5 +230,15 @@ public class UtilAssistants {
             LogUtils.error(e);
             return "";
         }
+    }
+
+    /**
+     * 获取手机屏幕的宽
+     * @param context
+     * @return
+     */
+    public static  int getDisplayWidth(Context context){
+        int displayWidth = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();//屏幕的宽
+        return  displayWidth;
     }
 }
