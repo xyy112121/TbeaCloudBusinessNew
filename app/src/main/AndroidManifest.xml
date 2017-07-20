@@ -151,6 +151,10 @@
         <activity android:name=".activity.franchisee.storeManage.ShopDynamicListActivity" />
         <activity android:name=".activity.franchisee.storeManage.ShopDynamicAddActivity" />
 
+        <activity android:name=".activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity"/>
+        <activity android:name=".activity.distributor.rebateAccount.activity.RebateAccountWithdrawCashActivity"/>
+        <activity android:name=".activity.distributor.rebateAccount.activity.WithdrawCashViewActivity"/>
+
     </application>
 
 </manifest>

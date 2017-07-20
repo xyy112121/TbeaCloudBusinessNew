@@ -2,6 +2,7 @@ package com.example.programmer.tbeacloudbusiness.activity.user.action;
 
 import com.example.programmer.tbeacloudbusiness.activity.user.model.HomeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.LoginUserModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.http.MD5Util;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
@@ -43,6 +44,14 @@ public class UserAction extends BaseAction {
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN002001001000", pairs);
         model = gson.fromJson(result, HomeMainResponseModel.class);
+        return model;
+    }
+
+    public MyMainResponseModel getMyMainData() throws Exception {
+        MyMainResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN002001003000", pairs);
+        model = gson.fromJson(result, MyMainResponseModel.class);
         return model;
     }
 }

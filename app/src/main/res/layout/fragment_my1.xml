@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/my_set"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/head_color"
+                android:gravity="right|center_vertical"
+                android:paddingRight="15dp"
+                android:text="设置"
+                android:textColor="@color/white" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/head_color">
+
+                <LinearLayout
+                    android:id="@+id/fragment_mian_account_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:background="@color/head_color"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp">
+
+                    <com.example.programmer.tbeacloudbusiness.component.CircleImageView
+                        android:id="@+id/user_picture"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/icon_head"
+                        app:border_color="#FFF"
+                        app:border_width="4dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="刘心茹"
+                            android:textColor="#FFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="总经销商"
+                            android:textColor="#FFF"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="公司名称"
+                            android:textColor="#FFF"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/icon_user_arrow_gray" />
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_message" />
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="我的消息"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_attention" />
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="我的关注"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    android:id="@+id/my_attention"
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_attention" />
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="我的粉丝"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    android:id="@+id/my_fans"
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_real_nameauthentication" />
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="实名认证"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    android:id="@+id/my_relaname_authentication"
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="已认证" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_bypass_account" />
+
+                <TextView
+
+
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="子账号"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    android:id="@+id/my_bypass_account_manage"
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="10dp"
+                android:background="@color/interval_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_scancode" />
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="扫码返利"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_store" />
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="商城"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_plumber" />
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="水电工"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_plumber_metting" />
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="水电工会议"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_distributor" />
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="分销商"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_tbws" />
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="特变卫士"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="10dp"
+                android:background="@color/interval_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_help" />
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="帮助中心"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/my_select_btn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/my_item_image"
+                    android:src="@drawable/icon_my_about" />
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:text="关于"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    style="@style/my_right_text_style"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:text="12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

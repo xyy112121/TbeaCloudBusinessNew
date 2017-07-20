@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+  <include layout="@layout/activity_page_top"/>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/head_color"
+    android:layout_margin="8dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            >
+            <View
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:background="@drawable/describing_circle_left"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:id="@+id/withdraw_cash_view_validexpiredtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="时间 "
+                android:layout_marginRight="5dp"
+                android:maxEms="16"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="12sp"
+                />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_my_xuxian"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:id="@+id/withdraw_cash_view_takemoneycode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:text="验证码:"
+            android:layout_marginTop="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="提现金额:"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                   style="@style/money_logo_style"
+                    android:textColor="@color/white"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/withdraw_cash_view_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold"
+                    android:text="121"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/wallet_withdraw_cash_view_qrcodepicture"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            />
+        <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icon_my_xuxian"
+        android:layout_centerVertical="true"/>
+        <TextView
+            android:id="@+id/wallet_withdraw_cash_view_distributorinfo_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="提现二维码的有效期为24小时，如您未能及时提现，该二维码失效，您可以在返利账户内查看生成的有效的提现二维码，失效的将不再显示，如需再次提现请重新生成。"/>
+
+    </LinearLayout>
+</ScrollView>
+
+
+
+</LinearLayout>
