@@ -5,4 +5,5 @@
     <dimen name="me_top_layout_hight">220dp</dimen>
     <dimen name="discover_top_hight">20dp</dimen>
     <dimen name="discover_top_layout_hight">65dp</dimen>
+    <dimen name="home_top_layout_hight">68dp</dimen>
 </resources>

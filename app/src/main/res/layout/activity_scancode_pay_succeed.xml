@@ -39,6 +39,7 @@
                 <TextView style="@style/money_logo_style" />
 
                 <TextView
+                    android:id="@+id/sacn_code_pay_succeed_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="500.00"
@@ -50,7 +51,7 @@
 
 
         <Button
-            android:id="@+id/completion_finish"
+            android:id="@+id/sacn_code_pay_succee_finish"
             style="@style/style_next_btn"
             android:layout_alignParentBottom="true"
             android:background="@drawable/btn_bg_blue"

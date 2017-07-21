@@ -58,6 +58,7 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/scancode_pay_confirm_money"
                 style="@style/my_right_text_style"
                 android:layout_width="wrap_content" />
         </LinearLayout>
@@ -83,12 +84,9 @@
             android:layout_gravity="center"
             android:layout_weight="0.8">
 
-            <TextView
-                style="@style/money_logo_style"
-                android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/withdrow_deposit_view_money"
+                android:id="@+id/scancode_pay_confirm_code"
                 style="@style/my_right_text_style"
                 android:layout_width="wrap_content" />
         </LinearLayout>
@@ -102,6 +100,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+
             style="@style/my_text_style"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
@@ -110,6 +109,7 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/scancode_pay_confirm_state"
             style="@style/my_right_text_style1"
             android:layout_width="wrap_content"
             android:text="未使用"
@@ -133,6 +133,7 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/scancode_pay_confirm_validexpiredtime"
             style="@style/my_right_text_style1"
             android:layout_width="wrap_content"
             android:text="剩余3小时"
@@ -144,9 +145,10 @@
     <View
         style="@style/horizontal_view"
         android:layout_height="0.5dp" />
+
     <Button
         android:id="@+id/scancode_pay_confirm_btn"
-       style="@style/style_next_btn"
+        style="@style/style_next_btn"
         android:background="@drawable/btn_bg_blue"
-        android:text="确认"/>
+        android:text="确认" />
 </LinearLayout>

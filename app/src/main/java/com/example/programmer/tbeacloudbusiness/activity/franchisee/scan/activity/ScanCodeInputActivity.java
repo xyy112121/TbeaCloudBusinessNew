@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.scan;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

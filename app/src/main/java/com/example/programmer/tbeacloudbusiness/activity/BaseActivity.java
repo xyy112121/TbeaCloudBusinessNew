@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.utils.permissonutil.PermissionActivity;
+import com.jaeger.library.StatusBarUtil;
 
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class BaseActivity extends PermissionActivity {
 	@Override
 	public void setContentView(@LayoutRes int layoutResID) {
 		super.setContentView(layoutResID);
+		StatusBarUtil.setColor(this, ContextCompat.getColor(this,R.color.head_color),0);
 		mContext = this;
 	}
 
@@ -177,5 +180,9 @@ public class BaseActivity extends PermissionActivity {
 			}
 		}
 		return false;
+	}
+
+	public void setTextViewValue(int id,String value){
+		((TextView)findViewById(id)).setText(value);
 	}
 }

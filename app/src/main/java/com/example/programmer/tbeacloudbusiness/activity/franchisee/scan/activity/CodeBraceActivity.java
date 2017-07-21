@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.scan;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

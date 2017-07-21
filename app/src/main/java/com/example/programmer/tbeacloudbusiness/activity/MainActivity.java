@@ -1,6 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.activity;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.R;
@@ -8,6 +9,7 @@ import com.example.programmer.tbeacloudbusiness.component.MainNavigateTabBar;
 import com.example.programmer.tbeacloudbusiness.fragment.MianFragment;
 import com.example.programmer.tbeacloudbusiness.fragment.MyFragment;
 import com.example.programmer.tbeacloudbusiness.fragment.TbMianFragment;
+import com.jaeger.library.StatusBarUtil;
 
 
 public class MainActivity extends BaseActivity {
@@ -17,6 +19,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        StatusBarUtil.setTransparentForImageViewInFragment(MainActivity.this, null);
         mNavigateTabBar = (MainNavigateTabBar) findViewById(R.id.mainTabBar);
 
         mNavigateTabBar.onRestoreInstanceState(savedInstanceState);

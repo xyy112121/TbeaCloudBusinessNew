@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
             <TextView
                 android:id="@+id/my_set"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/home_top_layout_hight"
                 android:background="@color/head_color"
                 android:gravity="right|center_vertical"
                 android:paddingRight="15dp"

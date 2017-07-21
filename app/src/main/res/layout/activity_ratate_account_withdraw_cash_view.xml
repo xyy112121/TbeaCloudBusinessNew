@@ -68,20 +68,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="提现金额:"
+                android:text="提现金额："
                 android:textSize="16sp"
                 android:layout_marginTop="10dp"/>
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <TextView
                    style="@style/money_logo_style"
                     android:textColor="@color/white"
-                    android:gravity="center"/>
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="8dp"
+                    />
                 <TextView
                     android:id="@+id/withdraw_cash_view_money"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:layout_gravity="center"
@@ -93,19 +95,29 @@
 
         <ImageView
             android:id="@+id/wallet_withdraw_cash_view_qrcodepicture"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             />
+        <TextView
+            android:id="@+id/wallet_withdraw_cash_view_withdraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:text="提现二维码"/>
         <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/icon_my_xuxian"
         android:layout_centerVertical="true"/>
         <TextView
-            android:id="@+id/wallet_withdraw_cash_view_distributorinfo_name"
+            android:id="@+id/wallet_withdraw_cash_view_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"

@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.scan;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -7,13 +7,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
-import com.example.programmer.tbeacloudbusiness.utils.permissonutil.MainActivity;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
@@ -112,10 +110,7 @@ public class ScanCodeAcctivity extends BaseActivity {
         if (requestCode == REQUEST_IMAGE) {
             if (data != null) {
                 Uri uri = data.getData();
-//                ContentResolver cr = getContentResolver();
                 try {
-//                    Bitmap mBitmap = MediaStore.Images.Media.getBitmap(cr, uri);//显得到bitmap图片
-
                     CodeUtils.analyzeBitmap(UtilAssistants.getPath(mContext,uri), new CodeUtils.AnalyzeCallback() {
                         @Override
                         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
@@ -128,9 +123,6 @@ public class ScanCodeAcctivity extends BaseActivity {
                         }
                     });
 
-//                    if (mBitmap != null) {
-//                        mBitmap.recycle();
-//                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -155,58 +147,14 @@ public class ScanCodeAcctivity extends BaseActivity {
     };
 
     public  void provingScanCode(final String result){
-//        final CustomDialog dialog = new CustomDialog(ScanCodeActivity.this,R.style.MyDialog,R.layout.tip_wait_dialog);
-//        dialog.setText("请等待...");
-//        dialog.show();
-//        final Handler handler = new Handler() {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                dialog.dismiss();
-//                switch (msg.what) {
-//                    case ThreadState.SUCCESS:
-//                        RspInfo1 re = (RspInfo1) msg.obj;
-//                        if (re.isSuccess()) {
-//                            Intent intent = new Intent();
-//                            if(mScanCodeType.equals("suyuan")){
-//                                intent.setClass(ScanCodeActivity.this,SuYuanViewActivity.class);
-//                            }else {
-//                                intent.setClass(ScanCodeActivity.this,ScanCodeViewActivity.class);
-//                                intent.putExtra("type","net");
-//                            }
-//                            intent.putExtra("scanCode",result);
-//                            startActivity(intent);
-//
-//                        } else {
-//                            final CustomDialog dialog1 = new CustomDialog(ScanCodeActivity.this,R.style.MyDialog,R.layout.tip_delete_dialog);
-//                            dialog1.setText(re.getMsg());
-//                            dialog1.setConfirmBtnIsCloseWindow(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog1.dismiss();
-//                                }
-//                            });
-//                            dialog1.show();
-//                        }
-//
-//                        break;
-//                    case ThreadState.ERROR:
-//                        ToastUtil.showMessage("操作失败！");
-//                        break;
-//                }
-//            }
-//        };
-//
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    UserAction userAction = new UserAction();
-//                    RspInfo1 re = userAction.provingScanCode(result,mScanCodeType);
-//                    handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
-//                } catch (Exception e) {
-//                    handler.sendEmptyMessage(ThreadState.ERROR);
-//                }
-//            }
-//        }).start();
+        if(result.indexOf("tbscrfl") != -1){
+            Intent intent = new Intent(mContext,ScanCodePayConfirmActivity.class);
+            intent.putExtra("code",result);
+            startActivity(intent);
+        }else {
+            //二维码无效
+            Intent intent = new Intent(mContext,CodeBraceActivity.class);
+            startActivity(intent);
+        }
     }
 }

@@ -131,11 +131,11 @@
         <activity android:name=".activity.administrator.realNameAuthentication.MemberListActivity" />
         <activity android:name=".activity.administrator.realNameAuthentication.PersonalDataActivity" />
 
-        <activity android:name=".activity.franchisee.scan.ScanCodeAcctivity" />
-        <activity android:name=".activity.franchisee.scan.CodeBraceActivity" />
-        <activity android:name=".activity.franchisee.scan.ScanCodeInputActivity" />
-        <activity android:name=".activity.franchisee.scan.ScanCodePayConfirmActivity" />
-        <activity android:name=".activity.franchisee.scan.ScanCodePaySucceedActivity" />
+        <activity android:name=".activity.franchisee.scan.activity.ScanCodeAcctivity" />
+        <activity android:name=".activity.franchisee.scan.activity.CodeBraceActivity" />
+        <activity android:name=".activity.franchisee.scan.activity.ScanCodeInputActivity" />
+        <activity android:name=".activity.franchisee.scan.activity.ScanCodePayConfirmActivity" />
+        <activity android:name=".activity.franchisee.scan.activity.ScanCodePaySucceedActivity" />
 
         <activity android:name=".activity.franchisee.storeManage.StoreManageMainActivity" />
         <activity android:name=".activity.franchisee.storeManage.StoreSetActtivity" />

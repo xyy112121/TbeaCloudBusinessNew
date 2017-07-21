@@ -19,6 +19,11 @@ import java.util.List;
 
 public class RebateAccountAction extends BaseAction {
 
+    /**
+     * 获取我的返利账户列表
+     * @return
+     * @throws Exception
+     */
     public RebateAccountListResponseModel getRebateAccountList() throws Exception {
         RebateAccountListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
@@ -27,6 +32,11 @@ public class RebateAccountAction extends BaseAction {
         return model;
     }
 
+    /**
+     * 获取返利详细
+     * @return
+     * @throws Exception
+     */
     public RebateAccountInfoResponseModel getRebateAccountInfo() throws Exception {
         RebateAccountInfoResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
@@ -35,6 +45,9 @@ public class RebateAccountAction extends BaseAction {
         return model;
     }
 
+    /**
+     * 生成二维码（提现）
+     */
     public WithdrawCashViewResponseModel getWithdrawCashView(String money,String distributorid) throws Exception {
         WithdrawCashViewResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();

@@ -22,7 +22,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * 积分提现
+ * 积分提现(二维码生成界面)
  */
 
 public class WithdrawCashViewActivity extends BaseActivity implements View.OnClickListener {
@@ -36,8 +36,6 @@ public class WithdrawCashViewActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ratate_account_withdraw_cash_view);
         initTopbar("提现凭证", "删除", this);
-        ((TextView) findViewById(R.id.top_center)).setText("");
-        ((TextView) findViewById(R.id.top_right_text)).setText("");
         String money = getIntent().getStringExtra("money");
         String distributorid = getIntent().getStringExtra("distributorid");
         if ("".equals(money) || money == null) {
@@ -167,14 +165,16 @@ public class WithdrawCashViewActivity extends BaseActivity implements View.OnCli
                         WithdrawCashViewResponseModel model = (WithdrawCashViewResponseModel) msg.obj;
                         if (model.isSuccess() && model.data != null) {
                             WithdrawCashViewResponseModel.TakemoneyInfo info = model.data.takemoneyinfo;
+                            ((TextView) findViewById(R.id.wallet_withdraw_cash_view_withdraw)).setText("提现单位："+model.data.distributorinfo.name);
                             if (info != null) {
                                 ImageView imageView = (ImageView) findViewById(R.id.wallet_withdraw_cash_view_qrcodepicture);
                                 ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + info.qrcodepicture, imageView);
-                                ((TextView) findViewById(R.id.withdraw_cash_view_takemoneycode)).setText("验证码:" + info.takemoneycode);
+                                ((TextView) findViewById(R.id.withdraw_cash_view_takemoneycode)).setText("验证码：" + info.takemoneycode);
                                 ((TextView) findViewById(R.id.withdraw_cash_view_money)).setText(info.money);
-                                ((TextView) findViewById(R.id.withdraw_cash_view_validexpiredtime)).setText(info.validexpiredtime);
-                                getCanexChangeMoneySuccess();
+                                ((TextView) findViewById(R.id.withdraw_cash_view_validexpiredtime)).setText("有效期："+info.validexpiredtime);
+                                ((TextView) findViewById(R.id.wallet_withdraw_cash_view_note)).setText("提现单位："+info.note);
                             }
+                            getCanexChangeMoneySuccess();
                         } else {
                             ToastUtil.showMessage(model.getMsg());
                             finish();

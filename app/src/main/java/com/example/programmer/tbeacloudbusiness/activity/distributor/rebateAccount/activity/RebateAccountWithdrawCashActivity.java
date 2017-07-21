@@ -32,8 +32,8 @@ public class RebateAccountWithdrawCashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rebate_account_withdraw_cash);
         initTopbar("提现");
+        initView();
         getDate();
-
     }
 
     public void initView(){

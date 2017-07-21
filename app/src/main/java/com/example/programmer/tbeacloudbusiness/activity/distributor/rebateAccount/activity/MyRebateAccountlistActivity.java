@@ -39,6 +39,7 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
     private MyAdapter mAdapter;
     private BGARefreshLayout mRefreshLayout;
     private int mCurrentMoney;
+    private boolean isFirst = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,26 +64,27 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
                         RebateAccountListResponseModel model = (RebateAccountListResponseModel) msg.obj;
                         if (model.isSuccess() && model.data != null) {
                             mCurrentMoney = model.data.mymoneyinfo.currentmoney;
-                            LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_rebate_account_list_head, null);
-                            mListView.addHeaderView(layout);
-                            FrameLayout layout1 = (FrameLayout) getLayoutInflater().inflate(R.layout.activity_rebate_account_list_item_head, null);
-                            mListView.addHeaderView(layout1);
-                            findViewById(R.id.my_rebate_account_withdraw_cash).setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    if (mCurrentMoney == 0) {
-                                        ToastUtil.showMessage("你当前可提现金额为0");
-                                    } else {
-                                        startActivity(new Intent(mContext,RebateAccountWithdrawCashActivity.class));
+                            if(isFirst == true){
+                                LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_rebate_account_list_head, null);
+                                mListView.addHeaderView(layout);
+                                FrameLayout layout1 = (FrameLayout) getLayoutInflater().inflate(R.layout.activity_rebate_account_list_item_head, null);
+                                mListView.addHeaderView(layout1);
+                                findViewById(R.id.my_rebate_account_withdraw_cash).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        if (mCurrentMoney == 0) {
+                                            ToastUtil.showMessage("你当前可提现金额为0");
+                                        } else {
+                                            startActivity(new Intent(mContext,RebateAccountWithdrawCashActivity.class));
+                                        }
+
                                     }
-
-                                }
-                            });
-
+                                });
+                            }
                             ((TextView) findViewById(R.id.my_rebate_account_list_currentmoney)).setText(mCurrentMoney + "");
 
                             mAdapter.addAll(model.data.nottakemoneylist);
-
+                            isFirst = false;
                         } else {
                             ToastUtil.showMessage(model.getMsg());
                         }
