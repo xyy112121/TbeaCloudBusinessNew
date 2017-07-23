@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.tbea;
+package com.example.programmer.tbeacloudbusiness.activity.tbea.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

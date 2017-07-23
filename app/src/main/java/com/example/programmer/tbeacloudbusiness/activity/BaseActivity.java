@@ -3,6 +3,7 @@ package com.example.programmer.tbeacloudbusiness.activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
@@ -45,23 +46,15 @@ public class BaseActivity extends PermissionActivity {
 		PermissionGen.onRequestPermissionsResult(this,requestCode, permissions, grantResults);
 	}
 
-	// 显示缺失权限提示
-	public void showMissingPermissionDialog() {
-//		final CustomDialog dialog = new CustomDialog(TopActivity.this,R.style.MyDialog,R.layout.tip_delete_dialog);
-//		dialog.setTitle(getResources().getString(R.string.help));
-//		dialog.setText(getResources().getString(R.string.string_help_text));
-//		dialog.setConfirmBtnClickListener(null,getResources().getString(R.string.quit));
-//		dialog.setCancelBtnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//
-//				dialog.dismiss();
-//				Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-//				intent.setData(Uri.parse("package:" + getPackageName()));
-//				startActivityForResult(intent,SET_REQEST);
-//			}
-//		},getResources().getString(R.string.settings));
-//		dialog.show();
+	/**
+	 * 查找View
+	 *
+	 * @param id   控件的id
+	 * @param <VT> View类型
+	 * @return
+	 */
+	protected <VT extends View> VT getViewById(@IdRes int id) {
+		return (VT) findViewById(id);
 	}
 
 	@Override

@@ -115,7 +115,7 @@
         android:layout_height="8dp"/>
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tb_mian_top_message"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:drawableLeft="@drawable/icon_tbea_bells"

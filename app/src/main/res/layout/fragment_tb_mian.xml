@@ -3,19 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout
         android:id="@+id/rl_recyclerview_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <com.example.programmer.tbeacloudbusiness.component.HeaderGridView
             android:id="@+id/gridView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:numColumns="2"
-            android:scrollbars="none" />
+            android:scrollbars="none"
+            android:background="@color/white"/>
 
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
 

@@ -211,7 +211,7 @@
     </style>
 
     <!-- 提示框主题样式-->
-    <style name="MyDialog" parent="@android:Theme.Dialog">
+    <style name="MyDialog" parent="Theme.AppCompat.Dialog">
         <item name="android:windowBackground">@drawable/tip_box_theme</item>
         <item name="android:windowNoTitle">true</item>
     </style>

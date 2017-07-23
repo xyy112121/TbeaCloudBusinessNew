@@ -107,10 +107,10 @@
         <activity android:name=".activity.user.RegisterSuccessActivity" />
         <activity android:name=".activity.user.RealNameAuthenticationActivity" />
 
-        <activity android:name=".activity.tbea.CompanyIntroActivity" />
-        <activity android:name=".activity.tbea.ProductPresentationListActivity" />
-        <activity android:name=".activity.tbea.ProductPresentationInfoActivity" />
-        <activity android:name=".activity.tbea.ProductPresentationContactInfoActivity" />
+        <activity android:name=".activity.tbea.activity.CompanyIntroActivity" />
+        <activity android:name=".activity.tbea.activity.ProductPresentationListActivity" />
+        <activity android:name=".activity.tbea.activity.ProductPresentationInfoActivity" />
+        <activity android:name=".activity.tbea.activity.ProductPresentationContactInfoActivity" />
 
         <activity android:name=".activity.my.main.SetActivity" />
         <activity android:name=".activity.my.set.BindingNewPhoneActivity" />

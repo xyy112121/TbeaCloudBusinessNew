@@ -60,8 +60,6 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.9'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.jaeger.statusbarutil:library:1.4.0'
-    compile 'com.squareup.okhttp3:okhttp:3.3.1'
-    compile 'com.zhy:okhttputils:2.6.2'
     compile files('libs/baidumapapi_base_v4_2_0.jar')
     compile files('libs/locSDK_6.13.jar')
     compile files('libs/baidumapapi_cloud_v4_2_0.jar')

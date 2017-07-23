@@ -1,0 +1,87 @@
+package com.example.programmer.tbeacloudbusiness.activity.tbea.action;
+
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeTypeSelectReponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateHistoryListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityCategoryResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityModelResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommoditySpecificationResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CompanyIntroListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.model.ProductPresentationListResponseModel;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
+import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by DELL on 2017/7/22.
+ */
+
+public class TbeaAction extends BaseAction {
+
+
+    //获取商品介绍里面的产品类别
+    public CommodityCategoryResponseModel getCommodityCategory() throws Exception {
+        CommodityCategoryResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("parentcategoryid", null));
+        String result = sendRequest("TBEAYUN001002003000", pairs);
+        model = gson.fromJson(result, CommodityCategoryResponseModel.class);
+        return model;
+    }
+
+
+    //获取商品介绍里面的产品规格
+    public CommoditySpecificationResponseModel getCommoditySpecification(String id) throws Exception {
+        CommoditySpecificationResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("parentcategoryid", id));
+        String result = sendRequest("TBEAYUN001002002000", pairs);
+        model = gson.fromJson(result, CommoditySpecificationResponseModel.class);
+        return model;
+    }
+
+
+    //获取商品介绍里面的产品类型
+    public CommodityModelResponseModel getCommodityModelList(String id) throws Exception {
+        CommodityModelResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("parentcategoryid", id));
+        String result = sendRequest("TBEAYUN001002001000", pairs);
+        model = gson.fromJson(result, CommodityModelResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 获取产品介绍列表
+     */
+    public ProductPresentationListResponseModel getCommodityList (String name, String commodityspecificationid, String commoditymodelid, String orderitem, String order, int page, int pagesize) throws Exception {
+        ProductPresentationListResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("name", name));
+        pairs.add(new BasicNameValuePair("commodityspecificationid", commodityspecificationid));
+        pairs.add(new BasicNameValuePair("commoditymodelid", commoditymodelid));
+        pairs.add(new BasicNameValuePair("orderitem", orderitem));
+        pairs.add(new BasicNameValuePair("order", order));
+        pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
+        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
+        String result = sendRequest("TBEAYUN002002004000", pairs);
+        model = gson.fromJson(result, ProductPresentationListResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 获取新闻资讯里面的公司动态
+     */
+
+    public CompanyIntroListResponseModel getCompanyDynamic() throws Exception {
+        CompanyIntroListResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN002002003000", pairs);
+        model = gson.fromJson(result, CompanyIntroListResponseModel.class);
+        return model;
+    }
+}

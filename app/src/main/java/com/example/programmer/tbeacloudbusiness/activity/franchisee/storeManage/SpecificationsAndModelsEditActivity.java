@@ -8,7 +8,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
- * Created by programmer on 2017/7/14.
+ * 添加规格型号
  */
 
 public class SpecificationsAndModelsEditActivity extends BaseActivity implements View.OnClickListener {

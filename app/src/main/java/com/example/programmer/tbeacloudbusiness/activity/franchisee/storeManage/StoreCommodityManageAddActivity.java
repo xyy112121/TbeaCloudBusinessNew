@@ -8,7 +8,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
- * Created by DELL on 2017/7/16.
+ * 商品添加
  */
 
 public class StoreCommodityManageAddActivity extends BaseActivity implements View.OnClickListener{

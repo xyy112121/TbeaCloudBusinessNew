@@ -8,7 +8,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
- * Created by programmer on 2017/7/14.
+ * 店铺介绍
  */
 
 public class StoreIntroduceActivity extends BaseActivity implements View.OnClickListener{

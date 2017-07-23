@@ -8,7 +8,7 @@ import java.util.List;
  * 提现数据列表
  */
 
-public class WithdrawDepositDateReponseModel extends BaseResponseModel {
+public class WithdrawDepositDateResponseModel extends BaseResponseModel {
 
     public WithdrawDepositDate data;
 

@@ -19,7 +19,7 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action.ScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.PayStatusResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.PayeeTypeResponeModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateReponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -225,7 +225,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                     mRefreshLayout.endLoadingMore();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            WithdrawDepositDateReponseModel model = (WithdrawDepositDateReponseModel) msg.obj;
+                            WithdrawDepositDateResponseModel model = (WithdrawDepositDateResponseModel) msg.obj;
                             if (model.isSuccess()) {
                                 if (model.data != null)
                                     mAdapter.addAll(model.data.takemoneylist);
@@ -247,7 +247,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                 public void run() {
                     try {
                         ScanCodeAction action = new ScanCodeAction();
-                        WithdrawDepositDateReponseModel model = action.getWithdrawDepositDateList(paystatusid, payeetypeid, starttime, endtime, orderitem, order, mPage++, mPagesiz);
+                        WithdrawDepositDateResponseModel model = action.getWithdrawDepositDateList(paystatusid, payeetypeid, starttime, endtime, orderitem, order, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -310,7 +310,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
          */
         private Context context;
 
-        public List<WithdrawDepositDateReponseModel.TakeMoney> mList = new ArrayList<>();
+        public List<WithdrawDepositDateResponseModel.TakeMoney> mList = new ArrayList<>();
 //
 //        public List<CheckBox> ckList = new ArrayList<>();
 
@@ -345,7 +345,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
             View view = layoutInflater.inflate(
                     R.layout.activity_scan_code_withdraw_deposit_list_item, null);
 
-            final WithdrawDepositDateReponseModel.TakeMoney obj = mList.get(position);
+            final WithdrawDepositDateResponseModel.TakeMoney obj = mList.get(position);
             ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_time)).setText(obj.time);
             ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_name)).setText(obj.payeename);
             ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_money)).setText(obj.money);
@@ -370,7 +370,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
             }
         }
 
-        public void addAll(List<WithdrawDepositDateReponseModel.TakeMoney> list) {
+        public void addAll(List<WithdrawDepositDateResponseModel.TakeMoney> list) {
             mList.addAll(list);
             notifyDataSetChanged();
         }
