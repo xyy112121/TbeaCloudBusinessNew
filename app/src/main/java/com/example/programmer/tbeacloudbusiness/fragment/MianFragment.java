@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.activity.PlumberMeetingListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.PlumberManageMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.PlumberMeetingMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity.ScanCodeAcctivity;
@@ -190,6 +191,9 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ToastUtil.showMessage("aaaaa");
+                //公司人员下的会议列表
+                Intent intent = new Intent(getActivity(), PlumberMeetingListActivity.class);
+                startActivity(intent);
             }
         });
 

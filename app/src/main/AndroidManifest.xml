@@ -155,6 +155,8 @@
         <activity android:name=".activity.distributor.rebateAccount.activity.RebateAccountWithdrawCashActivity"/>
         <activity android:name=".activity.distributor.rebateAccount.activity.WithdrawCashViewActivity"/>
 
+
+        <activity android:name=".activity.companyPersonnel.activity.PlumberMeetingListActivity"/>
     </application>
 
 </manifest>

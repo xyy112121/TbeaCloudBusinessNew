@@ -34,68 +34,68 @@ public class PublishTextRowView extends LinearLayout {
     private int mGravity;
 
     public PublishTextRowView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public PublishTextRowView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public PublishTextRowView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.PublishTextRowView,defStyleAttr,0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.PublishTextRowView, defStyleAttr, 0);
         mTitleText = a.getString(R.styleable.PublishTextRowView_PublishTextRowViewText);
         mHiht = a.getString(R.styleable.PublishTextRowView_PublishTextRowViewHiht);
-        mIsBottomLineShow = a.getBoolean(R.styleable.PublishTextRowView_PublishTextRowViewIsBottomLineShow,true);
-        mTextColor = a.getColor(R.styleable.PublishTextRowView_PublishTextRowViewTextColor, ContextCompat.getColor(context,R.color.tab_text_normal));
-        mTextSize = a.getDimensionPixelSize(R.styleable.PublishTextRowView_PublishTextRowViewTextSize, DensityUtil.dip2px(context,12));
-        mIsSelect = a.getBoolean(R.styleable.PublishTextRowView_PublishTextRowViewIsSelect,false);
-        mWidth = a.getDimensionPixelSize(R.styleable.PublishTextRowView_PublishTextRowViewLeftWidth,DensityUtil.dip2px(context,140));
+        mIsBottomLineShow = a.getBoolean(R.styleable.PublishTextRowView_PublishTextRowViewIsBottomLineShow, true);
+        mTextColor = a.getColor(R.styleable.PublishTextRowView_PublishTextRowViewTextColor, ContextCompat.getColor(context, R.color.tab_text_normal));
+        mTextSize = a.getDimensionPixelSize(R.styleable.PublishTextRowView_PublishTextRowViewTextSize, DensityUtil.dip2px(context, 12));
+        mIsSelect = a.getBoolean(R.styleable.PublishTextRowView_PublishTextRowViewIsSelect, false);
+        mWidth = a.getDimensionPixelSize(R.styleable.PublishTextRowView_PublishTextRowViewLeftWidth, DensityUtil.dip2px(context, 140));
         mGravity = a.getInt(R.styleable.PublishTextRowView_PublishTextRowViewGravity, 0);
         initView(context);
     }
 
-    public void setValueText(String text){
+    public void setValueText(String text) {
         mValueView.setText(text);
     }
 
-    public String getValueText(){
-        if(mValueView.getVisibility() == VISIBLE){
-            return mValueView.getText()+"";
-        }else {
-            return mValueView2.getText()+"";
+    public String getValueText() {
+        if (mValueView.getVisibility() == VISIBLE) {
+            return mValueView.getText() + "";
+        } else {
+            return mValueView2.getText() + "";
         }
     }
 
-    public void initView(Context context){
-        View view;
-        if (mGravity == 0){
-             view = ((Activity)context).getLayoutInflater().inflate(R.layout.view_pulish_text_row,null);
-        }else {
-            view = ((Activity)context).getLayoutInflater().inflate(R.layout.view_pulish_text_row,null);
-        }
+    public void initView(Context context) {
+        View view = ((Activity) context).getLayoutInflater().inflate(R.layout.view_pulish_text_row, null);
+
 
         TextView leftView = (TextView) view.findViewById(R.id.left);
         mValueView2 = (ClearEditText) view.findViewById(R.id.rowvalue);
         mValueView = (TextView) view.findViewById(R.id.row_value);
         View bottomView = view.findViewById(R.id.bottom_line);
-        ImageView rightView = (ImageView)view.findViewById(R.id.right_image);
+        ImageView rightView = (ImageView) view.findViewById(R.id.right_image);
         leftView.setText(mTitleText);
         mValueView2.setHint(mHiht);
         mValueView.setHint(mHiht);
-//        mValueView.setGravity(Gravity.RIGHT|Gravity.CENTER);
+        if (mGravity == 0) {//左边
+            mValueView.setGravity(Gravity.LEFT | Gravity.CENTER);
+        } else if (mGravity == 1) {
+            mValueView.setGravity(Gravity.RIGHT | Gravity.CENTER);
+        }
         leftView.setTextColor(mTextColor);
-        LayoutParams params = new LayoutParams(mWidth,LayoutParams.MATCH_PARENT);
+        LayoutParams params = new LayoutParams(mWidth, LayoutParams.MATCH_PARENT);
         leftView.setLayoutParams(params);
 
-        if (mIsBottomLineShow == false){
+        if (mIsBottomLineShow == false) {
             bottomView.setVisibility(GONE);
         }
-        if (mIsSelect){
+        if (mIsSelect) {
             mValueView2.setVisibility(GONE);
             mValueView.setVisibility(VISIBLE);
             rightView.setVisibility(VISIBLE);
-        }else {
+        } else {
             mValueView2.setVisibility(VISIBLE);
             mValueView.setVisibility(GONE);
         }
