@@ -28,7 +28,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.activity.PlumberMeetingListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.PlumberManageMainListActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.PlumberMeetingMainListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity.ScanCodeAcctivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.StoreManageMainActivity;

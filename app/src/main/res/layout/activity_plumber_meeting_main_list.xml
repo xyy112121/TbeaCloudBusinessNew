@@ -16,8 +16,8 @@
         android:focusableInTouchMode="true">
 
 
-        <TextView
-            android:id="@+id/expert_search_text"
+        <EditText
+            android:id="@+id/plumber_meeting_main_list_search_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -33,7 +33,9 @@
             android:maxLines="1"
             android:textColor="@color/text_color"
             android:textColorHint="@color/text_color"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:singleLine="true"
+            android:inputType="text"/>
 
     </LinearLayout>
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout

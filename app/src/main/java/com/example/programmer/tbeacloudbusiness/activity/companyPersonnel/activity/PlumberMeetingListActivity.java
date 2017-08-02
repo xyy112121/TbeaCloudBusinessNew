@@ -14,7 +14,7 @@ import android.widget.ListView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.PlumberMeetingViewActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingViewActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;

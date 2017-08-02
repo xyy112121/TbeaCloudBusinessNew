@@ -96,11 +96,11 @@
         <activity android:name=".activity.franchisee.plumberManage.PlumberManagePersonViewActivity" />
         <activity android:name=".activity.franchisee.plumberManage.PersonManageActivity" />
 
-        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingMainListActivity" />
-        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingListAllActivity" />
-        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingViewActivity" />
-        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingParticipantListActivity" />
-        <activity android:name=".activity.franchisee.plumberMeeting.PlumberMeetingSignInListActivity" />
+        <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingMainListActivity" />
+        <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingListAllActivity" />
+        <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingViewActivity" />
+        <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingParticipantListActivity" />
+        <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingSignInListActivity" />
 
         <activity android:name=".activity.user.RegisterActivity" />
         <activity android:name=".activity.user.CompletionDataActivity" />
