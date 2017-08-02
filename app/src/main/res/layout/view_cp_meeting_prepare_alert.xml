@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确保正确录入数据，相关操作会根据时间节点受限"
+            android:textColor="@color/tab_text_normal"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="【发起状态】会议开始前24小时，可编辑，删除，不可更新"
+            android:textColor="@color/text_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="【进行状态】议开始至结束24小时内，可编辑，删除，不可删除，更新"
+            android:textColor="@color/text_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="【结束状态】会议结束后，可更新，不可编辑，删除"
+            android:textColor="@color/text_color"
+            android:textSize="12sp" />
+
+        <View
+            style="@style/horizontal_view"
+            android:layout_marginTop="5dp" />
+
+        <Button
+            android:id="@+id/pop_window_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:background="@drawable/btn_bg_red"
+            android:text="确定"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+</FrameLayout>

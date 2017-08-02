@@ -11,4 +11,5 @@
     <string name="help">帮助</string>
     <string name="string_gps_help_text">请点击“设置”开启GPS设置。\n最后点击后退按钮，即可返回.</string>
     <string name="alert_text">为建设诚信商业平台，商家须补全资料并进行实名认证后才可以使用系统功能！</string>
+    <string name="cp_meeting_prepare">确保正确录入数据</string>
 </resources>

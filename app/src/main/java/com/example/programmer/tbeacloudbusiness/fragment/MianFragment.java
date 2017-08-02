@@ -190,7 +190,7 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ToastUtil.showMessage("aaaaa");
+//                ToastUtil.showMessage("aaaaa");
                 //公司人员下的会议列表
                 Intent intent = new Intent(getActivity(), PlumberMeetingListActivity.class);
                 startActivity(intent);

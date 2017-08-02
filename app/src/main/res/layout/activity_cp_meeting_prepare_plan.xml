@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical"
+        android:text="安排"
+        android:textColor="@color/tab_text_normal" />
+
+    <View style="@style/horizontal_view" />
+
+    <EditText
+        android:id="@+id/multi_row_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:background="@null"
+        android:gravity="left|top"
+        android:hint="内容"
+        android:lineSpacingExtra="9.5dp"
+        android:minLines="3"
+        android:paddingTop="15dp"
+        android:textSize="14sp" />
+
+    <View
+        style="@style/horizontal_view"
+        android:layout_height="10dp"
+        android:background="@color/interval_color" />
+
+    <RelativeLayout style="@style/my_text_layout"
+       >
+
+        <TextView
+            style="@style/my_text_style"
+            android:text="附件"
+            android:textColor="@color/tab_text_normal" />
+
+        <Button
+            android:id="@+id/addr_edit_contactperson"
+            android:layout_width="wrap_content"
+            android:text="上传附件"
+            android:textColor="@color/white"
+            android:layout_height="25dp"
+            android:background="@color/head_color"
+            android:layout_alignParentRight="true"
+           android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

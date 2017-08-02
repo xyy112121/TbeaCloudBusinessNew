@@ -33,6 +33,7 @@ import com.example.programmer.tbeacloudbusiness.activity.tbea.model.ProductPrese
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.TbMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.picker.CustomOptionObjPicker;
 import com.example.programmer.tbeacloudbusiness.model.Condition;
+import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.zhouwei.library.CustomPopWindow;
@@ -223,7 +224,7 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
                         .enableBackgroundDark(true) //弹出popWindow时，背景是否变暗
                         .setBgDarkAlpha(0.5f) // 控制亮度
                         .create()
-                        .showAsDropDown(view, -270, 20);
+                        .showAsDropDown(view, DensityUtil.px2dip(mContext,-270), DensityUtil.px2dip(mContext,20));
                 break;
         }
     }

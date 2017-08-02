@@ -68,7 +68,9 @@
 
     <View
         android:id="@+id/rebate_list_date_select_view"
-        style="@style/horizontal_view" />
+        style="@style/horizontal_view"
+        />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -121,7 +123,8 @@
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout
         android:id="@+id/rl_recyclerview_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <ListView
             android:id="@+id/listview"

@@ -28,14 +28,9 @@ public class MainActivity extends BaseActivity {
         mNavigateTabBar.addTab(TbMianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_tbea, R.drawable.icon_tbea, "特变电工"));
         mNavigateTabBar.addTab(MianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_other, R.drawable.icon_other, "其他应用"));
         mNavigateTabBar.addTab(MyFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_me, R.drawable.icon_me, "我的"));
-        listener();
         MyApplication.instance.addActivity(MainActivity.this);
     }
 
-
-    private void listener(){
-
-    }
 
     public void showTbMaianFragment(){
        View view =  mNavigateTabBar.getChildAt(1);

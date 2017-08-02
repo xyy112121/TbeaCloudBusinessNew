@@ -39,5 +39,9 @@
         <attr name="PublishTextRowViewIsSelect" format="boolean"/>
         <attr name="PublishTextRowViewLeftWidth" format="dimension"/>
         <attr name="PublishTextRowViewGravity" format="integer"/>
+        <attr name="PublishTextRowViewState">
+            <enum name="read" value="0" />
+            <enum name="write" value="1" />
+        </attr>
     </declare-styleable>
 </resources>

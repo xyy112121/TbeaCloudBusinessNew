@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeti
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
-import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -175,7 +173,7 @@ public class PlumberMeetingListActivity extends BaseActivity implements BGARefre
 
     @Override
     public void onClick(View view) {
-
+       startActivity(new Intent(mContext,MeetingPrepareActivity.class));
     }
 
     private class MyAdapter extends BaseAdapter {

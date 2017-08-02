@@ -157,6 +157,10 @@
 
 
         <activity android:name=".activity.companyPersonnel.activity.PlumberMeetingListActivity"/>
+        <activity android:name=".activity.companyPersonnel.activity.MeetingPrepareActivity"/>
+        <activity android:name=".activity.companyPersonnel.activity.FranchiserSelectListActivity"/>
+        <activity android:name=".activity.companyPersonnel.activity.MeetingPreparePlanActivity"/>
+        <activity android:name=".activity.companyPersonnel.activity.MeetingSponsorSuccessActivity"/>
     </application>
 
 </manifest>

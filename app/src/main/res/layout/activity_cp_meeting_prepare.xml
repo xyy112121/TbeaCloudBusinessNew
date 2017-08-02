@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/parentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewIsSelect="false"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="会议编号"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/cp_meeting_prepare_hold_time"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="举办时间"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <LinearLayout
+                style="@style/my_text_layout"
+                android:layout_height="wrap_content"
+                android:minHeight="55dp"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="90dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="8dp"
+                    android:text="举办单位"
+                    android:textColor="@color/text_color" />
+                <LinearLayout
+                    android:id="@+id/cp_meeting_prepare_hold_monad"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                </LinearLayout>
+
+            </LinearLayout>
+            <View
+                style="@style/horizontal_view"
+                />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/cp_meeting_prepare_hold_addr"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewText="举办地点"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewTextColor="@color/text_color"
+                app:PublishTextRowViewHiht="11"/>
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/cp_meeting_prepare_state"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="false"
+                app:PublishTextRowViewText="会议状态"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewTextColor="@color/text_color"
+                app:PublishTextRowViewHiht="11"/>
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="10dp"
+                android:background="@color/interval_color"/>
+
+            <LinearLayout
+                style="@style/my_text_layout"
+                android:layout_height="55dp"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/my_text_style"
+                    android:layout_width="90dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="8dp"
+                    android:text="发起人"
+                    android:textColor="@color/text_color" />
+
+                <include layout="@layout/activity_person_layout2"/>
+
+            </LinearLayout>
+            <View
+                style="@style/horizontal_view"
+              />
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/cp_meeting_prepare_participant"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="false"
+                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="参与人员"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="10dp"
+                android:background="@color/interval_color"/>
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/cp_meeting_prepare_plan"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="会议安排"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+            
+            <Button
+                android:id="@+id/cp_meeting_prepare_finish"
+                style="@style/style_next_btn"
+                android:background="@drawable/btn_bg_blue"
+                android:text="发起会议"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

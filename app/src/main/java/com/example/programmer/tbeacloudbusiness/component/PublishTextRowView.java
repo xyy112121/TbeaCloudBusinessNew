@@ -32,6 +32,7 @@ public class PublishTextRowView extends LinearLayout {
     private ClearEditText mValueView2;
     private int mWidth;
     private int mGravity;
+    private int mState;
 
     public PublishTextRowView(Context context) {
         this(context, null);
@@ -52,6 +53,7 @@ public class PublishTextRowView extends LinearLayout {
         mIsSelect = a.getBoolean(R.styleable.PublishTextRowView_PublishTextRowViewIsSelect, false);
         mWidth = a.getDimensionPixelSize(R.styleable.PublishTextRowView_PublishTextRowViewLeftWidth, DensityUtil.dip2px(context, 140));
         mGravity = a.getInt(R.styleable.PublishTextRowView_PublishTextRowViewGravity, 0);
+        mState = a.getInt(R.styleable.PublishTextRowView_PublishTextRowViewState, 1);
         initView(context);
     }
 
@@ -89,7 +91,7 @@ public class PublishTextRowView extends LinearLayout {
         leftView.setLayoutParams(params);
 
         if (mIsBottomLineShow == false) {
-            bottomView.setVisibility(GONE);
+            bottomView.setVisibility(INVISIBLE);
         }
         if (mIsSelect) {
             mValueView2.setVisibility(GONE);
@@ -98,6 +100,15 @@ public class PublishTextRowView extends LinearLayout {
         } else {
             mValueView2.setVisibility(VISIBLE);
             mValueView.setVisibility(GONE);
+            rightView.setVisibility(INVISIBLE);
+        }
+
+        if(mState == 1){//可编辑
+            mValueView2.setVisibility(VISIBLE);
+            mValueView.setVisibility(GONE);
+        }else {
+            mValueView2.setVisibility(GONE);
+            mValueView.setVisibility(VISIBLE);
         }
         addView(view);
     }
