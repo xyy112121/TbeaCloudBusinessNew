@@ -3,62 +3,35 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/activity_page_top"/>
-    <LinearLayout
-        android:id="@+id/plumber_meeting_sign_top1"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentTop="true"
-        android:background="@color/head_color"
-        android:orientation="horizontal"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-
-        <EditText
-            android:id="@+id/plumber_meeting_sign_search_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="30dp"
-            android:layout_weight="1"
-            android:background="@drawable/home_page_search_selector"
-            android:drawableLeft="@drawable/icon_search"
-            android:drawablePadding="5dp"
-            android:hint="会议查询"
-            android:imeOptions="actionSearch"
-            android:padding="5dp"
-            android:maxLines="1"
-            android:textColor="@color/text_color"
-            android:textColorHint="@color/text_color"
-            android:textSize="12sp"
-            android:singleLine="true"/>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/plumber_meeting_sign_signnumber"
+        android:layout_height="45dp"
+        android:text="签到人数：46"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical"
+        />
     <View style="@style/horizontal_view" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp">
-        <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
-            android:id="@+id/expandtab_view"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="0.33"
-            android:layout_marginLeft="15dp"/>
 
         <LinearLayout
             android:id="@+id/activity_plumber_meeting_main_list_user_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.33"
-            android:gravity="center">
+            android:layout_marginLeft="15dp"
+            android:layout_weight="0.33">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="8dp"
                 android:gravity="right|center_vertical"
-                android:text="累计签到"
+                android:text="用户"
                 android:textColor="@color/text_color" />
 
             <ImageView
@@ -69,7 +42,11 @@
                 android:src="@drawable/icon_arraw_grayblue" />
         </LinearLayout>
 
-
+        <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
+            android:id="@+id/expandtab_view"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="0.33" />
 
         <LinearLayout
             android:id="@+id/activity_plumber_meeting_main_list_time_layout"
@@ -97,8 +74,6 @@
 
 
     </LinearLayout>
-
-
 
     <View
         style="@style/horizontal_view"/>

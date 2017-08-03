@@ -21,13 +21,14 @@
     </declare-styleable>
 
     <!-- 水电工个人主页 管理页面中的item-->
-    <declare-styleable name="personManageItemView">
+    <declare-styleable name="PersonManageItemView">
         <attr name="icon" format="reference"/>
         <attr name="text1" format="string"/>
         <attr name="text2" format="string"/>
         <attr name="text3" format="string"/>
         <attr name="text4" format="string"/>
         <attr name="text5" format="string"/>
+        <attr name="isMoney" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="PublishTextRowView">

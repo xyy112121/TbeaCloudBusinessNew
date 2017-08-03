@@ -85,6 +85,7 @@
                     android:id="@+id/top_text4_label"
                     style="@style/money_logo_style"
                     android:visibility="gone"
+                    android:textSize="12sp"
                     />
 
                 <TextView
@@ -108,7 +109,7 @@
                     android:layout_gravity="top"
                     android:text="￥"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:paddingTop="1dp"
                     android:visibility="gone"/>
 

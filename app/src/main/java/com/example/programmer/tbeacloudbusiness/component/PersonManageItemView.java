@@ -22,6 +22,9 @@ public class PersonManageItemView  extends LinearLayout{
     private String  mText3;//内容文字
     private String  mText4;//内容文字
     private String  mText5;//内容文字
+    private boolean isMoney;
+    public TextView mTextView4;
+    public TextView mTextView5;
     public PersonManageItemView(Context context, AttributeSet attrs)
     {
         this(context, attrs, 0);
@@ -35,31 +38,34 @@ public class PersonManageItemView  extends LinearLayout{
     public PersonManageItemView(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.personManageItemView, defStyle, 0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.PersonManageItemView, defStyle, 0);
         int n = a.getIndexCount();
         for (int i = 0; i < n; i++)
         {
             int attr = a.getIndex(i);
             switch (attr)
             {
-                case R.styleable.personManageItemView_text1:
+                case R.styleable.PersonManageItemView_text1:
                     mText1 = a.getString(attr);
                     break;
-                case R.styleable.personManageItemView_text2:
+                case R.styleable.PersonManageItemView_text2:
                     mText2 = a.getString(attr);
                     break;
-                case R.styleable.personManageItemView_text3:
+                case R.styleable.PersonManageItemView_text3:
                     mText3 = a.getString(attr);
                     break;
-                case R.styleable.personManageItemView_text4:
+                case R.styleable.PersonManageItemView_text4:
                     mText4 = a.getString(attr);
                     break;
-                case R.styleable.personManageItemView_text5:
+                case R.styleable.PersonManageItemView_text5:
                     mText5 = a.getString(attr);
                     break;
-                case R.styleable.personManageItemView_icon:
+                case R.styleable.PersonManageItemView_icon:
                     //显示的图片
                     mLeftImageIcon = a.getResourceId(attr, 0);
+                    break;
+                case R.styleable.PersonManageItemView_isMoney:
+                    isMoney = a.getBoolean(attr,false);
                     break;
 
             }
@@ -74,25 +80,32 @@ public class PersonManageItemView  extends LinearLayout{
         TextView text1Tv = (TextView) layout.findViewById(R.id.person_manage_item_tv1);
         TextView text2Tv = (TextView) layout.findViewById(R.id.person_manage_item_tv2);
         TextView text3Tv = (TextView) layout.findViewById(R.id.person_manage_item_tv3);
-        TextView text4Tv = (TextView) layout.findViewById(R.id.person_manage_item_tv4);
-        TextView text5Tv = (TextView) layout.findViewById(R.id.person_manage_item_tv5);
+        mTextView4 = (TextView) layout.findViewById(R.id.person_manage_item_tv4);
+        mTextView5 = (TextView) layout.findViewById(R.id.person_manage_item_tv5);
+        TextView text4LabelTv = (TextView) layout.findViewById(R.id.person_manage_item_tv4_label);
+        TextView text5LabelTv = (TextView) layout.findViewById(R.id.person_manage_item_tv5_label);
         ImageView leftIv = (ImageView)layout.findViewById(R.id.person_manage_item_iv);
+
+        if (isMoney){
+            text4LabelTv.setVisibility(VISIBLE);
+            text5LabelTv.setVisibility(VISIBLE);
+        }
 
        text1Tv.setText(mText1);
         text2Tv.setText(mText2);
         text3Tv.setText(mText3);
-        text4Tv.setText(mText4);
-        text5Tv.setText(mText5);
+        mTextView4.setText(mText4);
+        mTextView5.setText(mText5);
         leftIv.setImageResource(mLeftImageIcon);
         layout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
         addView(layout);
     }
 
-     public void setmText4(String text4){
-         mText4 = text4;
+     public void setText4(String text4){
+         mTextView4.setText(text4);
      }
 
-    public void setmText5(String text5){
-        mText5 = text5;
+    public void setText5(String text5){
+       mTextView5.setText(text5);
     }
 }

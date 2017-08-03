@@ -31,7 +31,7 @@ public class HomeMainResponseModel extends BaseResponseModel{
         public String url ;
     }
     public class StaticsItem{
-        public String staticsitemid;
+        public String moduleid;
         public String icon ;
         public String name ;
         public String style ;
@@ -41,6 +41,7 @@ public class HomeMainResponseModel extends BaseResponseModel{
     public class Subitem{
         public String name;
         public String value;
+        public String ismoney;
         public String value1;
         public String value2;
     }

@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.PersonManageActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PersonManageViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeRegionSelectActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
@@ -75,7 +75,7 @@ public class MemberListActivity extends BaseActivity implements BGARefreshLayout
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(mContext, PersonManageActivity.class);
+                Intent intent = new Intent(mContext, PersonManageViewActivity.class);
 //                Intent intent = new Intent(mContext,ScanCodeDateListActivity.class);
                 startActivity(intent);
             }

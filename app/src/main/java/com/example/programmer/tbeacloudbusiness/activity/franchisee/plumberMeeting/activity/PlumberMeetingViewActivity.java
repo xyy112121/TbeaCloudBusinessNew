@@ -79,7 +79,7 @@ public class PlumberMeetingViewActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PlumberMeetingParticipantListActivity.class);
-                intent.putExtra("meetingId",getIntent().getStringExtra("id"));
+                intent.putExtra("meetingId", getIntent().getStringExtra("id"));
                 startActivity(intent);
             }
         });
@@ -87,12 +87,11 @@ public class PlumberMeetingViewActivity extends BaseActivity {
         findViewById(R.id.plumber_meeting_view_sign_in).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, PlumberMeetingSignInListActivity.class);
-                intent.putExtra("flag", "meetingSignIn");
+                Intent intent = new Intent(mContext, PlumberMeetingViewSignlnActivity.class);
+                intent.putExtra("meetingId", getIntent().getStringExtra("id"));
                 startActivity(intent);
             }
         });
-
 
     }
 
@@ -150,33 +149,33 @@ public class PlumberMeetingViewActivity extends BaseActivity {
 
         if (obj.organizecompanylist != null) {
             PlumberMeetingViewResponseModel.OrganizeCompany model = obj.organizecompanylist;
-            ImageLoader.getInstance().displayImage(path+model.companymasterheadpicture,mCompanyPersonHeadView);
+            ImageLoader.getInstance().displayImage(path + model.companymasterheadpicture, mCompanyPersonHeadView);
             mCompanyPersonNameView.setText(model.companymastername);
-            ImageLoader.getInstance().displayImage(path+model.companypersontypeicon,mCompanyPersonPersonjobtitleView);
+            ImageLoader.getInstance().displayImage(path + model.companypersontypeicon, mCompanyPersonPersonjobtitleView);
             mCompanyPersonCompanyNameView.setText(model.companyname);
             mCompanyPersonInfoRightView.setVisibility(View.GONE);
         }
 
-        if (obj.meetingoriginatorinfo != null){
-            CircleImageView mHodePersonHeadView = (CircleImageView)mMeetingoriginatorInfoView.findViewById(R.id.person_info_head);
-            TextView mHodePersonNameView = (TextView)mMeetingoriginatorInfoView.findViewById(R.id.person_info_name);
-            TextView mHodePersonCompanyNameView = (TextView)mMeetingoriginatorInfoView.findViewById(R.id.person_info_companyname);
+        if (obj.meetingoriginatorinfo != null) {
+            CircleImageView mHodePersonHeadView = (CircleImageView) mMeetingoriginatorInfoView.findViewById(R.id.person_info_head);
+            TextView mHodePersonNameView = (TextView) mMeetingoriginatorInfoView.findViewById(R.id.person_info_name);
+            TextView mHodePersonCompanyNameView = (TextView) mMeetingoriginatorInfoView.findViewById(R.id.person_info_companyname);
             ImageView mHodePersonPersonjobtitleView = (ImageView) mMeetingoriginatorInfoView.findViewById(R.id.person_info_personjobtitle);
             ImageView mHodePersonInfoRightView = (ImageView) mMeetingoriginatorInfoView.findViewById(R.id.person_info_right);
 
             PlumberMeetingViewResponseModel.MeetingOriginatorInfo model = obj.meetingoriginatorinfo;
-            ImageLoader.getInstance().displayImage(path+model.headpicture,mHodePersonHeadView);
-            ImageLoader.getInstance().displayImage(path+model.persontypeicon,mHodePersonPersonjobtitleView);
+            ImageLoader.getInstance().displayImage(path + model.headpicture, mHodePersonHeadView);
+            ImageLoader.getInstance().displayImage(path + model.persontypeicon, mHodePersonPersonjobtitleView);
             mHodePersonNameView.setText(model.name);
             mHodePersonCompanyNameView.setText(model.company);
             mHodePersonInfoRightView.setVisibility(View.GONE);
         }
 
-        if(obj.participantlist != null){
+        if (obj.participantlist != null) {
             mParticipantlistView.setText(obj.participantlist.participantnumber);
         }
 
-        if (obj.meetinginfo != null){
+        if (obj.meetinginfo != null) {
             PlumberMeetingViewResponseModel.MeetingInfo model = obj.meetinginfo;
             mMeetingitemsView.setText(model.meetingitems);
             mMeetingsummaryView.setText(model.meetingsummary);

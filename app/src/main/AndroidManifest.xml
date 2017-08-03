@@ -88,13 +88,13 @@
         <activity android:name=".activity.franchisee.scanCode.ScanCodeRebateListActivity" />
         <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateHistoryActivity" />
         <activity android:name=".activity.franchisee.scanCode.ScanCodeRegionSelectActivity" />
-        <activity android:name=".activity.franchisee.plumberManage.PlumberManageMainListActivity" />
-        <activity android:name=".activity.franchisee.plumberManage.PlumberManageScanCodeDateListActivity" />
-        <activity android:name=".activity.franchisee.plumberManage.PlumberManageSignHistoryListActivity" />
-        <activity android:name=".activity.franchisee.plumberManage.PlumberManageLoginDatailsActivity" />
-        <activity android:name=".activity.franchisee.plumberManage.PlumberManageLoginStatisticsActivity" />
-        <activity android:name=".activity.franchisee.plumberManage.PlumberManagePersonViewActivity" />
-        <activity android:name=".activity.franchisee.plumberManage.PersonManageActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManageMainListActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManageScanCodeDateListActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManageSignHistoryListActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManageLoginDatailsActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManageLoginStatisticsActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManagePersonViewActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.activity.PersonManageViewActivity" />
 
         <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingMainListActivity" />
         <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingListAllActivity" />
@@ -163,6 +163,7 @@
         <activity android:name=".activity.companyPersonnel.activity.MeetingSponsorSuccessActivity"/>
 
         <activity android:name=".activity.franchisee.plumberMeeting.activity.RegionSelectActivity"/>
+        <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingViewSignlnActivity"/>
     </application>
 
 </manifest>

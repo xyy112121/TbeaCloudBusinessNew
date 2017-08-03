@@ -4,267 +4,284 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="148dp">
-
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/top_layout"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/icon_watertest">
+                android:layout_height="148dp">
 
-                <ImageButton
-                    android:id="@+id/top_left"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@null"
-                    android:scaleType="center"
-                    android:src="@drawable/icon_back" />
 
-                <TextView
-                    android:id="@+id/top_right_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/top_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/icon_watertest">
+
+                    <ImageButton
+                        android:id="@+id/top_left"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@null"
+                        android:scaleType="center"
+                        android:src="@drawable/icon_back" />
+
+                    <TextView
+                        android:id="@+id/top_right_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_toLeftOf="@id/top_right_text_image"
+                        android:ellipsize="end"
+                        android:maxEms="4"
+                        android:maxLines="1"
+                        android:text="管理"
+                        android:textColor="#fff"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/pm_view_personname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawablePadding="8dp"
+                        android:drawableRight="@drawable/icon_water_right"
+                        android:text="刘心茹"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
+                <com.example.programmer.tbeacloudbusiness.component.CircleImageView
+                    android:id="@+id/pm_view_thumbpicture"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_toLeftOf="@id/top_right_text_image"
-                    android:ellipsize="end"
-                    android:maxEms="4"
-                    android:maxLines="1"
-                    android:text="管理"
-                    android:textColor="#fff"
-                    android:textSize="14sp" />
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/icon_head"
 
+                    />
             </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="0.8">
+
+                    <TextView
+                        android:id="@+id/pm_view_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/icon_water_women"
+                        android:drawablePadding="5dp"
+                        android:text="29"
+                        android:textColor="@color/text_color"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/pm_view_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:drawableLeft="@drawable/icon_water_location_blue"
+                        android:drawablePadding="5dp"
+                        android:text="四川省 德阳市 广汉市"
+                        android:textColor="@color/text_color"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.2"
+                    android:src="@drawable/icon_more" />
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="15dp"
-                android:background="@color/white"
-                android:orientation="vertical">
+                android:background="@color/white">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:drawablePadding="8dp"
-                    android:drawableRight="@drawable/icon_water_right"
-                    android:text="刘心茹"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:orientation="horizontal">
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/pm_view_fansnumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="598"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="粉丝"
+                            android:textColor="@color/text_color"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/pm_view_attentnumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="5"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="关注"
+                            android:textColor="@color/text_color"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/btn_bg_red"
+                    android:text="关注"
+                    android:textColor="@color/white" />
             </RelativeLayout>
 
-            <com.example.programmer.tbeacloudbusiness.component.CircleImageView
-                android:id="@+id/person_manage_head"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/icon_head"
-                android:layout_marginRight="15dp"
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp" />
 
-                />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="@color/white">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="0.8">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:drawableLeft="@drawable/icon_water_women"
-                    android:drawablePadding="5dp"
-                    android:text="29"
-                    android:textColor="@color/text_color"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
-                    android:drawableLeft="@drawable/icon_water_location_blue"
-                    android:drawablePadding="5dp"
-                    android:text="四川省 德阳市 广汉市"
-                    android:textColor="@color/text_color"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-
-            <ImageView
-                android:layout_width="0dp"
+            <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
+                android:id="@+id/pm_view_rebatescaninfo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0.2"
-                android:src="@drawable/icon_more" />
+                android:background="@color/white"
+                app:icon="@drawable/icon_water_scan_rebate"
+                app:isMoney="true"
+                app:text1="扫码返利"
+                app:text2="一年提现金额"
+                app:text3="三月提现金额" />
 
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
+                android:id="@+id/pm_view_electricianmeetingattendinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:icon="@drawable/icon_water_metting"
+                app:text1="水电工会议"
+                app:text2="一年签到次数"
+                app:text3="三月签到次数" />
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
+                android:id="@+id/pm_view_orderingserviceinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:icon="@drawable/icon_water_service"
+                app:text1="预约服务"
+                app:text2="一年接单此商户"
+                app:text3="三月接单次数"
+                app:text4="30"
+                app:text5="12" />
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp" />
+
+
+            <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
+                android:id="@+id/pm_view_commodityorderinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:icon="@drawable/icon_water_order"
+                app:text1="订单"
+                app:text2="一年接单次数"
+                app:text3="三月接单次数"
+                app:text4="20"
+                app:text5="12" />
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
+                android:id="@+id/pm_view_logininfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:icon="@drawable/icon_water_statistics"
+                app:text1="登录统计"
+                app:text2="登录次数"
+                app:text3="在线时长"
+                app:text4="1200.00"
+                app:text5="500.00" />
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp" />
         </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/white">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="598"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:text="155"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="粉丝"
-                        android:textColor="@color/text_color"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:text="关注"
-                        android:textColor="@color/text_color"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/btn_bg_red"
-                android:text="关注"
-                android:textColor="@color/white" />
-        </RelativeLayout>
-
-        <View
-           style="@style/horizontal_view"
-            android:layout_height="8dp"/>
-        <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
-            android:id="@+id/person_manage_scan_rebate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:icon="@drawable/icon_water_scan_rebate"
-            app:text1="扫码返利"
-            app:text2="一年提现金额"
-            app:text3="三月提现金额"
-            app:text4="1200.00"
-            app:text5="500.00"/>
-        <View
-            style="@style/horizontal_view"
-            android:layout_height="8dp"/>
-        <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
-            android:id="@+id/person_manage_metting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:icon="@drawable/icon_water_metting"
-            app:text1="水电工会议"
-            app:text2="一年签到次数"
-            app:text3="三月签到次数"
-            app:text4="20"
-            app:text5="12"/>
-        <View
-            style="@style/horizontal_view"
-            android:layout_height="8dp"/>
-        <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:icon="@drawable/icon_water_service"
-            app:text1="预约服务"
-            app:text2="一年接单此商户"
-            app:text3="三月接单次数"
-            app:text4="30"
-            app:text5="12"/>
-        <View
-            style="@style/horizontal_view"
-            android:layout_height="8dp"/>
-        <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:icon="@drawable/icon_water_order"
-            app:text1="订单"
-            app:text2="一年接单次数"
-            app:text3="三月接单次数"
-            app:text4="20"
-            app:text5="12"/>
-        <View
-            style="@style/horizontal_view"
-            android:layout_height="8dp"/>
-        <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
-            android:id="@+id/person_manage_login_statistics"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:icon="@drawable/icon_water_statistics"
-            app:text1="登录统计"
-            app:text2="登录次数"
-            app:text3="在线时长"
-            app:text4="1200.00"
-            app:text5="500.00"/>
-        <View
-            style="@style/horizontal_view"
-            android:layout_height="8dp"/>
-    </LinearLayout>
     </ScrollView>
 </FrameLayout>

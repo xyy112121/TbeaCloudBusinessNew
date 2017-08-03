@@ -1,15 +1,18 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,14 +21,20 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.action.PlumberManageAction;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PlumberManageMainListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListStateResonpseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.RegionSelectActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingUserTypeResonpseModel;
+import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,82 +45,60 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 水电工会议首页
+ * 水电工列表
  */
 
-public class PlumberMeetingMainListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
-    @BindView(R.id.plumber_meeting_main_list_search_text)
+public class PlumberManageMainListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
+    @BindView(R.id.pm_main_list_search_text)
     EditText mSearchTextView;
-    private ExpandPopTabView expandTabView;
 
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
-    private View mHeadView;
     private MyAdapter mAdapter;
     private int mPage = 1;
     private int mPagesiz = 10;
-    private List<KeyValueBean> mRegionLists;//区域,状态
-    private PopOneListView mRegionView, mStateView;
-    private String mCode, mZoneid, mStatusid, mStartTime, mEndTime, mOrderItem, mOrder, mCodeOrder, mTimeOrder;
+    private Context mContext;
 
+    private ExpandPopTabView expandTabView;
+    private List<KeyValueBean> mRegionLists;//区域
+    private PopOneListView mUserTypeView;
+
+    private String mName, mElectricianownertypeid, mZoneid, mOrderItem, mOrder;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plumber_meeting_main_list);
-        initTopbar("水电工会议");
-        intiView();
-        getStatusList();
-        getListData();
+        setContentView(R.layout.activity_plumber_manage_main_list);
+        initTopbar("水电工列表");
+        ButterKnife.bind(this);
+        initView();
+        getUserTypeList();
     }
 
-    public void intiView() {
+    private void initView() {
+
+        mContext = this;
         mListView = (ListView) findViewById(R.id.listview);
-        mHeadView = getLayoutInflater().inflate(R.layout.activity_plumber_meeting_main_list_top, null);
-
-        View mHeadView1 = getLayoutInflater().inflate(R.layout.activity_plumber_meeting_main_list_top1, null);
-
-        mListView.addHeaderView(mHeadView);
-        mListView.addHeaderView(mHeadView1);
         mAdapter = new MyAdapter();
         mListView.setAdapter(mAdapter);
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
         mRefreshLayout.beginRefreshing();
-        ButterKnife.bind(this);
         initDate();
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
+        addUserTypeItem(expandTabView, null, "", "用户");
         addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
-        addStateItem(expandTabView, null, "", "状态");
 
-        findViewById(R.id.plumber_meeting_all_list_tv).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(mContext, PlumberMeetingListAllActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        findViewById(R.id.plumber_meeting_sign_in_tv).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //水电工签到列表
-                Intent intent = new Intent();
-                intent.setClass(mContext, PlumberMeetingSignInListActivity.class);
-                intent.putExtra("mFlag", "plumberSignIn");
-                startActivity(intent);
-            }
-        });
 
         mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId,
                                           KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    mCode = mSearchTextView.getText() + "";
+                    mName = mSearchTextView.getText() + "";
                     mRefreshLayout.beginRefreshing();
                 }
 
@@ -119,52 +106,41 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
             }
         });
 
-        final ImageView codeView = getViewById(R.id.activity_plumber_meeting_main_list_code);
-        findViewById(R.id.activity_plumber_meeting_main_list_code_layout).setOnClickListener(new View.OnClickListener() {
+        final ImageView timeView = getViewById(R.id.pm_main_list_money_image);
+        findViewById(R.id.pm_main_list_money_image_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mOrderItem = "money";
-                if ("".equals(mCodeOrder) || "asc".equals(mCodeOrder)) {//升
-                    mCodeOrder = "desc";
-                    codeView.setImageResource(R.drawable.icon_arraw_grayblue);
-                } else {
-                    mCodeOrder = "asc";
-                    codeView.setImageResource(R.drawable.icon_arraw_bluegray);
-                }
-                mOrder = mCodeOrder;
-                mOrderItem = "meetingcode";
-                mRefreshLayout.beginRefreshing();
-            }
-        });
-
-        final ImageView timeView = getViewById(R.id.activity_plumber_meeting_main_list_time);
-        findViewById(R.id.activity_plumber_meeting_main_list_time_layout).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mOrderItem = "money";
-                if ("".equals(mTimeOrder) || "asc".equals(mTimeOrder)) {//升
-                    mTimeOrder = "desc";
+                if ("".equals(mOrderItem) || "asc".equals(mOrderItem)) {//升
+                    mOrderItem = "desc";
                     timeView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
-                    mTimeOrder = "asc";
+                    mOrderItem = "asc";
                     timeView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
-                mOrder = mTimeOrder;
-                mOrderItem = "meetingtime";
+                mOrder = mOrderItem;
+                mOrderItem = "money";
                 mRefreshLayout.beginRefreshing();
             }
         });
+
+//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//            }
+//        });
     }
 
-    private void getStatusList() {
+    private void getUserTypeList() {
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case ThreadState.SUCCESS:
-                        PlumberMeetingListStateResonpseModel model = (PlumberMeetingListStateResonpseModel) msg.obj;
+                        PlumberMeetingUserTypeResonpseModel model = (PlumberMeetingUserTypeResonpseModel) msg.obj;
                         if (model.isSuccess()) {
-                            mStateView.setAdapterData(model.data.meetingstatuslist);
+                            mUserTypeView.setAdapterData(model.data.electricianownertypelist);
 
                         } else {
                             ToastUtil.showMessage(model.getMsg());
@@ -182,7 +158,7 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
             public void run() {
                 try {
                     PlumberMeetingAction action = new PlumberMeetingAction();
-                    PlumberMeetingListStateResonpseModel model = action.getStatus();
+                    PlumberMeetingUserTypeResonpseModel model = action.getUserType();
                     handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);
@@ -204,10 +180,10 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
                     mRefreshLayout.endLoadingMore();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            PlumberMeetingListMainResonpseModel model = (PlumberMeetingListMainResonpseModel) msg.obj;
+                            PlumberManageMainListResponseModel model = (PlumberManageMainListResponseModel) msg.obj;
                             if (model.isSuccess()) {
-                                if (model.data.meetinglist != null) {
-                                    mAdapter.addAll(model.data.meetinglist);
+                                if (model.data.electricianlist != null) {
+                                    mAdapter.addAll(model.data.electricianlist);
                                 }
 
                             } else {
@@ -225,8 +201,8 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
                 @Override
                 public void run() {
                     try {
-                        PlumberMeetingAction action = new PlumberMeetingAction();
-                        PlumberMeetingListMainResonpseModel model = action.getPlumberMeetingMainList(mCode, mZoneid, mStatusid, mStartTime, mEndTime, mOrderItem, mOrder, mPage++, mPagesiz);
+                        PlumberManageAction action = new PlumberManageAction();
+                        PlumberManageMainListResponseModel model = action.getPlumberManageMainList(mName, mElectricianownertypeid, mZoneid, mOrderItem, mOrder, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -238,10 +214,27 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
         }
     }
 
-    public void addRegionItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-        mRegionView = new PopOneListView(this);
-        mRegionView.setDefaultSelectByValue(defaultSelect);
-        mRegionView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
+    private void addUserTypeItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
+        mUserTypeView = new PopOneListView(this);
+        mUserTypeView.setDefaultSelectByValue(defaultSelect);
+        mUserTypeView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
+            @Override
+            public void getValue(String key, String value) {
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                mElectricianownertypeid = key;
+                mRefreshLayout.beginRefreshing();
+            }
+        });
+        float displayWidth = UtilAssistants.getWidth(mContext);
+        double wid = displayWidth / 2;
+        int width = (int) wid;
+        expandTabView.addItemToExpandTab(defaultShowText, mUserTypeView, width, Gravity.LEFT);
+    }
+
+    private void addRegionItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
+        PopOneListView regionView = new PopOneListView(this);
+        regionView.setDefaultSelectByValue(defaultSelect);
+        regionView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
                 expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
@@ -255,28 +248,20 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
             }
         });
 
-        expandTabView.addItemToExpandTab(defaultShowText, mRegionView, Gravity.LEFT);
+        float displayWidth = UtilAssistants.getWidth(mContext);
+        double wid = displayWidth / 4;
+        int width = (int) wid;
+        expandTabView.addItemToExpandTab(defaultShowText, regionView, width, Gravity.CENTER);
     }
 
-    private void addStateItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-        mStateView = new PopOneListView(this);
-        mStateView.setDefaultSelectByValue(defaultSelect);
-        mStateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
-            @Override
-            public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
-                mStatusid = key;
-                mRefreshLayout.beginRefreshing();
-            }
-        });
-        expandTabView.addItemToExpandTab(defaultShowText, mStateView, Gravity.RIGHT);
-    }
 
-    private void initDate() {
-        mRegionLists = new ArrayList<>();
-        mRegionLists.add(new KeyValueBean("", "全部区域"));
-        mRegionLists.add(new KeyValueBean("regionSelect", "区域选择"));
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000 && resultCode == RESULT_OK) {
+            mZoneid = data.getStringExtra("ids");
+            mRefreshLayout.beginRefreshing();
+        }
     }
 
     @Override
@@ -289,24 +274,27 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        //上拉加载更多
         getListData();
-        return true;
+        return false;
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1000 && resultCode == RESULT_OK) {
-            mZoneid = data.getStringExtra("ids");
-            mRefreshLayout.beginRefreshing();
+    protected void onDestroy() {
+        super.onDestroy();
+        if (expandTabView != null) {
+            expandTabView.onExpandPopView();
         }
+    }
+
+    private void initDate() {
+        mRegionLists = new ArrayList<>();
+        mRegionLists.add(new KeyValueBean("", "全部区域"));
+        mRegionLists.add(new KeyValueBean("regionSelect", "区域选择"));
     }
 
     public class MyAdapter extends BaseAdapter {
 
-        public List<PlumberMeetingListMainResonpseModel.Meeting> mList = new ArrayList<>();
-
+        public List<PlumberManageMainListResponseModel.Electrician> mList = new ArrayList<>();
 
         @Override
         public int getCount() {
@@ -327,26 +315,24 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
-                convertView = getLayoutInflater().inflate(
-
-                        R.layout.activity_plumber_meeting_main_list_item, null);
+                convertView = getLayoutInflater().inflate(R.layout.activity_plumber_manage_list_item, null);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-
-            final PlumberMeetingListMainResonpseModel.Meeting obj = mList.get(position);
-            holder.mCodeView.setText(obj.meetingcode);
-            holder.mStatusView.setText(obj.meetingstatus);
-            holder.mTimeView.setText(obj.meetingtime);
-            holder.mZoneView.setText(obj.zone);
+            final PlumberManageMainListResponseModel.Electrician obj = mList.get(position);
+            ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, holder.mHeadView);
+            ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, holder.mJobtitleView);
+            holder.mNameView.setText(obj.personname);
+            holder.mCityzoneView.setText(obj.cityzone);
+            holder.mTotlemoneyView.setText(obj.totlemoney);
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, PlumberMeetingViewActivity.class);
-                    intent.putExtra("id", obj.id);
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, PersonManageViewActivity.class);
+                    intent.putExtra("id",obj.userid);
                     startActivity(intent);
                 }
             });
@@ -361,7 +347,7 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
             }
         }
 
-        public void addAll(List<PlumberMeetingListMainResonpseModel.Meeting> list) {
+        public void addAll(List<PlumberManageMainListResponseModel.Electrician> list) {
             mList.addAll(list);
             notifyDataSetChanged();
         }
@@ -372,19 +358,21 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
         }
 
         class ViewHolder {
-            @BindView(R.id.pm_all_list_item_code)
-            TextView mCodeView;
-            @BindView(R.id.pm_all_list_item_zone)
-            TextView mZoneView;
-            @BindView(R.id.pm_all_list_item_status)
-            TextView mStatusView;
-            @BindView(R.id.pm_all_list_item_time)
-            TextView mTimeView;
+            @BindView(R.id.person_info_head)
+            CircleImageView mHeadView;
+            @BindView(R.id.person_info_name)
+            TextView mNameView;
+            @BindView(R.id.person_info_personjobtitle)
+            ImageView mJobtitleView;
+            @BindView(R.id.pm_main_list_item_cityzone)
+            TextView mCityzoneView;
+            @BindView(R.id.pm_main_list_item_totlemoney)
+            TextView mTotlemoneyView;
 
             ViewHolder(View view) {
                 ButterKnife.bind(this, view);
             }
         }
+
     }
 }
-

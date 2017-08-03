@@ -1,18 +1,13 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
-import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +18,6 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageLoginStatisticsActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingSignListReponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingUserTypeResonpseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
@@ -41,60 +35,47 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 会议签到列表
+ * Created by DELL on 2017/8/3.
  */
 
-public class PlumberMeetingSignInListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
-    @BindView(R.id.plumber_meeting_sign_search_text)
-    EditText mSearchTextView;
+public class PlumberMeetingViewSignlnActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
 
     @BindView(R.id.listview)
     ListView mListView;
+    @BindView(R.id.plumber_meeting_sign_signnumber)
+    TextView mSignnumberView;
+
     @BindView(R.id.rl_recyclerview_refresh)
     BGARefreshLayout mRefreshLayout;
 
     private ExpandPopTabView expandTabView;
-    private PopOneListView mUserTypeView;
-
+    private List<KeyValueBean> mRegionLists;//区域,状态
 
     private MyAdapter mAdapter;
     private int mPage = 1;
     private int mPagesiz = 10;
-    private String name, electricianownertypeid, starttime, endtime, mOrderItem, mOrder, mCodeOrder, mTimeOrder;
+    private String mZoneid, mOrderItem, mOrder,mCodeOrder,mTimeOrder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plumber_meeting_sign_in_list);
+        setContentView(R.layout.activity_plumber_meeting_view_sign_in_list);
         ButterKnife.bind(this);
         initView();
-        getUserTypeList();
     }
 
     private void initView() {
-        initTopbar("水电工签到列表");
+        initTopbar("会议签到");
         mAdapter = new MyAdapter();
         mListView.setAdapter(mAdapter);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
         mRefreshLayout.beginRefreshing();
-
-        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId,
-                                          KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    name = mSearchTextView.getText()+"";
-                    mRefreshLayout.beginRefreshing();
-                }
-
-                return false;
-            }
-        });
-
+        initDate();
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
-        addUserTypeItem(expandTabView, null, "", "用户");
+        addItem(expandTabView, mRegionLists, "全部区域", "区域");
 
         final ImageView codeView = getViewById(R.id.activity_plumber_meeting_main_list_user);
         findViewById(R.id.activity_plumber_meeting_main_list_user_layout).setOnClickListener(new View.OnClickListener() {
@@ -109,7 +90,7 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
                     codeView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mOrder = mCodeOrder;
-                mOrderItem="signnumber";
+                mOrderItem="signuser";
                 mRefreshLayout.beginRefreshing();
             }
         });
@@ -131,42 +112,26 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
                 mRefreshLayout.beginRefreshing();
             }
         });
+
     }
 
-    private void getUserTypeList() {
-        final Handler handler = new Handler() {
+    public void addItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
+        PopOneListView popOneListView = new PopOneListView(this);
+        popOneListView.setDefaultSelectByValue(defaultSelect);
+        popOneListView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case ThreadState.SUCCESS:
-                        PlumberMeetingUserTypeResonpseModel model = (PlumberMeetingUserTypeResonpseModel) msg.obj;
-                        if (model.isSuccess()) {
-                            mUserTypeView.setAdapterData(model.data.electricianownertypelist);
-
-                        } else {
-                            ToastUtil.showMessage(model.getMsg());
-                        }
-                        break;
-                    case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
-                        break;
+            public void getValue(String key, String value) {
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                if ("regionSelect".equals(key)) {
+                    Intent intent = new Intent(mContext, RegionSelectActivity.class);
+                    startActivityForResult(intent, 1000);
+                }else {
+                    mZoneid= "";
+                    mRefreshLayout.beginRefreshing();
                 }
             }
-        };
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    PlumberMeetingAction action = new PlumberMeetingAction();
-                    PlumberMeetingUserTypeResonpseModel model = action.getUserType();
-                    handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
-                } catch (Exception e) {
-                    handler.sendEmptyMessage(ThreadState.ERROR);
-                }
-            }
-        }).start();
-
+        });
+        expandTabView.addItemToExpandTab(defaultShowText, popOneListView);
     }
 
     /**
@@ -185,6 +150,9 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
                             if (model.data.meetingsignlist != null) {
                                 mAdapter.addAll(model.data.meetingsignlist);
                             }
+                            if(model.data.meetingsigntotleinfo != null){
+                                mSignnumberView.setText(model.data.meetingsigntotleinfo.totlesignnumber);
+                            }
 
                         } else {
                             ToastUtil.showMessage(model.getMsg());
@@ -202,8 +170,8 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
             public void run() {
                 try {
                     PlumberMeetingAction action = new PlumberMeetingAction();
-                    PlumberMeetingSignListReponseModel model = action.getSignList
-                            (name, electricianownertypeid, starttime,endtime,mOrderItem, mOrder, mPage++, mPagesiz);
+                    String id = getIntent().getStringExtra("meetingId");
+                    PlumberMeetingSignListReponseModel model = action.getViewSignList(id, mZoneid, mOrderItem, mOrder, mPage++, mPagesiz);
                     handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);
@@ -213,23 +181,9 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
 
     }
 
-    private void addUserTypeItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-        mUserTypeView = new PopOneListView(this);
-        mUserTypeView.setDefaultSelectByValue(defaultSelect);
-        mUserTypeView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
-            @Override
-            public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
-                electricianownertypeid = key;
-                mRefreshLayout.beginRefreshing();
-            }
-        });
-        expandTabView.addItemToExpandTab(defaultShowText, mUserTypeView, Gravity.LEFT);
-    }
-
-
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
+//        下拉刷新
         mAdapter.removeAll();
         mPage = 1;
         getListData();
@@ -239,7 +193,16 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         //上拉加载更多
         getListData();
-        return false;
+        return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000 && resultCode == RESULT_OK){
+            mZoneid = data.getStringExtra("ids");
+            mRefreshLayout.beginRefreshing();
+        }
     }
 
     public class MyAdapter extends BaseAdapter {
@@ -275,9 +238,9 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, holder.mHeadView);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, holder.mPersonjobtitleView);
             holder.mNameView.setText(obj.name);
-            holder.mSignItemZoneView.setText(obj.totlesignnumber);
+            holder.mSignItemZoneView.setText(obj.zone);
             holder.mSignItemSignTimeView.setText(obj.signtime);
-            holder.mSignItemZoneView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -332,6 +295,17 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
         super.onDestroy();
         if (expandTabView != null) {
             expandTabView.onExpandPopView();
+        }
+    }
+
+    private void initDate() {
+        try {
+            mRegionLists = new ArrayList<>();
+            mRegionLists.add(new KeyValueBean("", "全部区域"));
+            mRegionLists.add(new KeyValueBean("regionSelect", "区域选择"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
