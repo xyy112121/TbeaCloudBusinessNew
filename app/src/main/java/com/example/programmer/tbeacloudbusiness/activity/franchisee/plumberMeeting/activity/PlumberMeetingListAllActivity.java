@@ -5,16 +5,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListAllResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListStateResonpseModel;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
@@ -36,15 +40,18 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  */
 
 public class PlumberMeetingListAllActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
+    @BindView(R.id.plumber_meeting_main_list_search_text)
+    EditText mSearchTextView;
+
     private ExpandPopTabView expandTabView;
-    private List<KeyValueBean> mRegionLists, mStateLists;//区域,状态
+    private List<KeyValueBean> mRegionLists;//区域,状态
     private PopOneListView mRegionView, mStateView;
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;
     private int mPage = 1;
     private int mPagesiz = 10;
-    private String meetingcode,zoneid,meetingstatusid,meetingstarttime,meetingendtime,orderitem,order;
+    private String mCode, mZoneid, mStatusid, mStartTime, mEndTime, mOrderItem, mOrder,mCodeOrder,mTimeOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +73,62 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
         mRefreshLayout.beginRefreshing();
-
+        ButterKnife.bind(this);
         initDate();
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
         addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
         addStateItem(expandTabView, null, "", "激活");
+
+        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId,
+                                          KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    mCode = mSearchTextView.getText()+"";
+                    mRefreshLayout.beginRefreshing();
+                }
+
+                return false;
+            }
+        });
+
+        final ImageView codeView = getViewById(R.id.activity_plumber_meeting_main_list_code);
+        findViewById(R.id.activity_plumber_meeting_main_list_code_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOrderItem = "money";
+                if ("".equals(mCodeOrder) || "asc".equals(mCodeOrder)) {//升
+                    mCodeOrder = "desc";
+                    codeView.setImageResource(R.drawable.icon_arraw_grayblue);
+                } else {
+                    mCodeOrder = "asc";
+                    codeView.setImageResource(R.drawable.icon_arraw_bluegray);
+                }
+                mOrder = mCodeOrder;
+                mOrderItem="meetingcode";
+                mRefreshLayout.beginRefreshing();
+            }
+        });
+
+        final ImageView timeView = getViewById(R.id.activity_plumber_meeting_main_list_time);
+        findViewById(R.id.activity_plumber_meeting_main_list_time_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOrderItem = "money";
+                if ("".equals(mTimeOrder) || "asc".equals(mTimeOrder)) {//升
+                    mTimeOrder = "desc";
+                    timeView.setImageResource(R.drawable.icon_arraw_grayblue);
+                } else {
+                    mTimeOrder = "asc";
+                    timeView.setImageResource(R.drawable.icon_arraw_bluegray);
+                }
+                mOrder = mTimeOrder;
+                mOrderItem="meetingtime";
+                mRefreshLayout.beginRefreshing();
+            }
+        });
+
     }
 
     private void getStatusList() {
@@ -125,7 +182,7 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
                     mRefreshLayout.endLoadingMore();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            PlumberMeetingListAllResonpseModel model = (PlumberMeetingListAllResonpseModel) msg.obj;
+                            PlumberMeetingListMainResonpseModel model = (PlumberMeetingListMainResonpseModel) msg.obj;
                             if (model.isSuccess()) {
                                 mAdapter.addAll(model.data.meetinglist);
                             } else {
@@ -144,7 +201,7 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
                 public void run() {
                     try {
                         PlumberMeetingAction action = new PlumberMeetingAction();
-                        PlumberMeetingListMainResonpseModel model = action.getPlumberMeetingListAll(meetingcode,zoneid,meetingstatusid,meetingstarttime,meetingendtime,orderitem,order, mPage++, mPagesiz);
+                        PlumberMeetingListMainResonpseModel model = action.getPlumberMeetingListAll(mCode, mZoneid, mStatusid, mStartTime, mEndTime, mOrderItem, mOrder, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -179,11 +236,11 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
             @Override
             public void getValue(String key, String value) {
                 expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
-//                activitystatusid = key;
-//                mRefreshLayout.beginRefreshing();
+                mStatusid = key;
+                mRefreshLayout.beginRefreshing();
             }
         });
-        expandTabView.addItemToExpandTab(defaultShowText, mStateView);
+        expandTabView.addItemToExpandTab(defaultShowText, mStateView, Gravity.RIGHT);
     }
 
     private void initDate() {
@@ -192,17 +249,10 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
             mRegionLists = new ArrayList<>();
             mRegionLists.add(new KeyValueBean("", "全部区域"));
             mRegionLists.add(new KeyValueBean("regionSelect", "区域选择"));
-
-            mStateLists = new ArrayList<>();
-            mStateLists.add(new KeyValueBean("", "默认排序"));
-            mStateLists.add(new KeyValueBean("yes", "已激活"));
-            mStateLists.add(new KeyValueBean("no", "未激活"));
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
@@ -219,9 +269,18 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000 && resultCode == RESULT_OK){
+            mZoneid = data.getStringExtra("ids");
+            mRefreshLayout.beginRefreshing();
+        }
+    }
+
     public class MyAdapter extends BaseAdapter {
 
-        public List<PlumberMeetingListAllResonpseModel.Meeting> mList = new ArrayList<>();
+        public List<PlumberMeetingListMainResonpseModel.Meeting> mList = new ArrayList<>();
 
 
         @Override
@@ -251,7 +310,7 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            PlumberMeetingListAllResonpseModel.Meeting obj = mList.get(position);
+            final PlumberMeetingListMainResonpseModel.Meeting obj = mList.get(position);
             holder.mCodeView.setText(obj.meetingcode);
             holder.mStatusView.setText(obj.meetingstatus);
             holder.mTimeView.setText(obj.meetingtime);
@@ -261,6 +320,7 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, PlumberMeetingViewActivity.class);
+                    intent.putExtra("id",obj.id);
                     startActivity(intent);
                 }
             });
@@ -275,7 +335,7 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
             }
         }
 
-        public void addAll(List<PlumberMeetingListAllResonpseModel.Meeting> list){
+        public void addAll(List<PlumberMeetingListMainResonpseModel.Meeting> list){
             mList.addAll(list);
             notifyDataSetChanged();
         }

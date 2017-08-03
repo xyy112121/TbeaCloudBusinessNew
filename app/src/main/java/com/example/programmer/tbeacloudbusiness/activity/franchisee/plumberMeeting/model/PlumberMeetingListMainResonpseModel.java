@@ -5,14 +5,14 @@ import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import java.util.List;
 
 /**
- * Created by DELL on 2017/8/2.
+ * 水电工列表首页
  */
 
 public class PlumberMeetingListMainResonpseModel extends BaseResponseModel{
-    public PlumberMeetingListAll data;
+    public PlumberMeetingListMain data;
 
-    public class PlumberMeetingListAll {
-        public List<PlumberMeetingListAllResonpseModel.Meeting> meetinglist;
+    public class PlumberMeetingListMain {
+        public List<Meeting> meetinglist;
     }
 
 

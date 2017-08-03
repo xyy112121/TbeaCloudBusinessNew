@@ -3,192 +3,213 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <include layout="@layout/activity_page_top" />
+            <include layout="@layout/activity_page_top" />
 
-        <LinearLayout style="@style/my_text_layout">
+            <LinearLayout style="@style/my_text_layout">
 
-            <TextView
-                style="@style/my_text_style"
-                android:layout_height="wrap_content"
-                android:text="会议编码" />
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="会议编码" />
 
-            <TextView
-                style="@style/my_right_text_style"
-                android:text="M85554789" />
-        </LinearLayout>
-
-        <View style="@style/horizontal_view" />
-        <LinearLayout style="@style/my_text_layout">
-
-            <TextView
-                style="@style/my_text_style"
-                android:layout_height="wrap_content"
-                android:text="举办时间" />
-
-            <TextView
-                style="@style/my_right_text_style"
-                android:text="2017-01-20 17:50:00" />
-        </LinearLayout>
-
-        <View style="@style/horizontal_view" />
-
-        <LinearLayout style="@style/my_text_layout">
-
-            <TextView
-                style="@style/my_text_style"
-                android:text="举报单位" />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.25"
-                android:layout_gravity="center_vertical">
-                <include layout="@layout/activity_person_layout1"/>
-            </LinearLayout>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/icon_arrow_right"/>
-
-
-        </LinearLayout>
-
-        <View style="@style/horizontal_view" />
-
-        <LinearLayout style="@style/my_text_layout">
-
-            <TextView
-                style="@style/my_text_style"
-                android:layout_height="wrap_content"
-                android:text="举办地点" />
-
-            <TextView
-                android:id="@+id/create_code_type_norms"
-                style="@style/my_right_text_style"
-                android:text="四川省 德阳市 广汉市" />
-        </LinearLayout>
-
-        <View style="@style/horizontal_view" />
-
-        <LinearLayout style="@style/my_text_layout">
-
-            <TextView
-                style="@style/my_text_style"
-                android:layout_height="wrap_content"
-                android:text="会议状态" />
-
-            <TextView
-                style="@style/my_right_text_style"
-                android:text="已结束"
-                />
-        </LinearLayout>
-
-        <View style="@style/horizontal_view"
-            android:layout_height="8dp"/>
-        <LinearLayout style="@style/my_text_layout">
-
-            <TextView
-                style="@style/my_text_style"
-                android:text="发起人" />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.25"
-                android:layout_gravity="center_vertical">
-                <include layout="@layout/activity_person_layout1"/>
+                <TextView
+                    android:id="@+id/pm_view_meetingcode"
+                    style="@style/my_right_text_style1"
+                    android:text="M85554789" />
             </LinearLayout>
 
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="举办时间" />
+
+                <TextView
+                    android:id="@+id/pm_view_meetingtime"
+                    style="@style/my_right_text_style1"
+                    android:text="2017-01-20 17:50:00" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="举办单位" />
+
+                <LinearLayout
+                    android:id="@+id/pm_view_organizecompanylist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.25">
+
+                    <include layout="@layout/activity_person_layout2" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icon_arrow_right"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="举办地点" />
+
+                <TextView
+                    android:id="@+id/pm_view_meetingplace"
+                    style="@style/my_right_text_style1"
+                    android:text="四川省 德阳市 广汉市" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="会议状态" />
+
+                <TextView
+                    android:id="@+id/pm_view_meetingstatus"
+                    style="@style/my_right_text_style1"
+                    android:text="已结束" />
+            </LinearLayout>
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="发起人" />
+
+                <LinearLayout
+                    android:id="@+id/pm_view_meetingoriginatorinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.25">
+
+                    <include layout="@layout/activity_person_layout2" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:id="@+id/plumber_meeting_view_participant"
+                style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="参与人员" />
+
+                <TextView
+                    android:id="@+id/pm_view_participantlist"
+                    style="@style/my_right_text_style"
+                    android:gravity="right|center"
+                    android:text="4" />
+            </LinearLayout>
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="会议安排" />
+
+                <TextView
+                    android:id="@+id/pm_view_meetingitems"
+                    style="@style/my_right_text_style"
+                    android:gravity="right|center" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="会议纪要" />
+
+                <TextView
+                    android:id="@+id/pm_view_meetingsummary"
+                    style="@style/my_right_text_style"
+                    android:gravity="right|center" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="现场图片" />
+
+                <TextView
+                    android:id="@+id/pm_view_meetingpicturenumber"
+                    style="@style/my_right_text_style"
+                    android:gravity="right|center"
+                    android:text="20" />
+            </LinearLayout>
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp" />
+
+            <LinearLayout
+                android:id="@+id/plumber_meeting_view_sign_in"
+                style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="会议签到" />
+
+                <TextView
+                    android:id="@+id/pm_view_meetingsigninfo"
+                    style="@style/my_right_text_style"
+                    android:gravity="right|center"
+                    android:text="20" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
         </LinearLayout>
-
-        <View style="@style/horizontal_view" />
-
-        <LinearLayout
-            android:id="@+id/plumber_meeting_view_participant"
-            style="@style/my_text_layout">
-
-            <TextView
-                style="@style/my_text_style"
-                android:layout_height="wrap_content"
-                android:text="参与人员" />
-
-            <TextView
-                android:id="@+id/textView2"
-                style="@style/my_right_text_style"
-                android:text="4"
-                android:gravity="right|center"
-               />
-        </LinearLayout>
-
-        <View
-            style="@style/horizontal_view"
-            android:layout_height="8dp" />
-
-        <LinearLayout style="@style/my_text_layout">
-
-            <TextView
-                style="@style/my_text_style"
-                android:layout_height="wrap_content"
-                android:text="会议安排" />
-
-            <TextView
-                style="@style/my_right_text_style"
-                 />
-        </LinearLayout>
-
-        <View style="@style/horizontal_view" />
-
-        <LinearLayout style="@style/my_text_layout">
-
-            <TextView
-                style="@style/my_text_style"
-                android:layout_height="wrap_content"
-                android:text="会议纪要" />
-
-            <TextView
-                style="@style/my_right_text_style"
-                />
-        </LinearLayout>
-        <View style="@style/horizontal_view" />
-        <LinearLayout style="@style/my_text_layout">
-
-            <TextView
-                style="@style/my_text_style"
-                android:layout_height="wrap_content"
-                android:text="现场图片" />
-
-            <TextView
-                style="@style/my_right_text_style"
-                android:text="20"
-                android:gravity="right|center"
-                />
-        </LinearLayout>
-        <View style="@style/horizontal_view"
-            android:layout_height="8dp"/>
-        <LinearLayout
-            android:id="@+id/plumber_meeting_view_sign_in"
-            style="@style/my_text_layout">
-
-            <TextView
-                style="@style/my_text_style"
-                android:layout_height="wrap_content"
-                android:text="会议签到" />
-
-            <TextView
-                style="@style/my_right_text_style"
-                android:text="20"
-                android:gravity="right|center"
-                />
-        </LinearLayout>
-    </LinearLayout>
 
     </ScrollView>
 </RelativeLayout>

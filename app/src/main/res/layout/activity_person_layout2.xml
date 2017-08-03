@@ -53,13 +53,15 @@
                 <ImageView
                     android:id="@+id/person_info_personjobtitle"
                     android:layout_width="40dp"
-                    android:layout_height="20dp"
-                    android:scaleType="centerInside" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:layout_marginLeft="5dp"/>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/person_info_companyname"
-                android:layout_width="40dp"
+                android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:text="44"
                 android:textColor="@color/text_color" />

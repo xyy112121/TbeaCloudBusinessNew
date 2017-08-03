@@ -7,10 +7,10 @@
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="48dp"
         android:gravity="center_vertical"
-        android:layout_marginLeft="15dp">
+        android:layout_marginLeft="25dp">
         <CheckBox
             android:id="@+id/region_select_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="广汉市"

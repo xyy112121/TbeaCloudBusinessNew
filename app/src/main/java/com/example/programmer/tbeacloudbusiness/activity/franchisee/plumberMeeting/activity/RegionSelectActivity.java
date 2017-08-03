@@ -1,5 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -7,20 +9,18 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingParticipantResponseModel;
-import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.RegionSeleteResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,32 +29,29 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 参与人员
+ * Created by programmer on 2017/8/3.
  */
 
-public class PlumberMeetingParticipantListActivity extends BaseActivity {
-    @BindView(R.id.listview)
-    ListView mListView;
+public class RegionSelectActivity extends BaseActivity implements View.OnClickListener{
+    private ListView mListView;
     private MyAdapter mAdapter;
+    public List<String> mSeleteId = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plumber_meeting_participant_list);
-        ButterKnife.bind(this);
-        initTopbar("参与人员");
-        initView();
-        getListData();
-    }
-
-    private void initView() {
+        setContentView(R.layout.activity_region_select_list);
+        initTopbar("区域选择","保存",this);
+        mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter();
         mListView.setAdapter(mAdapter);
+        getData();
     }
 
-    private void getListData() {
-        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
-        dialog.setText("加载中...");
+
+    private void getData() {
+        final CustomDialog dialog = new CustomDialog(mContext,R.style.MyDialog,R.layout.tip_wait_dialog);
+        dialog.setText("请等待...");
         dialog.show();
         try {
             final Handler handler = new Handler() {
@@ -63,10 +60,10 @@ public class PlumberMeetingParticipantListActivity extends BaseActivity {
                     dialog.dismiss();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            PlumberMeetingParticipantResponseModel model = (PlumberMeetingParticipantResponseModel) msg.obj;
-                            if (model.isSuccess() && model.data != null) {
-                                if (model.data.meetingparticipantlist != null) {
-                                    mAdapter.addAll(model.data.meetingparticipantlist);
+                            RegionSeleteResponseModel model = (RegionSeleteResponseModel) msg.obj;
+                            if (model.isSuccess()) {
+                                if (model.data.zonelist != null) {
+                                    mAdapter.addAll(model.data.zonelist);
                                 }
 
                             } else {
@@ -85,8 +82,7 @@ public class PlumberMeetingParticipantListActivity extends BaseActivity {
                 public void run() {
                     try {
                         PlumberMeetingAction action = new PlumberMeetingAction();
-                        String id = getIntent().getStringExtra("meetingId");
-                        PlumberMeetingParticipantResponseModel model = action.getParticipantList(id);
+                        RegionSeleteResponseModel model = action.getRegionSelete();
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -98,11 +94,26 @@ public class PlumberMeetingParticipantListActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        String ids = "";
+        if(mSeleteId.size() > 0){
+            for (String item:mSeleteId) {
+                if(!"".equals(ids)){
+                    ids+=",";
+                }
+                ids+=item;
+            }
+        }
+        Intent in = new Intent();
+        in.putExtra("ids",ids);
+        setResult(RESULT_OK,in);
+        finish();
+    }
 
     public class MyAdapter extends BaseAdapter {
 
-        public List<PlumberMeetingParticipantResponseModel.MeetingParticipant> mList = new ArrayList<>();
-
+        public List<KeyValueBean> mList = new ArrayList<>();
 
         @Override
         public int getCount() {
@@ -120,22 +131,26 @@ public class PlumberMeetingParticipantListActivity extends BaseActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.activity_plumber_meeting_participant_list_item, null);
+                convertView = getLayoutInflater().inflate(R.layout.activity_region_select_item, null);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
+            }else {
+                holder = (ViewHolder)convertView.getTag();
             }
-
-            PlumberMeetingParticipantResponseModel.MeetingParticipant obj = mList.get(position);
-            holder.mNameView.setText(obj.name);
-            holder.mCompanynameView.setText(obj.companyandjobposition);
-            ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath()+obj.thumbpicture,holder.mHeadView);
-            ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath()+obj.persontypeicon,holder.mPersonjobtitleView);
-            holder.mRightView.setVisibility(View.GONE);
+            holder.mSelectNameView.setText(mList.get(position).getValue());
+            holder.mSelectNameView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
+                        mSeleteId.add(mList.get(position).getKey());
+                    }else {
+                        mSeleteId.remove(mList.get(position).getKey());
+                    }
+                }
+            });
             return convertView;
         }
 
@@ -147,7 +162,7 @@ public class PlumberMeetingParticipantListActivity extends BaseActivity {
             }
         }
 
-        public void addAll(List<PlumberMeetingParticipantResponseModel.MeetingParticipant> list) {
+        public void addAll(List<KeyValueBean> list) {
             mList.addAll(list);
             notifyDataSetChanged();
         }
@@ -158,16 +173,8 @@ public class PlumberMeetingParticipantListActivity extends BaseActivity {
         }
 
         class ViewHolder {
-            @BindView(R.id.person_info_head)
-            CircleImageView mHeadView;
-            @BindView(R.id.person_info_name)
-            TextView mNameView;
-            @BindView(R.id.person_info_personjobtitle)
-            ImageView mPersonjobtitleView;
-            @BindView(R.id.person_info_companyname)
-            TextView mCompanynameView;
-            @BindView(R.id.person_info_right)
-            ImageView mRightView;
+            @BindView(R.id.region_select_name)
+            CheckBox mSelectNameView;
 
             ViewHolder(View view) {
                 ButterKnife.bind(this, view);

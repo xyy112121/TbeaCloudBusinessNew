@@ -26,66 +26,66 @@ import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneLis
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 会议签到
+ * 会议签到列表
  */
 
 public class PlumberMeetingSignInListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
+
+    @BindView(R.id.listview)
+    ListView mListView;
+    @BindView(R.id.rl_recyclerview_refresh)
+    BGARefreshLayout mRefreshLayout;
 
     private ExpandPopTabView expandTabView;
     private List<KeyValueBean> mNumberLists;//会议编码
     private List<KeyValueBean> mRegionLists;//区域
     private List<KeyValueBean> mDateLists;//时间
 
-    private BGARefreshLayout mRefreshLayout;
-    private ListView mListView;
     private MyAdapter mAdapter;
     private int mPage = 1;
     private int mPagesiz = 10;
-    private Context mContext;
     private String mFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plumber_meeting_sign_in_list);
-
-        mContext = this;
+        ButterKnife.bind(this);
         initView();
     }
 
-    private void initView(){
+    private void initView() {
 
-        mFlag = getIntent().getStringExtra("mFlag");
+        mFlag = getIntent().getStringExtra("flag");
         View topView = findViewById(R.id.plumber_meeting_sign_top1);
         View topView2 = findViewById(R.id.plumber_meeting_sign_top2);
-        if("meetingSignIn".equals(mFlag)){
+        if ("meetingSignIn".equals(mFlag)) {
             topView.setVisibility(View.GONE);
             initTopbar("会议签到");
-        }else {
+        } else {
             topView2.setVisibility(View.GONE);
             initTopbar("水电工签到列表");
         }
 
-        mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter(mContext);
         mListView.setAdapter(mAdapter);
-        mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
 //        mRefreshLayout.beginRefreshing();
         initDate();
 
 
-
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
         addItem(expandTabView, mNumberLists, "默认排序", "用户");
-        if("meetingSignIn".equals(mFlag)){
+        if ("meetingSignIn".equals(mFlag)) {
             addItem(expandTabView, mRegionLists, "全部区域", "区域");
-        }else {
+        } else {
             addItem(expandTabView, mRegionLists, "默认排序", "累计签到");
         }
 
@@ -98,7 +98,7 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
         popOneListView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext,R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
                 if ("Custom".equals(key)) {//时间自定义
                     Intent intent = new Intent(mContext, DateSelectActivity.class);
                     startActivity(intent);
@@ -109,13 +109,13 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
         int displayWidth = ((Activity) mContext).getWindowManager().getDefaultDisplay().getWidth();//屏幕的宽
 
         if ("用户".equals(defaultShowText)) {
-            double wid = displayWidth/2.8;
-            int width = (int)wid;
-            expandTabView.addItemToExpandTab(defaultShowText, popOneListView,width, Gravity.LEFT);
+            double wid = displayWidth / 2.8;
+            int width = (int) wid;
+            expandTabView.addItemToExpandTab(defaultShowText, popOneListView, width, Gravity.LEFT);
         } else if ("时间".equals(defaultShowText)) {
-            double wid = displayWidth/2.5;
-            int width = (int)wid;
-            expandTabView.addItemToExpandTab(defaultShowText, popOneListView,width, Gravity.RIGHT);
+            double wid = displayWidth / 2.5;
+            int width = (int) wid;
+            expandTabView.addItemToExpandTab(defaultShowText, popOneListView, width, Gravity.RIGHT);
         } else {
             expandTabView.addItemToExpandTab(defaultShowText, popOneListView);
         }
@@ -171,11 +171,10 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(
                     R.layout.activity_plumber_meeting_sign_in_list_item, null);
-            if(!"meetingSignIn".equals(mFlag)){
-                ((TextView )view.findViewById(R.id.scanCode_history_state_item_text2)).setText("12");
-                ((TextView )view.findViewById(R.id.scanCode_history_state_item_text2)).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            if (!"meetingSignIn".equals(mFlag)) {
+                ((TextView) view.findViewById(R.id.scanCode_history_state_item_text2)).setText("12");
+                ((TextView) view.findViewById(R.id.scanCode_history_state_item_text2)).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             }
-
 
 
             view.setOnClickListener(new View.OnClickListener() {
@@ -219,11 +218,11 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
 
     private void initDate() {
         try {
-            if("meetingSignIn".equals(mFlag)){
+            if ("meetingSignIn".equals(mFlag)) {
                 mRegionLists = new ArrayList<>();
                 mRegionLists.add(new KeyValueBean("", "全部区域"));
                 mRegionLists.add(new KeyValueBean("regionSelect", "区域选择"));
-            }else {
+            } else {
                 mRegionLists = new ArrayList<>();
                 mRegionLists.add(new KeyValueBean("", "默认排序"));
                 mRegionLists.add(new KeyValueBean("big", "从大到小"));

@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListAllResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListStateResonpseModel;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
@@ -51,7 +50,7 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
     private MyAdapter mAdapter;
     private int mPage = 1;
     private int mPagesiz = 10;
-    private List<KeyValueBean> mRegionLists, mStateLists;//区域,状态
+    private List<KeyValueBean> mRegionLists;//区域,状态
     private PopOneListView mRegionView, mStateView;
     private String mCode, mZoneid, mStatusid, mStartTime, mEndTime, mOrderItem, mOrder,mCodeOrder,mTimeOrder;
 
@@ -125,14 +124,15 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
             @Override
             public void onClick(View view) {
                 mOrderItem = "money";
-                if ("".equals(mCodeOrder) || "aes".equals(mCodeOrder)) {//升
+                if ("".equals(mCodeOrder) || "asc".equals(mCodeOrder)) {//升
                     mCodeOrder = "desc";
                     codeView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
-                    mCodeOrder = "aes";
+                    mCodeOrder = "asc";
                     codeView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mOrder = mCodeOrder;
+                mOrderItem="meetingcode";
                 mRefreshLayout.beginRefreshing();
             }
         });
@@ -142,14 +142,15 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
             @Override
             public void onClick(View view) {
                 mOrderItem = "money";
-                if ("".equals(mTimeOrder) || "aes".equals(mTimeOrder)) {//升
+                if ("".equals(mTimeOrder) || "asc".equals(mTimeOrder)) {//升
                     mTimeOrder = "desc";
                     timeView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
-                    mTimeOrder = "aes";
+                    mTimeOrder = "asc";
                     timeView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mOrder = mTimeOrder;
+                mOrderItem="meetingtime";
                 mRefreshLayout.beginRefreshing();
             }
         });
@@ -230,7 +231,7 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
                 public void run() {
                     try {
                         PlumberMeetingAction action = new PlumberMeetingAction();
-                        PlumberMeetingListMainResonpseModel model = action.getPlumberMeetingListAll(mCode, mZoneid, mStatusid, mStartTime, mEndTime, mOrderItem, mOrder, mPage++, mPagesiz);
+                        PlumberMeetingListMainResonpseModel model = action.getPlumberMeetingMainList(mCode, mZoneid, mStatusid, mStartTime, mEndTime, mOrderItem, mOrder, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -250,7 +251,8 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
             public void getValue(String key, String value) {
                 expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
                 if ("regionSelect".equals(key)) {
-//                    Intent intent = new Intent(mContext,)
+                    Intent intent = new Intent(mContext,RegionSelectActivity.class);
+                    startActivityForResult(intent,1000);
                 }
             }
         });
@@ -299,10 +301,18 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000 && resultCode == RESULT_OK){
+            mZoneid = data.getStringExtra("ids");
+            mRefreshLayout.beginRefreshing();
+        }
+    }
 
     public class MyAdapter extends BaseAdapter {
 
-        public List<PlumberMeetingListAllResonpseModel.Meeting> mList = new ArrayList<>();
+        public List<PlumberMeetingListMainResonpseModel.Meeting> mList = new ArrayList<>();
 
 
         @Override
@@ -333,7 +343,7 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            PlumberMeetingListAllResonpseModel.Meeting obj = mList.get(position);
+            final PlumberMeetingListMainResonpseModel.Meeting obj = mList.get(position);
             holder.mCodeView.setText(obj.meetingcode);
             holder.mStatusView.setText(obj.meetingstatus);
             holder.mTimeView.setText(obj.meetingtime);
@@ -343,6 +353,7 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, PlumberMeetingViewActivity.class);
+                    intent.putExtra("id",obj.id);
                     startActivity(intent);
                 }
             });
@@ -357,7 +368,7 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
             }
         }
 
-        public void addAll(List<PlumberMeetingListAllResonpseModel.Meeting> list) {
+        public void addAll(List<PlumberMeetingListMainResonpseModel.Meeting> list) {
             mList.addAll(list);
             notifyDataSetChanged();
         }

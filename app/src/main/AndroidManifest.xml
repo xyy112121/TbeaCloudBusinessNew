@@ -161,6 +161,8 @@
         <activity android:name=".activity.companyPersonnel.activity.FranchiserSelectListActivity"/>
         <activity android:name=".activity.companyPersonnel.activity.MeetingPreparePlanActivity"/>
         <activity android:name=".activity.companyPersonnel.activity.MeetingSponsorSuccessActivity"/>
+
+        <activity android:name=".activity.franchisee.plumberMeeting.activity.RegionSelectActivity"/>
     </application>
 
 </manifest>
