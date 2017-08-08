@@ -16,6 +16,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManag
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PersonManageItemView;
+import com.example.programmer.tbeacloudbusiness.component.StarBar;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -33,14 +34,10 @@ public class PersonManageViewActivity extends BaseActivity {
     TextView mPersonnameView;
     @BindView(R.id.pm_view_thumbpicture)
     CircleImageView mThumbpictureView;
-    @BindView(R.id.pm_view_age)
-    TextView mAgeView;
-    @BindView(R.id.pm_view_address)
+    @BindView(R.id.pm_withdrawal_history_view_address)
     TextView mAddressView;
-    @BindView(R.id.pm_view_fansnumber)
+    @BindView(R.id.pm_withdrawal_history_view_fansnumber)
     TextView mFansnumberView;
-    @BindView(R.id.pm_view_attentnumber)
-    TextView mAttentnumberView;
     @BindView(R.id.pm_view_rebatescaninfo)
     PersonManageItemView mRebatescaninfoView;
     @BindView(R.id.pm_view_electricianmeetingattendinfo)
@@ -51,6 +48,10 @@ public class PersonManageViewActivity extends BaseActivity {
     PersonManageItemView mCommodityorderinfoView;
     @BindView(R.id.pm_view_logininfo)
     PersonManageItemView mLogininfoView;
+    @BindView(R.id.pm_withdrawal_history_view_starlevel)
+    StarBar mStarlevelView;
+    @BindView(R.id.pm_withdrawal_history_view_workyears)
+    TextView mWorkyearsView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,10 +110,10 @@ public class PersonManageViewActivity extends BaseActivity {
             PersonManageViewResponseModel.ElectricianBaseInfo model = obj.electricianbaseinfo;
             mPersonnameView.setText(model.personname);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + model.thumbpicture, mThumbpictureView);
-            mAgeView.setText(model.age);
             mAddressView.setText(model.address);
-            mFansnumberView.setText(model.fansnumber);
-            mAttentnumberView.setText(model.attentnumber);
+            mFansnumberView.setText("粉丝:" + model.fansnumber);
+            mWorkyearsView.setText("工龄:" + model.workyears);
+            mStarlevelView.setStarMark(model.starlevel);;
         }
 
         if (obj.rebatescaninfo != null) {
@@ -192,7 +193,8 @@ public class PersonManageViewActivity extends BaseActivity {
                 break;
             case R.id.pm_view_logininfo:
                 //登录统计
-                 intent = new Intent(mContext, PlumberManageLoginStatisticsActivity.class);
+                 intent = new Intent(mContext, PlumberManageSignHistoryListActivity.class);
+                intent.putExtra("id",getIntent().getStringExtra("id"));
                 startActivity(intent);
                 break;
         }

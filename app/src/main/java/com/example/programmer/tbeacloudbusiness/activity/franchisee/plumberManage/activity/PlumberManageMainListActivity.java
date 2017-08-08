@@ -12,7 +12,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,7 +22,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.action.PlumberManageAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PlumberManageMainListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmMainListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.RegionSelectActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingUserTypeResonpseModel;
@@ -124,12 +123,6 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
             }
         });
 
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//        });
     }
 
     private void getUserTypeList() {
@@ -180,7 +173,7 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
                     mRefreshLayout.endLoadingMore();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            PlumberManageMainListResponseModel model = (PlumberManageMainListResponseModel) msg.obj;
+                            PmMainListResponseModel model = (PmMainListResponseModel) msg.obj;
                             if (model.isSuccess()) {
                                 if (model.data.electricianlist != null) {
                                     mAdapter.addAll(model.data.electricianlist);
@@ -202,7 +195,7 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
                 public void run() {
                     try {
                         PlumberManageAction action = new PlumberManageAction();
-                        PlumberManageMainListResponseModel model = action.getPlumberManageMainList(mName, mElectricianownertypeid, mZoneid, mOrderItem, mOrder, mPage++, mPagesiz);
+                        PmMainListResponseModel model = action.getPlumberManageMainList(mName, mElectricianownertypeid, mZoneid, mOrderItem, mOrder, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -294,7 +287,7 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
 
     public class MyAdapter extends BaseAdapter {
 
-        public List<PlumberManageMainListResponseModel.Electrician> mList = new ArrayList<>();
+        public List<PmMainListResponseModel.Electrician> mList = new ArrayList<>();
 
         @Override
         public int getCount() {
@@ -321,7 +314,7 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            final PlumberManageMainListResponseModel.Electrician obj = mList.get(position);
+            final PmMainListResponseModel.Electrician obj = mList.get(position);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, holder.mHeadView);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, holder.mJobtitleView);
             holder.mNameView.setText(obj.personname);
@@ -331,7 +324,9 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, PersonManageViewActivity.class);
+
+
+                    Intent intent = new Intent(mContext, PlumberManageWithdrawalHistoryListActivity.class);
                     intent.putExtra("id",obj.userid);
                     startActivity(intent);
                 }
@@ -347,7 +342,7 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
             }
         }
 
-        public void addAll(List<PlumberManageMainListResponseModel.Electrician> list) {
+        public void addAll(List<PmMainListResponseModel.Electrician> list) {
             mList.addAll(list);
             notifyDataSetChanged();
         }

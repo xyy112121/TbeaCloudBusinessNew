@@ -79,11 +79,11 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
             @Override
             public void onClick(View view) {
                 mOrderitem = "money";
-                if ("".equals(mOrder) || "aes".equals(mOrder)) {//升
+                if ("".equals(mOrder) || "asc".equals(mOrder)) {//升
                     mOrder = "desc";
                     moneyView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
-                    mOrder = "aes";
+                    mOrder = "asc";
                     moneyView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mRefreshLayout.beginRefreshing();

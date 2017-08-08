@@ -95,6 +95,8 @@
         <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManageLoginStatisticsActivity" />
         <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManagePersonViewActivity" />
         <activity android:name=".activity.franchisee.plumberManage.activity.PersonManageViewActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManageWithdrawalHistoryListActivity" />
+        <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManageWithdrawalHistoryViewActivity" />
 
         <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingMainListActivity" />
         <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingListAllActivity" />

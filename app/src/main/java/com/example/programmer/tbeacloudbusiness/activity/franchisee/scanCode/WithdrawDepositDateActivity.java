@@ -60,7 +60,6 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
         initView();
         getPayStatus();
         getPayeeType();
-
     }
 
     private void initView() {
@@ -132,10 +131,12 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
                             PayeeTypeResponeModel model = (PayeeTypeResponeModel) msg.obj;
-                            if (model.isSuccess()) {
-                                mUserView.setAdapterData(model.data.getpayeetypelist);
-                            } else {
-                                ToastUtil.showMessage(model.getMsg());
+                            if (model != null) {
+                                if (model.isSuccess()) {
+                                    mUserView.setAdapterData(model.data.getpayeetypelist);
+                                } else {
+                                    ToastUtil.showMessage(model.getMsg());
+                                }
                             }
                             break;
                         case ThreadState.ERROR:
@@ -226,14 +227,18 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
                             WithdrawDepositDateResponseModel model = (WithdrawDepositDateResponseModel) msg.obj;
-                            if (model.isSuccess()) {
-                                if (model.data != null)
-                                    mAdapter.addAll(model.data.takemoneylist);
-                                ((TextView) findViewById(R.id.take_money_pay_money)).setText(model.data.takemoneytotleinfo.totlemoney);
-
-                            } else {
-                                ToastUtil.showMessage(model.getMsg());
+                            if (model != null) {
+                                if (model.isSuccess()) {
+                                    if (model.data != null)
+                                        mAdapter.addAll(model.data.takemoneylist);
+                                    if(model.data.takemoneytotleinfo != null){
+                                        ((TextView) findViewById(R.id.take_money_pay_money)).setText(model.data.takemoneytotleinfo.totlemoney);
+                                    }
+                                } else {
+                                    ToastUtil.showMessage(model.getMsg());
+                                }
                             }
+
                             break;
                         case ThreadState.ERROR:
                             ToastUtil.showMessage("操作失败！");

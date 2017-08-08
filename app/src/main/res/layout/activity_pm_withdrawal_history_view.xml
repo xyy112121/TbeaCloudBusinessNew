@@ -129,7 +129,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-
                 android:background="@color/white">
 
                 <TextView
@@ -151,92 +150,19 @@
                     android:textSize="12sp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginBottom="15dp"/>
+                    android:layout_marginBottom="15dp"
+                    />
 
             </RelativeLayout>
 
-
             <View
                 style="@style/horizontal_view"
                 android:layout_height="8dp" />
 
-            <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
-                android:id="@+id/pm_view_rebatescaninfo"
+            <WebView
+                android:id="@+id/pm_withdrawal_history_view_webView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                app:icon="@drawable/icon_water_scan_rebate"
-                app:isMoney="true"
-                app:text1="扫码返利"
-                app:text2="一年提现金额"
-                app:text3="三月提现金额" />
-
-            <View
-                style="@style/horizontal_view"
-                android:layout_height="8dp" />
-
-            <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
-                android:id="@+id/pm_view_electricianmeetingattendinfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                app:icon="@drawable/icon_water_metting"
-                app:text1="水电工会议"
-                app:text2="一年签到次数"
-                app:text3="三月签到次数" />
-
-            <View
-                style="@style/horizontal_view"
-                android:layout_height="8dp" />
-
-            <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
-                android:id="@+id/pm_view_orderingserviceinfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                app:icon="@drawable/icon_water_service"
-                app:text1="预约服务"
-                app:text2="一年接单此商户"
-                app:text3="三月接单次数"
-                app:text4="30"
-                app:text5="12" />
-
-            <View
-                style="@style/horizontal_view"
-                android:layout_height="8dp" />
-
-
-            <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
-                android:id="@+id/pm_view_commodityorderinfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                app:icon="@drawable/icon_water_order"
-                app:text1="订单"
-                app:text2="一年接单次数"
-                app:text3="三月接单次数"
-                app:text4="20"
-                app:text5="12" />
-
-            <View
-                style="@style/horizontal_view"
-                android:layout_height="8dp" />
-
-            <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
-                android:id="@+id/pm_view_logininfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                app:icon="@drawable/icon_water_statistics"
-                app:text1="登录统计"
-                app:text2="登录次数"
-                app:text3="在线时长"
-                app:text4="1200.00"
-                app:text5="500.00" />
-
-            <View
-                style="@style/horizontal_view"
-                android:layout_height="8dp" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

@@ -34,6 +34,9 @@ public class PersonManageViewResponseModel extends BaseResponseModel {
         public String thumbpicture;
         public String userid;
         public String whetheridentify;
+        public String persontypeicon;
+        public int starlevel;
+        public String workyears;
     }
 
     public class ElectricianMeetingAttendInfo {
@@ -44,6 +47,7 @@ public class PersonManageViewResponseModel extends BaseResponseModel {
     public class LoginInfo {
         public String logintimes;
         public String totlelogintime;
+        public String lastloginaddr;
     }
 
     public class OrderingServiceInfo {

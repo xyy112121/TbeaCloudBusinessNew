@@ -233,7 +233,7 @@ public class ScanCodeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
         String result = sendRequest("TBEAYUN004002003000", pairs);
-        model = gson.fromJson(result, WithdrawDepositDateHistoryListResponseModel.class);
+           model = gson.fromJson(result, WithdrawDepositDateHistoryListResponseModel.class);
         return model;
     }
 

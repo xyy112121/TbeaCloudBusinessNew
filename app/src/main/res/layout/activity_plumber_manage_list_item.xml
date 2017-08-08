@@ -33,7 +33,7 @@
             android:maxLines="1"
             android:paddingLeft="20dp"
             android:text="广汉市"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/tab_text_normal" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -59,6 +59,7 @@
                 android:text="2555"
                 android:textColor="@color/tab_text_normal"
                 android:textStyle="bold"
+                android:layout_marginRight="15dp"
                />
         </LinearLayout>
 

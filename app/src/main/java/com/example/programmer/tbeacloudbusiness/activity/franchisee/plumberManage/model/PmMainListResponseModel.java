@@ -8,7 +8,7 @@ import java.util.List;
  * Created by DELL on 2017/8/4.
  */
 
-public class PlumberManageMainListResponseModel extends BaseResponseModel {
+public class PmMainListResponseModel extends BaseResponseModel {
     public PlumberManageMainList data;
 
     public class PlumberManageMainList {
