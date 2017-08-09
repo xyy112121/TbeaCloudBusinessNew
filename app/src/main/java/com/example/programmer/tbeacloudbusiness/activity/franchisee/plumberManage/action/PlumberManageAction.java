@@ -2,6 +2,7 @@ package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMana
 
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PersonManageViewResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmMainListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmSignHistoryResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmWithdrawalHistoryListResonseModel;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
@@ -92,8 +93,8 @@ public class PlumberManageAction extends BaseAction {
      page
      pagesize
      */
-    public PmWithdrawalHistoryListResonseModel getSignHistoryList(String electricianid, String meetingcode, String zoneid, String startdate, String enddate, String orderitem, String order, int page, int pagesize) throws Exception {
-        PmWithdrawalHistoryListResonseModel model;
+    public PmSignHistoryResponseModel getSignHistoryList(String electricianid, String meetingcode, String zoneid, String startdate, String enddate, String orderitem, String order, int page, int pagesize) throws Exception {
+        PmSignHistoryResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("electricianid", electricianid));
         pairs.add(new BasicNameValuePair("meetingcode", meetingcode));
@@ -105,7 +106,7 @@ public class PlumberManageAction extends BaseAction {
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
         String result = sendRequest("TBEAYUN004003008000", pairs);
-        model = gson.fromJson(result, PmWithdrawalHistoryListResonseModel.class);
+        model = gson.fromJson(result, PmSignHistoryResponseModel.class);
         return model;
     }
 

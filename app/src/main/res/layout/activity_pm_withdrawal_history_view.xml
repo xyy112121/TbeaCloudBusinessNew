@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/icon_watertest"
     android:orientation="vertical">
 
     <ScrollView
@@ -55,9 +56,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="15dp"
                     android:background="@color/white"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp">
 
                     <TextView
                         android:id="@+id/pm_view_personname"
@@ -111,47 +112,46 @@
 
                 <com.example.programmer.tbeacloudbusiness.component.StarBar
                     android:id="@+id/pm_withdrawal_history_view_starlevel"
-                    android:layout_below="@+id/display"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/display"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
+                    app:starCount="5"
+                    app:starDistance="5dp"
                     app:starEmpty="@drawable/icon_checkbox_normal_star"
                     app:starFill="@drawable/icon_checkbox_checkedl_star"
-                    app:starDistance="5dp"
-                    app:starCount="5"
-                    app:starSize="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="15dp"/>
+                    app:starSize="14dp" />
 
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
 
                 <TextView
                     android:id="@+id/pm_withdrawal_history_view_workyears"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="15dp"
                     android:text="工龄：12年"
                     android:textColor="@color/text_color"
-                    android:textSize="12sp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="15dp"/>
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/pm_withdrawal_history_view_fansnumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="粉丝：12"
-                    android:textColor="@color/text_color"
-                    android:textSize="12sp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="15dp"
-                    />
+                    android:text="粉丝：12"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
 
             </RelativeLayout>
 

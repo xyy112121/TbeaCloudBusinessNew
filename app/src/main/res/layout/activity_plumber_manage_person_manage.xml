@@ -2,8 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/icon_watertest">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -55,7 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="15dp"
+                   android:paddingLeft="15dp"
                     android:background="@color/white"
                     android:orientation="vertical">
 
@@ -94,13 +95,12 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.6">
 
-
                     <TextView
                         android:id="@+id/pm_withdrawal_history_view_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15dp"
+                        android:paddingLeft="15dp"
                         android:drawableLeft="@drawable/icon_water_location_blue"
                         android:drawablePadding="5dp"
                         android:text="四川省 德阳市 广汉市"
@@ -120,15 +120,15 @@
                     app:starCount="5"
                     app:starSize="14dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="15dp"/>
+                    android:paddingRight="15dp"/>
 
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
 
                 android:background="@color/white">
 

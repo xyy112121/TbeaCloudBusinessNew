@@ -18,6 +18,7 @@ import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.StarBar;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.jaeger.library.StatusBarUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;
@@ -48,6 +49,7 @@ public class PlumberManageWithdrawalHistoryViewActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pm_withdrawal_history_view);
+        StatusBarUtil.setTranslucent(this,0);
         ButterKnife.bind(this);
         getData();
     }

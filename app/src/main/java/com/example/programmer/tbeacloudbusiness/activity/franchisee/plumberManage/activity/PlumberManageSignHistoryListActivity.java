@@ -1,24 +1,26 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.action.PlumberManageAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmWithdrawalHistoryListResonseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmSignHistoryResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.RegionSelectActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.DateSelectActivity;
+import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -26,10 +28,13 @@ import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
@@ -39,6 +44,14 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 public class PlumberManageSignHistoryListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
 
+    @BindView(R.id.person_info_head)
+    CircleImageView mHeadView;
+    @BindView(R.id.person_info_name)
+    TextView mNameView;
+    @BindView(R.id.person_info_personjobtitle)
+    ImageView mPersonjobtitleView;
+    @BindView(R.id.pm_sign_list_total)
+    TextView mTotalView;
     private ExpandPopTabView expandTabView;
     private List<KeyValueBean> mRegionLists;//区域
     private List<KeyValueBean> mDateLists;//时间
@@ -56,6 +69,7 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pm_sign_list);
+        ButterKnife.bind(this);
         electricianid = getIntent().getStringExtra("id");
         initTopbar("签到历史");
         initView();
@@ -63,7 +77,7 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
 
     private void initView() {
         mListView = (ListView) findViewById(R.id.listview);
-        mAdapter = new MyAdapter(mContext);
+        mAdapter = new MyAdapter();
         mListView.setAdapter(mAdapter);
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
@@ -89,17 +103,21 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
                     mRefreshLayout.endLoadingMore();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            PmWithdrawalHistoryListResonseModel model = (PmWithdrawalHistoryListResonseModel) msg.obj;
+                            PmSignHistoryResponseModel model = (PmSignHistoryResponseModel) msg.obj;
                             if (model != null) {
-                                if (model.isSuccess() && model.getData() != null) {
-//                                    mAdapter.addAll(model.getData().getTakemoneylist());
-//                                    if(model.getData().getElectricianinfo() != null){
-//                                        PlumberManageWithdrawalHistoryListResonseModel.DataBean.ElectricianinfoBean info = model.getData().getElectricianinfo();
-//                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath()+info.getThumbpicture(),mHeadView);
-//                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath()+info.getPersontypeicon(),mPersonjobtitleView);
-//                                        mNameView.setText(info.getPersonname());
-//                                        mCompanynameView.setText(info.getZone());
-//                                    }
+                                if (model.isSuccess() && model.data != null) {
+                                    if (model.data.attendmeetinglist != null) {
+                                        mAdapter.addAll(model.data.attendmeetinglist);
+                                    }
+
+                                    if (model.data.electricianinfo != null) {
+                                        PmSignHistoryResponseModel.DataBean.ElectricianinfoBean info = model.data.electricianinfo;
+                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + info.thumbpicture, mHeadView);
+                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + info.persontypeicon, mPersonjobtitleView);
+                                        mNameView.setText(info.personname);
+                                    }
+//
+//
                                 } else {
                                     ToastUtil.showMessage(model.getMsg());
                                 }
@@ -117,7 +135,7 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
                 public void run() {
                     try {
                         PlumberManageAction action = new PlumberManageAction();
-                        PmWithdrawalHistoryListResonseModel model = action.getSignHistoryList(electricianid, meetingcode, zoneid, startdate, enddate, orderitem, order, mPage++, mPagesiz);
+                        PmSignHistoryResponseModel model = action.getSignHistoryList(electricianid, meetingcode, zoneid, startdate, enddate, orderitem, order, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -165,7 +183,7 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
                     Intent intent = new Intent(mContext, RegionSelectActivity.class);
                     startActivityForResult(intent, 1000);
                 } else {
-//                    mZoneid = "";
+                    zoneid = "";
                     mRefreshLayout.beginRefreshing();
                 }
             }
@@ -173,7 +191,7 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
 
         float displayWidth = UtilAssistants.getWidth(mContext);
         double wid = displayWidth * 0.2;
-        int width = (int) wid- DensityUtil.dip2px(mContext, 15);
+        int width = (int) wid - DensityUtil.dip2px(mContext, 15);
         expandTabView.addItemToExpandTab(defaultShowText, regionView, width, Gravity.CENTER);
     }
 
@@ -200,31 +218,19 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
                 order = "";
             }
             mRefreshLayout.beginRefreshing();
+        } else  if (requestCode == 1000 && resultCode == RESULT_OK) {
+            zoneid = data.getStringExtra("ids");
+            mRefreshLayout.beginRefreshing();
         }
     }
 
-    private class MyAdapter extends BaseAdapter {
-        /**
-         * android 上下文环境
-         */
-        private Context context;
+    public class MyAdapter extends BaseAdapter {
 
-        public List<Object> mList = new ArrayList<>();
-//
-//        public List<CheckBox> ckList = new ArrayList<>();
-
-        /**
-         * 构造函数
-         *
-         * @param context android上下文环境
-         */
-        public MyAdapter(Context context) {
-            this.context = context;
-        }
+        public List<PmSignHistoryResponseModel.DataBean.AttendmeetinglistBean> mList = new ArrayList<>();
 
         @Override
         public int getCount() {
-            return 10;
+            return mList.size();
         }
 
         @Override
@@ -239,22 +245,29 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater layoutInflater = (LayoutInflater) context
-                    .getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            View view = layoutInflater.inflate(
-                    R.layout.activity_plumber_manage_sign_history_list_item, null);
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(
+                        R.layout.activity_plumber_manage_sign_history_list_item, null);
+                holder = new ViewHolder(convertView);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            PmSignHistoryResponseModel.DataBean.AttendmeetinglistBean obj = mList.get(position);
+            holder.mCodeView.setText(obj.meetingcode);
+            holder.mTimeView.setText(obj.attendtime);
+            holder.mZoneView.setText(obj.zone);
+//            convertView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent();
+//                    intent.setClass(mContext, PlumberManageLoginStatisticsActivity.class);
+//                    startActivity(intent);
+//                }
+//            });
 
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.setClass(mContext, PlumberManageLoginStatisticsActivity.class);
-                    startActivity(intent);
-                }
-            });
-
-            return view;
+            return convertView;
         }
 
 
@@ -265,7 +278,7 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
             }
         }
 
-        public void addAll(List<Object> list) {
+        public void addAll(List<PmSignHistoryResponseModel.DataBean.AttendmeetinglistBean> list) {
             mList.addAll(list);
             notifyDataSetChanged();
         }
@@ -273,6 +286,19 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
         public void removeAll() {
             mList.clear();
             notifyDataSetChanged();
+        }
+
+        class ViewHolder {
+            @BindView(R.id.pm_sign_item_code)
+            TextView mCodeView;
+            @BindView(R.id.pm_sign_item_zone)
+            TextView mZoneView;
+            @BindView(R.id.pm_sign_item_time)
+            TextView mTimeView;
+
+            ViewHolder(View view) {
+                ButterKnife.bind(this, view);
+            }
         }
     }
 
