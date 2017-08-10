@@ -15,15 +15,9 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.administrator.realNameAuthentication.MemberListActivity;
-import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.BypassAccountManageListActivity;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.MyAttentionActivity;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.MyFansActivity;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.RealNameAuthenticationDistributorActivity;
+import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.rebateAccount.activity.MyRebateAccountlistActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.SetActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
-import com.example.programmer.tbeacloudbusiness.activity.user.model.HomeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;

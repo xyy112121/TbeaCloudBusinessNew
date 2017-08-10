@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/top_imgae"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_distribution" />
+
+            <TextView
+                android:id="@+id/top_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/top_imgae"
+                android:gravity="center_vertical"
+                android:text="收支明细"
+                android:textColor="@color/text_color1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="right"
+                android:src="@drawable/icon_more" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/top_text2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="已支付"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:id="@+id/top_text3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="已提现"
+                android:textColor="@color/text_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/top_text4_label"
+                    style="@style/money_logo_style"
+                    android:visibility="gone"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:id="@+id/top_text4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="2555"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/top_text5_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:text="￥"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:paddingTop="1dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/top_text5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="2555"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            style="@style/horizontal_view"
+            android:layout_height="10dp"
+            android:background="@color/interval_color" />
+
+    </LinearLayout>
+</FrameLayout>

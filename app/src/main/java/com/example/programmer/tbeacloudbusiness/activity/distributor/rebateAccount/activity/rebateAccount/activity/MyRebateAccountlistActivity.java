@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity;
+package com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.rebateAccount.activity;
 
 import android.content.Context;
 import android.content.Intent;

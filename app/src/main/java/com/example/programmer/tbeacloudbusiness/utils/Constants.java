@@ -8,5 +8,6 @@ public class Constants {
     public static final String SHARED_PREFERENCE_NAME = "tbeaCloudBusiness";
     public static final String ONLINE = "online";
     public static final String USERID = "userID";
+    public static final String USERTYPE = "usertypeid";
 
 }

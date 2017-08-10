@@ -27,6 +27,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.activity.PlumberMeetingListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.scanCode.activity.DistributorScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity.ScanCodeAcctivity;
@@ -275,6 +276,10 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
                 @Override
                 public void onClick(View view) {
                     HomeMainResponseModel.FunctionModel obj = mList.get(i);
+                    if ("distributor_shaomafanli".equals(obj.moduleid)) {//分销商
+                        //扫码返利
+                        startActivity(new Intent(getActivity(), DistributorScanCodeMainListActivity.class));
+                    }
                     if ("shaomafanli".equals(obj.moduleid)) {
                         //扫码返利
                         startActivity(new Intent(getActivity(), ScanCodeMainListActivity.class));

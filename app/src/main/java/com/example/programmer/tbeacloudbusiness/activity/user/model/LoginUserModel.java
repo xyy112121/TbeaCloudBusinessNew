@@ -20,7 +20,7 @@ public class LoginUserModel extends BaseResponseModel {
         public String mobile;
         public String name;
         public String picture;
-        public String usertypeid;
+        public String usertypeid;//用户类型
         public String whetheridentifiedid;
 
     }
