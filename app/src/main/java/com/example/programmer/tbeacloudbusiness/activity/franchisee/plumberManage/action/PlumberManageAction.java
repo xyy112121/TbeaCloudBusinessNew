@@ -2,8 +2,11 @@ package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMana
 
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PersonManageViewResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmMainListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmScanCodeResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmScanCodeStateResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmSignHistoryResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmWithdrawalHistoryListResonseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmWithdrawListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmWithdrawalHistoryListResponseModel;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
 import org.apache.http.NameValuePair;
@@ -65,9 +68,9 @@ public class PlumberManageAction extends BaseAction {
      pagesize
      page
      */
-    public PmWithdrawalHistoryListResonseModel getPmWithdrawalHistoryList
+    public PmWithdrawalHistoryListResponseModel getPmWithdrawalHistoryList
     (String electricianid, String startdate, String enddate, String orderitem, String order, int page, int pagesize) throws Exception {
-        PmWithdrawalHistoryListResonseModel model;
+        PmWithdrawalHistoryListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("electricianid", electricianid));
         pairs.add(new BasicNameValuePair("startdate", startdate));
@@ -77,7 +80,7 @@ public class PlumberManageAction extends BaseAction {
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
         String result = sendRequest("TBEAYUN004003001001", pairs);
-        model = gson.fromJson(result, PmWithdrawalHistoryListResonseModel.class);
+        model = gson.fromJson(result, PmWithdrawalHistoryListResponseModel.class);
         return model;
     }
 
@@ -107,6 +110,68 @@ public class PlumberManageAction extends BaseAction {
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
         String result = sendRequest("TBEAYUN004003008000", pairs);
         model = gson.fromJson(result, PmSignHistoryResponseModel.class);
+        return model;
+    }
+
+    public PmScanCodeStateResponseModel getStatus() throws Exception {
+        PmScanCodeStateResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN001005001000", pairs);
+        model = gson.fromJson(result, PmScanCodeStateResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 水电工管理扫码返利-扫码
+     electricianid      水电工ID
+     startdate
+     enddate
+     confirmstatusid    状态ID
+     orderitem           time,money
+     order
+     page
+     pagesize
+     */
+    public PmScanCodeResponseModel getScanCodeList
+            (String electricianid, String startdate, String enddate,String confirmstatusid, String orderitem, String order, int page, int pagesize) throws Exception {
+        PmScanCodeResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("electricianid", electricianid));
+        pairs.add(new BasicNameValuePair("startdate", startdate));
+        pairs.add(new BasicNameValuePair("enddate", enddate));
+        pairs.add(new BasicNameValuePair("confirmstatusid", confirmstatusid));
+        pairs.add(new BasicNameValuePair("orderitem", orderitem));
+        pairs.add(new BasicNameValuePair("order", order));
+        pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
+        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
+        String result = sendRequest("TBEAYUN004003006000", pairs);
+        model = gson.fromJson(result, PmScanCodeResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 水电工管理扫码返利-提现
+     electricianid      水电工ID
+     startdate
+     enddate
+     orderitem           time,money
+     order
+     page
+     pagesize
+     */
+    public PmWithdrawListResponseModel getWithdrawList
+    (String electricianid, String startdate, String enddate,String orderitem, String order, int page, int pagesize) throws Exception {
+        PmWithdrawListResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("electricianid", electricianid));
+        pairs.add(new BasicNameValuePair("startdate", startdate));
+        pairs.add(new BasicNameValuePair("enddate", enddate));
+        pairs.add(new BasicNameValuePair("orderitem", orderitem));
+        pairs.add(new BasicNameValuePair("order", order));
+        pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
+        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
+        String result = sendRequest("TBEAYUN004003007000", pairs);
+        model = gson.fromJson(result, PmWithdrawListResponseModel.class);
         return model;
     }
 

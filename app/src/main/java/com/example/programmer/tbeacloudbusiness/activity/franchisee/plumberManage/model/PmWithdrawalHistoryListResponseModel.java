@@ -9,7 +9,7 @@ import java.util.List;
  * Created by DELL on 2017/8/8.
  */
 
-public class PmWithdrawalHistoryListResonseModel extends BaseResponseModel {
+public class PmWithdrawalHistoryListResponseModel extends BaseResponseModel {
 
     /**
      * data : {"electricianinfo":{"userid":"uprmrg1490497827ewrznc","thumbpicture":"/public/upload/s_58d7e033f1a1b.jpg","personname":"李白3","persontypeicon":"/public/static/imagesforapp/electrician.png","zone":"成都市 金牛区"},"takemoneylist":[{"takemoneyid":"iunkaslkdfpp3982","time":"2017-05-05 18:55:57","zone":"旌阳区","money":"540.00"},{"takemoneyid":"iunkaslkdfpp3922","time":"2017-05-05 15:12:12","zone":"广汉市","money":"360.00"}]}

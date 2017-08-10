@@ -1,0 +1,214 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_page_top" />
+
+        <LinearLayout
+            android:id="@+id/scan_code_date_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/pm_scan_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="扫码"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/pm_withdraw_deposit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="提现"
+                android:textColor="@color/text_color"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout
+            android:id="@+id/pm_scan_code_top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+           >
+
+            <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
+                android:id="@+id/expandtab_view"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="0.7" />
+
+            <LinearLayout
+                android:id="@+id/pm_scan_code_top_money_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.3"
+                android:gravity="right">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:gravity="right|center_vertical"
+                    android:text="金额"
+                    android:textColor="@color/text_color" />
+
+                <ImageView
+                    android:id="@+id/pm_scan_code_top_money_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_arraw_grayblue" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pm_withdraw_deposit_top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:visibility="gone"
+           >
+
+            <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
+                android:id="@+id/expandtab_view1"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="0.5" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.2"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:gravity="center_vertical"
+                    android:text="地区"
+                    android:textColor="@color/text_color" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_arraw_grayblue"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pm_withdraw_deposit_top_moeny_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.3"
+                android:gravity="right">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:gravity="right|center_vertical"
+                    android:text="金额"
+                    android:textColor="@color/text_color" />
+
+                <ImageView
+                    android:id="@+id/pm_withdraw_deposit_top_moeny_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_arraw_grayblue" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+            android:id="@+id/rl_recyclerview_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="48dp">
+
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scrollbars="none" />
+
+        </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+        <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+            android:id="@+id/rl_recyclerview_refresh1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="48dp"
+            android:visibility="gone">
+            <ListView
+                android:id="@+id/listview1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scrollbars="none" />
+
+        </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/pm_withdraw_deposit_moeny_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="#ED8539"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提现金额"
+            android:textColor="@color/white"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+            <TextView
+                style="@style/money_logo_style"
+                android:textSize="10sp"
+                android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/pm_withdraw_deposit_moeny"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15"
+                android:textColor="@color/white"
+               android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</RelativeLayout>

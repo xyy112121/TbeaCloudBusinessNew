@@ -129,12 +129,12 @@ public class ScanCodeAction extends BaseAction {
     }
 
     /**
-     * 扫描详情
+     * 扫码详情
      */
     public ScanCodeInfoResponseModel getScanCodeInfo(String id) throws Exception {
         ScanCodeInfoResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new BasicNameValuePair("qrcodeactivityid", id));
+        pairs.add(new BasicNameValuePair("qrcode", id));
         String result = sendRequest("TBEAYUN004002009000", pairs);
         model = gson.fromJson(result, ScanCodeInfoResponseModel.class);
         return model;

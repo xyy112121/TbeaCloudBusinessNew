@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
@@ -47,18 +49,20 @@ public class PersonManageViewActivity extends BaseActivity {
     PersonManageItemView mOrderingserviceinfoView;
     @BindView(R.id.pm_view_commodityorderinfo)
     PersonManageItemView mCommodityorderinfoView;
-    @BindView(R.id.pm_view_logininfo)
-    PersonManageItemView mLogininfoView;
     @BindView(R.id.pm_withdrawal_history_view_starlevel)
     StarBar mStarlevelView;
     @BindView(R.id.pm_withdrawal_history_view_workyears)
     TextView mWorkyearsView;
+    @BindView(R.id.pm_view_logininfo)
+    TextView mLogininfoView;
+    @BindView(R.id.pm_view_socialinfo)
+    PersonManageItemView mSocialinfoView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plumber_manage_person_manage);
-        StatusBarUtil.setTranslucent(this,0);
+        StatusBarUtil.setTranslucent(this, 0);
         ButterKnife.bind(this);
         getData();
         listener();
@@ -115,7 +119,7 @@ public class PersonManageViewActivity extends BaseActivity {
             mAddressView.setText(model.address);
             mFansnumberView.setText("粉丝:" + model.fansnumber);
             mWorkyearsView.setText("工龄:" + model.workyears);
-            mStarlevelView.setStarMark(model.starlevel);;
+            mStarlevelView.setStarMark(model.starlevel);
         }
 
         if (obj.rebatescaninfo != null) {
@@ -129,8 +133,12 @@ public class PersonManageViewActivity extends BaseActivity {
         }
 
         if (obj.logininfo != null) {
-            mLogininfoView.setText4(obj.logininfo.logintimes);
-            mLogininfoView.setText5(obj.logininfo.totlelogintime);
+           mLogininfoView.setText(obj.logininfo.lastloginaddr);
+        }
+
+        if(obj.socialinfo != null){
+            mSocialinfoView.setText4(obj.socialinfo.fansnumber);
+            mSocialinfoView.setText5(obj.socialinfo.focusnumber);
         }
 
         if (obj.electricianmeetingattendinfo != null) {
@@ -179,7 +187,7 @@ public class PersonManageViewActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.pm_view_rebatescaninfo, R.id.pm_view_electricianmeetingattendinfo, R.id.pm_view_orderingserviceinfo, R.id.pm_view_commodityorderinfo, R.id.pm_view_logininfo})
+    @OnClick({R.id.pm_view_rebatescaninfo, R.id.pm_view_electricianmeetingattendinfo, R.id.pm_view_orderingserviceinfo, R.id.pm_view_commodityorderinfo, R.id.pm_view_logininfo_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.pm_view_rebatescaninfo:
@@ -193,10 +201,10 @@ public class PersonManageViewActivity extends BaseActivity {
                 break;
             case R.id.pm_view_commodityorderinfo:
                 break;
-            case R.id.pm_view_logininfo:
+            case R.id.pm_view_logininfo_layout:
                 //登录统计
-                 intent = new Intent(mContext, PlumberManageSignHistoryListActivity.class);
-                intent.putExtra("id",getIntent().getStringExtra("id"));
+                intent = new Intent(mContext, PlumberManageSignHistoryListActivity.class);
+                intent.putExtra("id", getIntent().getStringExtra("id"));
                 startActivity(intent);
                 break;
         }

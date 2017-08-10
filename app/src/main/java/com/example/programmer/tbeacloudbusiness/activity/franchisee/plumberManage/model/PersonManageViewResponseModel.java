@@ -16,6 +16,7 @@ public class PersonManageViewResponseModel extends BaseResponseModel {
         public ElectricianMeetingAttendInfo electricianmeetingattendinfo;
         public ElectricianBaseInfo electricianbaseinfo;
         public CommodityOrderInfo commodityorderinfo;
+        public SocialInfo socialinfo;
 
     }
 
@@ -58,6 +59,11 @@ public class PersonManageViewResponseModel extends BaseResponseModel {
     public class RebateScanInfo {
         public String takemoneyforoneyear;
         public String takemoneyforthreemonth;
+    }
+
+    public class SocialInfo{
+        public String fansnumber;
+        public String focusnumber;
     }
 
 }

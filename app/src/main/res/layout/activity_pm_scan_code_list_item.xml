@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="88dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        >
+
+        <TextView
+            android:id="@+id/pm_scan_code_item_scantime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="left|center"
+            android:text="2017-05-01\n 18:55:55"
+            android:textColor="@color/tab_text_normal"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/pm_scan_code_item_state"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:text="5.00"
+            android:textColor="@color/tab_text_normal"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:gravity="center|right"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="center">
+            <TextView
+                style="@style/money_logo_style"
+                android:textSize="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+               />
+            <TextView
+                android:id="@+id/pm_scan_code_item_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="654"
+                android:textColor="@color/tab_text_normal"
+                />
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+</FrameLayout>

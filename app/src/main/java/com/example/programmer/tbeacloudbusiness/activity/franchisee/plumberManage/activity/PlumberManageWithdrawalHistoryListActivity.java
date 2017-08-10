@@ -18,7 +18,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.action.PlumberManageAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmWithdrawalHistoryListResonseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmWithdrawalHistoryListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.DateSelectActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
@@ -61,6 +61,7 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
     private String electricianid, startdate, enddate, orderitem, order;
     private int mPage = 1;
     private int mPagesiz = 10;
+    PmWithdrawalHistoryListResponseModel model;
 
 
     @Override
@@ -96,6 +97,15 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
                     moneyView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mRefreshLayout.beginRefreshing();
+            }
+        });
+
+        findViewById(R.id.pm_withdrawal_history_list_person).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(mContext, PlumberManageWithdrawalHistoryViewActivity.class);
+//                intent.putExtra("id", model.getData().getElectricianinfo().getUserid());
+//                startActivity(intent);
             }
         });
     }
@@ -134,12 +144,12 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
                     mRefreshLayout.endLoadingMore();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            PmWithdrawalHistoryListResonseModel model = (PmWithdrawalHistoryListResonseModel) msg.obj;
+                            PmWithdrawalHistoryListResponseModel model = (PmWithdrawalHistoryListResponseModel) msg.obj;
                             if (model != null) {
                                 if (model.isSuccess() && model.getData() != null) {
                                     mAdapter.addAll(model.getData().getTakemoneylist());
                                     if(model.getData().getElectricianinfo() != null){
-                                        PmWithdrawalHistoryListResonseModel.DataBean.ElectricianinfoBean info = model.getData().getElectricianinfo();
+                                        PmWithdrawalHistoryListResponseModel.DataBean.ElectricianinfoBean info = model.getData().getElectricianinfo();
                                         ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath()+info.getThumbpicture(),mHeadView);
                                         ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath()+info.getPersontypeicon(),mPersonjobtitleView);
                                         mNameView.setText(info.getPersonname());
@@ -162,7 +172,7 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
                 public void run() {
                     try {
                         PlumberManageAction action = new PlumberManageAction();
-                        PmWithdrawalHistoryListResonseModel model = action.getPmWithdrawalHistoryList(electricianid, startdate, enddate, orderitem, order, mPage++, mPagesiz);
+                       model = action.getPmWithdrawalHistoryList(electricianid, startdate, enddate, orderitem, order, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -211,7 +221,7 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
 
     public class MyAdapter extends BaseAdapter {
 
-        public List<PmWithdrawalHistoryListResonseModel.DataBean.TakemoneylistBean> mList = new ArrayList<>();
+        public List<PmWithdrawalHistoryListResponseModel.DataBean.TakemoneylistBean> mList = new ArrayList<>();
 
 
         @Override
@@ -242,7 +252,7 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            final PmWithdrawalHistoryListResonseModel.DataBean.TakemoneylistBean obj = mList.get(position);
+            final PmWithdrawalHistoryListResponseModel.DataBean.TakemoneylistBean obj = mList.get(position);
             holder.mMoneyView.setText(obj.getMoney());
             holder.mTimeView.setText(obj.getTime());
             holder.mZoneView.setText(obj.getZone());
@@ -266,7 +276,7 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
             }
         }
 
-        public void addAll(List<PmWithdrawalHistoryListResonseModel.DataBean.TakemoneylistBean> list) {
+        public void addAll(List<PmWithdrawalHistoryListResponseModel.DataBean.TakemoneylistBean> list) {
             mList.addAll(list);
             notifyDataSetChanged();
         }

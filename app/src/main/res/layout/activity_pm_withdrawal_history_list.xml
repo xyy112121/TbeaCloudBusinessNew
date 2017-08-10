@@ -6,9 +6,11 @@
 
     <include layout="@layout/activity_page_top" />
     <RelativeLayout
+        android:id="@+id/pm_withdrawal_history_list_person"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp">
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
         <include layout="@layout/activity_person_layout2" />
     </RelativeLayout>
 
