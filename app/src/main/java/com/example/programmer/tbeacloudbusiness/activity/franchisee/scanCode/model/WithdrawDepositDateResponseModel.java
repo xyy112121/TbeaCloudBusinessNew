@@ -18,6 +18,10 @@ public class WithdrawDepositDateResponseModel extends BaseResponseModel {
     }
 
     public class TakeMoney {
+        public String companyname;
+        public String payeeid;
+        public String personname;
+        public String thumbpicture;
         public String money;
         public String payeename;
         public String persontypeicon;

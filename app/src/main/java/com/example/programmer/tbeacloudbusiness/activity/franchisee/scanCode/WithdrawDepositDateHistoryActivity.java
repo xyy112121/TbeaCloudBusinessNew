@@ -40,7 +40,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 提现历史
  */
 
-public class WithdrawDepositDateHistoryActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class    WithdrawDepositDateHistoryActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;

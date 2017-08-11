@@ -53,7 +53,7 @@
                 <ImageView
                     android:id="@+id/person_info_personjobtitle"
                     android:layout_width="40dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
                     android:layout_gravity="center"
                     android:scaleType="centerInside"
                     android:layout_marginLeft="5dp"/>

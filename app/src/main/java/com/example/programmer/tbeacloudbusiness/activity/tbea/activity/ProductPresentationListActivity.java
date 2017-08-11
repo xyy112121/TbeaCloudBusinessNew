@@ -190,7 +190,6 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
                 TextView timeTv = (TextView) findViewById(R.id.product_presentation_time_tv);
                 Drawable drawable = null;
                 /// 这一步必须要做,否则不会显示.
-
                 if ("asc".equals(timeTv.getTag())) {//正
                      drawable= getResources().getDrawable(R.drawable.icon_arraw_bluegray);
                     timeTv.setTag("desc");

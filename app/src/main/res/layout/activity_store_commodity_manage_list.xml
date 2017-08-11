@@ -31,7 +31,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:gravity="center"
-                android:src="@drawable/icon_arraw_bluegray" />
+                android:src="@drawable/icon_arraw_grayblue" />
         </LinearLayout>
     </LinearLayout>
 

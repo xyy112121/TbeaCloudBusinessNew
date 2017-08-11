@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.scanCode.activity;
+package com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,12 +17,10 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.scanCode.action.DBScanCodeAction;
-import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.scanCode.model.DBScanCodeMainResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.action.DBScanCodeAction;
+import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.model.DBScanCodeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeCreateActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeRebateListActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action.ScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
@@ -38,7 +36,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 扫码返利首页-分销商
  */
 
-public class DistributorScanCodeMainListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
+public class DbScanCodeMainListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private View mHeadView;
@@ -71,7 +69,7 @@ public class DistributorScanCodeMainListActivity extends BaseActivity implements
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(mContext,WithdrawDepositDateActivity.class);
+                intent.setClass(mContext,DbWithdrawDepositDateActivity.class);
                 startActivity(intent);
             }
         });
@@ -80,19 +78,11 @@ public class DistributorScanCodeMainListActivity extends BaseActivity implements
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(mContext,ScanCodeRebateListActivity.class);
+                intent.setClass(mContext,DbScanCodeRebateListActivity.class);
                 startActivity(intent);
             }
         });
 
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent();
-//                intent.setClass(mContext,WithdrawDepositDateHistoryActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     /**

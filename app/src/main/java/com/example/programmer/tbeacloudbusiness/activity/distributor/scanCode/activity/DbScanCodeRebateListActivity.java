@@ -1,16 +1,18 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode;
+package com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,7 +21,9 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.action.DBScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.RegionSelectActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateHistoryActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action.ScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeRebateListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
@@ -33,14 +37,16 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 提现排名
+ * 提现排名-分销商
  */
 
-public class ScanCodeRebateListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class DbScanCodeRebateListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;
@@ -62,7 +68,7 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
 
     private void initView() {
         mListView = (ListView) findViewById(R.id.listview);
-        mAdapter = new MyAdapter(mContext);
+        mAdapter = new MyAdapter(mContext, R.layout.activity_db_scan_code_rebate_list_item);
         mListView.setAdapter(mAdapter);
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
@@ -122,7 +128,7 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
                 @Override
                 public void run() {
                     try {
-                        ScanCodeAction action = new ScanCodeAction();
+                        DBScanCodeAction action = new DBScanCodeAction();
                         ScanCodeRebateListResponseModel model = action.getWithdrawDepositDateList(mRegionId, mOrderitem, mOrder, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
@@ -156,7 +162,7 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-        mAdapter.removeAll();
+        mAdapter.clear();
         mPage = 1;
         getListData();
     }
@@ -184,6 +190,7 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
         }
     }
 
+
     private void initDate() {
         try {
             mRegionLists = new ArrayList<>();
@@ -195,82 +202,66 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
         }
     }
 
-    private class MyAdapter extends BaseAdapter {
-        /**
-         * android 上下文环境
-         */
-        private Context context;
+    class MyAdapter extends ArrayAdapter<ScanCodeRebateListResponseModel.TakeMoneyranking> {
+        int resourceId;
 
-        public List<ScanCodeRebateListResponseModel.TakeMoneyranking> mList = new ArrayList<>();
-
-        /**
-         * 构造函数
-         *
-         * @param context android上下文环境
-         */
-        public MyAdapter(Context context) {
-            this.context = context;
+        public MyAdapter(@NonNull Context context, @LayoutRes int resource) {
+            super(context, resource);
+            resourceId = resource;
         }
 
-        @Override
-        public int getCount() {
-            return mList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater layoutInflater = (LayoutInflater) context
-                    .getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            FrameLayout view = (FrameLayout) layoutInflater.inflate(
-                    R.layout.activity_scan_code_rebate_list_item, null);
-            final ScanCodeRebateListResponseModel.TakeMoneyranking obj = mList.get(position);
-            CircleImageView headView = (CircleImageView) view.findViewById(R.id.person_info_head);
-            ImageView jobImageView = (ImageView) view.findViewById(R.id.person_info_personjobtitle);
-            ((TextView) view.findViewById(R.id.person_info_name)).setText(obj.personname);
-            ((TextView) view.findViewById(R.id.scanCode_rebate_money)).setText(obj.personorcompany);
-            ((TextView) view.findViewById(R.id.scanCode_rebate_zone)).setText(obj.zone);
-            String url = MyApplication.instance.getImgPath();
-            ImageLoader.getInstance().displayImage(url + obj.thumbpicture, headView);
-            ImageLoader.getInstance().displayImage(url + obj.persontypeicon, jobImageView);
-            view.setOnClickListener(new View.OnClickListener() {
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(resourceId, null);
+                holder = new ViewHolder(convertView);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            final ScanCodeRebateListResponseModel.TakeMoneyranking obj = getItem(position);
+            ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, holder.mHeadView);
+            ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, holder.mPersonjobtitleView);
+            holder.mMoneyView.setText(obj.totlemoney);
+            holder.mNameView.setText(obj.personname);
+            holder.mRightView.setVisibility(View.GONE);
+            holder.mZoneView.setText(obj.zone);
+            holder.mCompanynameView.setText(obj.personorcompany);
+
+            convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext,WithdrawDepositDateHistoryActivity.class);
-                    intent.putExtra("personOrCompany",obj.personorcompany);
-                    intent.putExtra("payeeId ",obj.electricianid);
+                    Intent intent = new Intent(mContext, WithdrawDepositDateHistoryActivity.class);
+                    intent.putExtra("personOrCompany", obj.personorcompany);
+                    intent.putExtra("payeeId ", obj.electricianid);
                     startActivity(intent);
                 }
             });
 
-            return view;
+            return convertView;
         }
 
+        class ViewHolder {
+            @BindView(R.id.person_info_head)
+            CircleImageView mHeadView;
+            @BindView(R.id.person_info_name)
+            TextView mNameView;
+            @BindView(R.id.person_info_personjobtitle)
+            ImageView mPersonjobtitleView;
+            @BindView(R.id.person_info_companyname)
+            TextView mCompanynameView;
+            @BindView(R.id.person_info_right)
+            ImageView mRightView;
+            @BindView(R.id.scanCode_rebate_zone)
+            TextView mZoneView;
+            @BindView(R.id.scanCode_rebate_money)
+            TextView mMoneyView;
 
-        public void remove(int index) {
-            if (index > 0) {
-                mList.remove(index);
-                notifyDataSetChanged();
+            ViewHolder(View view) {
+                ButterKnife.bind(this, view);
             }
-        }
-
-        public void addAll(List<ScanCodeRebateListResponseModel.TakeMoneyranking> list) {
-            mList.addAll(list);
-            notifyDataSetChanged();
-        }
-
-        public void removeAll() {
-            mList.clear();
-            notifyDataSetChanged();
         }
     }
 }

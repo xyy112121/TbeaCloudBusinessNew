@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.rebateAccount.activity.MyRebateAccountlistActivity;
+import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.SetActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;

@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.scanCode.model;
+package com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.model;
 
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 

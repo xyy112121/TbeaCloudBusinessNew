@@ -153,10 +153,12 @@
         <activity android:name=".activity.franchisee.storeManage.ShopDynamicListActivity" />
         <activity android:name=".activity.franchisee.storeManage.ShopDynamicAddActivity" />
 
-        <activity android:name=".activity.distributor.rebateAccount.activity.rebateAccount.activity.MyRebateAccountlistActivity"/>
-        <activity android:name=".activity.distributor.rebateAccount.activity.rebateAccount.activity.RebateAccountWithdrawCashActivity"/>
-        <activity android:name=".activity.distributor.rebateAccount.activity.rebateAccount.activity.WithdrawCashViewActivity"/>
-         <activity android:name=".activity.distributor.rebateAccount.activity.scanCode.activity.DistributorScanCodeMainListActivity"/>
+        <activity android:name=".activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity"/>
+        <activity android:name=".activity.distributor.rebateAccount.activity.RebateAccountWithdrawCashActivity"/>
+        <activity android:name=".activity.distributor.rebateAccount.activity.WithdrawCashViewActivity"/>
+         <activity android:name=".activity.distributor.scanCode.activity.DbScanCodeMainListActivity"/>
+         <activity android:name=".activity.distributor.scanCode.activity.DbWithdrawDepositDateActivity"/>
+         <activity android:name=".activity.distributor.scanCode.activity.DbScanCodeRebateListActivity"/>
 
         <activity android:name=".activity.companyPersonnel.activity.PlumberMeetingListActivity"/>
         <activity android:name=".activity.companyPersonnel.activity.MeetingPrepareActivity"/>
