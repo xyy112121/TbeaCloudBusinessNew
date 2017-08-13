@@ -7,7 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/scan_code_history_scan_code"
             android:layout_height="45dp"
             android:text="数量"
             android:textColor="@color/black"
@@ -17,8 +16,8 @@
             android:gravity="center_vertical"
             />
         <TextView
+            android:id="@+id/cp_franchiser_list_number"
             android:layout_height="45dp"
-            android:text="2"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:layout_width="wrap_content"
@@ -31,17 +30,10 @@
 
     <View style="@style/horizontal_view" />
 
-    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
-        android:id="@+id/rl_recyclerview_refresh"
+    <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/listview"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:scrollbars="none" />
-
-    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none" />
 </LinearLayout>

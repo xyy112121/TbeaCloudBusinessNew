@@ -7,6 +7,7 @@
     <include layout="@layout/activity_page_top" />
 
     <TextView
+        android:id="@+id/cp_meeting_prepare_plan_tv"
         android:layout_width="wrap_content"
         android:layout_height="49dp"
         android:layout_marginLeft="15dp"
@@ -17,7 +18,7 @@
     <View style="@style/horizontal_view" />
 
     <EditText
-        android:id="@+id/multi_row_value"
+        android:id="@+id/cp_meeting_prepare_plan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -35,6 +36,7 @@
         android:background="@color/interval_color" />
 
     <RelativeLayout style="@style/my_text_layout"
+        android:visibility="gone"
        >
 
         <TextView

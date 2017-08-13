@@ -34,23 +34,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 app:PublishTextRowViewIsBottomLineShow="true"
-                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewIsSelect="false"
                 app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewState="read"
                 app:PublishTextRowViewText="举办时间"
-                app:PublishTextRowViewHiht="请选择"
-                app:PublishTextRowViewTextColor="@color/text_color"
-                app:PublishTextRowViewRightTextColor="@color/text_color"/>
-
-            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
-                android:id="@+id/cp_meeting_prepare_hold_company"
-                android:layout_width="match_parent"
-                android:layout_height="49dp"
-                app:PublishTextRowViewIsBottomLineShow="false"
-                app:PublishTextRowViewIsSelect="true"
-                app:PublishTextRowViewLeftWidth="100dp"
-                app:PublishTextRowViewState="read"
-                app:PublishTextRowViewText="举办单位"
                 app:PublishTextRowViewHiht="请选择"
                 app:PublishTextRowViewTextColor="@color/text_color"
                 app:PublishTextRowViewRightTextColor="@color/text_color"/>
@@ -60,7 +47,7 @@
                 style="@style/my_text_layout"
                 android:layout_height="wrap_content"
                 android:minHeight="55dp"
-                android:visibility="gone"
+
                 >
                 <LinearLayout
                     style="@style/my_text_layout"
@@ -84,12 +71,14 @@
 
                 </LinearLayout>
                 <ImageView
+                    android:id="@+id/cp_meeting_prepare_hold_company_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_arrow_right"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="8dp"
+                    android:visibility="gone"
                     />
             </RelativeLayout>
 
@@ -100,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 app:PublishTextRowViewIsBottomLineShow="true"
-                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewIsSelect="false"
                 app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewState="read"
                 app:PublishTextRowViewText="举办地点"
@@ -118,8 +107,9 @@
                 app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewText="会议状态"
                 app:PublishTextRowViewTextColor="@color/text_color"
-                android:visibility="gone"
-                app:PublishTextRowViewRightTextColor="@color/text_color"/>
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewRightTextColor="@color/text_color"
+              />
 
             <View
                 style="@style/horizontal_view"
@@ -156,8 +146,8 @@
                 app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewState="read"
                 app:PublishTextRowViewText="参与人员"
-                app:PublishTextRowViewGravity="1"
                 app:PublishTextRowViewTextColor="@color/text_color"
+                app:PublishTextRowViewGravity="1"
                 app:PublishTextRowViewRightTextColor="@color/text_color"/>
 
             <View
@@ -176,6 +166,46 @@
                 app:PublishTextRowViewText="会议安排"
                 app:PublishTextRowViewTextColor="@color/text_color"
                 app:PublishTextRowViewRightTextColor="@color/text_color"/>
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/cp_meeting_prepare_summary"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="会议纪要"
+                app:PublishTextRowViewTextColor="@color/text_color"
+                app:PublishTextRowViewRightTextColor="@color/text_color"/>
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/cp_meeting_prepare_gallery"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="现场图片"
+                app:PublishTextRowViewTextColor="@color/text_color"
+                app:PublishTextRowViewRightTextColor="@color/text_color"/>
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="10dp"
+                android:background="@color/interval_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/cp_meeting_prepare_sign"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="会议签到"
+                app:PublishTextRowViewTextColor="@color/text_color"
+                app:PublishTextRowViewRightTextColor="@color/text_color"/>
+
 
             <Button
                 android:id="@+id/cp_meeting_prepare_finish"

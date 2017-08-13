@@ -9,15 +9,18 @@
         android:id="@+id/menu1"
         android:layout_width="120dp"
         android:layout_height="40dp"
-        android:gravity="center">
+        android:gravity="center"
+        >
 
         <ImageView
+            android:id="@+id/menu1_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:src="@drawable/icon_tbea_message" />
 
         <TextView
+            android:id="@+id/menu1_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -37,12 +40,14 @@
         >
 
         <ImageView
+            android:id="@+id/menu2_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:src="@drawable/icon_tbea_home" />
 
         <TextView
+            android:id="@+id/menu2_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -64,12 +69,14 @@
         android:visibility="gone">
 
         <ImageView
+            android:id="@+id/menu3_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:src="@drawable/icon_tbea_home" />
 
         <TextView
+            android:id="@+id/menu3_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

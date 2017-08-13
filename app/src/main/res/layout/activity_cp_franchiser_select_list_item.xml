@@ -19,7 +19,10 @@
             <include layout="@layout/activity_person_layout2" />
         </LinearLayout>
 
-        <CheckBox style="@style/select_ck_style" />
+        <CheckBox
+            android:id="@+id/cp_franchiser_select_item_ck"
+            style="@style/select_ck_style"
+            />
 
     </LinearLayout>
 

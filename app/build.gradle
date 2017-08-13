@@ -67,5 +67,6 @@ dependencies {
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.0'
     compile 'com.jakewharton:butterknife:8.7.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
+    compile 'com.contrarywind:Android-PickerView:3.2.6'
 
 }

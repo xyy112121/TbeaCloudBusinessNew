@@ -36,6 +36,7 @@
         <attr name="PublishTextRowViewHiht" format="string"/>
         <attr name="PublishTextRowViewTextSize" format="dimension"/>
         <attr name="PublishTextRowViewTextColor" format="color"/>
+        <attr name="PublishTextRowViewRightTextColor" format="color"/>
         <attr name="PublishTextRowViewIsBottomLineShow" format="boolean"/>
         <attr name="PublishTextRowViewIsSelect" format="boolean"/>
         <attr name="PublishTextRowViewLeftWidth" format="dimension"/>

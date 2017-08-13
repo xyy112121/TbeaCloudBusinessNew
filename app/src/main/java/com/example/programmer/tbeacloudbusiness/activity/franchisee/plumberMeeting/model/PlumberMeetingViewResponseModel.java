@@ -1,31 +1,56 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model;
 
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 /**
  *会议详细
  */
 
 public class PlumberMeetingViewResponseModel extends BaseResponseModel {
+    public DataBean data;
 
-    public PlumberMeetingView data;
+    public static class DataBean {
+        public MeetingbaseinfoBean meetingbaseinfo;//基本信息
+        public MeetingoriginatorinfoBean meetingoriginatorinfo;//发起人
+        public ParticipantlistBean participantlist;//参与人员
+        public MeetingInfo meetinginfo;//会议信息
+        public MeetingSignInfo meetingsigninfo;//会议签到
+        public List<OrganizeCompany> organizecompanylist;//举办单位
 
-    public class  PlumberMeetingView{
-      public  MeetingBaseInfo meetingbaseinfo;
-      public  OrganizeCompany organizecompanylist;
-      public  MeetingOriginatorInfo meetingoriginatorinfo;
-      public  Participant participantlist;
-      public  MeetingInfo meetinginfo;
-      public  MeetingSignInfo meetingsigninfo;
+        public  class MeetingbaseinfoBean {
+            public String id;
+            public String meetingcode;
+            public String meetingtime;
+            public String meetingstarttime;
+            public String meetingendtime;
+            public String meetingprovince;
+            public String meetingcity;
+            public String meetingzone;
+            public String meetingaddr;
+            public String meetingplace;
+            public String meetingstatus;
+            public String participantlist;
+            public String originatoruserid;
+        }
+
+        public  class MeetingoriginatorinfoBean {
+            public String userid;
+            public String headpicture;
+            public String name;
+            public String company;
+            public String jobposition;
+            public String persontypeicon;
+        }
+
+        public  class ParticipantlistBean {
+            public int participantnumber;
+            public String participantlist;
+        }
     }
 
-    public class MeetingBaseInfo{
-        public String id;
-        public String meetingcode;
-        public String meetingtime;
-        public String meetingplace;
-        public String meetingstatus;
-    }
 
     public class OrganizeCompany {
         public String companyid;
@@ -42,10 +67,6 @@ public class PlumberMeetingViewResponseModel extends BaseResponseModel {
         public String company;
         public String jobposition;
         public String persontypeicon;
-    }
-
-    public  class Participant{
-        public String participantnumber;
     }
 
     public  class MeetingInfo{

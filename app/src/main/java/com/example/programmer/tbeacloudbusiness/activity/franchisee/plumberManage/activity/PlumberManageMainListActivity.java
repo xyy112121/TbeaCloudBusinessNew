@@ -1,6 +1,5 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +14,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -50,19 +50,24 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 public class PlumberManageMainListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     @BindView(R.id.pm_main_list_search_text)
     EditText mSearchTextView;
+    @BindView(R.id.pm_main_list_top_layout)
+    LinearLayout mTopLayout;
+    @BindView(R.id.pm_main_list_top_layout1)
+    LinearLayout mTopLayout1;
 
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;
     private int mPage = 1;
     private int mPagesiz = 10;
-    private Context mContext;
 
     private ExpandPopTabView expandTabView;
     private List<KeyValueBean> mRegionLists;//区域
     private PopOneListView mUserTypeView;
 
     private String mName, mElectricianownertypeid, mZoneid, mOrderItem, mOrder;
+    ImageView moneyView;
+    LinearLayout moenyLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,12 +76,11 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
         initTopbar("水电工列表");
         ButterKnife.bind(this);
         initView();
-        getUserTypeList();
+
     }
 
     private void initView() {
 
-        mContext = this;
         mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter();
         mListView.setAdapter(mAdapter);
@@ -86,10 +90,23 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
         mRefreshLayout.beginRefreshing();
         initDate();
 
-        expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
-        addUserTypeItem(expandTabView, null, "", "用户");
-        addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
 
+        if (!"distributor".equals(getIntent().getStringExtra("type"))) {//总经销商
+            expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
+            addUserTypeItem(expandTabView, null, "", "用户");
+            mTopLayout.setVisibility(View.VISIBLE);
+            mTopLayout1.setVisibility(View.GONE);
+            moneyView = getViewById(R.id.pm_main_list_money_image);
+            moenyLayout = getViewById(R.id.pm_main_list_money_image_layout);
+            getUserTypeList();
+        } else {
+            expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view1);
+            mTopLayout.setVisibility(View.GONE);
+            mTopLayout1.setVisibility(View.VISIBLE);
+            moneyView = getViewById(R.id.pm_main_list_money_image1);
+            moenyLayout = getViewById(R.id.pm_main_list_money_image_layout1);
+        }
+        addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
 
 
         mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -105,17 +122,17 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
             }
         });
 
-        final ImageView timeView = getViewById(R.id.pm_main_list_money_image);
-        findViewById(R.id.pm_main_list_money_image_layout).setOnClickListener(new View.OnClickListener() {
+
+       moenyLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mOrderItem = "money";
                 if ("".equals(mOrderItem) || "asc".equals(mOrderItem)) {//升
                     mOrderItem = "desc";
-                    timeView.setImageResource(R.drawable.icon_arraw_grayblue);
+                    moneyView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
                     mOrderItem = "asc";
-                    timeView.setImageResource(R.drawable.icon_arraw_bluegray);
+                    moneyView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mOrder = mOrderItem;
                 mOrderItem = "money";
@@ -327,7 +344,7 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
 
 
                     Intent intent = new Intent(mContext, PlumberManageWithdrawalHistoryListActivity.class);
-                    intent.putExtra("id",obj.userid);
+                    intent.putExtra("id", obj.userid);
                     startActivity(intent);
                 }
             });

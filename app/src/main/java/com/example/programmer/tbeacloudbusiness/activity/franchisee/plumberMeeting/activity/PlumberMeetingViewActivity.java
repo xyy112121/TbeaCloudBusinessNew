@@ -52,16 +52,6 @@ public class PlumberMeetingViewActivity extends BaseActivity {
     TextView mMeetingpicturenumberView;
     @BindView(R.id.pm_view_meetingsigninfo)
     TextView mMeetingsigninfoView;
-    @BindView(R.id.person_info_head)
-    CircleImageView mCompanyPersonHeadView;
-    @BindView(R.id.person_info_name)
-    TextView mCompanyPersonNameView;
-    @BindView(R.id.person_info_personjobtitle)
-    ImageView mCompanyPersonPersonjobtitleView;
-    @BindView(R.id.person_info_companyname)
-    TextView mCompanyPersonCompanyNameView;
-    @BindView(R.id.person_info_right)
-    ImageView mCompanyPersonInfoRightView;
 
 
     @Override
@@ -138,7 +128,7 @@ public class PlumberMeetingViewActivity extends BaseActivity {
         }
     }
 
-    public void setData(PlumberMeetingViewResponseModel.PlumberMeetingView obj) {
+    public void setData(PlumberMeetingViewResponseModel.DataBean obj) {
         String path = MyApplication.instance.getImgPath();
         if (obj.meetingbaseinfo != null) {
             mMeetingcodeView.setText(obj.meetingbaseinfo.meetingcode);
@@ -147,13 +137,22 @@ public class PlumberMeetingViewActivity extends BaseActivity {
             mMeetingstatusView.setText(obj.meetingbaseinfo.meetingstatus);
         }
 
+        //举办单位
         if (obj.organizecompanylist != null) {
-            PlumberMeetingViewResponseModel.OrganizeCompany model = obj.organizecompanylist;
-            ImageLoader.getInstance().displayImage(path + model.companymasterheadpicture, mCompanyPersonHeadView);
-            mCompanyPersonNameView.setText(model.companymastername);
-            ImageLoader.getInstance().displayImage(path + model.companypersontypeicon, mCompanyPersonPersonjobtitleView);
-            mCompanyPersonCompanyNameView.setText(model.companyname);
-            mCompanyPersonInfoRightView.setVisibility(View.GONE);
+            for (PlumberMeetingViewResponseModel.OrganizeCompany item : obj.organizecompanylist) {
+                View pernsonLayout = getLayoutInflater().inflate(R.layout.activity_person_layout2, null);
+                CircleImageView headView = (CircleImageView) pernsonLayout.findViewById(R.id.person_info_head);
+                ImageView typwView = (ImageView) pernsonLayout.findViewById(R.id.person_info_personjobtitle);
+                ImageView rightView = (ImageView) pernsonLayout.findViewById(R.id.person_info_right);
+                TextView nameView = (TextView) pernsonLayout.findViewById(R.id.person_info_name);
+                TextView companyNameView = (TextView) pernsonLayout.findViewById(R.id.person_info_companyname);
+                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.companymasterheadpicture, headView);
+                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.companypersontypeicon, typwView);
+                nameView.setText(item.companymastername);
+                companyNameView.setText(item.companyname);
+                rightView.setVisibility(View.GONE);
+                mOrganizeCompanyView.addView(pernsonLayout);
+            }
         }
 
         if (obj.meetingoriginatorinfo != null) {
@@ -163,7 +162,7 @@ public class PlumberMeetingViewActivity extends BaseActivity {
             ImageView mHodePersonPersonjobtitleView = (ImageView) mMeetingoriginatorInfoView.findViewById(R.id.person_info_personjobtitle);
             ImageView mHodePersonInfoRightView = (ImageView) mMeetingoriginatorInfoView.findViewById(R.id.person_info_right);
 
-            PlumberMeetingViewResponseModel.MeetingOriginatorInfo model = obj.meetingoriginatorinfo;
+            PlumberMeetingViewResponseModel.DataBean.MeetingoriginatorinfoBean model = obj.meetingoriginatorinfo;
             ImageLoader.getInstance().displayImage(path + model.headpicture, mHodePersonHeadView);
             ImageLoader.getInstance().displayImage(path + model.persontypeicon, mHodePersonPersonjobtitleView);
             mHodePersonNameView.setText(model.name);

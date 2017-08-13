@@ -26,7 +26,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.activity.PlumberMeetingListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.activity.PlumberMeetingListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.activity.DbScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingMainListActivity;
@@ -191,10 +191,7 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                ToastUtil.showMessage("aaaaa");
-                //公司人员下的会议列表
-                Intent intent = new Intent(getActivity(), PlumberMeetingListActivity.class);
-                startActivity(intent);
+//
             }
         });
 
@@ -286,15 +283,26 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
                     } else if ("tbea".equals(obj.moduleid)) {
                         //特变电工
                         ((MainActivity) getActivity()).showTbMaianFragment();
-                    } else if ("shuidiangongguanli".equals(obj.moduleid)) {
+                    } else if ("shuidiangongguanli".equals(obj.moduleid)) {//总经销商
                         //水电工管理
-                        startActivity(new Intent(getActivity(), PlumberManageMainListActivity.class));
+                        Intent intent = new Intent(getActivity(),PlumberManageMainListActivity.class);
+                        intent.putExtra("type","");
+                        startActivity(intent);
                     } else if ("shuidiangonghuiyi".equals(obj.moduleid)) {
                         //水电工会议
                         startActivity(new Intent(getActivity(), PlumberMeetingMainListActivity.class));
                     } else if ("shangchengxitong".equals(obj.moduleid)) {
                         //商城管理
                         startActivity(new Intent(getActivity(), StoreManageMainActivity.class));
+                    }else if ("distributor_shuidiangongguanli".equals(obj.moduleid)) {//分销商
+                        //水电工管理
+                        Intent intent = new Intent(getActivity(),PlumberManageMainListActivity.class);
+                        intent.putExtra("type","distributor");
+                        startActivity(intent);
+                    }else if("marketer_shuidiangonghuiyi".equals(obj.moduleid)){
+
+                        //水电工会议
+                        startActivity(new Intent(getActivity(), PlumberMeetingListActivity.class));
                     }
                 }
             });
@@ -409,13 +417,23 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
                         ((MainActivity) getActivity()).showTbMaianFragment();
                     } else if ("shuidiangongguanli".equals(obj.moduleid)) {
                         //水电工管理
-                        startActivity(new Intent(getActivity(), PlumberManageMainListActivity.class));
+                        Intent intent = new Intent(getActivity(),PlumberManageMainListActivity.class);
+                        intent.putExtra("type","");
+                        startActivity(intent);
                     } else if ("shuidiangonghuiyi".equals(obj.moduleid)) {
                         //水电工会议
                         startActivity(new Intent(getActivity(), PlumberMeetingMainListActivity.class));
                     } else if ("shangchengxitong".equals(obj.moduleid)) {
                         //商城管理
                         startActivity(new Intent(getActivity(), StoreManageMainActivity.class));
+                    }else if ("distributor_shaomafanli".equals(obj.moduleid)) {//分销商
+                        //扫码返利
+                        startActivity(new Intent(getActivity(), DbScanCodeMainListActivity.class));
+                    }else if ("distributor_shuidiangongguanli".equals(obj.moduleid)) {//分销商
+                        //水电工管理
+                        Intent intent = new Intent(getActivity(),PlumberManageMainListActivity.class);
+                        intent.putExtra("type","distributor");
+                        startActivity(intent);
                     }
                 }
             });

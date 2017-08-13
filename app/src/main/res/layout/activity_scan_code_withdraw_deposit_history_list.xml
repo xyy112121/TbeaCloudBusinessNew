@@ -36,13 +36,39 @@
     </RelativeLayout>
 
     <View style="@style/horizontal_view" />
-
-    <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
-        android:id="@+id/expandtab_view"
+    <LinearLayout
+        android:id="@+id/scan_code_top_layout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginLeft="15dp" />
+        android:orientation="horizontal">
+        <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
+            android:id="@+id/expandtab_view"
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_height="48dp"
+            android:layout_marginLeft="15dp"
+            />
+        <LinearLayout
+            android:id="@+id/scan_code_top_money_layout"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:gravity="center|right"
+            android:layout_marginRight="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="金额"
+                />
+            <ImageView
+                android:id="@+id/scan_code_top_money_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/icon_arraw_grayblue"/>
+        </LinearLayout>
 
+    </LinearLayout>
     <View style="@style/horizontal_view" />
 
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout

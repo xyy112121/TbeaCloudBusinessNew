@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 水电工会议（经销商下）
+ * 水电工会议（总经销商下）
  */
 
 public class PlumberMeetingAction extends BaseAction {

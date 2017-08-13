@@ -233,7 +233,7 @@ public class DbScanCodeRebateListActivity extends BaseActivity implements BGARef
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, WithdrawDepositDateHistoryActivity.class);
+                    Intent intent = new Intent(mContext, DbWithdrawDepositDateHistoryActivity.class);
                     intent.putExtra("personOrCompany", obj.personorcompany);
                     intent.putExtra("payeeId ", obj.electricianid);
                     startActivity(intent);

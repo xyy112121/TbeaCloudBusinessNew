@@ -25,11 +25,13 @@ public class PublishTextRowView extends LinearLayout {
     private String mHiht;
     private int mTextSize;
     private int mTextColor;
+    private int mRightTextColor;
     private boolean mIsTopLineShow;
     private boolean mIsBottomLineShow;
     private boolean mIsSelect;//true 是，
     private TextView mValueView;
     private ClearEditText mValueView2;
+    private ImageView mRightView;
     private int mWidth;
     private int mGravity;
     private int mState;
@@ -49,6 +51,7 @@ public class PublishTextRowView extends LinearLayout {
         mHiht = a.getString(R.styleable.PublishTextRowView_PublishTextRowViewHiht);
         mIsBottomLineShow = a.getBoolean(R.styleable.PublishTextRowView_PublishTextRowViewIsBottomLineShow, true);
         mTextColor = a.getColor(R.styleable.PublishTextRowView_PublishTextRowViewTextColor, ContextCompat.getColor(context, R.color.tab_text_normal));
+        mRightTextColor = a.getColor(R.styleable.PublishTextRowView_PublishTextRowViewRightTextColor, ContextCompat.getColor(context, R.color.tab_text_normal));
         mTextSize = a.getDimensionPixelSize(R.styleable.PublishTextRowView_PublishTextRowViewTextSize, DensityUtil.dip2px(context, 12));
         mIsSelect = a.getBoolean(R.styleable.PublishTextRowView_PublishTextRowViewIsSelect, false);
         mWidth = a.getDimensionPixelSize(R.styleable.PublishTextRowView_PublishTextRowViewLeftWidth, DensityUtil.dip2px(context, 140));
@@ -69,16 +72,28 @@ public class PublishTextRowView extends LinearLayout {
         }
     }
 
+    /**
+     * 设置可编辑（可点击）
+     * @param isEditable
+     */
+    public void setEditable(boolean isEditable){
+        if(isEditable){
+            mRightView.setVisibility(VISIBLE);
+        }else {
+            mRightView.setVisibility(GONE);
+        }
+    }
+
     public void initView(Context context) {
         View view = ((Activity) context).getLayoutInflater().inflate(R.layout.view_pulish_text_row, null);
-
-
         TextView leftView = (TextView) view.findViewById(R.id.left);
         mValueView2 = (ClearEditText) view.findViewById(R.id.rowvalue);
         mValueView = (TextView) view.findViewById(R.id.row_value);
         View bottomView = view.findViewById(R.id.bottom_line);
-        ImageView rightView = (ImageView) view.findViewById(R.id.right_image);
+        mRightView = (ImageView) view.findViewById(R.id.right_image);
         leftView.setText(mTitleText);
+        mValueView.setTextColor(mRightTextColor);
+        mValueView2.setTextColor(mRightTextColor);
         mValueView2.setHint(mHiht);
         mValueView.setHint(mHiht);
         if (mGravity == 0) {//左边
@@ -96,11 +111,11 @@ public class PublishTextRowView extends LinearLayout {
         if (mIsSelect) {
             mValueView2.setVisibility(GONE);
             mValueView.setVisibility(VISIBLE);
-            rightView.setVisibility(VISIBLE);
+            mRightView.setVisibility(VISIBLE);
         } else {
             mValueView2.setVisibility(VISIBLE);
             mValueView.setVisibility(GONE);
-            rightView.setVisibility(INVISIBLE);
+            mRightView.setVisibility(INVISIBLE);
         }
 
         if(mState == 1){//可编辑
