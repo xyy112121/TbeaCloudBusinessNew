@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.activity;
+package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,12 +52,26 @@ public class MeetingViewUpdateActivity extends BaseActivity implements View.OnCl
         switch (view.getId()) {
             case R.id.cp_meeting_prepare_update_summary:
                 Intent intent = new Intent(mContext,MeetingPrepareSummaryActivity.class);
-                startActivity(intent);
+                intent.putExtra("meetingid",getIntent().getStringExtra("meetingid"));
+                startActivityForResult(intent,1000);
                 break;
             case R.id.cp_meeting_prepare_update_gallery:
-                 intent = new Intent(mContext,ShopDynamicAddActivity.class);
-                startActivity(intent);
+                 intent = new Intent(mContext,MeetingGalleryListActivity.class);
+                intent.putExtra("meetingid",getIntent().getStringExtra("meetingid"));
+                startActivityForResult(intent,1001);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+       if(resultCode == RESULT_OK){
+           if(requestCode == 1000){//会议纪要
+               String content = data.getStringExtra("summary");
+               mSummaryView.setValueText(content);
+           }else if(requestCode == 1001){
+
+           }
+       }
     }
 }

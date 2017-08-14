@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <include layout="@layout/activity_page_top" />
 
@@ -159,7 +160,7 @@
                 android:id="@+id/cp_meeting_prepare_plan"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
-                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewIsBottomLineShow="false"
                 app:PublishTextRowViewIsSelect="true"
                 app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewState="read"
@@ -211,7 +212,8 @@
                 android:id="@+id/cp_meeting_prepare_finish"
                 style="@style/style_next_btn"
                 android:background="@drawable/btn_bg_blue"
-                android:text="发起会议" />
+                android:visibility="gone"
+                android:text="保存" />
         </LinearLayout>
 
     </ScrollView>

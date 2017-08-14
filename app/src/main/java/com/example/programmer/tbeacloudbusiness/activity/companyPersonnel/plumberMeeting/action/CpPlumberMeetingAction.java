@@ -1,11 +1,13 @@
-package com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.action;
+package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action;
 
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.FranchiserSelectListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.MeetingPrepareRequestModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.MeetingPrepareMesResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.MeetingPrepareResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.ParticipantSelectlListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryListModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareMesResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareRequestModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
+import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
 import org.apache.http.NameValuePair;
@@ -131,15 +133,53 @@ public class CpPlumberMeetingAction extends BaseAction {
         pairs.add(new BasicNameValuePair("meetingstarttime", model.meetingstarttime));
         pairs.add(new BasicNameValuePair("meetingendtime", model.meetingendtime));
         pairs.add(new BasicNameValuePair("organizecompanylist", model.organizecompanylist));
-        pairs.add(new BasicNameValuePair("meetingprovinceid", model.meetingprovinceid));
-        pairs.add(new BasicNameValuePair("meetingcityid", model.meetingcityid));
-        pairs.add(new BasicNameValuePair("meetingzoneid", model.meetingzoneid));
+        pairs.add(new BasicNameValuePair("meetingprovince", model.meetingprovince));
+        pairs.add(new BasicNameValuePair("meetingcity", model.meetingcity));
+        pairs.add(new BasicNameValuePair("meetingzone", model.meetingzone));
         pairs.add(new BasicNameValuePair("meetingaddr", model.meetingaddr));
         pairs.add(new BasicNameValuePair("originatoruserid", model.originatoruserid));
         pairs.add(new BasicNameValuePair("participantlist", model.participantlist));
         pairs.add(new BasicNameValuePair("meetingitems", model.meetingitems));
         String result = sendRequest("TBEAYUN008003002000", pairs);
         resultModel = gson.fromJson(result, MeetingPrepareResponseModel.class);
+        return resultModel;
+    }
+
+
+    /**
+     * 删除会议
+     */
+    public BaseResponseModel deleteMeeting(String meetingid) throws Exception {
+        BaseResponseModel resultModel;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("meetingid", meetingid));
+        String result = sendRequest("TBEAYUN008003005000", pairs);
+        resultModel = gson.fromJson(result, BaseResponseModel.class);
+        return resultModel;
+    }
+
+    /**
+     * 保存会议纪要
+     */
+    public BaseResponseModel saveSummary(String meetingid,String meetingcontent ) throws Exception {
+        BaseResponseModel resultModel;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("meetingid", meetingid));
+        pairs.add(new BasicNameValuePair("meetingcontent", meetingcontent));
+        String result = sendRequest("TBEAYUN008003003000", pairs);
+        resultModel = gson.fromJson(result, BaseResponseModel.class);
+        return resultModel;
+    }
+
+    /**
+     * 获取现场图片
+     */
+    public MeetingGalleryListModel getGalleryList(String meetingid ) throws Exception {
+        MeetingGalleryListModel resultModel;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("meetingid", meetingid));
+        String result = sendRequest("TBEAYUN004004003004", pairs);
+        resultModel = gson.fromJson(result, MeetingGalleryListModel.class);
         return resultModel;
     }
 

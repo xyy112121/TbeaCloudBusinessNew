@@ -1,11 +1,10 @@
-package com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.activity;
+package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.example.programmer.tbeacloudbusiness.R;
@@ -21,7 +20,7 @@ import butterknife.OnClick;
 import cn.qqtheme.framework.picker.AddressPicker;
 
 /**
- * Created by DELL on 2017/8/12.
+ * 地址选择
  */
 
 public class AddrSelectActivity extends BaseActivity implements View.OnClickListener{

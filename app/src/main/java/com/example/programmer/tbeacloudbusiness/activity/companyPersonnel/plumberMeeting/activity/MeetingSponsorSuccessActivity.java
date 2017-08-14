@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.activity;
+package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

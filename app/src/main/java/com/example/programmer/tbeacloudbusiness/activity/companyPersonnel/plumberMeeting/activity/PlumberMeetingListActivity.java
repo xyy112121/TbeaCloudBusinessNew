@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.activity;
+package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,9 +16,8 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.action.CpPlumberMeetingAction;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.RegionSelectActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListStateResonpseModel;
@@ -74,14 +73,19 @@ public class PlumberMeetingListActivity extends BaseActivity implements BGARefre
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
-        mRefreshLayout.beginRefreshing();
+
         initDate();
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
         addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
         addStateItem(expandTabView, null, "", "状态");
         addDateItem(expandTabView, mDateLists, "默认排序", "时间");
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRefreshLayout.beginRefreshing();
     }
 
     public void addRegionItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {

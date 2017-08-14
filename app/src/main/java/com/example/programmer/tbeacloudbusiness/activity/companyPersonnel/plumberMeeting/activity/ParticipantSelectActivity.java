@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.activity;
+package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +19,8 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.action.CpPlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.FranchiserSelectListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.ParticipantSelectlListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;

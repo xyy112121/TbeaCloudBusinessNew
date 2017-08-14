@@ -32,6 +32,7 @@ public class PublishTextRowView extends LinearLayout {
     private TextView mValueView;
     private ClearEditText mValueView2;
     private ImageView mRightView;
+    View mBottomView;
     private int mWidth;
     private int mGravity;
     private int mState;
@@ -84,12 +85,16 @@ public class PublishTextRowView extends LinearLayout {
         }
     }
 
+    public void setBottonLineVisibility(int visibility){
+        mBottomView.setVisibility(visibility);
+    }
+
     public void initView(Context context) {
         View view = ((Activity) context).getLayoutInflater().inflate(R.layout.view_pulish_text_row, null);
         TextView leftView = (TextView) view.findViewById(R.id.left);
         mValueView2 = (ClearEditText) view.findViewById(R.id.rowvalue);
         mValueView = (TextView) view.findViewById(R.id.row_value);
-        View bottomView = view.findViewById(R.id.bottom_line);
+         mBottomView = view.findViewById(R.id.bottom_line);
         mRightView = (ImageView) view.findViewById(R.id.right_image);
         leftView.setText(mTitleText);
         mValueView.setTextColor(mRightTextColor);
@@ -106,7 +111,7 @@ public class PublishTextRowView extends LinearLayout {
         leftView.setLayoutParams(params);
 
         if (mIsBottomLineShow == false) {
-            bottomView.setVisibility(INVISIBLE);
+            mBottomView.setVisibility(INVISIBLE);
         }
         if (mIsSelect) {
             mValueView2.setVisibility(GONE);

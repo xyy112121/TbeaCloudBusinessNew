@@ -26,7 +26,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.activity.PlumberMeetingListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.PlumberMeetingListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.activity.DbScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingMainListActivity;

@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.activity;
+package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +14,12 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.action.CpPlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.FranchiserSelectListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.MeetingPrepareRequestModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.MeetingPrepareMesResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.MeetingPrepareResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.ParticipantSelectlListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareMesResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareRequestModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
@@ -210,9 +209,9 @@ public class MeetingPrepareActivity extends BaseActivity {
                     mRequest.organizecompanylist = companyIds;
                     break;
                 case RESULT_ADDR://举办地点
-                    mRequest.meetingprovinceid = data.getStringExtra("province");
-                    mRequest.meetingcityid = data.getStringExtra("city");
-                    mRequest.meetingzoneid = data.getStringExtra("county");
+                    mRequest.meetingprovince = data.getStringExtra("province");
+                    mRequest.meetingcity = data.getStringExtra("city");
+                    mRequest.meetingzone = data.getStringExtra("county");
                     mRequest.meetingaddr = data.getStringExtra("addrInfo");
                     String addr = data.getStringExtra("addr");
                     mHoldAddrView.setValueText(addr);

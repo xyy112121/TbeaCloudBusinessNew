@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.activity;
+package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -15,18 +16,18 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.action.CpPlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.FranchiserSelectListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.MeetingPrepareMesResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.MeetingPrepareRequestModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.MeetingPrepareResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.ParticipantSelectlListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareRequestModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingViewSignlnActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingViewResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
+import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
@@ -79,6 +80,8 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
     PublishTextRowView mMeetingPrepareGallery;//现场照片
     @BindView(R.id.cp_meeting_prepare_summary)
     PublishTextRowView mMeetingPrepareSummary;//会议纪要
+    @BindView(R.id.cp_meeting_prepare_finish)
+    Button mSaveView;
 
 
     private CustomPopWindow mCustomPopWindow;
@@ -129,8 +132,15 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                     if (meetingbaseinfo.meetingendtime.length() > 12) {
                                         endTime = meetingbaseinfo.meetingendtime.substring(12, meetingbaseinfo.meetingendtime.length());
                                     }
+                                    mRequest.meetingstarttime = meetingbaseinfo.meetingstarttime;
+                                    mRequest.meetingendtime = meetingbaseinfo.meetingendtime;
                                     mHoldTimeView.setValueText(meetingbaseinfo.meetingstarttime + "-" + endTime);
                                     mHoldAddrView.setValueText(meetingbaseinfo.meetingprovince + meetingbaseinfo.meetingcity + meetingbaseinfo.meetingzone + meetingbaseinfo.meetingaddr);
+                                    mRequest.meetingprovince = meetingbaseinfo.meetingprovince;
+                                    mRequest.meetingcity = meetingbaseinfo.meetingcity;
+                                    mRequest.meetingzone = meetingbaseinfo.meetingzone;
+                                    mRequest.meetingaddr = meetingbaseinfo.meetingaddr;
+
                                     mMeetingPrepareState.setValueText(meetingbaseinfo.meetingstatus);
                                     //新会议：可编辑，删除，准备中：可编辑 开会中：可更新
                                     if ("新会议".equals(meetingbaseinfo.meetingstatus)) {
@@ -144,12 +154,10 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                         mMeetingPrepareSummary.setVisibility(View.GONE);
                                         mMeetingPrepareGallery.setVisibility(View.GONE);
                                     }else if ("开会中".equals(meetingbaseinfo.meetingstatus)) {
-                                        mIsEdit = true;
+                                        mIsUpdate = true;
                                         mMeetingPrepareSummary.setVisibility(View.GONE);
                                         mMeetingPrepareGallery.setVisibility(View.GONE);
                                     }
-
-
                                     mPlanView.setValueText(meetingbaseinfo.meetingplace);
 
                                 }
@@ -261,7 +269,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
             case R.id.cp_meeting_prepare_finish:
-//                showAlert();
+                editMeeting();
                 break;
         }
     }
@@ -302,9 +310,9 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                     mRequest.organizecompanylist = companyIds;
                     break;
                 case RESULT_ADDR://举办地点
-                    mRequest.meetingprovinceid = data.getStringExtra("province");
-                    mRequest.meetingcityid = data.getStringExtra("city");
-                    mRequest.meetingzoneid = data.getStringExtra("county");
+                    mRequest.meetingprovince = data.getStringExtra("province");
+                    mRequest.meetingcity = data.getStringExtra("city");
+                    mRequest.meetingzone = data.getStringExtra("county");
                     mRequest.meetingaddr = data.getStringExtra("addrInfo");
                     String addr = data.getStringExtra("addr");
                     mHoldAddrView.setValueText(addr);
@@ -338,11 +346,55 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+    //删除会议
+    private void deleteMeeting() {
+        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+        dialog.setText("请等待...");
+        dialog.show();
+        try {
+            final Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    dialog.dismiss();
+                    switch (msg.what) {
+                        case ThreadState.SUCCESS:
+                            BaseResponseModel model = (BaseResponseModel) msg.obj;
+                            if (model.isSuccess()) {
+                                finish();
+                            } else {
+                                ToastUtil.showMessage(model.getMsg());
+                            }
+                            break;
+                        case ThreadState.ERROR:
+                            ToastUtil.showMessage("操作失败！");
+                            break;
+                    }
+                }
+            };
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        CpPlumberMeetingAction action = new CpPlumberMeetingAction();
+                        String id = getIntent().getStringExtra("id");
+                        BaseResponseModel model = action.deleteMeeting(id);
+                        handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+                    } catch (Exception e) {
+                        handler.sendEmptyMessage(ThreadState.ERROR);
+                    }
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     //编辑时
     private void editMeeting() {
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
-        dialog.setText("加载中...");
+        dialog.setText("请等待...");
         dialog.show();
         try {
             final Handler handler = new Handler() {
@@ -452,13 +504,16 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                             mHoldCompanyIv.setVisibility(View.VISIBLE);
                             mHoldTimeView.setEditable(true);
                             mHoldAddrView.setEditable(true);
+                            mSaveView.setVisibility(View.VISIBLE);
                         }
                         break;
                     case R.id.menu2://删除
+                        deleteMeeting();
 
                         break;
                     case R.id.menu3://更新
                         Intent intent = new Intent(mContext,MeetingViewUpdateActivity.class);
+                        intent.putExtra("meetingid",getIntent().getStringExtra("id"));
                         startActivityForResult(intent,RESULT_UPDATE);
 
                         break;

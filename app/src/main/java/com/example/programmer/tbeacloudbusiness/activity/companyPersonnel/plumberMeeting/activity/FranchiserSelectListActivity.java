@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.activity;
+package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +19,8 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.action.CpPlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.FranchiserSelectListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPerson.plumberMeeting.model.ParticipantSelectlListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
@@ -58,9 +57,9 @@ public class FranchiserSelectListActivity extends BaseActivity implements View.O
         setContentView(R.layout.activity_cp_franchiser_select_list);
         ButterKnife.bind(this);
         mFlag = getIntent().getBooleanExtra("flag", false);//true可选择
-        if(mFlag == false){
+        if (mFlag == false) {
             initTopbar("用户列表");
-        }else {
+        } else {
             initTopbar("用户列表", "确定", this);
         }
         initView();
@@ -94,7 +93,7 @@ public class FranchiserSelectListActivity extends BaseActivity implements View.O
                             FranchiserSelectListResponseModel model = (FranchiserSelectListResponseModel) msg.obj;
                             if (model.isSuccess() && model.data != null) {
                                 if (model.data.distributorlist != null) {
-                                    mAdapter.initDate(model.data.distributorlist.size(),model.data.distributorlist);
+                                    mAdapter.initDate(model.data.distributorlist.size(), model.data.distributorlist);
                                     mAdapter.addAll(model.data.distributorlist);
                                 }
 
@@ -147,22 +146,22 @@ public class FranchiserSelectListActivity extends BaseActivity implements View.O
             resourceId = resource;
             isSelected = new HashMap<>();
             // 初始化数据
-            initDate(getCount(),null);
+            initDate(getCount(), null);
         }
 
         // 初始化isSelected的数据
         public void initDate(int count, List<FranchiserSelectListResponseModel.DataBean.DistributorlistBean> list) {
             for (int i = 0; i < count; i++) {
-                if(mSelectIds.length > 0){
-                    for (String item:mSelectIds){
-                        if(item.equals(list.get(i).id)){
+                if (mSelectIds.length > 0) {
+                    for (String item : mSelectIds) {
+                        if (item.equals(list.get(i).id)) {
                             getIsSelected().put(i, true);
                             break;
-                        }else {
+                        } else {
                             getIsSelected().put(i, false);
                         }
                     }
-                }else {
+                } else {
                     getIsSelected().put(i, false);
                 }
             }
@@ -189,7 +188,7 @@ public class FranchiserSelectListActivity extends BaseActivity implements View.O
                 holder.mCkView.setVisibility(View.VISIBLE);
             } else {
                 holder.mCkView.setChecked(isSelected.get(position));
-                if(isSelected.get(position) == true){
+                if (isSelected.get(position) == true) {
                     mSelectList.add(getItem(position));
                     removeDuplicate(mSelectList);
                 }
@@ -239,8 +238,8 @@ public class FranchiserSelectListActivity extends BaseActivity implements View.O
 
     }
 
-    public  void  removeDuplicate(List list)   {
-        HashSet h  =   new  HashSet(list);
+    public void removeDuplicate(List list) {
+        HashSet h = new HashSet(list);
         list.clear();
         mSelectList.addAll(h);
         mNumberView.setText(mSelectList.size() + "");

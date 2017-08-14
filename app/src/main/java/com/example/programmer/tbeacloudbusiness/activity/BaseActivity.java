@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -26,7 +27,7 @@ public class BaseActivity extends PermissionActivity {
 	protected ImageButton mBackBtn;
 	protected ImageButton mRightBtn;
 	public final int SET_REQEST = 1000;
-	protected Context mContext;
+	protected Activity mContext;
 
 	@Override
 	public void setContentView(@LayoutRes int layoutResID) {
