@@ -1,26 +1,21 @@
 package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryListModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.ShopDynamicAddActivity;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
@@ -45,18 +40,19 @@ import butterknife.ButterKnife;
 public class MeetingGalleryUploadActivity extends BaseActivity implements View.OnClickListener {
     List<LocalMedia> mSelectList = new ArrayList<>();
     GridAdapter mGridAdapter;
+    private String mPictureSaveNames;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shop_dynamic_add);
+        setContentView(R.layout.activity_cp_meeting_grllery_upload);
         initTopbar("图片上传", "保存", this);
         initView();
     }
 
     private void initView() {
         GridView gridView = (GridView) findViewById(R.id.shop_dynamic_image_gridView);
-        mGridAdapter = new GridAdapter(mContext, R.layout.activity_shop_dynamic_add_image_item);
+        mGridAdapter = new GridAdapter();
         gridView.setAdapter(mGridAdapter);
         mGridAdapter.addAll(mSelectList);
 
@@ -64,7 +60,55 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
 
     @Override
     public void onClick(View v) {
+        uploadImage();
+    }
 
+    public void uploadImage() {
+        if (mSelectList.size() > 0) {
+            final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+            dialog.setText("请等待...");
+            dialog.show();
+            try {
+                final Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        dialog.dismiss();
+                        switch (msg.what) {
+                            case ThreadState.SUCCESS:
+                                MeetingGalleryUpdateResponseModel model = (MeetingGalleryUpdateResponseModel) msg.obj;
+                                if (model.isSuccess() && model.data != null) {
+                                    if (model.data.pictureinfo != null) {
+                                        mPictureSaveNames = model.data.pictureinfo.picturesavenames;
+                                    }
+                                } else {
+                                    ToastUtil.showMessage(model.getMsg());
+                                }
+                                break;
+                            case ThreadState.ERROR:
+                                ToastUtil.showMessage("操作失败！");
+                                break;
+                        }
+                    }
+                };
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            CpPlumberMeetingAction action = new CpPlumberMeetingAction();
+                            MeetingGalleryUpdateResponseModel model = action.uploadGallery(mSelectList);
+                            handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+                        } catch (Exception e) {
+                            handler.sendEmptyMessage(ThreadState.ERROR);
+                        }
+                    }
+                }).start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            ToastUtil.showMessage("请选择需要上传的图片");
+        }
     }
 
 
@@ -89,7 +133,7 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
                 case PictureConfig.CHOOSE_REQUEST:
                     // 图片选择结果回调
                     mSelectList = PictureSelector.obtainMultipleResult(data);
-                    mGridAdapter.clear();
+                    mGridAdapter.removeAll();
                     // 例如 LocalMedia 里面返回三种path
                     // 1.media.getPath(); 为原图path
                     // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
@@ -102,26 +146,48 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
     }
 
 
-    private class GridAdapter extends ArrayAdapter<LocalMedia> {
-        int resourceId;
+    public class GridAdapter extends BaseAdapter {
+        private List<LocalMedia> mList = new ArrayList<>();
 
 
-        public GridAdapter(@NonNull Context context, @LayoutRes int resource) {
-            super(context, resource);
-            resourceId = resource;
+        public void addAll(List<LocalMedia> list) {
+            this.mList.addAll(list);
+            if (mList.size() < 8) {
+                this.mList.add(mList.size(), null);
+            }
+            notifyDataSetChanged();
+        }
+
+        public void removeAll() {
+            this.mList.clear();
+        }
+
+        @Override
+        public int getCount() {
+            return mList.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return mList.get(i);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
         }
 
         @Override
         public View getView(final int postion, View view, ViewGroup viewGroup) {
             ViewHolder holder;
             if (view == null) {
-                view = getLayoutInflater().inflate(resourceId, null);
+                view = getLayoutInflater().inflate(R.layout.activity_shop_dynamic_add_image_item, null);
                 holder = new ViewHolder(view);
                 view.setTag(holder);
             } else {
                 holder = (ViewHolder) view.getTag();
             }
-            final LocalMedia obj = getItem(postion);
+            final LocalMedia obj = mList.get(postion);
             int displayWidth = UtilAssistants.getDisplayWidth(mContext);
             holder.mImageView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (displayWidth / 4)));
             if (obj == null) {
@@ -129,14 +195,15 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
                 holder.mDeleteView.setVisibility(View.GONE);
             } else {
                 ImageLoader.getInstance().displayImage("file://" + obj.getCompressPath(), holder.mImageView);
+                holder.mDeleteView.setVisibility(View.VISIBLE);
             }
 
             holder.mDeleteView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    mList.remove(postion);
                     mSelectList.remove(postion);
-                    remove(getItem(postion));
-
+                    notifyDataSetChanged();
                 }
             });
 

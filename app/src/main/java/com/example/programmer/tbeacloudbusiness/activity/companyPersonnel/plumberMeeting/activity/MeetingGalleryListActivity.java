@@ -1,6 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,16 +19,12 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryListModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
-import com.luck.picture.lib.entity.LocalMedia;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +35,7 @@ import butterknife.ButterKnife;
 
 public class MeetingGalleryListActivity extends BaseActivity implements View.OnClickListener {
 
-    List<LocalMedia> mSelectList = new ArrayList<>();
+//    List<LocalMedia> mSelectList = new ArrayList<>();
     GridAdapter mGridAdapter;
     @BindView(R.id.gridView)
     GridView mGridView;
@@ -50,7 +47,7 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cp_meeting_gallery_list);
         ButterKnife.bind(this);
-        initTopbar("现场图片", "保存", this);
+        initTopbar("现场图片", "上传", this);
         initView();
     }
 
@@ -80,8 +77,8 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
                     dialog.dismiss();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            MeetingGalleryListModel model = (MeetingGalleryListModel) msg.obj;
-                            if (model.isSuccess() && model != null) {
+                            MeetingGalleryListResponseModel model = (MeetingGalleryListResponseModel) msg.obj;
+                            if (model.isSuccess() && model.data != null) {
                                 if (model.data.picturelist != null) {
                                     mGridAdapter.addAll(model.data.picturelist);
                                 }
@@ -102,7 +99,7 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
                     try {
                         CpPlumberMeetingAction action = new CpPlumberMeetingAction();
                         String id = getIntent().getStringExtra("meetingid");
-                        MeetingGalleryListModel model = action.getGalleryList(id);
+                        MeetingGalleryListResponseModel model = action.getGalleryList(id);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -116,11 +113,13 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent(mContext,MeetingGalleryUploadActivity.class);
+        startActivity(intent);
 
     }
 
 
-    private class GridAdapter extends ArrayAdapter<MeetingGalleryListModel.DataBean.PictureBean> {
+    public class GridAdapter extends ArrayAdapter<MeetingGalleryListResponseModel.DataBean.PictureBean> {
         int resourceId;
 
 
@@ -141,7 +140,7 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
             }
             int displayWidth = UtilAssistants.getDisplayWidth(mContext);
             holder.mImageView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (displayWidth / 4)));
-            MeetingGalleryListModel.DataBean.PictureBean obj = getItem(postion);
+            MeetingGalleryListResponseModel.DataBean.PictureBean obj = getItem(postion);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpictureurl, holder.mImageView);
             holder.mDeleteView.setVisibility(View.GONE);
             return view;

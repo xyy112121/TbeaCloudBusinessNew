@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberManage.activity.DranchiseeSeleteActivity;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.PlumberMeetingListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.activity.DbScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageMainListActivity;
@@ -304,6 +305,10 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
                         //水电工会议
                         startActivity(new Intent(getActivity(), PlumberMeetingListActivity.class));
                     }
+                    else if("marketer_shuidiangongguanli".equals(obj.moduleid)){
+                        //水电工管理
+                        startActivity(new Intent(getActivity(), DranchiseeSeleteActivity.class));
+                    }
                 }
             });
             return view1;
@@ -434,6 +439,13 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
                         Intent intent = new Intent(getActivity(),PlumberManageMainListActivity.class);
                         intent.putExtra("type","distributor");
                         startActivity(intent);
+                    }else if("marketer_shuidiangongguanli".equals(obj.moduleid)){//公司人员
+                        //水电工管理
+                        startActivity(new Intent(getActivity(), DranchiseeSeleteActivity.class));
+                    }else if("marketer_shuidiangonghuiyi".equals(obj.moduleid)){//公司人员
+
+                        //水电工会议
+                        startActivity(new Intent(getActivity(), PlumberMeetingListActivity.class));
                     }
                 }
             });

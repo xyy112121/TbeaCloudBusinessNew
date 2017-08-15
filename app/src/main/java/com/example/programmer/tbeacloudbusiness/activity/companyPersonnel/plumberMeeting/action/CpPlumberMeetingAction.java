@@ -1,7 +1,8 @@
 package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action;
 
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryListModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareMesResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareResponseModel;
@@ -9,12 +10,15 @@ import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumbe
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
+import com.luck.picture.lib.entity.LocalMedia;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by DELL on 2017/8/12.
@@ -174,13 +178,29 @@ public class CpPlumberMeetingAction extends BaseAction {
     /**
      * 获取现场图片
      */
-    public MeetingGalleryListModel getGalleryList(String meetingid ) throws Exception {
-        MeetingGalleryListModel resultModel;
+    public MeetingGalleryListResponseModel getGalleryList(String meetingid ) throws Exception {
+        MeetingGalleryListResponseModel resultModel;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("meetingid", meetingid));
         String result = sendRequest("TBEAYUN004004003004", pairs);
-        resultModel = gson.fromJson(result, MeetingGalleryListModel.class);
+        resultModel = gson.fromJson(result, MeetingGalleryListResponseModel.class);
         return resultModel;
+    }
+
+
+    /**
+     * 现场图片上传
+     */
+    public MeetingGalleryUpdateResponseModel uploadGallery(List<LocalMedia> list) throws Exception {
+        MeetingGalleryUpdateResponseModel model;
+        Map<String, String> paramsIn = new HashMap<>();
+        Map<String, String> fileIn = new HashMap<>();
+        for(int i = 0;i< list.size();i++){
+            fileIn.put("file"+i, list.get(i).getCompressPath());
+        }
+        String result = uploadImage("TBEAYUN001007001000", paramsIn, fileIn);
+        model = gson.fromJson(result, MeetingGalleryUpdateResponseModel.class);
+        return model;
     }
 
 

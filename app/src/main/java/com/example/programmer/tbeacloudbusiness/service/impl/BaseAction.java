@@ -47,7 +47,7 @@ public class BaseAction {
      * 注册
      * @return
      */
-    public String regist(final String serviceCode,final Map<String ,String> paramsIn,final Map<String,String> fileIn ) throws  Exception{
+    public String uploadImage(final String serviceCode,final Map<String ,String> paramsIn,final Map<String,String> fileIn ) throws  Exception{
         FutureTask task = new FutureTask(
                 new Callable()
                 {

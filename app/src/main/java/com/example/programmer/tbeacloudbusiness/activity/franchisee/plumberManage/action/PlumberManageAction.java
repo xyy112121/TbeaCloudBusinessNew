@@ -31,9 +31,12 @@ public class PlumberManageAction extends BaseAction {
      pagesize
      */
     public PmMainListResponseModel getPlumberManageMainList
-            (String name, String electricianownertypeid, String zoneid, String orderitem, String order, int page, int pagesize) throws Exception {
+            (String fdistributorid ,String name, String electricianownertypeid, String zoneid, String orderitem, String order, int page, int pagesize) throws Exception {
         PmMainListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
+        if (fdistributorid != null && !"".equals(fdistributorid)) {
+            pairs.add(new BasicNameValuePair("fdistributorid", name));
+        }
         pairs.add(new BasicNameValuePair("name", name));
         pairs.add(new BasicNameValuePair("electricianownertypeid", electricianownertypeid));
         pairs.add(new BasicNameValuePair("zoneid", zoneid));

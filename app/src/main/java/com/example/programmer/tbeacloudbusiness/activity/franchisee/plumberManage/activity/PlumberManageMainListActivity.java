@@ -212,7 +212,8 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
                 public void run() {
                     try {
                         PlumberManageAction action = new PlumberManageAction();
-                        PmMainListResponseModel model = action.getPlumberManageMainList(mName, mElectricianownertypeid, mZoneid, mOrderItem, mOrder, mPage++, mPagesiz);
+                        String fdistributorid = getIntent().getStringExtra("id");
+                        PmMainListResponseModel model = action.getPlumberManageMainList(fdistributorid,mName, mElectricianownertypeid, mZoneid, mOrderItem, mOrder, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

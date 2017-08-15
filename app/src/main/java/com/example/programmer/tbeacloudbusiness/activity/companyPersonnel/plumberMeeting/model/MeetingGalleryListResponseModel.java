@@ -9,7 +9,7 @@ import java.util.List;
  * Created by programmer on 2017/8/14.
  */
 
-public class MeetingGalleryListModel extends BaseResponseModel {
+public class MeetingGalleryListResponseModel extends BaseResponseModel {
 
     public DataBean data;
 
