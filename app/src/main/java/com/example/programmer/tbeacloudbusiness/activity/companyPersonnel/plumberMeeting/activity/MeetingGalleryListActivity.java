@@ -114,6 +114,7 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(mContext,MeetingGalleryUploadActivity.class);
+        intent.putExtra("meetingid",getIntent().getStringExtra("meetingid"));
         startActivity(intent);
 
     }

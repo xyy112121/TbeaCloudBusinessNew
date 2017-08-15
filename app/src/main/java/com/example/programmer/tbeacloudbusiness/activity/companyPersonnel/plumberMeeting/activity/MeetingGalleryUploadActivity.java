@@ -17,6 +17,8 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
+import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
@@ -27,6 +29,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +44,7 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
     List<LocalMedia> mSelectList = new ArrayList<>();
     GridAdapter mGridAdapter;
     private String mPictureSaveNames;
+    private int mIndex = 1;//设置主图的下标
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +68,9 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
     }
 
     public void uploadImage() {
+
+        final String title = ((PublishTextRowView) findViewById(R.id.cp_meeting_gallery_image_title)).getValueText();
+        final String meetingid = getIntent().getStringExtra("meetingid");
         if (mSelectList.size() > 0) {
             final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
             dialog.setText("请等待...");
@@ -75,11 +82,9 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
                         dialog.dismiss();
                         switch (msg.what) {
                             case ThreadState.SUCCESS:
-                                MeetingGalleryUpdateResponseModel model = (MeetingGalleryUpdateResponseModel) msg.obj;
-                                if (model.isSuccess() && model.data != null) {
-                                    if (model.data.pictureinfo != null) {
-                                        mPictureSaveNames = model.data.pictureinfo.picturesavenames;
-                                    }
+                                BaseResponseModel model = (BaseResponseModel) msg.obj;
+                                if (model.isSuccess()) {
+                                    ToastUtil.showMessage("操作成功！");
                                 } else {
                                     ToastUtil.showMessage(model.getMsg());
                                 }
@@ -97,7 +102,13 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
                         try {
                             CpPlumberMeetingAction action = new CpPlumberMeetingAction();
                             MeetingGalleryUpdateResponseModel model = action.uploadGallery(mSelectList);
-                            handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+                            if (model.isSuccess() && model.data.pictureinfo != null) {
+                                BaseResponseModel model1 = action.uploadGallery(meetingid, title, model.data.pictureinfo.picturesavenames, mIndex);
+                                handler.obtainMessage(ThreadState.SUCCESS, model1).sendToTarget();
+                            } else {
+                                handler.sendEmptyMessage(ThreadState.ERROR);
+                            }
+
                         } catch (Exception e) {
                             handler.sendEmptyMessage(ThreadState.ERROR);
                         }
@@ -139,6 +150,12 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
                     // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
                     // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
                     // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+                    mGridAdapter.addAll(mSelectList);
+                    break;
+                case 1000:
+                    mSelectList = (List<LocalMedia>) data.getSerializableExtra("images");
+                    mIndex = data.getIntExtra("index",1);
+                    mGridAdapter.removeAll();
                     mGridAdapter.addAll(mSelectList);
                     break;
             }
@@ -197,6 +214,8 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
                 ImageLoader.getInstance().displayImage("file://" + obj.getCompressPath(), holder.mImageView);
                 holder.mDeleteView.setVisibility(View.VISIBLE);
             }
+            holder.mImageView.setTag(postion);
+
 
             holder.mDeleteView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -210,7 +229,13 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openImage();
+                    if (postion == mList.size() - 1) {
+                        openImage();
+                    } else {
+                        Intent intent = new Intent(mContext, MeetingGalleryImageShowActivity.class);
+                        intent.putExtra("images", (Serializable) mSelectList);
+                        startActivityForResult(intent, 1000);
+                    }
                 }
             });
             return view;

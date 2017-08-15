@@ -9,7 +9,7 @@
 
 
     <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
-        android:id="@+id/store_set_store_specifications_and_models"
+        android:id="@+id/cp_meeting_gallery_image_title"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:PublishTextRowViewHiht="请输入主题内容"

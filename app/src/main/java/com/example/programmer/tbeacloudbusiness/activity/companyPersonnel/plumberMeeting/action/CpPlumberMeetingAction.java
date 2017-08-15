@@ -203,5 +203,20 @@ public class CpPlumberMeetingAction extends BaseAction {
         return model;
     }
 
+    /**
+     * 现场图片路径上传
+     * primarypictureindex 设置主图的图片
+     */
+    public BaseResponseModel uploadGallery(String meetingid,String picturetitle, String pictures,int primarypictureindex) throws Exception {
+        BaseResponseModel resultModel;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("meetingid", meetingid));
+        pairs.add(new BasicNameValuePair("picturetitle", picturetitle));
+        pairs.add(new BasicNameValuePair("pictures", pictures));
+        pairs.add(new BasicNameValuePair("primarypictureindex", String.valueOf(primarypictureindex)));
+        String result = sendRequest("TBEAYUN008003003001", pairs);
+        resultModel = gson.fromJson(result, BaseResponseModel.class);
+        return resultModel;
+    }
 
 }

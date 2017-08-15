@@ -153,31 +153,32 @@
         <activity android:name=".activity.franchisee.storeManage.ShopDynamicListActivity" />
         <activity android:name=".activity.franchisee.storeManage.ShopDynamicAddActivity" />
 
-        <activity android:name=".activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity"/>
-        <activity android:name=".activity.distributor.rebateAccount.activity.RebateAccountWithdrawCashActivity"/>
-        <activity android:name=".activity.distributor.rebateAccount.activity.WithdrawCashViewActivity"/>
-         <activity android:name=".activity.distributor.scanCode.activity.DbScanCodeMainListActivity"/>
-         <activity android:name=".activity.distributor.scanCode.activity.DbWithdrawDepositDateActivity"/>
-         <activity android:name=".activity.distributor.scanCode.activity.DbScanCodeRebateListActivity"/>
-         <activity android:name=".activity.distributor.scanCode.activity.DbWithdrawDepositDateHistoryActivity"/>
+        <activity android:name=".activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity" />
+        <activity android:name=".activity.distributor.rebateAccount.activity.RebateAccountWithdrawCashActivity" />
+        <activity android:name=".activity.distributor.rebateAccount.activity.WithdrawCashViewActivity" />
+        <activity android:name=".activity.distributor.scanCode.activity.DbScanCodeMainListActivity" />
+        <activity android:name=".activity.distributor.scanCode.activity.DbWithdrawDepositDateActivity" />
+        <activity android:name=".activity.distributor.scanCode.activity.DbScanCodeRebateListActivity" />
+        <activity android:name=".activity.distributor.scanCode.activity.DbWithdrawDepositDateHistoryActivity" />
 
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.PlumberMeetingListActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.FranchiserSelectListActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingPreparePlanActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingSponsorSuccessActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingPrepareActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.CpDateSelectActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.AddrSelectActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.ParticipantSelectActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingViewActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingViewUpdateActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingPrepareSummaryActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingGalleryListActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingGalleryUploadActivity"/>
-        <activity android:name=".activity.companyPersonnel.plumberManage.activity.DranchiseeSeleteActivity"/>
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.PlumberMeetingListActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.FranchiserSelectListActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingPreparePlanActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingSponsorSuccessActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingPrepareActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.CpDateSelectActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.AddrSelectActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.ParticipantSelectActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingViewActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingViewUpdateActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingPrepareSummaryActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingGalleryListActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingGalleryUploadActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingGalleryImageShowActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberManage.activity.DranchiseeSeleteActivity" />
 
-        <activity android:name=".activity.franchisee.plumberMeeting.activity.RegionSelectActivity"/>
-        <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingViewSignlnActivity"/>
+        <activity android:name=".activity.franchisee.plumberMeeting.activity.RegionSelectActivity" />
+        <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingViewSignlnActivity" />
 
 
     </application>
