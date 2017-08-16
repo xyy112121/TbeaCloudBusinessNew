@@ -32,6 +32,7 @@
                     android:maxLines="1"
                     android:textColor="@color/tab_text_normal"
                     android:textSize="14sp"
+                    android:layout_marginLeft="8dp"
                     android:text="名字"/>
 
                 <TextView

@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_weight="1"
-                android:text="设置为默认收货地址"
+                android:text="每次下单时会使用该地址"
                 android:textColor="@color/text_color" />
 
             <CheckBox

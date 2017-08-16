@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.my.set;
+package com.example.programmer.tbeacloudbusiness.activity.my.set.activity;
 
 import android.content.Context;
 import android.os.Bundle;

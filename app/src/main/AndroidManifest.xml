@@ -115,14 +115,14 @@
         <activity android:name=".activity.tbea.activity.ProductPresentationContactInfoActivity" />
 
         <activity android:name=".activity.my.main.SetActivity" />
-        <activity android:name=".activity.my.set.BindingNewPhoneActivity" />
-        <activity android:name=".activity.my.set.EditBindingPhoneActivity" />
-        <activity android:name=".activity.my.set.BindingNewPhoneFinishActivity" />
-        <activity android:name=".activity.my.set.PwdEditActivity" />
-        <activity android:name=".activity.my.set.AddressEditActivity" />
-        <activity android:name=".activity.my.set.AddressEditListActivity" />
-        <activity android:name=".activity.my.set.SetBackgroundActivity" />
-        <activity android:name=".activity.my.set.GeneralActivity" />
+        <activity android:name=".activity.my.set.activity.BindingNewPhoneActivity" />
+        <activity android:name=".activity.my.set.activity.EditBindingPhoneActivity" />
+        <activity android:name=".activity.my.set.activity.BindingNewPhoneFinishActivity" />
+        <activity android:name=".activity.my.set.activity.PwdEditActivity" />
+        <activity android:name=".activity.my.set.activity.AddressEditActivity" />
+        <activity android:name=".activity.my.set.activity.AddressEditListActivity" />
+        <activity android:name=".activity.my.set.activity.SetBackgroundActivity" />
+        <activity android:name=".activity.my.set.activity.GeneralActivity" />
         <activity android:name=".activity.my.main.RealNameAuthenticationPlumberActivity" />
         <activity android:name=".activity.my.main.RealNameAuthenticationDistributorActivity" />
         <activity android:name=".activity.my.main.MyAttentionActivity" />
