@@ -68,7 +68,6 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
     }
 
     public void uploadImage() {
-
         final String title = ((PublishTextRowView) findViewById(R.id.cp_meeting_gallery_image_title)).getValueText();
         final String meetingid = getIntent().getStringExtra("meetingid");
         if (mSelectList.size() > 0) {

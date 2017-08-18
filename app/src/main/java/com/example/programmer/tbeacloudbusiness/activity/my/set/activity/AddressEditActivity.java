@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.set.action.SetAction
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.AddressModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
@@ -40,11 +42,12 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
     @BindView(R.id.addr_edit_address)
     EditText mAddressView;
     @BindView(R.id.addr_edit_isdefault)
-    CheckBox mIsdefault;
+    CheckBox mIsdefaultView;
+    @BindView(R.id.addr_edit_save)
+    Button mSaveView;
     private Context mContext;
     private final int RESULT_ADDR = 1002;
     private AddressModel mObj = new AddressModel();
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,33 +56,41 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         ButterKnife.bind(this);
         mContext = this;
         if ("edit".equals(getIntent().getStringExtra("flag"))) {
-//            Gson gson = new Gson();
-//            String objGson = getIntent().getStringExtra("obj");
-//            mObj = gson.fromJson(objGson,Address.class);
+            mObj = (AddressModel) getIntent().getSerializableExtra("model");
             initTopbar("收货地址管理", "删除", this);
-//            getDate(mObj.getId());
+            initData();
+            mSaveView.setVisibility(View.VISIBLE);
         } else {
             initTopbar("收货地址管理", "保存", this);
+            mSaveView.setVisibility(View.GONE);
         }
     }
 
-    /**
-     * 验证手机格式 false不正确
-     */
-    public boolean isMobileNO(String mobiles) {
-    /*
-    移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
-    联通：130、131、132、152、155、156、185、186
-    电信：133、153、180、189、（1349卫通）
-    总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
-    */
-        String telRegex = "[1][34578]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-        if (mobiles.equals("")) return false;
-        else return mobiles.matches(telRegex);
+    private void initData() {
+        mNameView.setText(mObj.contactperson);
+        mMobileView.setText(mObj.contactmobile);
+        mCityView.setText(mObj.province + mObj.city + mObj.zone);
+        mAddressView.setText(mObj.address);
+        if ("1".equals(mObj.isdefault)) {
+            mIsdefaultView.setChecked(true);
+        } else {
+            mIsdefaultView.setChecked(false);
+        }
     }
 
     @Override
     public void onClick(View v) {
+        if ("edit".equals(getIntent().getStringExtra("flag"))) {
+            delete();
+        } else {
+            save();
+        }
+    }
+
+    /**
+     * 保存
+     */
+    private void save() {
         String name = mNameView.getText() + "";
         String contactmobile = mMobileView.getText() + "";
         String address = mAddressView.getText() + "";
@@ -105,7 +116,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         mObj.contactperson = name;
         mObj.contactmobile = contactmobile;
         mObj.address = address;
-//
+
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         dialog.setText("请等待...");
         dialog.show();
@@ -115,7 +126,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
                 dialog.dismiss();
                 switch (msg.what) {
                     case ThreadState.SUCCESS:
-                        BaseResponseModel re = (BaseResponseModel) msg.obj;
+                        ResponseInfo re = (ResponseInfo) msg.obj;
                         if (re.isSuccess()) {
                             setResult(RESULT_OK);
                             finish();
@@ -137,7 +148,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
             public void run() {
                 try {
                     SetAction action = new SetAction();
-                    BaseResponseModel model = action.editAddrss(mObj);
+                    ResponseInfo model = action.editAddrss(mObj);
                     handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);
@@ -146,11 +157,77 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         }).start();
     }
 
-    @OnClick(R.id.addr_edit_provincial_city)
-    public void onViewClicked() {
-        Intent intent = new Intent(mContext, AddrSelectActivity.class);
-        intent.putExtra("flag", "addrEdit");
-        startActivityForResult(intent, RESULT_ADDR);
+    /**
+     * 删除
+     */
+    private void delete() {
+        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_delete_dialog);
+        dialog.show();
+        dialog.setConfirmBtnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+
+            }
+        }, "否");
+        dialog.setCancelBtnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                final String id = mObj.recvaddrid;
+                final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+                dialog.setText("请等待...");
+                dialog.show();
+                final Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        dialog.dismiss();
+                        switch (msg.what) {
+                            case ThreadState.SUCCESS:
+                                ResponseInfo re = (ResponseInfo) msg.obj;
+                                if (re.isSuccess()) {
+                                    finish();
+                                } else {
+                                    ToastUtil.showMessage(re.getMsg());
+                                }
+
+                                break;
+                            case ThreadState.ERROR:
+                                ToastUtil.showMessage("操作失败!");
+                                break;
+                        }
+                    }
+                };
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            SetAction userAction = new SetAction();
+                            ResponseInfo re = userAction.deleteAddrss(id);
+                            handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
+                        } catch (Exception e) {
+                            handler.sendEmptyMessage(ThreadState.ERROR);
+                        }
+                    }
+                }).start();
+
+            }
+        }, "是");
+    }
+
+    @OnClick({R.id.addr_edit_provincial_city, R.id.addr_edit_save})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.addr_edit_provincial_city:
+                Intent intent = new Intent(mContext, AddrSelectActivity.class);
+                intent.putExtra("flag", "addrEdit");
+                startActivityForResult(intent, RESULT_ADDR);
+                break;
+            case R.id.addr_edit_save:
+                save();
+                break;
+        }
     }
 
     @Override
@@ -166,5 +243,17 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
             }
         }
 
+    }
+
+    public boolean isMobileNO(String mobiles) {
+    /*
+    移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
+    联通：130、131、132、152、155、156、185、186
+    电信：133、153、180、189、（1349卫通）
+    总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
+    */
+        String telRegex = "[1][34578]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
+        if (mobiles.equals("")) return false;
+        else return mobiles.matches(telRegex);
     }
 }

@@ -15,8 +15,14 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+
+import com.example.programmer.tbeacloudbusiness.activity.administrator.realNameAuthentication.MemberListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.SetActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.BypassAccountManageListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyFansActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.RealNameAuthenticationPlumberActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.SetActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
@@ -90,8 +96,8 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 
     private void initItemView(List<List<MyMainResponseModel.Item>> modelList) {
         LinearLayout parentLayout = (LinearLayout) mView.findViewById(R.id.fragment_my_item_layout);
-        for (int i = 0;i<modelList.size();i++) {
-            List<MyMainResponseModel.Item> list  = modelList.get(i);
+        for (int i = 0; i < modelList.size(); i++) {
+            List<MyMainResponseModel.Item> list = modelList.get(i);
             for (final MyMainResponseModel.Item item : list) {
                 View layout = getActivity().getLayoutInflater().inflate(R.layout.fragment_my_item, null);
                 TextView leftView = (TextView) layout.findViewById(R.id.my_item_left_text);
@@ -105,14 +111,33 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if("mymoneyaccount".equals(item.id)){
-                            startActivity(new Intent(getActivity(), MyRebateAccountlistActivity.class));
 
+                        if ("mymessage".equals(item.id)) {//测试管理界面
+                            startActivity(new Intent(getActivity(), MemberListActivity.class));
                         }
+                        if ("mymoneyaccount".equals(item.id)) {//我的返利账户
+                            startActivity(new Intent(getActivity(), MyRebateAccountlistActivity.class));
+                        }
+                        if ("mysubaccount".equals(item.id)) {//我的子账号
+                            startActivity(new Intent(getActivity(), BypassAccountManageListActivity.class));
+                        }
+
+                        if ("myfocus".equals(item.id)) {//我的关注
+                            startActivity(new Intent(getActivity(), MyAttentionActivity.class));
+                        }
+
+                        if ("myfans".equals(item.id)) {//我的粉丝
+                            startActivity(new Intent(getActivity(), MyFansActivity.class));
+                        }
+
+                        if ("companyidentify".equals(item.id)) {//实名认证
+                            startActivity(new Intent(getActivity(), RealNameAuthenticationPlumberActivity.class));
+                        }
+
                     }
                 });
             }
-            if(i < modelList.size()-1){
+            if (i < modelList.size() - 1) {
                 View layout = getActivity().getLayoutInflater().inflate(R.layout.fragment_my_view_item, null);
                 parentLayout.addView(layout);
             }

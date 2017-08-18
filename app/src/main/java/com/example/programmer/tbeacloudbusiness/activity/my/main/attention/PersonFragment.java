@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,13 +17,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.action.MyAction;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionCommodityResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionSelectModel;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionPersonResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionStoreResponseModel;
+import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +36,7 @@ import butterknife.ButterKnife;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
-/**
- * 关注的商品
- */
-public class CommodityFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class PersonFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private View mView;
     private ListView mListView;
     private MyAdapter mAdapter;
@@ -58,6 +57,7 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
         super.onResume();
         mRefreshLayout.beginRefreshing();
     }
+
 
     /**
      * 实例化组件
@@ -94,7 +94,7 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
                     mRefreshLayout.endLoadingMore();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            AttentionCommodityResponseModel model = (AttentionCommodityResponseModel) msg.obj;
+                            AttentionPersonResponseModel model = (AttentionPersonResponseModel) msg.obj;
                             if (model.isSuccess()) {
                                 if (model.data.myfocuslist != null) {
                                     mAdapter.addAll(model.data.myfocuslist);
@@ -116,7 +116,7 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
                 public void run() {
                     try {
                         MyAction action = new MyAction();
-                        AttentionCommodityResponseModel model = action.getAttentionCommodityList(mPage++, mPagesiz);
+                        AttentionPersonResponseModel model = action.getAttentionPersonList(mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -171,7 +171,7 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
                     public void onClick(View v) {
                         String ids = "";
                         if (mAdapter.mList != null) {
-                            for (AttentionCommodityResponseModel.DataBean.MyfocuslistBean item : mAdapter.mList) {
+                            for (AttentionPersonResponseModel.DataBean.MyfocuslistBean item : mAdapter.mList) {
                                 if (item.isCheck == true) {
                                     if (ids.length() > 0) {
                                         ids += ",";
@@ -180,12 +180,12 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
                                 }
                             }
                             if ("".equals(ids)) {
-                                ToastUtil.showMessage("请选择需要取消关注的商品");
+                                ToastUtil.showMessage("请选择需要取消关注的个人");
                             } else {
                                 ((MyAttentionActivity) getActivity()).cancelAttention(ids);
                             }
                         } else {
-                            ToastUtil.showMessage("没有关注的商品");
+                            ToastUtil.showMessage("没有关注的个人");
                         }
                     }
                 });
@@ -198,7 +198,7 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
 
     class MyAdapter extends BaseAdapter {
 
-        private List<AttentionCommodityResponseModel.DataBean.MyfocuslistBean> mList = new ArrayList<>();
+        private List<AttentionPersonResponseModel.DataBean.MyfocuslistBean> mList = new ArrayList<>();
 
         @Override
         public int getCount() {
@@ -217,17 +217,16 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
+
             ViewHolder holder;
             if (convertView == null) {
-                convertView = getActivity().getLayoutInflater().inflate(
-                        R.layout.fragment_attention_commodity_list_item, null);
+                convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_attention_store_list_item, null);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            holder.mNameView.setText(mList.get(position).name);
-            holder.mPriceView.setText(mList.get(position).price);
+
             if (isSelect) {
                 holder.mCk.setVisibility(View.VISIBLE);
             } else {
@@ -247,7 +246,12 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
                     }
                 }
             });
-
+//
+            AttentionPersonResponseModel.DataBean.MyfocuslistBean obj = mList.get(position);
+            ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, holder.mHeadView);
+            ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, holder.mPersontypeiconView);
+            holder.mNameView.setText(obj.name);
+            holder.mJobtitleView.setText(obj.info);
             return convertView;
         }
 
@@ -275,26 +279,27 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
             }
         }
 
-
         public void removeAll() {
             mList.clear();
             notifyDataSetChanged();
         }
 
-        public void addAll(List<AttentionCommodityResponseModel.DataBean.MyfocuslistBean> list) {
+        public void addAll(List<AttentionPersonResponseModel.DataBean.MyfocuslistBean> list) {
             mList.addAll(list);
             notifyDataSetChanged();
         }
 
         class ViewHolder {
-            @BindView(R.id.attention_commdity_item_ck)
+            @BindView(R.id.attention_item_ck)
             CheckBox mCk;
-            @BindView(R.id.attention_commdity_item_head)
-            ImageView mHeadView;
-            @BindView(R.id.attention_commdity_item_name)
+            @BindView(R.id.attention_item_head)
+            CircleImageView mHeadView;
+            @BindView(R.id.attention_item_name)
             TextView mNameView;
-            @BindView(R.id.attention_commdity_item_price)
-            TextView mPriceView;
+            @BindView(R.id.attention_item_persontypeicon)
+            ImageView mPersontypeiconView;
+            @BindView(R.id.attention_item_jobtitle)
+            TextView mJobtitleView;
 
             ViewHolder(View view) {
                 ButterKnife.bind(this, view);

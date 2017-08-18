@@ -1,14 +1,22 @@
 package com.example.programmer.tbeacloudbusiness.activity.my.set.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.my.set.action.SetAction;
+import com.example.programmer.tbeacloudbusiness.activity.my.set.model.PwdUpdateModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
+import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
 /**
@@ -61,41 +69,39 @@ public class PwdEditActivity extends BaseActivity {
         final CustomDialog dialog = new CustomDialog(PwdEditActivity.this,R.style.MyDialog,R.layout.tip_wait_dialog);
         dialog.setText("请等待");
         dialog.show();
-//        final Handler handler = new Handler(){
-//            @Override
-//            public void handleMessage(Message msg) {
-//                dialog.dismiss();
-//                switch (msg.what){
-//                    case ThreadState.SUCCESS:
-//                        RspInfo1 re = (RspInfo1)msg.obj;
-//                        if(re.isSuccess()){
-//                            Intent intent = new Intent(PwdEditActivity.this,BindingNewPhoneFinishActivity.class);
-//                            intent.putExtra("title","密码修改成功");
-//                            intent.putExtra("title1","密码修改成功");
-//                            startActivity(intent);
-//                            finish();
-//                        }else {
-//                            UtilAssistants.showToast(re.getMsg());
-//                        }
-//                        break;
-//                    case ThreadState.ERROR:
-//                        UtilAssistants.showToast("操作失败！");
-//                        break;
-//                }
-//            }
-//        };
-//
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    UserAction userAction = new UserAction();
-//                    RspInfo1 re = userAction.updateNewPwd(oldPwd,newPwd);
-//                    handler.obtainMessage(ThreadState.SUCCESS,re).sendToTarget();
-//                } catch (Exception e) {
-//                    handler.sendEmptyMessage(ThreadState.ERROR);
-//                }
-//            }
-//        }).start();
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                dialog.dismiss();
+                switch (msg.what){
+                    case ThreadState.SUCCESS:
+                        ResponseInfo re = (ResponseInfo)msg.obj;
+                        if(re.isSuccess()){
+                            Intent intent = new Intent(PwdEditActivity.this,PwdEditSucceedActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else {
+                            ToastUtil.showMessage(re.getMsg());
+                        }
+                        break;
+                    case ThreadState.ERROR:
+                        ToastUtil.showMessage("操作失败！");
+                        break;
+                }
+            }
+        };
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    SetAction userAction = new SetAction();
+                    ResponseInfo re = userAction.updatePwd(oldPwd,newPwd);
+                    handler.obtainMessage(ThreadState.SUCCESS,re).sendToTarget();
+                } catch (Exception e) {
+                    handler.sendEmptyMessage(ThreadState.ERROR);
+                }
+            }
+        }).start();
     }
 }

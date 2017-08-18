@@ -1,6 +1,8 @@
-package com.example.programmer.tbeacloudbusiness.activity.my.main;
+package com.example.programmer.tbeacloudbusiness.activity.my.main.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,8 +15,16 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.action.MyAction;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.attention.CommodityFragment;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.attention.PersonFragment;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.attention.StoreFragment;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionCommodityResponseModel;
+import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
+import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
+import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +38,7 @@ public class MyAttentionActivity extends BaseActivity implements View.OnClickLis
     private int mIndex2 = 0;//前一次点击的下标
     private CommodityFragment mCommodityFragment;
     private StoreFragment mStoreFragment;
+    private PersonFragment mPersonFragment;
     private Fragment mCustomFragment;
     public View mSelectAllLayout;
 
@@ -92,11 +103,16 @@ public class MyAttentionActivity extends BaseActivity implements View.OnClickLis
                 mCommodityFragment = new CommodityFragment();
             }
             mCustomFragment = mCommodityFragment;
-        } else if (mIndex == 1 || mIndex == 2) {
+        } else if (mIndex == 1) {
             if (mStoreFragment == null) {
                 mStoreFragment = new StoreFragment();
             }
             mCustomFragment = mStoreFragment;
+        } else if (mIndex == 2) {
+            if (mPersonFragment == null) {
+                mPersonFragment = new PersonFragment();
+            }
+            mCustomFragment = mPersonFragment;
         }
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         t.replace(R.id.content_frame, mCustomFragment);
@@ -107,10 +123,63 @@ public class MyAttentionActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         if (mIndex == 0) {
             mCommodityFragment.refresh();
-        }else if(mIndex == 1){
+        } else if (mIndex == 1) {
             mStoreFragment.refresh();
+        } else if (mIndex == 2) {
+            mPersonFragment.refresh();
         }
 
+    }
+
+    /**
+     * 取消关注
+     */
+    public void cancelAttention(final String ids) {
+        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+        dialog.setText("请等待...");
+        dialog.show();
+        try {
+            final Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    dialog.dismiss();
+                    switch (msg.what) {
+                        case ThreadState.SUCCESS:
+                            ResponseInfo model = (ResponseInfo) msg.obj;
+                            if (model.isSuccess()) {
+                                if (mIndex == 0) {
+                                    mCommodityFragment.refreshDate();
+                                } else if (mIndex == 1) {
+                                    mStoreFragment.refreshDate();
+                                } else if (mIndex == 21) {
+                                    mPersonFragment.refreshDate();
+                                }
+                            } else {
+                                ToastUtil.showMessage(model.getMsg());
+                            }
+                            break;
+                        case ThreadState.ERROR:
+                            ToastUtil.showMessage("操作失败！");
+                            break;
+                    }
+                }
+            };
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        MyAction action = new MyAction();
+                        ResponseInfo model = action.cancelAttention(ids);
+                        handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+                    } catch (Exception e) {
+                        handler.sendEmptyMessage(ThreadState.ERROR);
+                    }
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

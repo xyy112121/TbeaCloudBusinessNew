@@ -126,6 +126,7 @@
         <View style="@style/horizontal_view" />
 
         <Button
+            android:id="@+id/addr_edit_save"
             style="@style/style_next_btn1"
             android:layout_alignParentBottom="true"
             android:background="@drawable/btn_bg_blue"

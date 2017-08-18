@@ -114,22 +114,23 @@
         <activity android:name=".activity.tbea.activity.ProductPresentationInfoActivity" />
         <activity android:name=".activity.tbea.activity.ProductPresentationContactInfoActivity" />
 
-        <activity android:name=".activity.my.main.SetActivity" />
+        <activity android:name=".activity.my.main.activity.SetActivity" />
         <activity android:name=".activity.my.set.activity.BindingNewPhoneActivity" />
         <activity android:name=".activity.my.set.activity.EditBindingPhoneActivity" />
         <activity android:name=".activity.my.set.activity.BindingNewPhoneFinishActivity" />
         <activity android:name=".activity.my.set.activity.PwdEditActivity" />
+        <activity android:name=".activity.my.set.activity.PwdEditSucceedActivity" />
         <activity android:name=".activity.my.set.activity.AddressEditActivity" />
         <activity android:name=".activity.my.set.activity.AddressEditListActivity" />
         <activity android:name=".activity.my.set.activity.SetBackgroundActivity" />
         <activity android:name=".activity.my.set.activity.GeneralActivity" />
-        <activity android:name=".activity.my.main.RealNameAuthenticationPlumberActivity" />
-        <activity android:name=".activity.my.main.RealNameAuthenticationDistributorActivity" />
-        <activity android:name=".activity.my.main.MyAttentionActivity" />
-        <activity android:name=".activity.my.main.MyFansActivity" />
-        <activity android:name=".activity.my.main.BypassAccountManageListActivity" />
-        <activity android:name=".activity.my.main.BypassAccountManageEditActivity" />
-        <activity android:name=".activity.my.main.ByPassAccountAuthorizationFunctionsActivity" />
+        <activity android:name=".activity.my.main.activity.RealNameAuthenticationPlumberActivity" />
+        <activity android:name=".activity.my.main.activity.RealNameAuthenticationDistributorActivity" />
+        <activity android:name=".activity.my.main.activity.MyAttentionActivity" />
+        <activity android:name=".activity.my.main.activity.MyFansActivity" />
+        <activity android:name=".activity.my.main.activity.BypassAccountManageListActivity" />
+        <activity android:name=".activity.my.main.activity.BypassAccountManageEditActivity" />
+        <activity android:name=".activity.my.main.activity.ByPassAccountAuthorizationFunctionsActivity" />
         <activity android:name=".activity.administrator.realNameAuthentication.MemberListActivity" />
         <activity android:name=".activity.administrator.realNameAuthentication.PersonalDataActivity" />
 

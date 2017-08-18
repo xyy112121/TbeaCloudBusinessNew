@@ -10,7 +10,7 @@
             style="@style/my_text_style"
             android:text="消息通知"/>
         <CheckBox
-            android:id="@+id/addr_edit_isdefault"
+            android:id="@+id/general_notify"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginRight="10dp"

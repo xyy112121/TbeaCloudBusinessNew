@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.my.main;
+package com.example.programmer.tbeacloudbusiness.activity.my.main.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingViewResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.action.SetAction;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.activity.AddressEditListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.activity.EditBindingPhoneActivity;
@@ -20,7 +18,6 @@ import com.example.programmer.tbeacloudbusiness.activity.my.set.activity.PwdEdit
 import com.example.programmer.tbeacloudbusiness.activity.my.set.activity.SetBackgroundActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.SetResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
-import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 

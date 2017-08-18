@@ -49,9 +49,11 @@
             android:id="@+id/select_all"
             style="@style/select_ck_style"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            />
 
         <TextView
+            android:id="@+id/select_all_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -60,6 +62,7 @@
             android:text="全选" />
 
         <Button
+            android:id="@+id/my_attention_cancel"
             android:layout_width="80dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"

@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
+            android:id="@+id/set_background_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitXY"
@@ -22,11 +23,13 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="30dp">
             <Button
+                android:id="@+id/open_album"
                 style="@style/style_next_btn"
                 android:background="@drawable/btn_bg_blue"
                 android:text="相册"/>
 
             <Button
+                android:id="@+id/open_camera"
                 style="@style/style_next_btn"
                 android:background="@drawable/btn_bg_blue"
                 android:layout_marginTop="1dp"

@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.my.main;
+package com.example.programmer.tbeacloudbusiness.activity.my.set.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,14 +7,14 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
- * 授权功能
+ * Created by programmer on 2017/8/18.
  */
 
-public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
+public class PwdEditSucceedActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bypass_account_authorization_functions);
-        initTopbar("授权功能");
+        setContentView(R.layout.activity_pwd_edit_succeed);
+        initTopbar("密码设置");
     }
 }

@@ -50,7 +50,7 @@ public class AddrSelectActivity extends BaseActivity implements View.OnClickList
         ArrayList<AddressPicker.Province> data = new ArrayList<>();
         String json = AssetsUtils.readText(mContext, "city.json");
         data.addAll(JSON.parseArray(json, AddressPicker.Province.class));
-        AddressPicker picker = new AddressPicker((Activity) mContext,data);
+        AddressPicker picker = new AddressPicker( mContext,data);
         picker.setSelectedItem(mProvince, mCity, mCounty);
         picker.setOnAddressPickListener(new AddressPicker.OnAddressPickListener() {
             @Override

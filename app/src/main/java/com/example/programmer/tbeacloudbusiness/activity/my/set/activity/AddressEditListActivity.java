@@ -45,84 +45,12 @@ public class AddressEditListActivity extends BaseActivity implements View.OnClic
         mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter();
         mListView.setAdapter(mAdapter);
-        getListDate();
-        listener();
-    }
-
-    private void listener() {
-
-        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
-//                final CustomDialog dialog = new CustomDialog(mContext,R.style.MyDialog,R.layout.tip_delete_dialog);
-//                dialog.show();
-//                dialog.setConfirmBtnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        dialog.dismiss();
-//
-//                    }
-//                },"否");
-//                dialog.setCancelBtnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        dialog.dismiss();
-//                        String id = ((Address)mAdapter.getItem(i)).getId();
-//                        delect(id);
-//
-//                    }
-//                },"是");
-                return false;
-            }
-        });
-    }
-
-    private void delect(final String id) {
-//        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
-//        dialog.setText("请等待...");
-//        dialog.show();
-//        final Handler handler = new Handler() {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                dialog.dismiss();
-//                switch (msg.what) {
-//                    case ThreadState.SUCCESS:
-//                        RspInfo1 re = (RspInfo1) msg.obj;
-//                        if (re.isSuccess()) {
-//                           mAdapter.removeAll();
-//                            getListDate();
-//                        } else {
-//                            UtilAssistants.showToast(re.getMsg());
-//                        }
-//
-//                        break;
-//                    case ThreadState.ERROR:
-//                        UtilAssistants.showToast("操作失败！");
-//                        break;
-//                }
-//            }
-//        };
-//
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    UserAction userAction = new UserAction();
-//                    RspInfo1 re = userAction.delectAddr(id);
-//                    handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
-//                } catch (Exception e) {
-//                    handler.sendEmptyMessage(ThreadState.ERROR);
-//                }
-//            }
-//        }).start();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK && requestCode == 100) {
-            mAdapter.removeAll();
-            getListDate();
-        }
+    protected void onResume() {
+        super.onResume();
+        getListDate();
     }
 
     /**
@@ -172,7 +100,8 @@ public class AddressEditListActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        startActivityForResult(new Intent(mContext,AddressEditActivity.class),100);
+        Intent intent = new Intent(mContext, AddressEditActivity.class);
+        startActivity(intent);
     }
 
     class MyAdapter extends BaseAdapter {
@@ -204,7 +133,7 @@ public class AddressEditListActivity extends BaseActivity implements View.OnClic
             } else {
                 holder = (ViewHolder) v.getTag();
             }
-            AddressModel obj = mList.get(i);
+            final AddressModel obj = mList.get(i);
             holder.mNameView.setText(obj.contactperson);
             holder.mAddressView.setText(obj.address);
             holder.mMobileView.setText(obj.contactmobile);
@@ -214,6 +143,15 @@ public class AddressEditListActivity extends BaseActivity implements View.OnClic
             } else {
                 holder.mIsdefaultView.setVisibility(View.GONE);
             }
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, AddressEditActivity.class);
+                    intent.putExtra("flag", "edit");
+                    intent.putExtra("model", obj);
+                    startActivity(intent);
+                }
+            });
             return v;
         }
 
