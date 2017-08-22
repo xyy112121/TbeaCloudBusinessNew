@@ -1,34 +1,45 @@
 package com.example.programmer.tbeacloudbusiness.activity.user.model;
 
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by programmer on 2017/8/22.
  */
 
 public class CompletionDataResponseModel extends BaseResponseModel {
+
+
     public DataBean data;
 
+    public static class DataBean {
+        public PersoninfoBean personinfo;
 
-    public  class DataBean {
-        public CompanyidentifyinfoBean companyidentifyinfo;
-
-        public  class CompanyidentifyinfoBean {
+        public static class PersoninfoBean {
             public String id;
-            public String companyname;
-            public Object businessscope;
+            public String mobilenumber;
+            public String usertypeid;
+            public String usertype;
             public String provinceid;
+            public String province;
             public String cityid;
+            public String city;
             public String zoneid;
-            public String address;
-            public String companyaddress;
-            public String whetheridentifiedid;
-            public String whetheridentified;
-            public String masterperson;
-            public String masterpersonid;
-            public String masterpersonidcard1;
-            public String masterpersonidcard2;
-            public String companypicture;
+            public String zone;
+            public String picture;
+            public FirstdistributorinfoBean firstdistributorinfo;
+            public String realname;
+            public String sexid;
+            public String birthyear;
+            public String birthmonth;
+            public String birthday;
+
+            public static class FirstdistributorinfoBean {
+                public String firstdistributorid;
+                public String thumbpicture;
+                public String personname;
+                public String companyname;
+            }
         }
     }
 }

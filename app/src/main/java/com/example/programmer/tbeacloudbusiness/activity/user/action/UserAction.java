@@ -1,5 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.activity.user.action;
 
+import android.util.Log;
+
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataResponseModel;
@@ -115,18 +117,18 @@ public class UserAction extends BaseAction {
     public ResponseInfo completionData(CompletionDataRequestModel obj)throws Exception {
         ResponseInfo model;
         List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new BasicNameValuePair("mobilenumber ", obj.mobilenumber));
-        pairs.add(new BasicNameValuePair("usertypeid ", obj.usertypeid));
-        pairs.add(new BasicNameValuePair("province ", obj.province));
-        pairs.add(new BasicNameValuePair("city ", obj.city));
-        pairs.add(new BasicNameValuePair("zone ", obj.zone));
-        pairs.add(new BasicNameValuePair("uplevelcompanyid ", obj.uplevelcompanyid));
-        pairs.add(new BasicNameValuePair("realname ", obj.realname));
-        pairs.add(new BasicNameValuePair("sexid ", obj.sexid));
-        pairs.add(new BasicNameValuePair("birthyear ", obj.birthyear));
-        pairs.add(new BasicNameValuePair("birthmonth ", obj.birthmonth));
-        pairs.add(new BasicNameValuePair("birthday ", obj.birthday));
-        pairs.add(new BasicNameValuePair("picture ", obj.picture));
+        pairs.add(new BasicNameValuePair("mobilenumber", obj.mobilenumber));
+        pairs.add(new BasicNameValuePair("usertypeid", obj.usertypeid));
+        pairs.add(new BasicNameValuePair("province", obj.province));
+        pairs.add(new BasicNameValuePair("city", obj.city));
+        pairs.add(new BasicNameValuePair("zone", obj.zone));
+        pairs.add(new BasicNameValuePair("uplevelcompanyid", obj.uplevelcompanyid));
+        pairs.add(new BasicNameValuePair("realname", obj.realname));
+        pairs.add(new BasicNameValuePair("sexid", obj.sexid));
+        pairs.add(new BasicNameValuePair("birthyear", obj.birthyear));
+        pairs.add(new BasicNameValuePair("birthmonth", obj.birthmonth));
+        pairs.add(new BasicNameValuePair("birthday", obj.birthday));
+        pairs.add(new BasicNameValuePair("picture", obj.picture));
         String result = sendRequest("TBEAYUN003002001000", pairs);
         model = gson.fromJson(result, ResponseInfo.class);
         return model;
@@ -151,37 +153,49 @@ public class UserAction extends BaseAction {
     public ResponseInfo attestation(RelaNameAuthenticationRequestModel obj)throws Exception {
         ResponseInfo model;
         List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new BasicNameValuePair("companyname ", obj.companyname));
-        pairs.add(new BasicNameValuePair("companylisencecode ", obj.companylisencecode));
-        pairs.add(new BasicNameValuePair("province ", obj.province));
-        pairs.add(new BasicNameValuePair("city ", obj.city));
-        pairs.add(new BasicNameValuePair("zone ", obj.zone));
-        pairs.add(new BasicNameValuePair("address ", obj.address));
-        pairs.add(new BasicNameValuePair("businessscope ", obj.businessscope));
-        pairs.add(new BasicNameValuePair("companylisencepicture ", obj.companylisencepicture));
-        pairs.add(new BasicNameValuePair("masterperson ", obj.masterperson));
-        pairs.add(new BasicNameValuePair("masterpersonid ", obj.masterpersonid));
-        pairs.add(new BasicNameValuePair("masterpersonidcard1 ", obj.masterpersonidcard1));
-        pairs.add(new BasicNameValuePair("masterpersonidcard2 ", obj.masterpersonidcard2));
-        pairs.add(new BasicNameValuePair("companyphoto ", obj.companyphoto));
+        pairs.add(new BasicNameValuePair("companyname", obj.companyname));
+        pairs.add(new BasicNameValuePair("companylisencecode", obj.companylisencecode));
+        pairs.add(new BasicNameValuePair("province", obj.province));
+        pairs.add(new BasicNameValuePair("city", obj.city));
+        pairs.add(new BasicNameValuePair("zone", obj.zone));
+        pairs.add(new BasicNameValuePair("address", obj.address));
+        pairs.add(new BasicNameValuePair("businessscope", obj.businessscope));
+        pairs.add(new BasicNameValuePair("companylisencepicture", obj.companylisencepicture));
+        pairs.add(new BasicNameValuePair("masterperson", obj.masterperson));
+        pairs.add(new BasicNameValuePair("masterpersonid", obj.masterpersonid));
+        pairs.add(new BasicNameValuePair("masterpersonidcard1", obj.masterpersonidcard1));
+        pairs.add(new BasicNameValuePair("masterpersonidcard2", obj.masterpersonidcard2));
+        pairs.add(new BasicNameValuePair("companyphoto", obj.companyphoto));
         String result = sendRequest("TBEAYUN003003001000", pairs);
         model = gson.fromJson(result, ResponseInfo.class);
         return model;
     }
 
     /**
-     * 获取实名认证
+     * 查看认证状态
+     */
+    public ResponseInfo getAttestationState()throws Exception{
+        ResponseInfo model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN003003003000", pairs);
+        model = gson.fromJson(result, ResponseInfo.class);
+        return model;
+    }
+
+    /**
+     * 获取实名认证信息
      */
     public RelaNameAuthenticationResponseModel getRelaNameAuthentication()throws Exception {
         RelaNameAuthenticationResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN003003002000", pairs);
+        Log.e("RelaNameAuthentication",result);
         model = gson.fromJson(result, RelaNameAuthenticationResponseModel.class);
         return model;
     }
 
     /**
-     * 获取补全资料
+     * 获取补全资料信息
      */
     public CompletionDataResponseModel getCompletionData()throws Exception {
         CompletionDataResponseModel model;

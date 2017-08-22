@@ -1,6 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.activity.user.model;
 
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by programmer on 2017/8/22.
@@ -10,14 +11,15 @@ public class RelaNameAuthenticationResponseModel extends BaseResponseModel {
 
     public DataBean data;
 
-
-    public  class DataBean {
+    public static class DataBean {
         public CompanyidentifyinfoBean companyidentifyinfo;
 
-        public  class CompanyidentifyinfoBean {
+        public static class CompanyidentifyinfoBean {
             public String id;
-            public String companyname;
-            public Object businessscope;
+            public String companyname;//公司名
+            public String companylisencecode;//营业执照号
+            public String businessscope;//经营范围
+            public String companylisencepicture;//营业执照
             public String provinceid;
             public String cityid;
             public String zoneid;

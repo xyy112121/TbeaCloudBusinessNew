@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,10 +17,14 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationRequestModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationResponseModel;
+import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.picker.CustomAddressPicker;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
@@ -70,21 +75,24 @@ public class RealNameAuthenticationActivity extends BaseActivity {
     ImageView mMasterPersonIdCard2View;
     @BindView(R.id.real_name_companyPhoto_layout)
     LinearLayout mCompanyPhotoParentView;
-
-    RelaNameAuthenticationRequestModel mRequest = new RelaNameAuthenticationRequestModel();
     @BindView(R.id.real_name_companyLisencePicture_pb)
     ProgressBar mCompanyLisencePicturePbView;
     @BindView(R.id.real_name_masterPersonIdCard1_pb)
     ProgressBar mPersonIdCard1PbView;
     @BindView(R.id.real_name_masterPersonIdCard2_pb)
     ProgressBar mPersonIdCard2PbView;
+    @BindView(R.id.real_name_companyPhoto_finish)
+    Button mFinishView;
+
+
+
     private String mFlag;//判断当前选择的是什么 LisencePicture（营业执照） IdCard1（身份证正面）IdCard2（身份证反面）CompanyPhoto（实景照片）
     List<LocalMedia> mSelectLisencePictureList = new ArrayList<>();
     List<LocalMedia> mSelectIdCard1List = new ArrayList<>();
     List<LocalMedia> mSelectIdCard2List = new ArrayList<>();
     List<LocalMedia> mSelectCompanyPhotoList = new ArrayList<>();
     List<LocalMedia> mSelectList = new ArrayList<>();
-
+    RelaNameAuthenticationRequestModel mRequest = new RelaNameAuthenticationRequestModel();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,7 +100,97 @@ public class RealNameAuthenticationActivity extends BaseActivity {
         setContentView(R.layout.activity_real_name_authentication);
         ButterKnife.bind(this);
         initTopbar("实名认证");
+        initView();
     }
+
+    private void initView(){
+        String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
+        if (!"notidentify".equals(identify)) {//未认证
+            getDate();
+        }
+    }
+
+    public void getDate() {
+        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+        dialog.setText("请等待...");
+        dialog.show();
+
+        try {
+            final Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    dialog.dismiss();
+                    switch (msg.what) {
+                        case ThreadState.SUCCESS:
+                            RelaNameAuthenticationResponseModel model = (RelaNameAuthenticationResponseModel) msg.obj;
+                            if (model.isSuccess() && model.data != null) {
+                                RelaNameAuthenticationResponseModel.DataBean.CompanyidentifyinfoBean obj = model.data.companyidentifyinfo;
+                                ShareConfig.getConfigString(mContext,Constants.whetheridentifiedid,obj.whetheridentifiedid);
+                                mCompanyNameView.setText(obj.companyname);
+                                mCompanyLisenceCodeView.setText(obj.companylisencecode);
+                                mAddrView.setText(obj.companyaddress);
+                                mAddr2View.setText(obj.address);
+                                mBusinessScopeView.setText(obj.businessscope);
+                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.companylisencepicture, mCompanyLisencePictureView);
+                                mMasterPersonView.setText(obj.masterperson);
+                                mMasterPersonIDView.setText(obj.masterpersonid);
+                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.masterpersonidcard1, mMasterPersonIdCard1View);
+                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.masterpersonidcard2, mMasterPersonIdCard2View);
+                                if(obj.companypicture.length()>0){
+                                    String[] pictures = obj.companypicture.split(",");
+                                    mCompanyPhotoParentView.removeAllViews();
+                                    for (String s:pictures) {
+                                        View v = getLayoutInflater().inflate(R.layout.activity_real_name_authentication_companyphoto, null);
+                                        ImageView iv = (ImageView) v.findViewById(R.id.real_name_companyPhoto);
+                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + s, iv);
+                                        mCompanyPhotoParentView.addView(v);
+                                    }
+                                }
+
+                                setView();
+                            } else {
+                                ToastUtil.showMessage(model.getMsg());
+                            }
+                            break;
+                        case ThreadState.ERROR:
+                            ToastUtil.showMessage("操作失败！");
+                            break;
+                    }
+                }
+            };
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        UserAction action = new UserAction();
+                        RelaNameAuthenticationResponseModel model = action.getRelaNameAuthentication();
+                        handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+                    } catch (Exception e) {
+                        handler.sendEmptyMessage(ThreadState.ERROR);
+                    }
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setView() {
+        mCompanyNameView.setFocusable(false);
+        mCompanyLisenceCodeView.setFocusable(false);
+        mAddrView.setClickable(false);
+        mAddr2View.setFocusable(false);
+        mBusinessScopeView.setFocusable(false);
+        mCompanyLisencePictureView.setClickable(false);
+        mMasterPersonView.setFocusable(false);
+        mMasterPersonIDView.setFocusable(false);
+        mMasterPersonIdCard1View.setClickable(false);
+        mMasterPersonIdCard2View.setClickable(false);
+        mCompanyPhotoParentView.setClickable(false);
+        mFinishView.setText("查看认证状态");
+    }
+
 
     @OnClick({R.id.real_name_addr, R.id.real_name_companyLisencePicture, R.id.real_name_masterPersonIdCard1, R.id.real_name_masterPersonIdCard2, R.id.real_name_companyPhoto_layout, R.id.real_name_companyPhoto_finish})
     public void onViewClicked(View view) {
@@ -117,10 +215,56 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                 openImage();
                 break;
             case R.id.real_name_companyPhoto_finish:
-                attestation();
+                String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
+                if ("notidentify".equals(identify)) {//未认证
+                    attestation();
+                }else {
+                    getAttestationstate();
+                }
                 break;
         }
     }
+
+    /**
+     * 查看认证状态
+     */
+    private void getAttestationstate(){
+        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+        dialog.setText("请等待...");
+        dialog.show();
+
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                dialog.dismiss();
+                switch (msg.what) {
+                    case ThreadState.SUCCESS:
+                        ResponseInfo model = (ResponseInfo) msg.obj;
+                        ToastUtil.showMessage(model.getMsg());
+
+                        break;
+                    case ThreadState.ERROR:
+                        ToastUtil.showMessage("操作失败！");
+                        break;
+                }
+            }
+        };
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    UserAction action = new UserAction();
+                    ResponseInfo model = action.getAttestationState();
+                    handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+                } catch (Exception e) {
+                    handler.sendEmptyMessage(ThreadState.ERROR);
+                }
+            }
+        }).start();
+
+    }
+
 
     /**
      * 认证
@@ -140,6 +284,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
         }
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         dialog.setText("请等待...");
+        dialog.show();
 
         try {
             final Handler handler = new Handler() {

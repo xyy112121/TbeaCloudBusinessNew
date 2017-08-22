@@ -98,10 +98,10 @@ public class CompletionDataActivity extends BaseActivity {
 
     private void initView() {
         String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-        if ("identifying".equals(identify)) {//认证中
-            getDate();
-        } else {
+        if ("notidentify".equals(identify)) {//未认证
             getUserTypeList();
+        } else {
+            getDate();
         }
     }
 
@@ -119,9 +119,35 @@ public class CompletionDataActivity extends BaseActivity {
                         case ThreadState.SUCCESS:
                             CompletionDataResponseModel model = (CompletionDataResponseModel) msg.obj;
                             if (model.isSuccess() && model.data != null) {
-                                CompletionDataResponseModel.DataBean.CompanyidentifyinfoBean obj = model.data.companyidentifyinfo;
-//                                mAccountView.setText(obj.);
+                                CompletionDataResponseModel.DataBean.PersoninfoBean obj = model.data.personinfo;
 
+                                mAccountView.setText(obj.mobilenumber);
+                                mUserTypeView.setText(obj.usertype);
+                                mAreaView.setText(obj.province + obj.city + obj.zone);
+                                mNameView.setText(obj.realname);
+                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.picture, mHeadView1);
+                                if ("male".equals(obj.sexid)) {
+                                    mSexView.setText("男");
+                                } else {
+                                    mSexView.setText("女");
+                                }
+                                mBirthdayView.setText(obj.birthyear + "-" + obj.birthmonth + "-" + obj.birthday);
+                                mAffiliationView.setVisibility(View.GONE);
+                                mAffiliationLayoutView.setVisibility(View.VISIBLE);
+                                CompletionDataResponseModel.DataBean.PersoninfoBean.FirstdistributorinfoBean item = obj.firstdistributorinfo;
+                                View pernsonLayout = getLayoutInflater().inflate(R.layout.activity_person_layout2, null);
+                                CircleImageView headView = (CircleImageView) pernsonLayout.findViewById(R.id.person_info_head);
+                                ImageView typwView = (ImageView) pernsonLayout.findViewById(R.id.person_info_personjobtitle);
+                                ImageView rightView = (ImageView) pernsonLayout.findViewById(R.id.person_info_right);
+                                TextView nameView = (TextView) pernsonLayout.findViewById(R.id.person_info_name);
+                                TextView companyNameView = (TextView) pernsonLayout.findViewById(R.id.person_info_companyname);
+                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.thumbpicture, headView);
+                                typwView.setVisibility(View.GONE);
+                                nameView.setText(item.personname);
+                                companyNameView.setText(item.companyname);
+                                rightView.setVisibility(View.GONE);
+                                mAffiliationLayoutView.addView(pernsonLayout);
+                                setView();
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
                             }
@@ -148,6 +174,20 @@ public class CompletionDataActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    private void setView() {
+        mAccountView.setFocusable(false);
+//        mAccountView.setFocusableInTouchMode(false);
+        mUserTypeView.setClickable(false);
+        mAreaView.setClickable(false);
+        mAffiliationView.setClickable(false);
+        mNameView.setFocusable(false);
+//        mNameView.setFocusableInTouchMode(false);
+        mHeadView.setClickable(false);
+        mSexView.setClickable(false);
+        mBirthdayView.setClickable(false);
 
     }
 
@@ -211,7 +251,14 @@ public class CompletionDataActivity extends BaseActivity {
                 showDatePicker();
                 break;
             case R.id.completion_data_next:
-                uploadImage();
+                String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
+                if ("notidentify".equals(identify)) {//未认证
+                    uploadImage();
+                } else {
+                    intent = new Intent(mContext, RealNameAuthenticationActivity.class);
+                    startActivity(intent);
+                }
+
                 break;
             case R.id.completion_data_userType:
                 final CustomPopWindow1 popWindow1 = new CustomPopWindow1(mContext);
