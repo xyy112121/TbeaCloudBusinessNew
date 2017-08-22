@@ -3,8 +3,7 @@
     android:id="@+id/register_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00AAEF"
-  >
+    android:background="#00AAEF">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,7 +48,7 @@
                     android:src="@drawable/icon_login_usr_in_img" />
 
                 <EditText
-                    android:id="@+id/login_phone"
+                    android:id="@+id/register_phone"
                     style="@style/editText_image_center"
                     android:hint="输入手机号"
                     android:imeOptions="actionNext"
@@ -62,30 +61,28 @@
                 android:layout_height="0.5dp" />
 
             <LinearLayout style="@style/editText_image_layout">
+
                 <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="18dp"
-                    android:gravity="center"
                     android:layout_gravity="center"
-                   >
+                    android:gravity="center">
+
                     <ImageView
                         android:layout_width="20dp"
-                       android:layout_height="18dp"
-                        android:src="@drawable/icon_usercode"
-                       />
+                        android:layout_height="18dp"
+                        android:src="@drawable/icon_usercode" />
                 </LinearLayout>
 
-
-
                 <EditText
-
+                    android:id="@+id/register_code"
                     style="@style/editText_image_center"
                     android:hint="验证码"
                     android:imeOptions="actionNext"
-                    android:inputType="phone"
-                   />
+                    android:inputType="phone" />
 
                 <TextView
+                    android:id="@+id/register_send"
                     style="@style/editText_image_right"
                     android:layout_width="wrap_content"
                     android:text="获取验证码"
@@ -107,15 +104,14 @@
                     android:src="@drawable/icon_userpwd" />
 
                 <EditText
-                    android:id="@+id/login_pwd"
+                    android:id="@+id/register_pwd"
                     style="@style/editText_image_center"
                     android:hint="密码"
                     android:imeOptions="actionNext"
-                    android:inputType="phone" />
+                    android:inputType="textPassword" />
 
                 <ImageView
                     style="@style/editText_image_right"
-
                     android:src="@drawable/icon_user_eye" />
             </LinearLayout>
 
@@ -132,10 +128,10 @@
                 <TextView
                     android:id="@+id/register_user_type"
                     style="@style/editText_image_center"
+                    android:gravity="center_vertical|left"
                     android:hint="用户类型"
                     android:imeOptions="actionNext"
-                    android:inputType="phone"
-                    android:gravity="center_vertical|left"/>
+                    android:inputType="phone" />
 
                 <ImageView
                     style="@style/editText_image_right"
@@ -160,9 +156,9 @@
                 android:layout_marginTop="30dp">
 
                 <CheckBox
+                    style="@style/register_ck_style"
                     android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    style="@style/register_ck_style"/>
+                    android:layout_height="20dp" />
 
                 <TextView
                     android:layout_width="wrap_content"

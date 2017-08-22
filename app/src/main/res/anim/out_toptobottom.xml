@@ -3,7 +3,7 @@
   
     <!-- 定义从下向上动画退出动画 -->  
     <translate  
-        android:duration="500"  
+        android:duration="200"
         android:fromYDelta="0"
         android:toYDelta="200%"/>  
 </set>  

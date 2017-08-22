@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
+import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class RotateADLinkPageListActivity extends BaseActivity {
                         ((TextView) findViewById(R.id.completion_data_sex)).setText(text);
                     }
                 });
+
             }
         });
     }

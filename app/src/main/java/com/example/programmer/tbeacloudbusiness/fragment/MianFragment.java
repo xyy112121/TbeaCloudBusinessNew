@@ -34,11 +34,14 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeti
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity.ScanCodeAcctivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.StoreManageMainActivity;
+import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.RealNameAuthenticationActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.HomeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.MyGridView;
+import com.example.programmer.tbeacloudbusiness.utils.Constants;
+import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -70,8 +73,18 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
         mInflater = inflater;
         initView(mView);
         mRefreshLayout.beginRefreshing();
-//        showAlert();
         return mView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String type = ShareConfig.getConfigString(getActivity(), Constants.USERTYPE,"");
+        String identify  = ShareConfig.getConfigString(getActivity(), Constants.whetheridentifiedid,"");
+        if(("distributor".equals(type)||"seller".equals(type)) && ("notidentify".equals(identify)||"identifying".equals(identify))){
+            //需要认证
+            showAlert();
+        }
     }
 
     /**
@@ -163,7 +176,7 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
         popWindow1.setItemClick(new CustomPopWindow1.ItemClick() {
             @Override
             public void onItemClick(String text) {
-                Intent intent = new Intent(getActivity(), RealNameAuthenticationActivity.class);
+                Intent intent = new Intent(getActivity(), CompletionDataActivity.class);
                 startActivity(intent);
 
             }

@@ -177,7 +177,7 @@
         <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingGalleryUploadActivity" />
         <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.MeetingGalleryImageShowActivity" />
         <activity android:name=".activity.companyPersonnel.plumberManage.activity.DranchiseeSeleteActivity" />
-
+        <activity android:name=".activity.user.AffiliationSelectListActivity" />
         <activity android:name=".activity.franchisee.plumberMeeting.activity.RegionSelectActivity" />
         <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingViewSignlnActivity" />
 

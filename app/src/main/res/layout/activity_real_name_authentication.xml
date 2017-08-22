@@ -37,6 +37,7 @@
                     android:text="名称" />
 
                 <EditText
+                    android:id="@+id/real_name_companyName"
                     style="@style/my_right_text_style1"
                     android:background="@null"
                     android:hint="请填写营业执照上的企业名称" />
@@ -55,6 +56,7 @@
                     android:text="注册号" />
 
                 <EditText
+                    android:id="@+id/real_name_companyLisenceCode"
                     style="@style/my_right_text_style1"
                     android:background="@null"
                     android:hint="请填写营业执照上的注册号" />
@@ -72,7 +74,27 @@
                     style="@style/my_text_style"
                     android:text="所在地" />
 
+                <TextView
+                    android:id="@+id/real_name_addr"
+                    style="@style/my_right_text_style1"
+                    android:background="@null"
+                    android:hint="请选择营业执照上的注册所在地点" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/my_select_btn"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="所在地" />
+
                 <EditText
+                    android:id="@+id/real_name_addr2"
                     style="@style/my_right_text_style1"
                     android:background="@null"
                     android:hint="请填写营业执照上的注册所在详细" />
@@ -91,6 +113,7 @@
                     android:text="经营范围" />
 
                 <EditText
+                    android:id="@+id/real_name_businessScope"
                     style="@style/my_right_text_style1"
                     android:background="@null"
                     android:hint="请填写营业执照上的经营范围" />
@@ -114,11 +137,20 @@
                     android:layout_weight="0.7">
 
                     <ImageView
+                        android:id="@+id/real_name_companyLisencePicture"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="left"
                         android:src="@drawable/icon_user_addpic" />
+                    <ProgressBar
+                        android:id="@+id/real_name_companyLisencePicture_pb"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:indeterminateDrawable="@drawable/tip_drawable_progress"
+                        android:visibility="gone"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -162,6 +194,7 @@
                     android:text="法人姓名" />
 
                 <EditText
+                    android:id="@+id/real_name_masterPerson"
                     style="@style/my_right_text_style1"
                     android:background="@null"
                     android:hint="请输入与营业执照上一致的姓名" />
@@ -180,6 +213,7 @@
                     android:text="身份证号" />
 
                 <EditText
+                    android:id="@+id/real_name_masterPersonID"
                     style="@style/my_right_text_style1"
                     android:background="@null"
                     android:hint="请输入与营业执照上一致的号码" />
@@ -201,12 +235,20 @@
                     android:layout_weight="0.7">
 
                     <ImageView
+                        android:id="@+id/real_name_masterPersonIdCard1"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="left"
                         android:src="@drawable/icon_user_addpic" />
-
+                    <ProgressBar
+                        android:id="@+id/real_name_masterPersonIdCard1_pb"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:indeterminateDrawable="@drawable/tip_drawable_progress"
+                        android:visibility="gone"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -238,11 +280,21 @@
                     android:layout_weight="0.7">
 
                     <ImageView
+                        android:id="@+id/real_name_masterPersonIdCard2"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="left"
                         android:src="@drawable/icon_user_addpic" />
+
+                    <ProgressBar
+                        android:id="@+id/real_name_masterPersonIdCard2_pb"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:indeterminateDrawable="@drawable/tip_drawable_progress"
+                        android:visibility="gone"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -287,20 +339,14 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.7">
+                    <LinearLayout
+                        android:id="@+id/real_name_companyPhoto_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true">
+                       <include layout="@layout/activity_real_name_authentication_companyphoto"/>
 
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="left"
-                        android:src="@drawable/icon_user_addpic" />
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="left"
-                        android:src="@drawable/icon_user_addpic" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -320,6 +366,7 @@
             <View style="@style/horizontal_view" />
 
             <Button
+                android:id="@+id/real_name_companyPhoto_finish"
                 style="@style/style_next_btn"
                 android:background="@drawable/btn_bg_blue"
                 android:text="提交审核" />

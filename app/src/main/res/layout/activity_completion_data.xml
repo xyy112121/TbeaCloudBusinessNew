@@ -7,7 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <include layout="@layout/activity_page_top" />
 
@@ -17,9 +19,9 @@
                 style="@style/my_text_style"
                 android:text="账号" />
 
-            <TextView
+            <EditText
+                android:id="@+id/completion_data_account"
                 style="@style/my_right_text_style1"
-                android:text="138****8888"
                 android:textColor="@color/text_color" />
         </LinearLayout>
 
@@ -32,8 +34,8 @@
                 android:text="用户类型" />
 
             <TextView
+                android:id="@+id/completion_data_userType"
                 style="@style/my_right_text_style1"
-                android:text="分销商"
                 android:textColor="@color/text_color" />
         </LinearLayout>
 
@@ -49,7 +51,7 @@
                 android:id="@+id/completion_data_area"
                 style="@style/my_right_text_style"
                 android:hint="地区选择后不能更改，请谨慎选择"
-                android:textColorHint="@color/text_color" />
+                android:textColorHint="@color/tab_text_normal" />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -61,10 +63,18 @@
                 android:text="隶属关系" />
 
             <TextView
+                android:id="@+id/completion_data_affiliation"
                 style="@style/my_right_text_style"
                 android:hint="请选择您的上级经销商"
                 android:textColor="@color/text_color"
-                android:textColorHint="@color/text_color" />
+                android:textColorHint="@color/tab_text_normal" />
+            <LinearLayout
+                android:id="@+id/completion_data_affiliation_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+               android:visibility="gone"
+                />
         </LinearLayout>
 
         <View
@@ -79,8 +89,9 @@
                 android:text="真实姓名" />
 
             <EditText
+                android:id="@+id/completion_data_name"
                 style="@style/my_right_text_style1"
-                android:text="张明" />
+                android:textColor="@color/tab_text_normal"/>
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -99,12 +110,14 @@
                 android:layout_weight="0.7">
 
                 <ImageView
+                    android:id="@+id/completion_data_head_iv"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left"
                     android:src="@drawable/icon_user_heder_gray" />
 
                 <TextView
+                    android:id="@+id/completion_data_head"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -128,6 +141,7 @@
             <TextView
                 android:id="@+id/completion_data_sex"
                 style="@style/my_right_text_style"
+                android:textColor="@color/tab_text_normal"
                />
         </LinearLayout>
 
@@ -140,8 +154,9 @@
                 android:text="生日" />
 
             <TextView
-                android:id="@+id/completion_data_date"
+                android:id="@+id/completion_data_birthday"
                 style="@style/my_right_text_style"
+                android:textColor="@color/tab_text_normal"
               />
         </LinearLayout>
 
@@ -149,6 +164,7 @@
 
     </LinearLayout>
     <Button
+        android:id="@+id/completion_data_next"
         style="@style/style_next_btn"
         android:text="下一步"
         android:layout_alignParentBottom="true"

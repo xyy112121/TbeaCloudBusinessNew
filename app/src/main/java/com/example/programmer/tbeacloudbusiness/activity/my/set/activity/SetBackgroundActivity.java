@@ -18,6 +18,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.set.model.Background
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.luck.picture.lib.PictureSelector;
@@ -153,7 +154,7 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                         dialog.dismiss();
                         switch (msg.what) {
                             case ThreadState.SUCCESS:
-                                BaseResponseModel model = (BaseResponseModel) msg.obj;
+                                ResponseInfo model = (ResponseInfo) msg.obj;
                                 if (model.isSuccess()) {
                                     ToastUtil.showMessage("操作成功！");
                                 } else {
@@ -175,7 +176,7 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                             MeetingGalleryUpdateResponseModel model = action.uploadGallery(mSelectList);
                             if (model.isSuccess() && model.data.pictureinfo != null) {
                                 SetAction action1 = new SetAction();
-                                BaseResponseModel model1 = action1.setBackground(model.data.pictureinfo.picturesavenames);
+                                ResponseInfo model1 = action1.setBackground(model.data.pictureinfo.picturesavenames);
                                 handler.obtainMessage(ThreadState.SUCCESS, model1).sendToTarget();
                             } else {
                                 handler.sendEmptyMessage(ThreadState.ERROR);

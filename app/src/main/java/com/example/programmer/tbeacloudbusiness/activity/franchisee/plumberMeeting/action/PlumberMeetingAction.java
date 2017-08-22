@@ -21,7 +21,7 @@ import java.util.List;
 
 public class PlumberMeetingAction extends BaseAction {
 
-    //获取水电工会议列表
+    //获取水电工会议列表状态
     public PlumberMeetingListStateResonpseModel getStatus() throws Exception {
         PlumberMeetingListStateResonpseModel model;
         List<NameValuePair> pairs = new ArrayList<>();

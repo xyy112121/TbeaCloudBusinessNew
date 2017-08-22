@@ -104,6 +104,7 @@ public class LoginActivity extends PermissionActivity {
                                         ShareConfig.setConfig(LoginActivity.this, Constants.ONLINE, true);
                                         ShareConfig.setConfig(LoginActivity.this, Constants.USERID, model.userinfo.id);
                                         ShareConfig.setConfig(LoginActivity.this, Constants.USERTYPE, model.userinfo.usertypeid);
+                                        ShareConfig.setConfig(LoginActivity.this, Constants.whetheridentifiedid, model.userinfo.whetheridentifiedid);
                                         Intent intent = new Intent(mContext, MainActivity.class);
                                         startActivity(intent);
                                         finish();

@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.my.set.action;
 
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListStateResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingViewResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.AddrListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.AddressModel;
@@ -7,6 +8,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.set.model.Background
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.NotifyInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.PwdUpdateModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.SetResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.UserTypeResponseModel;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
@@ -92,12 +94,12 @@ public class SetAction extends BaseAction {
      *
      * @param picture 上传后的背景图 名称
      */
-    public BackgroundInfoModel setBackground(String picture) throws Exception {
-        BackgroundInfoModel rspInfo;
+    public ResponseInfo setBackground(String picture) throws Exception {
+        ResponseInfo rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN011001003002", pairs);
         pairs.add(new BasicNameValuePair("picture", picture));
-        rspInfo = gson.fromJson(result, BackgroundInfoModel.class);
+        rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;
     }
 
@@ -146,6 +148,14 @@ public class SetAction extends BaseAction {
         String result = sendRequest("TBEAYUN003001006000", pairs);
         rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;
+    }
+
+    public UserTypeResponseModel getUserType() throws Exception {
+        UserTypeResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN001006001000", pairs);
+        model = gson.fromJson(result, UserTypeResponseModel.class);
+        return model;
     }
 
 
