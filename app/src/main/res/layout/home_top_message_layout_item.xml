@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/top_imgae"
             android:layout_width="30dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:src="@drawable/icon_distribution" />
         <TextView
             android:id="@+id/top_text1"

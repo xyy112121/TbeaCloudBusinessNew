@@ -7,21 +7,21 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.action.SetAction;
-import com.example.programmer.tbeacloudbusiness.activity.my.set.model.BackgroundInfoModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.NotifyInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
-import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.example.programmer.tbeacloudbusiness.utils.cache.DataCleanManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by programmer on 2017/6/25.
@@ -88,6 +88,14 @@ public class GeneralActivity extends BaseActivity {
     }
 
     private void initView() {
+
+        try {
+            String size = DataCleanManager.getTotalCacheSize(MyApplication.instance);
+            ((TextView) findViewById(R.id.cache_size)).setText(size);
+        } catch (Exception e) {
+
+        }
+
         mNotifyView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -96,14 +104,6 @@ public class GeneralActivity extends BaseActivity {
                 } else {
                     mNotify = "off";
                 }
-            }
-        });
-
-        mBackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setData();
-                finish();
             }
         });
     }
@@ -121,5 +121,39 @@ public class GeneralActivity extends BaseActivity {
                 }
             }
         }).start();
+    }
+
+    @OnClick({R.id.top_left, R.id.cache_size})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.top_left:
+                setData();
+                finish();
+                break;
+            case R.id.cache_size:
+                final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_delete_dialog);
+                dialog.setText("清除缓存？");
+                dialog.setCancelBtnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+//                        cleanInternalCache(getApplicationContext());
+//                        cleanExternalCache(mContext);
+                        DataCleanManager.clearAllCache(MyApplication.instance);
+//                        String size = getCacheSize(getApplicationContext().getExternalCacheDir());
+
+                        ((TextView) findViewById(R.id.cache_size)).setText("0KB");
+                        ToastUtil.showMessage("清除成功！");
+                    }
+                }, "确定");
+                dialog.setConfirmBtnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                }, "取消");
+                dialog.show();
+                break;
+        }
     }
 }

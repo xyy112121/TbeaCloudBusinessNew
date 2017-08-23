@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.action.SetAction;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.activity.AddressEditListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.activity.EditBindingPhoneActivity;
@@ -17,7 +18,10 @@ import com.example.programmer.tbeacloudbusiness.activity.my.set.activity.General
 import com.example.programmer.tbeacloudbusiness.activity.my.set.activity.PwdEditActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.activity.SetBackgroundActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.SetResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.LoginActivity;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.utils.Constants;
+import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
@@ -29,7 +33,7 @@ import butterknife.OnClick;
  * 设置
  */
 
-public class SetActivity extends BaseActivity{
+public class SetActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +56,8 @@ public class SetActivity extends BaseActivity{
                         case ThreadState.SUCCESS:
                             SetResponseModel model = (SetResponseModel) msg.obj;
                             if (model.isSuccess() && model.data != null) {
-                                ((TextView)findViewById(R.id.set_phone)).setText(model.data.baseinfo.mobilenumber);
-                                ((TextView)findViewById(R.id.set_address)).setText(model.data.baseinfo.recvaddrnumber+"");
+                                ((TextView) findViewById(R.id.set_phone)).setText(model.data.baseinfo.mobilenumber);
+                                ((TextView) findViewById(R.id.set_address)).setText(model.data.baseinfo.recvaddrnumber + "");
 
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
@@ -84,12 +88,12 @@ public class SetActivity extends BaseActivity{
     }
 
 
-    @OnClick({R.id.set_phone, R.id.set_edit_pwd, R.id.set_address, R.id.set_background, R.id.set_general})
+    @OnClick({R.id.set_phone, R.id.set_edit_pwd, R.id.set_address, R.id.set_background, R.id.set_general, R.id.set_my_quit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.set_phone:
                 Intent intent = new Intent(mContext, EditBindingPhoneActivity.class);
-                intent.putExtra("phone",((TextView)view).getText()+"");
+                intent.putExtra("phone", ((TextView) view).getText() + "");
                 startActivity(intent);
                 break;
             case R.id.set_edit_pwd:
@@ -103,6 +107,29 @@ public class SetActivity extends BaseActivity{
                 break;
             case R.id.set_general:
                 startActivity(new Intent(mContext, GeneralActivity.class));
+                break;
+            case R.id.set_my_quit:
+                final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_delete_dialog);
+                dialog.setText("您确定要退出么？");
+                dialog.setCancelBtnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        ShareConfig.setConfig(mContext, Constants.ONLINE, false);
+                        ShareConfig.setConfig(mContext, Constants.USERID, "");
+                        finish();
+                        MyApplication.instance.exit();
+                        startActivity(new Intent(mContext, LoginActivity.class));
+
+                    }
+                }, "确定");
+                dialog.setConfirmBtnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                }, "取消");
+                dialog.show();
                 break;
         }
     }

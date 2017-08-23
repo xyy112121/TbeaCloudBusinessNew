@@ -21,6 +21,7 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListStateResonpseModel;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -41,7 +42,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 public class PlumberMeetingListAllActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     @BindView(R.id.plumber_meeting_main_list_search_text)
-    EditText mSearchTextView;
+    TextView mSearchTextView;
 
     private ExpandPopTabView expandTabView;
     private List<KeyValueBean> mRegionLists;//区域
@@ -80,16 +81,25 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
         addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
         addStateItem(expandTabView, null, "", "激活");
 
-        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId,
-                                          KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    mCode = mSearchTextView.getText() + "";
-                    mRefreshLayout.beginRefreshing();
-                }
+//        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId,
+//                                          KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                    mCode = mSearchTextView.getText() + "";
+//                    mRefreshLayout.beginRefreshing();
+//                }
+//
+//                return false;
+//            }
+//        });
 
-                return false;
+        mSearchTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, HistorySearchActivity.class);
+                intent.putExtra("type", "servicemeeting");
+                startActivity(intent);
             }
         });
 

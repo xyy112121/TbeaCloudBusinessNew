@@ -26,6 +26,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManag
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.RegionSelectActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingUserTypeResonpseModel;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
@@ -49,7 +50,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 public class PlumberManageMainListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     @BindView(R.id.pm_main_list_search_text)
-    EditText mSearchTextView;
+    TextView mSearchTextView;
     @BindView(R.id.pm_main_list_top_layout)
     LinearLayout mTopLayout;
     @BindView(R.id.pm_main_list_top_layout1)
@@ -109,16 +110,25 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
         addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
 
 
-        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId,
-                                          KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    mName = mSearchTextView.getText() + "";
-                    mRefreshLayout.beginRefreshing();
-                }
+//        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId,
+//                                          KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                    mName = mSearchTextView.getText() + "";
+//                    mRefreshLayout.beginRefreshing();
+//                }
+//
+//                return false;
+//            }
+//        });
 
-                return false;
+        mSearchTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, HistorySearchActivity.class);
+                intent.putExtra("type", "electrician");
+                startActivity(intent);
             }
         });
 

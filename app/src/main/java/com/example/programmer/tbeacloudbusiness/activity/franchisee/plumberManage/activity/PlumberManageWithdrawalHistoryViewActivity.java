@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -26,7 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by DELL on 2017/8/8.
+ * 水电工管理提现历史详情
  */
 
 public class PlumberManageWithdrawalHistoryViewActivity extends BaseActivity {
@@ -49,7 +50,7 @@ public class PlumberManageWithdrawalHistoryViewActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pm_withdrawal_history_view);
-        StatusBarUtil.setTranslucent(this,0);
+        StatusBarUtil.setTranslucent(this, 0);
         ButterKnife.bind(this);
         getData();
     }
@@ -109,10 +110,18 @@ public class PlumberManageWithdrawalHistoryViewActivity extends BaseActivity {
         }
     }
 
-    @OnClick(R.id.top_right_text)
-    public void onViewClicked() {
-        Intent intent = new Intent(mContext, PersonManageViewActivity.class);
-        intent.putExtra("id", getIntent().getStringExtra("id"));
-        startActivity(intent);
+    @OnClick({R.id.top_right_text, R.id.top_left})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.top_right_text:
+                Intent intent = new Intent(mContext, PersonManageViewActivity.class);
+                intent.putExtra("id", getIntent().getStringExtra("id"));
+                startActivity(intent);
+                break;
+            case R.id.top_left:
+                finish();
+                break;
+        }
+
     }
 }

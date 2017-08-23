@@ -92,6 +92,7 @@
 
 </LinearLayout>
     <Button
+        android:id="@+id/set_my_quit"
        style="@style/style_next_btn"
         android:layout_alignParentBottom="true"
         android:text="退出登录"

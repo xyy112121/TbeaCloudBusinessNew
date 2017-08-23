@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by programmer on 2017/6/4.
+ * 会议详细
  */
 
 public class PlumberMeetingViewActivity extends BaseActivity {
@@ -171,7 +171,7 @@ public class PlumberMeetingViewActivity extends BaseActivity {
         }
 
         if (obj.participantlist != null) {
-            mParticipantlistView.setText(obj.participantlist.participantnumber);
+            mParticipantlistView.setText(obj.participantlist.participantnumber+"");
         }
 
         if (obj.meetinginfo != null) {

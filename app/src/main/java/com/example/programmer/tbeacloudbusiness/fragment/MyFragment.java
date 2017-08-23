@@ -113,7 +113,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                     public void onClick(View v) {
 
                         if ("mymessage".equals(item.id)) {//测试管理界面
-                            startActivity(new Intent(getActivity(), MemberListActivity.class));
+//                            startActivity(new Intent(getActivity(), MemberListActivity.class));
                         }
                         if ("mymoneyaccount".equals(item.id)) {//我的返利账户
                             startActivity(new Intent(getActivity(), MyRebateAccountlistActivity.class));

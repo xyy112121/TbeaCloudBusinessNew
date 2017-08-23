@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include layout="@layout/activity_page_top"/>
-    <RelativeLayout
-       style="@style/my_text_layout"
-        >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <RelativeLayout style="@style/my_text_layout">
+
         <TextView
             style="@style/my_text_style"
-            android:text="消息通知"/>
+            android:text="消息通知" />
+
         <CheckBox
             android:id="@+id/general_notify"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/addr_is_defult_ck"
-            android:button="@null"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:button="@null" />
     </RelativeLayout>
-    <View
-        style="@style/horizontal_view"/>
-    <LinearLayout
-        style="@style/my_text_layout">
+
+    <View style="@style/horizontal_view" />
+
+    <LinearLayout style="@style/my_text_layout">
+
         <TextView
             style="@style/my_text_style"
-            android:text="缓存处理"/>
+            android:text="缓存处理" />
+
         <TextView
+            android:id="@+id/cache_size"
             style="@style/my_right_text_style"
-            android:textColor="@color/text_color"
             android:gravity="right|center_vertical"
-            android:text="1.23k"/>
+            android:textColor="@color/text_color" />
     </LinearLayout>
-    <View
-        style="@style/horizontal_view"/>
+
+    <View style="@style/horizontal_view" />
 
 </LinearLayout>

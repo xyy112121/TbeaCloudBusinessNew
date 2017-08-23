@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.OtherResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.HomeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.LoginUserModel;
@@ -53,6 +54,17 @@ public class UserAction extends BaseAction {
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN002001001000", pairs);
         model = gson.fromJson(result, HomeMainResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 获取其他用数据
+     */
+    public OtherResponseModel getOtherData() throws Exception {
+        OtherResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN002004001000", pairs);
+        model = gson.fromJson(result, OtherResponseModel.class);
         return model;
     }
 

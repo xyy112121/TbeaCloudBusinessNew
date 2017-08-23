@@ -34,6 +34,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeti
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity.ScanCodeAcctivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.StoreManageMainActivity;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.RealNameAuthenticationActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
@@ -56,7 +57,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 首页
  */
 
-public class MianFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class MainFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private ListView mListView;
     private MyAdapter mAdapter;
     private LayoutInflater mInflater;
@@ -79,9 +80,9 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
     @Override
     public void onResume() {
         super.onResume();
-        String type = ShareConfig.getConfigString(getActivity(), Constants.USERTYPE,"");
-        String identify  = ShareConfig.getConfigString(getActivity(), Constants.whetheridentifiedid,"");
-        if(("distributor".equals(type)||"seller".equals(type)) && ("notidentify".equals(identify)||"identifying".equals(identify))){
+        String type = ShareConfig.getConfigString(getActivity(), Constants.USERTYPE, "");
+        String identify = ShareConfig.getConfigString(getActivity(), Constants.whetheridentifiedid, "");
+        if (("distributor".equals(type) || "seller".equals(type)) && ("notidentify".equals(identify) || "identifying".equals(identify))) {
             //需要认证
             showAlert();
         }
@@ -216,6 +217,15 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
                 startActivity(intent);
             }
         });
+
+        mView.findViewById(R.id.expert_search_text).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), HistorySearchActivity.class);
+                intent.putExtra("type", "all");
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -297,10 +307,13 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
                     } else if ("tbea".equals(obj.moduleid)) {
                         //特变电工
                         ((MainActivity) getActivity()).showTbMaianFragment();
+                    } else if ("qitayingyong".equals(obj.moduleid)) {
+                        //特变电工
+                        ((MainActivity) getActivity()).showOtherFragment();
                     } else if ("shuidiangongguanli".equals(obj.moduleid)) {//总经销商
                         //水电工管理
-                        Intent intent = new Intent(getActivity(),PlumberManageMainListActivity.class);
-                        intent.putExtra("type","");
+                        Intent intent = new Intent(getActivity(), PlumberManageMainListActivity.class);
+                        intent.putExtra("type", "");
                         startActivity(intent);
                     } else if ("shuidiangonghuiyi".equals(obj.moduleid)) {
                         //水电工会议
@@ -308,17 +321,16 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
                     } else if ("shangchengxitong".equals(obj.moduleid)) {
                         //商城管理
                         startActivity(new Intent(getActivity(), StoreManageMainActivity.class));
-                    }else if ("distributor_shuidiangongguanli".equals(obj.moduleid)) {//分销商
+                    } else if ("distributor_shuidiangongguanli".equals(obj.moduleid)) {//分销商
                         //水电工管理
-                        Intent intent = new Intent(getActivity(),PlumberManageMainListActivity.class);
-                        intent.putExtra("type","distributor");
+                        Intent intent = new Intent(getActivity(), PlumberManageMainListActivity.class);
+                        intent.putExtra("type", "distributor");
                         startActivity(intent);
-                    }else if("marketer_shuidiangonghuiyi".equals(obj.moduleid)){
+                    } else if ("marketer_shuidiangonghuiyi".equals(obj.moduleid)) {
 
                         //水电工会议
                         startActivity(new Intent(getActivity(), PlumberMeetingListActivity.class));
-                    }
-                    else if("marketer_shuidiangongguanli".equals(obj.moduleid)){
+                    } else if ("marketer_shuidiangongguanli".equals(obj.moduleid)) {
                         //水电工管理
                         startActivity(new Intent(getActivity(), DranchiseeSeleteActivity.class));
                     }
@@ -435,8 +447,8 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
                         ((MainActivity) getActivity()).showTbMaianFragment();
                     } else if ("shuidiangongguanli".equals(obj.moduleid)) {
                         //水电工管理
-                        Intent intent = new Intent(getActivity(),PlumberManageMainListActivity.class);
-                        intent.putExtra("type","");
+                        Intent intent = new Intent(getActivity(), PlumberManageMainListActivity.class);
+                        intent.putExtra("type", "");
                         startActivity(intent);
                     } else if ("shuidiangonghuiyi".equals(obj.moduleid)) {
                         //水电工会议
@@ -444,18 +456,18 @@ public class MianFragment extends Fragment implements BGARefreshLayout.BGARefres
                     } else if ("shangchengxitong".equals(obj.moduleid)) {
                         //商城管理
                         startActivity(new Intent(getActivity(), StoreManageMainActivity.class));
-                    }else if ("distributor_shaomafanli".equals(obj.moduleid)) {//分销商
+                    } else if ("distributor_shaomafanli".equals(obj.moduleid)) {//分销商
                         //扫码返利
                         startActivity(new Intent(getActivity(), DbScanCodeMainListActivity.class));
-                    }else if ("distributor_shuidiangongguanli".equals(obj.moduleid)) {//分销商
+                    } else if ("distributor_shuidiangongguanli".equals(obj.moduleid)) {//分销商
                         //水电工管理
-                        Intent intent = new Intent(getActivity(),PlumberManageMainListActivity.class);
-                        intent.putExtra("type","distributor");
+                        Intent intent = new Intent(getActivity(), PlumberManageMainListActivity.class);
+                        intent.putExtra("type", "distributor");
                         startActivity(intent);
-                    }else if("marketer_shuidiangongguanli".equals(obj.moduleid)){//公司人员
+                    } else if ("marketer_shuidiangongguanli".equals(obj.moduleid)) {//公司人员
                         //水电工管理
                         startActivity(new Intent(getActivity(), DranchiseeSeleteActivity.class));
-                    }else if("marketer_shuidiangonghuiyi".equals(obj.moduleid)){//公司人员
+                    } else if ("marketer_shuidiangonghuiyi".equals(obj.moduleid)) {//公司人员
 
                         //水电工会议
                         startActivity(new Intent(getActivity(), PlumberMeetingListActivity.class));

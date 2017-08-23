@@ -180,8 +180,8 @@
         <activity android:name=".activity.user.AffiliationSelectListActivity" />
         <activity android:name=".activity.franchisee.plumberMeeting.activity.RegionSelectActivity" />
         <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingViewSignlnActivity" />
-
-
+        <activity android:name=".activity.publicUse.activity.HistorySearchActivity" />
+        <activity android:name=".activity.publicUse.activity.HistorySearchListActivity" />
     </application>
 
 </manifest>

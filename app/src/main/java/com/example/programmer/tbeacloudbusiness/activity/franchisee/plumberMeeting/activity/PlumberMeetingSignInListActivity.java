@@ -24,6 +24,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManag
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingSignListReponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingUserTypeResonpseModel;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
@@ -46,7 +47,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 public class PlumberMeetingSignInListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     @BindView(R.id.plumber_meeting_sign_search_text)
-    EditText mSearchTextView;
+    TextView mSearchTextView;
 
     @BindView(R.id.listview)
     ListView mListView;
@@ -79,16 +80,25 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
         mRefreshLayout.beginRefreshing();
 
-        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId,
-                                          KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    name = mSearchTextView.getText()+"";
-                    mRefreshLayout.beginRefreshing();
-                }
+//        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId,
+//                                          KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                    name = mSearchTextView.getText()+"";
+//                    mRefreshLayout.beginRefreshing();
+//                }
+//
+//                return false;
+//            }
+//        });
 
-                return false;
+        mSearchTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, HistorySearchActivity.class);
+                intent.putExtra("type", "servicemeeting");
+                startActivity(intent);
             }
         });
 

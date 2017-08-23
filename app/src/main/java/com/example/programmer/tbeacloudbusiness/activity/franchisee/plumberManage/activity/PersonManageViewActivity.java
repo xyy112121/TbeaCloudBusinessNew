@@ -7,7 +7,6 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
@@ -57,6 +56,8 @@ public class PersonManageViewActivity extends BaseActivity {
     TextView mLogininfoView;
     @BindView(R.id.pm_view_socialinfo)
     PersonManageItemView mSocialinfoView;
+    @BindView(R.id.top_left)
+    ImageButton mTopLeft;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class PersonManageViewActivity extends BaseActivity {
         setContentView(R.layout.activity_plumber_manage_person_manage);
         StatusBarUtil.setTranslucent(this, 0);
         ButterKnife.bind(this);
+        findViewById(R.id.top_right_text).setVisibility(View.GONE);
         getData();
         listener();
     }
@@ -133,10 +135,10 @@ public class PersonManageViewActivity extends BaseActivity {
         }
 
         if (obj.logininfo != null) {
-           mLogininfoView.setText(obj.logininfo.lastloginaddr);
+            mLogininfoView.setText(obj.logininfo.lastloginaddr);
         }
 
-        if(obj.socialinfo != null){
+        if (obj.socialinfo != null) {
             mSocialinfoView.setText4(obj.socialinfo.fansnumber);
             mSocialinfoView.setText5(obj.socialinfo.focusnumber);
         }
@@ -187,7 +189,7 @@ public class PersonManageViewActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.pm_view_rebatescaninfo, R.id.pm_view_electricianmeetingattendinfo, R.id.pm_view_orderingserviceinfo, R.id.pm_view_commodityorderinfo, R.id.pm_view_logininfo_layout})
+    @OnClick({R.id.pm_view_rebatescaninfo, R.id.pm_view_electricianmeetingattendinfo, R.id.pm_view_orderingserviceinfo, R.id.pm_view_commodityorderinfo, R.id.pm_view_logininfo_layout, R.id.top_left})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.pm_view_rebatescaninfo:
@@ -206,6 +208,9 @@ public class PersonManageViewActivity extends BaseActivity {
                 intent = new Intent(mContext, PlumberManageSignHistoryListActivity.class);
                 intent.putExtra("id", getIntent().getStringExtra("id"));
                 startActivity(intent);
+                break;
+            case R.id.top_left:
+                finish();
                 break;
         }
     }
