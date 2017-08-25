@@ -43,6 +43,9 @@ public class MyApplication extends Application implements BDLocationListener {
     private static final String SERVICE_PATH = "http://121.42.193.154:6696/index.php/tbyuninterface/Index/index";
     private static final String IMG_SERVICE_PATH = "http://121.42.193.154:6696/";
 
+    private static final String SERVICE_PATH1 = "http://www.u-shang.net/interface/index.php";
+    private static final String IMG_SERVICE_PATH1 = "http://www.u-shang.net/";
+
 
     public static MyApplication instance;
     private List<SoftReference<Activity>> activitys = new ArrayList<SoftReference<Activity>>();
@@ -97,6 +100,15 @@ public class MyApplication extends Application implements BDLocationListener {
 
     public String getServicePath() {
         return SERVICE_PATH;
+    }
+
+    public String getImgPath1() {
+        return IMG_SERVICE_PATH1;
+    }
+
+
+    public String getServicePath1() {
+        return SERVICE_PATH1;
     }
 
     public void exit() {

@@ -22,13 +22,14 @@
             android:layout_marginLeft="8dp">
 
             <TextView
-                android:id="@+id/product_presentation_list_item_specification"
+                android:id="@+id/product_presentation_list_item_name"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/tab_text_normal" />
 
             <TextView
-                android:id="@+id/product_presentation_list_item_name"
+                android:id="@+id/product_presentation_list_item_specification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

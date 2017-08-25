@@ -27,14 +27,14 @@ public class ReqBase {
 	protected ReqHead reqHead;
 	private List<NameValuePair> params;
 	protected HttpResponse rsp;
+
 	
 	public ReqBase(ReqHead reqHead, List<NameValuePair> params){
 		this.reqHead=reqHead;
 		this.params=params;
 	}
 	
-	public void req() throws  IOException, JSONException {
-		String url= MyApplication.instance.getServicePath();
+	public void req(String url) throws  IOException, JSONException {
 		HttpPost request=new HttpPost(url);
 		Header[] headers=reqHead.getHeaders();
 		Log.d(TAG, "Requery Hearders:");

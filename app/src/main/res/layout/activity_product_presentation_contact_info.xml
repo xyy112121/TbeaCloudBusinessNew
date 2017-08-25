@@ -5,87 +5,97 @@
     android:orientation="vertical">
 
     <include layout="@layout/activity_page_top" />
+
     <TextView
+
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@color/head_color"
+        android:gravity="center_vertical"
+        android:paddingLeft="30dp"
         android:text="联系方式"
-        android:textSize="30sp"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:gravity="center_vertical"
-        android:paddingLeft="30dp"/>
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
     <TextView
+        android:id="@+id/product_presentation_contact_info_name"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginLeft="15dp"
         android:gravity="center_vertical"
-        android:textColor="@color/tab_text_normal"
         android:text="特变电工电缆股份有限公司"
-        android:layout_marginLeft="15dp"/>
-    <View
-       style="@style/horizontal_view"/>
+        android:textColor="@color/tab_text_normal" />
+
+    <View style="@style/horizontal_view" />
+
     <TextView
+        android:id="@+id/product_presentation_contact_info_addr"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/tab_text_normal"
-        android:text="地址：四川省德阳市旌阳区东海路东路2号"
         android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:drawableRight="@drawable/icon_arrow_right"
-        android:layout_marginRight="15dp"/>
-    <View
-        style="@style/horizontal_view"/>
+        android:gravity="center_vertical"
+        android:textColor="@color/tab_text_normal" />
+
+    <View style="@style/horizontal_view" />
+
     <TextView
+        android:id="@+id/product_presentation_contact_info_zipcode"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/tab_text_normal"
-        android:text="邮编：588555"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
-    <View
-        style="@style/horizontal_view"/>
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/tab_text_normal" />
+
+    <View style="@style/horizontal_view" />
+
     <TextView
+        android:id="@+id/product_presentation_contact_info_platformservicetel"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/tab_text_normal"
-        android:text="平台服务电话：588555"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:drawableRight="@drawable/icon_telicon_blue"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
-    <View
-        style="@style/horizontal_view"/>
+        android:gravity="center_vertical"
+        android:textColor="@color/tab_text_normal" />
+
+    <View style="@style/horizontal_view" />
+
     <TextView
+        android:id="@+id/product_presentation_contact_info_fax"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/tab_text_normal"
-        android:text="传真：588555"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
-    <View
-        style="@style/horizontal_view"/>
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/tab_text_normal" />
+
+    <View style="@style/horizontal_view" />
+
     <TextView
+        android:id="@+id/product_presentation_contact_info_delantel"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/tab_text_normal"
-        android:text="德缆电话：588555"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:drawableRight="@drawable/icon_telicon_blue"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
-    <View
-        style="@style/horizontal_view"/>
+        android:gravity="center_vertical"
+        android:textColor="@color/tab_text_normal" />
+
+    <View style="@style/horizontal_view" />
+
     <TextView
+        android:id="@+id/product_presentation_contact_info_tbeatel"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/tab_text_normal"
-        android:text="集团电话：588555"
-        android:drawableRight="@drawable/icon_telicon_blue"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
-    <View
-        style="@style/horizontal_view"/>
+        android:layout_marginRight="15dp"
+        android:drawableRight="@drawable/icon_telicon_blue"
+        android:gravity="center_vertical"
+        android:textColor="@color/tab_text_normal" />
+
+    <View style="@style/horizontal_view" />
 </LinearLayout>

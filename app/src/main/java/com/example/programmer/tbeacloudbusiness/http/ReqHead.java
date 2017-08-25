@@ -8,7 +8,7 @@ import org.apache.http.message.BasicHeader;
 import java.util.ArrayList;
 
 
-public class ReqHead {
+public class ReqHead extends ReqHeadBase{
 	public String origDomain;
 	public String protocolVar;
 	public String appVersion;

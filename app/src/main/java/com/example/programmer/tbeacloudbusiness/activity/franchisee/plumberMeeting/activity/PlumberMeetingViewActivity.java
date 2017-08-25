@@ -15,6 +15,7 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingViewResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.WebViewActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
@@ -79,6 +80,29 @@ public class PlumberMeetingViewActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PlumberMeetingViewSignlnActivity.class);
                 intent.putExtra("meetingId", getIntent().getStringExtra("id"));
+                startActivity(intent);
+            }
+        });
+
+        mMeetingitemsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //会议安排
+                Intent intent = new Intent(mContext, WebViewActivity.class);
+                String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/meetingprepareinfo?meetingid="+ getIntent().getStringExtra("id");
+                intent.putExtra("url", url);
+                intent.putExtra("title", "会议安排");
+                startActivity(intent);
+            }
+        });
+
+        mMeetingsummaryView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, WebViewActivity.class);
+                String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/meetingsummary?meetingid="+ getIntent().getStringExtra("id");
+                intent.putExtra("url", url);
+                intent.putExtra("title", "会议纪要");
                 startActivity(intent);
             }
         });

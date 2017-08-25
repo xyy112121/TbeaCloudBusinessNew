@@ -18,12 +18,13 @@
         android:id="@+id/product_presentation_top_wb"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+         />
 
     <ScrollView
         android:id="@+id/product_presentation_top_sl"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -182,6 +182,10 @@
         <activity android:name=".activity.franchisee.plumberMeeting.activity.PlumberMeetingViewSignlnActivity" />
         <activity android:name=".activity.publicUse.activity.HistorySearchActivity" />
         <activity android:name=".activity.publicUse.activity.HistorySearchListActivity" />
+        <activity android:name=".activity.publicUse.activity.WebViewActivity" />
+        <activity android:name=".activity.tbea.activity.NewsIntroActivity" />
+
+        <activity android:name=".activity.distributionSystem.activity.FxMainActivity"/>
     </application>
 
 </manifest>

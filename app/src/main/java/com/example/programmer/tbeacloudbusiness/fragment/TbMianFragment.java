@@ -18,7 +18,9 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.CompanyIntroActivity;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.NewsIntroActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationContactInfoActivity;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationInfoActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.TbMainResponseModel;
@@ -177,12 +179,10 @@ public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefr
         switch (v.getId()) {
             case R.id.mian_top_company_intro_layout:
                 Intent intent = new Intent(getActivity(), CompanyIntroActivity.class);
-                intent.putExtra("flag", "CompanyIntro");
                 startActivity(intent);
                 break;
             case R.id.mian_top_news_layout:
-                intent = new Intent(getActivity(), CompanyIntroActivity.class);
-                intent.putExtra("flag", "new");
+                intent = new Intent(getActivity(), NewsIntroActivity.class);
                 startActivity(intent);
                 break;
             case R.id.mian_product_presentation_layout:
@@ -238,11 +238,20 @@ public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefr
                 LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
                 convertView = layoutInflater.inflate(R.layout.fragment_tb_main_item, null);
             }
-            TbMainResponseModel.Product obj = mList.get(position);
+            final  TbMainResponseModel.Product obj = mList.get(position);
             ImageView imageView = (ImageView) convertView.findViewById(R.id.tb_mian_image);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, imageView);
-            ((TextView) convertView.findViewById(R.id.tb_mian_title)).setText(obj.specification);
-            ((TextView) convertView.findViewById(R.id.tb_mian_type)).setText(obj.name);
+            ((TextView) convertView.findViewById(R.id.tb_mian_title)).setText(obj.name);
+            ((TextView) convertView.findViewById(R.id.tb_mian_type)).setText(obj.specification);
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), ProductPresentationInfoActivity.class);
+                    intent.putExtra("id", obj.id);
+                    startActivity(intent);
+                }
+            });
             return convertView;
         }
 

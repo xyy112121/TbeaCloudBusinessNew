@@ -88,7 +88,7 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
             public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
                 // TODO Auto-generated method stub
                 if (arg1 == EditorInfo.IME_ACTION_SEARCH) {
-                    name = searchEditText.getText()+"";
+                    name = searchEditText.getText() + "";
                     mRefreshLayout.beginRefreshing();
                 }
                 return false;
@@ -140,7 +140,7 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
                         case ThreadState.SUCCESS:
                             ProductPresentationListResponseModel model = (ProductPresentationListResponseModel) msg.obj;
                             if (model.isSuccess()) {
-                                if (model.data != null && model.data.commoditylist!= null)
+                                if (model.data != null && model.data.commoditylist != null)
                                     mAdapter.addAll(model.data.commoditylist);
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
@@ -191,16 +191,16 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
                 Drawable drawable = null;
                 /// 这一步必须要做,否则不会显示.
                 if ("asc".equals(timeTv.getTag())) {//正
-                     drawable= getResources().getDrawable(R.drawable.icon_arraw_bluegray);
+                    drawable = getResources().getDrawable(R.drawable.icon_arraw_bluegray);
                     timeTv.setTag("desc");
                 } else if ("desc".equals(timeTv.getTag())) {//倒序\
-                    drawable= getResources().getDrawable(R.drawable.icon_arraw_grayblue);
+                    drawable = getResources().getDrawable(R.drawable.icon_arraw_grayblue);
                     timeTv.setTag("asc");
                 }
                 drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-                timeTv.setCompoundDrawables(null,null,drawable,null);
+                timeTv.setCompoundDrawables(null, null, drawable, null);
                 orderitem = "time";
-                order = timeTv.getTag()+"";
+                order = timeTv.getTag() + "";
                 mRefreshLayout.beginRefreshing();
 
                 break;
@@ -223,7 +223,7 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
                         .enableBackgroundDark(true) //弹出popWindow时，背景是否变暗
                         .setBgDarkAlpha(0.5f) // 控制亮度
                         .create()
-                        .showAsDropDown(view, DensityUtil.px2dip(mContext,-270), DensityUtil.px2dip(mContext,20));
+                        .showAsDropDown(view, DensityUtil.px2dip(mContext, -270), DensityUtil.px2dip(mContext, 20));
                 break;
         }
     }
@@ -234,9 +234,9 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
         optionPicker.setOnOptionPickListener(new CustomOptionObjPicker.OnOptionPickListener() {
             @Override
             public void onOptionPicked(Condition option) {
-                if(id == R.id.product_presentation_specification_tv){
+                if (id == R.id.product_presentation_specification_tv) {
                     commodityspecificationid = option.getId();
-                }else if(id == R.id.product_presentation_model_tv){
+                } else if (id == R.id.product_presentation_model_tv) {
                     commoditymodelid = option.getId();
                 }
                 //选择规格
@@ -273,18 +273,18 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
                 view = getLayoutInflater().inflate(
                         R.layout.activity_product_presentation_list_item, null);
             }
-            TbMainResponseModel.Product obj = mList.get(position);
+            final TbMainResponseModel.Product obj = mList.get(position);
 
             ImageView imageView = (ImageView) view.findViewById(R.id.product_presentation_list_item_thumbpicture);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, imageView);
-            ((TextView) view.findViewById(R.id.product_presentation_list_item_specification)).setText(obj.specification);
-            ((TextView) view.findViewById(R.id.product_presentation_list_item_name)).setText("规格型号：" + obj.name);
+            ((TextView) view.findViewById(R.id.product_presentation_list_item_specification)).setText("规格型号：" + obj.specification);
+            ((TextView) view.findViewById(R.id.product_presentation_list_item_name)).setText(obj.name);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.setClass(mContext, ProductPresentationInfoActivity.class);
+                    Intent intent = new Intent(mContext, ProductPresentationInfoActivity.class);
+                    intent.putExtra("id", obj.id);
                     startActivity(intent);
                 }
             });

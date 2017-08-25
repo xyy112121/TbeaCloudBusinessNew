@@ -1,7 +1,10 @@
 package com.example.programmer.tbeacloudbusiness.service.impl;
 
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.http.ReqBase;
+import com.example.programmer.tbeacloudbusiness.http.ReqBase1;
 import com.example.programmer.tbeacloudbusiness.http.ReqHead;
+import com.example.programmer.tbeacloudbusiness.http.ReqHead1;
 import com.example.programmer.tbeacloudbusiness.http.ReqUploadFile;
 import com.google.gson.Gson;
 
@@ -33,7 +36,27 @@ public class BaseAction {
                     public String call() throws Exception {
                         ReqHead rh = new ReqHead();
                         rh.serviceCode=serviceCode;
+                        String url = MyApplication.instance.getServicePath();
                         ReqBase req = new ReqBase(rh, pairs);
+                        req.req(url);
+                        String rspContext = req.getRspContext();
+                        return rspContext;
+                    }
+                });
+        new Thread(task).start();
+        return (String)task.get();
+    }
+
+    public String sendRequest1(final String serviceCode,final List<NameValuePair> pairs) throws InterruptedException, IOException,
+            ExecutionException {
+        FutureTask task = new FutureTask(
+                new Callable()
+                {
+                    public String call() throws Exception {
+                        ReqHead1 rh = new ReqHead1();
+                        rh.setServiceCode(serviceCode);
+                        ReqBase1 req = new ReqBase1(rh, pairs);
+                        String url = MyApplication.instance.getServicePath1();
                         req.req();
                         String rspContext = req.getRspContext();
                         return rspContext;

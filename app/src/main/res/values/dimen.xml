@@ -10,4 +10,6 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="home_top_layout_hight">68dp</dimen>
     <dimen name="discover_top_hight">0dp</dimen>
+
+    <dimen name="title_height">40dp</dimen>
 </resources>

@@ -28,6 +28,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberManage.activity.DranchiseeSeleteActivity;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.PlumberMeetingListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.activity.FxMainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.activity.DbScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingMainListActivity;
@@ -315,7 +316,13 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
                         Intent intent = new Intent(getActivity(), PlumberManageMainListActivity.class);
                         intent.putExtra("type", "");
                         startActivity(intent);
-                    } else if ("shuidiangonghuiyi".equals(obj.moduleid)) {
+                    }
+                    else if ("tebianfenxiao".equals(obj.moduleid)) {
+                        //分销系统
+                        Intent intent = new Intent(getActivity(), FxMainActivity.class);
+                        startActivity(intent);
+                    }
+                    else if ("shuidiangonghuiyi".equals(obj.moduleid)) {
                         //水电工会议
                         startActivity(new Intent(getActivity(), PlumberMeetingMainListActivity.class));
                     } else if ("shangchengxitong".equals(obj.moduleid)) {

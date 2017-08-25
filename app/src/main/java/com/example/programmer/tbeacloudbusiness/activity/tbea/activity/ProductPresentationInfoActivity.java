@@ -6,6 +6,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.zhouwei.library.CustomPopWindow;
 
 import java.util.ArrayList;
@@ -38,18 +41,45 @@ public class ProductPresentationInfoActivity extends BaseActivity implements Vie
         initTopbar("产品详情",this,R.drawable.icon_morepointwhite);
         initView();
         initTopLayout();
-        listener();
     }
 
     private void initView(){
         mWebView = (WebView)findViewById(R.id.product_presentation_top_wb);
         mScrollView = (ScrollView)findViewById(R.id.product_presentation_top_sl);
+
+        String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/productdescriptiondetails?commodityid="+getIntent().getStringExtra("id");
+        showWebView(url);
     }
 
 
-    private void listener(){
+    private   void showWebView(String url){
+        final CustomDialog mDialog= new CustomDialog(mContext,R.style.MyDialog,R.layout.tip_wait_dialog);
+        mDialog.setText("加载中...");
+        mDialog.show();
+        WebSettings settings = mWebView.getSettings();
+        //自适应屏幕
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+        //启用支持javascript
+        settings.setJavaScriptEnabled(true);
+        settings.setBlockNetworkImage(false);//解决图片加载不出来的问题
+        settings.setJavaScriptEnabled(true);
+        settings.setAllowFileAccess(true);
+        settings.setDomStorageEnabled(true);//允许DCOM
 
+        mWebView.loadUrl(url);
+
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100) {
+                    // 网页加载完成
+                    mDialog.dismiss();
+                }
+            }
+        });
     }
+
 
 //    private void handleLogic(View contentView){
 //        View.OnClickListener listener = new View.OnClickListener() {
@@ -124,10 +154,14 @@ public class ProductPresentationInfoActivity extends BaseActivity implements Vie
                     if(index == 0){
                         mWebView.setVisibility(View.VISIBLE);
                         mScrollView.setVisibility(View.GONE);
+                        String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/productdescriptiondetails?commodityid="+getIntent().getStringExtra("id");
+                        showWebView(url);
 
                     }else if(index == 1){
-                        mWebView.setVisibility(View.GONE);
-                        mScrollView.setVisibility(View.VISIBLE);
+                        mWebView.setVisibility(View.VISIBLE);
+                        mScrollView.setVisibility(View.GONE);
+                        String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/productparameters?commodityid="+getIntent().getStringExtra("id");
+                        showWebView(url);
                     }
 //
                 }

@@ -6,6 +6,7 @@ import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityCat
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityModelResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommoditySpecificationResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CompanyIntroListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.model.ContactInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.ProductPresentationListResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
@@ -58,7 +59,7 @@ public class TbeaAction extends BaseAction {
     /**
      * 获取产品介绍列表
      */
-    public ProductPresentationListResponseModel getCommodityList (String name, String commodityspecificationid, String commoditymodelid, String orderitem, String order, int page, int pagesize) throws Exception {
+    public ProductPresentationListResponseModel getCommodityList(String name, String commodityspecificationid, String commoditymodelid, String orderitem, String order, int page, int pagesize) throws Exception {
         ProductPresentationListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("name", name));
@@ -77,11 +78,24 @@ public class TbeaAction extends BaseAction {
      * 获取新闻资讯里面的公司动态
      */
 
-    public CompanyIntroListResponseModel getCompanyDynamic() throws Exception {
+    public CompanyIntroListResponseModel getCompanyDynamic(String category) throws Exception {
         CompanyIntroListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("category", category));
         String result = sendRequest("TBEAYUN002002003000", pairs);
         model = gson.fromJson(result, CompanyIntroListResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 获取联系方式
+     */
+
+    public ContactInfoResponseModel getContactInfo() throws Exception {
+        ContactInfoResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN002002005000", pairs);
+        model = gson.fromJson(result, ContactInfoResponseModel.class);
         return model;
     }
 }
