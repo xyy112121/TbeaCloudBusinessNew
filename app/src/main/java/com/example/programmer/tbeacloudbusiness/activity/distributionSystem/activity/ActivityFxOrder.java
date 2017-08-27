@@ -92,7 +92,7 @@ public class ActivityFxOrder extends Activity implements AsyncListener, OnScroll
         linJSRQ = (LinearLayout) findViewById(R.id.linJSRQ);
         txtZT = (TextView) findViewById(R.id.txtZT);
         butQuery = (Button) findViewById(R.id.butQuery);
-//        butSearch = (ImageButton) findViewById(R.id.butSearch);
+        butSearch = (ImageButton) findViewById(R.id.butSearch);
         lstContent = (ListView) findViewById(R.id.lstContent);
         refView = (RefreshableView) findViewById(R.id.refView);
     }
@@ -168,16 +168,16 @@ public class ActivityFxOrder extends Activity implements AsyncListener, OnScroll
         OrderListItem2 datat = (OrderListItem2) tag[1];
         if (type.equals("1")) {
             //发运明细
-//            Intent intent = new Intent(ActivityFxOrder.this, ActivityFxOrderFYMX.class);
-//            intent.putExtra("id", datat.Id);
-//            startActivity(intent);
+            Intent intent = new Intent(ActivityFxOrder.this, ActivityFxOrderFYMX.class);
+            intent.putExtra("id", datat.Id);
+            startActivity(intent);
             return;
         }
         if (type.equals("2")) {
             //订货明细
-//            Intent intent = new Intent(ActivityFxOrder.this, ActivityFxOrderDHMX.class);
-//            intent.putExtra("id", datat.Id);
-//            startActivity(intent);
+            Intent intent = new Intent(ActivityFxOrder.this, ActivityFxOrderDHMX.class);
+            intent.putExtra("id", datat.Id);
+            startActivity(intent);
             return;
         }
     }
@@ -242,7 +242,7 @@ public class ActivityFxOrder extends Activity implements AsyncListener, OnScroll
     }
 
     private void toSearch() {
-//        startActivity(new Intent(this, ActivityFxOrderQuery.class));
+        startActivity(new Intent(this, ActivityFxOrderQuery.class));
     }
 
     private void toQuery() {
@@ -349,9 +349,9 @@ public class ActivityFxOrder extends Activity implements AsyncListener, OnScroll
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        OrderListItem2 item = data.get(position);
-//        Intent intent = new Intent(ActivityFxOrder.this, ActivityFxOrderDHMX.class);
-//        intent.putExtra("id", item.Id);
-//        startActivity(intent);
+        OrderListItem2 item = data.get(position);
+        Intent intent = new Intent(ActivityFxOrder.this, ActivityFxOrderDHMX.class);
+        intent.putExtra("id", item.Id);
+        startActivity(intent);
     }
 }

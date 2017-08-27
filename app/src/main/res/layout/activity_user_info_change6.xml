@@ -22,10 +22,10 @@
     </com.newhope.idea.RefreshableView>
  -->
 
-    <!--<LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        android:background="@color/title_background"
+        android:background="@color/head_color"
         android:gravity="center"
         android:orientation="horizontal" >
 
@@ -46,7 +46,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="更新用户资料"
-            android:textColor="@color/title_font_color"
+            android:textColor="@color/white"
             android:textSize="@dimen/title_font_size" />
 
         <ImageButton
@@ -59,7 +59,7 @@
             android:src="@drawable/ic_czsp_ok"
             android:visibility="visible" />
 
-    </LinearLayout>-->
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txtTitle"

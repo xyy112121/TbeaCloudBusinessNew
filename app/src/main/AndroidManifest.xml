@@ -185,7 +185,35 @@
         <activity android:name=".activity.publicUse.activity.WebViewActivity" />
         <activity android:name=".activity.tbea.activity.NewsIntroActivity" />
 
-        <activity android:name=".activity.distributionSystem.activity.FxMainActivity"/>
+        <activity android:name=".activity.distributionSystem.activity.FxMainActivity" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxGgXQ" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxFHMX" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxFL" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxGG" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxHKLB" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxHKMX" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxKcQuery" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxKcQueryResult" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxLXWM" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxOrder" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxOrderDHMX" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxOrderFYMX" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxOrderQuery" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxTSFB" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxTSLB" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxTSXQ" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxZD" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxZdjgQuery" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxZxxd" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxZxxdKFTjCX" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxZxxdKFTjCxJG" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxZxxdTj" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxZxxdTjCX" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxZxxdTjCxJG" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityFxZxxdTjTj" />
+        <activity android:name=".activity.distributionSystem.activity.ActivityUserInfoChang6" />
+        <activity android:name=".activity.my.main.activity.MessageListActivity" />
+        <activity android:name=".activity.my.main.activity.MessageViewActivity" />
     </application>
 
 </manifest>

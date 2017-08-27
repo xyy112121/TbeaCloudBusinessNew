@@ -12,4 +12,5 @@
     <dimen name="discover_top_hight">0dp</dimen>
 
     <dimen name="title_height">40dp</dimen>
+    <dimen name="title_font_size">18sp</dimen>
 </resources>

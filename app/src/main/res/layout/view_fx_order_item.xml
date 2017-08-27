@@ -209,7 +209,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/but_bg9999"
+                android:background="@drawable/but_bg999"
                 android:clickable="true"
                 android:gravity="center"
                 android:text="发运明细"

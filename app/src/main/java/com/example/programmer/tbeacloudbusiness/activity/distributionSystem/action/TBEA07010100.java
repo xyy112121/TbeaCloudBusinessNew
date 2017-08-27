@@ -1,5 +1,13 @@
 package com.example.programmer.tbeacloudbusiness.activity.distributionSystem.action;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -7,13 +15,6 @@ import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.mode
 import com.example.programmer.tbeacloudbusiness.http.ReqBase1;
 import com.example.programmer.tbeacloudbusiness.http.ReqHead1;
 
-import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TBEA07010100 {
     public static final String SERVICE_CODE = "TBEA07010100";
@@ -24,8 +25,7 @@ public class TBEA07010100 {
 
 
     public RspInfo rspInfo;
-    public ArrayList<OrderStatusListItem> OrderStatusList=new ArrayList<OrderStatusListItem>();
-
+    public ArrayList<OrderStatusListItem> OrderStatusList = new ArrayList<OrderStatusListItem>();
 
 
     public boolean isHasError() {
@@ -51,9 +51,9 @@ public class TBEA07010100 {
         protected void onPreExecute() {
             hasError = false;
             errorMsg = null;
-            rspInfo=null;
+            rspInfo = null;
             OrderStatusList.clear();
-            if(asynListener.get()!=null)asynListener.get().start(SERVICE_CODE);
+            if (asynListener.get() != null) asynListener.get().start(SERVICE_CODE);
         }
 
         @Override
@@ -66,10 +66,10 @@ public class TBEA07010100 {
                 req.req();
                 String rspContext = req.getRspContext();
                 JSONObject jobj = new JSONObject(rspContext);
-                rspInfo=RspInfo.initByJson(jobj);
-                if(JsonUtil.hasArray(jobj,"OrderStatusList")){
-                    JSONArray jarray=jobj.getJSONArray("OrderStatusList");
-                    for(int i=0;i<jarray.length();i++){
+                rspInfo = RspInfo.initByJson(jobj);
+                if (JsonUtil.hasArray(jobj, "OrderStatusList")) {
+                    JSONArray jarray = jobj.getJSONArray("OrderStatusList");
+                    for (int i = 0; i < jarray.length(); i++) {
                         OrderStatusList.add(OrderStatusListItem.initByJson(jarray.getJSONObject(i)));
                     }
                 }
@@ -83,7 +83,7 @@ public class TBEA07010100 {
 
         @Override
         protected void onPostExecute(Void result) {
-            if(asynListener.get()!=null)asynListener.get().finish(SERVICE_CODE);
+            if (asynListener.get() != null) asynListener.get().finish(SERVICE_CODE);
         }
     }
 

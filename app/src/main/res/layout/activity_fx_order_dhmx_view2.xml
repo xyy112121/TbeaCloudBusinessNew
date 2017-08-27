@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:background="#ffffff"
+    android:clickable="false"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#fec254"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/TextView03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="编号"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <View
+            android:id="@+id/View04"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#20ffffff" />
+
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="描述"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <View
+            android:id="@+id/View03"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#20ffffff" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="单位"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <View
+            android:id="@+id/View02"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#20ffffff" />
+
+        <TextView
+            android:id="@+id/TextView04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="数量"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <View
+            android:id="@+id/View01"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#20ffffff" />
+
+        <TextView
+            android:id="@+id/TextView05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="已发数"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

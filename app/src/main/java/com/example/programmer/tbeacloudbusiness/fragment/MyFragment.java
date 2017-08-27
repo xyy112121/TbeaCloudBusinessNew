@@ -19,6 +19,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.administrator.realNameAuthentication.MemberListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.BypassAccountManageListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyFansActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.RealNameAuthenticationPlumberActivity;
@@ -113,7 +114,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                     public void onClick(View v) {
 
                         if ("mymessage".equals(item.id)) {//测试管理界面
-//                            startActivity(new Intent(getActivity(), MemberListActivity.class));
+                            startActivity(new Intent(getActivity(), MessageListActivity.class));
                         }
                         if ("mymoneyaccount".equals(item.id)) {//我的返利账户
                             startActivity(new Intent(getActivity(), MyRebateAccountlistActivity.class));

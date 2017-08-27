@@ -3,6 +3,7 @@ package com.example.programmer.tbeacloudbusiness.activity.user.action;
 import android.util.Log;
 
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.model.MessageListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.OtherResponseModel;
@@ -16,6 +17,7 @@ import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuth
 import com.example.programmer.tbeacloudbusiness.http.MD5Util;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -95,10 +97,11 @@ public class UserAction extends BaseAction {
     /**
      * 发送验证码
      * serviceCode 验证码用途
+     *
      * @return
      * @throws Exception
      */
-    public ResponseInfo sendCode(String phone,String serviceCode )throws Exception {
+    public ResponseInfo sendCode(String phone, String serviceCode) throws Exception {
         ResponseInfo model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("mobilenumber ", phone));
@@ -111,7 +114,7 @@ public class UserAction extends BaseAction {
     /**
      * 注册
      */
-    public ResponseInfo register(RegisterRequestModel obj)throws Exception {
+    public ResponseInfo register(RegisterRequestModel obj) throws Exception {
         ResponseInfo model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("mobilenumber", obj.mobilenumber));
@@ -126,7 +129,7 @@ public class UserAction extends BaseAction {
     /**
      * 补全资料
      */
-    public ResponseInfo completionData(CompletionDataRequestModel obj)throws Exception {
+    public ResponseInfo completionData(CompletionDataRequestModel obj) throws Exception {
         ResponseInfo model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("mobilenumber", obj.mobilenumber));
@@ -148,6 +151,7 @@ public class UserAction extends BaseAction {
 
     /**
      * 获取隶属关系列表
+     *
      * @return
      * @throws Exception
      */
@@ -162,7 +166,7 @@ public class UserAction extends BaseAction {
     /**
      * 认证
      */
-    public ResponseInfo attestation(RelaNameAuthenticationRequestModel obj)throws Exception {
+    public ResponseInfo attestation(RelaNameAuthenticationRequestModel obj) throws Exception {
         ResponseInfo model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("companyname", obj.companyname));
@@ -186,7 +190,7 @@ public class UserAction extends BaseAction {
     /**
      * 查看认证状态
      */
-    public ResponseInfo getAttestationState()throws Exception{
+    public ResponseInfo getAttestationState() throws Exception {
         ResponseInfo model;
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN003003003000", pairs);
@@ -197,11 +201,11 @@ public class UserAction extends BaseAction {
     /**
      * 获取实名认证信息
      */
-    public RelaNameAuthenticationResponseModel getRelaNameAuthentication()throws Exception {
+    public RelaNameAuthenticationResponseModel getRelaNameAuthentication() throws Exception {
         RelaNameAuthenticationResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN003003002000", pairs);
-        Log.e("RelaNameAuthentication",result);
+        Log.e("RelaNameAuthentication", result);
         model = gson.fromJson(result, RelaNameAuthenticationResponseModel.class);
         return model;
     }
@@ -209,7 +213,7 @@ public class UserAction extends BaseAction {
     /**
      * 获取补全资料信息
      */
-    public CompletionDataResponseModel getCompletionData()throws Exception {
+    public CompletionDataResponseModel getCompletionData() throws Exception {
         CompletionDataResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN003002002000", pairs);
@@ -217,7 +221,18 @@ public class UserAction extends BaseAction {
         return model;
     }
 
-
+    /**
+     * 获取消息列表
+     */
+    public MessageListResponseModel getMessageList(int page, int pageSize) throws Exception {
+        MessageListResponseModel rspInfo;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
+        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pageSize)));
+        String result = sendRequest("TBEAENG005001013000", pairs);
+        rspInfo = gson.fromJson(result, MessageListResponseModel.class);
+        return rspInfo;
+    }
 
 
 }
