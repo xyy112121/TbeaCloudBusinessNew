@@ -205,7 +205,7 @@ public class PersonManageViewActivity extends BaseActivity {
                 break;
             case R.id.pm_view_logininfo_layout:
                 //登录统计
-                intent = new Intent(mContext, PlumberManageSignHistoryListActivity.class);
+                intent = new Intent(mContext, PlumberManageLoginDatailsActivity.class);
                 intent.putExtra("id", getIntent().getStringExtra("id"));
                 startActivity(intent);
                 break;

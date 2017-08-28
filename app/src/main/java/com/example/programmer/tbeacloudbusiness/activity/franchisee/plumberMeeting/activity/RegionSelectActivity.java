@@ -1,6 +1,5 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
  * Created by programmer on 2017/8/3.
  */
 
-public class RegionSelectActivity extends BaseActivity implements View.OnClickListener{
+public class RegionSelectActivity extends BaseActivity implements View.OnClickListener {
     private ListView mListView;
     private MyAdapter mAdapter;
     public List<String> mSeleteId = new ArrayList<>();
@@ -41,7 +41,7 @@ public class RegionSelectActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_region_select_list);
-        initTopbar("区域选择","保存",this);
+        initTopbar("区域选择", "保存", this);
         mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter();
         mListView.setAdapter(mAdapter);
@@ -50,7 +50,7 @@ public class RegionSelectActivity extends BaseActivity implements View.OnClickLi
 
 
     private void getData() {
-        final CustomDialog dialog = new CustomDialog(mContext,R.style.MyDialog,R.layout.tip_wait_dialog);
+        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         dialog.setText("请等待...");
         dialog.show();
         try {
@@ -97,17 +97,17 @@ public class RegionSelectActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         String ids = "";
-        if(mSeleteId.size() > 0){
-            for (String item:mSeleteId) {
-                if(!"".equals(ids)){
-                    ids+=",";
+        if (mSeleteId.size() > 0) {
+            for (String item : mSeleteId) {
+                if (!"".equals(ids)) {
+                    ids += ",";
                 }
-                ids+=item;
+                ids += item;
             }
         }
         Intent in = new Intent();
-        in.putExtra("ids",ids);
-        setResult(RESULT_OK,in);
+        in.putExtra("ids", ids);
+        setResult(RESULT_OK, in);
         finish();
     }
 
@@ -132,21 +132,34 @@ public class RegionSelectActivity extends BaseActivity implements View.OnClickLi
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
+            final ViewHolder holder;
             if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.activity_region_select_item, null);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
-            }else {
-                holder = (ViewHolder)convertView.getTag();
+            } else {
+                holder = (ViewHolder) convertView.getTag();
             }
             holder.mSelectNameView.setText(mList.get(position).getValue());
-            holder.mSelectNameView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            holder.mSelectNameView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
+                public void onClick(View view) {
+                    if (holder.mckView.isChecked() == false) {
+                        holder.mckView.setChecked(true);
                         mSeleteId.add(mList.get(position).getKey());
-                    }else {
+                    } else {
+                        holder.mckView.setChecked(false);
+                        mSeleteId.remove(mList.get(position).getKey());
+                    }
+                }
+            });
+
+            holder.mckView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.mckView.isChecked() == true) {
+                        mSeleteId.add(mList.get(position).getKey());
+                    } else {
                         mSeleteId.remove(mList.get(position).getKey());
                     }
                 }
@@ -173,8 +186,10 @@ public class RegionSelectActivity extends BaseActivity implements View.OnClickLi
         }
 
         class ViewHolder {
+            @BindView(R.id.region_select_ck)
+            CheckBox mckView;
             @BindView(R.id.region_select_name)
-            CheckBox mSelectNameView;
+            TextView mSelectNameView;
 
             ViewHolder(View view) {
                 ButterKnife.bind(this, view);

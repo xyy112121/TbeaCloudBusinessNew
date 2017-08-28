@@ -228,6 +228,11 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
         }
     }
 
+    private void showMore(){
+
+    }
+
+
     public void showOptionPicker(final int id, String text, List<Condition> list) {
         CustomOptionObjPicker optionPicker = new CustomOptionObjPicker((Activity) mContext, text, list);
         optionPicker.setTextSize(14);
@@ -277,7 +282,10 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
 
             ImageView imageView = (ImageView) view.findViewById(R.id.product_presentation_list_item_thumbpicture);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, imageView);
-            ((TextView) view.findViewById(R.id.product_presentation_list_item_specification)).setText("规格型号：" + obj.specification);
+            if(obj.specification != null){
+                ((TextView) view.findViewById(R.id.product_presentation_list_item_specification)).setText("规格型号：" + obj.specification);
+            }
+
             ((TextView) view.findViewById(R.id.product_presentation_list_item_name)).setText(obj.name);
 
             view.setOnClickListener(new View.OnClickListener() {

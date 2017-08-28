@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,8 +22,6 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberManage.action.PlumberManageAction;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberManage.model.DranchiseeSeleteResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageMainListActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageWithdrawalHistoryListActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmMainListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
@@ -31,16 +30,23 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
+import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
  * Created by programmer on 2017/8/15.
  */
 
-public class DranchiseeSeleteActivity extends BaseActivity {
+public class DranchiseeSeleteActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     @BindView(R.id.listview)
     ListView mListView;
+    @BindView(R.id.dramchisee_selete_item_number_image)
+    ImageView mNumberImage;
+    @BindView(R.id.dramchisee_selete_item_number_layout)
+    LinearLayout mNumberLayout;
     private String mOrderItem, mOrder;
     private MyAdapter mAdapter;
+    private BGARefreshLayout mRefreshLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +60,26 @@ public class DranchiseeSeleteActivity extends BaseActivity {
         initTopbar("总经销选择");
         mAdapter = new MyAdapter(mContext, R.layout.activity_cp_pm_dranchisee_selete_item);
         mListView.setAdapter(mAdapter);
-        getListData();
+
+        mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
+        mRefreshLayout.setDelegate(this);
+        mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, false));
+        mRefreshLayout.beginRefreshing();
+
+        mNumberLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ("".equals(mOrder) || "asc".equals(mOrder)) {//升
+                    mOrder = "desc";
+                    mNumberImage.setImageResource(R.drawable.icon_arraw_grayblue);
+                } else {
+                    mOrder = "asc";
+                    mNumberImage.setImageResource(R.drawable.icon_arraw_bluegray);
+                }
+                mOrderItem = "count";
+                mRefreshLayout.beginRefreshing();
+            }
+        });
     }
 
 
@@ -63,13 +88,11 @@ public class DranchiseeSeleteActivity extends BaseActivity {
      */
     private void getListData() {
         try {
-            final CustomDialog dialog = new CustomDialog(mContext,R.style.MyDialog,R.layout.tip_wait_dialog);
-            dialog.setText("请等待");
-            dialog.show();
             final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
-                    dialog.dismiss();
+                    mRefreshLayout.endLoadingMore();
+                    mRefreshLayout.endRefreshing();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
                             DranchiseeSeleteResonpseModel model = (DranchiseeSeleteResonpseModel) msg.obj;
@@ -106,6 +129,17 @@ public class DranchiseeSeleteActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
+        mAdapter.clear();
+        getListData();
+    }
+
+    @Override
+    public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+        return false;
+    }
+
     public class MyAdapter extends ArrayAdapter<DranchiseeSeleteResonpseModel.DataBean.FirstLevelDistributorListBean> {
 
 
@@ -128,14 +162,14 @@ public class DranchiseeSeleteActivity extends BaseActivity {
             holder.mPersonjobtitleView.setVisibility(View.GONE);
             holder.mNameView.setText(obj.mastername);
             holder.mCompanynameView.setText(obj.companyname);
-            holder.mNumberView.setText(obj.electriciannumber+"");
+            holder.mNumberView.setText(obj.electriciannumber + "");
             holder.mRightView.setVisibility(View.GONE);
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, PlumberManageMainListActivity.class);
-                    intent.putExtra("type","distributor");
+                    intent.putExtra("type", "distributor");
                     intent.putExtra("id", obj.fdistributorid);
                     startActivity(intent);
                 }

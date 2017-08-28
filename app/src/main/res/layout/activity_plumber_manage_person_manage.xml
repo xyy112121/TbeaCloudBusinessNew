@@ -180,7 +180,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                app:icon="@drawable/icon_water_metting"
+                app:icon="@drawable/icon_pm"
                 app:text1="水电工会议"
                 app:text2="一年签到次数"
                 app:text3="三月签到次数" />
@@ -303,7 +303,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                app:icon="@drawable/icon_water_statistics"
+                app:icon="@drawable/icon_socialinfo"
                 app:text1="社交"
                 app:text2="粉丝"
                 app:text3="关注"

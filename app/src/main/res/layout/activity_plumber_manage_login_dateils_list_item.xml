@@ -13,7 +13,7 @@
 
 
         <TextView
-            android:id="@+id/scanCode_history_state_item_text1"
+            android:id="@+id/login_data_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
@@ -24,6 +24,7 @@
             android:textSize="12sp"
             />
         <TextView
+            android:id="@+id/login_data_location"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
@@ -37,6 +38,7 @@
 
 
         <TextView
+            android:id="@+id/login_data_terminal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.25"

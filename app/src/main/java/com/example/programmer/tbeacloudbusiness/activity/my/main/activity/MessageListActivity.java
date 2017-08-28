@@ -16,8 +16,10 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.MessageListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
+import com.example.programmer.tbeacloudbusiness.component.BadgeView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -68,15 +70,14 @@ public class MessageListActivity extends BaseActivity implements BGARefreshLayou
                     case ThreadState.SUCCESS:
                         MessageListResponseModel re = (MessageListResponseModel) msg.obj;
                         if (re.isSuccess()) {
-//                            List<MessageCategory> list = (List<MessageCategory>)re.getDateObj("messagecategorylist");
-//                            if(list != null){
-//                                mAdapter.addAll(list);
-//                            }else {
-//                                mListView.setSelection(mAdapter.getCount());
-//                                if(mPage >1){//防止分页的时候没有加载数据，但是页数已经增加，导致下一次查询不正确
-//                                    mPage--;
-//                                }
-//                            }
+                            if (re.data != null) {
+                                mAdapter.addAll(re.data.messagecategorylist);
+                            } else {
+                                mListView.setSelection(mAdapter.getCount());
+                                if (mPage > 1) {//防止分页的时候没有加载数据，但是页数已经增加，导致下一次查询不正确
+                                    mPage--;
+                                }
+                            }
 
                         } else {
                             ToastUtil.showMessage(re.getMsg());
@@ -107,7 +108,7 @@ public class MessageListActivity extends BaseActivity implements BGARefreshLayou
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         //下拉刷新
-//        mAdapter.removeAll();
+        mAdapter.removeAll();
         mPage = 1;
         getListDate();
     }
@@ -121,7 +122,7 @@ public class MessageListActivity extends BaseActivity implements BGARefreshLayou
 
     private class MyAdapter extends BaseAdapter {
         private Context mContext;
-//        private List<MessageCategory> mList = new ArrayList<>();
+        private List<MessageListResponseModel.DataBean.MessagecategorylistBean> mList = new ArrayList<>();
 
         public MyAdapter(Context context) {
             this.mContext = context;
@@ -129,8 +130,7 @@ public class MessageListActivity extends BaseActivity implements BGARefreshLayou
 
         @Override
         public int getCount() {
-//            return mList.size();
-            return 10;
+            return mList.size();
         }
 
         @Override
@@ -146,41 +146,41 @@ public class MessageListActivity extends BaseActivity implements BGARefreshLayou
         @Override
         public View getView(int i, View v, ViewGroup viewGroup) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
-            View view = (View) inflater.inflate(R.layout.activity_message_list_item, null);
-//            final MessageCategory obj = mList.get(i);
-//            final ImageView imageView = (ImageView) view.findViewById(R.id.message_item_picture);
-//            ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.getPicture(), imageView);
-//            ((TextView) view.findViewById(R.id.message_item_title)).setText(obj.getName());
-//            ((TextView) view.findViewById(R.id.message_item_time)).setText(obj.getLasttime());
-//            ((TextView) view.findViewById(R.id.message_item_content)).setText(obj.getLastmessagetitle());
-//
-//            if (!"0".equals(obj.getNewcount()) && !"".equals(obj.getNewcount())) {
-//                BadgeView badgeView = new BadgeView(mContext, imageView);
-//                badgeView.setText(obj.getNewcount());
-//                badgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
-//                badgeView.setBadgeMargin(0, 0); // 水平和竖直方向的间距
-//                badgeView.show();
-//            }
-//
-//            view.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(mContext, MessageViewActivity.class);
-//                    intent.putExtra("id", obj.getId());
-//                    startActivity(intent);
-//                }
-//            });
+            View view = inflater.inflate(R.layout.activity_message_list_item, null);
+            final MessageListResponseModel.DataBean.MessagecategorylistBean obj = mList.get(i);
+            final ImageView imageView = (ImageView) view.findViewById(R.id.message_item_picture);
+            ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.picture, imageView);
+            ((TextView) view.findViewById(R.id.message_item_title)).setText(obj.name);
+            ((TextView) view.findViewById(R.id.message_item_time)).setText(obj.lasttime);
+            ((TextView) view.findViewById(R.id.message_item_content)).setText(obj.lastmessagetitle);
+
+            if (!"0".equals(obj.newcount) && !"".equals(obj.newcount)) {
+                BadgeView badgeView = new BadgeView(mContext, imageView);
+                badgeView.setText(obj.newcount);
+                badgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
+                badgeView.setBadgeMargin(0, 0); // 水平和竖直方向的间距
+                badgeView.show();
+            }
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, MessageViewActivity.class);
+                    intent.putExtra("id", obj.id);
+                    startActivity(intent);
+                }
+            });
             return view;
         }
 
-//        public void addAll(List<MessageCategory> list) {
-//            mList.addAll(list);
-//            notifyDataSetChanged();
-//        }
-//
-//        public void removeAll() {
-//            mList.clear();
-//            notifyDataSetChanged();
-//        }
+        public void addAll(List<MessageListResponseModel.DataBean.MessagecategorylistBean> list) {
+            mList.addAll(list);
+            notifyDataSetChanged();
+        }
+
+        public void removeAll() {
+            mList.clear();
+            notifyDataSetChanged();
+        }
     }
 }

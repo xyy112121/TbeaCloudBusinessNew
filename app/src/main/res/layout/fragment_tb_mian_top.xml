@@ -132,6 +132,7 @@
         android:background="@color/interval_color"
         android:layout_height="8dp"/>
     <TextView
+        android:id="@+id/tb_mian_top_product"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:drawablePadding="10dp"

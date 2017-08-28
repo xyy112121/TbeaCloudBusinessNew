@@ -18,11 +18,18 @@
         android:id="@+id/company_intro_wb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
-    <ListView
-        android:id="@+id/listview"
+    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        android:id="@+id/rl_recyclerview_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
+
 
 </LinearLayout>

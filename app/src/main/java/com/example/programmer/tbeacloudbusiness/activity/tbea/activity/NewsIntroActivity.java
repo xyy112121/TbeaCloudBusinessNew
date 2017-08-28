@@ -31,32 +31,42 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
+import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
+
 /**
  * 新闻资讯
  */
 
-public class NewsIntroActivity extends BaseActivity {
+public class NewsIntroActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private int mIndex = 0;
     private int mIndex2 = -1;//前一次点击的下标
     private List<FrameLayout> mListLayout = new ArrayList<>();
     private WebView mWebView;
     private MyAdapter mAdapter;
 
+    private BGARefreshLayout mRefreshLayout;
+    private String mType = "companynews";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tbea_company_intro);
         initView();
-        getData("companynews");
+        getData();
     }
 
     public void initView() {
         initTopLayout();
-
         mWebView = getViewById(R.id.company_intro_wb);
         ListView listView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter();
         listView.setAdapter(mAdapter);
+
+        mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
+        mRefreshLayout.setDelegate(this);
+        mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, false));
+        mRefreshLayout.beginRefreshing();
     }
 
     /**
@@ -92,20 +102,19 @@ public class NewsIntroActivity extends BaseActivity {
                         ((TextView) view.findViewById(R.id.fragment_company_top_tv)).setTextColor(ContextCompat.getColor(mContext, R.color.blue));
                         setViewColor();
                     }
-                    String type = "";
                     switch (mIndex) {
                         case 0:
-                            type = "companynews";
+                            mType = "companynews";
                             break;
                         case 1:
-                            type = "industrynews";
+                            mType = "industrynews";
                             break;
                         case 2:
-                            type = "decorationnews";
+                            mType = "decorationnews";
                             break;
                     }
                     mAdapter.removeAll();
-                    getData(type);
+                    getData();
 
                 }
             });
@@ -119,7 +128,7 @@ public class NewsIntroActivity extends BaseActivity {
         ((TextView) layout.findViewById(R.id.fragment_company_top_tv)).setTextColor(ContextCompat.getColor(mContext, R.color.text_color));
     }
 
-    private void getData(final String type) {
+    private void getData() {
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         dialog.setText("加载中...");
         dialog.show();
@@ -150,7 +159,7 @@ public class NewsIntroActivity extends BaseActivity {
                 public void run() {
                     try {
                         TbeaAction action = new TbeaAction();
-                        CompanyIntroListResponseModel model = action.getCompanyDynamic(type);
+                        CompanyIntroListResponseModel model = action.getCompanyDynamic(mType);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -160,6 +169,16 @@ public class NewsIntroActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
+        getData();
+    }
+
+    @Override
+    public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+        return false;
     }
 
     private class MyAdapter extends BaseAdapter {
@@ -195,16 +214,16 @@ public class NewsIntroActivity extends BaseActivity {
             ((TextView) view.findViewById(R.id.tbea_company_intro_item_author)).setText(obj.author);
             ((TextView) view.findViewById(R.id.tbea_company_intro_item_time)).setText(obj.time);
 
-             view.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     Intent intent = new Intent(mContext, WebViewActivity.class);
-                     String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/viewnews?newsid="+ obj.id;
-                     intent.putExtra("url", url);
-                     intent.putExtra("title", "新闻资讯");
-                     startActivity(intent);
-                 }
-             });
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, WebViewActivity.class);
+                    String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/viewnews?newsid=" + obj.id;
+                    intent.putExtra("url", url);
+                    intent.putExtra("title", "新闻资讯");
+                    startActivity(intent);
+                }
+            });
             return view;
         }
 

@@ -133,18 +133,16 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
         });
 
 
-       moenyLayout.setOnClickListener(new View.OnClickListener() {
+        moenyLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOrderItem = "money";
-                if ("".equals(mOrderItem) || "asc".equals(mOrderItem)) {//升
-                    mOrderItem = "desc";
+                if ("".equals(mOrder) || "asc".equals(mOrder)) {//升
+                    mOrder = "desc";
                     moneyView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
-                    mOrderItem = "asc";
+                    mOrder = "asc";
                     moneyView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
-                mOrder = mOrderItem;
                 mOrderItem = "money";
                 mRefreshLayout.beginRefreshing();
             }
@@ -223,7 +221,11 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
                     try {
                         PlumberManageAction action = new PlumberManageAction();
                         String fdistributorid = getIntent().getStringExtra("id");
-                        PmMainListResponseModel model = action.getPlumberManageMainList(fdistributorid,mName, mElectricianownertypeid, mZoneid, mOrderItem, mOrder, mPage++, mPagesiz);
+                        if (!"distributor".equals(getIntent().getStringExtra("type"))) {//总经销商
+                            fdistributorid = null;
+                        }
+
+                        PmMainListResponseModel model = action.getPlumberManageMainList(fdistributorid, mName, mElectricianownertypeid, mZoneid, mOrderItem, mOrder, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

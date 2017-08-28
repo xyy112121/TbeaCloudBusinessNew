@@ -20,6 +20,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.action.PlumberManageAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmWithdrawalHistoryListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.DateSelectActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateInfoActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
@@ -103,9 +104,9 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
         findViewById(R.id.pm_withdrawal_history_list_person).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(mContext, PlumberManageWithdrawalHistoryViewActivity.class);
-//                intent.putExtra("id", model.getData().getElectricianinfo().getUserid());
-//                startActivity(intent);
+                Intent intent = new Intent(mContext, PlumberManageWithdrawalHistoryViewActivity.class);
+                intent.putExtra("id", model.getData().getElectricianinfo().getUserid());
+                startActivity(intent);
             }
         });
     }
@@ -117,7 +118,7 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
             @Override
             public void getValue(String key, String value) {
                 expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
-                if ("custom".equals(key)) {
+                if ("Custom".equals(key)) {
                     Intent intent = new Intent(mContext, DateSelectActivity.class);
                     startActivityForResult(intent, RESULT_DATA_SELECT);
                 } else {
@@ -148,10 +149,10 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
                             if (model != null) {
                                 if (model.isSuccess() && model.getData() != null) {
                                     mAdapter.addAll(model.getData().getTakemoneylist());
-                                    if(model.getData().getElectricianinfo() != null){
+                                    if (model.getData().getElectricianinfo() != null) {
                                         PmWithdrawalHistoryListResponseModel.DataBean.ElectricianinfoBean info = model.getData().getElectricianinfo();
-                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath()+info.getThumbpicture(),mHeadView);
-                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath()+info.getPersontypeicon(),mPersonjobtitleView);
+                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + info.getThumbpicture(), mHeadView);
+                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + info.getPersontypeicon(), mPersonjobtitleView);
                                         mNameView.setText(info.getPersonname());
                                         mCompanynameView.setText(info.getZone());
                                     }
@@ -172,7 +173,7 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
                 public void run() {
                     try {
                         PlumberManageAction action = new PlumberManageAction();
-                       model = action.getPmWithdrawalHistoryList(electricianid, startdate, enddate, orderitem, order, mPage++, mPagesiz);
+                        model = action.getPmWithdrawalHistoryList(electricianid, startdate, enddate, orderitem, order, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -188,8 +189,8 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
     private void initDate() {
         mDateLists = new ArrayList<>();
         mDateLists.add(new KeyValueBean("", "默认排序"));
-        mDateLists.add(new KeyValueBean("PositiveSequence", "正序"));
-        mDateLists.add(new KeyValueBean("InvertedOrder", "倒序"));
+        mDateLists.add(new KeyValueBean("asc", "正序"));
+        mDateLists.add(new KeyValueBean("desc", "倒序"));
         mDateLists.add(new KeyValueBean("Custom", "自定义"));
     }
 
@@ -260,8 +261,8 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, PlumberManageWithdrawalHistoryViewActivity.class);
-                    intent.putExtra("id", obj.getTakemoneyid());
+                    Intent intent = new Intent(mContext, WithdrawDepositDateInfoActivity.class);
+                    intent.putExtra("takeMoneyId", obj.getTakemoneyid());
                     startActivity(intent);
                 }
             });
@@ -286,7 +287,7 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
             notifyDataSetChanged();
         }
 
-         class ViewHolder {
+        class ViewHolder {
             @BindView(R.id.pm_withdrawal_history_list_item_time)
             TextView mTimeView;
             @BindView(R.id.pm_withdrawal_history_list_item_zone)

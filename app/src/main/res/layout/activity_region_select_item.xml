@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="match_parent"
-    android:layout_height="48dp"
-  >
+    android:layout_width="match_parent"
+    android:layout_height="48dp">
+
     <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="25dp">
+        android:layout_marginLeft="25dp"
+        android:gravity="center_vertical">
+
         <CheckBox
+            android:id="@+id/region_select_ck"
+            style="@style/select_ck_style" />
+
+        <TextView
             android:id="@+id/region_select_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"
             android:text="广汉市"
-            android:textColor="@drawable/select_item_text_color"
-            android:button="@null"/>
+            android:textSize="16sp" />
     </LinearLayout>
 
 

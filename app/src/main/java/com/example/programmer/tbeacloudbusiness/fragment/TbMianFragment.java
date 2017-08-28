@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.CompanyIntroActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.NewsIntroActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationContactInfoActivity;
@@ -74,7 +75,7 @@ public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefr
                             if (model.isSuccess() && model.data != null) {
                                 initBanner(model.data.advpicturelist);
                                 initMessage(model.data.messagelist);
-                                if(model.data.productlist != null){
+                                if (model.data.productlist != null) {
                                     mAdapter.addAll(model.data.productlist);
                                 }
                             } else {
@@ -124,6 +125,8 @@ public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefr
             mHeadView.findViewById(R.id.mian_product_presentation_layout).setOnClickListener(this);
             mHeadView.findViewById(R.id.mian_top_company_intro_layout).setOnClickListener(this);
             mHeadView.findViewById(R.id.mian_product_presentation_phone_layout).setOnClickListener(this);
+            mHeadView.findViewById(R.id.tb_mian_top_product).setOnClickListener(this);
+            mHeadView.findViewById(R.id.tb_mian_top_message).setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -186,6 +189,7 @@ public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefr
                 startActivity(intent);
                 break;
             case R.id.mian_product_presentation_layout:
+            case R.id.tb_mian_top_product:
                 intent = new Intent(getActivity(), ProductPresentationListActivity.class);
                 startActivity(intent);
                 break;
@@ -193,6 +197,11 @@ public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefr
                 intent = new Intent(getActivity(), ProductPresentationContactInfoActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.tb_mian_top_message:
+                intent = new Intent(getActivity(), MessageListActivity.class);
+                startActivity(intent);
+                break;
+
         }
     }
 
@@ -238,7 +247,7 @@ public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefr
                 LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
                 convertView = layoutInflater.inflate(R.layout.fragment_tb_main_item, null);
             }
-            final  TbMainResponseModel.Product obj = mList.get(position);
+            final TbMainResponseModel.Product obj = mList.get(position);
             ImageView imageView = (ImageView) convertView.findViewById(R.id.tb_mian_image);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, imageView);
             ((TextView) convertView.findViewById(R.id.tb_mian_title)).setText(obj.name);
@@ -261,7 +270,7 @@ public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefr
             notifyDataSetChanged();
         }
 
-        public void addAll(List<TbMainResponseModel.Product> list){
+        public void addAll(List<TbMainResponseModel.Product> list) {
             mList.addAll(list);
             notifyDataSetChanged();
         }

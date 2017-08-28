@@ -229,7 +229,7 @@ public class UserAction extends BaseAction {
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pageSize)));
-        String result = sendRequest("TBEAENG005001013000", pairs);
+        String result = sendRequest("TBEAYUN011005001001", pairs);
         rspInfo = gson.fromJson(result, MessageListResponseModel.class);
         return rspInfo;
     }
