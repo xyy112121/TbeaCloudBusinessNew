@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,19 +8,19 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
- * 商品添加
+ * 店铺介绍
  */
 
-public class StoreCommodityManageAddActivity extends BaseActivity implements View.OnClickListener{
+public class StoreIntroduceActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_commodity_manage_add);
-        initTopbar("商品添加","保存",this);
+        setContentView(R.layout.activity_store_introduce);
+        initTopbar("店铺介绍","保存",this);
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
 
     }
 }

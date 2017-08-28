@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.ShopDynamicAddActivity;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 
 import butterknife.BindView;

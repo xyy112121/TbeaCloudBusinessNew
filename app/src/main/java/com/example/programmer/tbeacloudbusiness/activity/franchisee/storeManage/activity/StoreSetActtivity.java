@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,31 +8,31 @@ import android.view.View;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * 店铺设置
  */
 
-public class StoreSetActtivity extends BaseActivity implements View.OnClickListener {
+public class StoreSetActtivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_set);
+        ButterKnife.bind(this);
         initTopbar("店铺设置");
-        initView();
     }
 
-    private void initView() {
-        findViewById(R.id.store_set_store_code).setOnClickListener(this);
-        findViewById(R.id.store_set_rotate_ad).setOnClickListener(this);
-        findViewById(R.id.store_set_store_introduce).setOnClickListener(this);
-        findViewById(R.id.store_set_store_specifications_and_models).setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    @OnClick({R.id.store_set_visual_graph, R.id.store_set_rotate_ad, R.id.store_set_store_code, R.id.store_set_store_introduce, R.id.store_set_store_specifications_and_models})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.store_set_visual_graph:
+                Intent intent = new Intent(mContext, SetVisualGraphActivity.class);
+                startActivity(intent);
+                break;
             case R.id.store_set_rotate_ad:
-                Intent intent = new Intent(mContext, RotateADListActivity.class);
+                 intent = new Intent(mContext, RotateADListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.store_set_store_code:

@@ -87,7 +87,6 @@
         <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateInfoActivity" />
         <activity android:name=".activity.franchisee.scanCode.ScanCodeRebateListActivity" />
         <activity android:name=".activity.franchisee.scanCode.WithdrawDepositDateHistoryActivity" />
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeRegionSelectActivity" />
         <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManageMainListActivity" />
         <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManageScanCodeDateListActivity" />
         <activity android:name=".activity.franchisee.plumberManage.activity.PlumberManageSignHistoryListActivity" />
@@ -140,19 +139,20 @@
         <activity android:name=".activity.franchisee.scan.activity.ScanCodePayConfirmActivity" />
         <activity android:name=".activity.franchisee.scan.activity.ScanCodePaySucceedActivity" />
 
-        <activity android:name=".activity.franchisee.storeManage.StoreManageMainActivity" />
-        <activity android:name=".activity.franchisee.storeManage.StoreSetActtivity" />
-        <activity android:name=".activity.franchisee.storeManage.RotateADListActivity" />
-        <activity android:name=".activity.franchisee.storeManage.RotateADEditActivity" />
-        <activity android:name=".activity.franchisee.storeManage.RotateADLinkPageListActivity" />
-        <activity android:name=".activity.franchisee.storeManage.StoreCodeActivity" />
-        <activity android:name=".activity.franchisee.storeManage.StoreIntroduceActivity" />
-        <activity android:name=".activity.franchisee.storeManage.SpecificationsAndModelsListActivity" />
-        <activity android:name=".activity.franchisee.storeManage.SpecificationsAndModelsEditActivity" />
-        <activity android:name=".activity.franchisee.storeManage.OrderManageDeliverGoodsActivity" />
-        <activity android:name=".activity.franchisee.storeManage.StoreCommodityManageListActivity" />
-        <activity android:name=".activity.franchisee.storeManage.ShopDynamicListActivity" />
-        <activity android:name=".activity.franchisee.storeManage.ShopDynamicAddActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.StoreManageMainActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.StoreSetActtivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.RotateADListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.RotateADEditActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.RotateADLinkPageListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.StoreCodeActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.StoreIntroduceActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.SpecificationsAndModelsListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.SpecificationsAndModelsEditActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.OrderManageDeliverGoodsActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.StoreCommodityManageListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.ShopDynamicListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.ShopDynamicAddActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.SetVisualGraphActivity"/>
 
         <activity android:name=".activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity" />
         <activity android:name=".activity.distributor.rebateAccount.activity.RebateAccountWithdrawCashActivity" />

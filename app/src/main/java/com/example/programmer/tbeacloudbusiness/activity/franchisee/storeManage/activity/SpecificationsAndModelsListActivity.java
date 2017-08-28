@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,35 +15,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 店铺动态
+ * 规格型号
  */
 
-public class ShopDynamicListActivity extends BaseActivity implements View.OnClickListener{
+public class SpecificationsAndModelsListActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shop_dynamic_list);
-        initTopbar("店铺动态");
+        setContentView(R.layout.activity_specifications_and_models_list);
+        initTopbar("规格型号","添加",this);
         initView();
     }
 
-    private void initView() {
+    private void  initView(){
         ListView listView = (ListView) findViewById(R.id.listview);
         MyAdapter mAdapter = new MyAdapter();
         listView.setAdapter(mAdapter);
-
-        findViewById(R.id.shop_dynamic_list_add).setOnClickListener(this);
     }
+
+
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.shop_dynamic_list_add:
-                Intent intent = new Intent(mContext,ShopDynamicAddActivity.class);
-                startActivity(intent);
-                break;
-        }
-
+        Intent intent = new Intent(mContext,SpecificationsAndModelsEditActivity.class);
+        startActivity(intent);
     }
 
     private class MyAdapter extends BaseAdapter {
@@ -67,7 +62,7 @@ public class ShopDynamicListActivity extends BaseActivity implements View.OnClic
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.activity_shop_dynamic_list_item, null);
+                convertView = getLayoutInflater().inflate(R.layout.activity_specifications_and_models_list_item, null);
             }
             return convertView;
         }

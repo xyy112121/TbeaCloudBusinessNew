@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +13,16 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
  */
 
 public class RotateADEditActivity extends BaseActivity implements View.OnClickListener {
+    private String mFlag;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rotate_ad_edit);
-        initTopbar("轮换广告", "添加", this);
+        mFlag = getIntent().getStringExtra("flag");
+
+
+        initTopbar("轮换广告", "保存", this);
         initView();
     }
 

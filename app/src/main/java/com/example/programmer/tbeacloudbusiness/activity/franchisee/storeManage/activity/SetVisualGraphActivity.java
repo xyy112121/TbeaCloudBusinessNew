@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.my.set.activity;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +13,11 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.action.StoreManageAction;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.VisualGraphResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.action.SetAction;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.BackgroundInfoModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
-import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
@@ -36,10 +37,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 设置背景图
+ * 设置店铺形象图
  */
 
-public class SetBackgroundActivity extends BaseActivity implements View.OnClickListener {
+public class SetVisualGraphActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.set_background_image)
     ImageView mImageView;
     List<LocalMedia> mSelectList = new ArrayList<>();
@@ -49,7 +50,7 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_background);
         ButterKnife.bind(this);
-        initTopbar("设置背景", "删除", this);
+        initTopbar("形象图", "删除", this);
         getData();
     }
 
@@ -63,10 +64,10 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                 dialog.dismiss();
                 switch (msg.what) {
                     case ThreadState.SUCCESS:
-                        BackgroundInfoModel re = (BackgroundInfoModel) msg.obj;
+                        VisualGraphResonpseModel re = (VisualGraphResonpseModel) msg.obj;
                         if (re.isSuccess() && re.data != null) {
-                            if (!"".equals(re.data.backgroundinfo.picture)) {
-                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + re.data.backgroundinfo.picture, mImageView);
+                            if (!"".equals(re.data.shoppictureinfo)) {
+                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + re.data.shoppictureinfo, mImageView);
                             }
                         } else {
                             ToastUtil.showMessage(re.getMsg());
@@ -85,8 +86,8 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
             @Override
             public void run() {
                 try {
-                    SetAction action = new SetAction();
-                    BackgroundInfoModel model = action.getBackground();
+                    StoreManageAction action = new StoreManageAction();
+                    VisualGraphResonpseModel model = action.getBackground();
                     handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);
@@ -175,7 +176,7 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                             CpPlumberMeetingAction action = new CpPlumberMeetingAction();
                             MeetingGalleryUpdateResponseModel model = action.uploadGallery(mSelectList);
                             if (model.isSuccess() && model.data.pictureinfo != null) {
-                                SetAction action1 = new SetAction();
+                                StoreManageAction action1 = new StoreManageAction();
                                 ResponseInfo model1 = action1.setBackground(model.data.pictureinfo.picturesavenames);
                                 handler.obtainMessage(ThreadState.SUCCESS, model1).sendToTarget();
                             } else {
@@ -218,7 +219,7 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                         dialog.dismiss();
                         switch (msg.what) {
                             case ThreadState.SUCCESS:
-                                BaseResponseModel re = (BaseResponseModel) msg.obj;
+                                ResponseInfo re = (ResponseInfo) msg.obj;
                                 if (re.isSuccess()) {
                                     mImageView.setImageResource(R.drawable.icon_defult);
                                 } else {
@@ -237,8 +238,8 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                     @Override
                     public void run() {
                         try {
-                            SetAction action = new SetAction();
-                            BaseResponseModel re = action.deleteBackground();
+                            StoreManageAction action = new StoreManageAction();
+                            ResponseInfo re = action.deleteBackground();
                             handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                         } catch (Exception e) {
                             handler.sendEmptyMessage(ThreadState.ERROR);

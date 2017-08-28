@@ -8,12 +8,13 @@
     <include layout="@layout/activity_page_top" />
 
     <LinearLayout
-        android:layout_below="@id/topbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/topbar"
         android:orientation="vertical">
 
         <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+            android:id="@+id/rotate_ad_edit_title"
             android:layout_width="match_parent"
             android:layout_height="49dp"
             app:PublishTextRowViewIsBottomLineShow="true"
@@ -27,9 +28,10 @@
             app:PublishTextRowViewIsBottomLineShow="true"
             app:PublishTextRowViewIsSelect="true"
             app:PublishTextRowViewText="链接页面"
-            app:PublishTextRowViewTextColor="@color/text_color"/>
+            app:PublishTextRowViewTextColor="@color/text_color" />
 
         <LinearLayout
+            android:id="@+id/rotate_ad_edit_url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="155dp"
@@ -59,6 +61,7 @@
                 android:text="图片" />
 
             <ImageView
+                android:id="@+id/rotate_ad_edit_pic"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="15dp"
@@ -69,8 +72,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="修改"
                 android:layout_marginLeft="8dp"
+                android:text="修改"
                 android:textColor="@color/tab_text_normal" />
         </LinearLayout>
 
@@ -78,8 +81,10 @@
             style="@style/horizontal_view"
             android:layout_marginTop="8dp" />
     </LinearLayout>
+
     <Button
+        android:id="@+id/rotate_ad_edit_btn"
+        style="@style/style_next_btn"
         android:layout_alignParentBottom="true"
-       style="@style/style_next_btn"
-        android:text="删除"/>
+        android:text="删除" />
 </RelativeLayout>

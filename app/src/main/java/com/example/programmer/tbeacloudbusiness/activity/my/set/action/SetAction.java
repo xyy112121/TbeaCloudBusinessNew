@@ -97,8 +97,8 @@ public class SetAction extends BaseAction {
     public ResponseInfo setBackground(String picture) throws Exception {
         ResponseInfo rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
-        String result = sendRequest("TBEAYUN011001003002", pairs);
         pairs.add(new BasicNameValuePair("picture", picture));
+        String result = sendRequest("TBEAYUN011001003002", pairs);
         rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;
     }

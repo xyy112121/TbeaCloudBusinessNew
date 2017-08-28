@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PersonManageViewActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeRegionSelectActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.RegionSelectActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -90,7 +90,7 @@ public class MemberListActivity extends BaseActivity implements BGARefreshLayout
             public void getValue(String key, String value) {
 
                 if ("regionSelect".equals(key)) {
-                    Intent intent = new Intent(mContext, ScanCodeRegionSelectActivity.class);
+                    Intent intent = new Intent(mContext, RegionSelectActivity.class);
                     startActivity(intent);
                 }
 

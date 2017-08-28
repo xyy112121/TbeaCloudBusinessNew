@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/rotate_ad_list_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableRight="@drawable/icon_arrow_right"
@@ -16,10 +17,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp">
 
         <ImageView
+            android:id="@+id/rotate_ad_list_item_picture"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.6"
@@ -27,6 +29,7 @@
             android:src="@drawable/icon_defult" />
 
         <TextView
+            android:id="@+id/rotate_ad_list_item_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"

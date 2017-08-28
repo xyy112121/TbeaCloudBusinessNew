@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,19 +8,19 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 
 /**
- * 添加规格型号
+ * 评价详情 - 回复
  */
 
-public class SpecificationsAndModelsEditActivity extends BaseActivity implements View.OnClickListener {
+public class MarketInfoBeRateInfoReplyActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_specifications_and_models_edit);
-        initTopbar("添加规格型号", "保存", this);
+        setContentView(R.layout.activity_market_info_be_rate_info);
+        initTopbar("评价回复","发表",this);
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
 
     }
 }

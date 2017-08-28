@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,33 +15,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 轮换广告列表
+ * 店铺动态
  */
 
-public class RotateADListActivity extends BaseActivity implements View.OnClickListener {
-    private MyAdapter mAdapter;
-
-
+public class ShopDynamicListActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rotate_ad_list);
-        initTopbar("轮换广告", "添加", this);
+        setContentView(R.layout.activity_shop_dynamic_list);
+        initTopbar("店铺动态");
         initView();
-
     }
 
     private void initView() {
-        ListView mListView = (ListView) findViewById(R.id.listview);
-        mAdapter = new MyAdapter();
-        mListView.setAdapter(mAdapter);
+        ListView listView = (ListView) findViewById(R.id.listview);
+        MyAdapter mAdapter = new MyAdapter();
+        listView.setAdapter(mAdapter);
 
+        findViewById(R.id.shop_dynamic_list_add).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(mContext,RotateADEditActivity.class);
-        startActivity(intent);
+        switch (v.getId()){
+            case R.id.shop_dynamic_list_add:
+                Intent intent = new Intent(mContext,ShopDynamicAddActivity.class);
+                startActivity(intent);
+                break;
+        }
+
     }
 
     private class MyAdapter extends BaseAdapter {
@@ -64,18 +66,10 @@ public class RotateADListActivity extends BaseActivity implements View.OnClickLi
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.activity_rotate_ad_list_item, null);
-            return view;
-        }
-
-        public void addAll(List<Object> list) {
-            mList = list;
-            notifyDataSetChanged();
-        }
-
-        public void removeAll() {
-            mList.clear();
-            notifyDataSetChanged();
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.activity_shop_dynamic_list_item, null);
+            }
+            return convertView;
         }
     }
 }
