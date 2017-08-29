@@ -3,6 +3,7 @@ package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.RotateADListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.StoreIntroduceResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.StoreManageMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.VisualGraphResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.BackgroundInfoModel;
@@ -75,6 +76,29 @@ public class StoreManageAction extends BaseAction {
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN006002002001", pairs);
         model = gson.fromJson(result, RotateADListResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 获得店铺介绍
+     */
+    public StoreIntroduceResponseModel getStoreIntroduce() throws Exception {
+        StoreIntroduceResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN006002004001", pairs);
+        model = gson.fromJson(result, StoreIntroduceResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 设置店铺介绍
+     */
+    public ResponseInfo setStoreIntroduce(String text) throws Exception {
+        ResponseInfo model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("shopdescription", text));
+        String result = sendRequest("TBEAYUN006002004002", pairs);
+        model = gson.fromJson(result, ResponseInfo.class);
         return model;
     }
 }

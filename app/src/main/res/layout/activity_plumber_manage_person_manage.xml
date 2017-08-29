@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -56,9 +55,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_alignParentBottom="true"
-                   android:paddingLeft="15dp"
                     android:background="@color/white"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp">
 
                     <TextView
                         android:id="@+id/pm_view_personname"
@@ -100,9 +99,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:paddingLeft="15dp"
                         android:drawableLeft="@drawable/icon_water_location_blue"
                         android:drawablePadding="5dp"
+                        android:paddingLeft="15dp"
                         android:text="四川省 德阳市 广汉市"
                         android:textColor="@color/text_color"
                         android:textSize="14sp" />
@@ -111,47 +110,48 @@
 
                 <com.example.programmer.tbeacloudbusiness.component.StarBar
                     android:id="@+id/pm_withdrawal_history_view_starlevel"
-                    android:layout_below="@+id/display"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/display"
+                    android:layout_marginLeft="5dp"
+                    android:paddingRight="15dp"
+                    app:isTouch="false"
+                    app:starCount="5"
+                    app:starDistance="5dp"
                     app:starEmpty="@drawable/icon_checkbox_normal_star"
                     app:starFill="@drawable/icon_checkbox_checkedl_star"
-                    app:starDistance="5dp"
-                    app:starCount="5"
-                    app:starSize="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:paddingRight="15dp"/>
+                    app:starSize="14dp" />
 
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:paddingLeft="15dp"
-                android:paddingRight="15dp"
 
-                android:background="@color/white">
+                android:paddingRight="15dp">
 
                 <TextView
                     android:id="@+id/pm_withdrawal_history_view_workyears"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="15dp"
                     android:text="工龄：12年"
                     android:textColor="@color/text_color"
-                    android:textSize="12sp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="15dp"/>
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/pm_withdrawal_history_view_fansnumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="粉丝：12"
-                    android:textColor="@color/text_color"
-                    android:textSize="12sp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginBottom="15dp"/>
+                    android:layout_marginBottom="15dp"
+                    android:text="粉丝：12"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
 
             </RelativeLayout>
 
@@ -283,17 +283,18 @@
                         android:id="@+id/pm_view_logininfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:layout_marginLeft="40dp"
                         android:layout_marginTop="8dp"
                         android:text="一年提现金额"
                         android:textColor="@color/text_color"
-                        android:textSize="12sp"
-                        android:layout_marginBottom="8dp"/>
+                        android:textSize="12sp" />
 
 
                 </LinearLayout>
 
             </FrameLayout>
+
             <View
                 style="@style/horizontal_view"
                 android:layout_height="8dp" />

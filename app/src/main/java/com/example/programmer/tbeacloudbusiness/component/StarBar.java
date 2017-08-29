@@ -15,7 +15,6 @@ import com.example.programmer.tbeacloudbusiness.R;
 
 /**
  * Created by DMing on 2016/7/18.
- *
  */
 public class StarBar extends View {
     private int starDistance = 0; //星星间距
@@ -27,6 +26,7 @@ public class StarBar extends View {
     private OnStarChangeListener onStarChangeListener;//监听星星变化接口
     private Paint paint;         //绘制星星画笔
     private boolean integerMark = false;
+    private boolean isTouch = false;
 
     public StarBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -45,13 +45,14 @@ public class StarBar extends View {
      * @param attrs
      */
     private void init(Context context, AttributeSet attrs) {
-        setClickable(true);
+//        setClickable(true);
         TypedArray mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.RatingBar);
         this.starDistance = (int) mTypedArray.getDimension(R.styleable.RatingBar_starDistance, 0);
         this.starSize = (int) mTypedArray.getDimension(R.styleable.RatingBar_starSize, 20);
         this.starCount = mTypedArray.getInteger(R.styleable.RatingBar_starCount, 5);
         this.starEmptyDrawable = mTypedArray.getDrawable(R.styleable.RatingBar_starEmpty);
         this.starFillBitmap = drawableToBitmap(mTypedArray.getDrawable(R.styleable.RatingBar_starFill));
+        this.isTouch = mTypedArray.getBoolean(R.styleable.RatingBar_isTouch, true);//可点击
         mTypedArray.recycle();
 
         paint = new Paint();
@@ -150,23 +151,26 @@ public class StarBar extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        int x = (int) event.getX();
-        if (x < 0) x = 0;
-        if (x > getMeasuredWidth()) x = getMeasuredWidth();
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN: {
-                setStarMark(x * 1.0f / (getMeasuredWidth() * 1.0f / starCount));
-                break;
+        if (isTouch) {
+            int x = (int) event.getX();
+            if (x < 0) x = 0;
+            if (x > getMeasuredWidth()) x = getMeasuredWidth();
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    setStarMark(x * 1.0f / (getMeasuredWidth() * 1.0f / starCount));
+                    break;
+                }
+                case MotionEvent.ACTION_MOVE: {
+                    setStarMark(x * 1.0f / (getMeasuredWidth() * 1.0f / starCount));
+                    break;
+                }
+                case MotionEvent.ACTION_UP: {
+                    break;
+                }
             }
-            case MotionEvent.ACTION_MOVE: {
-                setStarMark(x * 1.0f / (getMeasuredWidth() * 1.0f / starCount));
-                break;
-            }
-            case MotionEvent.ACTION_UP: {
-                break;
-            }
+            invalidate();
         }
-        invalidate();
+
         return super.onTouchEvent(event);
     }
 

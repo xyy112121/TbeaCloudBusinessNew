@@ -58,6 +58,8 @@
         <attr format="reference" name="starEmpty"/>
         <!--星星满图-->
         <attr format="reference" name="starFill"/>
+        <!--是否点击-->
+        <attr format="boolean" name="isTouch"/>
     </declare-styleable>
 
     <declare-styleable name="CircularImageView">

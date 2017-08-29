@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
     <include layout="@layout/activity_page_top"/>
     <EditText
+        android:id="@+id/store_introduce_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"

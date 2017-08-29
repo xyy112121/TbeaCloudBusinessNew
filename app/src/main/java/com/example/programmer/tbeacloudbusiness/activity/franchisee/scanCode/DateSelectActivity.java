@@ -13,6 +13,7 @@ import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import cn.qqtheme.framework.picker.DatePicker;
@@ -91,7 +92,8 @@ public class DateSelectActivity extends BaseActivity {
         DatePicker picker = new DatePicker(mContext, DatePicker.YEAR_MONTH_DAY);
         picker.setTextColor(ContextCompat.getColor(mContext, R.color.black));
         picker.setLabel("", "", "");
-//                picker.setLineColor(ContextCompat.getColor(mContext, R.color.white));
+        Calendar c = Calendar.getInstance();
+         picker.setSelectedItem(c.get(Calendar.YEAR),c.get(Calendar.MONTH)+1,c.get(Calendar.DAY_OF_MONTH));
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
             public void onDatePicked(String year, String month, String day) {

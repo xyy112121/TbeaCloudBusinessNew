@@ -116,6 +116,7 @@
                     android:layout_below="@+id/display"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="15dp"
+                    app:isTouch="false"
                     app:starCount="5"
                     app:starDistance="5dp"
                     app:starEmpty="@drawable/icon_checkbox_normal_star"

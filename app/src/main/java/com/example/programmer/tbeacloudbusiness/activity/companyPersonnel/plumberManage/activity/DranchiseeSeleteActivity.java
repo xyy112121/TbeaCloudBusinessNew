@@ -169,7 +169,7 @@ public class DranchiseeSeleteActivity extends BaseActivity implements BGARefresh
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, PlumberManageMainListActivity.class);
-                    intent.putExtra("type", "distributor");
+                    intent.putExtra("type", "");
                     intent.putExtra("id", obj.fdistributorid);
                     startActivity(intent);
                 }
