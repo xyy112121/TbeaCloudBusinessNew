@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/model_spec_list_item_name"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginLeft="15dp"
@@ -13,6 +14,7 @@
         android:textColor="@color/tab_text_normal" />
 
     <ImageView
+        android:id="@+id/model_spec_list_item_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

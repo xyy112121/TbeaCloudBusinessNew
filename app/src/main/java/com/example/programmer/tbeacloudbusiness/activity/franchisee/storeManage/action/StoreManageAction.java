@@ -1,12 +1,13 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.action;
 
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeMainResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.RotateADListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.StoreIntroduceResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.commodityManage.CommodityManageListRequestModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.commodityManage.CommodityManageListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.ModelSpecListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.RotateADListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.StoreIntroduceResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.StoreManageMainResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.VisualGraphResonpseModel;
-import com.example.programmer.tbeacloudbusiness.activity.my.set.model.BackgroundInfoModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.VisualGraphResonpseModel;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.model.ProductPresentationListResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
@@ -74,7 +75,7 @@ public class StoreManageAction extends BaseAction {
     public RotateADListResponseModel getRotateADList() throws Exception {
         RotateADListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
-        String result = sendRequest("TBEAYUN006002002001", pairs);
+        String result = sendRequest("TBEAYUN006002002000", pairs);
         model = gson.fromJson(result, RotateADListResponseModel.class);
         return model;
     }
@@ -101,4 +102,55 @@ public class StoreManageAction extends BaseAction {
         model = gson.fromJson(result, ResponseInfo.class);
         return model;
     }
+
+    /**
+     * 商城管理-­‐获得规格参数列表
+     */
+    public ModelSpecListResponseModel getModelSpecList() throws Exception {
+        ModelSpecListResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN006002005001", pairs);
+        model = gson.fromJson(result, ModelSpecListResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 删除规格型号
+     */
+    public ResponseInfo deleteModelSpec(String id) throws Exception {
+        ResponseInfo model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("modelspecid", id));
+        String result = sendRequest("TBEAYUN006002005003", pairs);
+        model = gson.fromJson(result, ResponseInfo.class);
+        return model;
+    }
+
+    /**
+     * 添加规格型号
+     */
+    public ResponseInfo saveModelSpec(String name) throws Exception {
+        ResponseInfo model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("modelspecname", name));
+        String result = sendRequest("TBEAYUN006002005002", pairs);
+        model = gson.fromJson(result, ResponseInfo.class);
+        return model;
+    }
+
+    /**
+     * 获取店铺商品列表
+     */
+    public CommodityManageListResponseModel getCommodityList(CommodityManageListRequestModel request) throws Exception {
+        CommodityManageListResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("orderitem", request.orderitem));
+        pairs.add(new BasicNameValuePair("order", request.order));
+        pairs.add(new BasicNameValuePair("page", String.valueOf(request.page)));
+        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(request.pageSize)));
+        String result = sendRequest("TBEAYUN006004001000", pairs);
+        model = gson.fromJson(result, CommodityManageListResponseModel.class);
+        return model;
+    }
+
 }

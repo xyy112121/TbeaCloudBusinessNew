@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,11 +14,8 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.action.StoreManageAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.VisualGraphResonpseModel;
-import com.example.programmer.tbeacloudbusiness.activity.my.set.action.SetAction;
-import com.example.programmer.tbeacloudbusiness.activity.my.set.model.BackgroundInfoModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.VisualGraphResonpseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
-import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;

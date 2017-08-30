@@ -141,18 +141,18 @@
 
         <activity android:name=".activity.franchisee.storeManage.activity.StoreManageMainActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.StoreSetActtivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.RotateADListActivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.RotateADEditActivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.RotateADLinkPageListActivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.StoreCodeActivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.StoreIntroduceActivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.SpecificationsAndModelsListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.set.RotateADListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.set.RotateADEditActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.set.RotateADLinkPageListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.set.StoreCodeActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.set.StoreIntroduceActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.set.SpecificationsAndModelsListActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.SpecificationsAndModelsEditActivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.OrderManageDeliverGoodsActivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.StoreCommodityManageListActivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.ShopDynamicListActivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.ShopDynamicAddActivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.SetVisualGraphActivity"/>
+        <activity android:name=".activity.franchisee.storeManage.activity.order.OrderManageDeliverGoodsActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.StoreCommodityManageListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.set.ShopDynamicListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.set.ShopDynamicAddActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.set.SetVisualGraphActivity"/>
 
         <activity android:name=".activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity" />
         <activity android:name=".activity.distributor.rebateAccount.activity.RebateAccountWithdrawCashActivity" />

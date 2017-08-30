@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,8 +10,7 @@ import android.widget.EditText;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.action.StoreManageAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.RotateADListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.StoreIntroduceResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.StoreIntroduceResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;

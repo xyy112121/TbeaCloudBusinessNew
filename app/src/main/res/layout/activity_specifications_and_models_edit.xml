@@ -8,7 +8,7 @@
     <include layout="@layout/activity_page_top" />
 
     <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
-        android:id="@+id/store_set_store_specifications_and_models"
+        android:id="@+id/specifications_models_edit_name"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:PublishTextRowViewHiht="请输入自定义规格型号名称"

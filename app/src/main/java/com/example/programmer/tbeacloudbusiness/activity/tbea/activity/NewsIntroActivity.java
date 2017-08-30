@@ -53,7 +53,6 @@ public class NewsIntroActivity extends BaseActivity implements BGARefreshLayout.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tbea_company_intro);
         initView();
-        getData();
     }
 
     public void initView() {
@@ -113,8 +112,7 @@ public class NewsIntroActivity extends BaseActivity implements BGARefreshLayout.
                             mType = "decorationnews";
                             break;
                     }
-                    mAdapter.removeAll();
-                    getData();
+                   mRefreshLayout.beginRefreshing();
 
                 }
             });
@@ -129,14 +127,12 @@ public class NewsIntroActivity extends BaseActivity implements BGARefreshLayout.
     }
 
     private void getData() {
-        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
-        dialog.setText("加载中...");
-        dialog.show();
         try {
             final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
-                    dialog.dismiss();
+                    mRefreshLayout.endRefreshing();
+                    mRefreshLayout.endLoadingMore();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
                             CompanyIntroListResponseModel model = (CompanyIntroListResponseModel) msg.obj;
@@ -173,6 +169,7 @@ public class NewsIntroActivity extends BaseActivity implements BGARefreshLayout.
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
+        mAdapter.removeAll();
         getData();
     }
 

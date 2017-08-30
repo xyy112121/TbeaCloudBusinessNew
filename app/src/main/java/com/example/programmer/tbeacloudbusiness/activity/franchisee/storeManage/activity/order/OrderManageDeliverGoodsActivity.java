@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -1,45 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-   <include layout="@layout/activity_page_top"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp">
-        <LinearLayout
-            android:id="@+id/store_commodity_intro_top_layout"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:layout_weight="0.75"
-            />
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:gravity="center">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="48dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="价格"
-                android:textColor="@color/tab_text_normal" />
+        <include layout="@layout/activity_page_top" />
 
-            <ImageView
-                android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <LinearLayout
+                android:id="@+id/store_commodity_intro_top_layout"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="0.75"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/store_commodity_manage_list_price_layout"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:src="@drawable/icon_arraw_grayblue" />
+                android:layout_weight="0.25"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/store_commodity_manage_list_price_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="价格"
+                    android:textColor="@color/tab_text_normal" />
+
+                <ImageView
+                    android:id="@+id/store_commodity_manage_list_price_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:src="@drawable/icon_arraw_grayblue" />
+            </LinearLayout>
         </LinearLayout>
+
+
+        <View style="@style/horizontal_view" />
+
+        <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+            android:id="@+id/rl_recyclerview_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
     </LinearLayout>
 
+    <View
+        style="@style/horizontal_view"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="48dp"/>
 
-    <View style="@style/horizontal_view"/>
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-</LinearLayout>
+    <TextView
+        android:id="@+id/store_commodity_manage_list_total"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:background="@drawable/store_commodity_manage_list_btn_bg"
+        android:text="数量：22"
+        android:textColor="#FF4B4C"
+       android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:textSize="15sp"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+      android:layout_marginRight="35dp"
+        android:layout_marginBottom="8dp"/>
+</RelativeLayout>

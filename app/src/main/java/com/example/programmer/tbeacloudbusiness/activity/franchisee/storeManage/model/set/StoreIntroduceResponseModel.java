@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set;
 
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.google.gson.annotations.SerializedName;

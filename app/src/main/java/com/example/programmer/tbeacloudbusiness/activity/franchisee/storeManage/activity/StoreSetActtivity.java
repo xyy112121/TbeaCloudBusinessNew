@@ -7,6 +7,11 @@ import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.RotateADListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.SetVisualGraphActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.SpecificationsAndModelsListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.StoreCodeActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.StoreIntroduceActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
