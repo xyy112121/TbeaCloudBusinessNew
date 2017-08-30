@@ -41,7 +41,7 @@ public class RegionSelectActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_region_select_list);
-        initTopbar("区域选择", "保存", this);
+        initTopbar("区域选择", "确定", this);
         mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter();
         mListView.setAdapter(mAdapter);
