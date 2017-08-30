@@ -22,6 +22,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeti
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListStateResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.DateSelectActivity;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
@@ -41,6 +42,8 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  */
 
 public class PlumberMeetingListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
+      @BindView(R.id.plumber_meeting_main_list_search_text)
+    TextView mSearchTextView;
     private ExpandPopTabView expandTabView;
     private List<KeyValueBean> mRegionLists, mDateLists;//区域,时间
     private PopOneListView mRegionView, mStateView, mDateView;
@@ -58,6 +61,7 @@ public class PlumberMeetingListActivity extends BaseActivity implements BGARefre
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cp_plumber_meeting_main_list);
+        ButterKnife.bind(this);
         initTopbar("水电工会议列表", "准备会议", this);
         intiView();
         getStatusList();
@@ -68,7 +72,7 @@ public class PlumberMeetingListActivity extends BaseActivity implements BGARefre
 
 //        View mHeadView1 = getLayoutInflater().inflate(R.layout.activity_cp_plumber_meeting_list_head, null);
 //        mListView.addHeaderView(mHeadView1);
-        mAdapter = new MyAdapter(mContext,R.layout.activity_plumber_meeting_main_list_item);
+        mAdapter = new MyAdapter(mContext, R.layout.activity_plumber_meeting_main_list_item);
         mListView.setAdapter(mAdapter);
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
@@ -80,6 +84,15 @@ public class PlumberMeetingListActivity extends BaseActivity implements BGARefre
         addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
         addStateItem(expandTabView, null, "", "状态");
         addDateItem(expandTabView, mDateLists, "默认排序", "时间");
+
+        mSearchTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, HistorySearchActivity.class);
+                intent.putExtra("type", "servicemeeting");
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -291,12 +304,12 @@ public class PlumberMeetingListActivity extends BaseActivity implements BGARefre
         public View getView(int position, View convertView, ViewGroup parent) {
             final PlumberMeetingListMainResonpseModel.Meeting obj = getItem(position);
             ViewHolder holder;
-            if(convertView == null){
+            if (convertView == null) {
                 convertView = getLayoutInflater().inflate(resourceId, null);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
 
-            }else {
+            } else {
                 holder = (ViewHolder) convertView.getTag();
             }
 
@@ -308,7 +321,7 @@ public class PlumberMeetingListActivity extends BaseActivity implements BGARefre
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, MeetingViewActivity.class);
-                    intent.putExtra("id",obj.id);
+                    intent.putExtra("id", obj.id);
                     startActivity(intent);
                 }
             });
@@ -316,7 +329,7 @@ public class PlumberMeetingListActivity extends BaseActivity implements BGARefre
             return convertView;
         }
 
-         class ViewHolder {
+        class ViewHolder {
             @BindView(R.id.pm_all_list_item_code)
             TextView mCodeView;
             @BindView(R.id.pm_all_list_item_zone)

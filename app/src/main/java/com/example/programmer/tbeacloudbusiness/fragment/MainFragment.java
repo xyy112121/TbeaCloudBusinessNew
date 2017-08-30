@@ -35,6 +35,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeti
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity.ScanCodeAcctivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.StoreManageMainActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
@@ -218,12 +219,20 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
             }
         });
 
-        mView.findViewById(R.id.expert_search_text).setOnClickListener(new View.OnClickListener() {
+        mView.findViewById(R.id.mian_home_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), HistorySearchActivity.class);
                 intent.putExtra("type", "all");
                 startActivity(intent);
+
+            }
+        });
+
+        mView.findViewById(R.id.mian_home_message).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MessageListActivity.class));
             }
         });
     }

@@ -147,7 +147,7 @@
         <activity android:name=".activity.franchisee.storeManage.activity.set.StoreCodeActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.set.StoreIntroduceActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.set.SpecificationsAndModelsListActivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.SpecificationsAndModelsEditActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.StoreCommodityManageAddActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.order.OrderManageDeliverGoodsActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.StoreCommodityManageListActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.set.ShopDynamicListActivity" />

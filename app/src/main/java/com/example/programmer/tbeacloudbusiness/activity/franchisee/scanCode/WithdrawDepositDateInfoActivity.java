@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -58,30 +59,36 @@ public class WithdrawDepositDateInfoActivity extends BaseActivity {
                                 if (ownerInfo != null) {
                                     LinearLayout layout = (LinearLayout) findViewById(R.id.withdrow_deposit_view_ownerInfo);
                                     ((TextView) findViewById(R.id.person_info_name)).setText(ownerInfo.personname);
+                                    layout.findViewById(R.id.person_info_personjobtitle).setVisibility(View.GONE);
                                     ImageLoader.getInstance().displayImage(imagePath + ownerInfo.thumbpicture, ((ImageView) layout.findViewById(R.id.person_info_head)));
-                                    ImageLoader.getInstance().displayImage(imagePath + ownerInfo.persontypeicon, ((ImageView) layout.findViewById(R.id.person_info_personjobtitle)));
+//                                    ImageLoader.getInstance().displayImage(imagePath + ownerInfo.persontypeicon, ((ImageView) layout.findViewById(R.id.person_info_personjobtitle)));
                                 }
 
                                 if (payeeInfo != null) {
                                     LinearLayout layout = (LinearLayout) findViewById(R.id.withdrow_deposit_view_payeeInfo);
-                                    ((TextView) findViewById(R.id.person_info_name)).setText(payeeInfo.personname);
+                                    ((TextView)layout. findViewById(R.id.person_info_name)).setText(payeeInfo.personname);
+                                    ((TextView)layout. findViewById(R.id.person_info_companyname)).setText(payeeInfo.companyname);
+                                    layout. findViewById(R.id.person_info_right).setVisibility(View.GONE);
                                     ImageLoader.getInstance().displayImage(imagePath + payeeInfo.thumbpicture, ((ImageView) layout.findViewById(R.id.person_info_head)));
                                     ImageLoader.getInstance().displayImage(imagePath + payeeInfo.persontypeicon, ((ImageView) layout.findViewById(R.id.person_info_personjobtitle)));
                                 }
 
                                 if (takeMoneyCodeInfo != null) {
-                                    ((TextView) findViewById(R.id.withdrow_deposit_view_takemoneycode)).setText(payeeInfo.personname);
-                                    ((TextView) findViewById(R.id.withdrow_deposit_view_generatecodetime)).setText(payeeInfo.personname);
-                                    ((TextView) findViewById(R.id.withdrow_deposit_view_money)).setText(payeeInfo.personname);
+                                    ((TextView) findViewById(R.id.withdrow_deposit_view_takemoneycode)).setText(takeMoneyCodeInfo.takemoneycode);
+                                    ((TextView) findViewById(R.id.withdrow_deposit_view_generatecodetime)).setText(takeMoneyCodeInfo.generatecodetime);
+                                    ((TextView) findViewById(R.id.withdrow_deposit_view_money)).setText(takeMoneyCodeInfo.money);
                                 }
 
                                 if (payMoneyInfo != null) {
-                                    LinearLayout layout = (LinearLayout) findViewById(R.id.withdrow_deposit_view_paymoneyinfo);
-                                    ((TextView) findViewById(R.id.person_info_name)).setText(payMoneyInfo.personname);
                                     ((TextView) findViewById(R.id.withdrow_deposit_view_paytime)).setText(payMoneyInfo.paytime);
                                     ((TextView) findViewById(R.id.withdrow_deposit_view_payplace)).setText(payMoneyInfo.payplace);
+
+                                    LinearLayout layout = (LinearLayout) findViewById(R.id.withdrow_deposit_view_paymoneyinfo);
+                                    ((TextView) layout.findViewById(R.id.person_info_name)).setText(payMoneyInfo.personname);
                                     ImageLoader.getInstance().displayImage(imagePath + payMoneyInfo.thumbpicture, ((ImageView) layout.findViewById(R.id.person_info_head)));
                                     ImageLoader.getInstance().displayImage(imagePath + payMoneyInfo.persontypeicon, ((ImageView) layout.findViewById(R.id.person_info_personjobtitle)));
+                                    ((TextView) layout.findViewById(R.id.person_info_companyname)).setText(payMoneyInfo.companyname);
+                                    layout.findViewById(R.id.person_info_right).setVisibility(View.GONE);
                                 }
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
