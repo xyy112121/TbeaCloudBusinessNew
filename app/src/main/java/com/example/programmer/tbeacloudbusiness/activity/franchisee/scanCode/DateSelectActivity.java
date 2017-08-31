@@ -11,6 +11,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -52,7 +53,7 @@ public class DateSelectActivity extends BaseActivity {
             public void onClick(View v) {
                 String startTime = ((TextView) findViewById(R.id.date_select_begin)).getText() + "";
                 String endTime = ((TextView) findViewById(R.id.date_select_end)).getText() + "";
-                if (compareTime(startTime, endTime) > 0) {
+                if (compareTime(startTime, endTime) == 1) {
                     ToastUtil.showMessage("开始时间不能大于结束时间！");
                 } else {
                     Intent intent = new Intent();
@@ -66,27 +67,26 @@ public class DateSelectActivity extends BaseActivity {
         });
     }
 
-    /**
-     * 比较时间
-     * 注：result大于0，则t1>t2；
-     * result等于0，则t1=t2；
-     * result小于0，则t1<t2；
-     */
-    private long compareTime(String t1, String t2) {
-        Date d1 = null;
-        Date d2 = null;
-        long result = 0;
+    public  int compareTime(String date1, String date2) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-            d1 = sdf.parse(t1);
-            d2 = sdf.parse(t2);
-            result = d1.getTime() - d2.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
+            Date dt1 = df.parse(date1);
+            Date dt2 = df.parse(date2);
+            if (dt1.getTime() > dt2.getTime()) {
+                System.out.println("dt1 在dt2前");
+                return 1;
+            } else if (dt1.getTime() < dt2.getTime()) {
+                System.out.println("dt1在dt2后");
+                return -1;
+            } else {
+                return 0;
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
-        return result;
-
+        return 0;
     }
+
 
     public void showPicker(final View view) {
         DatePicker picker = new DatePicker(mContext, DatePicker.YEAR_MONTH_DAY);

@@ -63,6 +63,7 @@ public class PublishTextRowView extends LinearLayout {
 
     public void setValueText(String text) {
         mValueView.setText(text);
+        mValueView2.setText(text);
     }
 
     public String getValueText() {

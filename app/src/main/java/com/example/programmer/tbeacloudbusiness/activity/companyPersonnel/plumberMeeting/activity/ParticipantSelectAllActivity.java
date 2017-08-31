@@ -20,6 +20,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListAllResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
@@ -37,15 +38,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 公司人员-准备-参与人员选择(多选)
+ * 公司人员-准备-参与人员选择全部(多选)
  */
 
-public class ParticipantSelectActivity extends BaseActivity implements View.OnClickListener {
+public class ParticipantSelectAllActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.cp_franchiser_list_number)
     TextView mNumberView;
     private ListView mListView;
     private MyAdapter mAdapter;
-    List<ParticipantSelectlListResponseModel.DataBean.MeetingparticipantlistBean> mSelectList = new ArrayList<>();
+    List<ParticipantSelectlListAllResponseModel.DataBean.CompanyemployeelistBean> mSelectList = new ArrayList<>();
     String[] mSelectIds = new String[]{};
     // 用来控制CheckBox的选中状况
     private static HashMap<Integer, Boolean> isSelected;
@@ -57,10 +58,11 @@ public class ParticipantSelectActivity extends BaseActivity implements View.OnCl
         setContentView(R.layout.activity_cp_franchiser_select_list);
 //        mFlag = getIntent().getBooleanExtra("flag", false);//true可选择
 //        if(mFlag == false){
-        initTopbar("用户列表");
+//            initTopbar("用户列表");
 //        }else {
 //            initTopbar("用户列表", "确定", this);
 //        }
+        initTopbar("用户列表", "确定", this);
         ButterKnife.bind(this);
         initView();
     }
@@ -90,16 +92,12 @@ public class ParticipantSelectActivity extends BaseActivity implements View.OnCl
                     dialog.dismiss();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            ParticipantSelectlListResponseModel model = (ParticipantSelectlListResponseModel) msg.obj;
+                            ParticipantSelectlListAllResponseModel model = (ParticipantSelectlListAllResponseModel) msg.obj;
                             if (model.isSuccess() && model.data != null) {
-                                if (model.data.meetingparticipantlist != null) {
-                                    mAdapter.initDate(model.data.meetingparticipantlist.size(), model.data.meetingparticipantlist);
-                                    mAdapter.addAll(model.data.meetingparticipantlist);
+                                if (model.data.companyemployeelist != null) {
+                                    mAdapter.initDate(model.data.companyemployeelist.size(), model.data.companyemployeelist);
+                                    mAdapter.addAll(model.data.companyemployeelist);
                                 }
-//                                if (model.data.meetingparticipantlist != null) {
-//                                    mAdapter.initDate(model.data.meetingparticipantlist.size(),model.data.meetingparticipantlist);
-//                                    mAdapter.addAll(model.data.meetingparticipantlist);
-//                                }
 
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
@@ -117,12 +115,12 @@ public class ParticipantSelectActivity extends BaseActivity implements View.OnCl
                 public void run() {
                     try {
                         CpPlumberMeetingAction action = new CpPlumberMeetingAction();
-                        ParticipantSelectlListResponseModel model;
+
 //                        if (mFlag) {
-//                            model = action.getParticipantListAll();
+                        ParticipantSelectlListAllResponseModel model = action.getParticipantListAll();
 //                        } else {
-                        String meetingId = getIntent().getStringExtra("meetingId");
-                        model = action.getParticipantList(meetingId);
+//                            String meetingId = getIntent().getStringExtra("meetingId");
+//                            model = action.getParticipantList(meetingId);
 //                        }
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
@@ -147,7 +145,7 @@ public class ParticipantSelectActivity extends BaseActivity implements View.OnCl
         }
     }
 
-    public class MyAdapter extends ArrayAdapter<ParticipantSelectlListResponseModel.DataBean.MeetingparticipantlistBean> {
+    public class MyAdapter extends ArrayAdapter<ParticipantSelectlListAllResponseModel.DataBean.CompanyemployeelistBean> {
         int resourceId;
 
         public MyAdapter(@NonNull Context context, @LayoutRes int resource) {
@@ -159,7 +157,7 @@ public class ParticipantSelectActivity extends BaseActivity implements View.OnCl
         }
 
         // 初始化isSelected的数据
-        public void initDate(int count, List<ParticipantSelectlListResponseModel.DataBean.MeetingparticipantlistBean> list) {
+        public void initDate(int count, List<ParticipantSelectlListAllResponseModel.DataBean.CompanyemployeelistBean> list) {
             for (int i = 0; i < count; i++) {
                 if (mSelectIds.length > 0) {
                     for (String item : mSelectIds) {
@@ -187,35 +185,50 @@ public class ParticipantSelectActivity extends BaseActivity implements View.OnCl
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            final ParticipantSelectlListResponseModel.DataBean.MeetingparticipantlistBean obj = getItem(position);
+            final ParticipantSelectlListAllResponseModel.DataBean.CompanyemployeelistBean obj = getItem(position);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, holder.mHeadView);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, holder.mPersonjobtitleView);
-            holder.mNameView.setText(obj.name);
-            holder.mCompanyNameView.setText(obj.companyandjobposition);
-            holder.mCkView.setVisibility(View.GONE);
+            holder.mNameView.setText(obj.personname);
+            holder.mCompanyNameView.setText(obj.companyname);
 //            if (mFlag == false) {
-//                holder.mCkView.setVisibility(View.GONE);
+//                holder.mCkView.setVisibility(View.VISIBLE);
 //            } else {
-//                holder.mCkView.setChecked(isSelected.get(position));
-//                if(isSelected.get(position) == true){
-//                    mSelectList.add(getItem(position));
-//                    removeDuplicate(mSelectList);
-//                }
-//                convertView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        if (isSelected.get(position)) {
-//                            isSelected.put(position, false);
-//                            mSelectList.remove(getItem(position));
-//                            mNumberView.setText(mSelectList.size() + "");
-//                        } else {
-//                            isSelected.put(position, true);
-//                            mSelectList.add(getItem(position));
-//                            removeDuplicate(mSelectList);
-//                        }
-//                        notifyDataSetChanged();
-//                    }
-//                });
+            holder.mCkView.setChecked(isSelected.get(position));
+            if (isSelected.get(position) == true) {
+                mSelectList.add(getItem(position));
+                removeDuplicate(mSelectList);
+            }
+
+            holder.mCkView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (isSelected.get(position)) {
+                        isSelected.put(position, false);
+                        mSelectList.remove(getItem(position));
+                        mNumberView.setText(mSelectList.size() + "");
+                    } else {
+                        isSelected.put(position, true);
+                        mSelectList.add(getItem(position));
+                        removeDuplicate(mSelectList);
+                    }
+                    notifyDataSetChanged();
+                }
+            });
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (isSelected.get(position)) {
+                        isSelected.put(position, false);
+                        mSelectList.remove(getItem(position));
+                        mNumberView.setText(mSelectList.size() + "");
+                    } else {
+                        isSelected.put(position, true);
+                        mSelectList.add(getItem(position));
+                        removeDuplicate(mSelectList);
+                    }
+                    notifyDataSetChanged();
+                }
+            });
 //            }
             holder.mRightView.setVisibility(View.GONE);
             return convertView;

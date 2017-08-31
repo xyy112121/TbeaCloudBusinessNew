@@ -20,6 +20,7 @@ import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumbe
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListAllResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingViewSignlnActivity;
@@ -98,7 +99,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
     private final int RESULT_ADDR = 1002;
     private final int RESULT_PARTICIPANT = 1003;
     private final int RESULT_PLAN = 1004;
-    private final int RESULT_UPDATE= 1005;
+    private final int RESULT_UPDATE = 1005;
 
     MeetingPrepareRequestModel mRequest = new MeetingPrepareRequestModel();
 
@@ -145,20 +146,20 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                     //新会议：可编辑，删除，准备中：可编辑 开会中：可更新
                                     if ("新会议".equals(meetingbaseinfo.meetingstatus)) {
                                         mIsEdit = true;
-                                        mIsDelete  = true;
+                                        mIsDelete = true;
                                         mMeetingPrepareSummary.setVisibility(View.GONE);
                                         mMeetingPrepareGallery.setVisibility(View.GONE);
                                         mMeetingPrepareSign.setVisibility(View.GONE);
-                                    }else if ("准备中".equals(meetingbaseinfo.meetingstatus)) {
+                                    } else if ("准备中".equals(meetingbaseinfo.meetingstatus)) {
                                         mIsEdit = true;
                                         mMeetingPrepareSummary.setVisibility(View.GONE);
                                         mMeetingPrepareGallery.setVisibility(View.GONE);
-                                    }else if ("开会中".equals(meetingbaseinfo.meetingstatus)) {
+                                    } else if ("开会中".equals(meetingbaseinfo.meetingstatus)) {
                                         mIsUpdate = true;
                                         mMeetingPrepareSummary.setVisibility(View.GONE);
                                         mMeetingPrepareGallery.setVisibility(View.GONE);
                                     }
-                                    mPlanView.setValueText(meetingbaseinfo.meetingplace);
+
 
                                 }
                                 //举办单位
@@ -171,16 +172,16 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                         ImageView rightView = (ImageView) pernsonLayout.findViewById(R.id.person_info_right);
                                         TextView nameView = (TextView) pernsonLayout.findViewById(R.id.person_info_name);
                                         TextView companyNameView = (TextView) pernsonLayout.findViewById(R.id.person_info_companyname);
-                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.companymasterheadpicture, headView);
-                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.companypersontypeicon, typwView);
-                                        nameView.setText(item.companymastername);
-                                        companyNameView.setText(item.companyname);
+                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.masterthumbpicture, headView);
+                                        ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.companytypeicon, typwView);
+                                        nameView.setText(item.mastername);
+                                        companyNameView.setText(item.name);
                                         rightView.setVisibility(View.GONE);
                                         mHoldMonadView.addView(pernsonLayout);
                                         if (companyIds.length() > 0) {
                                             companyIds += ",";
                                         }
-                                        companyIds += item.companyid;
+                                        companyIds += item.id;
                                     }
                                     mRequest.organizecompanylist = companyIds;
                                 }
@@ -190,15 +191,16 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                     ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.headpicture, mHeadView);
                                     ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, mPersonjobtitleView);
                                     mNameView.setText(obj.name);
-                                    mCompanynameView.setText(obj.company);
+                                    mCompanynameView.setText(obj.company + " " + obj.jobposition);
                                 }
 
                                 if (model.data.participantlist != null) {
                                     mParticipantView.setValueText(model.data.participantlist.participantnumber + "");
-                                    mRequest.participantlist  = model.data.participantlist.participantlist;
+                                    mRequest.participantlist = model.data.participantlist.participantlist;
                                 }
 
                                 if (model.data.meetinginfo != null) {
+                                    mPlanView.setValueText(model.data.meetinginfo.meetingitems);
                                     mMeetingPrepareSummary.setValueText(model.data.meetinginfo.meetingsummary);
                                     mMeetingPrepareGallery.setValueText(model.data.meetinginfo.meetingpicturenumber);
                                 }
@@ -235,7 +237,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    @OnClick({R.id.cp_meeting_prepare_sign,R.id.cp_meeting_prepare_hold_time, R.id.cp_meeting_prepare_hold_monad, R.id.cp_meeting_prepare_participant, R.id.cp_meeting_prepare_plan, R.id.cp_meeting_prepare_finish, R.id.cp_meeting_prepare_hold_addr})
+    @OnClick({R.id.cp_meeting_prepare_sign, R.id.cp_meeting_prepare_hold_time, R.id.cp_meeting_prepare_hold_monad, R.id.cp_meeting_prepare_participant, R.id.cp_meeting_prepare_plan, R.id.cp_meeting_prepare_finish, R.id.cp_meeting_prepare_hold_addr})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cp_meeting_prepare_hold_time:
@@ -248,23 +250,30 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                     startActivityForResult(new Intent(mContext, AddrSelectActivity.class), RESULT_ADDR);
                 break;
             case R.id.cp_meeting_prepare_participant:
-                 Intent intent = new Intent(mContext, ParticipantSelectActivity.class);
-                if (mIsEditOnClick == true){//编辑状态，可更改参与人员
-                    intent.putExtra("flag",true);
-                    intent.putExtra("ids",mRequest.participantlist);
-                }else {
-                    intent.putExtra("flag",false);
-                    intent.putExtra("ids","");
+                Intent intent = new Intent();
+                if (mIsEditOnClick == true) {//编辑状态，可更改参与人员
+//                    intent.putExtra("flag", true);
+                    intent.putExtra("ids", mRequest.participantlist);
+                    intent.setClass(mContext, ParticipantSelectAllActivity.class);
+                } else {
+//                    intent.putExtra("flag", false);
+                    intent.putExtra("ids", "");
+                    intent.setClass(mContext, ParticipantSelectActivity.class);
                 }
+                intent.putExtra("meetingId", getIntent().getStringExtra("id"));
                 startActivityForResult(intent, RESULT_PARTICIPANT);
 
                 break;
             case R.id.cp_meeting_prepare_plan:
-                if (mIsEdit == true)
-                    startActivityForResult(new Intent(mContext, MeetingPreparePlanActivity.class), RESULT_PLAN);
+                if (mIsEdit == true) {
+                    intent = new Intent(mContext, MeetingPreparePlanActivity.class);
+                    intent.putExtra("text", mPlanView.getValueText());
+                    startActivityForResult(intent, RESULT_PLAN);
+                }
+
                 break;
             case R.id.cp_meeting_prepare_sign:
-                 intent = new Intent(mContext, PlumberMeetingViewSignlnActivity.class);
+                intent = new Intent(mContext, PlumberMeetingViewSignlnActivity.class);
                 intent.putExtra("meetingId", getIntent().getStringExtra("id"));
                 startActivity(intent);
                 break;
@@ -282,7 +291,11 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                 case RESULT_DATE:
                     String startTime = data.getStringExtra("startTime");
                     String endTime = data.getStringExtra("endTime");
-                    mHoldTimeView.setValueText(startTime + "~" + endTime);
+                    String endTime2 = "";
+                    if (endTime.length() > 12) {
+                        endTime2 = endTime.substring(12, endTime.length());
+                    }
+                    mHoldTimeView.setValueText(startTime + "-" + endTime2);
                     mRequest.meetingstarttime = startTime;
                     mRequest.meetingendtime = endTime;
                     break;
@@ -318,9 +331,9 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                     mHoldAddrView.setValueText(addr);
                     break;
                 case RESULT_PARTICIPANT://参与人员
-                    List<ParticipantSelectlListResponseModel.DataBean.CompanyemployeelistBean> participants = (List<ParticipantSelectlListResponseModel.DataBean.CompanyemployeelistBean>) data.getSerializableExtra("selectObj");
+                    List<ParticipantSelectlListAllResponseModel.DataBean.CompanyemployeelistBean> participants = (List<ParticipantSelectlListAllResponseModel.DataBean.CompanyemployeelistBean>) data.getSerializableExtra("selectObj");
                     String participantIds = "";
-                    for (ParticipantSelectlListResponseModel.DataBean.CompanyemployeelistBean item : participants) {
+                    for (ParticipantSelectlListAllResponseModel.DataBean.CompanyemployeelistBean item : participants) {
                         if (participantIds.length() > 0) {
                             participantIds += ",";
                         }
@@ -467,13 +480,13 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
             menu3.setAlpha((float) 0.3);
         }
 
-        if(mIsUpdate == true){
+        if (mIsUpdate == true) {
             menu1.setAlpha((float) 0.3);
             menu2.setAlpha((float) 0.3);
             menu3.setAlpha((float) 1.0);
         }
 
-        if(mIsEdit == false && mIsDelete == false && mIsUpdate == false){
+        if (mIsEdit == false && mIsDelete == false && mIsUpdate == false) {
             menu1.setAlpha((float) 0.3);
             menu2.setAlpha((float) 0.3);
             menu3.setAlpha((float) 0.3);
@@ -499,7 +512,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                 }
                 switch (v.getId()) {
                     case R.id.menu1://编辑
-                        if(mIsEdit == true){
+                        if (mIsEdit == true) {
                             mIsEditOnClick = true;//可编辑
                             mHoldCompanyIv.setVisibility(View.VISIBLE);
                             mHoldTimeView.setEditable(true);
@@ -512,9 +525,9 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
 
                         break;
                     case R.id.menu3://更新
-                        Intent intent = new Intent(mContext,MeetingViewUpdateActivity.class);
-                        intent.putExtra("meetingid",getIntent().getStringExtra("id"));
-                        startActivityForResult(intent,RESULT_UPDATE);
+                        Intent intent = new Intent(mContext, MeetingViewUpdateActivity.class);
+                        intent.putExtra("meetingid", getIntent().getStringExtra("id"));
+                        startActivityForResult(intent, RESULT_UPDATE);
 
                         break;
                 }

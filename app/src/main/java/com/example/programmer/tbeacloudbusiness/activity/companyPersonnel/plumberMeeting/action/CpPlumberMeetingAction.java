@@ -6,6 +6,7 @@ import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumbe
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareMesResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListAllResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
@@ -87,16 +88,15 @@ public class CpPlumberMeetingAction extends BaseAction {
     }
 
     /**
-     * 获取参与人员
+     * 获取参与人员(只是参与)
      * @return
      * @throws Exception
      */
-    public ParticipantSelectlListResponseModel getParticipantList() throws Exception {
+    public ParticipantSelectlListResponseModel getParticipantList(String meetingid) throws Exception {
         ParticipantSelectlListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new BasicNameValuePair("companyid", null));
-        pairs.add(new BasicNameValuePair("userworkrole", "market"));
-        String result = sendRequest("TBEAYUN001004003001", pairs);
+        pairs.add(new BasicNameValuePair("meetingid", meetingid));
+        String result = sendRequest("TBEAYUN004004003001", pairs);
         model = gson.fromJson(result, ParticipantSelectlListResponseModel.class);
         return model;
     }
@@ -106,13 +106,13 @@ public class CpPlumberMeetingAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ParticipantSelectlListResponseModel getParticipantListAll() throws Exception {
-        ParticipantSelectlListResponseModel model;
+    public ParticipantSelectlListAllResponseModel getParticipantListAll() throws Exception {
+        ParticipantSelectlListAllResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("companyid", null));
         pairs.add(new BasicNameValuePair("userworkrole", "market"));
         String result = sendRequest("TBEAYUN001004003000", pairs);
-        model = gson.fromJson(result, ParticipantSelectlListResponseModel.class);
+        model = gson.fromJson(result, ParticipantSelectlListAllResponseModel.class);
         return model;
     }
 

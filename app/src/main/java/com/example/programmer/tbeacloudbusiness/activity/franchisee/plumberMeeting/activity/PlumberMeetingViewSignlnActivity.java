@@ -151,7 +151,7 @@ public class PlumberMeetingViewSignlnActivity extends BaseActivity implements BG
                                 mAdapter.addAll(model.data.meetingsignlist);
                             }
                             if(model.data.meetingsigntotleinfo != null){
-                                mSignnumberView.setText(model.data.meetingsigntotleinfo.totlesignnumber);
+                                mSignnumberView.setText("签到人数："+model.data.meetingsigntotleinfo.totlesignnumber);
                             }
 
                         } else {

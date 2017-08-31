@@ -23,7 +23,7 @@ import cn.qqtheme.framework.picker.AddressPicker;
  * 地址选择
  */
 
-public class AddrSelectActivity extends BaseActivity implements View.OnClickListener{
+public class AddrSelectActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.cp_addr_province)
     PublishTextRowView mProvinceView;
     @BindView(R.id.cp_addr_info)
@@ -39,10 +39,18 @@ public class AddrSelectActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cp_addr_select);
         ButterKnife.bind(this);
-        initTopbar("地址选择","保存",this);
-        if("addrEdit".equals(getIntent().getStringExtra("flag"))){
+        initTopbar("地址选择", "保存", this);
+        if ("addrEdit".equals(getIntent().getStringExtra("flag"))) {
             mAddrInfoView.setVisibility(View.GONE);
         }
+        if (getIntent().getStringExtra("province") != null) {
+            mProvince = getIntent().getStringExtra("province");
+            mCity = getIntent().getStringExtra("city");
+            mCounty = getIntent().getStringExtra("county");
+            mProvinceView.setValueText(mProvince+mCity+mCounty);
+        }
+
+        mAddrInfoView.setValueText(getIntent().getStringExtra("addr"));
     }
 
     @OnClick(R.id.cp_addr_province)
@@ -50,7 +58,7 @@ public class AddrSelectActivity extends BaseActivity implements View.OnClickList
         ArrayList<AddressPicker.Province> data = new ArrayList<>();
         String json = AssetsUtils.readText(mContext, "city.json");
         data.addAll(JSON.parseArray(json, AddressPicker.Province.class));
-        AddressPicker picker = new AddressPicker( mContext,data);
+        AddressPicker picker = new AddressPicker(mContext, data);
         picker.setSelectedItem(mProvince, mCity, mCounty);
         picker.setOnAddressPickListener(new AddressPicker.OnAddressPickListener() {
             @Override
@@ -67,12 +75,12 @@ public class AddrSelectActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();
-        intent.putExtra("province",mProvince);
-        intent.putExtra("city",mCity);
-        intent.putExtra("county",mCounty);
-        intent.putExtra("addrInfo",mAddrInfoView.getValueText());
-        intent.putExtra("addr",mProvince+mCity+mCounty+mAddrInfoView.getValueText());
-        setResult(RESULT_OK,intent);
+        intent.putExtra("province", mProvince);
+        intent.putExtra("city", mCity);
+        intent.putExtra("county", mCounty);
+        intent.putExtra("addrInfo", mAddrInfoView.getValueText());
+        intent.putExtra("addr", mProvince + mCity + mCounty + mAddrInfoView.getValueText());
+        setResult(RESULT_OK, intent);
         finish();
     }
 }

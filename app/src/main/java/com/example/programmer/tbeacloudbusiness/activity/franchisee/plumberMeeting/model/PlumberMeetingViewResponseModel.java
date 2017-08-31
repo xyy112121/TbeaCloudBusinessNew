@@ -53,11 +53,11 @@ public class PlumberMeetingViewResponseModel extends BaseResponseModel {
 
 
     public class OrganizeCompany {
-        public String companyid;
-        public String companyname;
-        public String companymastername;
-        public String companymasterheadpicture;
-        public String companypersontypeicon;
+        public String id;
+        public String name;
+        public String mastername;
+        public String masterthumbpicture;
+        public String companytypeicon;
     }
 
     public class MeetingOriginatorInfo {

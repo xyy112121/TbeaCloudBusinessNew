@@ -207,6 +207,22 @@ public class FranchiserSelectListActivity extends BaseActivity implements View.O
                         notifyDataSetChanged();
                     }
                 });
+
+                holder.mCkView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (isSelected.get(position)) {
+                            isSelected.put(position, false);
+                            mSelectList.remove(getItem(position));
+                            mNumberView.setText(mSelectList.size() + "");
+                        } else {
+                            isSelected.put(position, true);
+                            mSelectList.add(getItem(position));
+                            removeDuplicate(mSelectList);
+                        }
+                        notifyDataSetChanged();
+                    }
+                });
             }
 
             return convertView;

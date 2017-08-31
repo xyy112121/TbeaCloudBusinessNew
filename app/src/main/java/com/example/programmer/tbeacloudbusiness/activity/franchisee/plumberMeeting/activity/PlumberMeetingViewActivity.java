@@ -170,10 +170,10 @@ public class PlumberMeetingViewActivity extends BaseActivity {
                 ImageView rightView = (ImageView) pernsonLayout.findViewById(R.id.person_info_right);
                 TextView nameView = (TextView) pernsonLayout.findViewById(R.id.person_info_name);
                 TextView companyNameView = (TextView) pernsonLayout.findViewById(R.id.person_info_companyname);
-                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.companymasterheadpicture, headView);
-                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.companypersontypeicon, typwView);
-                nameView.setText(item.companymastername);
-                companyNameView.setText(item.companyname);
+                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.masterthumbpicture, headView);
+                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.companytypeicon, typwView);
+                nameView.setText(item.mastername);
+                companyNameView.setText(item.name);
                 rightView.setVisibility(View.GONE);
                 mOrganizeCompanyView.addView(pernsonLayout);
             }

@@ -189,6 +189,7 @@
                 app:PublishTextRowViewState="read"
                 app:PublishTextRowViewText="现场图片"
                 app:PublishTextRowViewTextColor="@color/text_color"
+                app:PublishTextRowViewGravity="1"
                 app:PublishTextRowViewRightTextColor="@color/text_color"/>
             <View
                 style="@style/horizontal_view"
@@ -205,6 +206,7 @@
                 app:PublishTextRowViewState="read"
                 app:PublishTextRowViewText="会议签到"
                 app:PublishTextRowViewTextColor="@color/text_color"
+                app:PublishTextRowViewGravity="1"
                 app:PublishTextRowViewRightTextColor="@color/text_color"/>
 
 

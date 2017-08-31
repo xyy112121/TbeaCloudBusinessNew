@@ -19,12 +19,12 @@ import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumbe
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareMesResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListAllResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
-import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -112,6 +112,7 @@ public class MeetingPrepareActivity extends BaseActivity {
                                     ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, mPersonjobtitleView);
                                     mNameView.setText(obj.name);
                                     mCompanynameView.setText(obj.company);
+                                    mRightView.setVisibility(View.GONE);
                                 }
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
@@ -145,26 +146,36 @@ public class MeetingPrepareActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cp_meeting_prepare_hold_time:
-                startActivityForResult(new Intent(mContext, CpDateSelectActivity.class), RESULT_DATE);
+                Intent intent = new Intent(mContext, CpDateSelectActivity.class);
+                intent.putExtra("startTime", mRequest.meetingstarttime);
+                intent.putExtra("endTime", mRequest.meetingendtime);
+                startActivityForResult(intent, RESULT_DATE);
                 break;
             case R.id.cp_meeting_prepare_hold_monad:
             case R.id.cp_meeting_prepare_hold_company:
-                Intent intent = new Intent(mContext, FranchiserSelectListActivity.class);
-                intent.putExtra("flag",true);
-                intent.putExtra("ids",mRequest.organizecompanylist);
+                intent = new Intent(mContext, FranchiserSelectListActivity.class);
+                intent.putExtra("flag", true);
+                intent.putExtra("ids", mRequest.organizecompanylist);
                 startActivityForResult(intent, RESULT_COMPANY);
                 break;
             case R.id.cp_meeting_prepare_hold_addr:
-                startActivityForResult(new Intent(mContext, AddrSelectActivity.class), RESULT_ADDR);
+                intent = new Intent(mContext, AddrSelectActivity.class);
+                intent.putExtra("province",mRequest.meetingprovince);
+                intent.putExtra("city",mRequest.meetingcity);
+                intent.putExtra("county",mRequest.meetingzone);
+                intent.putExtra("addr",mRequest.meetingaddr);
+                startActivityForResult(intent, RESULT_ADDR);
                 break;
             case R.id.cp_meeting_prepare_participant:
-                intent = new Intent(mContext, ParticipantSelectActivity.class);
-                intent.putExtra("flag",true);
-                intent.putExtra("ids",mRequest.participantlist);
+                intent = new Intent(mContext, ParticipantSelectAllActivity.class);
+//                intent.putExtra("flag",true);
+                intent.putExtra("ids", mRequest.participantlist);
                 startActivityForResult(intent, RESULT_PARTICIPANT);
                 break;
             case R.id.cp_meeting_prepare_plan:
-                startActivityForResult(new Intent(mContext, MeetingPreparePlanActivity.class), RESULT_PLAN);
+                intent = new Intent(mContext, MeetingPreparePlanActivity.class);
+                intent.putExtra("text",mPlanView.getValueText());
+                startActivityForResult(intent, RESULT_PLAN);
                 break;
             case R.id.cp_meeting_prepare_finish:
                 showAlert();
@@ -180,11 +191,16 @@ public class MeetingPrepareActivity extends BaseActivity {
                 case RESULT_DATE:
                     String startTime = data.getStringExtra("startTime");
                     String endTime = data.getStringExtra("endTime");
-                    mHoldTimeView.setValueText(startTime + "~" + endTime);
+                    String endTime2 = "";
+                    if (endTime.length() > 12) {
+                        endTime2 = endTime.substring(12, endTime.length());
+                    }
+                    mHoldTimeView.setValueText(startTime + "-" + endTime2);
                     mRequest.meetingstarttime = startTime;
                     mRequest.meetingendtime = endTime;
                     break;
                 case RESULT_COMPANY://举报单位
+                    mHoldMonadView.removeAllViews();
                     mMeetingPrepareHoldCompany.setVisibility(View.GONE);
                     mMeetingPrepareHoldCompanyLayout.setVisibility(View.VISIBLE);
                     List<FranchiserSelectListResponseModel.DataBean.DistributorlistBean> mSelectList = (List<FranchiserSelectListResponseModel.DataBean.DistributorlistBean>) data.getSerializableExtra("selectObj");
@@ -218,9 +234,9 @@ public class MeetingPrepareActivity extends BaseActivity {
                     mHoldAddrView.setValueText(addr);
                     break;
                 case RESULT_PARTICIPANT://参与人员
-                    List<ParticipantSelectlListResponseModel.DataBean.CompanyemployeelistBean> participants = (List<ParticipantSelectlListResponseModel.DataBean.CompanyemployeelistBean>) data.getSerializableExtra("selectObj");
+                    List<ParticipantSelectlListAllResponseModel.DataBean.CompanyemployeelistBean> participants = (List<ParticipantSelectlListAllResponseModel.DataBean.CompanyemployeelistBean>) data.getSerializableExtra("selectObj");
                     String participantIds = "";
-                    for (ParticipantSelectlListResponseModel.DataBean.CompanyemployeelistBean item : participants) {
+                    for (ParticipantSelectlListAllResponseModel.DataBean.CompanyemployeelistBean item : participants) {
                         if (participantIds.length() > 0) {
                             participantIds += ",";
                         }
@@ -270,7 +286,7 @@ public class MeetingPrepareActivity extends BaseActivity {
                             MeetingPrepareResponseModel model = (MeetingPrepareResponseModel) msg.obj;
                             if (model.isSuccess() && model.data != null) {
                                 Intent intent = new Intent(mContext, MeetingSponsorSuccessActivity.class);
-                                intent.putExtra("id",model.data.meetinginfo.meetingid);
+                                intent.putExtra("id", model.data.meetinginfo.meetingid);
                                 startActivity(intent);
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
