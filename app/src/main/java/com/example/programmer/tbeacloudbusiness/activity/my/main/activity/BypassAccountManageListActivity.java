@@ -61,6 +61,12 @@ public class BypassAccountManageListActivity extends BaseActivity implements Vie
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         mRefreshLayout.beginRefreshing();
     }
 
@@ -146,6 +152,13 @@ public class BypassAccountManageListActivity extends BaseActivity implements Vie
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, holder.mPersontypeiconView);
             holder.mNameView.setText(obj.name);
             holder.mJobtitleView.setText(obj.jobtitle);
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivityForResult(new Intent(mContext, ByPassAccountAuthorizationFunctionsActivity.class), 1000);
+                }
+            });
             return convertView;
         }
 

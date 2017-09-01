@@ -196,7 +196,12 @@ public class CpPlumberMeetingAction extends BaseAction {
         Map<String, String> paramsIn = new HashMap<>();
         Map<String, String> fileIn = new HashMap<>();
         for(int i = 0;i< list.size();i++){
-            fileIn.put("file"+i, list.get(i).getCompressPath());
+            if(list.get(i).getCompressPath() != null){
+                fileIn.put("file"+i, list.get(i).getCompressPath());
+            }else {
+                fileIn.put("file"+i, list.get(i).getPath());
+            }
+
         }
         String result = uploadImage("TBEAYUN001007001000", paramsIn, fileIn);
         model = gson.fromJson(result, MeetingGalleryUpdateResponseModel.class);

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -50,6 +51,7 @@ public class AddressEditListActivity extends BaseActivity implements View.OnClic
     @Override
     protected void onResume() {
         super.onResume();
+        mAdapter.removeAll();
         getListDate();
     }
 
@@ -139,9 +141,10 @@ public class AddressEditListActivity extends BaseActivity implements View.OnClic
             holder.mMobileView.setText(obj.contactmobile);
             if ("1".equals(obj.isdefault)) {
                 holder.mIsdefaultView.setVisibility(View.VISIBLE);
+                holder.mIsdefaultView.setChecked(true);
 
             } else {
-                holder.mIsdefaultView.setVisibility(View.GONE);
+                holder.mIsdefaultView.setVisibility(View.INVISIBLE);
             }
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -170,8 +173,8 @@ public class AddressEditListActivity extends BaseActivity implements View.OnClic
             TextView mNameView;
             @BindView(R.id.addr_item_contactmobile)
             TextView mMobileView;
-            @BindView(R.id.addr_item_isdefault)
-            TextView mIsdefaultView;
+            @BindView(R.id.addr_item_ck)
+            CheckBox mIsdefaultView;
             @BindView(R.id.addr_item_address)
             TextView mAddressView;
 

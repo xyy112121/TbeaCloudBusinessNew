@@ -145,8 +145,8 @@ public class MyFansActivity extends BaseActivity implements View.OnClickListener
                         case ThreadState.SUCCESS:
                             FansListResponseModel model = (FansListResponseModel) msg.obj;
                             if (model.isSuccess()) {
-                                if (model.data.myfocuslist != null) {
-                                    mAdapter.addAll(model.data.myfocuslist);
+                                if (model.data.myfanslist != null) {
+                                    mAdapter.addAll(model.data.myfanslist);
                                 }
 
                             } else {

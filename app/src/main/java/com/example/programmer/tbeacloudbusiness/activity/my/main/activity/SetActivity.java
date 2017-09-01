@@ -40,6 +40,11 @@ public class SetActivity extends BaseActivity {
         setContentView(R.layout.activity_set);
         ButterKnife.bind(this);
         initTopbar("设置");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getData();
     }
 

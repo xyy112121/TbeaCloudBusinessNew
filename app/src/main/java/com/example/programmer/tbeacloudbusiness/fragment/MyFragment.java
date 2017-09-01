@@ -24,6 +24,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAtte
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyFansActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.RealNameAuthenticationPlumberActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.SetActivity;
+import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
@@ -132,7 +133,8 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                         }
 
                         if ("companyidentify".equals(item.id)) {//实名认证
-                            startActivity(new Intent(getActivity(), RealNameAuthenticationPlumberActivity.class));
+                            startActivity(new Intent(getActivity(), CompletionDataActivity.class));
+//                            startActivity(new Intent(getActivity(), RealNameAuthenticationPlumberActivity.class));
                         }
 
                     }

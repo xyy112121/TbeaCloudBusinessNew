@@ -110,7 +110,7 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
                         BypassAccountEditUserTypeRequestModel model = (BypassAccountEditUserTypeRequestModel) msg.obj;
                         if (model.isSuccess() && model.data != null) {
                             if (model.data.subaccountusertypeinfo != null) {
-                               mRequest.usertypeId = model.data.subaccountusertypeinfo.id;
+                                mRequest.usertypeId = model.data.subaccountusertypeinfo.id;
                                 mTypeView.setText(model.data.subaccountusertypeinfo.name);
                             }
 
@@ -162,6 +162,35 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
     }
 
     public void uploadImage() {
+        mRequest.realname = mNameView.getText() + "";
+        mRequest.mobilenumber = mPhoneView.getText() + "";
+        mRequest.password = mPwdView.getText() + "";
+        mRequest.jobtitle = mJobTitleView.getText() + "";
+        if (isMobileNO(mRequest.mobilenumber) == false) {
+            ToastUtil.showMessage("请输入正确的手机号码");
+            return;
+        }
+
+        if ("".equals(mRequest.realname)) {
+            ToastUtil.showMessage("请输入真实姓名");
+            return;
+        }
+
+        if (mRequest.sex == null) {
+            ToastUtil.showMessage("请选择性别");
+            return;
+        }
+
+        if ("".equals(mRequest.password)) {
+            ToastUtil.showMessage("请输入登录密码");
+            return;
+        }
+
+        if ("".equals(mRequest.jobtitle)) {
+            ToastUtil.showMessage("请输入职务");
+            return;
+        }
+
         mDialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         mDialog.setText("请等待...");
         mDialog.show();
@@ -218,12 +247,6 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
      * 保存
      */
     private void save() {
-        mRequest.realname = mNameView.getText() + "";
-        mRequest.mobilenumber = mPhoneView.getText() + "";
-        mRequest.password = mPwdView.getText() + "";
-        mRequest.jobtitle = mJobTitleView.getText() + "";
-
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -237,6 +260,18 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
             }
         }).start();
 
+    }
+
+    public boolean isMobileNO(String mobiles) {
+    /*
+    移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
+    联通：130、131、132、152、155、156、185、186
+    电信：133、153、180、189、（1349卫通）
+    总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
+    */
+        String telRegex = "[1][34578]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
+        if (mobiles.equals("")) return false;
+        else return mobiles.matches(telRegex);
     }
 
     /**

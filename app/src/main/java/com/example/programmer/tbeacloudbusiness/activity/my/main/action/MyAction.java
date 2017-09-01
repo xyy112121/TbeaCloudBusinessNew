@@ -8,6 +8,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.main.model.BypassAcc
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.BypassAccountFunctionListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.BypassAccountListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.FansListResponseModel;
+import com.example.programmer.tbeacloudbusiness.http.MD5Util;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
@@ -67,7 +68,7 @@ public class MyAction extends BaseAction {
         pairs.add(new BasicNameValuePair("authorizationlist", requestModel.authorizationlist));
         pairs.add(new BasicNameValuePair("thumbpicture", requestModel.thumbpicture));
         pairs.add(new BasicNameValuePair("jobtitle", requestModel.jobtitle));
-        pairs.add(new BasicNameValuePair("password", requestModel.password));
+        pairs.add(new BasicNameValuePair("password", MD5Util.getMD5String(requestModel.password)));
         pairs.add(new BasicNameValuePair("birthyear", requestModel.birthyear));
         pairs.add(new BasicNameValuePair("birthmonth", requestModel.birthmonth));
         pairs.add(new BasicNameValuePair("birthday", requestModel.birthday));

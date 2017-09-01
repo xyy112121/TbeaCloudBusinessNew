@@ -106,6 +106,14 @@ public class GeneralActivity extends BaseActivity {
                 }
             }
         });
+
+        mBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setData();
+                finish();
+            }
+        });
     }
 
 

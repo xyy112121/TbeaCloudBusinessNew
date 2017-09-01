@@ -14,7 +14,7 @@ public class FansListResponseModel extends BaseResponseModel {
     public DataBean data;
 
     public static class DataBean {
-        public List<MyfocuslistBean> myfocuslist;
+        public List<MyfocuslistBean> myfanslist;
 
         public static class MyfocuslistBean {
             public String fansid;

@@ -16,14 +16,14 @@
 
         <ImageView
             android:id="@+id/attention_commdity_item_head"
-            android:layout_width="113dp"
-            android:layout_height="113dp"
-            android:scaleType="fitXY"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/icon_tbea_producttestpic" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="113dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="8dp">
 
             <TextView

@@ -100,9 +100,8 @@ public class CompletionDataActivity extends BaseActivity {
         String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
         if ("notidentify".equals(identify)) {//未认证
             getUserTypeList();
-        } else {
-            getDate();
         }
+        getDate();
     }
 
     public void getDate() {

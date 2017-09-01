@@ -139,6 +139,7 @@ public class StoreFragment extends Fragment implements BGARefreshLayout.BGARefre
                 if (isSelect) {
                     isSelect = false;
                     mAdapter.notifyDataSetChanged();
+                    ((MyAttentionActivity) getActivity()).mRightView.setText("编辑");
                     ((MyAttentionActivity) getActivity()).mSelectAllLayout.setVisibility(View.GONE);
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mListView.getLayoutParams();
                     layoutParams.bottomMargin = 0;
@@ -146,6 +147,7 @@ public class StoreFragment extends Fragment implements BGARefreshLayout.BGARefre
                 } else {
                     isSelect = true;
                     mAdapter.notifyDataSetChanged();
+                    ((MyAttentionActivity) getActivity()).mRightView.setText("完成");
                     ((MyAttentionActivity) getActivity()).mSelectAllLayout.setVisibility(View.VISIBLE);
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mListView.getLayoutParams();
                     layoutParams.bottomMargin = DensityUtil.dip2px(getActivity(), 44);

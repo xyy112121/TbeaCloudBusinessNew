@@ -109,6 +109,7 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
             case R.id.open_camera:
                 PictureSelector.create(mContext)
                         .openCamera(PictureMimeType.ofImage())
+                        .compress(true)
                         .forResult(PictureConfig.CHOOSE_REQUEST);
                 break;
         }
@@ -135,7 +136,12 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                 case PictureConfig.CHOOSE_REQUEST:
                     // 图片选择结果回调
                     mSelectList = PictureSelector.obtainMultipleResult(data);
-                    ImageLoader.getInstance().displayImage("file://" + mSelectList.get(0).getCompressPath(), mImageView);
+                    if(mSelectList.get(0).getCompressPath() != null){
+                        ImageLoader.getInstance().displayImage("file://" + mSelectList.get(0).getCompressPath(), mImageView);
+                    }else {
+                        ImageLoader.getInstance().displayImage("file://" + mSelectList.get(0).getPath(), mImageView);
+                    }
+
                     uploadImage();
                     break;
             }

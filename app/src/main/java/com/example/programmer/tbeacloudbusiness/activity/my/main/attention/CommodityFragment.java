@@ -141,12 +141,15 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
                     isSelect = false;
                     mAdapter.notifyDataSetChanged();
                     ((MyAttentionActivity) getActivity()).mSelectAllLayout.setVisibility(View.GONE);
+                    ((MyAttentionActivity) getActivity()).mRightView.setText("编辑");
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mListView.getLayoutParams();
                     layoutParams.bottomMargin = 0;
                     mListView.setLayoutParams(layoutParams);
+
                 } else {
                     isSelect = true;
                     mAdapter.notifyDataSetChanged();
+                    ((MyAttentionActivity) getActivity()).mRightView.setText("完成");
                     ((MyAttentionActivity) getActivity()).mSelectAllLayout.setVisibility(View.VISIBLE);
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mListView.getLayoutParams();
                     layoutParams.bottomMargin = DensityUtil.dip2px(getActivity(), 44);

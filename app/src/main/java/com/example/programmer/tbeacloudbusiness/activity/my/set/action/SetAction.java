@@ -10,6 +10,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.set.model.PwdUpdateM
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.SetResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.UserTypeResponseModel;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.example.programmer.tbeacloudbusiness.http.MD5Util;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
@@ -143,8 +144,8 @@ public class SetAction extends BaseAction {
     public ResponseInfo updatePwd(String olduserpas, String newuserpas) throws Exception {
         ResponseInfo rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new BasicNameValuePair("olduserpas", olduserpas));
-        pairs.add(new BasicNameValuePair("newuserpas", newuserpas));
+        pairs.add(new BasicNameValuePair("olduserpas", MD5Util.getMD5String(olduserpas)));
+        pairs.add(new BasicNameValuePair("newuserpas",MD5Util.getMD5String(newuserpas)));
         String result = sendRequest("TBEAYUN003001006000", pairs);
         rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;

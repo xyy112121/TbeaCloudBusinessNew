@@ -26,6 +26,8 @@ import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,7 @@ public class MyAttentionActivity extends BaseActivity implements View.OnClickLis
     private PersonFragment mPersonFragment;
     private Fragment mCustomFragment;
     public View mSelectAllLayout;
+    public TextView mRightView;
 
 
     @Override
@@ -49,6 +52,7 @@ public class MyAttentionActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_my_attention);
         initTopbar("我的关注", "编辑", this);
         mSelectAllLayout = findViewById(R.id.attention_select_all_layout);
+        mRightView = (TextView) findViewById(R.id.top_right_text);
         initTopLayout();
     }
 

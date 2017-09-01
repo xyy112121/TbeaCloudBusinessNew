@@ -69,7 +69,9 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
     private void initData() {
         mNameView.setText(mObj.contactperson);
         mMobileView.setText(mObj.contactmobile);
-        mCityView.setText(mObj.province + mObj.city + mObj.zone);
+        if(mObj.province != null){
+            mCityView.setText(mObj.province + mObj.city + mObj.zone);
+        }
         mAddressView.setText(mObj.address);
         if ("1".equals(mObj.isdefault)) {
             mIsdefaultView.setChecked(true);
@@ -222,6 +224,12 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
             case R.id.addr_edit_provincial_city:
                 Intent intent = new Intent(mContext, AddrSelectActivity.class);
                 intent.putExtra("flag", "addrEdit");
+                if(mObj.province != null){
+                    intent.putExtra("province",mObj.province);
+                    intent.putExtra("city",mObj.city);
+                    intent.putExtra("county",mObj.zone);
+                }
+
                 startActivityForResult(intent, RESULT_ADDR);
                 break;
             case R.id.addr_edit_save:
