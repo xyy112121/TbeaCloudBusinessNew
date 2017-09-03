@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <LinearLayout style="@style/my_text_layout">
+
+        <TextView
+            style="@style/my_text_style"
+            android:text="合计金额"
+            android:textColor="@color/tab_text_normal" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.8"
+            android:gravity="right|center_vertical">
+
+            <TextView
+                style="@style/money_logo_style"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/store_commodity_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/horizontal_view" />
+
+    <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:id="@+id/commodity_sales_list_time"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:PublishTextRowViewHiht="时间范围选择"
+        app:PublishTextRowViewIsBottomLineShow="true"
+        app:PublishTextRowViewLeftWidth="100dp"
+        app:PublishTextRowViewState="read"
+        app:PublishTextRowViewIsSelect="true"
+        app:PublishTextRowViewText="时间范围" />
+
+    <View
+        style="@style/horizontal_view"
+        android:layout_height="8dp"
+        android:background="@color/interval_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/marker_info_list_user_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:gravity="left|center_vertical">
+
+            <TextView
+                android:id="@+id/marker_info_list_user_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:text="商品名称"
+                android:textColor="@color/tab_text_normal" />
+
+            <ImageView
+                android:id="@+id/marker_info_list_user_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:src="@drawable/icon_arraw_grayblue" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/marker_info_list_number_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:layout_weight="0.2"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/marker_info_list_number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="销售数量"
+                android:textColor="@color/tab_text_normal" />
+
+            <ImageView
+                android:id="@+id/marker_info_list_number_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:src="@drawable/icon_arraw_grayblue" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/horizontal_view" />
+
+    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        android:id="@+id/rl_recyclerview_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
+</LinearLayout>

@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
-            android:id="@+id/store_set_store_specifications_and_models"
+            android:id="@+id/activity_shop_dynamic_add_title"
             android:layout_width="match_parent"
             android:layout_height="49dp"
             app:PublishTextRowViewHiht="请输入标题内容"
@@ -29,22 +29,24 @@
             android:background="@color/white"
             android:numColumns="4" />
 
-        <View style="@style/horizontal_view"
-            android:layout_marginTop="5dp"/>
+        <View
+            style="@style/horizontal_view"
+            android:layout_marginTop="5dp" />
 
         <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
-            android:id="@+id/store_set_store_specifications_and_models1"
+            android:id="@+id/activity_shop_dynamic_add_content"
             android:layout_width="match_parent"
             android:layout_height="49dp"
-            app:PublishTextRowViewHiht="请输入标题内容"
+            app:PublishTextRowViewHiht="请输入文章内容"
             app:PublishTextRowViewIsBottomLineShow="true"
             app:PublishTextRowViewIsSelect="true"
-            app:PublishTextRowViewText="标题" />
+            app:PublishTextRowViewText="内容" />
     </LinearLayout>
 
     <Button
         style="@style/style_next_btn"
         android:layout_alignParentBottom="true"
         android:background="@drawable/btn_bg_blue"
-        android:text="保存" />
+        android:text="保存"
+        android:visibility="gone"/>
 </RelativeLayout>

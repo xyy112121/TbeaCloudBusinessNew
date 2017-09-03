@@ -55,8 +55,12 @@ public class RotateADListActivity extends BaseActivity implements View.OnClickLi
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, false));
-        mRefreshLayout.beginRefreshing();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRefreshLayout.beginRefreshing();
     }
 
     @Override
@@ -152,11 +156,20 @@ public class RotateADListActivity extends BaseActivity implements View.OnClickLi
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            RotateADListResponseModel.DataBean.ShopadvertiselistBean model = mList.get(position);
+            final RotateADListResponseModel.DataBean.ShopadvertiselistBean model = mList.get(position);
             holder.mTimeView.setText(model.publishtime);
             holder.mTitleView.setTag(model.title);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + model.picture, holder.mPictureView);
 
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, RotateADEditActivity.class);
+                    intent.putExtra("flag", "edit");
+                    intent.putExtra("advertiseId", model.advertiseid);
+                    startActivity(intent);
+                }
+            });
             return convertView;
         }
 

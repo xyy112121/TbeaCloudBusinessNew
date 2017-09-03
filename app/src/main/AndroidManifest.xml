@@ -152,7 +152,7 @@
         <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.StoreCommodityManageListActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.set.ShopDynamicListActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.set.ShopDynamicAddActivity" />
-        <activity android:name=".activity.franchisee.storeManage.activity.set.SetVisualGraphActivity"/>
+        <activity android:name=".activity.franchisee.storeManage.activity.set.SetVisualGraphActivity" />
 
         <activity android:name=".activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity" />
         <activity android:name=".activity.distributor.rebateAccount.activity.RebateAccountWithdrawCashActivity" />
@@ -215,6 +215,20 @@
         <activity android:name=".activity.distributionSystem.activity.ActivityUserInfoChang6" />
         <activity android:name=".activity.my.main.activity.MessageListActivity" />
         <activity android:name=".activity.my.main.activity.MessageViewActivity" />
+
+        <activity android:name=".activity.franchisee.storeManage.activity.set.RotateADEditSucceedActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.set.SpecificationsAndModelsEditActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.MarketInfoActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.MarketInfoBeRateActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.MarketInfoBeRateInfoActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.MarketInfoBeRateInfoReplyActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.MarketInfoBeSoldActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.CommoditySalesListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.CommoditySalesInfoActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.SaleWaterListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.set.SpecificationsAndModelsSelectListActivity" />
+
+
     </application>
 
 </manifest>

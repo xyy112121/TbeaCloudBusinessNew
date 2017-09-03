@@ -63,9 +63,10 @@ public class SetVisualGraphActivity extends BaseActivity implements View.OnClick
                     case ThreadState.SUCCESS:
                         VisualGraphResonpseModel re = (VisualGraphResonpseModel) msg.obj;
                         if (re.isSuccess() && re.data != null) {
-                            if (!"".equals(re.data.shoppictureinfo)) {
-                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + re.data.shoppictureinfo, mImageView);
+                            if (re.data.shoppictureinfo != null) {
+                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + re.data.shoppictureinfo.picture, mImageView);
                             }
+
                         } else {
                             ToastUtil.showMessage(re.getMsg());
                         }
@@ -171,7 +172,7 @@ public class SetVisualGraphActivity extends BaseActivity implements View.OnClick
                     public void run() {
                         try {
                             CpPlumberMeetingAction action = new CpPlumberMeetingAction();
-                            MeetingGalleryUpdateResponseModel model = action.uploadGallery(mSelectList);
+                            MeetingGalleryUpdateResponseModel model = action.uploadImage(mSelectList);
                             if (model.isSuccess() && model.data.pictureinfo != null) {
                                 StoreManageAction action1 = new StoreManageAction();
                                 ResponseInfo model1 = action1.setBackground(model.data.pictureinfo.picturesavenames);

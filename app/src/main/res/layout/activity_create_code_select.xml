@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include layout="@layout/activity_page_top"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
     <LinearLayout
+        android:id="@+id/create_code_select_title"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@drawable/my_select_btn"
@@ -13,14 +17,15 @@
             style="@style/my_text_style"
             android:text="已选择"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/create_code_select_type_norms"
-            style="@style/my_right_text_style1"
-            />
+            style="@style/my_right_text_style1" />
     </LinearLayout>
+
     <View style="@style/horizontal_view" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -34,10 +39,11 @@
 
         <TextView
             android:id="@+id/create_code_select_type"
-            style="@style/my_right_text_style"
-           />
+            style="@style/my_right_text_style" />
     </LinearLayout>
+
     <View style="@style/horizontal_view" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -53,7 +59,6 @@
             android:id="@+id/create_code_select_norms"
             style="@style/my_right_text_style" />
     </LinearLayout>
-
 
 
     <View style="@style/horizontal_view" />

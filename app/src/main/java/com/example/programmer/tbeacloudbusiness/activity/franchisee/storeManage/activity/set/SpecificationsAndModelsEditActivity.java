@@ -25,13 +25,16 @@ import butterknife.ButterKnife;
 public class SpecificationsAndModelsEditActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.specifications_models_edit_name)
     PublishTextRowView mNameView;
+    private String mMethodName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specifications_and_models_edit);
         ButterKnife.bind(this);
-        initTopbar("添加规格型号", "保存", this);
+        String title = getIntent().getStringExtra("title");
+        mMethodName = getIntent().getStringExtra("methodName");
+        initTopbar("添加商品" + title, "保存", this);
     }
 
     @Override
@@ -74,7 +77,7 @@ public class SpecificationsAndModelsEditActivity extends BaseActivity implements
             public void run() {
                 try {
                     StoreManageAction action = new StoreManageAction();
-                    ResponseInfo re = action.saveModelSpec(name);
+                    ResponseInfo re = action.saveModelSpec(name, mMethodName);
                     handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);

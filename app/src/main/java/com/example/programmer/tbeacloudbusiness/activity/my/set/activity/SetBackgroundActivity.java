@@ -179,7 +179,7 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                     public void run() {
                         try {
                             CpPlumberMeetingAction action = new CpPlumberMeetingAction();
-                            MeetingGalleryUpdateResponseModel model = action.uploadGallery(mSelectList);
+                            MeetingGalleryUpdateResponseModel model = action.uploadImage(mSelectList);
                             if (model.isSuccess() && model.data.pictureinfo != null) {
                                 SetAction action1 = new SetAction();
                                 ResponseInfo model1 = action1.setBackground(model.data.pictureinfo.picturesavenames);

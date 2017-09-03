@@ -54,7 +54,7 @@ import butterknife.OnClick;
 import cn.qqtheme.framework.picker.AddressPicker;
 
 /**
- * Created by programmer on 2017/6/7.
+ * 资料补全
  */
 
 public class CompletionDataActivity extends BaseActivity {
@@ -146,7 +146,11 @@ public class CompletionDataActivity extends BaseActivity {
                                 companyNameView.setText(item.companyname);
                                 rightView.setVisibility(View.GONE);
                                 mAffiliationLayoutView.addView(pernsonLayout);
-                                setView();
+                                String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
+                                if (!"notidentify".equals(identify)) {//未认证
+                                    setView();
+                                }
+
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
                             }
@@ -357,7 +361,7 @@ public class CompletionDataActivity extends BaseActivity {
                     public void run() {
                         try {
                             CpPlumberMeetingAction action = new CpPlumberMeetingAction();
-                            MeetingGalleryUpdateResponseModel model = action.uploadGallery(mSelectList);
+                            MeetingGalleryUpdateResponseModel model = action.uploadImage(mSelectList);
                             if (model.isSuccess() && model.data.pictureinfo != null) {
                                 mRequest.picture = model.data.pictureinfo.picturesavenames;
                                 UserAction userAction = new UserAction();

@@ -7,43 +7,47 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="58dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp">
+        android:layout_marginLeft="15dp"
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
             android:layout_weight="0.4"
-            android:gravity="center">
+            android:gravity="left|center">
 
             <include layout="@layout/activity_person_layout1" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="0.6"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginRight="8dp"
-            android:gravity="center_vertical">
+            android:layout_weight="0.6"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
             <TextView
+                android:id="@+id/evaluate_item_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="评价内容"
                 android:textColor="@color/tab_text_normal" />
+
             <TextView
+                android:id="@+id/evaluate_item_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="2017-08-09 16:09:59"
                 android:textColor="@color/text_color" />
         </LinearLayout>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/icon_arrow_right"
-            android:layout_marginRight="15dp"/>
-
-
-
+            android:layout_marginRight="15dp"
+            android:src="@drawable/icon_arrow_right" />
 
 
     </LinearLayout>

@@ -10,6 +10,7 @@ import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumbe
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 import com.luck.picture.lib.entity.LocalMedia;
 
@@ -191,7 +192,7 @@ public class CpPlumberMeetingAction extends BaseAction {
     /**
      * 现场图片上传
      */
-    public MeetingGalleryUpdateResponseModel uploadGallery(List<LocalMedia> list) throws Exception {
+    public MeetingGalleryUpdateResponseModel uploadImage(List<LocalMedia> list) throws Exception {
         MeetingGalleryUpdateResponseModel model;
         Map<String, String> paramsIn = new HashMap<>();
         Map<String, String> fileIn = new HashMap<>();
@@ -212,15 +213,15 @@ public class CpPlumberMeetingAction extends BaseAction {
      * 现场图片路径上传
      * primarypictureindex 设置主图的图片
      */
-    public BaseResponseModel uploadGallery(String meetingid,String picturetitle, String pictures,int primarypictureindex) throws Exception {
-        BaseResponseModel resultModel;
+    public ResponseInfo uploadGallery(String meetingid, String picturetitle, String pictures, int primarypictureindex) throws Exception {
+        ResponseInfo resultModel;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("meetingid", meetingid));
         pairs.add(new BasicNameValuePair("picturetitle", picturetitle));
         pairs.add(new BasicNameValuePair("pictures", pictures));
         pairs.add(new BasicNameValuePair("primarypictureindex", String.valueOf(primarypictureindex)));
         String result = sendRequest("TBEAYUN008003003001", pairs);
-        resultModel = gson.fromJson(result, BaseResponseModel.class);
+        resultModel = gson.fromJson(result, ResponseInfo.class);
         return resultModel;
     }
 

@@ -7,33 +7,38 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="58dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp">
+        android:layout_marginLeft="15dp"
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:gravity="center">
+            android:layout_height="50dp"
+            android:layout_weight="0.4"
+            android:gravity="left|center_vertical"
+            >
 
-            <include layout="@layout/activity_person_layout1" />
+            <include layout="@layout/activity_person_layout1"/>
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/market_info_item_buyamount"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
+            android:layout_weight="0.25"
             android:gravity="center"
             android:text="*2"
             android:textColor="@color/tab_text_normal" />
 
         <TextView
+            android:id="@+id/market_info_item_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="8dp"
-            android:layout_weight="0.4"
+            android:layout_weight="0.35"
             android:drawableRight="@drawable/icon_arrow_right"
+            android:ellipsize="end"
             android:gravity="center_vertical"
+            android:maxLines="1"
             android:text="2017-08-09 16:09:59"
             android:textColor="@color/text_color" />
 

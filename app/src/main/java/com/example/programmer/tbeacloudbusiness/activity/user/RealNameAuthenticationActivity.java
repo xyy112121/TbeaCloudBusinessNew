@@ -49,7 +49,7 @@ import butterknife.OnClick;
 import cn.qqtheme.framework.picker.AddressPicker;
 
 /**
- * Created by programmer on 2017/6/16.
+ * 企业认证
  */
 
 public class RealNameAuthenticationActivity extends BaseActivity {
@@ -265,7 +265,6 @@ public class RealNameAuthenticationActivity extends BaseActivity {
 
     }
 
-
     /**
      * 认证
      */
@@ -411,7 +410,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                     public void run() {
                         try {
                             CpPlumberMeetingAction action = new CpPlumberMeetingAction();
-                            MeetingGalleryUpdateResponseModel model = action.uploadGallery(list);
+                            MeetingGalleryUpdateResponseModel model = action.uploadImage(list);
                             handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                         } catch (Exception e) {
                             handler.sendEmptyMessage(ThreadState.ERROR);

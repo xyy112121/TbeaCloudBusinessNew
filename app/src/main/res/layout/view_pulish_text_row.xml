@@ -17,22 +17,24 @@
             android:id="@+id/left"
             style="@style/my_text_style"
             android:layout_width="140dp"
-            android:textColor="@color/tab_text_normal"
+            android:paddingLeft="8dp"
             android:text="标题"
-            android:paddingLeft="8dp"/>
+            android:textColor="@color/tab_text_normal" />
 
         <com.example.programmer.tbeacloudbusiness.component.ClearEditText
             android:id="@+id/rowvalue"
             style="@style/my_right_text_style1"
-            android:textColor="@color/text_color1"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginRight="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_color1" />
 
         <TextView
             android:id="@+id/row_value"
             style="@style/my_right_text_style1"
+            android:layout_marginRight="5dp"
             android:textColor="@color/text_color1"
-            android:visibility="gone"
-            android:layout_marginRight="5dp"/>
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/right_image"

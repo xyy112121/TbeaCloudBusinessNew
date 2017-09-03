@@ -3,6 +3,7 @@ package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class CommodityManageListResponseModel extends BaseResponseModel{
             public Integer totlecommoditynumber;//总数
         }
 
-        public  class CommoditylistBean {
+        public  class CommoditylistBean implements Serializable{
             public String commodityid;
             public String thumbpicture;//缩略图
             public String commodityname;//商品名称

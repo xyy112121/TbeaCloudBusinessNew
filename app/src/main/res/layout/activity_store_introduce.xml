@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include layout="@layout/activity_page_top"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
     <EditText
         android:id="@+id/store_introduce_tv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
         android:background="@null"
-        android:text="介绍"
-        android:layout_margin="15dp"/>
+        android:minLines="3"
+        android:gravity="left|top"
+        android:text="介绍" />
 
 </LinearLayout>

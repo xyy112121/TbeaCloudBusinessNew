@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/parent_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -15,6 +15,7 @@
         android:layout_height="49dp"
         app:PublishTextRowViewIsBottomLineShow="true"
         app:PublishTextRowViewIsSelect="true"
+        app:PublishTextRowViewState="read"
         app:PublishTextRowViewText="类型选择" />
 
     <View
@@ -23,40 +24,26 @@
         android:background="@color/interval_color" />
 
     <LinearLayout
+        android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="48dp">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/store_commodity_intro_top_layout"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="推荐"
-            android:textColor="@color/head_color" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="销量"
-            android:textColor="@color/tab_text_normal" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="新品"
-            android:textColor="@color/tab_text_normal" />
+            android:layout_height="48dp"
+            android:layout_weight="0.75"
+            android:orientation="horizontal" />
 
         <LinearLayout
+            android:id="@+id/store_commodity_manage_list_price_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.25"
             android:gravity="center">
 
             <TextView
+                android:id="@+id/store_commodity_manage_list_price_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -64,22 +51,24 @@
                 android:textColor="@color/tab_text_normal" />
 
             <ImageView
+                android:id="@+id/store_commodity_manage_list_price_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:gravity="center"
                 android:src="@drawable/icon_arraw_grayblue" />
         </LinearLayout>
-
-
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/top_layout1"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginLeft="15dp">
+        android:layout_marginLeft="15dp"
+        android:visibility="gone">
 
         <TextView
+            android:id="@+id/rotate_ad_edit_link_page_release_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -87,6 +76,7 @@
             android:textColor="@color/tab_text_normal" />
 
         <ImageView
+            android:id="@+id/rotate_ad_edit_link_page_release_time_iv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
@@ -97,10 +87,30 @@
 
     <View style="@style/horizontal_view" />
 
-    <ListView
-        android:id="@+id/listview"
+    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        android:id="@+id/rl_recyclerview_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+
+        >
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
+    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        android:id="@+id/rl_recyclerview_refresh1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ListView
+            android:id="@+id/listview1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
 
 
 </LinearLayout>

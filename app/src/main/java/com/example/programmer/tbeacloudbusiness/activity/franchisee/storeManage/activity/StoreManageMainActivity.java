@@ -23,6 +23,8 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.action.StoreManageAction;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.commodityManage.CommoditySalesListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.commodityManage.SaleWaterListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.commodityManage.StoreCommodityManageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderManageDeliverGoodsActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.ShopDynamicListActivity;
@@ -144,7 +146,7 @@ public class StoreManageMainActivity extends BaseActivity implements BGARefreshL
         return false;
     }
 
-     class GridAdapter extends BaseAdapter {
+    class GridAdapter extends BaseAdapter {
         private List<StoreManageMainResponseModel.DataBean.FunctionmodulelistBean> mList = new ArrayList<>();
 
 
@@ -207,7 +209,7 @@ public class StoreManageMainActivity extends BaseActivity implements BGARefreshL
     /**
      * 附近商家
      */
-     class MyAdapter extends BaseAdapter {
+    class MyAdapter extends BaseAdapter {
         /**
          * android 上下文环境
          */
@@ -328,6 +330,26 @@ public class StoreManageMainActivity extends BaseActivity implements BGARefreshL
 //                    }
                 }
             }
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if ("shangpinguanli".equals(obj.moduleid)) {//商品管理
+                        Intent intent = new Intent(mContext, StoreCommodityManageListActivity.class);
+                        startActivity(intent);
+
+                    } else if ("shangpinxiaoliang".equals(obj.moduleid)) {//单品销售
+                        Intent intent = new Intent(mContext, CommoditySalesListActivity.class);
+                        startActivity(intent);
+                    } else if ("xiaoshouliushui".equals(obj.moduleid)) {//销售流水
+                        Intent intent = new Intent(mContext, SaleWaterListActivity.class);
+                        startActivity(intent);
+                    } else if ("dingdanguanli".equals(obj.moduleid)) {//订单管理
+
+                    }
+
+                }
+            });
 
 
             return view;

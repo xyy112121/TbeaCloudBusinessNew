@@ -2,6 +2,8 @@ package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,14 @@ import android.widget.RelativeLayout;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.action.StoreManageAction;
+import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
+import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
+import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
@@ -35,11 +45,11 @@ public class ShopDynamicAddActivity extends BaseActivity implements View.OnClick
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_dynamic_add);
-        initTopbar("发表文章", "预览", this);
+        initTopbar("发表文章", "保存", this);
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         GridView gridView = (GridView) findViewById(R.id.shop_dynamic_image_gridView);
         mGridAdapter = new GridAdapter();
         gridView.setAdapter(mGridAdapter);
@@ -49,7 +59,63 @@ public class ShopDynamicAddActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
+        uploadImage();
+    }
 
+    public void uploadImage() {
+        final String title = ((PublishTextRowView) findViewById(R.id.activity_shop_dynamic_add_title)).getValueText();
+        final String content = ((PublishTextRowView) findViewById(R.id.activity_shop_dynamic_add_content)).getValueText();
+        final String newsId = getIntent().getStringExtra("newsId");
+        if (mSelectList.size() > 0) {
+            final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+            dialog.setText("请等待...");
+            dialog.show();
+            try {
+                final Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        dialog.dismiss();
+                        switch (msg.what) {
+                            case ThreadState.SUCCESS:
+                                ResponseInfo model = (ResponseInfo) msg.obj;
+                                if (model.isSuccess()) {
+                                    ToastUtil.showMessage("操作成功！");
+                                } else {
+                                    ToastUtil.showMessage(model.getMsg());
+                                }
+                                break;
+                            case ThreadState.ERROR:
+                                ToastUtil.showMessage("操作失败！");
+                                break;
+                        }
+                    }
+                };
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            CpPlumberMeetingAction action = new CpPlumberMeetingAction();
+                            MeetingGalleryUpdateResponseModel model = action.uploadImage(mSelectList);
+                            if (model.isSuccess() && model.data.pictureinfo != null) {
+                                StoreManageAction action1 = new StoreManageAction();
+                                ResponseInfo model1 = action1.addDynamic(newsId, title, content, model.data.pictureinfo.picturesavenames);
+                                handler.obtainMessage(ThreadState.SUCCESS, model1).sendToTarget();
+                            } else {
+                                handler.sendEmptyMessage(ThreadState.ERROR);
+                            }
+
+                        } catch (Exception e) {
+                            handler.sendEmptyMessage(ThreadState.ERROR);
+                        }
+                    }
+                }).start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            ToastUtil.showMessage("请选择需要上传的图片");
+        }
     }
 
 
@@ -80,7 +146,7 @@ public class ShopDynamicAddActivity extends BaseActivity implements View.OnClick
                     // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
                     // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
                     // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
-                   mGridAdapter.addAll(mSelectList);
+                    mGridAdapter.addAll(mSelectList);
                     break;
             }
         }
@@ -92,7 +158,7 @@ public class ShopDynamicAddActivity extends BaseActivity implements View.OnClick
 
         public void addAll(List<LocalMedia> list) {
             this.mList.addAll(list);
-            if(mList.size() < 8){
+            if (mList.size() < 8) {
                 this.mList.add(mList.size(), null);
             }
             notifyDataSetChanged();
@@ -123,7 +189,7 @@ public class ShopDynamicAddActivity extends BaseActivity implements View.OnClick
             ImageView imageView = (ImageView) view1.findViewById(R.id.shop_dynamic_add_list_item_image);
             ImageView deleteView = (ImageView) view1.findViewById(R.id.shop_dynamic_add_list_item_image_delete);
             int displayWidth = UtilAssistants.getDisplayWidth(mContext);
-            imageView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,(displayWidth/4)));
+            imageView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (displayWidth / 4)));
             if (mList.get(i) == null) {
                 imageView.setImageResource(R.drawable.icon_take_photos);
                 deleteView.setVisibility(View.GONE);

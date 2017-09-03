@@ -39,7 +39,6 @@ public class SpecificationsAndModelsListActivity extends BaseActivity implements
     @BindView(R.id.rl_recyclerview_refresh)
     BGARefreshLayout mRefreshLayout;
     private MyAdapter mAdapter;
-    private final int REQUEST_EDIT = 1000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,14 +56,22 @@ public class SpecificationsAndModelsListActivity extends BaseActivity implements
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, false));
-        mRefreshLayout.beginRefreshing();
     }
 
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(mContext, SpecificationsAndModelsEditActivity.class);
-        startActivityForResult(intent, REQUEST_EDIT);
+        Intent intent = new Intent(mContext, SpecificationsAndModelsSelectListActivity.class);
+        startActivity(intent);
+//
+//        Intent intent = new Intent(mContext, SpecificationsAndModelsEditActivity.class);
+//        startActivityForResult(intent, REQUEST_EDIT);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRefreshLayout.beginRefreshing();
     }
 
     /**
@@ -122,13 +129,6 @@ public class SpecificationsAndModelsListActivity extends BaseActivity implements
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getListData();
         return false;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_EDIT && resultCode == RESULT_OK) {
-            mRefreshLayout.beginRefreshing();
-        }
     }
 
     class MyAdapter extends BaseAdapter {

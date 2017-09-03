@@ -18,7 +18,7 @@ import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumbe
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
-import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
@@ -50,7 +50,7 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cp_meeting_grllery_upload);
-        initTopbar("图片上传", "保存", this);
+        initTopbar(" 图片上传", "保存", this);
         initView();
     }
 
@@ -81,12 +81,13 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
                         dialog.dismiss();
                         switch (msg.what) {
                             case ThreadState.SUCCESS:
-                                BaseResponseModel model = (BaseResponseModel) msg.obj;
-                                if (model.isSuccess()) {
-                                    ToastUtil.showMessage("操作成功！");
-                                } else {
-                                    ToastUtil.showMessage(model.getMsg());
-                                }
+                                ResponseInfo model = (ResponseInfo) msg.obj;
+                                ToastUtil.showMessage(model.getMsg());
+//                                if (model.isSuccess()) {
+//                                    ToastUtil.showMessage("操作成功！");
+//                                } else {
+//                                    ToastUtil.showMessage(model.getMsg());
+//                                }
                                 break;
                             case ThreadState.ERROR:
                                 ToastUtil.showMessage("操作失败！");
@@ -100,9 +101,9 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
                     public void run() {
                         try {
                             CpPlumberMeetingAction action = new CpPlumberMeetingAction();
-                            MeetingGalleryUpdateResponseModel model = action.uploadGallery(mSelectList);
+                            MeetingGalleryUpdateResponseModel model = action.uploadImage(mSelectList);
                             if (model.isSuccess() && model.data.pictureinfo != null) {
-                                BaseResponseModel model1 = action.uploadGallery(meetingid, title, model.data.pictureinfo.picturesavenames, mIndex);
+                                ResponseInfo model1 = action.uploadGallery(meetingid, title, model.data.pictureinfo.picturesavenames, mIndex);
                                 handler.obtainMessage(ThreadState.SUCCESS, model1).sendToTarget();
                             } else {
                                 handler.sendEmptyMessage(ThreadState.ERROR);
@@ -153,7 +154,7 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
                     break;
                 case 1000:
                     mSelectList = (List<LocalMedia>) data.getSerializableExtra("images");
-                    mIndex = data.getIntExtra("index",1);
+                    mIndex = data.getIntExtra("index", 1);
                     mGridAdapter.removeAll();
                     mGridAdapter.addAll(mSelectList);
                     break;

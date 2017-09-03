@@ -201,7 +201,7 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
                     public void run() {
                         try {
                             CpPlumberMeetingAction action = new CpPlumberMeetingAction();
-                            MeetingGalleryUpdateResponseModel model = action.uploadGallery(mSelectList);
+                            MeetingGalleryUpdateResponseModel model = action.uploadImage(mSelectList);
                             if (model.isSuccess() && model.data.pictureinfo != null) {
                                 mRequest.thumbpicture = model.data.pictureinfo.picturesavenames;
                                 save();

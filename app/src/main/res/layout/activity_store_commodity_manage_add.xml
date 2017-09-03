@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/commdity_add_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,64 +19,162 @@
             android:orientation="vertical">
 
             <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/commdity_add_name"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 app:PublishTextRowViewHiht="请输入商品名称"
                 app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewText="商品名称"
-                app:PublishTextRowViewTextColor="@color/text_color" />
+                app:PublishTextRowViewTextColor="@color/tab_text_normal" />
 
             <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/commdity_add_categoryid"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 app:PublishTextRowViewHiht="请输入商品分类"
                 app:PublishTextRowViewIsBottomLineShow="true"
                 app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
                 app:PublishTextRowViewText="商品分类"
-                app:PublishTextRowViewTextColor="@color/text_color" />
+                app:PublishTextRowViewTextColor="@color/tab_text_normal" />
 
             <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/commdity_add_modespec"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 app:PublishTextRowViewHiht="请输入规格型号"
                 app:PublishTextRowViewIsBottomLineShow="true"
                 app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
                 app:PublishTextRowViewText="规格型号"
-                app:PublishTextRowViewTextColor="@color/text_color" />
+                app:PublishTextRowViewTextColor="@color/tab_text_normal" />
 
             <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/commdity_add_price"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 app:PublishTextRowViewHiht="请输入商品价格"
                 app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewText="商品价格"
-                app:PublishTextRowViewTextColor="@color/text_color" />
+                app:PublishTextRowViewTextColor="@color/tab_text_normal" />
 
             <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/commdity_add_discountmoney"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 app:PublishTextRowViewHiht="请输入下单优惠的金额"
                 app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewText="优惠金额"
-                app:PublishTextRowViewTextColor="@color/text_color" />
+                app:PublishTextRowViewTextColor="@color/tab_text_normal" />
 
             <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/commdity_add_unit"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 app:PublishTextRowViewHiht="请输入计价单位，如件，个，套等"
                 app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewText="商品单位"
-                app:PublishTextRowViewTextColor="@color/text_color" />
+                app:PublishTextRowViewTextColor="@color/tab_text_normal" />
 
             <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/commdity_add_stocknumber"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 app:PublishTextRowViewHiht="不输入为无限制"
                 app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewText="商品库存"
-                app:PublishTextRowViewTextColor="@color/text_color" />
+                app:PublishTextRowViewTextColor="@color/tab_text_normal" />
 
+            <include
+                android:id="@+id/commdity_add_thumb_layout"
+                layout="@layout/activity_image_select_layout" />
 
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp"
+                android:background="@color/interval_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:orientation="horizontal"
+              >
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="100dp"
+                    android:paddingLeft="8dp"
+                    android:text="商品描述"
+                    android:textColor="@color/tab_text_normal" />
+
+                <com.example.programmer.tbeacloudbusiness.component.ClearEditText
+                    android:id="@+id/commdity_adda_description"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="top"
+                    android:hint="请输入商品描述或介绍"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minLines="5"
+                  />
+
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <include
+                android:id="@+id/commdity_add_picture_layout"
+                layout="@layout/activity_image_select_layout" />
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp"
+                android:background="@color/interval_color" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="推荐商品"
+                    android:textColor="@color/tab_text_normal" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:text="选中即显示在店铺首页推荐模块"
+                    android:textColor="@color/text_color" />
+
+                <CheckBox
+                    android:id="@+id/commdity_add_recommended"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/addr_is_defult_ck"
+                    android:button="@null" />
+            </LinearLayout>
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/commdity_add_btn"
+                style="@style/style_next_btn"
+                android:layout_alignParentBottom="true"
+                android:text="删除"
+                android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
 

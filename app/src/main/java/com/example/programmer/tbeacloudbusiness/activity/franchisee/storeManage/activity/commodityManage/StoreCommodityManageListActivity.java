@@ -34,6 +34,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
@@ -41,7 +42,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 商品管理
  */
 
-public class StoreCommodityManageListActivity extends BaseActivity implements View.OnClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
+public class StoreCommodityManageListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
     @BindView(R.id.listview)
     ListView mListView;
     @BindView(R.id.rl_recyclerview_refresh)
@@ -66,10 +67,13 @@ public class StoreCommodityManageListActivity extends BaseActivity implements Vi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_commodity_manage_list);
-        ButterKnife.bind(this);
-        initTopbar("商品管理", "添加", this, R.drawable.icon_search, this);
-        initView();
+        try {
+            setContentView(R.layout.activity_store_commodity_manage_list);
+            ButterKnife.bind(this);
+            initView();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initView() {
@@ -221,6 +225,7 @@ public class StoreCommodityManageListActivity extends BaseActivity implements Vi
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         mAdapter.clear();
+        mPage = 1;
         getData();
     }
 
@@ -230,11 +235,19 @@ public class StoreCommodityManageListActivity extends BaseActivity implements Vi
         return false;
     }
 
-    @Override
-    public void onClick(View view) {
+
+    @OnClick({R.id.top_left, R.id.top_right, R.id.top_right_text_layout})
+    public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.top_right_text:
+            case R.id.top_left:
+                finish();
+                break;
+            case R.id.top_right:
+                //搜索
+                break;
+            case R.id.top_right_text_layout:
                 Intent intent = new Intent(mContext, StoreCommodityManageAddActivity.class);
+                intent.putExtra("flag", "add");
                 startActivity(intent);
                 break;
         }
@@ -258,7 +271,7 @@ public class StoreCommodityManageListActivity extends BaseActivity implements Vi
             } else {
                 holder = (ViewHolder) view.getTag();
             }
-            CommodityManageListResponseModel.DataBean.CommoditylistBean obj = getItem(i);
+            final CommodityManageListResponseModel.DataBean.CommoditylistBean obj = getItem(i);
             holder.mNameView.setText(obj.commodityname);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, holder.mThumbView);
             holder.mPriceView.setText(obj.price);
@@ -269,6 +282,15 @@ public class StoreCommodityManageListActivity extends BaseActivity implements Vi
             } else {
                 holder.mRecommendedView.setText("推荐商品：不是");
             }
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, MarketInfoActivity.class);
+                    intent.putExtra("commodityId", obj.commodityid);
+                    startActivity(intent);
+                }
+            });
             return view;
         }
 

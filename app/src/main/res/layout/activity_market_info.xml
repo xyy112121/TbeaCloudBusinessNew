@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <include layout="@layout/activity_page_top" />
@@ -11,9 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/market_info_thumbpicture"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:scaleType="fitXY"
@@ -25,7 +28,7 @@
             android:layout_marginLeft="8dp">
 
             <TextView
-                android:id="@+id/store_commodity_name"
+                android:id="@+id/market_info_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
@@ -34,7 +37,7 @@
                 android:textSize="14sp" />
 
             <LinearLayout
-                android:id="@+id/store_commodity_price"
+                android:id="@+id/market_info_price_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true">
@@ -56,6 +59,7 @@
                         android:textSize="10sp" />
 
                     <TextView
+                        android:id="@+id/market_info_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
@@ -66,37 +70,42 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/market_info_publishtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/store_commodity_price"
-                android:layout_below="@id/store_commodity_name"
+                android:layout_above="@id/market_info_price_layout"
+                android:layout_below="@id/market_info_name"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="推荐商品：是"
+                android:text="发布时间"
                 android:textColor="@color/text_color"
                 android:textSize="12sp" />
         </RelativeLayout>
 
     </LinearLayout>
 
+    <View style="@style/horizontal_view" />
+
     <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
         android:id="@+id/market_info_be_sold"
         android:layout_width="match_parent"
         android:layout_height="49dp"
+        app:PublishTextRowViewGravity="1"
         app:PublishTextRowViewIsBottomLineShow="true"
-        app:PublishTextRowViewText="已出售"
         app:PublishTextRowViewIsSelect="true"
-        app:PublishTextRowViewGravity="1"/>
+        app:PublishTextRowViewState="read"
+        app:PublishTextRowViewText="已出售" />
 
     <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
         android:id="@+id/market_info_be_rate"
         android:layout_width="match_parent"
         android:layout_height="49dp"
+        app:PublishTextRowViewGravity="1"
         app:PublishTextRowViewIsBottomLineShow="true"
-        app:PublishTextRowViewText="已评价"
         app:PublishTextRowViewIsSelect="true"
-        app:PublishTextRowViewGravity="1"/>
+        app:PublishTextRowViewState="read"
+        app:PublishTextRowViewText="已评价" />
 
 </LinearLayout>

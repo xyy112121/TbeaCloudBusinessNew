@@ -11,7 +11,11 @@ public class VisualGraphResonpseModel extends BaseResponseModel {
 
     public DataBean data;
 
-    public static class DataBean {
-        public String shoppictureinfo;
+    public class DataBean {
+        public ShoppictureinfoBean shoppictureinfo;
+
+        public class ShoppictureinfoBean {
+            public String picture;
+        }
     }
 }

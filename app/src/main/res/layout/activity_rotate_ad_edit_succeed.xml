@@ -31,7 +31,7 @@
 
 
     <Button
-        android:id="@+id/completion_finish"
+        android:id="@+id/rotate_ad_edit_succeed_btn"
         style="@style/style_next_btn"
         android:layout_alignParentBottom="true"
         android:background="@drawable/btn_bg_blue"
