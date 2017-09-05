@@ -7,12 +7,8 @@ import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
  */
 
 public class RebateAccountInfoResponseModel extends BaseResponseModel {
-    public RebateAccountInfoModel data;
-
-    public class RebateAccountInfoModel {
-        public MyMoneyInfo mymoneyinfo;
-        public FirstDistriButorinfo firstdistributorinfo;
-    }
+    public MyMoneyInfo mymoneyinfo;
+    public FirstDistriButorinfo firstdistributorinfo;
 
     public class MyMoneyInfo {
         public int currentmoney;

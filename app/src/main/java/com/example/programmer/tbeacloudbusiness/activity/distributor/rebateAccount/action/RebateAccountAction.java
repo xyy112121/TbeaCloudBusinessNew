@@ -5,6 +5,7 @@ import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccou
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.model.WithdrawCashViewResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.http.MD5Util;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
 import org.apache.http.NameValuePair;
@@ -37,11 +38,24 @@ public class RebateAccountAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public RebateAccountInfoResponseModel getRebateAccountInfo() throws Exception {
-        RebateAccountInfoResponseModel model;
+//    public RebateAccountInfoResponseModel getRebateAccountInfo() throws Exception {
+//        RebateAccountInfoResponseModel model;
+//        List<NameValuePair> pairs = new ArrayList<>();
+//        String result = sendRequest("TBEAYUN005002008000", pairs);
+//        model = gson.fromJson(result, RebateAccountInfoResponseModel.class);
+//        return model;
+//    }
+
+    /**
+     * 获取返利详细
+     * @return
+     * @throws Exception
+     */
+    public ResponseInfo getRebateAccountInfo() throws Exception {
+        ResponseInfo model;
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN005002008000", pairs);
-        model = gson.fromJson(result, RebateAccountInfoResponseModel.class);
+        model = gson.fromJson(result, ResponseInfo.class);
         return model;
     }
 

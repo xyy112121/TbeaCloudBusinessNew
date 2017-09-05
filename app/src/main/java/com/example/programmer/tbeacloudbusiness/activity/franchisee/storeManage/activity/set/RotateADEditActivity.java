@@ -187,6 +187,8 @@ public class RotateADEditActivity extends BaseActivity implements View.OnClickLi
             final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
             dialog.setText("请等待...");
             dialog.show();
+
+            mRequest.title = mTitleView.getValueText();
             try {
                 final Handler handler = new Handler() {
                     @Override
@@ -330,7 +332,6 @@ public class RotateADEditActivity extends BaseActivity implements View.OnClickLi
                         ((TextView) view.findViewById(R.id.news_item_title)).setText(obj.title);
                         ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, pictureView);
                         mUrlView.addView(view);
-                        mTitleView.setValueText(obj.title);
                         mLinkPageView.setValueText("店铺动态");
 
                     } else {
@@ -342,7 +343,6 @@ public class RotateADEditActivity extends BaseActivity implements View.OnClickLi
                         ((TextView) view.findViewById(R.id.commdity_item_money)).setText(obj.price);
                         ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, pictureView);
                         mUrlView.addView(view);
-                        mTitleView.setValueText(obj.commodityname);
                         mLinkPageView.setValueText("店铺商品");
                     }
                     break;

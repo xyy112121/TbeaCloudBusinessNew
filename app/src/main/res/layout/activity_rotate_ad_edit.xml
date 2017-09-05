@@ -19,8 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="49dp"
             app:PublishTextRowViewIsBottomLineShow="true"
-            app:PublishTextRowViewState="read"
             app:PublishTextRowViewText="标题"
+            app:PublishTextRowViewLeftWidth="90dp"
             app:PublishTextRowViewTextColor="@color/text_color" />
 
         <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
@@ -31,13 +31,14 @@
             app:PublishTextRowViewIsSelect="true"
             app:PublishTextRowViewState="read"
             app:PublishTextRowViewText="链接页面"
+            app:PublishTextRowViewLeftWidth="90dp"
             app:PublishTextRowViewTextColor="@color/text_color" />
 
         <LinearLayout
             android:id="@+id/rotate_ad_edit_url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="155dp"
+            android:layout_marginLeft="110dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:orientation="vertical">
@@ -59,7 +60,7 @@
 
             <TextView
                 style="@style/my_text_style"
-                android:layout_width="140dp"
+                android:layout_width="90dp"
                 android:text="图片" />
 
             <ImageView

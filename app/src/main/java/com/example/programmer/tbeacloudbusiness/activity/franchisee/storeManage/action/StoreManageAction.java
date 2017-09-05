@@ -128,6 +128,7 @@ public class StoreManageAction extends BaseAction {
         pairs.add(new BasicNameValuePair("advertiseid", request.advertiseid));
         pairs.add(new BasicNameValuePair("urltype", request.urltype));
         pairs.add(new BasicNameValuePair("url", request.url));
+        pairs.add(new BasicNameValuePair("title", request.title));
         pairs.add(new BasicNameValuePair("picture", request.picture));
         String result = sendRequest("TBEAYUN006002002002", pairs);
         model = gson.fromJson(result, ResponseInfo.class);

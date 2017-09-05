@@ -15,8 +15,11 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.action.RebateAccountAction;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.model.RebateAccountInfoResponseModel;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
@@ -36,7 +39,7 @@ public class RebateAccountWithdrawCashActivity extends BaseActivity {
         getDate();
     }
 
-    public void initView(){
+    public void initView() {
         findViewById(R.id.rebate_account_withdraw_cash_finsh).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,15 +51,15 @@ public class RebateAccountWithdrawCashActivity extends BaseActivity {
                     }
 
                     Double mo = Double.parseDouble(money);
-                    if(mo > mCanexChangeMoney){
+                    if (mo > mCanexChangeMoney) {
                         ToastUtil.showMessage("不能大于最大提现金额！");
                         return;
                     }
                     Intent intent = new Intent(RebateAccountWithdrawCashActivity.this, WithdrawCashViewActivity.class);
                     intent.putExtra("money", money);
-                    intent.putExtra("distributorid",mDistributorid );
+                    intent.putExtra("distributorid", mDistributorid);
                     startActivity(intent);
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
 
@@ -70,6 +73,7 @@ public class RebateAccountWithdrawCashActivity extends BaseActivity {
             }
         });
     }
+
     /**
      * 获取数据
      */
@@ -79,26 +83,35 @@ public class RebateAccountWithdrawCashActivity extends BaseActivity {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case ThreadState.SUCCESS:
-                        RebateAccountInfoResponseModel model = (RebateAccountInfoResponseModel) msg.obj;
-                        if (model.isSuccess() && model.data != null) {
-                            if(model.data.mymoneyinfo != null){
-                                mCanexChangeMoney = model.data.mymoneyinfo.canexchangemoney;
-                                ((TextView)findViewById(R.id.rebate_account_withdraw_cash_info)).setText("当前可提现金额：￥"+model.data.mymoneyinfo.canexchangemoney);
-                            }
-                            if(model.data.firstdistributorinfo != null){
-                               RebateAccountInfoResponseModel.FirstDistriButorinfo info = model.data.firstdistributorinfo;
-                                mDistributorid = info.id;
-                                ((TextView) findViewById(R.id.person_info_name)).setText(info.personname);
-                                ((TextView) findViewById(R.id.person_info_companyname)).setText(info.companyname);
-                                String imagePath = MyApplication.instance.getImgPath();
-                                ImageLoader.getInstance().displayImage(imagePath + info.thumbpicture, ((ImageView) findViewById(R.id.person_info_head)));
-                               if(!"".equals(info.persontypeicon)){
-                                   ImageLoader.getInstance().displayImage(imagePath + info.persontypeicon, ((ImageView)findViewById(R.id.person_info_personjobtitle)));
-                               }
+                        ResponseInfo model = (ResponseInfo) msg.obj;
+                        if(model.isSuccess()){
+                            if (model.isSuccess() && model.data != null) {
+                                Gson gson = new GsonBuilder().serializeNulls().create();
+                                String json = gson.toJson(model.data);
+                                RebateAccountInfoResponseModel obj =  gson.fromJson(json, RebateAccountInfoResponseModel.class);
+                                if (obj != null) {
+                                    mCanexChangeMoney = obj.mymoneyinfo.canexchangemoney;
+                                    ((TextView) findViewById(R.id.rebate_account_withdraw_cash_info)).setText("当前可提现金额：￥" + obj.mymoneyinfo.canexchangemoney);
+                                }
+                                if (obj.firstdistributorinfo != null) {
+                                    RebateAccountInfoResponseModel.FirstDistriButorinfo info = obj.firstdistributorinfo;
+                                    mDistributorid = info.id;
+                                    ((TextView) findViewById(R.id.person_info_name)).setText(info.personname);
+                                    ((TextView) findViewById(R.id.person_info_companyname)).setText(info.companyname);
+                                    findViewById(R.id.person_info_right).setVisibility(View.GONE);
+                                    String imagePath = MyApplication.instance.getImgPath();
+                                    ImageLoader.getInstance().displayImage(imagePath + info.thumbpicture, ((ImageView) findViewById(R.id.person_info_head)));
+                                    if (!"".equals(info.persontypeicon)) {
+                                        ImageLoader.getInstance().displayImage(imagePath + info.persontypeicon, ((ImageView) findViewById(R.id.person_info_personjobtitle)));
+                                    }
+                                }
 
                             }
-
+                        }else {
+                            ToastUtil.showMessage(model.getMsg());
+                            findViewById(R.id.rebate_account_withdraw_cash_top).setVisibility(View.GONE);
                         }
+
 
                         break;
                     case ThreadState.ERROR:
@@ -113,7 +126,7 @@ public class RebateAccountWithdrawCashActivity extends BaseActivity {
             public void run() {
                 try {
                     RebateAccountAction action = new RebateAccountAction();
-                    RebateAccountInfoResponseModel re = action.getRebateAccountInfo();
+                    ResponseInfo re = action.getRebateAccountInfo();
                     handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);

@@ -96,6 +96,17 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
             }
         });
 
+        findViewById(R.id.plumber_meeting_all_list_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(mContext, PlumberMeetingListAllActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
         findViewById(R.id.plumber_meeting_sign_in_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
