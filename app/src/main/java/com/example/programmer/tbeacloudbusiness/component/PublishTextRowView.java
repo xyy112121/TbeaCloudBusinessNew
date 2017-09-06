@@ -116,8 +116,10 @@ public class PublishTextRowView extends LinearLayout {
             mValueView2.setInputType(InputType.TYPE_CLASS_PHONE);
         } else if (mInputType == 2) {//文本
             mValueView2.setInputType(InputType.TYPE_CLASS_TEXT);
-        }else if (mInputType == 3) {//密码
+        } else if (mInputType == 3) {//密码
             mValueView2.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else if (mInputType == 4) {
+            mValueView2.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         }
 
         mValueView.setHint(mHiht);

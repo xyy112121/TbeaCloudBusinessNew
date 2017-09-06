@@ -37,25 +37,25 @@ public class UserAction extends BaseAction {
      * @param pwd         密码
      * @param devicetoken 手机唯一码
      */
-    public LoginUserModel login(String phone, String pwd, String devicetoken) throws Exception {
-        LoginUserModel rspInfo;
+    public ResponseInfo login(String phone, String pwd, String devicetoken) throws Exception {
+        ResponseInfo rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("mobilenumber", phone));
         pairs.add(new BasicNameValuePair("userpas", MD5Util.getMD5String(pwd)));
         pairs.add(new BasicNameValuePair("devicetoken", devicetoken));
         String result = sendRequest("TBEAYUN003001004000", pairs);
-        rspInfo = gson.fromJson(result, LoginUserModel.class);
+        rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;
     }
 
     /**
      * 获取主页显示数据
      */
-    public HomeMainResponseModel getMainData() throws Exception {
-        HomeMainResponseModel model;
+    public ResponseInfo getMainData() throws Exception {
+        ResponseInfo model;
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN002001001000", pairs);
-        model = gson.fromJson(result, HomeMainResponseModel.class);
+        model = gson.fromJson(result, ResponseInfo.class);
         return model;
     }
 
@@ -75,11 +75,11 @@ public class UserAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public MyMainResponseModel getMyMainData() throws Exception {
-        MyMainResponseModel model;
+    public ResponseInfo getMyMainData() throws Exception {
+        ResponseInfo model;
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN002001003000", pairs);
-        model = gson.fromJson(result, MyMainResponseModel.class);
+        model = gson.fromJson(result, ResponseInfo.class);
         return model;
     }
 
@@ -155,9 +155,11 @@ public class UserAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public FranchiserSelectListResponseModel getAffiliationList() throws Exception {
+    public FranchiserSelectListResponseModel getAffiliationList(String province ,String  city) throws Exception {
         FranchiserSelectListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("province", province));
+        pairs.add(new BasicNameValuePair("city", city));
         String result = sendRequest("TBEAYUN001004002000", pairs);
         model = gson.fromJson(result, FranchiserSelectListResponseModel.class);
         return model;

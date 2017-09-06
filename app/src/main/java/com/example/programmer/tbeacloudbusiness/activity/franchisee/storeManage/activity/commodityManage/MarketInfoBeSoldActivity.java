@@ -90,7 +90,7 @@ public class MarketInfoBeSoldActivity extends BaseActivity implements BGARefresh
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getListData();
-        return false;
+        return true;
     }
 
     /**

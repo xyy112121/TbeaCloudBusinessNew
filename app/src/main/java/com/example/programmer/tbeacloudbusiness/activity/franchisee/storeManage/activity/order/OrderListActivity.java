@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.publicUse.activity;
+package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,16 +9,17 @@ import android.webkit.WebViewClient;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * webView公用界面（会议安排，会议纪要）
+ * 订单管理
  */
 
-public class WebViewActivity extends BaseActivity {
+public class OrderListActivity extends BaseActivity {
     @BindView(R.id.web_view)
     WebView mWebView;
 
@@ -27,12 +28,11 @@ public class WebViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plumber_meeting_view_plan);
         ButterKnife.bind(this);
-        initTopbar(getIntent().getStringExtra("title"));
-        String url = getIntent().getStringExtra("url");
-        showWebView(url);
+        initTopbar("订单管理");
+        showWebView();
     }
 
-    private void showWebView(String url) {
+    private void showWebView() {
         final CustomDialog mDialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         mDialog.setText("加载中...");
         mDialog.show();
@@ -47,7 +47,7 @@ public class WebViewActivity extends BaseActivity {
         settings.setAllowFileAccess(true);
         settings.setDomStorageEnabled(true);//允许DCOM
 
-        mWebView.loadUrl(url);
+        mWebView.loadUrl("http://121.42.193.154:6696/index.php/store/Index/orderall/userid/"+ MyApplication.instance.getUserId());
 
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override

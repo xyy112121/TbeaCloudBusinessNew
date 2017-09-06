@@ -26,6 +26,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.commodityManage.CommoditySalesListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.commodityManage.SaleWaterListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.commodityManage.StoreCommodityManageListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderManageDeliverGoodsActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.ShopDynamicListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.StoreManageMainResponseModel;
@@ -189,7 +190,7 @@ public class StoreManageMainActivity extends BaseActivity implements BGARefreshL
                     }
                     if ("dingdanguanli".equals(obj.moduleid)) {
                         //订单管理
-                        Intent intent = new Intent(mContext, OrderManageDeliverGoodsActivity.class);
+                        Intent intent = new Intent(mContext, OrderListActivity.class);
                         startActivity(intent);
                     } else if ("shangpinguanli".equals(obj.moduleid)) {
                         //商品管理
@@ -204,6 +205,10 @@ public class StoreManageMainActivity extends BaseActivity implements BGARefreshL
             });
             return view1;
         }
+    }
+
+    private void  openActivity(){
+
     }
 
     /**
@@ -345,7 +350,8 @@ public class StoreManageMainActivity extends BaseActivity implements BGARefreshL
                         Intent intent = new Intent(mContext, SaleWaterListActivity.class);
                         startActivity(intent);
                     } else if ("dingdanguanli".equals(obj.moduleid)) {//订单管理
-
+                        Intent intent = new Intent(mContext, OrderListActivity.class);
+                        startActivity(intent);
                     }
 
                 }

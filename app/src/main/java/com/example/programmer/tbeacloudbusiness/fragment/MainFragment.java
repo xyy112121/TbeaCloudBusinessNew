@@ -38,14 +38,19 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
+import com.example.programmer.tbeacloudbusiness.activity.user.LoginActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.HomeMainResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.LoginUserModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.MyGridView;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -89,6 +94,8 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
         }
     }
 
+
+
     /**
      * 从服务器获取数据
      */
@@ -101,14 +108,16 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
                     mRefreshLayout.endLoadingMore();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            HomeMainResponseModel model = (HomeMainResponseModel) msg.obj;
-                            if (model.isSuccess()) {
-                                initFunctionModel(model.data.functionmodulelist);
-                                initStaticsItem(model.data.staticsitemlist);
-                                initMessage(model.data.systemmessagelist);
-
+                            ResponseInfo re = (ResponseInfo) msg.obj;
+                            if (re.isSuccess()) {
+                                Gson gson = new GsonBuilder().serializeNulls().create();
+                                String json = gson.toJson(re.data);
+                                HomeMainResponseModel model = gson.fromJson(json, HomeMainResponseModel.class);
+                                initFunctionModel(model.functionmodulelist);
+                                initStaticsItem(model.staticsitemlist);
+                                initMessage(model.systemmessagelist);
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                               ToastUtil.showMessage(re.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
@@ -123,7 +132,7 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
                 public void run() {
                     try {
                         UserAction userAction = new UserAction();
-                        HomeMainResponseModel model = userAction.getMainData();
+                        ResponseInfo model = userAction.getMainData();
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -183,6 +192,16 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
 
             }
         });
+        popWindow1.setItemClickClose(new CustomPopWindow1.ItemClickClose() {
+            @Override
+            public void close() {
+                ShareConfig.setConfig(getActivity(),Constants.ONLINE,false);
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
     }
 
 

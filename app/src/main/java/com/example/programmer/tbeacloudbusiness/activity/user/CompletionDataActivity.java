@@ -91,8 +91,17 @@ public class CompletionDataActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completion_data);
         ButterKnife.bind(this);
+        mRequest.province = MyApplication.instance.getProvince();
+        mRequest.city = MyApplication.instance.getCity();
+        mRequest.zone = MyApplication.instance.getDistrict();
         parentLayout = findViewById(R.id.completion_data_layout);
         initTopbar("资料补全");
+        mAccountView.setText(ShareConfig.getConfigString(mContext,Constants.ACCOUNT,""));
+        if("distributor".equals(ShareConfig.getConfigString(mContext,Constants.USERTYPE,""))){
+            mUserTypeView.setText("经销商");
+        }else {
+            mUserTypeView.setText("其他商家");
+        }
         initView();
     }
 
@@ -100,8 +109,10 @@ public class CompletionDataActivity extends BaseActivity {
         String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
         if ("notidentify".equals(identify)) {//未认证
             getUserTypeList();
+        }else {
+            getDate();
         }
-        getDate();
+
     }
 
     public void getDate() {
@@ -119,9 +130,6 @@ public class CompletionDataActivity extends BaseActivity {
                             CompletionDataResponseModel model = (CompletionDataResponseModel) msg.obj;
                             if (model.isSuccess() && model.data != null) {
                                 CompletionDataResponseModel.DataBean.PersoninfoBean obj = model.data.personinfo;
-
-                                mAccountView.setText(obj.mobilenumber);
-                                mUserTypeView.setText(obj.usertype);
                                 mAreaView.setText(obj.province + obj.city + obj.zone);
                                 mNameView.setText(obj.realname);
                                 ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.picture, mHeadView1);
@@ -131,9 +139,11 @@ public class CompletionDataActivity extends BaseActivity {
                                     mSexView.setText("女");
                                 }
                                 mBirthdayView.setText(obj.birthyear + "-" + obj.birthmonth + "-" + obj.birthday);
-                                mAffiliationView.setVisibility(View.GONE);
-                                mAffiliationLayoutView.setVisibility(View.VISIBLE);
                                 CompletionDataResponseModel.DataBean.PersoninfoBean.FirstdistributorinfoBean item = obj.firstdistributorinfo;
+                                if(item != null){
+                                    mAffiliationView.setVisibility(View.GONE);
+                                    mAffiliationLayoutView.setVisibility(View.VISIBLE);
+                                }
                                 View pernsonLayout = getLayoutInflater().inflate(R.layout.activity_person_layout2, null);
                                 CircleImageView headView = (CircleImageView) pernsonLayout.findViewById(R.id.person_info_head);
                                 ImageView typwView = (ImageView) pernsonLayout.findViewById(R.id.person_info_personjobtitle);
@@ -205,7 +215,6 @@ public class CompletionDataActivity extends BaseActivity {
                             if (model.data.usertypelist != null) {
                                 userTypeList = model.data.usertypelist;
                             }
-
                         } else {
                             ToastUtil.showMessage(model.getMsg());
                         }
@@ -232,8 +241,7 @@ public class CompletionDataActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.completion_data_area, R.id.completion_data_affiliation_layout, R.id.completion_data_affiliation, R.id.completion_data_head, R.id.completion_data_sex, R.id.completion_data_birthday, R.id.completion_data_next, R
-            .id.completion_data_userType})
+    @OnClick({R.id.completion_data_area, R.id.completion_data_affiliation_layout, R.id.completion_data_affiliation, R.id.completion_data_head, R.id.completion_data_sex, R.id.completion_data_birthday, R.id.completion_data_next})
     public void onViewClicked(final View view) {
         switch (view.getId()) {
             case R.id.completion_data_area:
@@ -242,6 +250,8 @@ public class CompletionDataActivity extends BaseActivity {
             case R.id.completion_data_affiliation:
             case R.id.completion_data_affiliation_layout:
                 Intent intent = new Intent(mContext, AffiliationSelectListActivity.class);
+                intent.putExtra("province",mRequest.province);
+                intent.putExtra("city",mRequest.city);
                 startActivityForResult(intent, 1000);
                 break;
             case R.id.completion_data_head:
@@ -259,7 +269,7 @@ public class CompletionDataActivity extends BaseActivity {
                     uploadImage();
                 } else {
                     intent = new Intent(mContext, RealNameAuthenticationActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent,1001);
                 }
 
                 break;
@@ -317,6 +327,9 @@ public class CompletionDataActivity extends BaseActivity {
                     mSelectList = PictureSelector.obtainMultipleResult(data);
                     ImageLoader.getInstance().displayImage("file://" + mSelectList.get(0).getCompressPath(), mHeadView1);
                     break;
+                case 1001:
+                    finish();
+                    break;
             }
         }
     }
@@ -343,8 +356,7 @@ public class CompletionDataActivity extends BaseActivity {
                                 ResponseInfo model = (ResponseInfo) msg.obj;
                                 if (model.isSuccess()) {
                                     Intent intent = new Intent(mContext, RealNameAuthenticationActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    startActivityForResult(intent,1001);
                                 } else {
                                     ToastUtil.showMessage(model.getMsg());
                                 }
@@ -480,6 +492,7 @@ public class CompletionDataActivity extends BaseActivity {
                 } else {
                     PictureSelector.create(mContext)
                             .openCamera(PictureMimeType.ofImage())
+                            .compress(true)
                             .forResult(PictureConfig.CHOOSE_REQUEST);
                 }
 

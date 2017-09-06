@@ -295,6 +295,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                             ResponseInfo model = (ResponseInfo) msg.obj;
                             if (model.isSuccess()) {
                                 ShareConfig.setConfig(mContext, Constants.whetheridentifiedid, "identifying");
+                                setResult(RESULT_OK);
                                 finish();
                             } else {
                                 ToastUtil.showMessage(model.getMsg());

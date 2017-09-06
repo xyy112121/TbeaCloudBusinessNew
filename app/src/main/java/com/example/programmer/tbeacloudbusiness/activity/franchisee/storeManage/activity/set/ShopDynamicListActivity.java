@@ -21,10 +21,9 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.action.StoreManageAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.DynamicListRequestModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.DynamicListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.DynamicListResponseModel1;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
@@ -62,7 +61,7 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
     private MyAdapter1 mAdapter;
     private int mPage = 1;
     private DynamicListRequestModel mRequest = new DynamicListRequestModel();
-    List<DynamicListResponseModel.DataBean.NewslistBean> mSelectList = new ArrayList<>();
+    List<DynamicListResponseModel1.DataBean.NewslistBean> mSelectList = new ArrayList<>();
     // 用来控制CheckBox的选中状况
     private static HashMap<Integer, Boolean> isSelected;
     private boolean mFlag;
@@ -87,7 +86,6 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
 
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
-        mRefreshLayout.beginRefreshing();
 
         mAllView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -103,6 +101,12 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRefreshLayout.beginRefreshing();
+
+    }
 
     private void getData() {
         try {
@@ -115,7 +119,7 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
                     mRefreshLayout.endLoadingMore();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            DynamicListResponseModel model = (DynamicListResponseModel) msg.obj;
+                            DynamicListResponseModel1 model = (DynamicListResponseModel1) msg.obj;
                             if (model.isSuccess() && model.data != null) {
                                 if (model.data.newslist != null) {
                                     mAdapter.initDate(model.data.newslist.size(), model.data.newslist);
@@ -137,7 +141,7 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
                 public void run() {
                     try {
                         StoreManageAction action = new StoreManageAction();
-                        DynamicListResponseModel model = action.getDynamicList(mRequest);
+                        DynamicListResponseModel1 model = action.getDynamicList1(mRequest);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -204,7 +208,7 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
             case R.id.shop_dynamic_add_list_delete:
                 if (mSelectList.size() > 0) {
                     String ids = "";
-                    for (DynamicListResponseModel.DataBean.NewslistBean item : mSelectList) {
+                    for (DynamicListResponseModel1.DataBean.NewslistBean item : mSelectList) {
                         if (ids.length() > 0) {
                             ids += ",";
                         }
@@ -244,10 +248,13 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
                 switch (msg.what) {
                     case ThreadState.SUCCESS:
                         ResponseInfo re = (ResponseInfo) msg.obj;
-                        mAdapter.selectNotAll();
-                        mSelectList.clear();
-                        ToastUtil.showMessage(re.getMsg());
-
+                        if(re.isSuccess()){
+                            mAdapter.selectNotAll();
+                            mSelectList.clear();
+                            mRefreshLayout.beginRefreshing();
+                        }else {
+                            ToastUtil.showMessage("操作失败!");
+                        }
                         break;
                     case ThreadState.ERROR:
                         ToastUtil.showMessage("操作失败!");
@@ -273,7 +280,7 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
         }, "是");
     }
 
-    class MyAdapter1 extends ArrayAdapter<DynamicListResponseModel.DataBean.NewslistBean> {
+    class MyAdapter1 extends ArrayAdapter<DynamicListResponseModel1.DataBean.NewslistBean> {
         private int resourceId;
 
         public MyAdapter1(@NonNull Context context, @LayoutRes int resource) {
@@ -301,7 +308,7 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
         }
 
         // 初始化isSelected的数据
-        public void initDate(int count, List<DynamicListResponseModel.DataBean.NewslistBean> list) {
+        public void initDate(int count, List<DynamicListResponseModel1.DataBean.NewslistBean> list) {
             for (int i = 0; i < count; i++) {
                 isSelected.put(i, false);
             }
@@ -319,7 +326,7 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
             }
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + getItem(position).thumbpicture, holder.mPictureView);
             holder.mTimeView.setText(getItem(position).time);
-            holder.mTitleView.setText(getItem(position).title);
+            holder.mTitleView.setText(getItem(position).name);
             if (mFlag) {
                 holder.mCk.setVisibility(View.VISIBLE);
                 holder.mCk.setChecked(isSelected.get(position));

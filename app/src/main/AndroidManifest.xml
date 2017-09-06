@@ -230,6 +230,7 @@
 
        <activity android:name=".activity.distributorManage.activity.DistributorListActivity"/>
        <activity android:name=".activity.distributorManage.activity.DustributorWithdrawalHistoryListActivity"/>
+       <activity android:name=".activity.franchisee.storeManage.activity.order.OrderListActivity"/>
     </application>
 
 </manifest>

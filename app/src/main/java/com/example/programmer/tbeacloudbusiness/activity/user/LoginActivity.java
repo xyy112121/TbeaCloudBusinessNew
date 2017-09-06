@@ -7,17 +7,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.text.TextUtils;
+import android.text.InputType;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.LoginUserModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.Installation;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.DeviceIdUtil;
@@ -25,11 +27,11 @@ import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.programmer.tbeacloudbusiness.utils.permissonutil.PermissionActivity;
-
-import java.util.Map;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
- * Created by programmer on 2017/6/5.
+ * 登录
  */
 
 public class LoginActivity extends PermissionActivity {
@@ -42,11 +44,11 @@ public class LoginActivity extends PermissionActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mContext = this;
-        if(ShareConfig.getConfigBoolean(mContext,Constants.ONLINE,false)){
+        if (ShareConfig.getConfigBoolean(mContext, Constants.ONLINE, false)) {
             Intent intent = new Intent(mContext, MainActivity.class);
             startActivity(intent);
             finish();
-        }else {
+        } else {
             //单个权限获取
             checkPermission(new CheckPermListener() {
                 @Override
@@ -65,22 +67,39 @@ public class LoginActivity extends PermissionActivity {
         }
     }
 
-    private void listener(){
+    private void listener() {
+
+        final EditText pwdEd = (EditText) findViewById(R.id.login_pwd);
+
         findViewById(R.id.login_register_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
+
+        ((CheckBox) findViewById(R.id.login_isShow_pwd)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    //选择状态 显示明文--设置为可见的密码
+                    pwdEd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else {
+                    //默认状态显示密码--设置文本 要一起写才能起作用 InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
+                    pwdEd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+            }
+        });
+
 
         findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String mobile = ((TextView)findViewById(R.id.login_phone)).getText()+"";
-                final String pwd = ((TextView)findViewById(R.id.login_pwd)).getText()+"";
+                final String mobile = ((TextView) findViewById(R.id.login_phone)).getText() + "";
+                final String pwd = ((TextView) findViewById(R.id.login_pwd)).getText() + "";
                 if (isMobileNO(mobile) == false) {
-                   ToastUtil.showMessage("请输入正确的手机号码！");
+                    ToastUtil.showMessage("请输入正确的手机号码！");
                     return;
                 }
                 if ("".equals(pwd)) {
@@ -97,21 +116,23 @@ public class LoginActivity extends PermissionActivity {
                         dialog.dismiss();
                         switch (msg.what) {
                             case ThreadState.SUCCESS:
-                                LoginUserModel re = (LoginUserModel) msg.obj;
+                                ResponseInfo re = (ResponseInfo) msg.obj;
                                 if (re.isSuccess()) {
-                                    LoginUserModel.User model = re.data;
-                                    if (model.userinfo != null){
+                                    Gson gson = new GsonBuilder().serializeNulls().create();
+                                    String json = gson.toJson(re.data);
+                                    LoginUserModel model = gson.fromJson(json, LoginUserModel.class);
+                                    if (model != null) {
                                         ShareConfig.setConfig(LoginActivity.this, Constants.ONLINE, true);
                                         ShareConfig.setConfig(LoginActivity.this, Constants.USERID, model.userinfo.id);
                                         ShareConfig.setConfig(LoginActivity.this, Constants.USERTYPE, model.userinfo.usertypeid);
+                                        ShareConfig.setConfig(LoginActivity.this, Constants.ACCOUNT, model.userinfo.account);
                                         ShareConfig.setConfig(LoginActivity.this, Constants.whetheridentifiedid, model.userinfo.whetheridentifiedid);
                                         Intent intent = new Intent(mContext, MainActivity.class);
                                         startActivity(intent);
                                         finish();
-                                    }else {
+                                    } else {
                                         ToastUtil.showMessage("操作失败！");
                                     }
-
                                 } else {
                                     ToastUtil.showMessage(re.getMsg());
                                 }
@@ -128,7 +149,7 @@ public class LoginActivity extends PermissionActivity {
                     public void run() {
                         try {
                             UserAction action = new UserAction();
-                            LoginUserModel re = action.login(mobile, pwd,mDeviceId);
+                            ResponseInfo re = action.login(mobile, pwd, mDeviceId);
                             handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                         } catch (Exception e) {
                             handler.sendEmptyMessage(ThreadState.ERROR);

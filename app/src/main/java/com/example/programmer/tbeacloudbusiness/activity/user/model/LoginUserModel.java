@@ -1,28 +1,21 @@
 package com.example.programmer.tbeacloudbusiness.activity.user.model;
 
-import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
-
 /**
  * Created by DELL on 2017/7/9.
  */
 
-public class LoginUserModel extends BaseResponseModel {
-    public User data;
+public class LoginUserModel{
 
-    public class User{
-       public UserInfo userinfo;
-    }
+    public UserinfoBean userinfo;
 
-    public  class UserInfo{
-        public String account;
+    public static class UserinfoBean {
         public String id;
-        public String mailaddr;
-        public String mobile;
-        public String name;
         public String picture;
-        public String usertypeid;//用户类型
+        public String name;
+        public String account;
+        public String usertypeid;
+        public String mobile;
+        public String mailaddr;
         public String whetheridentifiedid;
-
     }
-
 }

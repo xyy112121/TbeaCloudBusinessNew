@@ -9,6 +9,7 @@ public class Constants {
     public static final String ONLINE = "online";
     public static final String USERID = "userID";
     public static final String USERTYPE = "usertypeid";
+    public static final String ACCOUNT = "account";
     public static final String whetheridentifiedid = "whetheridentifiedid";
 
 }

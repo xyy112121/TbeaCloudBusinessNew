@@ -145,6 +145,7 @@ public class ShopDynamicAddActivity extends BaseActivity implements View.OnClick
                                 ResponseInfo model = (ResponseInfo) msg.obj;
                                 if (model.isSuccess()) {
                                     ToastUtil.showMessage("操作成功！");
+                                    finish();
                                 } else {
                                     ToastUtil.showMessage(model.getMsg());
                                 }

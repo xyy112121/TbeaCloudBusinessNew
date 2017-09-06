@@ -193,6 +193,7 @@ public class StoreCommodityManageListActivity extends BaseActivity implements BG
                 @Override
                 public void onClick(View view) {
                     mPriceTv.setTextColor(ContextCompat.getColor(mContext, R.color.text_color));
+                    mPriceIv.setImageResource(R.drawable.icon_arraw);
                     mIndex2 = mIndex;
                     mIndex = index;
                     if (mIndex2 != -1 && mIndex != mIndex2) {

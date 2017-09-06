@@ -1,13 +1,18 @@
 package com.example.programmer.tbeacloudbusiness.activity.user;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -22,6 +27,7 @@ import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueB
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +45,16 @@ public class RegisterActivity extends Activity {
     EditText mPhoneView;
     @BindView(R.id.register_pwd)
     EditText mPwdView;
+    @BindView(R.id.register_confirm_pwd)
+    EditText mConfirmPwdView;
     @BindView(R.id.register_code)
     EditText mCodeView;
     @BindView(R.id.register_send)
     TextView mSendView;
+    @BindView(R.id.register_agree)
+    CheckBox mAgreeView;
+
+
     private View parentLayout;
 
     List<KeyValueBean> userTypeList = new ArrayList<>();
@@ -56,6 +68,35 @@ public class RegisterActivity extends Activity {
         ButterKnife.bind(this);
         parentLayout = findViewById(R.id.register_layout);
         getUserTypeList();
+        initView();
+    }
+
+    private void initView() {
+        ((CheckBox) findViewById(R.id.register_confirm_isShow_pwd)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    //选择状态 显示明文--设置为可见的密码
+                    mConfirmPwdView.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else {
+                    //默认状态显示密码--设置文本 要一起写才能起作用 InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
+                    mConfirmPwdView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+            }
+        });
+
+        ((CheckBox) findViewById(R.id.register_isShow_pwd)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    //选择状态 显示明文--设置为可见的密码
+                    mPwdView.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else {
+                    //默认状态显示密码--设置文本 要一起写才能起作用 InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
+                    mPwdView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+            }
+        });
     }
 
     private void getUserTypeList() {
@@ -97,7 +138,7 @@ public class RegisterActivity extends Activity {
     }
 
 
-    @OnClick({R.id.top_left, R.id.register_send, R.id.register_user_type, R.id.register_btn})
+    @OnClick({R.id.top_left, R.id.register_send, R.id.register_user_type, R.id.register_btn, R.id.register_layout})
     public void onViewClicked(final View view) {
         switch (view.getId()) {
             case R.id.top_left:
@@ -108,7 +149,7 @@ public class RegisterActivity extends Activity {
                 break;
             case R.id.register_user_type:
                 final CustomPopWindow1 popWindow1 = new CustomPopWindow1(RegisterActivity.this);
-                popWindow1.init(parentLayout, R.layout.pop_window_header, R.layout.pop_window_tv, userTypeList,"");
+                popWindow1.init(parentLayout, R.layout.pop_window_header, R.layout.pop_window_tv, userTypeList, "");
                 popWindow1.setItemClick2(new CustomPopWindow1.ItemClick2() {
                     @Override
                     public void onItemClick2(KeyValueBean bean) {
@@ -120,11 +161,19 @@ public class RegisterActivity extends Activity {
             case R.id.register_btn:
                 register();
                 break;
+            case R.id.register_layout:
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(),
+                            0);
+                }
+                break;
+
         }
     }
 
     private void sendCode() {
-        final String mobile = mPhoneView.getText()+"";
+        final String mobile = mPhoneView.getText() + "";
         if (isMobileNO(mobile) == false) {
             ToastUtil.showMessage("请输入正确的手机号码");
             return;
@@ -210,8 +259,27 @@ public class RegisterActivity extends Activity {
             ToastUtil.showMessage("验证码不能为空！");
             return;
         }
-        if ("".equals(mRequest.usertypeid)) {
+        if ("".equals(mRequest.password)) {
+            ToastUtil.showMessage("密码不能为空！");
+            return;
+        }
+
+        if (mRequest.password.length() <0) {
+            ToastUtil.showMessage("密码长度不能小于6位！");
+            return;
+        }
+        if (!mRequest.password.equals(mConfirmPwdView.getText()+"")) {
+            ToastUtil.showMessage("两次密码输入不一致！");
+            return;
+        }
+
+        if ("".equals(mRequest.usertypeid)|| mRequest.usertypeid == null) {
             ToastUtil.showMessage("用户类型不能为空！");
+            return;
+        }
+
+        if(mAgreeView.isChecked() == false){
+            ToastUtil.showMessage("你需同意用户协议");
             return;
         }
 

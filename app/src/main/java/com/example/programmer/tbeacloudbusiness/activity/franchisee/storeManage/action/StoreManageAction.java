@@ -1,5 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.action;
 
+import android.util.Log;
+
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeTypeSelectReponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.commodityManage.CommodityAddRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.commodityManage.CommodityAddResponseModel;
@@ -14,6 +16,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.commodityManage.SaleWaterResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.DynamicListRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.DynamicListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.DynamicListResponseModel1;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.ModelSpecListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.RotateADEditRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.RotateADListResponseModel;
@@ -280,7 +283,24 @@ public class StoreManageAction extends BaseAction {
         pairs.add(new BasicNameValuePair("page", String.valueOf(request.page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(request.pageSize)));
         String result = sendRequest("TBEAYUN006005001001", pairs);
+        Log.e("result", result);
         model = gson.fromJson(result, DynamicListResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 获取店铺动态
+     */
+    public DynamicListResponseModel1 getDynamicList1(DynamicListRequestModel request) throws Exception {
+        DynamicListResponseModel1 model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("orderitem", request.orderitem));
+        pairs.add(new BasicNameValuePair("order", request.order));
+        pairs.add(new BasicNameValuePair("page", String.valueOf(request.page)));
+        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(request.pageSize)));
+        String result = sendRequest("TBEAYUN006005001001", pairs);
+        Log.e("result", result);
+        model = gson.fromJson(result, DynamicListResponseModel1.class);
         return model;
     }
 
@@ -290,6 +310,8 @@ public class StoreManageAction extends BaseAction {
      * 如果不为空，则为修改操 作 如果为空，则为添加操作 2 Title   标题  3 Content   内容  4 PictureList   图片列表
      */
     public ResponseInfo addDynamic(String newsId, String title, String content, String pictureList) throws Exception {
+        Log.e("title", title);
+        Log.e("content", content);
         ResponseInfo resultModel;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("newsid", newsId));
@@ -302,9 +324,10 @@ public class StoreManageAction extends BaseAction {
     }
 
     /**
-     * 商城管理-­‐删除文章
+     * 商城管理-­‐删除动态
      */
     public ResponseInfo deleteDynamic(String advertiseId) throws Exception {
+        Log.e("删除的id", advertiseId);
         ResponseInfo rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("newsids", advertiseId));

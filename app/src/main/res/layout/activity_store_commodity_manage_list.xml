@@ -45,8 +45,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="8dp"
                     android:background="@drawable/icon_search"
-
-                    android:scaleType="center" />
+                    android:scaleType="center"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
 

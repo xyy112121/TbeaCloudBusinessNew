@@ -17,9 +17,9 @@
 
             <TextView
                 style="@style/my_text_style"
-                android:text="账号" />
+                android:text="帐号" />
 
-            <EditText
+            <TextView
                 android:id="@+id/completion_data_account"
                 style="@style/my_right_text_style1"
                 android:textColor="@color/text_color" />

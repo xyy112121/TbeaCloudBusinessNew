@@ -2,15 +2,24 @@ package com.example.programmer.tbeacloudbusiness.component;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.user.LoginActivity;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
+import com.example.programmer.tbeacloudbusiness.utils.Constants;
+import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
+import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.zhouwei.library.CustomPopWindow;
 
 import java.util.List;
@@ -19,11 +28,12 @@ import java.util.List;
 public class CustomPopWindow1 {
     private ItemClick mItemClick;//内容点击事件
     private ItemClick2 mItemClick2;//内容点击事件
+    private ItemClickClose mItemClickClose;//内容点击事件
     private Context mContext;
     CustomPopWindow mPopWindow;
 
-    public CustomPopWindow1(Context context){
-        mContext  = context;
+    public CustomPopWindow1(Context context) {
+        mContext = context;
     }
 
     /**
@@ -34,7 +44,7 @@ public class CustomPopWindow1 {
      * @param contentRes   内容
      * @param items        显示的内容
      */
-    public void init(View parentLayout, int headerRes, int contentRes,List<KeyValueBean> items,String flag) {
+    public void init(View parentLayout, int headerRes, int contentRes, List<KeyValueBean> items, String flag) {
         try {
             LinearLayout parentView = (LinearLayout) ((Activity) mContext).getLayoutInflater().inflate(R.layout.pop_window_layout, null);
             View headerView = ((Activity) mContext).getLayoutInflater().inflate(headerRes, null);
@@ -68,13 +78,20 @@ public class CustomPopWindow1 {
                 parentView.addView(contentView);
             }
 
-            mPopWindow =   new CustomPopWindow.PopupWindowBuilder((mContext))
+            mPopWindow = new CustomPopWindow.PopupWindowBuilder((mContext)).setOnDissmissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    ToastUtil.showMessage("关闭啦");
+                }
+            })
                     .setView(parentView)
                     .enableBackgroundDark(true) //弹出popWindow时，背景是否变暗
                     .setBgDarkAlpha(0.5f) // 控制亮度
                     .setAnimationStyle(R.style.PopWindowAnimationFade)
                     .create()
                     .showAtLocation(parentLayout, Gravity.CENTER, 0, 0);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,7 +131,7 @@ public class CustomPopWindow1 {
                 parentView.addView(contentView);
             }
 
-            mPopWindow =   new CustomPopWindow.PopupWindowBuilder((mContext))
+            mPopWindow = new CustomPopWindow.PopupWindowBuilder((mContext))
                     .setView(parentView)
                     .enableBackgroundDark(true) //弹出popWindow时，背景是否变暗
                     .setBgDarkAlpha(0.5f) // 控制亮度
@@ -182,13 +199,18 @@ public class CustomPopWindow1 {
             LinearLayout parentView = (LinearLayout) ((Activity) mContext).getLayoutInflater().inflate(R.layout.pop_window_layout, null);
             View headerView = ((Activity) mContext).getLayoutInflater().inflate(headerRes, null);
             ((TextView) headerView.findViewById(R.id.picker_header_tv)).setText(title);
-            if ("功能受限".equals(title)) {
-                headerView.findViewById(R.id.picker_header_close).setVisibility(View.GONE);
-            }
+//            if ("功能受限".equals(title)) {
+//                headerView.findViewById(R.id.picker_header_close).setVisibility(View.GONE);
+//            }
             headerView.findViewById(R.id.picker_header_close).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mPopWindow.dissmiss();
+                    if(mItemClickClose == null){
+                        mPopWindow.dissmiss();
+                    }else {
+                        mItemClickClose.close();
+                    }
+
                 }
             });
 
@@ -211,7 +233,17 @@ public class CustomPopWindow1 {
             parentView.addView(contentView);
 
 //            ColorDrawable dw = new ColorDrawable(00000);popupwindow.setBackgroundDrawable(dw);
-            mPopWindow = new CustomPopWindow.PopupWindowBuilder((mContext))
+            mPopWindow = new CustomPopWindow.PopupWindowBuilder((mContext)).setOnDissmissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    if(mItemClickClose == null){
+                        mPopWindow.dissmiss();
+                    }else {
+                        mItemClickClose.close();
+                    }
+
+                }
+            })
                     .setView(parentView)
                     .enableBackgroundDark(true) //弹出popWindow时，背景是否变暗
                     .setBgDarkAlpha(0.4f) // 控制亮度
@@ -225,7 +257,8 @@ public class CustomPopWindow1 {
         }
     }
 
-    public void init(View parentLayout, int headerRes, int contentRes, String title, String content,String content1,String btnText) {
+
+    public void init(View parentLayout, int headerRes, int contentRes, String title, String content, String content1, String btnText) {
         try {
             LinearLayout parentView = (LinearLayout) ((Activity) mContext).getLayoutInflater().inflate(R.layout.pop_window_layout, null);
             View headerView = ((Activity) mContext).getLayoutInflater().inflate(headerRes, null);
@@ -274,10 +307,17 @@ public class CustomPopWindow1 {
         void onItemClick(String text);
     }
 
+    public interface ItemClickClose {
+        void close();
+    }
+
     public interface ItemClick2 {
         void onItemClick2(KeyValueBean bean);
     }
 
+    public void setItemClickClose(ItemClickClose click) {
+        this.mItemClickClose = click;
+    }
 
     public void setItemClick(ItemClick click) {
         this.mItemClick = click;

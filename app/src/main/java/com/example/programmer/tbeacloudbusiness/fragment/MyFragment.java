@@ -26,10 +26,14 @@ import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.RealNa
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.SetActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.HomeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -64,13 +68,18 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                     mDialog.dismiss();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            MyMainResponseModel model = (MyMainResponseModel) msg.obj;
-                            if (model.isSuccess()) {
-                                initItemView(model.data.itemlist);
-                                initPersonInfo(model.data.userpersoninfo);
-                            } else {
-                                ToastUtil.showMessage(model.getMsg());
+                            ResponseInfo re = (ResponseInfo) msg.obj;
+                            if(re.isSuccess()){
+                                Gson gson = new GsonBuilder().serializeNulls().create();
+                                String json = gson.toJson(re.data);
+                                MyMainResponseModel model = gson.fromJson(json, MyMainResponseModel.class);
+                                    initItemView(model.itemlist);
+                                    initPersonInfo(model.userpersoninfo);
+
+                            }else {
+                                ToastUtil.showMessage(re.getMsg());
                             }
+
                             break;
                         case ThreadState.ERROR:
                             ToastUtil.showMessage("操作失败！");
@@ -84,7 +93,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 public void run() {
                     try {
                         UserAction userAction = new UserAction();
-                        MyMainResponseModel model = userAction.getMyMainData();
+                        ResponseInfo model = userAction.getMyMainData();
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

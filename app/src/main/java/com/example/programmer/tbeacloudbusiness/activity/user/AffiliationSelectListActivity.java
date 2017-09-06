@@ -45,7 +45,7 @@ public class AffiliationSelectListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cp_franchiser_select_list);
         ButterKnife.bind(this);
-        initTopbar("用户列表");
+        initTopbar("总经销商列表");
         initView();
     }
 
@@ -92,7 +92,9 @@ public class AffiliationSelectListActivity extends BaseActivity {
                 public void run() {
                     try {
                         UserAction action = new UserAction();
-                        FranchiserSelectListResponseModel model = action.getAffiliationList();
+                        String city = getIntent().getStringExtra("city");
+                        String province = getIntent().getStringExtra("province");
+                        FranchiserSelectListResponseModel model = action.getAffiliationList(province,city);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

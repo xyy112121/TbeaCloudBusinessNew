@@ -220,7 +220,7 @@ public class CommoditySalesListActivity extends BaseActivity implements BGARefre
             startTime = data.getStringExtra("startTime");
             endTime = data.getStringExtra("endTime");
             mOrderItem = "time";
-            ((PublishTextRowView) findViewById(R.id.commodity_sales_list_time)).setValueText(startTime + "-" + endTime);
+            ((PublishTextRowView) findViewById(R.id.commodity_sales_list_time)).setValueText(startTime + "至" + endTime);
 //            if ("time".equals(mOrderItem)) {
 //                mOrderItem = "";
 //                mOrder = "";

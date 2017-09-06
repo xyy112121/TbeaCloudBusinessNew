@@ -273,6 +273,10 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                     if (categoryList != null) {
                         CustomOptionObjPicker optionPicker = new CustomOptionObjPicker(mContext, "分类选择", categoryList);
                         optionPicker.setTextSize(14);
+                        if (categoryList.size() > 2) {
+                            optionPicker.setSelectedIndex(1);
+                        }
+
 
                         optionPicker.setOnOptionPickListener(new CustomOptionObjPicker.OnOptionPickListener() {
                             @Override
@@ -290,8 +294,8 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                 break;
             case R.id.commdity_add_modespec:
                 Intent intent = new Intent(mContext, ScanCodeCreateSelectActivity.class);
-                intent.putExtra("type",mType);
-                intent.putExtra("norms",mNorms);
+                intent.putExtra("type", mType);
+                intent.putExtra("norms", mNorms);
                 startActivityForResult(intent, REQEST_TYPE_NORMS);
                 break;
             case R.id.commdity_add_btn:
@@ -470,7 +474,7 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                             parentLayout.removeView(layout);
                         }
                     });
-                    layout.setLayoutParams(new FrameLayout.LayoutParams(DensityUtil.dip2px(mContext,100),DensityUtil.dip2px(mContext,100)));
+                    layout.setLayoutParams(new FrameLayout.LayoutParams(DensityUtil.dip2px(mContext, 100), DensityUtil.dip2px(mContext, 100)));
                     parentLayout.addView(layout);
                 }
                 final Handler handler = new Handler() {

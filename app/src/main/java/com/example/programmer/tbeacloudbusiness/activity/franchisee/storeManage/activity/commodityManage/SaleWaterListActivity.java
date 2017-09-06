@@ -75,6 +75,10 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, false));
+
+        mNumberOrder = "desc";
+        mOrderItem = "number";
+        mOrder = mNumberOrder;
         mRefreshLayout.beginRefreshing();
     }
 
@@ -89,7 +93,7 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getListData();
-        return false;
+        return true;
     }
 
     /**
@@ -162,6 +166,7 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
                 mOrderItem = "user";
                 mNumberOrder = "";
                 mNumberIv.setImageResource(R.drawable.icon_arraw);
+                mNumberTv.setTextColor(ContextCompat.getColor(mContext, R.color.tab_text_normal));
                 mRefreshLayout.beginRefreshing();
                 break;
             case R.id.marker_info_list_number_layout:
@@ -177,6 +182,7 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
                 mOrder = mNumberOrder;
                 mUserOrder = "";
                 mUserIv.setImageResource(R.drawable.icon_arraw);
+                mUserTv.setTextColor(ContextCompat.getColor(mContext, R.color.tab_text_normal));
                 mRefreshLayout.beginRefreshing();
                 break;
         }
@@ -188,7 +194,7 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
             startTime = data.getStringExtra("startTime");
             endTime = data.getStringExtra("endTime");
             mOrderItem = "time";
-            ((PublishTextRowView) findViewById(R.id.commodity_sales_list_time)).setValueText(startTime + "-" + endTime);
+            ((PublishTextRowView) findViewById(R.id.commodity_sales_list_time)).setValueText(startTime + "至" + endTime);
 //            if ("time".equals(mOrderItem)) {
 //                mOrderItem = "";
 //                mOrder = "";
@@ -220,9 +226,9 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
             ImageLoader.getInstance().displayImage(obj.thumbpicture, holder.mThumbpictureView);
             holder.mNameView.setText(obj.name);
             holder.mPromotionView.setText(obj.promotion);
-            holder.mSaleNumberView.setText(obj.salenumber);
+            holder.mSaleNumberView.setText(obj.salenumber+"");
             holder.mPriceView.setText(obj.price);
-            holder.mSaleNumberView.setText(obj.salenumber);
+            holder.mSaleNumberView.setText(obj.salenumber+"");
             holder.mFinishTimeView.setText(obj.finishtime);
             return view;
         }

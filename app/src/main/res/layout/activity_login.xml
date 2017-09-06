@@ -53,13 +53,18 @@
                     android:id="@+id/login_pwd"
                     android:hint="密码"
                     android:imeOptions="actionNext"
-                    android:inputType="phone"
+                    android:inputType="textPassword"
                     style="@style/editText_image_center"
                     />
-                <ImageView
-                    style="@style/editText_image_right"
-
-                    android:src="@drawable/icon_user_eye" />
+                <CheckBox
+                    android:id="@+id/login_isShow_pwd"
+                    android:layout_width="25dp"
+                    android:layout_height="15dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/login_show_pwd_ck"
+                    android:button="@null"
+                    android:visibility="invisible"/>
             </LinearLayout>
             <View
                 style="@style/horizontal_view"

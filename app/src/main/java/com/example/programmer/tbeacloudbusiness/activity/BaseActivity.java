@@ -34,6 +34,7 @@ public class BaseActivity extends PermissionActivity {
 		super.setContentView(layoutResID);
 		StatusBarUtil.setColor(this, ContextCompat.getColor(this,R.color.head_color),0);
 		mContext = this;
+		MyApplication.instance.addActivity(mContext);
 	}
 
 	@Override

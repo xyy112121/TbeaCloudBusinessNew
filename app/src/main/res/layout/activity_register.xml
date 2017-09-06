@@ -110,9 +110,43 @@
                     android:imeOptions="actionNext"
                     android:inputType="textPassword" />
 
+                <CheckBox
+                    android:id="@+id/register_isShow_pwd"
+                    android:layout_width="25dp"
+                    android:layout_height="15dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/login_show_pwd_ck"
+                    android:button="@null"
+                    android:visibility="invisible"/>
+            </LinearLayout>
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="0.5dp" />
+
+            <LinearLayout style="@style/editText_image_layout">
+
                 <ImageView
-                    style="@style/editText_image_right"
-                    android:src="@drawable/icon_user_eye" />
+                    style="@style/editText_image"
+                    android:src="@drawable/icon_userpwd" />
+
+                <EditText
+                    android:id="@+id/register_confirm_pwd"
+                    style="@style/editText_image_center"
+                    android:hint="密码"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword" />
+
+                <CheckBox
+                    android:id="@+id/register_confirm_isShow_pwd"
+                    android:layout_width="25dp"
+                    android:layout_height="15dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/login_show_pwd_ck"
+                    android:button="@null"
+                    android:visibility="invisible"/>
             </LinearLayout>
 
             <View
@@ -156,6 +190,7 @@
                 android:layout_marginTop="30dp">
 
                 <CheckBox
+                    android:id="@+id/register_agree"
                     style="@style/register_ck_style"
                     android:layout_width="20dp"
                     android:layout_height="20dp" />
@@ -164,7 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="注册既同意用户协议"
+                    android:text="注册即同意用户协议"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>
