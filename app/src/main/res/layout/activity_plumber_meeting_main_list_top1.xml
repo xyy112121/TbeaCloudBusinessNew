@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/icon_arraw_grayblue" />
+                android:src="@drawable/icon_arraw" />
         </LinearLayout>
 
         <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/icon_arraw_grayblue" />
+                android:src="@drawable/icon_arraw" />
         </LinearLayout>
 
 

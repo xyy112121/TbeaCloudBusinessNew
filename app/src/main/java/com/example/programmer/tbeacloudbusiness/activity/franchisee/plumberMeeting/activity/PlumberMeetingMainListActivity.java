@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -106,7 +107,6 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
         });
 
 
-
         findViewById(R.id.plumber_meeting_sign_in_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,11 +141,11 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
         });
 
         final ImageView codeView = getViewById(R.id.activity_plumber_meeting_main_list_code);
+        final ImageView timeView = getViewById(R.id.activity_plumber_meeting_main_list_time);
         findViewById(R.id.activity_plumber_meeting_main_list_code_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOrderItem = "money";
-                if ("".equals(mCodeOrder) || "asc".equals(mCodeOrder)) {//升
+                if ("".equals(mCodeOrder) || "asc".equals(mCodeOrder) || mCodeOrder == null) {//升
                     mCodeOrder = "desc";
                     codeView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -153,17 +153,18 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
                     codeView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mOrder = mCodeOrder;
+                mTimeOrder = "";
                 mOrderItem = "meetingcode";
+                timeView.setImageResource(R.drawable.icon_arraw);
                 mRefreshLayout.beginRefreshing();
             }
         });
 
-        final ImageView timeView = getViewById(R.id.activity_plumber_meeting_main_list_time);
+
         findViewById(R.id.activity_plumber_meeting_main_list_time_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOrderItem = "money";
-                if ("".equals(mTimeOrder) || "asc".equals(mTimeOrder)) {//升
+                if ("".equals(mTimeOrder) || "asc".equals(mTimeOrder) || mTimeOrder == null) {//升
                     mTimeOrder = "desc";
                     timeView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -171,7 +172,9 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
                     timeView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mOrder = mTimeOrder;
+                codeView.setImageResource(R.drawable.icon_arraw);
                 mOrderItem = "meetingtime";
+                mCodeOrder = "";
                 mRefreshLayout.beginRefreshing();
             }
         });

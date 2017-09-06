@@ -35,6 +35,7 @@ public class SpecificationsAndModelsEditActivity extends BaseActivity implements
         String title = getIntent().getStringExtra("title");
         mMethodName = getIntent().getStringExtra("methodName");
         initTopbar("添加商品" + title, "保存", this);
+        mNameView.setValueHint("请输入自定义" + title + "名称");
     }
 
     @Override

@@ -55,11 +55,10 @@ public class DbWithdrawDepositDateHistoryActivity extends BaseActivity implement
     ImageView mScanCodeTopMoneyIv;
 
     private ExpandPopTabView expandTabView;
-    private List<KeyValueBean> mDateLists,mPriceLists;//时间
-    private PopOneListView mDateView,mPriceView;
-    private String starttime, endtime, mOrderitem, mOrder,mMoneyOrder;
+    private List<KeyValueBean> mDateLists, mPriceLists;//时间
+    private PopOneListView mDateView, mPriceView;
+    private String starttime, endtime, mOrderitem, mOrder, mMoneyOrder;
     private final int RESULT_DATA_SELECT = 1000;
-
 
 
     @Override
@@ -71,7 +70,7 @@ public class DbWithdrawDepositDateHistoryActivity extends BaseActivity implement
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter(mContext);
         mListView.setAdapter(mAdapter);
@@ -102,7 +101,7 @@ public class DbWithdrawDepositDateHistoryActivity extends BaseActivity implement
                             if (model.isSuccess()) {
                                 if (model.data != null)
                                     mAdapter.addAll(model.data.takemoneyrankinglist);
-                                    initPayeeInfo(model.data.payeeinfo);
+                                initPayeeInfo(model.data.payeeinfo);
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
                             }
@@ -133,16 +132,16 @@ public class DbWithdrawDepositDateHistoryActivity extends BaseActivity implement
         }
     }
 
-    public void initPayeeInfo(WithdrawDepositDateHistoryListResponseModel.PayeeInfo info){
-        if (info != null){
-            ImageView headView = (ImageView)findViewById(R.id.person_info_head);
-            ImageView jobtitleView = (ImageView)findViewById(R.id.person_info_personjobtitle);
+    public void initPayeeInfo(WithdrawDepositDateHistoryListResponseModel.PayeeInfo info) {
+        if (info != null) {
+            ImageView headView = (ImageView) findViewById(R.id.person_info_head);
+            ImageView jobtitleView = (ImageView) findViewById(R.id.person_info_personjobtitle);
             String pathUrl = MyApplication.instance.getImgPath();
-            ImageLoader.getInstance().displayImage(pathUrl+info.thumbpicture,headView);
-            ImageLoader.getInstance().displayImage(pathUrl+info.persontypeicon,jobtitleView);
-            ((TextView)findViewById(R.id.person_info_name)).setText(info.personname);
-            ((TextView)findViewById(R.id.person_info_companyname)).setText(info.companyname);
-            ((TextView)findViewById(R.id.scan_code_withdraw_deposit_history_list_money)).setText(info.totlemoney);
+            ImageLoader.getInstance().displayImage(pathUrl + info.thumbpicture, headView);
+            ImageLoader.getInstance().displayImage(pathUrl + info.persontypeicon, jobtitleView);
+            ((TextView) findViewById(R.id.person_info_name)).setText(info.personname);
+            ((TextView) findViewById(R.id.person_info_companyname)).setText(info.companyname);
+            ((TextView) findViewById(R.id.scan_code_withdraw_deposit_history_list_money)).setText(info.totlemoney);
         }
     }
 
@@ -156,7 +155,7 @@ public class DbWithdrawDepositDateHistoryActivity extends BaseActivity implement
                 if ("Custom".equals(key)) {//时间自定义
                     Intent intent = new Intent(mContext, DateSelectActivity.class);
                     startActivityForResult(intent, RESULT_DATA_SELECT);
-                }else {
+                } else {
                     mOrderitem = "time";
                     mOrder = key;
                     starttime = "";
@@ -205,7 +204,7 @@ public class DbWithdrawDepositDateHistoryActivity extends BaseActivity implement
         switch (view.getId()) {
             case R.id.scan_code_top_money_layout:
                 mOrderitem = "money";
-                if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder)) {//升
+                if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null) {//升
                     mMoneyOrder = "desc";
                     mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -216,6 +215,19 @@ public class DbWithdrawDepositDateHistoryActivity extends BaseActivity implement
                 mOrderitem = "money";
                 mRefreshLayout.beginRefreshing();
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == RESULT_DATA_SELECT) {
+            starttime = data.getStringExtra("startTime");
+            endtime = data.getStringExtra("endTime");
+            if ("time".equals(mOrderitem)) {
+                mOrderitem = "";
+                mOrder = "";
+            }
+            mRefreshLayout.beginRefreshing();
         }
     }
 
@@ -285,8 +297,8 @@ public class DbWithdrawDepositDateHistoryActivity extends BaseActivity implement
             FrameLayout view = (FrameLayout) layoutInflater.inflate(
                     R.layout.activity_scan_code_withdraw_deposit_history_list_item, null);
             WithdrawDepositDateHistoryListResponseModel.TakeMoneyRanking obj = mList.get(position);
-            ((TextView)view.findViewById(R.id.scan_code_withdraw_deposit_history_list_item_time)).setText(obj.time);
-            ((TextView)view.findViewById(R.id.scan_code_withdraw_deposit_history_list_item_money)).setText(obj.money);
+            ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_history_list_item_time)).setText(obj.time);
+            ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_history_list_item_money)).setText(obj.money);
 
             return view;
         }
@@ -299,7 +311,7 @@ public class DbWithdrawDepositDateHistoryActivity extends BaseActivity implement
             }
         }
 
-        public void addAll(List<WithdrawDepositDateHistoryListResponseModel.TakeMoneyRanking> list){
+        public void addAll(List<WithdrawDepositDateHistoryListResponseModel.TakeMoneyRanking> list) {
             mList.addAll(list);
             notifyDataSetChanged();
         }

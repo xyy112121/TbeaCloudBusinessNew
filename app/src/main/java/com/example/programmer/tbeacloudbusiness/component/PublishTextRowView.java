@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -35,6 +36,7 @@ public class PublishTextRowView extends LinearLayout {
     View mBottomView;
     private int mWidth;
     private int mGravity;
+    private int mInputType;
     private int mState;
 
     public PublishTextRowView(Context context) {
@@ -58,12 +60,18 @@ public class PublishTextRowView extends LinearLayout {
         mWidth = a.getDimensionPixelSize(R.styleable.PublishTextRowView_PublishTextRowViewLeftWidth, DensityUtil.dip2px(context, 140));
         mGravity = a.getInt(R.styleable.PublishTextRowView_PublishTextRowViewGravity, 0);
         mState = a.getInt(R.styleable.PublishTextRowView_PublishTextRowViewState, 1);
+        mInputType = a.getInt(R.styleable.PublishTextRowView_PublishTextRowViewInputType, 2);
         initView(context);
     }
 
     public void setValueText(String text) {
         mValueView.setText(text);
         mValueView2.setText(text);
+    }
+
+    public void setValueHint(String text) {
+        mValueView.setHint(text);
+        mValueView2.setHint(text);
     }
 
     public String getValueText() {
@@ -76,17 +84,18 @@ public class PublishTextRowView extends LinearLayout {
 
     /**
      * 设置可编辑（可点击）
+     *
      * @param isEditable
      */
-    public void setEditable(boolean isEditable){
-        if(isEditable){
+    public void setEditable(boolean isEditable) {
+        if (isEditable) {
             mRightView.setVisibility(VISIBLE);
-        }else {
+        } else {
             mRightView.setVisibility(GONE);
         }
     }
 
-    public void setBottonLineVisibility(int visibility){
+    public void setBottonLineVisibility(int visibility) {
         mBottomView.setVisibility(visibility);
     }
 
@@ -95,12 +104,22 @@ public class PublishTextRowView extends LinearLayout {
         TextView leftView = (TextView) view.findViewById(R.id.left);
         mValueView2 = (ClearEditText) view.findViewById(R.id.rowvalue);
         mValueView = (TextView) view.findViewById(R.id.row_value);
-         mBottomView = view.findViewById(R.id.bottom_line);
+        mBottomView = view.findViewById(R.id.bottom_line);
         mRightView = (ImageView) view.findViewById(R.id.right_image);
         leftView.setText(mTitleText);
         mValueView.setTextColor(mRightTextColor);
         mValueView2.setTextColor(mRightTextColor);
         mValueView2.setHint(mHiht);
+        if (mInputType == 0) {//数字
+            mValueView2.setInputType(InputType.TYPE_CLASS_NUMBER);
+        } else if (mInputType == 1) {//电话
+            mValueView2.setInputType(InputType.TYPE_CLASS_PHONE);
+        } else if (mInputType == 2) {//文本
+            mValueView2.setInputType(InputType.TYPE_CLASS_TEXT);
+        }else if (mInputType == 3) {//密码
+            mValueView2.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        }
+
         mValueView.setHint(mHiht);
         if (mGravity == 0) {//左边
             mValueView.setGravity(Gravity.LEFT | Gravity.CENTER);
@@ -124,10 +143,10 @@ public class PublishTextRowView extends LinearLayout {
             mRightView.setVisibility(INVISIBLE);
         }
 
-        if(mState == 1){//可编辑
+        if (mState == 1) {//可编辑
             mValueView2.setVisibility(VISIBLE);
             mValueView.setVisibility(GONE);
-        }else {
+        } else {
             mValueView2.setVisibility(GONE);
             mValueView.setVisibility(VISIBLE);
         }

@@ -84,13 +84,13 @@ public class StoreCommodityManageListActivity extends BaseActivity implements BG
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
-        mRefreshLayout.beginRefreshing();
+
 
         mPriceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPriceTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if ("".equals(mOrder) || "asc".equals(mOrder)) {//升
+                if ("".equals(mOrder) || "asc".equals(mOrder) || mOrder == null) {//升
                     mOrder = "desc";
                     mPriceIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -106,6 +106,12 @@ public class StoreCommodityManageListActivity extends BaseActivity implements BG
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRefreshLayout.beginRefreshing();
     }
 
     private void getData() {
@@ -277,10 +283,10 @@ public class StoreCommodityManageListActivity extends BaseActivity implements BG
             holder.mPriceView.setText(obj.price);
             holder.mSalenumberView.setText("已售出：" + obj.salenumber);
             holder.mEvaluatenumberView.setText("已评价：" + obj.evaluatenumber);
-            if ("1".equals(obj.recommended)) {
+            if (obj.recommended == 1) {
                 holder.mRecommendedView.setText("推荐商品：是");
             } else {
-                holder.mRecommendedView.setText("推荐商品：不是");
+                holder.mRecommendedView.setText("推荐商品：否");
             }
 
             view.setOnClickListener(new View.OnClickListener() {

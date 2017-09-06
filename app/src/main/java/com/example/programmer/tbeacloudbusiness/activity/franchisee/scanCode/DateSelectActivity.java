@@ -68,7 +68,7 @@ public class DateSelectActivity extends BaseActivity {
     }
 
     public  int compareTime(String date1, String date2) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date dt1 = df.parse(date1);
             Date dt2 = df.parse(date2);

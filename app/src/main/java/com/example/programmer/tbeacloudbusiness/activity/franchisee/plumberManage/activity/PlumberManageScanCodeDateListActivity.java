@@ -218,7 +218,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                                 if (model.data.takemoneylist != null) {
                                     mWAdapter.addAll(model.data.takemoneylist);
                                 }
-                                if(model.data.takemoneytotleinfo != null){
+                                if (model.data.takemoneytotleinfo != null) {
                                     mMoenyView.setText(model.data.takemoneytotleinfo.totlemoney);
                                 }
 
@@ -314,13 +314,13 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                     Intent intent = new Intent(mContext, DateSelectActivity.class);
                     startActivityForResult(intent, RESULT_DATA_SELECT);
                 } else {
-                    if(mFlag == 1){//扫码
+                    if (mFlag == 1) {//扫码
                         mOrderItem = "time";
                         order = key;
                         startdate = "";
                         enddate = "";
                         mRefreshLayout.beginRefreshing();
-                    }else {
+                    } else {
                         mOrderItem1 = "time";
                         order1 = key;
                         startdate1 = "";
@@ -364,21 +364,22 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                 mRefreshLayout1.beginRefreshing();
                 break;
             case R.id.pm_scan_code_top_money_layout://扫码的金额
-                mOrderItem = "money";
-                if ("".equals(mMoneyOrder1) || "asc".equals(mMoneyOrder1)) {//升
-                    mMoneyOrder1 = "desc";
+                if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null) {//升
+                    mMoneyOrder = "desc";
                     mWithdrawDepositTopMoenyIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
-                    mMoneyOrder1 = "asc";
+                    mMoneyOrder = "asc";
                     mWithdrawDepositTopMoenyIv.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
-                order = mMoneyOrder1;
+                order = mMoneyOrder;
                 mOrderItem = "money";
                 mRefreshLayout.beginRefreshing();
+
+                mMoneyOrder1 = "";
+                mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw);
                 break;
             case R.id.pm_withdraw_deposit_top_moeny_layout://提现的金额
-                mOrderItem1 = "money";
-                if ("".equals(mMoneyOrder1) || "asc".equals(mMoneyOrder1)) {//升
+                if ("".equals(mMoneyOrder1) || "asc".equals(mMoneyOrder1) || mMoneyOrder1 == null) {//升
                     mMoneyOrder1 = "desc";
                     mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -388,6 +389,9 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                 order1 = mMoneyOrder1;
                 mOrderItem1 = "money";
                 mRefreshLayout1.beginRefreshing();
+
+                mMoneyOrder = "";
+                mWithdrawDepositTopMoenyIv.setImageResource(R.drawable.icon_arraw);
                 break;
         }
     }
@@ -395,7 +399,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == RESULT_DATA_SELECT) {
-            if(mFlag == 1){//扫码
+            if (mFlag == 1) {//扫码
                 startdate = data.getStringExtra("startTime");
                 enddate = data.getStringExtra("endTime");
                 if ("time".equals(mOrderItem)) {
@@ -403,7 +407,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                     order = "";
                 }
                 mRefreshLayout.beginRefreshing();
-            }else {
+            } else {
                 startdate1 = data.getStringExtra("startTime");
                 enddate1 = data.getStringExtra("endTime");
                 if ("time".equals(mOrderItem1)) {
@@ -438,7 +442,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
             }
             holder.mMoneyView.setText(obj.money);
             holder.mScantimeView.setText(obj.scantime);
-            if("已确认".equals(obj.confirmstatus)){
+            if ("已确认".equals(obj.confirmstatus)) {
                 holder.mStateView.setTextColor(ContextCompat.getColor(mContext, R.color.blue));
             }
             holder.mStateView.setText(obj.confirmstatus);
@@ -447,7 +451,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ScanCodeViewActivity.class);
-                    intent.putExtra("id",obj.rebatescanid);
+                    intent.putExtra("id", obj.rebatescanid);
                     startActivity(intent);
                 }
             });
@@ -496,7 +500,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, WithdrawDepositDateInfoActivity.class);
-                    intent.putExtra("id",obj.takemoneyid);
+                    intent.putExtra("id", obj.takemoneyid);
                     startActivity(intent);
                 }
             });

@@ -15,6 +15,7 @@ public class ScanCodeTypeSelectReponseModel extends BaseResponseModel {
 
     public class ScanCodeTypeSelect {
         public List<Condition> commoditymodellist;
+        public List<Condition> commodityspecificationlist;
     }
 
 

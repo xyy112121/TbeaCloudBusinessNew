@@ -44,9 +44,9 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/shop_dynamic_add_btn"
         style="@style/style_next_btn"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/btn_bg_blue"
-        android:text="保存"
-        android:visibility="gone"/>
+        android:text="删除"
+        android:visibility="gone" />
 </RelativeLayout>

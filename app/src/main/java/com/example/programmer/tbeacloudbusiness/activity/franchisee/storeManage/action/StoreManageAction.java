@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.action;
 
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeTypeSelectReponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.commodityManage.CommodityAddRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.commodityManage.CommodityAddResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.commodityManage.CommodityCategoryResponseModel;
@@ -185,10 +186,10 @@ public class StoreManageAction extends BaseAction {
     /**
      * 添加规格型号
      */
-    public ResponseInfo saveModelSpec(String name,String methodName) throws Exception {
+    public ResponseInfo saveModelSpec(String name, String methodName) throws Exception {
         ResponseInfo model;
         List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new BasicNameValuePair("modelspecname", name));
+        pairs.add(new BasicNameValuePair("name", name));
         String result = sendRequest(methodName, pairs);
         model = gson.fromJson(result, ResponseInfo.class);
         return model;
@@ -284,7 +285,7 @@ public class StoreManageAction extends BaseAction {
     }
 
     /**
-     * 商城管理-­‐添加文章
+     * 商城管理-­‐添加动态
      * NewsId   新闻 Id
      * 如果不为空，则为修改操 作 如果为空，则为添加操作 2 Title   标题  3 Content   内容  4 PictureList   图片列表
      */
@@ -292,7 +293,7 @@ public class StoreManageAction extends BaseAction {
         ResponseInfo resultModel;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("newsid", newsId));
-        pairs.add(new BasicNameValuePair("picturetitle", title));
+        pairs.add(new BasicNameValuePair("title", title));
         pairs.add(new BasicNameValuePair("content", content));
         pairs.add(new BasicNameValuePair("picturelist", pictureList));
         String result = sendRequest("TBEAYUN006005001002", pairs);
@@ -406,6 +407,18 @@ public class StoreManageAction extends BaseAction {
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pageSize)));
         String result = sendRequest("TBEAYUN006006001003", pairs);
         model = gson.fromJson(result, SaleWaterResponseModel.class);
+        return model;
+    }
+
+
+    //获取选择型号 TBEAYUN001002001000
+    //TBEAYUN001002002000  获取选择规格
+    public ScanCodeTypeSelectReponseModel getTypeSelect(String method) throws Exception {
+        ScanCodeTypeSelectReponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("flag", "1"));
+        String result = sendRequest(method, pairs);
+        model = gson.fromJson(result, ScanCodeTypeSelectReponseModel.class);
         return model;
     }
 

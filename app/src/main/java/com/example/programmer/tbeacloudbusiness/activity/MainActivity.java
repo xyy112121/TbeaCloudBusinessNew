@@ -24,21 +24,21 @@ public class MainActivity extends BaseActivity {
 
         mNavigateTabBar.onRestoreInstanceState(savedInstanceState);
 
-        mNavigateTabBar.addTab(MainFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_home, R.drawable.icon_home, "首页"));
-        mNavigateTabBar.addTab(TbMianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_tbea, R.drawable.icon_tbea, "特变电工"));
-        mNavigateTabBar.addTab(OtherFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_other, R.drawable.icon_other, "其他应用"));
-        mNavigateTabBar.addTab(MyFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_me, R.drawable.icon_me, "我的"));
+        mNavigateTabBar.addTab(MainFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_main, R.drawable.icon_main_select, "首页"));
+        mNavigateTabBar.addTab(TbMianFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_main_tbea, R.drawable.icon_main_tbea_select, "特变电工"));
+        mNavigateTabBar.addTab(OtherFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_other, R.drawable.icon_other_select, "其他应用"));
+        mNavigateTabBar.addTab(MyFragment.class, new MainNavigateTabBar.TabParam(R.drawable.icon_my, R.drawable.icon_my_select, "我的"));
         MyApplication.instance.addActivity(MainActivity.this);
     }
 
 
-    public void showTbMaianFragment(){
-       View view =  mNavigateTabBar.getChildAt(1);
+    public void showTbMaianFragment() {
+        View view = mNavigateTabBar.getChildAt(1);
         view.performClick();
     }
 
-    public void showOtherFragment(){
-        View view =  mNavigateTabBar.getChildAt(2);
+    public void showOtherFragment() {
+        View view = mNavigateTabBar.getChildAt(2);
         view.performClick();
     }
 

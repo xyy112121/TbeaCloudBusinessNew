@@ -28,7 +28,7 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/store_commodity_price"
+                android:id="@+id/masale_water_list_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -83,7 +83,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:gravity="center"
-                android:src="@drawable/icon_arraw_grayblue" />
+                android:src="@drawable/icon_arraw" />
         </LinearLayout>
 
         <LinearLayout
@@ -108,7 +108,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:gravity="center"
-                android:src="@drawable/icon_arraw_grayblue" />
+                android:src="@drawable/icon_arraw" />
         </LinearLayout>
     </LinearLayout>
 

@@ -131,7 +131,7 @@ public class RotateADLinkPageListActivity extends BaseActivity implements BGARef
             @Override
             public void onClick(View v) {
                 mPriceTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if ("".equals(mOrder) || "asc".equals(mOrder)) {//升
+                if ("".equals(mOrder) || "asc".equals(mOrder) || mOrder == null) {//升
                     mOrder = "desc";
                     mPriceIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -152,7 +152,7 @@ public class RotateADLinkPageListActivity extends BaseActivity implements BGARef
             @Override
             public void onClick(View view) {
                 mTimeTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if ("".equals(mRequest1.order) || "asc".equals(mRequest1.order)) {//升
+                if ("".equals(mRequest1.order) || "asc".equals(mRequest1.order) || mRequest1.order == null) {//升
                     mRequest1.order = "desc";
                     mTimeIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {

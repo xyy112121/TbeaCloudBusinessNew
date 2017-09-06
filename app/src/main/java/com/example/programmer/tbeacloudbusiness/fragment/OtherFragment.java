@@ -22,6 +22,7 @@ import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumbe
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.PlumberMeetingListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.activity.FxMainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.activity.DbScanCodeMainListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.distributorManage.activity.DistributorListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeMainListActivity;
@@ -212,6 +213,8 @@ public class OtherFragment extends Fragment {
                     } else if ("marketer_shuidiangongguanli".equals(obj.moduleid)) {
                         //水电工管理
                         startActivity(new Intent(getActivity(), DranchiseeSeleteActivity.class));
+                    } else if ("fenxiaoshang".equals(obj.moduleid)) {
+                        startActivity(new Intent(getActivity(), DistributorListActivity.class));
                     }
                 }
             });

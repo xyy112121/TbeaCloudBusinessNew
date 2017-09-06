@@ -86,7 +86,7 @@ public class DbScanCodeRebateListActivity extends BaseActivity implements BGARef
             @Override
             public void onClick(View view) {
                 mOrderitem = "money";
-                if ("".equals(mOrder) || "asc".equals(mOrder)) {//升
+                if ("".equals(mOrder) || "asc".equals(mOrder) || mOrder == null) {//升
                     mOrder = "desc";
                     moneyView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {

@@ -54,7 +54,7 @@ public class PlumberMeetingViewSignlnActivity extends BaseActivity implements BG
     private MyAdapter mAdapter;
     private int mPage = 1;
     private int mPagesiz = 10;
-    private String mZoneid, mOrderItem, mOrder,mCodeOrder,mTimeOrder;
+    private String mZoneid, mOrderItem, mOrder, mCodeOrder, mTimeOrder;
 
 
     @Override
@@ -78,11 +78,12 @@ public class PlumberMeetingViewSignlnActivity extends BaseActivity implements BG
         addItem(expandTabView, mRegionLists, "全部区域", "区域");
 
         final ImageView codeView = getViewById(R.id.activity_plumber_meeting_main_list_user);
+        final ImageView timeView = getViewById(R.id.activity_plumber_meeting_main_list_time);
+
         findViewById(R.id.activity_plumber_meeting_main_list_user_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOrderItem = "money";
-                if ("".equals(mCodeOrder) || "asc".equals(mCodeOrder)) {//升
+                if ("".equals(mCodeOrder) || "asc".equals(mCodeOrder) || mCodeOrder == null) {//升
                     mCodeOrder = "desc";
                     codeView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -90,17 +91,19 @@ public class PlumberMeetingViewSignlnActivity extends BaseActivity implements BG
                     codeView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mOrder = mCodeOrder;
-                mOrderItem="signuser";
+                mOrderItem = "signuser";
                 mRefreshLayout.beginRefreshing();
+
+                mTimeOrder = "";
+                timeView.setImageResource(R.drawable.icon_arraw);
             }
         });
 
-        final ImageView timeView = getViewById(R.id.activity_plumber_meeting_main_list_time);
+
         findViewById(R.id.activity_plumber_meeting_main_list_time_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOrderItem = "money";
-                if ("".equals(mTimeOrder) || "asc".equals(mTimeOrder)) {//升
+                if ("".equals(mTimeOrder) || "asc".equals(mTimeOrder) || mTimeOrder == null) {//升
                     mTimeOrder = "desc";
                     timeView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -108,8 +111,11 @@ public class PlumberMeetingViewSignlnActivity extends BaseActivity implements BG
                     timeView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mOrder = mTimeOrder;
-                mOrderItem="signtime ";
+                mOrderItem = "signtime ";
                 mRefreshLayout.beginRefreshing();
+
+                mCodeOrder = "";
+                codeView.setImageResource(R.drawable.icon_arraw);
             }
         });
 
@@ -125,8 +131,8 @@ public class PlumberMeetingViewSignlnActivity extends BaseActivity implements BG
                 if ("regionSelect".equals(key)) {
                     Intent intent = new Intent(mContext, RegionSelectActivity.class);
                     startActivityForResult(intent, 1000);
-                }else {
-                    mZoneid= "";
+                } else {
+                    mZoneid = "";
                     mRefreshLayout.beginRefreshing();
                 }
             }
@@ -150,8 +156,8 @@ public class PlumberMeetingViewSignlnActivity extends BaseActivity implements BG
                             if (model.data.meetingsignlist != null) {
                                 mAdapter.addAll(model.data.meetingsignlist);
                             }
-                            if(model.data.meetingsigntotleinfo != null){
-                                mSignnumberView.setText("签到人数："+model.data.meetingsigntotleinfo.totlesignnumber);
+                            if (model.data.meetingsigntotleinfo != null) {
+                                mSignnumberView.setText("签到人数：" + model.data.meetingsigntotleinfo.totlesignnumber);
                             }
 
                         } else {
@@ -199,7 +205,7 @@ public class PlumberMeetingViewSignlnActivity extends BaseActivity implements BG
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1000 && resultCode == RESULT_OK){
+        if (requestCode == 1000 && resultCode == RESULT_OK) {
             mZoneid = data.getStringExtra("ids");
             mRefreshLayout.beginRefreshing();
         }

@@ -26,6 +26,8 @@ import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import org.w3c.dom.Text;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -57,7 +59,7 @@ public class CommoditySalesListActivity extends BaseActivity implements BGARefre
 
     private MyAdapter mAdapter;
     private int mPage = 1;
-    private String mOrder, mOrderItem, mUserOrder, mNumberOrder, mTimeOrder, startTime, endTime;
+    private String mOrder, mOrderItem, mUserOrder, mNumberOrder, mTimeOrder, startTime, endTime = "";
     private final int RESULT_DATA_SELECT = 1000;
 
     @Override
@@ -149,7 +151,7 @@ public class CommoditySalesListActivity extends BaseActivity implements BGARefre
                 break;
             case R.id.marker_info_list_user_layout:
                 mUserTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mUserOrder) || "asc".equals(mUserOrder))) {//升
+                if (("".equals(mUserOrder) || "asc".equals(mUserOrder) || mUserOrder == null)) {//升
                     mUserOrder = "desc";
                     mUserIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -159,10 +161,16 @@ public class CommoditySalesListActivity extends BaseActivity implements BGARefre
                 mOrder = mUserOrder;
                 mOrderItem = "user";
                 mRefreshLayout.beginRefreshing();
+
+                mNumberOrder = "";
+                mTimeOrder = "";
+                setScreenView(mTimeIv, mTimeTv);
+                setScreenView(mNumberIv, mNumberTv);
+
                 break;
             case R.id.marker_info_list_number_layout:
                 mNumberTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mNumberOrder) || "asc".equals(mNumberOrder))) {//升
+                if (("".equals(mNumberOrder) || "asc".equals(mNumberOrder) || mNumberOrder == null)) {//升
                     mNumberOrder = "desc";
                     mNumberIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -172,10 +180,16 @@ public class CommoditySalesListActivity extends BaseActivity implements BGARefre
                 mOrder = mNumberOrder;
                 mOrderItem = "number";
                 mRefreshLayout.beginRefreshing();
+
+                mUserOrder = "";
+                mTimeOrder = "";
+                setScreenView(mTimeIv, mTimeTv);
+                setScreenView(mUserIv, mUserTv);
+
                 break;
             case R.id.marker_info_list_time_layout:
                 mTimeTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mTimeOrder) || "asc".equals(mTimeOrder))) {//升
+                if (("".equals(mTimeOrder) || "asc".equals(mTimeOrder) || mTimeOrder == null)) {//升
                     mTimeOrder = "desc";
                     mTimeIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -185,9 +199,20 @@ public class CommoditySalesListActivity extends BaseActivity implements BGARefre
                 mOrder = mTimeOrder;
                 mOrderItem = "time";
                 mRefreshLayout.beginRefreshing();
+
+                mUserOrder = "";
+                mNumberOrder = "";
+                setScreenView(mNumberIv, mNumberTv);
+                setScreenView(mUserIv, mUserTv);
                 break;
         }
     }
+
+    private void setScreenView(ImageView iv, TextView tv) {
+        iv.setImageResource(R.drawable.icon_arraw);
+        tv.setTextColor(ContextCompat.getColor(mContext, R.color.text_color));
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

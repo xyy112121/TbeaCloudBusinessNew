@@ -165,7 +165,7 @@ public class MarketInfoBeRateActivity extends BaseActivity implements View.OnCli
         switch (view.getId()) {
             case R.id.marker_info_list_user_layout:
                 mUserTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mUserOrder) || "asc".equals(mUserOrder))) {//升
+                if (("".equals(mUserOrder) || "asc".equals(mUserOrder) || mUserOrder == null)) {//升
                     mUserOrder = "desc";
                     mUserIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -175,10 +175,13 @@ public class MarketInfoBeRateActivity extends BaseActivity implements View.OnCli
                 mOrder = mUserOrder;
                 mOrderItem = "user";
                 mRefreshLayout.beginRefreshing();
+
+                mTimeOrder = "";
+                mTimeIv.setImageResource(R.drawable.icon_arraw);
                 break;
             case R.id.marker_info_list_time_layout:
                 mTimeTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mTimeOrder) || "asc".equals(mTimeOrder))) {//升
+                if (("".equals(mTimeOrder) || "asc".equals(mTimeOrder) || mTimeOrder == null)) {//升
                     mTimeOrder = "desc";
                     mTimeIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -188,6 +191,9 @@ public class MarketInfoBeRateActivity extends BaseActivity implements View.OnCli
                 mOrder = mTimeOrder;
                 mOrderItem = "time";
                 mRefreshLayout.beginRefreshing();
+
+                mUserOrder = "";
+                mUserIv.setImageResource(R.drawable.icon_arraw);
                 break;
 
 

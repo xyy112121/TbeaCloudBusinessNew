@@ -30,8 +30,10 @@ import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.component.picker.CustomOptionObjPicker;
 import com.example.programmer.tbeacloudbusiness.model.Condition;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
+import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
@@ -92,6 +94,8 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
 
     private View parentLayout;
     private final int REQEST_TYPE_NORMS = 1004;
+    private Condition mType;
+    private Condition mNorms;
 
 
     @Override
@@ -103,6 +107,7 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
         initView();
         String flag = getIntent().getStringExtra("flag");
         if ("edit".equals(flag)) {
+            initTopbar("商品编辑", "保存", this);
             mRequest.commodityid = getIntent().getStringExtra("commodityId");
             getData();
             mDeleteBtn.setVisibility(View.VISIBLE);
@@ -130,11 +135,12 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                                     mRequest.categoryid = obj.categoryid;
                                     mRequest.moditymodelid = obj.moditymodelid;
                                     mRequest.modityspecid = obj.modityspecid;
-                                    if ("1".equals(mRequest.recommended)) {
+                                    if ("1".equals(obj.recommended)) {
                                         mRecommendedView.setChecked(true);
                                     } else {
                                         mRecommendedView.setChecked(false);
                                     }
+                                    mRequest.recommended = obj.recommended;
                                     mCategoryView.setValueText(obj.categoryname);
                                     mNameView.setValueText(obj.name);
                                     mPriceView.setValueText(obj.price);
@@ -283,8 +289,9 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                 }
                 break;
             case R.id.commdity_add_modespec:
-                Intent intent = new Intent();
-                intent.setClass(mContext, ScanCodeCreateSelectActivity.class);
+                Intent intent = new Intent(mContext, ScanCodeCreateSelectActivity.class);
+                intent.putExtra("type",mType);
+                intent.putExtra("norms",mNorms);
                 startActivityForResult(intent, REQEST_TYPE_NORMS);
                 break;
             case R.id.commdity_add_btn:
@@ -410,12 +417,19 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                     }
                     break;
                 case REQEST_TYPE_NORMS:
-                    Condition mType = (Condition) data.getSerializableExtra("type");
-                    Condition mNorms = (Condition) data.getSerializableExtra("norms");
-                    mRequest.moditymodelid = mType.getId();
-                    mRequest.modityspecid = mNorms.getId();
-                    String type = mType != null ? mType.getName() + "  " : "";
-                    String norm = mNorms != null ? mNorms.getName() : "";
+                    mType = (Condition) data.getSerializableExtra("type");
+                    mNorms = (Condition) data.getSerializableExtra("norms");
+                    String type = "";
+                    String norm = "";
+                    if (mType != null) {
+                        mRequest.moditymodelid = mType.getId();
+                        type = mType != null ? mType.getName() + "  " : "";
+                    }
+
+                    if (mNorms != null) {
+                        mRequest.modityspecid = mNorms.getId();
+                        norm = mNorms != null ? mNorms.getName() : "";
+                    }
                     mModespecView.setValueText(type + norm);
                     break;
             }
@@ -456,6 +470,7 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                             parentLayout.removeView(layout);
                         }
                     });
+                    layout.setLayoutParams(new FrameLayout.LayoutParams(DensityUtil.dip2px(mContext,100),DensityUtil.dip2px(mContext,100)));
                     parentLayout.addView(layout);
                 }
                 final Handler handler = new Handler() {

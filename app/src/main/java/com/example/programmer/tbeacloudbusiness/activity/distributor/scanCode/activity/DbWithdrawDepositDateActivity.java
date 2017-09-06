@@ -410,8 +410,7 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.scan_code_top_money_layout:
-                mOrderItem = "money";
-                if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder)) {//升
+                if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null ) {//升
                     mMoneyOrder = "desc";
                     mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -421,10 +420,12 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
                 mOrder = mMoneyOrder;
                 mOrderItem = "money";
                 mRefreshLayout.beginRefreshing();
+
+                mMoneyOrder1 = "";
+                mScanCodeTopMoneyIv1.setImageResource(R.drawable.icon_arraw);
                 break;
             case R.id.scan_code_top_money_layout1:
-                mOrderItem1 = "money";
-                if ("".equals(mMoneyOrder1) || "asc".equals(mMoneyOrder1)) {//升
+                if ("".equals(mMoneyOrder1) || "asc".equals(mMoneyOrder1) || mMoneyOrder1 == null) {//升
                     mMoneyOrder1 = "desc";
                     mScanCodeTopMoneyIv1.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -434,6 +435,9 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
                 mOrder1 = mMoneyOrder1;
                 mOrderItem1 = "money";
                 mRefreshLayout1.beginRefreshing();
+
+                mMoneyOrder = "";
+                mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw);
                 break;
         }
     }

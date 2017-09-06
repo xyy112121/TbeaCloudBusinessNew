@@ -158,7 +158,7 @@ public class RotateADListActivity extends BaseActivity implements View.OnClickLi
 
             final RotateADListResponseModel.DataBean.ShopadvertiselistBean model = mList.get(position);
             holder.mTimeView.setText(model.publishtime);
-            holder.mTitleView.setTag(model.title);
+            holder.mTitleView.setText(model.title);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + model.picture, holder.mPictureView);
 
             convertView.setOnClickListener(new View.OnClickListener() {

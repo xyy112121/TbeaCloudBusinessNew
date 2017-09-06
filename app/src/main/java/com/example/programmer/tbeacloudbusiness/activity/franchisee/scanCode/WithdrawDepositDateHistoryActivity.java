@@ -202,7 +202,7 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
         switch (view.getId()) {
             case R.id.scan_code_top_money_layout:
                 mOrderitem = "money";
-                if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder)) {//升
+                if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null) {//升
                     mMoneyOrder = "desc";
                     mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {

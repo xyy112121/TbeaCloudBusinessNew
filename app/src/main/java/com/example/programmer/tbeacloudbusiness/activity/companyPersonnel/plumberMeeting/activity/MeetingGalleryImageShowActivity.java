@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by DELL on 2017/8/15.
+ * 现场图片查看（网络）
  */
 
 public class MeetingGalleryImageShowActivity extends BaseActivity implements View.OnClickListener {

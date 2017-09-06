@@ -104,11 +104,12 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
         });
 
         final ImageView codeView = getViewById(R.id.activity_plumber_meeting_main_list_code);
+        final ImageView timeView = getViewById(R.id.activity_plumber_meeting_main_list_time);
+
         findViewById(R.id.activity_plumber_meeting_main_list_code_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOrderItem = "money";
-                if ("".equals(mCodeOrder) || "asc".equals(mCodeOrder)) {//升
+                if ("".equals(mCodeOrder) || "asc".equals(mCodeOrder) || mCodeOrder == null) {//升
                     mCodeOrder = "desc";
                     codeView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -118,15 +119,18 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
                 mOrder = mCodeOrder;
                 mOrderItem = "meetingcode";
                 mRefreshLayout.beginRefreshing();
+
+                mTimeOrder = "";
+                timeView.setImageResource(R.drawable.icon_arraw);
             }
         });
 
-        final ImageView timeView = getViewById(R.id.activity_plumber_meeting_main_list_time);
+
         findViewById(R.id.activity_plumber_meeting_main_list_time_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mOrderItem = "money";
-                if ("".equals(mTimeOrder) || "asc".equals(mTimeOrder)) {//升
+                if ("".equals(mTimeOrder) || "asc".equals(mTimeOrder) || mTimeOrder == null) {//升
                     mTimeOrder = "desc";
                     timeView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -136,6 +140,9 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
                 mOrder = mTimeOrder;
                 mOrderItem = "meetingtime";
                 mRefreshLayout.beginRefreshing();
+
+                mCodeOrder = "";
+                codeView.setImageResource(R.drawable.icon_arraw);
             }
         });
 

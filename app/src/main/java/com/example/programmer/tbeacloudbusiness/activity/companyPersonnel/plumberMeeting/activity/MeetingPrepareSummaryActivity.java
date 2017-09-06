@@ -18,7 +18,7 @@ import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
 /**
- * Created by DELL on 2017/8/13.
+ * 会议纪要
  */
 
 public class MeetingPrepareSummaryActivity extends BaseActivity implements View.OnClickListener {

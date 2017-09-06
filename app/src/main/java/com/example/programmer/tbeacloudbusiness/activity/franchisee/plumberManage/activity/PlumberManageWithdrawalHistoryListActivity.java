@@ -90,7 +90,7 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
             @Override
             public void onClick(View view) {
                 orderitem = "money";
-                if ("".equals(order) || "asc".equals(order)) {//升
+                if ("".equals(order) || "asc".equals(order) || order == null) {//升
                     order = "desc";
                     moneyView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {

@@ -56,7 +56,7 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
     CheckBox mAllView;
     @BindView(R.id.shop_dynamic_add_list_item_all_tv)
     TextView mAllTextView;
-    @BindView(R.id.shop_dynamic_add_list_item_all_layout)
+    @BindView(R.id.shop_dynamic_add_list_item_all_parent_layout)
     RelativeLayout mParentAllView;
 
     private MyAdapter1 mAdapter;
@@ -159,20 +159,22 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getData();
-        return false;
+        return true;
     }
 
-    @OnClick({R.id.shop_dynamic_list_delete, R.id.top_right_text, R.id.shop_dynamic_add_list_item_all_layout})
+    @OnClick({R.id.shop_dynamic_add_list_delete,R.id.shop_dynamic_list_delete, R.id.top_right_text, R.id.shop_dynamic_add_list_item_all_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.shop_dynamic_list_delete:
+                //未婚
                 TextView deleteView = (TextView) view;
-                if ("删除".equals((deleteView.getText() + ""))) {
+                if ("编辑".equals((deleteView.getText() + ""))) {
                     try {
                         mParentAllView.setVisibility(View.VISIBLE);
                         mFlag = true;
                         deleteView.setText("完成");
                         mAdapter.notifyDataSetChanged();
+                        findViewById(R.id.top_right_text).setVisibility(View.INVISIBLE);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -180,17 +182,9 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
                 } else if ("完成".equals((deleteView.getText() + ""))) {
                     mParentAllView.setVisibility(View.GONE);
                     mFlag = false;
-                    deleteView.setText("删除");
-                    if (mSelectList.size() > 0) {
-                        String ids = "";
-                        for (DynamicListResponseModel.DataBean.NewslistBean item : mSelectList) {
-                            if (ids.length() > 0) {
-                                ids += ",";
-                            }
-                            ids += item.newsid;
-                        }
-                        delete(ids);
-                    }
+                    deleteView.setText("编辑");
+                    findViewById(R.id.top_right_text).setVisibility(View.VISIBLE);
+                    mAdapter.notifyDataSetChanged();
                 }
 
                 break;
@@ -207,25 +201,39 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
                     mAllView.setChecked(true);
                 }
                 break;
+            case R.id.shop_dynamic_add_list_delete:
+                if (mSelectList.size() > 0) {
+                    String ids = "";
+                    for (DynamicListResponseModel.DataBean.NewslistBean item : mSelectList) {
+                        if (ids.length() > 0) {
+                            ids += ",";
+                        }
+                        ids += item.newsid;
+                    }
+                    delete(ids);
+                }else {
+                    ToastUtil.showMessage("请选择需要删除的动态！");
+                }
+                break;
         }
     }
 
     private void delete(final String ids) {
 
-//        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_delete_dialog);
-//        dialog.show();
-//        dialog.setText("删除后不可恢复，确定删除么？");
-//        dialog.setConfirmBtnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialog.dismiss();
-//
-//            }
-//        }, "否");
-//        dialog.setCancelBtnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialog.dismiss();
+        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_delete_dialog);
+        dialog.show();
+        dialog.setText("删除后不可恢复，确定删除么？");
+        dialog.setConfirmBtnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+
+            }
+        }, "否");
+        dialog.setCancelBtnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         dialog.setText("请等待...");
         dialog.show();
@@ -261,8 +269,8 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
             }
         }).start();
 
-//    }
-//        }, "是");
+            }
+        }, "是");
     }
 
     class MyAdapter1 extends ArrayAdapter<DynamicListResponseModel.DataBean.NewslistBean> {

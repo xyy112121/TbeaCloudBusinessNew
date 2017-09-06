@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:drawableRight="@drawable/icon_arrow_right"
         android:padding="8dp"
-        android:text="hhdhhdhdh"
         android:textColor="@color/tab_text_normal"
         android:textSize="14sp" />
 

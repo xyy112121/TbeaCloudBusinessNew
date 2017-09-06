@@ -107,11 +107,12 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
         addUserTypeItem(expandTabView, null, "", "用户");
 
         final ImageView codeView = getViewById(R.id.activity_plumber_meeting_main_list_user);
+        final ImageView timeView = getViewById(R.id.activity_plumber_meeting_main_list_time);
+
         findViewById(R.id.activity_plumber_meeting_main_list_user_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOrderItem = "money";
-                if ("".equals(mCodeOrder) || "asc".equals(mCodeOrder)) {//升
+                if ("".equals(mCodeOrder) || "asc".equals(mCodeOrder) || mCodeOrder == null) {//升
                     mCodeOrder = "desc";
                     codeView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -119,17 +120,19 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
                     codeView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mOrder = mCodeOrder;
-                mOrderItem="signnumber";
+                mOrderItem = "signnumber";
                 mRefreshLayout.beginRefreshing();
+
+                mTimeOrder = "";
+                timeView.setImageResource(R.drawable.icon_arraw);
             }
         });
 
-        final ImageView timeView = getViewById(R.id.activity_plumber_meeting_main_list_time);
+
         findViewById(R.id.activity_plumber_meeting_main_list_time_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOrderItem = "money";
-                if ("".equals(mTimeOrder) || "asc".equals(mTimeOrder)) {//升
+                if ("".equals(mTimeOrder) || "asc".equals(mTimeOrder) || mTimeOrder == null) {//升
                     mTimeOrder = "desc";
                     timeView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -137,8 +140,11 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
                     timeView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mOrder = mTimeOrder;
-                mOrderItem="signtime ";
+                mOrderItem = "signtime ";
                 mRefreshLayout.beginRefreshing();
+
+                mCodeOrder = "";
+                codeView.setImageResource(R.drawable.icon_arraw);
             }
         });
     }
@@ -213,7 +219,7 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
                 try {
                     PlumberMeetingAction action = new PlumberMeetingAction();
                     PlumberMeetingSignListReponseModel model = action.getSignList
-                            (name, electricianownertypeid, starttime,endtime,mOrderItem, mOrder, mPage++, mPagesiz);
+                            (name, electricianownertypeid, starttime, endtime, mOrderItem, mOrder, mPage++, mPagesiz);
                     handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);

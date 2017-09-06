@@ -10,6 +10,7 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.RotateADListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.SetVisualGraphActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.SpecificationsAndModelsListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.SpecificationsAndModelsSelectListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.StoreCodeActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.StoreIntroduceActivity;
 
@@ -49,7 +50,7 @@ public class StoreSetActtivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.store_set_store_specifications_and_models:
-                intent = new Intent(mContext, SpecificationsAndModelsListActivity.class);
+                intent = new Intent(mContext, SpecificationsAndModelsSelectListActivity.class);
                 startActivity(intent);
                 break;
         }

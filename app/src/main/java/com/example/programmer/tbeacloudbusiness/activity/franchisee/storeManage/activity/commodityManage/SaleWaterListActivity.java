@@ -50,6 +50,10 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
     @BindView(R.id.marker_info_list_number_iv)
     ImageView mNumberIv;
 
+    @BindView(R.id.masale_water_list_price)
+    TextView mPriceView;
+
+
     private MyAdapter mAdapter;
     private int mPage = 1;
     private String mOrder, mOrderItem, mUserOrder, mNumberOrder, startTime, endTime;
@@ -60,7 +64,7 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale_water_list);
         ButterKnife.bind(this);
-        initTopbar("销量流水");
+        initTopbar("销售流水");
         initView();
     }
 
@@ -106,6 +110,10 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
                                     mAdapter.addAll(model.data.commoditylist);
                                 }
 
+                                if (model.data.totleinfo != null) {
+                                    mPriceView.setText(model.data.totleinfo.saletotlemoney);
+                                }
+
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
                             }
@@ -143,7 +151,7 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
                 break;
             case R.id.marker_info_list_user_layout:
                 mUserTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mUserOrder) || "asc".equals(mUserOrder))) {//升
+                if (("".equals(mUserOrder) || "asc".equals(mUserOrder)) || mUserOrder == null) {//升
                     mUserOrder = "desc";
                     mUserIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -152,19 +160,23 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
                 }
                 mOrder = mUserOrder;
                 mOrderItem = "user";
+                mNumberOrder = "";
+                mNumberIv.setImageResource(R.drawable.icon_arraw);
                 mRefreshLayout.beginRefreshing();
                 break;
             case R.id.marker_info_list_number_layout:
                 mNumberTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mNumberOrder) || "asc".equals(mNumberOrder))) {//升
+                if (("".equals(mNumberOrder) || "asc".equals(mNumberOrder) || mNumberOrder == null)) {//升
                     mNumberOrder = "desc";
                     mNumberIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
                     mNumberOrder = "asc";
                     mNumberIv.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
-                mOrder = mNumberOrder;
                 mOrderItem = "number";
+                mOrder = mNumberOrder;
+                mUserOrder = "";
+                mUserIv.setImageResource(R.drawable.icon_arraw);
                 mRefreshLayout.beginRefreshing();
                 break;
         }
@@ -185,7 +197,7 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
         }
     }
 
-    class MyAdapter extends ArrayAdapter<SaleWaterResponseModel.DataBean.CommodityinfoBean> {
+    class MyAdapter extends ArrayAdapter<SaleWaterResponseModel.DataBean.CommoditylistBean> {
         private int resourceId;
 
         public MyAdapter(@NonNull Context context, @LayoutRes int resource) {
@@ -204,7 +216,7 @@ public class SaleWaterListActivity extends BaseActivity implements BGARefreshLay
                 holder = (ViewHolder) view.getTag();
             }
 
-            SaleWaterResponseModel.DataBean.CommodityinfoBean obj = getItem(i);
+            SaleWaterResponseModel.DataBean.CommoditylistBean obj = getItem(i);
             ImageLoader.getInstance().displayImage(obj.thumbpicture, holder.mThumbpictureView);
             holder.mNameView.setText(obj.name);
             holder.mPromotionView.setText(obj.promotion);

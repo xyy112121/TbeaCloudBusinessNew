@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,7 +157,7 @@ public class CommoditySalesInfoActivity extends BaseActivity implements BGARefre
         switch (view.getId()) {
             case R.id.marker_info_list_user_layout:
                 mUserTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mUserOrder) || "asc".equals(mUserOrder))) {//升
+                if (("".equals(mUserOrder) || "asc".equals(mUserOrder) || mUserOrder == null)) {//升
                     mUserOrder = "desc";
                     mUserIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -166,10 +167,15 @@ public class CommoditySalesInfoActivity extends BaseActivity implements BGARefre
                 mOrder = mUserOrder;
                 mOrderItem = "user";
                 mRefreshLayout.beginRefreshing();
+
+                mNumberOrder = "";
+                mNumberIv.setImageResource(R.drawable.icon_arraw);
+                mTimeOrder = "";
+                mTimeIv.setImageResource(R.drawable.icon_arraw);
                 break;
             case R.id.marker_info_list_number_layout:
                 mNumberTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mNumberOrder) || "asc".equals(mNumberOrder))) {//升
+                if (("".equals(mNumberOrder) || "asc".equals(mNumberOrder) || mNumberOrder == null)) {//升
                     mNumberOrder = "desc";
                     mNumberIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -179,10 +185,15 @@ public class CommoditySalesInfoActivity extends BaseActivity implements BGARefre
                 mOrder = mNumberOrder;
                 mOrderItem = "number";
                 mRefreshLayout.beginRefreshing();
+
+                mUserOrder = "";
+                mUserIv.setImageResource(R.drawable.icon_arraw);
+                mTimeOrder = "";
+                mTimeIv.setImageResource(R.drawable.icon_arraw);
                 break;
             case R.id.marker_info_list_time_layout:
                 mTimeTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mTimeOrder) || "asc".equals(mTimeOrder))) {//升
+                if (("".equals(mTimeOrder) || "asc".equals(mTimeOrder) || mTimeOrder == null)) {//升
                     mTimeOrder = "desc";
                     mTimeIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -192,6 +203,11 @@ public class CommoditySalesInfoActivity extends BaseActivity implements BGARefre
                 mOrder = mTimeOrder;
                 mOrderItem = "time";
                 mRefreshLayout.beginRefreshing();
+
+                mNumberOrder = "";
+                mNumberIv.setImageResource(R.drawable.icon_arraw);
+                mUserOrder = "";
+                mUserIv.setImageResource(R.drawable.icon_arraw);
                 break;
 
 

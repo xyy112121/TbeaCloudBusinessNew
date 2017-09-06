@@ -228,7 +228,8 @@
         <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.SaleWaterListActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.set.SpecificationsAndModelsSelectListActivity" />
 
-
+       <activity android:name=".activity.distributorManage.activity.DistributorListActivity"/>
+       <activity android:name=".activity.distributorManage.activity.DustributorWithdrawalHistoryListActivity"/>
     </application>
 
 </manifest>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/commdity_add_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/commdity_add_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -57,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 app:PublishTextRowViewHiht="请输入商品价格"
+                app:PublishTextRowViewInputType="number"
                 app:PublishTextRowViewIsBottomLineShow="true"
                 app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewText="商品价格"
@@ -67,6 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 app:PublishTextRowViewHiht="请输入下单优惠的金额"
+                app:PublishTextRowViewInputType="number"
                 app:PublishTextRowViewIsBottomLineShow="true"
                 app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewText="优惠金额"
@@ -89,6 +91,7 @@
                 app:PublishTextRowViewHiht="不输入为无限制"
                 app:PublishTextRowViewIsBottomLineShow="true"
                 app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewInputType="number"
                 app:PublishTextRowViewText="商品库存"
                 app:PublishTextRowViewTextColor="@color/tab_text_normal" />
 
@@ -106,8 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:orientation="horizontal"
-              >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/my_text_style"
@@ -118,14 +120,13 @@
 
                 <com.example.programmer.tbeacloudbusiness.component.ClearEditText
                     android:id="@+id/commdity_adda_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="8dp"
                     android:gravity="top"
                     android:hint="请输入商品描述或介绍"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minLines="5"
-                  />
+                    android:minLines="5" />
 
             </LinearLayout>
 
@@ -174,7 +175,7 @@
                 style="@style/style_next_btn"
                 android:layout_alignParentBottom="true"
                 android:text="删除"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 

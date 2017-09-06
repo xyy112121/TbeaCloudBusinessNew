@@ -17,6 +17,7 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.action.StoreManageAction;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.commodityManage.CommodityAddResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
@@ -40,14 +41,71 @@ import java.util.List;
 public class ShopDynamicAddActivity extends BaseActivity implements View.OnClickListener {
     List<LocalMedia> mSelectList = new ArrayList<>();
     GridAdapter mGridAdapter;
+    String mNewsId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_dynamic_add);
-        initTopbar("发表文章", "保存", this);
+        initTopbar("添加动态", "保存", this);
         initView();
+        String flag = getIntent().getStringExtra("flag");
+        if ("edit".equals(flag)) {
+            initTopbar("商品编辑", "保存", this);
+            mNewsId = getIntent().getStringExtra("newsId");
+//            getData();
+//            mDeleteBtn.setVisibility(View.VISIBLE);
+        }
     }
+
+    /**
+     * 从服务器获取数据
+     */
+//    private void getData() {
+//        try {
+//            final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+//            dialog.setText("请等待...");
+//            dialog.show();
+//            final Handler handler = new Handler() {
+//                @Override
+//                public void handleMessage(Message msg) {
+//                    dialog.dismiss();
+//                    switch (msg.what) {
+//                        case ThreadState.SUCCESS:
+//                            CommodityAddResponseModel model = (CommodityAddResponseModel) msg.obj;
+//                            if (model.isSuccess() && model.data != null) {
+//                                if (model.data.commodityinfo != null) {
+//                                    CommodityAddResponseModel.DataBean.CommodityinfoBean obj = model.data.commodityinfo;
+//
+//                                }
+//
+//                            } else {
+//                                ToastUtil.showMessage(model.getMsg());
+//                            }
+//                            break;
+//                        case ThreadState.ERROR:
+//                            ToastUtil.showMessage("操作失败！");
+//                            break;
+//                    }
+//                }
+//            };
+//
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        StoreManageAction action = new StoreManageAction();
+//                        CommodityAddResponseModel model = action.getCommodity(mRequest.commodityid);
+//                        handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+//                    } catch (Exception e) {
+//                        handler.sendEmptyMessage(ThreadState.ERROR);
+//                    }
+//                }
+//            }).start();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void initView() {
         GridView gridView = (GridView) findViewById(R.id.shop_dynamic_image_gridView);
@@ -65,7 +123,14 @@ public class ShopDynamicAddActivity extends BaseActivity implements View.OnClick
     public void uploadImage() {
         final String title = ((PublishTextRowView) findViewById(R.id.activity_shop_dynamic_add_title)).getValueText();
         final String content = ((PublishTextRowView) findViewById(R.id.activity_shop_dynamic_add_content)).getValueText();
-        final String newsId = getIntent().getStringExtra("newsId");
+        if ("".equals(title)) {
+            ToastUtil.showMessage("请输入标题");
+            return;
+        }
+        if ("".equals(content)) {
+            ToastUtil.showMessage("请输入内容");
+            return;
+        }
         if (mSelectList.size() > 0) {
             final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
             dialog.setText("请等待...");
@@ -99,7 +164,7 @@ public class ShopDynamicAddActivity extends BaseActivity implements View.OnClick
                             MeetingGalleryUpdateResponseModel model = action.uploadImage(mSelectList);
                             if (model.isSuccess() && model.data.pictureinfo != null) {
                                 StoreManageAction action1 = new StoreManageAction();
-                                ResponseInfo model1 = action1.addDynamic(newsId, title, content, model.data.pictureinfo.picturesavenames);
+                                ResponseInfo model1 = action1.addDynamic(mNewsId, title, content, model.data.pictureinfo.picturesavenames);
                                 handler.obtainMessage(ThreadState.SUCCESS, model1).sendToTarget();
                             } else {
                                 handler.sendEmptyMessage(ThreadState.ERROR);

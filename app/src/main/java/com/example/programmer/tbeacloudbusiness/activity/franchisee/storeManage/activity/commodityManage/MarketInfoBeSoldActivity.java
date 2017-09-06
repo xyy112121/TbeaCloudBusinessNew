@@ -138,7 +138,7 @@ public class MarketInfoBeSoldActivity extends BaseActivity implements BGARefresh
                 public void run() {
                     try {
                         StoreManageAction action = new StoreManageAction();
-                        SaleListResponseModel model = action.getSaleList(mCommodityId  , mOrderItem, mOrder, mPage++, 10);
+                        SaleListResponseModel model = action.getSaleList(mCommodityId, mOrderItem, mOrder, mPage++, 10);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -155,7 +155,7 @@ public class MarketInfoBeSoldActivity extends BaseActivity implements BGARefresh
         switch (view.getId()) {
             case R.id.marker_info_list_user_layout:
                 mUserTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mUserOrder) || "asc".equals(mUserOrder))) {//升
+                if (("".equals(mUserOrder) || "asc".equals(mUserOrder) || mUserOrder == null)) {//升
                     mUserOrder = "desc";
                     mUserIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -165,10 +165,16 @@ public class MarketInfoBeSoldActivity extends BaseActivity implements BGARefresh
                 mOrder = mUserOrder;
                 mOrderItem = "user";
                 mRefreshLayout.beginRefreshing();
+
+                mNumberOrder = "";
+                mNumberIv.setImageResource(R.drawable.icon_arraw);
+                mTimeOrder = "";
+                mTimeIv.setImageResource(R.drawable.icon_arraw);
+
                 break;
             case R.id.marker_info_list_number_layout:
                 mNumberTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mNumberOrder) || "asc".equals(mNumberOrder))) {//升
+                if (("".equals(mNumberOrder) || "asc".equals(mNumberOrder) || mNumberOrder == null)) {//升
                     mNumberOrder = "desc";
                     mNumberIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -178,10 +184,15 @@ public class MarketInfoBeSoldActivity extends BaseActivity implements BGARefresh
                 mOrder = mNumberOrder;
                 mOrderItem = "number";
                 mRefreshLayout.beginRefreshing();
+
+                mUserOrder = "";
+                mUserIv.setImageResource(R.drawable.icon_arraw);
+                mTimeOrder = "";
+                mTimeIv.setImageResource(R.drawable.icon_arraw);
                 break;
             case R.id.marker_info_list_time_layout:
                 mTimeTv.setTextColor(ContextCompat.getColor(mContext, R.color.head_color));
-                if (("".equals(mTimeOrder) || "asc".equals(mTimeOrder))) {//升
+                if (("".equals(mTimeOrder) || "asc".equals(mTimeOrder) || mTimeOrder == null)) {//升
                     mTimeOrder = "desc";
                     mTimeIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
@@ -191,6 +202,11 @@ public class MarketInfoBeSoldActivity extends BaseActivity implements BGARefresh
                 mOrder = mTimeOrder;
                 mOrderItem = "time";
                 mRefreshLayout.beginRefreshing();
+
+                mNumberOrder = "";
+                mNumberIv.setImageResource(R.drawable.icon_arraw);
+                mUserOrder = "";
+                mUserIv.setImageResource(R.drawable.icon_arraw);
                 break;
 
 
@@ -223,13 +239,13 @@ public class MarketInfoBeSoldActivity extends BaseActivity implements BGARefresh
             holder.mBuyamountView.setText("X" + obj.buyamount);
             holder.mTimeView.setText(obj.paytime);
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(mContext,CommoditySalesListActivity.class);
-                    startActivity(intent);
-                }
-            });
+//            view.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent intent = new Intent(mContext,CommoditySalesListActivity.class);
+//                    startActivity(intent);
+//                }
+//            });
             return view;
         }
 

@@ -13,7 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by programmer on 2017/8/2.
+ *会议安排
  */
 
 public class MeetingPreparePlanActivity extends BaseActivity implements View.OnClickListener {

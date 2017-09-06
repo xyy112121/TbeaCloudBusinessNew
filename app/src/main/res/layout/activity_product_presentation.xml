@@ -98,7 +98,7 @@
                 android:layout_height="48dp"
                 android:gravity="center"
                 android:text="最新产品"
-                android:drawableRight="@drawable/icon_arraw_grayblue"
+                android:drawableRight="@drawable/icon_arraw"
                 android:textColor="@color/black"
                 android:drawablePadding="5dp"
                 android:tag="asc"/>

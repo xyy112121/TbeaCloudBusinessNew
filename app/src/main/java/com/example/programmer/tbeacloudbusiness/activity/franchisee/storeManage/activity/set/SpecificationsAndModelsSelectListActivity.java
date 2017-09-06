@@ -28,20 +28,33 @@ public class SpecificationsAndModelsSelectListActivity extends BaseActivity {
         findViewById(R.id.create_code_select_type).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, SpecificationsAndModelsEditActivity.class);
+                Intent intent = new Intent(mContext, SpecificationsAndModelsListActivity.class);
                 intent.putExtra("title", "型号");
+                intent.putExtra("method", "TBEAYUN001002001000");
                 intent.putExtra("methodName", "TBEAYUN001002001001");
                 startActivity(intent);
+
+//                Intent intent = new Intent(mContext, SpecificationsAndModelsEditActivity.class);
+//                intent.putExtra("title", "型号");
+//                intent.putExtra("methodName", "TBEAYUN001002001001");
+//                startActivity(intent);
             }
         });
 
         findViewById(R.id.create_code_select_norms).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, SpecificationsAndModelsEditActivity.class);
+
+                Intent intent = new Intent(mContext, SpecificationsAndModelsListActivity.class);
                 intent.putExtra("title", "规格");
+                intent.putExtra("method", "TBEAYUN001002002000");
                 intent.putExtra("methodName", "TBEAYUN001002002001");
                 startActivity(intent);
+
+//                Intent intent = new Intent(mContext, SpecificationsAndModelsEditActivity.class);
+//                intent.putExtra("title", "规格");
+//                intent.putExtra("methodName", "TBEAYUN001002002001");
+//                startActivity(intent);
             }
         });
 

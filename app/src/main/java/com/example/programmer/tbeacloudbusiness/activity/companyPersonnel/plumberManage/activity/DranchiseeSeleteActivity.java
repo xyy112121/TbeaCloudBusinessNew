@@ -69,7 +69,7 @@ public class DranchiseeSeleteActivity extends BaseActivity implements BGARefresh
         mNumberLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ("".equals(mOrder) || "asc".equals(mOrder)) {//升
+                if ("".equals(mOrder) || "asc".equals(mOrder) || mOrder == null) {//升
                     mOrder = "desc";
                     mNumberImage.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {

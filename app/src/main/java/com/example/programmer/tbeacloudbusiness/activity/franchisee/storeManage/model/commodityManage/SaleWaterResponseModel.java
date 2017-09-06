@@ -1,6 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.commodityManage;
 
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -12,16 +13,28 @@ public class SaleWaterResponseModel extends BaseResponseModel {
     public DataBean data;
 
     public class DataBean {
-        public List<CommodityinfoBean> commoditylist;
+        public TotleinfoBean totleinfo;
+        public List<CommoditylistBean> commoditylist;
 
-        public class CommodityinfoBean {
+        public class TotleinfoBean {
+            public String saletotlemoney;
+        }
+
+        public class CommoditylistBean {
             public String commodityid;
-            public String thumbpicture;//缩略图
-            public String name;//商品名称
-            public String promotion;//促销信息
-            public String salenumber;//已售出数
-            public String price;//单价
-            public String finishtime;//完成时间
+            public String thumbpicture;
+            public String name;
+            public String commodityname;
+            public String price;
+            public String publishtime;
+            public int salenumber;
+            public String evaluatenumber;
+            public String recommended;
+            public String promotion;
+            public String finishtime;
+            public String id;
+            public int createtime;
         }
     }
+
 }
