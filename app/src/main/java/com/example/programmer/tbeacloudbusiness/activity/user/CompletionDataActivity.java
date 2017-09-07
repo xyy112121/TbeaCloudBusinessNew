@@ -307,6 +307,7 @@ public class CompletionDataActivity extends BaseActivity {
                 case 1000:
                     mAffiliationView.setVisibility(View.GONE);
                     mAffiliationLayoutView.setVisibility(View.VISIBLE);
+                    mAffiliationLayoutView.removeAllViews();
                     FranchiserSelectListResponseModel.DataBean.DistributorlistBean item = (FranchiserSelectListResponseModel.DataBean.DistributorlistBean) data.getSerializableExtra("selectObj");
                     View pernsonLayout = getLayoutInflater().inflate(R.layout.activity_person_layout2, null);
                     CircleImageView headView = (CircleImageView) pernsonLayout.findViewById(R.id.person_info_head);

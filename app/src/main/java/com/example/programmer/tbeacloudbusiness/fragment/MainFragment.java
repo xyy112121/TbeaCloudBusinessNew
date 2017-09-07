@@ -30,11 +30,13 @@ import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumbe
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.PlumberMeetingListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.activity.FxMainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.activity.DbScanCodeMainListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.distributorManage.activity.DistributorListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity.ScanCodeAcctivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.StoreManageMainActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
@@ -95,7 +97,6 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
     }
 
 
-
     /**
      * 从服务器获取数据
      */
@@ -117,7 +118,7 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
                                 initStaticsItem(model.staticsitemlist);
                                 initMessage(model.systemmessagelist);
                             } else {
-                               ToastUtil.showMessage(re.getMsg());
+                                ToastUtil.showMessage(re.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
@@ -195,7 +196,7 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
         popWindow1.setItemClickClose(new CustomPopWindow1.ItemClickClose() {
             @Override
             public void close() {
-                ShareConfig.setConfig(getActivity(),Constants.ONLINE,false);
+                ShareConfig.setConfig(getActivity(), Constants.ONLINE, false);
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();
@@ -374,6 +375,11 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
         } else if ("marketer_shuidiangongguanli".equals(moduleid)) {
             //水电工管理
             startActivity(new Intent(getActivity(), DranchiseeSeleteActivity.class));
+        } else if ("fenxiaoshang".equals(moduleid)) {
+            startActivity(new Intent(getActivity(), DistributorListActivity.class));
+        } else if ("dingdanguanli".equals(moduleid)) {//订单管理
+            Intent intent = new Intent(getActivity(), OrderListActivity.class);
+            startActivity(intent);
         }
     }
 

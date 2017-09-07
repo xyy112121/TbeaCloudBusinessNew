@@ -216,7 +216,18 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
             ImageLoader.getInstance().displayImage(path + obj.personjobtitle, personJobTitleView);
             nameView.setText(obj.personname);
             moneyView.setText(obj.totlemoney);
-
+            ImageView rankingView = (ImageView) view.findViewById(R.id.scan_code_main_item_ranking);
+            if(position == 1){
+                rankingView.setImageResource(R.drawable.icon_scanre_batesort1);
+            }else if(position == 2){
+                rankingView.setImageResource(R.drawable.icon_scanre_batesort2);
+            }else if(position == 3){
+                rankingView.setImageResource(R.drawable.icon_scanre_batesort3);
+            }else if(position == 4){
+                rankingView.setImageResource(R.drawable.icon_scanre_batesort4);
+            }else {
+                rankingView.setImageResource(R.drawable.icon_scanre_batesort4);
+            }
             return view;
         }
 

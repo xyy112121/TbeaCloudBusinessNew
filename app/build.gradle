@@ -24,20 +24,17 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles 'proguard-rules.pro'
+        }
     }
 
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
-        }
-    }
-
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'x86', 'armeabi-v7a'
-            universalApk true
         }
     }
 }
@@ -68,5 +65,4 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.7.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
     compile 'com.contrarywind:Android-PickerView:3.2.6'
-
 }

@@ -78,20 +78,13 @@ public class CustomPopWindow1 {
                 parentView.addView(contentView);
             }
 
-            mPopWindow = new CustomPopWindow.PopupWindowBuilder((mContext)).setOnDissmissListener(new PopupWindow.OnDismissListener() {
-                @Override
-                public void onDismiss() {
-                    ToastUtil.showMessage("关闭啦");
-                }
-            })
+            mPopWindow = new CustomPopWindow.PopupWindowBuilder((mContext))
                     .setView(parentView)
                     .enableBackgroundDark(true) //弹出popWindow时，背景是否变暗
                     .setBgDarkAlpha(0.5f) // 控制亮度
                     .setAnimationStyle(R.style.PopWindowAnimationFade)
                     .create()
                     .showAtLocation(parentLayout, Gravity.CENTER, 0, 0);
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }

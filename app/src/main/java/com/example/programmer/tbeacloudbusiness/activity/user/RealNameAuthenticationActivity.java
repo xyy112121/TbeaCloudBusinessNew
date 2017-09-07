@@ -85,7 +85,6 @@ public class RealNameAuthenticationActivity extends BaseActivity {
     Button mFinishView;
 
 
-
     private String mFlag;//判断当前选择的是什么 LisencePicture（营业执照） IdCard1（身份证正面）IdCard2（身份证反面）CompanyPhoto（实景照片）
     List<LocalMedia> mSelectLisencePictureList = new ArrayList<>();
     List<LocalMedia> mSelectIdCard1List = new ArrayList<>();
@@ -103,7 +102,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
         if (!"notidentify".equals(identify)) {//未认证
             getDate();
@@ -125,7 +124,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                             RelaNameAuthenticationResponseModel model = (RelaNameAuthenticationResponseModel) msg.obj;
                             if (model.isSuccess() && model.data != null) {
                                 RelaNameAuthenticationResponseModel.DataBean.CompanyidentifyinfoBean obj = model.data.companyidentifyinfo;
-                                ShareConfig.getConfigString(mContext,Constants.whetheridentifiedid,obj.whetheridentifiedid);
+                                ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, obj.whetheridentifiedid);
                                 mCompanyNameView.setText(obj.companyname);
                                 mCompanyLisenceCodeView.setText(obj.companylisencecode);
                                 mAddrView.setText(obj.companyaddress);
@@ -136,10 +135,10 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                                 mMasterPersonIDView.setText(obj.masterpersonid);
                                 ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.masterpersonidcard1, mMasterPersonIdCard1View);
                                 ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.masterpersonidcard2, mMasterPersonIdCard2View);
-                                if(obj.companypicture.length()>0){
+                                if (obj.companypicture.length() > 0) {
                                     String[] pictures = obj.companypicture.split(",");
                                     mCompanyPhotoParentView.removeAllViews();
-                                    for (String s:pictures) {
+                                    for (String s : pictures) {
                                         View v = getLayoutInflater().inflate(R.layout.activity_real_name_authentication_companyphoto, null);
                                         ImageView iv = (ImageView) v.findViewById(R.id.real_name_companyPhoto);
                                         ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + s, iv);
@@ -218,7 +217,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                 String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
                 if ("notidentify".equals(identify)) {//未认证
                     attestation();
-                }else {
+                } else {
                     getAttestationstate();
                 }
                 break;
@@ -228,7 +227,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
     /**
      * 查看认证状态
      */
-    private void getAttestationstate(){
+    private void getAttestationstate() {
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         dialog.setText("请等待...");
         dialog.show();
@@ -275,7 +274,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
         mRequest.businessscope = mBusinessScopeView.getText() + "";
         mRequest.masterperson = mMasterPersonView.getText() + "";
         mRequest.masterpersonid = mMasterPersonIDView.getText() + "";
-        if ("".equals(mRequest.companyname) || "".equals(mRequest.companylisencecode) || mRequest.province == null || "".equals(mRequest.address) ||
+        if ("".equals(mRequest.address) || "".equals(mRequest.companyname) || "".equals(mRequest.companylisencecode) || mRequest.province == null || "".equals(mRequest.address) ||
                 "".equals(mRequest.businessscope) || mRequest.companylisencepicture == null || "".equals(mRequest.masterperson) || "".equals(mRequest.masterpersonid) || mRequest.masterpersonidcard1 == null || mRequest.masterpersonidcard2 == null || mRequest.companyphoto == null) {
             ToastUtil.showMessage("请补全资料");
             return;

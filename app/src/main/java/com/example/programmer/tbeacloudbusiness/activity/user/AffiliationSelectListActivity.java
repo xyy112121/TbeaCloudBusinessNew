@@ -50,6 +50,7 @@ public class AffiliationSelectListActivity extends BaseActivity {
     }
 
     private void initView() {
+        ((TextView)findViewById(R.id.cp_franchiser_list_number_tv)).setText("总经销商");
         mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter(mContext, R.layout.activity_cp_franchiser_select_list_item);
         mListView.setAdapter(mAdapter);
@@ -136,6 +137,7 @@ public class AffiliationSelectListActivity extends BaseActivity {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    final FranchiserSelectListResponseModel.DataBean.DistributorlistBean obj = getItem(position);
                     Intent intent = new Intent();
                     intent.putExtra("selectObj", obj);
                     setResult(RESULT_OK, intent);

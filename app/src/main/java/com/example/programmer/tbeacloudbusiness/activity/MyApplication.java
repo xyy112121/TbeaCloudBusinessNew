@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
@@ -22,6 +23,9 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
+import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.example.programmer.tbeacloudbusiness.utils.permissonutil.PermissionActivity;
+import com.example.programmer.tbeacloudbusiness.utils.permissonutil.PermissionUtil;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
@@ -53,17 +57,20 @@ public class MyApplication extends Application implements BDLocationListener {
 
 
     private LocationClient mLocationClient;
+    /**
+     * 权限回调接口
+     */
+    private PermissionActivity.CheckPermListener mListener;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
         initUniversalImageLoader();
-//		isGps();
-//        SDKInitializer.initialize(getApplicationContext());
-        //百度定位
+        SDKInitializer.initialize(getApplicationContext());
         mLocationClient = new LocationClient(getApplicationContext());
-        mLocationClient.registerLocationListener(this);
+        mLocationClient.registerLocationListener(MyApplication.instance);
+        //百度定位
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
         option.setIsNeedAddress(true);
@@ -71,9 +78,9 @@ public class MyApplication extends Application implements BDLocationListener {
         option.setAddrType("all");// 返回的定位结果包含地址信息
         option.setCoorType("bd09ll"); // 设置坐标类型
         option.setScanSpan(60 * 1000);
-//        mLocationClient.setLocOption(option);
-//        mLocationClient.start();
-//        mLocationClient.requestLocation();
+        mLocationClient.setLocOption(option);
+        mLocationClient.start();
+        mLocationClient.requestLocation();
 
         //加载保存的位置信息
         loadLoaclInfo();
@@ -148,8 +155,6 @@ public class MyApplication extends Application implements BDLocationListener {
 
     private String longitude;
     private String latitude;
-
-
     private String address;
     private String city;
     private String province;

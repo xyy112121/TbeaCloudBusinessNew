@@ -264,21 +264,21 @@ public class RegisterActivity extends Activity {
             return;
         }
 
-        if (mRequest.password.length() <0) {
-            ToastUtil.showMessage("密码长度不能小于6位！");
+        if (mRequest.password.length() < 6 || mRequest.password.length() > 32) {
+            ToastUtil.showMessage("密码位数大于等于6位，小于等于32位！");
             return;
         }
-        if (!mRequest.password.equals(mConfirmPwdView.getText()+"")) {
+        if (!mRequest.password.equals(mConfirmPwdView.getText() + "")) {
             ToastUtil.showMessage("两次密码输入不一致！");
             return;
         }
 
-        if ("".equals(mRequest.usertypeid)|| mRequest.usertypeid == null) {
+        if ("".equals(mRequest.usertypeid) || mRequest.usertypeid == null) {
             ToastUtil.showMessage("用户类型不能为空！");
             return;
         }
 
-        if(mAgreeView.isChecked() == false){
+        if (mAgreeView.isChecked() == false) {
             ToastUtil.showMessage("你需同意用户协议");
             return;
         }

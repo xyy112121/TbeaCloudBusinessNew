@@ -91,7 +91,7 @@
 
                 <TextView
                     style="@style/my_text_style"
-                    android:text="所在地" />
+                    android:text="详细地址" />
 
                 <EditText
                     android:id="@+id/real_name_addr2"

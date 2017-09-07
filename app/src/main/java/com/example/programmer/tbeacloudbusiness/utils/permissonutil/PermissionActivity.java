@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public class PermissionActivity extends AppCompatActivity implements PermissionUtil.PermissionCallbacks {
-    protected static final int RC_PERM = 123;
+    public static final int RC_PERM = 123;
     /**
      * 权限回调接口
      */
