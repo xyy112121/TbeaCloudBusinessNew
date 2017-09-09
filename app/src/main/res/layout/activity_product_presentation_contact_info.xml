@@ -52,15 +52,31 @@
 
     <View style="@style/horizontal_view" />
 
-    <TextView
-        android:id="@+id/product_presentation_contact_info_platformservicetel"
+    <RelativeLayout
+        android:id="@+id/product_presentation_contact_info_platformservicetel_layout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:drawableRight="@drawable/icon_telicon_blue"
-        android:gravity="center_vertical"
-        android:textColor="@color/tab_text_normal" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/product_presentation_contact_info_platformservicetel"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/tab_text_normal"
+            android:layout_marginRight="35dp"
+            />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon_telicon_blue"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
 
     <View style="@style/horizontal_view" />
 
@@ -75,27 +91,57 @@
 
     <View style="@style/horizontal_view" />
 
-    <TextView
-        android:id="@+id/product_presentation_contact_info_delantel"
+    <RelativeLayout
+        android:id="@+id/product_presentation_contact_info_delantel_layout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:drawableRight="@drawable/icon_telicon_blue"
-        android:gravity="center_vertical"
-        android:textColor="@color/tab_text_normal" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/product_presentation_contact_info_delantel"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/tab_text_normal"
+            android:layout_marginRight="35dp"
+           />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon_telicon_blue"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
 
     <View style="@style/horizontal_view" />
-
-    <TextView
-        android:id="@+id/product_presentation_contact_info_tbeatel"
+    <RelativeLayout
+        android:id="@+id/product_presentation_contact_info_tbeatel_layout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:drawableRight="@drawable/icon_telicon_blue"
-        android:gravity="center_vertical"
-        android:textColor="@color/tab_text_normal" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/product_presentation_contact_info_tbeatel"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/tab_text_normal"
+            android:layout_marginRight="35dp"
+            />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon_telicon_blue"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
 
     <View style="@style/horizontal_view" />
 </LinearLayout>

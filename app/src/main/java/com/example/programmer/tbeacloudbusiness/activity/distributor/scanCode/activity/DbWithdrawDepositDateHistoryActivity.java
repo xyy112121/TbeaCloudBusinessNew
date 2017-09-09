@@ -196,7 +196,7 @@ public class DbWithdrawDepositDateHistoryActivity extends BaseActivity implement
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getListData();
-        return false;
+        return true;
     }
 
     @OnClick({R.id.scan_code_top_money_layout})

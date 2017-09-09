@@ -1,14 +1,11 @@
 package com.example.programmer.tbeacloudbusiness.activity.tbea.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -24,7 +21,10 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.MeetingViewUpdateActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.action.TbeaAction;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityCategoryResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityModelResponseModel;
@@ -180,7 +180,7 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getListData();
-        return false;
+        return true;
     }
 
     @Override
@@ -216,7 +216,7 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
             case R.id.product_presentation_more:
                 View contentView = LayoutInflater.from(mContext).inflate(R.layout.acitivity_pop_menu, null);
                 //处理popWindow 显示内容
-//                handleLogic(contentView);
+                handleLogic(contentView);
                 //创建并显示popWindow
                 mCustomPopWindow = new CustomPopWindow.PopupWindowBuilder(mContext)
                         .setView(contentView)
@@ -228,14 +228,39 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
         }
     }
 
-    private void showMore(){
+    private void handleLogic(View contentView) {
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCustomPopWindow != null) {
+                    mCustomPopWindow.dissmiss();
+                }
+                switch (v.getId()) {
+                    case R.id.menu2://首页
+                        Intent intent = new Intent(mContext, MainActivity.class);
+                        startActivity(intent);
+                        MyApplication.instance.exit();
+                        break;
+                    case R.id.menu1://消息
+                         intent = new Intent(mContext, MessageListActivity.class);
+                        startActivity(intent);
+                        break;
+                }
 
+            }
+        };
+        contentView.findViewById(R.id.menu1).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu2).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu3).setOnClickListener(listener);
     }
 
 
     public void showOptionPicker(final int id, String text, List<Condition> list) {
-        CustomOptionObjPicker optionPicker = new CustomOptionObjPicker((Activity) mContext, text, list);
+        CustomOptionObjPicker optionPicker = new CustomOptionObjPicker(mContext, text, list);
         optionPicker.setTextSize(14);
+        if (list.size() > 2) {
+            optionPicker.setSelectedIndex(1);
+        }
         optionPicker.setOnOptionPickListener(new CustomOptionObjPicker.OnOptionPickListener() {
             @Override
             public void onOptionPicked(Condition option) {

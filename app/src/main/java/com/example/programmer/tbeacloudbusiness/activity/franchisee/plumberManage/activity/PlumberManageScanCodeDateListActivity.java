@@ -119,7 +119,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
             @Override
             public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
                 getScanCodeListData();
-                return false;
+                return true;
             }
         });
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
@@ -138,7 +138,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
             @Override
             public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
                 getWithdrawListData();
-                return false;
+                return true;
             }
         });
         mRefreshLayout1.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));

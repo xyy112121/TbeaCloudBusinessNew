@@ -274,7 +274,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getListData();
-        return false;
+        return true;
     }
 
     @Override

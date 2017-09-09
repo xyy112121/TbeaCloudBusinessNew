@@ -204,7 +204,7 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getListData();
-        return false;
+        return true;
     }
 
     @Override

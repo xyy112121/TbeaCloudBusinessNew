@@ -179,6 +179,7 @@ public class PlumberMeetingViewActivity extends BaseActivity {
             }
         }
 
+        //发起人
         if (obj.meetingoriginatorinfo != null) {
             CircleImageView mHodePersonHeadView = (CircleImageView) mMeetingoriginatorInfoView.findViewById(R.id.person_info_head);
             TextView mHodePersonNameView = (TextView) mMeetingoriginatorInfoView.findViewById(R.id.person_info_name);
@@ -190,7 +191,7 @@ public class PlumberMeetingViewActivity extends BaseActivity {
             ImageLoader.getInstance().displayImage(path + model.headpicture, mHodePersonHeadView);
             ImageLoader.getInstance().displayImage(path + model.persontypeicon, mHodePersonPersonjobtitleView);
             mHodePersonNameView.setText(model.name);
-            mHodePersonCompanyNameView.setText(model.company);
+            mHodePersonCompanyNameView.setText(model.company + "  "+model.jobposition);
             mHodePersonInfoRightView.setVisibility(View.GONE);
         }
 

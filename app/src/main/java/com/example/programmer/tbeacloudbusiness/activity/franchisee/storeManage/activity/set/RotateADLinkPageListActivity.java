@@ -364,7 +364,7 @@ public class RotateADLinkPageListActivity extends BaseActivity implements BGARef
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getData();
-        return false;
+        return true;
     }
 
     class MyAdapter1 extends ArrayAdapter<DynamicListResponseModel.DataBean.NewslistBean> {

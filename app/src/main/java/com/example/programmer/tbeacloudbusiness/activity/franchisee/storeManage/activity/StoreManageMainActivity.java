@@ -144,7 +144,7 @@ public class StoreManageMainActivity extends BaseActivity implements BGARefreshL
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        return false;
+        return true;
     }
 
     class GridAdapter extends BaseAdapter {

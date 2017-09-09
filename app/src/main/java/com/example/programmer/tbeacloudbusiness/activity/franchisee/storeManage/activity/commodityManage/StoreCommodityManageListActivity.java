@@ -239,7 +239,7 @@ public class StoreCommodityManageListActivity extends BaseActivity implements BG
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getData();
-        return false;
+        return true;
     }
 
 

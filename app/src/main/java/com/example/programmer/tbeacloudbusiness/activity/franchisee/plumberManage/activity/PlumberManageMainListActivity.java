@@ -298,7 +298,7 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getListData();
-        return false;
+        return true;
     }
 
     @Override

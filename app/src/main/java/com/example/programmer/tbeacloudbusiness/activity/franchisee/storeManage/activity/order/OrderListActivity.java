@@ -47,7 +47,12 @@ public class OrderListActivity extends BaseActivity {
         settings.setAllowFileAccess(true);
         settings.setDomStorageEnabled(true);//允许DCOM
 
-        mWebView.loadUrl("http://121.42.193.154:6696/index.php/store/Index/orderall/userid/"+ MyApplication.instance.getUserId());
+        String id = getIntent().getStringExtra("id");
+        if(id == null){
+            id = MyApplication.instance.getUserId();
+        }
+
+        mWebView.loadUrl("http://121.42.193.154:6696/index.php/store/Index/orderall/userid/"+ id);
 
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override

@@ -14,6 +14,7 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.action.PlumberManageAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PersonManageViewResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderListActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PersonManageItemView;
@@ -189,7 +190,7 @@ public class PersonManageViewActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.pm_view_rebatescaninfo, R.id.pm_view_electricianmeetingattendinfo, R.id.pm_view_orderingserviceinfo, R.id.pm_view_commodityorderinfo, R.id.pm_view_logininfo_layout, R.id.top_left})
+    @OnClick({ R.id.pm_view_thumbpicture,R.id.pm_view_rebatescaninfo, R.id.pm_view_electricianmeetingattendinfo, R.id.pm_view_orderingserviceinfo, R.id.pm_view_commodityorderinfo, R.id.pm_view_logininfo_layout, R.id.top_left})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.pm_view_rebatescaninfo:
@@ -202,6 +203,9 @@ public class PersonManageViewActivity extends BaseActivity {
             case R.id.pm_view_orderingserviceinfo:
                 break;
             case R.id.pm_view_commodityorderinfo:
+                 intent = new Intent(mContext, OrderListActivity.class);
+                intent.putExtra("id", getIntent().getStringExtra("id"));
+                startActivity(intent);
                 break;
             case R.id.pm_view_logininfo_layout:
                 //登录统计
@@ -211,6 +215,11 @@ public class PersonManageViewActivity extends BaseActivity {
                 break;
             case R.id.top_left:
                 finish();
+                break;
+            case R.id.pm_view_thumbpicture:
+                intent = new Intent(mContext, PlumberManagePersonViewActivity.class);
+                intent.putExtra("id", getIntent().getStringExtra("id"));
+                startActivity(intent);
                 break;
         }
     }

@@ -141,7 +141,7 @@ public class SpecificationsAndModelsListActivity extends BaseActivity implements
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getData();
-        return false;
+        return true;
     }
 
     class MyAdapter extends BaseAdapter {

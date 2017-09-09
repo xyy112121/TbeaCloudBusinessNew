@@ -164,6 +164,12 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
                 TextView nameView = (TextView) itemView.findViewById(R.id.top_text1);
                 ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.icon, imageView);
                 nameView.setText(item.title);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(getActivity(), MessageListActivity.class));
+                    }
+                });
                 view.addView(itemView);
             }
         }

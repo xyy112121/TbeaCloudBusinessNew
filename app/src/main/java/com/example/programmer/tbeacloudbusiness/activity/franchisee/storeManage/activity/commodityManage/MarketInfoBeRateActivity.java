@@ -95,7 +95,7 @@ public class MarketInfoBeRateActivity extends BaseActivity implements View.OnCli
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getListData();
-        return false;
+        return true;
     }
 
     /**

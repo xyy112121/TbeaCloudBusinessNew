@@ -120,7 +120,7 @@ public class MemberListActivity extends BaseActivity implements BGARefreshLayout
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        return false;
+        return true;
     }
 
     @Override

@@ -136,10 +136,10 @@ public class ProductPresentationContactInfoActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.product_presentation_contact_info_platformservicetel, R.id.product_presentation_contact_info_delantel, R.id.product_presentation_contact_info_tbeatel})
+    @OnClick({R.id.product_presentation_contact_info_platformservicetel_layout, R.id.product_presentation_contact_info_delantel_layout, R.id.product_presentation_contact_info_tbeatel_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.product_presentation_contact_info_platformservicetel:
+            case R.id.product_presentation_contact_info_platformservicetel_layout:
                 if("".equals(mObj.platformservicetel)){
                     ToastUtil.showMessage("号码为空");
                 }else {
@@ -147,14 +147,14 @@ public class ProductPresentationContactInfoActivity extends BaseActivity {
                 }
 
                 break;
-            case R.id.product_presentation_contact_info_delantel:
+            case R.id.product_presentation_contact_info_delantel_layout:
                 if("".equals(mObj.delantel)){
                     ToastUtil.showMessage("号码为空");
                 }else {
                     callPhone(mObj.delantel);
                 }
                 break;
-            case R.id.product_presentation_contact_info_tbeatel:
+            case R.id.product_presentation_contact_info_tbeatel_layout:
                 if("".equals(mObj.tbeatel)){
                     ToastUtil.showMessage("号码为空");
                 }else {

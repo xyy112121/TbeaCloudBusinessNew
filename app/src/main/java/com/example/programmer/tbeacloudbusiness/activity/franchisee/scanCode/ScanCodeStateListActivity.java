@@ -143,7 +143,7 @@ public class ScanCodeStateListActivity extends BaseActivity implements BGARefres
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getListData();
-        return false;
+        return true;
     }
 
     private class MyAdapter extends BaseAdapter {

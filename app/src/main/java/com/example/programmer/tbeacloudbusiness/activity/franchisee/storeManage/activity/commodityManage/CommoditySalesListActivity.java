@@ -92,7 +92,7 @@ public class CommoditySalesListActivity extends BaseActivity implements BGARefre
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getListData();
-        return false;
+        return true;
     }
 
     /**

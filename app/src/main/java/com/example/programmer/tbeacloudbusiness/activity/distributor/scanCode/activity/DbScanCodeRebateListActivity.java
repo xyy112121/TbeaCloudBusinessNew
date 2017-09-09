@@ -170,7 +170,7 @@ public class DbScanCodeRebateListActivity extends BaseActivity implements BGARef
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getListData();
-        return false;
+        return true;
     }
 
     @Override

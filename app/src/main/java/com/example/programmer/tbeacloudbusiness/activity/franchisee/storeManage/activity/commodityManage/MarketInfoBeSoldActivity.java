@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.action.StoreManageAction;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.commodityManage.SaleListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
@@ -239,13 +240,14 @@ public class MarketInfoBeSoldActivity extends BaseActivity implements BGARefresh
             holder.mBuyamountView.setText("X" + obj.buyamount);
             holder.mTimeView.setText(obj.paytime);
 
-//            view.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(mContext,CommoditySalesListActivity.class);
-//                    startActivity(intent);
-//                }
-//            });
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, OrderListActivity.class);
+//                    intent.putExtra("id", obj.);
+                    startActivity(intent);
+                }
+            });
             return view;
         }
 

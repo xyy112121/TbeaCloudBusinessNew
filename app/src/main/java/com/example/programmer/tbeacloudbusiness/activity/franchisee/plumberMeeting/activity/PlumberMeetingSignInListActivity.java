@@ -255,7 +255,7 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         //上拉加载更多
         getListData();
-        return false;
+        return true;
     }
 
     public class MyAdapter extends BaseAdapter {

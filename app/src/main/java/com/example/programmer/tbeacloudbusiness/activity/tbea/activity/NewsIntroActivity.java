@@ -175,7 +175,7 @@ public class NewsIntroActivity extends BaseActivity implements BGARefreshLayout.
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        return false;
+        return true;
     }
 
     private class MyAdapter extends BaseAdapter {

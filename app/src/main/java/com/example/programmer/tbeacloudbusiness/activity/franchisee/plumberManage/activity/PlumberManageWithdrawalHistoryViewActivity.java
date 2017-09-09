@@ -142,7 +142,7 @@ public class PlumberManageWithdrawalHistoryViewActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.top_right_text, R.id.top_left})
+    @OnClick({R.id.top_right_text, R.id.top_left,R.id.pm_view_thumbpicture})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.top_right_text:
@@ -152,6 +152,11 @@ public class PlumberManageWithdrawalHistoryViewActivity extends BaseActivity {
                 break;
             case R.id.top_left:
                 finish();
+                break;
+            case R.id.pm_view_thumbpicture:
+                 intent = new Intent(mContext, PlumberManagePersonViewActivity.class);
+                intent.putExtra("id", getIntent().getStringExtra("id"));
+                startActivity(intent);
                 break;
         }
 

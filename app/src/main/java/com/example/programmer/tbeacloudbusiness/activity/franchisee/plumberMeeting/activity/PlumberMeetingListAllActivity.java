@@ -238,7 +238,11 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
             public void getValue(String key, String value) {
                 expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
                 if ("regionSelect".equals(key)) {
-//                    Intent intent = new Intent(mContext,)
+                    Intent intent = new Intent(mContext, RegionSelectActivity.class);
+                    startActivityForResult(intent, 1000);
+                } else {
+                    mZoneid = "";
+                    mRefreshLayout.beginRefreshing();
                 }
             }
         });

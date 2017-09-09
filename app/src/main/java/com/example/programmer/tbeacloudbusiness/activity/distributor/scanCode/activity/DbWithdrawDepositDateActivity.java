@@ -115,7 +115,7 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
             @Override
             public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
                 getListData();
-                return false;
+                return true;
             }
         });
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
@@ -137,7 +137,7 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
             @Override
             public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
                 getListData();
-                return false;
+                return true;
             }
         });
         mRefreshLayout1.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
