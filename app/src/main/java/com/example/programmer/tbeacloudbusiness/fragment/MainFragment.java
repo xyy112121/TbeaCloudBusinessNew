@@ -325,7 +325,12 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
             View view1 = getActivity().getLayoutInflater().inflate(R.layout.fragment_home_top_item, null);
             ImageView imageView = (ImageView) view1.findViewById(R.id.home_top_item_image);
             TextView textView = (TextView) view1.findViewById(R.id.home_top_item_name);
-            ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + mList.get(i).moduleicon, imageView);
+            if(mList.get(i).newmessagenumber > 0){
+                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + mList.get(i).iconwithnewdata, imageView);
+            }else {
+                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + mList.get(i).moduleicon, imageView);
+            }
+
             textView.setText(mList.get(i).modulename);
             LinearLayout layout = (LinearLayout) view1.findViewById(R.id.home_top_tb_layout);
             layout.setOnClickListener(new View.OnClickListener() {

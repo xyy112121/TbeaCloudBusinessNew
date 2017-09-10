@@ -57,14 +57,20 @@ public class MyFansActivity extends BaseActivity implements View.OnClickListener
     private int mPagesiz = 10;
     private BGARefreshLayout mRefreshLayout;
     public boolean isSelect = false;
-
+    private String mId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_fans);
         ButterKnife.bind(this);
-        initTopbar("我的粉丝", "编辑", this);
+        mId = getIntent().getStringExtra("id");
+        if(mId == null){
+            initTopbar("我的粉丝", "编辑", this);
+        }else {
+            initTopbar("我的粉丝");
+        }
+
         initUI();
     }
 
@@ -165,7 +171,7 @@ public class MyFansActivity extends BaseActivity implements View.OnClickListener
                 public void run() {
                     try {
                         MyAction action = new MyAction();
-                        FansListResponseModel model = action.getFansList(mPage++, mPagesiz);
+                        FansListResponseModel model = action.getFansList(mId,mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

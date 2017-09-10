@@ -15,6 +15,8 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.action.PlumberManageAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PersonManageViewResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyFansActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PersonManageItemView;
@@ -60,15 +62,42 @@ public class PersonManageViewActivity extends BaseActivity {
     @BindView(R.id.top_left)
     ImageButton mTopLeft;
 
+    private String mId;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plumber_manage_person_manage);
-        StatusBarUtil.setTranslucent(this, 0);
-        ButterKnife.bind(this);
-        findViewById(R.id.top_right_text).setVisibility(View.GONE);
-        getData();
-        listener();
+        try {
+            setContentView(R.layout.activity_plumber_manage_person_manage);
+            StatusBarUtil.setTranslucent(this, 0);
+            ButterKnife.bind(this);
+            findViewById(R.id.top_right_text).setVisibility(View.GONE);
+            mId = getIntent().getStringExtra("id");
+            getData();
+            initView();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initView() {
+        mSocialinfoView.setText4Click(new PersonManageItemView.Text4Click() {
+            @Override
+            public void onClick() {
+                Intent intent = new Intent(mContext, MyFansActivity.class);
+                intent.putExtra("id",mId );
+                startActivity(intent);
+            }
+        });
+
+        mSocialinfoView.setText5Click(new PersonManageItemView.Text5Click() {
+            @Override
+            public void onClick() {
+                Intent intent = new Intent(mContext, MyAttentionActivity.class);
+                intent.putExtra("id",mId );
+                startActivity(intent);
+            }
+        });
     }
 
     private void getData() {
@@ -101,8 +130,7 @@ public class PersonManageViewActivity extends BaseActivity {
                 public void run() {
                     try {
                         PlumberManageAction action = new PlumberManageAction();
-                        String id = getIntent().getStringExtra("id");
-                        PersonManageViewResponseModel model = action.getPersonManageView(id);
+                        PersonManageViewResponseModel model = action.getPersonManageView(mId);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -131,8 +159,10 @@ public class PersonManageViewActivity extends BaseActivity {
         }
 
         if (obj.orderingserviceinfo != null) {
-            mOrderingserviceinfoView.setText4(obj.orderingserviceinfo.timesforoneyear);
-            mOrderingserviceinfoView.setText5(obj.orderingserviceinfo.timesforthreemonth);
+            String timesforoneyear = obj.orderingserviceinfo.timesforoneyear;
+            mOrderingserviceinfoView.setText4(timesforoneyear);
+            String timesforthreemonth = obj.orderingserviceinfo.timesforthreemonth;
+            mOrderingserviceinfoView.setText5(timesforthreemonth);
         }
 
         if (obj.logininfo != null) {
@@ -150,47 +180,13 @@ public class PersonManageViewActivity extends BaseActivity {
         }
 
         if (obj.commodityorderinfo != null) {
-            mCommodityorderinfoView.setText4(obj.commodityorderinfo.totlemoneyforoneyear);
-            mCommodityorderinfoView.setText5(obj.commodityorderinfo.totlemoneyforthreemonth);
+            mCommodityorderinfoView.setText4(obj.commodityorderinfo.ordermoneyforoneyear);
+            mCommodityorderinfoView.setText5(obj.commodityorderinfo.ordermoneythreemonth);
         }
 
     }
 
-    private void listener() {
-//        findViewById(R.id.person_manage_head).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(mContext, PlumberManagePersonViewActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        findViewById(R.id.person_manage_scan_rebate).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//
-//        findViewById(R.id.person_manage_metting).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //签到历史
-//
-//            }
-//        });
-//
-//        findViewById(R.id.person_manage_login_statistics).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-
-
-    }
-
-    @OnClick({ R.id.pm_view_thumbpicture,R.id.pm_view_rebatescaninfo, R.id.pm_view_electricianmeetingattendinfo, R.id.pm_view_orderingserviceinfo, R.id.pm_view_commodityorderinfo, R.id.pm_view_logininfo_layout, R.id.top_left})
+    @OnClick({R.id.pm_view_thumbpicture, R.id.pm_view_rebatescaninfo, R.id.pm_view_electricianmeetingattendinfo, R.id.pm_view_orderingserviceinfo, R.id.pm_view_commodityorderinfo, R.id.pm_view_logininfo_layout, R.id.top_left})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.pm_view_rebatescaninfo:
@@ -199,11 +195,15 @@ public class PersonManageViewActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.pm_view_electricianmeetingattendinfo:
+                //签到历史
+                intent = new Intent(mContext, PlumberManageSignHistoryListActivity.class);
+                startActivity(intent);
+
                 break;
             case R.id.pm_view_orderingserviceinfo:
                 break;
             case R.id.pm_view_commodityorderinfo:
-                 intent = new Intent(mContext, OrderListActivity.class);
+                intent = new Intent(mContext, OrderListActivity.class);
                 intent.putExtra("id", getIntent().getStringExtra("id"));
                 startActivity(intent);
                 break;

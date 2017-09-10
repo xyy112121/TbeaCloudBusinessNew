@@ -116,7 +116,8 @@ public class PersonFragment extends Fragment implements BGARefreshLayout.BGARefr
                 public void run() {
                     try {
                         MyAction action = new MyAction();
-                        AttentionPersonResponseModel model = action.getAttentionPersonList(mPage++, mPagesiz);
+                        String id = ((MyAttentionActivity)getActivity()).mId;
+                        AttentionPersonResponseModel model = action.getAttentionPersonList(id,mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

@@ -116,7 +116,8 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
                 public void run() {
                     try {
                         MyAction action = new MyAction();
-                        AttentionCommodityResponseModel model = action.getAttentionCommodityList(mPage++, mPagesiz);
+                        String id = ((MyAttentionActivity)getActivity()).mId;
+                        AttentionCommodityResponseModel model = action.getAttentionCommodityList(id,mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

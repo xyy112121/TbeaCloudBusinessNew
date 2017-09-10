@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.my.main.action;
 
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionCommodityResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionPersonResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionStoreResponseModel;
@@ -85,9 +86,14 @@ public class MyAction extends BaseAction {
      * 关注的商品
      */
     public AttentionCommodityResponseModel getAttentionCommodityList
-    (int page, int pagesize) throws Exception {
+    (String  userId,int page, int pagesize) throws Exception {
         AttentionCommodityResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
+        if (userId != null){
+            pairs.add(new BasicNameValuePair("userid", userId));
+        }else {
+            pairs.add(new BasicNameValuePair("userid", MyApplication.instance.getUserId()));
+        }
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
         String result = sendRequest("TBEAYUN011002001001", pairs);
@@ -99,9 +105,14 @@ public class MyAction extends BaseAction {
      * 关注的店铺
      */
     public AttentionStoreResponseModel getAttentionStoreList
-    (int page, int pagesize) throws Exception {
+    (String userId,int page, int pagesize) throws Exception {
         AttentionStoreResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
+        if (userId != null){
+            pairs.add(new BasicNameValuePair("userid", userId));
+        }else {
+            pairs.add(new BasicNameValuePair("userid", MyApplication.instance.getUserId()));
+        }
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
         String result = sendRequest("TBEAYUN011002002001", pairs);
@@ -113,9 +124,14 @@ public class MyAction extends BaseAction {
      * 关注的个人
      */
     public AttentionPersonResponseModel getAttentionPersonList
-    (int page, int pagesize) throws Exception {
+    (String userId,int page, int pagesize) throws Exception {
         AttentionPersonResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
+        if (userId != null){
+            pairs.add(new BasicNameValuePair("userid", userId));
+        }else {
+            pairs.add(new BasicNameValuePair("userid", MyApplication.instance.getUserId()));
+        }
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
         String result = sendRequest("TBEAYUN011002003001", pairs);
@@ -139,9 +155,14 @@ public class MyAction extends BaseAction {
      * 我的粉丝
      */
     public FansListResponseModel getFansList
-    (int page, int pagesize) throws Exception {
+    (String userId,int page, int pagesize) throws Exception {
         FansListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
+        if (userId != null){
+            pairs.add(new BasicNameValuePair("userid", userId));
+        }else {
+            pairs.add(new BasicNameValuePair("userid", MyApplication.instance.getUserId()));
+        }
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
         String result = sendRequest("TBEAYUN011003001001", pairs);

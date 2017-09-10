@@ -44,13 +44,19 @@ public class MyAttentionActivity extends BaseActivity implements View.OnClickLis
     private Fragment mCustomFragment;
     public View mSelectAllLayout;
     public TextView mRightView;
+    public String mId;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_attention);
-        initTopbar("我的关注", "编辑", this);
+        mId = getIntent().getStringExtra("id");
+        if(mId == null){
+            initTopbar("我的关注", "编辑", this);
+        }else {
+            initTopbar("我的关注");
+        }
         mSelectAllLayout = findViewById(R.id.attention_select_all_layout);
         mRightView = (TextView) findViewById(R.id.top_right_text);
         initTopLayout();

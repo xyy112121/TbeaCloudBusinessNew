@@ -87,7 +87,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="15dp"
+                android:layout_height="21dp"
                 android:background="@color/white">
 
                 <LinearLayout
@@ -134,9 +134,9 @@
                 <TextView
                     android:id="@+id/pm_withdrawal_history_view_workyears"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="13dp"
                     android:text="工龄：12年"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
@@ -144,10 +144,10 @@
                 <TextView
                     android:id="@+id/pm_withdrawal_history_view_fansnumber"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="13dp"
                     android:text="粉丝：12"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />

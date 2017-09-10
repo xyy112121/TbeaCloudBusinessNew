@@ -115,7 +115,8 @@ public class StoreFragment extends Fragment implements BGARefreshLayout.BGARefre
                 public void run() {
                     try {
                         MyAction action = new MyAction();
-                        AttentionStoreResponseModel model = action.getAttentionStoreList(mPage++, mPagesiz);
+                        String id = ((MyAttentionActivity)getActivity()).mId;
+                        AttentionStoreResponseModel model = action.getAttentionStoreList(id,mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

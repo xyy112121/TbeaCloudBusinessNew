@@ -21,8 +21,8 @@ public class PersonManageViewResponseModel extends BaseResponseModel {
     }
 
     public class CommodityOrderInfo {
-        public String totlemoneyforoneyear;
-        public String totlemoneyforthreemonth;
+        public String ordermoneyforoneyear;
+        public String ordermoneythreemonth;
     }
 
     public class ElectricianBaseInfo {

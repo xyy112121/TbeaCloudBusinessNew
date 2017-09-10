@@ -16,9 +16,10 @@ public class HomeMainResponseModel extends BaseResponseModel {
     public class FunctionModel {
         public String enable;
         public String moduleicon;
+        public String iconwithnewdata;
         public String moduleid;
         public String modulename;
-        public String newmessagenumber;
+        public int newmessagenumber;
     }
 
     public class SystemMessage {

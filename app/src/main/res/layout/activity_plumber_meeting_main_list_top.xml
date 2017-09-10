@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:drawablePadding="10dp"
-            android:drawableTop="@drawable/icon_water_metting"
+            android:drawableTop="@drawable/icon_pm_top_image1"
             android:text="会议列表"
             android:textColor="@color/text_color" />
 
@@ -27,7 +27,7 @@
             android:layout_height="60dp"
             android:layout_marginLeft="15dp"
             android:drawablePadding="10dp"
-            android:drawableTop="@drawable/icon_water_order"
+            android:drawableTop="@drawable/icon_pm_top_image2"
             android:text="水电工签到"
             android:textColor="@color/text_color" />
     </LinearLayout>

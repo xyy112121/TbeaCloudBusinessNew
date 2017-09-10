@@ -25,6 +25,9 @@ public class PersonManageItemView  extends LinearLayout{
     private boolean isMoney;
     public TextView mTextView4;
     public TextView mTextView5;
+    Text4Click mText4Click;
+    Text5Click mText5Click;
+
     public PersonManageItemView(Context context, AttributeSet attrs)
     {
         this(context, attrs, 0);
@@ -86,6 +89,44 @@ public class PersonManageItemView  extends LinearLayout{
         TextView text5LabelTv = (TextView) layout.findViewById(R.id.person_manage_item_tv5_label);
         ImageView leftIv = (ImageView)layout.findViewById(R.id.person_manage_item_iv);
 
+        LinearLayout layout4 = (LinearLayout)layout.findViewById(R.id.person_manage_item_tv4_layout);
+        layout4.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mText4Click != null){
+                    mText4Click.onClick();
+                }
+            }
+        });
+
+        text2Tv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mText4Click != null){
+                    mText4Click.onClick();
+                }
+            }
+        });
+
+        LinearLayout layout5 = (LinearLayout)layout.findViewById(R.id.person_manage_item_tv5_layout);
+        layout5.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mText5Click != null){
+                    mText5Click.onClick();
+                }
+            }
+        });
+
+        text3Tv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mText5Click != null){
+                    mText5Click.onClick();
+                }
+            }
+        });
+
         if (isMoney){
             text4LabelTv.setVisibility(VISIBLE);
             text5LabelTv.setVisibility(VISIBLE);
@@ -101,9 +142,27 @@ public class PersonManageItemView  extends LinearLayout{
         addView(layout);
     }
 
+    public interface Text4Click{
+         void onClick();
+    }
+
+    public interface Text5Click{
+        void onClick();
+    }
+
+    public void setText4Click(Text4Click click){
+        mText4Click = click;
+    }
+
+    public void setText5Click(Text5Click click){
+        mText5Click = click;
+    }
+
      public void setText4(String text4){
          mTextView4.setText(text4);
      }
+
+
 
     public void setText5(String text5){
        mTextView5.setText(text5);
