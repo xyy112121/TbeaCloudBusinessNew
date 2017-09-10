@@ -33,54 +33,55 @@ public class PwdEditActivity extends BaseActivity {
         listener();
     }
 
-    public  void listener(){
+    public void listener() {
         findViewById(R.id.pwd_edit_finish).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String oldpwd = ((TextView)findViewById(R.id.pwd_edit_old)).getText()+"";
-                String newPwd = ((TextView)findViewById(R.id.pwd_edit_new)).getText()+"";
-                String confirmPwd = ((TextView)findViewById(R.id.pwd_edit_confirm)).getText()+"";
-                if("".equals(oldpwd)){
+                String oldpwd = ((TextView) findViewById(R.id.pwd_edit_old)).getText() + "";
+                String newPwd = ((TextView) findViewById(R.id.pwd_edit_new)).getText() + "";
+                String confirmPwd = ((TextView) findViewById(R.id.pwd_edit_confirm)).getText() + "";
+
+                if ("".equals(oldpwd)) {
                     ToastUtil.showMessage("当前密码不能为空！");
                     return;
                 }
 
-                if("".equals(newPwd)){
+                if ("".equals(newPwd)) {
                     ToastUtil.showMessage("新密码不能为空！");
                     return;
                 }
 
-                if(newPwd.length() < 6 || newPwd.length() > 10){
-                    ToastUtil.showMessage("密码长度6到10位！");
+                if (newPwd.length() < 6 || newPwd.length() > 32) {
+                    ToastUtil.showMessage("密码长度6到32位！");
                     return;
                 }
 
-                if(!newPwd.equals(confirmPwd)){
+                if (!newPwd.equals(confirmPwd)) {
                     ToastUtil.showMessage("两次密码不一致！");
                     return;
                 }
-                updatePwd(oldpwd,newPwd);
+                updatePwd(oldpwd, newPwd);
             }
         });
 
     }
 
-    public  void updatePwd(final String oldPwd, final String newPwd){
-        final CustomDialog dialog = new CustomDialog(PwdEditActivity.this,R.style.MyDialog,R.layout.tip_wait_dialog);
+    public void updatePwd(final String oldPwd, final String newPwd) {
+        final CustomDialog dialog = new CustomDialog(PwdEditActivity.this, R.style.MyDialog, R.layout.tip_wait_dialog);
         dialog.setText("请等待");
         dialog.show();
-        final Handler handler = new Handler(){
+        final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 dialog.dismiss();
-                switch (msg.what){
+                switch (msg.what) {
                     case ThreadState.SUCCESS:
-                        ResponseInfo re = (ResponseInfo)msg.obj;
-                        if(re.isSuccess()){
-                            Intent intent = new Intent(PwdEditActivity.this,PwdEditSucceedActivity.class);
+                        ResponseInfo re = (ResponseInfo) msg.obj;
+                        if (re.isSuccess()) {
+                            Intent intent = new Intent(PwdEditActivity.this, PwdEditSucceedActivity.class);
                             startActivity(intent);
                             finish();
-                        }else {
+                        } else {
                             ToastUtil.showMessage(re.getMsg());
                         }
                         break;
@@ -96,8 +97,8 @@ public class PwdEditActivity extends BaseActivity {
             public void run() {
                 try {
                     SetAction userAction = new SetAction();
-                    ResponseInfo re = userAction.updatePwd(oldPwd,newPwd);
-                    handler.obtainMessage(ThreadState.SUCCESS,re).sendToTarget();
+                    ResponseInfo re = userAction.updatePwd(oldPwd, newPwd);
+                    handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);
                 }

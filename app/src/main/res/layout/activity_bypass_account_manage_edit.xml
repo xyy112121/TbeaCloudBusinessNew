@@ -93,7 +93,7 @@
                 <EditText
                     android:id="@+id/my_bypass_account_edit_pwd"
                     style="@style/my_right_text_style1"
-                    />
+                    android:inputType="textPassword"/>
             </LinearLayout>
 
             <View style="@style/horizontal_view" />

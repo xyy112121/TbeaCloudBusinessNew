@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.my.main.attention;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PersonManageViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.action.MyAction;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionPersonResponseModel;
@@ -116,8 +118,8 @@ public class PersonFragment extends Fragment implements BGARefreshLayout.BGARefr
                 public void run() {
                     try {
                         MyAction action = new MyAction();
-                        String id = ((MyAttentionActivity)getActivity()).mId;
-                        AttentionPersonResponseModel model = action.getAttentionPersonList(id,mPage++, mPagesiz);
+                        String id = ((MyAttentionActivity) getActivity()).mId;
+                        AttentionPersonResponseModel model = action.getAttentionPersonList(id, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -250,11 +252,20 @@ public class PersonFragment extends Fragment implements BGARefreshLayout.BGARefr
                 }
             });
 //
-            AttentionPersonResponseModel.DataBean.MyfocuslistBean obj = mList.get(position);
+            final AttentionPersonResponseModel.DataBean.MyfocuslistBean obj = mList.get(position);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, holder.mHeadView);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, holder.mPersontypeiconView);
             holder.mNameView.setText(obj.name);
             holder.mJobtitleView.setText(obj.info);
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), PersonManageViewActivity.class);
+                    intent.putExtra("id", obj.userid);
+                    startActivity(intent);
+                }
+            });
             return convertView;
         }
 

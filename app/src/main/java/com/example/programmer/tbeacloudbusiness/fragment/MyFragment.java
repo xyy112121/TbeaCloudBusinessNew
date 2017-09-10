@@ -15,18 +15,17 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-
-import com.example.programmer.tbeacloudbusiness.activity.administrator.realNameAuthentication.MemberListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.PlumberMeetingListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.activity.FxMainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.BypassAccountManageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyFansActivity;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.RealNameAuthenticationPlumberActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.SetActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
-import com.example.programmer.tbeacloudbusiness.activity.user.model.HomeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
@@ -69,14 +68,14 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
                             ResponseInfo re = (ResponseInfo) msg.obj;
-                            if(re.isSuccess()){
+                            if (re.isSuccess()) {
                                 Gson gson = new GsonBuilder().serializeNulls().create();
                                 String json = gson.toJson(re.data);
                                 MyMainResponseModel model = gson.fromJson(json, MyMainResponseModel.class);
-                                    initItemView(model.itemlist);
-                                    initPersonInfo(model.userpersoninfo);
+                                initItemView(model.itemlist);
+                                initPersonInfo(model.userpersoninfo);
 
-                            }else {
+                            } else {
                                 ToastUtil.showMessage(re.getMsg());
                             }
 
@@ -144,6 +143,18 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                         if ("companyidentify".equals(item.id)) {//实名认证
                             startActivity(new Intent(getActivity(), CompletionDataActivity.class));
 //                            startActivity(new Intent(getActivity(), RealNameAuthenticationPlumberActivity.class));
+                        }
+
+                        if ("marketer_shuidiangonghuiyi".equals(item.id) || "shuidiangonghuiyi".equals(item.id)) {
+
+                            //水电工会议
+                            startActivity(new Intent(getActivity(), PlumberMeetingListActivity.class));
+                        }
+
+                        if ("tebianfenxiao".equals(item.id) || "fxsubsystem".equals(item.id)) {
+                            //分销系统
+                            Intent intent = new Intent(getActivity(), FxMainActivity.class);
+                            startActivity(intent);
                         }
 
                     }

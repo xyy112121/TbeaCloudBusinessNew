@@ -27,7 +27,6 @@ import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueB
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
-import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -265,9 +264,10 @@ public class RegisterActivity extends Activity {
         }
 
         if (mRequest.password.length() < 6 || mRequest.password.length() > 32) {
-            ToastUtil.showMessage("密码位数大于等于6位，小于等于32位！");
+            ToastUtil.showMessage("密码长度6到32位！");
             return;
         }
+
         if (!mRequest.password.equals(mConfirmPwdView.getText() + "")) {
             ToastUtil.showMessage("两次密码输入不一致！");
             return;

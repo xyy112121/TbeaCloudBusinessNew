@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.my.main.attention;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +23,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.main.action.MyAction
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionCommodityResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionSelectModel;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationInfoActivity;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
@@ -249,6 +251,15 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
                     } else {
                         mList.get(position).isCheck = true;
                     }
+                }
+            });
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), ProductPresentationInfoActivity.class);
+                    intent.putExtra("id", mList.get(position).commodityid);
+                    startActivity(intent);
                 }
             });
 

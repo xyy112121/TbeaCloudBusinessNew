@@ -180,14 +180,33 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
             ToastUtil.showMessage("请选择性别");
             return;
         }
+        if (mRequest.birthday == null) {
+            ToastUtil.showMessage("请输入生日");
+            return;
+        }
 
         if ("".equals(mRequest.password)) {
             ToastUtil.showMessage("请输入登录密码");
             return;
         }
 
+        if (mRequest.password.length() < 6 || mRequest.password.length() > 32) {
+            ToastUtil.showMessage("密码长度6到32位！");
+            return;
+        }
+
         if ("".equals(mRequest.jobtitle)) {
             ToastUtil.showMessage("请输入职务");
+            return;
+        }
+
+        if (mSelectList.size() < 0) {
+            ToastUtil.showMessage("请选择头像");
+            return;
+        }
+
+        if ("".equals(mRequest.authorizationlist) || mRequest.authorizationlist == null) {
+            ToastUtil.showMessage("请选择授权功能");
             return;
         }
 

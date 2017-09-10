@@ -273,11 +273,11 @@ public class StoreManageMainActivity extends BaseActivity implements BGARefreshL
 
                 holder.topText6.setText(obj.subitemlist.get(2).name);
                 holder.topText7.setText(obj.subitemlist.get(3).name);
-                if ("0".equals(obj.subitemlist.get(2).ismoney)) {
+                if ("1".equals(obj.subitemlist.get(2).ismoney)) {
                     holder.topText8Label.setVisibility(View.VISIBLE);
                 }
                 holder.topText8.setText(obj.subitemlist.get(3).value);
-                if ("0".equals(obj.subitemlist.get(3).ismoney)) {
+                if ("1".equals(obj.subitemlist.get(3).ismoney)) {
                     holder.topText9Label.setVisibility(View.VISIBLE);
                 }
                 holder.topText9.setText(obj.subitemlist.get(1).value);
