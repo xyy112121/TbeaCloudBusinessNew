@@ -54,7 +54,6 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
     private void initView() {
         mGridAdapter = new GridAdapter(mContext, R.layout.activity_shop_dynamic_add_image_item);
         mGridView.setAdapter(mGridAdapter);
-//        mGridAdapter.addAll(mSelectList);
 
     }
 
@@ -81,6 +80,8 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
                             if (model.isSuccess() && model.data != null) {
                                 if (model.data.picturelist != null) {
                                     mGridAdapter.addAll(model.data.picturelist);
+                                    mGalleryImageView.setVisibility(View.GONE);
+                                    mGridView.setVisibility(View.VISIBLE);
                                 }
                             } else {
                                 ToastUtil.showMessage(model.getMsg());

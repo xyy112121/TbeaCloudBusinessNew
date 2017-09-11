@@ -100,6 +100,9 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
     private final int RESULT_PARTICIPANT = 1003;
     private final int RESULT_PLAN = 1004;
     private final int RESULT_UPDATE = 1005;
+    private final int RESULT_SUMMARY = 1006;
+
+    private String mState;
 
     MeetingPrepareRequestModel mRequest = new MeetingPrepareRequestModel();
 
@@ -143,6 +146,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                     mRequest.meetingaddr = meetingbaseinfo.meetingaddr;
 
                                     mMeetingPrepareState.setValueText(meetingbaseinfo.meetingstatus);
+                                    mState = meetingbaseinfo.meetingstatus;
                                     //新会议：可编辑，删除，准备中：可编辑 开会中：可更新
                                     if ("新会议".equals(meetingbaseinfo.meetingstatus)) {
                                         mIsEdit = true;
@@ -156,11 +160,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                         mMeetingPrepareGallery.setVisibility(View.GONE);
                                     } else if ("开会中".equals(meetingbaseinfo.meetingstatus)) {
                                         mIsUpdate = true;
-                                        mMeetingPrepareSummary.setVisibility(View.GONE);
-                                        mMeetingPrepareGallery.setVisibility(View.GONE);
                                     }
-
-
                                 }
                                 //举办单位
                                 if (model.data.organizecompanylist != null) {
@@ -237,9 +237,18 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    @OnClick({R.id.cp_meeting_prepare_sign, R.id.cp_meeting_prepare_hold_time, R.id.cp_meeting_prepare_hold_monad, R.id.cp_meeting_prepare_participant, R.id.cp_meeting_prepare_plan, R.id.cp_meeting_prepare_finish, R.id.cp_meeting_prepare_hold_addr})
+    @OnClick({R.id.cp_meeting_prepare_summary,R.id.cp_meeting_prepare_sign, R.id.cp_meeting_prepare_hold_time, R.id.cp_meeting_prepare_hold_monad, R.id.cp_meeting_prepare_participant, R.id.cp_meeting_prepare_plan, R.id.cp_meeting_prepare_finish, R.id.cp_meeting_prepare_hold_addr})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.cp_meeting_prepare_summary:
+                Intent intent = new Intent(mContext,MeetingPrepareSummaryActivity.class);
+                if (!"开会中".equals(mState)) {
+                    intent.putExtra("flag", "view");
+                }
+                intent.putExtra("text",mMeetingPrepareSummary.getValueText());
+                intent.putExtra("meetingid",getIntent().getStringExtra("id"));
+                startActivityForResult(intent,RESULT_SUMMARY);
+                break;
             case R.id.cp_meeting_prepare_hold_time:
                 if (mIsEdit == true) {
                     startActivityForResult(new Intent(mContext, CpDateSelectActivity.class), RESULT_DATE);
@@ -250,7 +259,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                     startActivityForResult(new Intent(mContext, AddrSelectActivity.class), RESULT_ADDR);
                 break;
             case R.id.cp_meeting_prepare_participant:
-                Intent intent = new Intent();
+                 intent = new Intent();
                 if (mIsEditOnClick == true) {//编辑状态，可更改参与人员
 //                    intent.putExtra("flag", true);
                     intent.putExtra("ids", mRequest.participantlist);
@@ -265,11 +274,12 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
 
                 break;
             case R.id.cp_meeting_prepare_plan:
-                if (mIsEdit == true) {
-                    intent = new Intent(mContext, MeetingPreparePlanActivity.class);
-                    intent.putExtra("text", mPlanView.getValueText());
-                    startActivityForResult(intent, RESULT_PLAN);
+                intent = new Intent(mContext, MeetingPreparePlanActivity.class);
+                intent.putExtra("text", mPlanView.getValueText());
+                if (mIsEdit == false) {
+                    intent.putExtra("flag", "view");
                 }
+                startActivityForResult(intent, RESULT_PLAN);
 
                 break;
             case R.id.cp_meeting_prepare_sign:
@@ -354,6 +364,10 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                     mMeetingPrepareSummary.setVisibility(View.VISIBLE);
                     mMeetingPrepareGallery.setValueText(gallery);
                     mMeetingPrepareSummary.setValueText(summary);
+                    break;
+                case RESULT_SUMMARY:
+                    String content = data.getStringExtra("summary");
+                    mMeetingPrepareSummary.setValueText(content);
                     break;
             }
         }

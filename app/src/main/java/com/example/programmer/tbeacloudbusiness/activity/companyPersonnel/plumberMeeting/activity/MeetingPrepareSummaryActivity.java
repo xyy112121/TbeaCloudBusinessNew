@@ -17,22 +17,37 @@ import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * 会议纪要
  */
 
 public class MeetingPrepareSummaryActivity extends BaseActivity implements View.OnClickListener {
+    @BindView(R.id.cp_meeting_prepare_plan)
+    EditText mPlanView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cp_meeting_prepare_plan);
-        initTopbar("会议纪要", "保存", this);
-        ((TextView)findViewById(R.id.cp_meeting_prepare_plan_tv)).setText("录入");
+        ButterKnife.bind(this);
+        String flag = getIntent().getStringExtra("flag");
+        if ("view".equals(flag)) {
+            mPlanView.setEnabled(false);
+            initTopbar("会议纪要");
+        } else {
+            initTopbar("会议纪要", "保存", this);
+        }
+        String text = getIntent().getStringExtra("text");
+        mPlanView.setText(text);
+        ((TextView) findViewById(R.id.cp_meeting_prepare_plan_tv)).setText("录入");
     }
 
     @Override
     public void onClick(View v) {
-        String content = ((EditText) findViewById(R.id.cp_meeting_prepare_plan)).getText() + "";
+        String content = mPlanView.getText() + "";
         save(content);
     }
 
@@ -71,7 +86,7 @@ public class MeetingPrepareSummaryActivity extends BaseActivity implements View.
                     try {
                         CpPlumberMeetingAction action = new CpPlumberMeetingAction();
                         String id = getIntent().getStringExtra("meetingid");
-                        BaseResponseModel model = action.saveSummary(id,content);
+                        BaseResponseModel model = action.saveSummary(id, content);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
