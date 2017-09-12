@@ -79,7 +79,6 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
         getData();
     }
 
-
     //获取信息
     private void getData() {
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
