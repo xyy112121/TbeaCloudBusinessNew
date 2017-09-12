@@ -21,6 +21,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
@@ -34,20 +35,24 @@ import butterknife.ButterKnife;
  */
 
 public class MeetingGalleryListActivity extends BaseActivity implements View.OnClickListener {
-
-//    List<LocalMedia> mSelectList = new ArrayList<>();
     GridAdapter mGridAdapter;
     @BindView(R.id.gridView)
     GridView mGridView;
     @BindView(R.id.cp_meeting_gallery_image)
     ImageView mGalleryImageView;
+    private String mFlag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cp_meeting_gallery_list);
         ButterKnife.bind(this);
-        initTopbar("现场图片", "上传", this);
+        mFlag = getIntent().getStringExtra("flag");
+        if ("view".equals(mFlag)) {//已结束
+            initTopbar("现场图片");
+        } else {
+            initTopbar("现场图片", "上传", this);
+        }
         initView();
     }
 
@@ -55,7 +60,17 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
         mGridAdapter = new GridAdapter(mContext, R.layout.activity_shop_dynamic_add_image_item);
         mGridView.setAdapter(mGridAdapter);
 
+        mBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("number", mGridAdapter.getCount() + "");
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
     }
+
 
     @Override
     protected void onResume() {
@@ -64,7 +79,8 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
         getData();
     }
 
-    //保存会议纪要
+
+    //获取信息
     private void getData() {
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         dialog.setText("请等待...");
@@ -82,6 +98,9 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
                                     mGridAdapter.addAll(model.data.picturelist);
                                     mGalleryImageView.setVisibility(View.GONE);
                                     mGridView.setVisibility(View.VISIBLE);
+                                }else {
+                                    mGalleryImageView.setVisibility(View.VISIBLE);
+                                    mGridView.setVisibility(View.GONE);
                                 }
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
@@ -114,8 +133,8 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(mContext,MeetingGalleryUploadActivity.class);
-        intent.putExtra("meetingid",getIntent().getStringExtra("meetingid"));
+        Intent intent = new Intent(mContext, MeetingGalleryUploadActivity.class);
+        intent.putExtra("meetingid", getIntent().getStringExtra("meetingid"));
         startActivity(intent);
 
     }
@@ -142,10 +161,77 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
             }
             int displayWidth = UtilAssistants.getDisplayWidth(mContext);
             holder.mImageView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (displayWidth / 4)));
-            MeetingGalleryListResponseModel.DataBean.PictureBean obj = getItem(postion);
+            final MeetingGalleryListResponseModel.DataBean.PictureBean obj = getItem(postion);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpictureurl, holder.mImageView);
-            holder.mDeleteView.setVisibility(View.GONE);
+            if (!"view".equals(mFlag)) {
+                holder.mDeleteView.setVisibility(View.VISIBLE);
+            }else {
+                holder.mDeleteView.setVisibility(View.GONE);
+            }
+            holder.mDeleteView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    delete(obj.pictureid);
+                }
+            });
             return view;
+        }
+
+        private void delete(final String pictureid) {
+            final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_delete_dialog);
+            dialog.show();
+            dialog.setText("删除后不可恢复，确定删除么？");
+            dialog.setConfirmBtnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+
+                }
+            }, "否");
+            dialog.setCancelBtnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+                    dialog.setText("请等待...");
+                    dialog.show();
+                    final Handler handler = new Handler() {
+                        @Override
+                        public void handleMessage(Message msg) {
+                            dialog.dismiss();
+                            switch (msg.what) {
+                                case ThreadState.SUCCESS:
+                                    ResponseInfo re = (ResponseInfo) msg.obj;
+                                    if (re.isSuccess()) {
+                                        mGridAdapter.clear();
+                                        getData();
+                                    } else {
+                                        ToastUtil.showMessage(re.getMsg());
+                                    }
+
+                                    break;
+                                case ThreadState.ERROR:
+                                    ToastUtil.showMessage("操作失败!");
+                                    break;
+                            }
+                        }
+                    };
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                CpPlumberMeetingAction action = new CpPlumberMeetingAction();
+                                ResponseInfo re = action.deleteGallery(pictureid);
+                                handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
+                            } catch (Exception e) {
+                                handler.sendEmptyMessage(ThreadState.ERROR);
+                            }
+                        }
+                    }).start();
+
+                }
+            }, "是");
         }
 
         class ViewHolder {

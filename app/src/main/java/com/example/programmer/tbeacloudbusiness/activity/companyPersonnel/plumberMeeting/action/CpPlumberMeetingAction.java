@@ -225,4 +225,16 @@ public class CpPlumberMeetingAction extends BaseAction {
         return resultModel;
     }
 
+    /**
+     * 删除现场图片
+     */
+    public ResponseInfo deleteGallery(String pictureid) throws Exception {
+        ResponseInfo rspInfo;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("pictureid", pictureid));
+        String result = sendRequest("TBEAYUN008003003002", pairs);
+        rspInfo = gson.fromJson(result, ResponseInfo.class);
+        return rspInfo;
+    }
+
 }

@@ -101,6 +101,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
     private final int RESULT_PLAN = 1004;
     private final int RESULT_UPDATE = 1005;
     private final int RESULT_SUMMARY = 1006;
+    private final int RESULT_GALLERY = 1007;
 
     private String mState;
 
@@ -237,17 +238,25 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    @OnClick({R.id.cp_meeting_prepare_summary,R.id.cp_meeting_prepare_sign, R.id.cp_meeting_prepare_hold_time, R.id.cp_meeting_prepare_hold_monad, R.id.cp_meeting_prepare_participant, R.id.cp_meeting_prepare_plan, R.id.cp_meeting_prepare_finish, R.id.cp_meeting_prepare_hold_addr})
+    @OnClick({R.id.cp_meeting_prepare_gallery,R.id.cp_meeting_prepare_summary, R.id.cp_meeting_prepare_sign, R.id.cp_meeting_prepare_hold_time, R.id.cp_meeting_prepare_hold_monad, R.id.cp_meeting_prepare_participant, R.id.cp_meeting_prepare_plan, R.id.cp_meeting_prepare_finish, R.id.cp_meeting_prepare_hold_addr})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cp_meeting_prepare_summary:
-                Intent intent = new Intent(mContext,MeetingPrepareSummaryActivity.class);
+                Intent intent = new Intent(mContext, MeetingPrepareSummaryActivity.class);
                 if (!"开会中".equals(mState)) {
                     intent.putExtra("flag", "view");
                 }
-                intent.putExtra("text",mMeetingPrepareSummary.getValueText());
-                intent.putExtra("meetingid",getIntent().getStringExtra("id"));
-                startActivityForResult(intent,RESULT_SUMMARY);
+                intent.putExtra("text", mMeetingPrepareSummary.getValueText());
+                intent.putExtra("meetingid", getIntent().getStringExtra("id"));
+                startActivityForResult(intent, RESULT_SUMMARY);
+                break;
+            case R.id.cp_meeting_prepare_gallery:
+                intent = new Intent(mContext, MeetingGalleryListActivity.class);
+                if (!"开会中".equals(mState)) {
+                    intent.putExtra("flag", "view");
+                }
+                intent.putExtra("meetingid", getIntent().getStringExtra("id"));
+                startActivityForResult(intent, RESULT_GALLERY);
                 break;
             case R.id.cp_meeting_prepare_hold_time:
                 if (mIsEdit == true) {
@@ -259,7 +268,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                     startActivityForResult(new Intent(mContext, AddrSelectActivity.class), RESULT_ADDR);
                 break;
             case R.id.cp_meeting_prepare_participant:
-                 intent = new Intent();
+                intent = new Intent();
                 if (mIsEditOnClick == true) {//编辑状态，可更改参与人员
 //                    intent.putExtra("flag", true);
                     intent.putExtra("ids", mRequest.participantlist);
@@ -369,6 +378,10 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                     String content = data.getStringExtra("summary");
                     mMeetingPrepareSummary.setValueText(content);
                     break;
+                case RESULT_GALLERY:
+                    String number = data.getStringExtra("number");
+                    mMeetingPrepareGallery.setValueText(number);
+                    break;
             }
         }
     }
@@ -416,7 +429,6 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
             e.printStackTrace();
         }
     }
-
 
     //编辑时
     private void editMeeting() {
