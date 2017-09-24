@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/my_free_test_list_item_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:maxLines="1"
+            android:text="111111"
+            android:textSize="14sp"
+            android:textColor="@color/tab_text_normal" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/my_free_test_list_item_isMoney"
+                style="@style/money_logo_style"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+            <TextView
+
+                android:id="@+id/my_free_test_list_item_status"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="111111"
+                android:textSize="14sp"
+                android:textColor="@color/tab_text_normal" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/my_free_test_list_item_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:ellipsize="end"
+            android:gravity="right|center"
+            android:maxLines="1"
+            android:text="111111"
+            android:textSize="14sp"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/tab_text_normal" />
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

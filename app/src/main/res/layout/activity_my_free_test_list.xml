@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <LinearLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+    <View style="@style/horizontal_view" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="15dp">
+
+        <LinearLayout
+            android:id="@+id/my_free_test_list_code_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:layout_weight="0.5"
+            android:gravity="left">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:gravity="right|center_vertical"
+                android:text="预约编号"
+                android:textColor="@color/tab_text_normal" />
+
+            <ImageView
+                android:id="@+id/my_free_test_list_code_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_arraw" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/my_free_test_list_status_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:layout_weight="0.25"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:gravity="right|center_vertical"
+                android:text="预约状态"
+                android:textColor="@color/tab_text_normal" />
+
+            <ImageView
+                android:id="@+id/my_free_test_list_status_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_arraw" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/my_free_test_list_time_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:layout_weight="0.25"
+            android:gravity="right"
+            android:tag="desc">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:gravity="right|center_vertical"
+                android:text="预约日期"
+                android:textColor="@color/tab_text_normal" />
+
+            <ImageView
+                android:id="@+id/my_free_test_list_time_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_arraw_grayblue" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View style="@style/horizontal_view" />
+
+    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        android:id="@+id/rl_recyclerview_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/text_color"
+            android:dividerHeight="0.5dp" />
+    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
+
+</LinearLayout>
