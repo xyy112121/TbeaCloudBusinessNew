@@ -157,7 +157,8 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
                 switch (msg.what) {
                     case ThreadState.SUCCESS:
                         PlumberMeetingUserTypeResonpseModel model = (PlumberMeetingUserTypeResonpseModel) msg.obj;
-                        if (model.isSuccess()) {
+                        if (model.isSuccess() && model.data != null) {
+                            if (model.data.electricianownertypelist != null)
                             mUserTypeView.setAdapterData(model.data.electricianownertypelist);
 
                         } else {

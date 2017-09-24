@@ -11,6 +11,8 @@ import java.util.List;
 
 public class MeetingGalleryListResponseModel extends BaseResponseModel {
 
+
+
     public DataBean data;
 
     public static class DataBean {

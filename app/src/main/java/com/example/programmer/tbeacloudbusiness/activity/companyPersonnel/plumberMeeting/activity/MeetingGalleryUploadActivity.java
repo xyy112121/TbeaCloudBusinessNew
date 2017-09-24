@@ -82,12 +82,12 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
                         switch (msg.what) {
                             case ThreadState.SUCCESS:
                                 ResponseInfo model = (ResponseInfo) msg.obj;
-                                ToastUtil.showMessage(model.getMsg());
-//                                if (model.isSuccess()) {
-//                                    ToastUtil.showMessage("操作成功！");
-//                                } else {
-//                                    ToastUtil.showMessage(model.getMsg());
-//                                }
+                                if (model.isSuccess()) {
+                                    ToastUtil.showMessage("操作成功！");
+                                    finish();
+                                } else {
+                                    ToastUtil.showMessage(model.getMsg());
+                                }
                                 break;
                             case ThreadState.ERROR:
                                 ToastUtil.showMessage("操作失败！");

@@ -224,7 +224,7 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                         dialog.dismiss();
                         switch (msg.what) {
                             case ThreadState.SUCCESS:
-                                BaseResponseModel re = (BaseResponseModel) msg.obj;
+                                ResponseInfo re = (ResponseInfo) msg.obj;
                                 if (re.isSuccess()) {
                                     mImageView.setImageResource(R.drawable.icon_defult);
                                 } else {
@@ -244,7 +244,7 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                     public void run() {
                         try {
                             SetAction action = new SetAction();
-                            BaseResponseModel re = action.deleteBackground();
+                            ResponseInfo re = action.deleteBackground();
                             handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                         } catch (Exception e) {
                             handler.sendEmptyMessage(ThreadState.ERROR);

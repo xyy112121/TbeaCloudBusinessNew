@@ -25,7 +25,13 @@ public class MeetingPreparePlanActivity extends BaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cp_meeting_prepare_plan);
         ButterKnife.bind(this);
-        initTopbar("会议安排", "保存", this);
+        String flag = getIntent().getStringExtra("flag");
+        if ("view".equals(flag)) {
+            mPlanView.setEnabled(false);
+            initTopbar("会议安排");
+        }else {
+            initTopbar("会议安排", "保存", this);
+        }
         String text = getIntent().getStringExtra("text");
         mPlanView.setText(text);
     }

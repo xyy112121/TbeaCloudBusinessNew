@@ -107,11 +107,11 @@ public class SetAction extends BaseAction {
     /**
      * 删除背景图
      */
-    public BackgroundInfoModel deleteBackground() throws Exception {
-        BackgroundInfoModel rspInfo;
+    public ResponseInfo deleteBackground() throws Exception {
+        ResponseInfo rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN011001003003", pairs);
-        rspInfo = gson.fromJson(result, BackgroundInfoModel.class);
+        rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;
     }
 

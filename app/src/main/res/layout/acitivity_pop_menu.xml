@@ -25,7 +25,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="消息"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color1" />
     </LinearLayout>
 
     <View style="@style/horizontal_view" />
@@ -52,7 +52,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="首页"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color1" />
     </LinearLayout>
 
     <View
@@ -81,6 +81,6 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="首页"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color1" />
     </LinearLayout>
 </LinearLayout>
