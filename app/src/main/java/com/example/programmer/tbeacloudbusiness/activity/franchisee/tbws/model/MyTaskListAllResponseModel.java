@@ -1,6 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model;
 
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -10,18 +11,19 @@ import java.util.List;
 
 public class MyTaskListAllResponseModel extends BaseResponseModel {
 
+
     public DataBean data;
 
 
     public class DataBean {
-        public List<TasklistBean> tasklist;
+        public List<ElectricalchecklistBean> electricalchecklist;
 
-        public class TasklistBean {
-            public String taskid;
-            public String taskcode;
-            public String taskstatusid;
-            public String taskstatus;
-            public String publishtime;
+        public class ElectricalchecklistBean {
+            public String electricalcheckid;
+            public String subscribecode;
+            public String checkstatusid;
+            public String checkstatus;
+            public String subscribetime;
         }
     }
 }

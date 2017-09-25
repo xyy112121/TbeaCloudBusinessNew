@@ -98,8 +98,8 @@ public class MyTaskAllListFragment extends Fragment implements BGARefreshLayout.
                     case ThreadState.SUCCESS:
                         MyTaskListAllResponseModel re = (MyTaskListAllResponseModel) msg.obj;
                         if (re.isSuccess()) {
-                            if (re.data.tasklist != null) {
-                                mAdapter.addAll(re.data.tasklist);
+                            if (re.data.electricalchecklist != null) {
+                                mAdapter.addAll(re.data.electricalchecklist);
                             }
                         } else {
                             ToastUtil.showMessage(re.getMsg());
@@ -159,7 +159,7 @@ public class MyTaskAllListFragment extends Fragment implements BGARefreshLayout.
         switch (view.getId()) {
             case R.id.my_task_list_code_layout:
                 mCodeImage.setImageResource(drawable);
-                mOrderItem = "taskcode";
+                mOrderItem = "subscribecode";
 
                 mStatusImage.setImageResource(R.drawable.icon_arraw);
                 mTimeImage.setImageResource(R.drawable.icon_arraw);
@@ -168,7 +168,7 @@ public class MyTaskAllListFragment extends Fragment implements BGARefreshLayout.
                 break;
             case R.id.my_task_list_status_layout:
                 mStatusImage.setImageResource(drawable);
-                mOrderItem = "taskstatus";
+                mOrderItem = "checkstatus";
 
                 mCodeImage.setImageResource(R.drawable.icon_arraw);
                 mTimeImage.setImageResource(R.drawable.icon_arraw);
@@ -189,7 +189,7 @@ public class MyTaskAllListFragment extends Fragment implements BGARefreshLayout.
         mRefreshLayout.beginRefreshing();
     }
 
-    class MyAdapter extends ArrayAdapter<MyTaskListAllResponseModel.DataBean.TasklistBean> {
+    class MyAdapter extends ArrayAdapter<MyTaskListAllResponseModel.DataBean.ElectricalchecklistBean> {
 
         public MyAdapter(@NonNull Context context, @LayoutRes int resource) {
             super(context, resource);
@@ -205,14 +205,14 @@ public class MyTaskAllListFragment extends Fragment implements BGARefreshLayout.
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            holder.mCodeView.setText(getItem(position).taskcode);
-            holder.mStatusView.setText(getItem(position).taskstatus);
-            holder.mDateView.setText(getItem(position).publishtime);
+            holder.mCodeView.setText(getItem(position).subscribecode);
+            holder.mStatusView.setText(getItem(position).checkstatus);
+            holder.mDateView.setText(getItem(position).subscribetime);
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String checkstatusid = getItem(position).taskstatusid;
+                    String checkstatusid = getItem(position).checkstatusid;
                     Intent intent = new Intent();
 //                    if ("new".equals(checkstatusid)) {//待接单
 //                        intent.setClass(getActivity(), MyTaskViewWaitingActivity.class);
@@ -226,7 +226,7 @@ public class MyTaskAllListFragment extends Fragment implements BGARefreshLayout.
 //                    if ("finished".equals(checkstatusid)) {//已结束
 //                        intent.setClass(getActivity(), MyTaskViewHaveFinishedActivity.class);
 //                    }
-                    intent.putExtra("id", getItem(position).taskid);
+                    intent.putExtra("id", getItem(position).electricalcheckid);
                     startActivity(intent);
                 }
             });

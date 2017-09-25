@@ -61,7 +61,7 @@ public class MyTaskListActivity extends BaseActivity {
                     case ThreadState.SUCCESS:
                         TaskStateResponseModel re = (TaskStateResponseModel) msg.obj;
                         if (re.isSuccess()) {
-                            final List<Condition> list = re.data.taskstatuslist;
+                            final List<Condition> list = re.data.electricalcheckstatuslist;
                             if (list != null) {
                                 LinearLayout parentLayout = (LinearLayout) findViewById(R.id.top_layout);
                                 for (int i = 0; i < list.size(); i++) {
@@ -136,22 +136,22 @@ public class MyTaskListActivity extends BaseActivity {
             FragmentTransaction t = getSupportFragmentManager().beginTransaction();
             t.replace(R.id.content_frame, f);
             t.commit();
-        } else if ("待接单".equals(status)) {
+        } else if ("待处理".equals(status)) {
             MyTaskListWaitingFragment f = new MyTaskListWaitingFragment();
             FragmentTransaction t = getSupportFragmentManager().beginTransaction();
             t.replace(R.id.content_frame, f);
             t.commit();
-        }else if ("已接单".equals(status)) {
+        } else if ("已派单".equals(status)) {
             MyTaskListHaveOderFragment f = new MyTaskListHaveOderFragment();
             FragmentTransaction t = getSupportFragmentManager().beginTransaction();
             t.replace(R.id.content_frame, f);
             t.commit();
-        }else if ("待评价".equals(status)) {
+        } else if ("已完工".equals(status)) {
             MyTaskListHaveEvaluationFragment f = new MyTaskListHaveEvaluationFragment();
             FragmentTransaction t = getSupportFragmentManager().beginTransaction();
             t.replace(R.id.content_frame, f);
             t.commit();
-        }else if ("已结束".equals(status)) {
+        } else if ("已上传".equals(status)) {
             MyTaskListHaveFinishedFragment f = new MyTaskListHaveFinishedFragment();
             FragmentTransaction t = getSupportFragmentManager().beginTransaction();
             t.replace(R.id.content_frame, f);

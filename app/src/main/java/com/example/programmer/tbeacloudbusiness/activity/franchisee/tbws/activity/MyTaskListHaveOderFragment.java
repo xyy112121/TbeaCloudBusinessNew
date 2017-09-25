@@ -32,7 +32,7 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 获得我发布的任务列表-­‐已接单
+ * 获得我发布的任务列表-­‐已派单
  */
 
 public class MyTaskListHaveOderFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
@@ -78,9 +78,9 @@ public class MyTaskListHaveOderFragment extends Fragment implements BGARefreshLa
 
     private void initView() {
 
-        mCodeTv.setText("任务编号");
-        mStatusTv.setText("竞价状态");
-        mTimeTv.setText("发布时间");
+        mCodeTv.setText("预约编号");
+        mStatusTv.setText("检测人员");
+        mTimeTv.setText("派单日期");
         mAdapter = new MyAdapter(getActivity(), R.layout.activity_my_free_test_list_item);
         mListView.setAdapter(mAdapter);
 
@@ -102,8 +102,8 @@ public class MyTaskListHaveOderFragment extends Fragment implements BGARefreshLa
                     case ThreadState.SUCCESS:
                         MyTaskListHaveOrderResponseModel re = (MyTaskListHaveOrderResponseModel) msg.obj;
                         if (re.isSuccess()) {
-                            if (re.data.tasklist != null) {
-                                mAdapter.addAll(re.data.tasklist);
+                            if (re.data.electricalchecklist != null) {
+                                mAdapter.addAll(re.data.electricalchecklist);
                             }
                         } else {
                             ToastUtil.showMessage(re.getMsg());
@@ -163,7 +163,7 @@ public class MyTaskListHaveOderFragment extends Fragment implements BGARefreshLa
         switch (view.getId()) {
             case R.id.my_task_list_code_layout:
                 mCodeImage.setImageResource(drawable);
-                mOrderItem = "taskcode";
+                mOrderItem = "subscribecode";
 
                 mStatusImage.setImageResource(R.drawable.icon_arraw);
                 mTimeImage.setImageResource(R.drawable.icon_arraw);
@@ -172,7 +172,7 @@ public class MyTaskListHaveOderFragment extends Fragment implements BGARefreshLa
                 break;
             case R.id.my_task_list_status_layout:
                 mStatusImage.setImageResource(drawable);
-                mOrderItem = "bidstatus";
+                mOrderItem = "user";
 
                 mCodeImage.setImageResource(R.drawable.icon_arraw);
                 mTimeImage.setImageResource(R.drawable.icon_arraw);
@@ -181,7 +181,7 @@ public class MyTaskListHaveOderFragment extends Fragment implements BGARefreshLa
                 break;
             case R.id.my_task_list_time_layout:
                 mTimeImage.setImageResource(drawable);
-                mOrderItem = "time";
+                mOrderItem = "subscribetime";
 
                 mStatusImage.setImageResource(R.drawable.icon_arraw);
                 mCodeImage.setImageResource(R.drawable.icon_arraw);
@@ -193,7 +193,7 @@ public class MyTaskListHaveOderFragment extends Fragment implements BGARefreshLa
         mRefreshLayout.beginRefreshing();
     }
 
-    class MyAdapter extends ArrayAdapter<MyTaskListHaveOrderResponseModel.DataBean.TasklistBean> {
+    class MyAdapter extends ArrayAdapter<MyTaskListHaveOrderResponseModel.DataBean.ElectricalchecklistBean> {
 
         public MyAdapter(@NonNull Context context, @LayoutRes int resource) {
             super(context, resource);
@@ -209,14 +209,14 @@ public class MyTaskListHaveOderFragment extends Fragment implements BGARefreshLa
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            holder.mCodeView.setText(getItem(position).taskcode);
-            holder.mStatusView.setText(getItem(position).taskstatus);
-            holder.mDateView.setText(getItem(position).publishtime);
+            holder.mCodeView.setText(getItem(position).subscribecode);
+            holder.mStatusView.setText(getItem(position).electricianname);
+            holder.mDateView.setText(getItem(position).assigntime);
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String checkstatusid = getItem(position).taskstatusid;
+//                    String checkstatusid = getItem(position).;
                     Intent intent = new Intent();
 //                    if ("new".equals(checkstatusid)) {//待接单
 //                        intent.setClass(getActivity(), MyTaskViewWaitingActivity.class);
@@ -230,7 +230,7 @@ public class MyTaskListHaveOderFragment extends Fragment implements BGARefreshLa
 //                    if ("finished".equals(checkstatusid)) {//已结束
 //                        intent.setClass(getActivity(), MyTaskViewHaveFinishedActivity.class);
 //                    }
-                    intent.putExtra("id", getItem(position).taskid);
+                    intent.putExtra("id", getItem(position).electricalcheckid);
                     startActivity(intent);
                 }
             });

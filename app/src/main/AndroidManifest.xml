@@ -231,6 +231,9 @@
        <activity android:name=".activity.distributorManage.activity.DistributorListActivity"/>
        <activity android:name=".activity.distributorManage.activity.DustributorWithdrawalHistoryListActivity"/>
        <activity android:name=".activity.franchisee.storeManage.activity.order.OrderListActivity"/>
+
+     <activity android:name=".activity.franchisee.tbws.activity.MyTaskListActivity"/>
+     <activity android:name=".activity.franchisee.tbws.activity.PendingViewActivity"/>
     </application>
 
 </manifest>

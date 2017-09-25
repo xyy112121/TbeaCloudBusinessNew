@@ -5,25 +5,25 @@ import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import java.util.List;
 
 /**
- * 获得我发布的任务列表-­‐待接单
+ * 获得我发布的任务列表-­‐待处理
  */
 
 public class MyTaskListWaitingResponseModel extends BaseResponseModel {
 
+
     public DataBean data;
 
+    public static class DataBean {
+        public List<ElectricalchecklistBean> electricalchecklist;
 
-    public class DataBean {
-        public List<TasklistBean> tasklist;
-
-        public class TasklistBean {
-            public String taskid;
-            public String taskcode;
-            public String bidstatusid;
-            public String bidstatus;
-            public String taskstatusid;
-            public String taskstatus;
-            public String publishtime;
+        public static class ElectricalchecklistBean {
+            public String electricalcheckid;
+            public String subscribecode;
+            public String checkstatusid;
+            public String checkstatus;
+            public String customeruserid;
+            public String customername;
+            public String subscribetime;
         }
     }
 }

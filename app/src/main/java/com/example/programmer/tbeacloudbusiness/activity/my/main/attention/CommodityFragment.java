@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,6 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.action.MyAction;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionCommodityResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionSelectModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationInfoActivity;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
@@ -118,8 +116,8 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
                 public void run() {
                     try {
                         MyAction action = new MyAction();
-                        String id = ((MyAttentionActivity)getActivity()).mId;
-                        AttentionCommodityResponseModel model = action.getAttentionCommodityList(id,mPage++, mPagesiz);
+                        String id = ((MyAttentionActivity) getActivity()).mId;
+                        AttentionCommodityResponseModel model = action.getAttentionCommodityList(id, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

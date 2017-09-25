@@ -3,7 +3,8 @@
     android:layout_width="120dp"
     android:layout_height="match_parent"
     android:background="@drawable/icon_rectangle"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:id="@+id/menu1"

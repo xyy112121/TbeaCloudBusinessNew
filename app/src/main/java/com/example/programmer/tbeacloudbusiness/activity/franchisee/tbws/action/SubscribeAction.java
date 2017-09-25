@@ -6,6 +6,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.M
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.MyTaskListHaveOrderResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.MyTaskListWaitingResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.TaskStateResponseModel;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
 import org.apache.http.NameValuePair;
@@ -25,14 +26,14 @@ public class SubscribeAction extends BaseAction {
     public TaskStateResponseModel getState() throws Exception {
         TaskStateResponseModel rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
-        String result = sendRequest("TBEAWS004004001000", pairs);
+        String result = sendRequest("TBEAYUN004006001000", pairs);
         rspInfo = gson.fromJson(result, TaskStateResponseModel.class);
         return rspInfo;
     }
 
     /**
-     * 获得我发布的任务列表-­‐全部
-     * OrderItem   排序项  任务编号: TaskCode 任务状态：TaskStatus 发布日期：Time (默认)
+     * 获得我发布的预约列表-­‐全部
+     * OrderItem   排序项  预约编号: TaskCode 预约状态：TaskStatus 发布日期：Time (默认)
      * Order   排序 正序：ASC 倒序：Desc (默认)
      * Page   第几页
      * PageSize   页大小
@@ -44,14 +45,14 @@ public class SubscribeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
-        String result = sendRequest("TBEAWS004004002000", pairs);
+        String result = sendRequest("TBEAYUN004006002000", pairs);
         rspInfo = gson.fromJson(result, MyTaskListAllResponseModel.class);
         return rspInfo;
     }
 
     /**
-     * 获得我发布的任务列表-­‐待接单
-     * OrderItem   排序项  任务编号: TaskCode 竞价状态：BidStatus 发布日期：Time (默认)
+     * 获得我发布的预约列表-­‐待处理
+     * OrderItem   排序项  预约编号: TaskCode 竞价状态：BidStatus 发布日期：Time (默认)
      * Order   排序 正序：ASC 倒序：Desc (默认)
      * Page   第几页
      * PageSize   页大小
@@ -63,14 +64,14 @@ public class SubscribeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
-        String result = sendRequest("TBEAWS004004003000", pairs);
+        String result = sendRequest("TBEAYUN004006003000", pairs);
         rspInfo = gson.fromJson(result, MyTaskListWaitingResponseModel.class);
         return rspInfo;
     }
 
     /**
-     * 获得我发布的任务列表-­‐已接单
-     * OrderItem   排序项  任务编号: TaskCode 竞价状态：BidStatus 发布日期：Time (默认)
+     * 获得我发布的预约列表-­‐已派单
+     * OrderItem   排序项  预约编号: TaskCode 竞价状态：BidStatus 发布日期：Time (默认)
      * Order   排序 正序：ASC 倒序：Desc (默认)
      * Page   第几页
      * PageSize   页大小
@@ -82,14 +83,14 @@ public class SubscribeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
-        String result = sendRequest("TBEAWS004004004000", pairs);
+        String result = sendRequest("TBEAYUN004006004000", pairs);
         rspInfo = gson.fromJson(result, MyTaskListHaveOrderResponseModel.class);
         return rspInfo;
     }
 
     /**
-     * 获得我发布的任务列表-­‐待评价
-     * OrderItem   排序项  任务编号: TaskCode 接单价格：fee 完工日期：Time (默认)
+     * 获得我发布的预约列表-­‐已完工
+     * OrderItem   排序项  预约编号: TaskCode 接单价格：fee 完工日期：Time (默认)
      * Order   排序 正序：ASC 倒序：Desc (默认)
      * Page   第几页
      * PageSize   页大小
@@ -101,15 +102,15 @@ public class SubscribeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
-        String result = sendRequest("TBEAWS004004005000", pairs);
+        String result = sendRequest("TBEAYUN004006005000", pairs);
         rspInfo = gson.fromJson(result, MyTaskListHaveEvaluationResponseModel.class);
         return rspInfo;
     }
 
 
     /**
-     * 获得我发布的任务列表-­‐已结束
-     * OrderItem   排序项  任务编号: TaskCode 接单价格：fee 完工日期：Time (默认)
+     * 获得我发布的预约列表-­‐已上传
+     * OrderItem   排序项  预约编号: TaskCode 接单价格：fee 完工日期：Time (默认)
      * Order   排序 正序：ASC 倒序：Desc (默认)
      * Page   第几页
      * PageSize   页大小
@@ -121,8 +122,17 @@ public class SubscribeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
-        String result = sendRequest("TBEAWS004004005001", pairs);
+        String result = sendRequest("TBEAYUN004006006000", pairs);
         rspInfo = gson.fromJson(result, MyTaskListHaveFinishedResponseModel.class);
+        return rspInfo;
+    }
+
+    public ResponseInfo getPendingInfo(String id) throws Exception {
+        ResponseInfo rspInfo;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("electricalcheckid", id));
+        String result = sendRequest("TBEAYUN004006007000", pairs);
+        rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;
     }
 

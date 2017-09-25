@@ -3,6 +3,7 @@ package com.example.programmer.tbeacloudbusiness.component;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -93,6 +94,12 @@ public class PublishTextRowView extends LinearLayout {
         } else {
             mRightView.setVisibility(GONE);
         }
+    }
+
+    public void setImageDrawable(int drawableId) {
+        Drawable drawable = getResources().getDrawable(drawableId);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        mValueView.setCompoundDrawables(null, null, drawable, null);
     }
 
     public void setBottonLineVisibility(int visibility) {

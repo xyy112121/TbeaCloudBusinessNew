@@ -32,7 +32,7 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 获得我发布的任务列表-­‐待接单
+ * 获得我发布的任务列表-­‐待处理
  */
 
 public class MyTaskListWaitingFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
@@ -78,9 +78,9 @@ public class MyTaskListWaitingFragment extends Fragment implements BGARefreshLay
 
     private void initView() {
 
-        mCodeTv.setText("任务编号");
-        mStatusTv.setText("竞价状态");
-        mTimeTv.setText("发布时间");
+        mCodeTv.setText("预约编号");
+        mStatusTv.setText("业主");
+        mTimeTv.setText("申请日期");
         mAdapter = new MyAdapter(getActivity(), R.layout.activity_my_free_test_list_item);
         mListView.setAdapter(mAdapter);
 
@@ -102,8 +102,8 @@ public class MyTaskListWaitingFragment extends Fragment implements BGARefreshLay
                     case ThreadState.SUCCESS:
                         MyTaskListWaitingResponseModel re = (MyTaskListWaitingResponseModel) msg.obj;
                         if (re.isSuccess()) {
-                            if (re.data.tasklist != null) {
-                                mAdapter.addAll(re.data.tasklist);
+                            if (re.data.electricalchecklist != null) {
+                                mAdapter.addAll(re.data.electricalchecklist);
                             }
                         } else {
                             ToastUtil.showMessage(re.getMsg());
@@ -163,7 +163,7 @@ public class MyTaskListWaitingFragment extends Fragment implements BGARefreshLay
         switch (view.getId()) {
             case R.id.my_task_list_code_layout:
                 mCodeImage.setImageResource(drawable);
-                mOrderItem = "taskcode";
+                mOrderItem = "subscribecode";
 
                 mStatusImage.setImageResource(R.drawable.icon_arraw);
                 mTimeImage.setImageResource(R.drawable.icon_arraw);
@@ -172,7 +172,7 @@ public class MyTaskListWaitingFragment extends Fragment implements BGARefreshLay
                 break;
             case R.id.my_task_list_status_layout:
                 mStatusImage.setImageResource(drawable);
-                mOrderItem = "bidstatus";
+                mOrderItem = "user";
 
                 mCodeImage.setImageResource(R.drawable.icon_arraw);
                 mTimeImage.setImageResource(R.drawable.icon_arraw);
@@ -193,7 +193,7 @@ public class MyTaskListWaitingFragment extends Fragment implements BGARefreshLay
         mRefreshLayout.beginRefreshing();
     }
 
-    class MyAdapter extends ArrayAdapter<MyTaskListWaitingResponseModel.DataBean.TasklistBean> {
+    class MyAdapter extends ArrayAdapter<MyTaskListWaitingResponseModel.DataBean.ElectricalchecklistBean> {
 
         public MyAdapter(@NonNull Context context, @LayoutRes int resource) {
             super(context, resource);
@@ -209,28 +209,17 @@ public class MyTaskListWaitingFragment extends Fragment implements BGARefreshLay
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            holder.mCodeView.setText(getItem(position).taskcode);
-            holder.mStatusView.setText(getItem(position).taskstatus);
-            holder.mDateView.setText(getItem(position).publishtime);
+            holder.mCodeView.setText(getItem(position).subscribecode);
+            holder.mStatusView.setText(getItem(position).customername);
+            holder.mDateView.setText(getItem(position).subscribetime);
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String checkstatusid = getItem(position).taskstatusid;
-                    Intent intent = new Intent();
-//                    if ("new".equals(checkstatusid)) {//待接单
-//                        intent.setClass(getActivity(), MyTaskViewWaitingActivity.class);
-//                    }
-//                    if ("assigned".equals(checkstatusid)) {//已接单
-//                        intent.setClass(getActivity(), MyTaskViewHaveOrderActivity.class);
-//                    }
-//                    if ("finishedbutneedappraise".equals(checkstatusid)) {//待评价
-//                        intent.setClass(getActivity(), MyTaskViewRemainEvaluatedActivity.class);
-//                    }
-//                    if ("finished".equals(checkstatusid)) {//已结束
-//                        intent.setClass(getActivity(), MyTaskViewHaveFinishedActivity.class);
-//                    }
-                    intent.putExtra("id", getItem(position).taskid);
+                    String checkstatusid = getItem(position).checkstatusid;
+                    Intent intent = new Intent(getActivity(), PendingViewActivity.class);
+//                    intent.putExtra("id", "zovpnm1505625289bpepqa");
+                    intent.putExtra("id", getItem(position).electricalcheckid);
                     startActivity(intent);
                 }
             });

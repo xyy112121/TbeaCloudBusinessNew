@@ -37,6 +37,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activit
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.StoreManageMainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.activity.MyTaskListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
@@ -325,9 +326,9 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
             View view1 = getActivity().getLayoutInflater().inflate(R.layout.fragment_home_top_item, null);
             ImageView imageView = (ImageView) view1.findViewById(R.id.home_top_item_image);
             TextView textView = (TextView) view1.findViewById(R.id.home_top_item_name);
-            if(mList.get(i).newmessagenumber > 0){
+            if (mList.get(i).newmessagenumber > 0) {
                 ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + mList.get(i).iconwithnewdata, imageView);
-            }else {
+            } else {
                 ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + mList.get(i).moduleicon, imageView);
             }
 
@@ -349,8 +350,9 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
         if ("distributor_shaomafanli".equals(moduleid)) {//分销商
             //扫码返利
             startActivity(new Intent(getActivity(), DbScanCodeMainListActivity.class));
-        }
-        if ("shaomafanli".equals(moduleid)) {
+        } else if ("tebianweishi".equals(moduleid)) {
+            startActivity(new Intent(getActivity(), MyTaskListActivity.class));
+        } else if ("shaomafanli".equals(moduleid)) {
             //扫码返利
             startActivity(new Intent(getActivity(), ScanCodeMainListActivity.class));
         } else if ("tbea".equals(moduleid)) {

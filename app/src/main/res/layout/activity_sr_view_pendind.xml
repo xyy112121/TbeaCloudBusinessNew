@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_personName"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="预约用户"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_code"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="预约编号"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_time"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="预约时间"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_VoucherCode"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="凭证号"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_customername"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="业主"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_customermobile"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="联系电话"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_customerAddr"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="地址"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <View
+                style="@style/horizontal_view"
+                android:layout_height="8dp"
+                android:background="@color/interval_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_orderCompany"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="购买商家"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_orderTime"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="购买日期"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_orderCommdity"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="购买的产品"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_note"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="备注"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <Button
+                style="@style/style_next_btn"
+                android:background="@drawable/login_btn_bg"
+                android:text="派单"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
