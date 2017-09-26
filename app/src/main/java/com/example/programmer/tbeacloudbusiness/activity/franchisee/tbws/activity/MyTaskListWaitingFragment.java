@@ -216,9 +216,7 @@ public class MyTaskListWaitingFragment extends Fragment implements BGARefreshLay
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String checkstatusid = getItem(position).checkstatusid;
                     Intent intent = new Intent(getActivity(), PendingViewActivity.class);
-//                    intent.putExtra("id", "zovpnm1505625289bpepqa");
                     intent.putExtra("id", getItem(position).electricalcheckid);
                     startActivity(intent);
                 }

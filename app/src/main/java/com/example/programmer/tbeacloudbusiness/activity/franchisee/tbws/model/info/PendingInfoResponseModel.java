@@ -7,15 +7,14 @@ package com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.
 public class PendingInfoResponseModel {
 
 
-    public ElectricalcheckinfoBean electricalcheckinfoX;
+    public ElectricalcheckinfoBean electricalcheckinfo;
+    public OrderinfoBean orderinfo;
 
-    public OrderinfoBean orderinfoX;
-
-    public static class OrderinfoBean {
+    public class OrderinfoBean {
         public String orderid;
-        public String ordertime;
+        public String ordertime;//购买时间
         public String ordercompanyid;
-        public String ordercompany;
+        public String ordercompany;//购买商家
 
     }
 

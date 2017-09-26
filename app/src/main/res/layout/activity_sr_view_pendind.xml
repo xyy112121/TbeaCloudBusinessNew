@@ -126,7 +126,7 @@
                 android:layout_height="49dp"
                 app:PublishTextRowViewIsBottomLineShow="true"
                 app:PublishTextRowViewIsSelect="true"
-                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewLeftWidth="110dp"
                 app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
                 app:PublishTextRowViewState="read"
                 app:PublishTextRowViewText="购买的产品"

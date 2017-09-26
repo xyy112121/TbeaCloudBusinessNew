@@ -9,11 +9,14 @@ import android.view.View;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.action.SubscribeAction;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.PendingInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * 待处理详情
@@ -38,24 +41,29 @@ public class PendingViewActivity extends BaseActivity implements View.OnClickLis
                 dialog.dismiss();
                 switch (msg.what) {
                     case ThreadState.SUCCESS:
-//                        UntreatedRsponseModel re = (UntreatedRsponseModel) msg.obj;
-//                        if (re.isSuccess()) {
-//                            if (re.data != null) {
-//                                if (re.data.electricalcheckinfo != null) {
-//                                    mMode = re.data.electricalcheckinfo;
-//                                    setViewText(R.id.free_test_view_code, mMode.vouchercode);
-//                                    setViewText(R.id.free_test_view_time, mMode.subscribetime);
-//                                    setViewText(R.id.free_test_view_status, mMode.checkstatus);
-//                                }
-//
-//                            } else {
-//                                ToastUtil.showMessage(re.getMsg());
-//                            }
-//
-//
-//                        } else {
-//                            ToastUtil.showMessage("操作失败！");
-//                        }
+                        ResponseInfo re = (ResponseInfo) msg.obj;
+                        if (re.isSuccess()){
+                            Gson gson = new GsonBuilder().serializeNulls().create();
+                            String json = gson.toJson(re.data);
+                            PendingInfoResponseModel model = gson.fromJson(json, PendingInfoResponseModel.class);
+                            if(model.electricalcheckinfo != null){
+                                PendingInfoResponseModel.ElectricalcheckinfoBean info = model.electricalcheckinfo;
+                                setViewText(R.id.sr_view_personName,info.subscribeuser);
+                                setViewText(R.id.sr_view_code,info.subscribecode);
+                                setViewText(R.id.sr_view_time,info.subscribetime);
+                                setViewText(R.id.sr_view_VoucherCode,info.vouchercode);
+                                setViewText(R.id.sr_view_customername,info.customername);
+                                setViewText(R.id.sr_view_customermobile,info.customermobile);
+                                setViewText(R.id.sr_view_customerAddr,info.customeraddress);
+                                setViewText(R.id.sr_view_note,info.subscribenote);
+                            }
+
+                            if(model.orderinfo != null){
+                                PendingInfoResponseModel.OrderinfoBean info = model.orderinfo;
+                                setViewText(R.id.sr_view_orderCompany,info.ordercompany);
+                                setViewText(R.id.sr_view_orderTime,info.ordertime);
+                            }
+                        }
 
                         break;
                     case ThreadState.ERROR:
@@ -72,7 +80,11 @@ public class PendingViewActivity extends BaseActivity implements View.OnClickLis
                     SubscribeAction action = new SubscribeAction();
                     String id = getIntent().getStringExtra("id");
                     ResponseInfo re = action.getPendingInfo(id);
-                    handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
+                    if(re == null){
+                        handler.sendEmptyMessage(ThreadState.ERROR);
+                    }else {
+                        handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
+                    }
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);
                 }
