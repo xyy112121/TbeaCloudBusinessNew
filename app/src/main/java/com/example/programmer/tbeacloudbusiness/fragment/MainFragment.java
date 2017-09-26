@@ -350,7 +350,10 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
         if ("distributor_shaomafanli".equals(moduleid)) {//分销商
             //扫码返利
             startActivity(new Intent(getActivity(), DbScanCodeMainListActivity.class));
-        } else if ("tebianweishi".equals(moduleid)) {
+        } else if("electricalcheckor_tebianweishi".equals(moduleid)){
+            startActivity(new Intent(getActivity(), com.example.programmer.tbeacloudbusiness.activity.check.tbws.activity.MyTaskListActivity.class));
+        }else
+            if ("tebianweishi".equals(moduleid)) {
             startActivity(new Intent(getActivity(), MyTaskListActivity.class));
         } else if ("shaomafanli".equals(moduleid)) {
             //扫码返利

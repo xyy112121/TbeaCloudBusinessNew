@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:numColumns="4"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/cp_meeting_gallery_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/icon_no_image" />
+
+
+    <RelativeLayout
+        android:id="@+id/my_picture_list_person_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/my_picture_list_personName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dd"
+            android:textColor="@color/text_color"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/my_picture_list_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dd"
+            android:textColor="@color/text_color"
+            android:textSize="16sp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.activity;
+package com.example.programmer.tbeacloudbusiness.activity.check.tbws.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +19,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.action.SubscribeAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.MyTaskListHaveFinishedResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.action.SubscribeAction;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.MyTaskListHaveOrderResponseModel;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
@@ -32,10 +32,10 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 获得我发布的任务列表-­‐已上传
+ * 获得我发布的任务列表-­‐已接单
  */
 
-public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class MyTaskListHaveOderFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
 
     Unbinder unbinder;
     @BindView(R.id.my_task_list_code_tv)
@@ -66,7 +66,6 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
     public String mOrder = "desc";
     private int mPage;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,8 +79,9 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
     private void initView() {
 
         mCodeTv.setText("预约编号");
-        mStatusTv.setText("操作人员");
-        mTimeTv.setText("上传日期");
+//        mStatusTv.setText("检测人员");
+        mStatusLayout.setVisibility(View.GONE);
+        mTimeTv.setText("接单日期");
         mAdapter = new MyAdapter(getActivity(), R.layout.activity_my_free_test_list_item);
         mListView.setAdapter(mAdapter);
 
@@ -101,7 +101,7 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
                 mRefreshLayout.endRefreshing();
                 switch (msg.what) {
                     case ThreadState.SUCCESS:
-                        MyTaskListHaveFinishedResponseModel re = (MyTaskListHaveFinishedResponseModel) msg.obj;
+                        MyTaskListHaveOrderResponseModel re = (MyTaskListHaveOrderResponseModel) msg.obj;
                         if (re.isSuccess()) {
                             if (re.data.electricalchecklist != null) {
                                 mAdapter.addAll(re.data.electricalchecklist);
@@ -123,7 +123,7 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
             public void run() {
                 try {
                     SubscribeAction action = new SubscribeAction();
-                    MyTaskListHaveFinishedResponseModel re = action.getListHaveFinished(mOrderItem, mOrder, mPage++, 10);
+                    MyTaskListHaveOrderResponseModel re = action.getListHaveOrder(mOrderItem, mOrder, mPage++, 10);
                     handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);
@@ -157,7 +157,7 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
         if ("asc".equals(view.getTag()) || view.getTag() == null) {//正
             drawable = R.drawable.icon_arraw_grayblue;
             view.setTag("desc");
-        } else if ("desc".equals(view.getTag())) {//倒序
+        } else if ("desc".equals(view.getTag())) {//倒序\
             drawable = R.drawable.icon_arraw_bluegray;
             view.setTag("asc");
         }
@@ -171,18 +171,18 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
                 mStatusLayout.setTag(null);
                 mTimeLayout.setTag(null);
                 break;
-            case R.id.my_task_list_status_layout:
-                mStatusImage.setImageResource(drawable);
-                mOrderItem = "user";
-
-                mCodeImage.setImageResource(R.drawable.icon_arraw);
-                mTimeImage.setImageResource(R.drawable.icon_arraw);
-                mCodeLayout.setTag(null);
-                mTimeLayout.setTag(null);
-                break;
+//            case R.id.my_task_list_status_layout:
+//                mStatusImage.setImageResource(drawable);
+//                mOrderItem = "user";
+//
+//                mCodeImage.setImageResource(R.drawable.icon_arraw);
+//                mTimeImage.setImageResource(R.drawable.icon_arraw);
+//                mCodeLayout.setTag(null);
+//                mTimeLayout.setTag(null);
+//                break;
             case R.id.my_task_list_time_layout:
                 mTimeImage.setImageResource(drawable);
-                mOrderItem = "time";
+                mOrderItem = "subscribetime";
 
                 mStatusImage.setImageResource(R.drawable.icon_arraw);
                 mCodeImage.setImageResource(R.drawable.icon_arraw);
@@ -194,7 +194,7 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
         mRefreshLayout.beginRefreshing();
     }
 
-    class MyAdapter extends ArrayAdapter<MyTaskListHaveFinishedResponseModel.DataBean.ElectricalchecklistBean> {
+    class MyAdapter extends ArrayAdapter<MyTaskListHaveOrderResponseModel.DataBean.ElectricalchecklistBean> {
 
         public MyAdapter(@NonNull Context context, @LayoutRes int resource) {
             super(context, resource);
@@ -210,18 +210,16 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-//            holder.mIsMoneyView.setVisibility(View.VISIBLE);
             holder.mCodeView.setText(getItem(position).subscribecode);
-            holder.mStatusView.setText(getItem(position).electricianname);
-            holder.mDateView.setText(getItem(position).uploadtime);
+//            holder.mStatusView.setText(getItem(position).electricianname);
+            holder.mStatusView.setVisibility(View.GONE);
+            holder.mDateView.setText(getItem(position).accepttime);
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    String checkstatusid = getItem(position).taskstatusid;
                     Intent intent = new Intent();
-
-                    intent.setClass(getActivity(), ServiceHaveUploadViewActivity.class);
+                    intent.setClass(getActivity(), ServiceHaveAssignViewActivity.class);
                     intent.putExtra("id", getItem(position).electricalcheckid);
                     startActivity(intent);
                 }
@@ -238,8 +236,6 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
             TextView mStatusView;
             @BindView(R.id.my_free_test_list_item_date)
             TextView mDateView;
-            @BindView(R.id.my_free_test_list_item_isMoney)
-            TextView mIsMoneyView;
 
             ViewHolder(View view) {
                 ButterKnife.bind(this, view);

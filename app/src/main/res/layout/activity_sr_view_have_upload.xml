@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/my_text_layout"
+                android:layout_height="60dp"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="90dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="8dp"
+                    android:text="检测人员"
+                    android:textColor="@color/text_color" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.8"
+                    android:gravity="center_vertical">
+
+                    <include layout="@layout/activity_person_layout2" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_assign_time"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="派单日期"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_accept_time"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="接单日期"
+                app:PublishTextRowViewTextColor="@color/text_color"
+                android:visibility="gone"/>
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_assign_state"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="状态"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_finish_time"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="上传时间"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_state_subscribeCode"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="预约详情"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/sr_view_state_checkResult"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewLeftWidth="90dp"
+                app:PublishTextRowViewRightTextColor="@color/tab_text_normal"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="上传数据"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

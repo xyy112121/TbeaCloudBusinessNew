@@ -228,12 +228,30 @@
         <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.SaleWaterListActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.set.SpecificationsAndModelsSelectListActivity" />
 
-       <activity android:name=".activity.distributorManage.activity.DistributorListActivity"/>
-       <activity android:name=".activity.distributorManage.activity.DustributorWithdrawalHistoryListActivity"/>
-       <activity android:name=".activity.franchisee.storeManage.activity.order.OrderListActivity"/>
+        <activity android:name=".activity.distributorManage.activity.DistributorListActivity" />
+        <activity android:name=".activity.distributorManage.activity.DustributorWithdrawalHistoryListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.order.OrderListActivity" />
 
-     <activity android:name=".activity.franchisee.tbws.activity.MyTaskListActivity"/>
-     <activity android:name=".activity.franchisee.tbws.activity.PendingViewActivity"/>
+        <activity android:name=".activity.franchisee.tbws.activity.MyTaskListActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.PendingViewActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.CommdityListActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.SendOrdersPersonSelectActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.ServiceHaveAssignViewActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.ServiceHaveFinishedViewActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.MyFreeTestViewDetectionActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.ServiceHaveUploadViewActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.UploadPictureListActivity" />
+        <activity android:name=".activity.publicUse.activity.PictureShowActivity"/>
+        <activity android:name=".activity.publicUse.activity.SuccessActivity" />
+
+        <activity android:name=".activity.check.tbws.activity.MyTaskListActivity"/>
+        <activity android:name=".activity.check.tbws.activity.PendingViewActivity"/>
+        <activity android:name=".activity.check.tbws.activity.ServiceHaveAssignViewActivity"/>
+        <activity android:name=".activity.check.tbws.activity.ServiceHaveFinishedViewActivity"/>
+        <activity android:name=".activity.check.tbws.activity.MyFreeTestViewDetectionActivity"/>
+        <activity android:name=".activity.check.tbws.activity.ServiceHaveUploadViewActivity"/>
+        <activity android:name=".activity.check.tbws.activity.UploadPictureListActivity"/>
+        <activity android:name=".activity.check.tbws.activity.PictureUploadActivity"/>
     </application>
 
 </manifest>
