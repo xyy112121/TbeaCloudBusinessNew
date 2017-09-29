@@ -5,20 +5,16 @@ import android.util.Log;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.MessageListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.model.TbMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.OtherResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.user.model.HomeMainResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.user.model.LoginUserModel;
-import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.tbea.model.TbMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RegisterRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationRequestModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationResponseModel;
 import com.example.programmer.tbeacloudbusiness.http.MD5Util;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
-import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -256,6 +252,35 @@ public class UserAction extends BaseAction {
         ResponseInfo rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN003004002000", pairs);
+        rspInfo = gson.fromJson(result, ResponseInfo.class);
+        return rspInfo;
+    }
+
+    /**
+     * 找回密码：验证验证码的有效性：
+     *
+     * @param mobile     老的手机号码
+     * @param verifycode 验证码
+     */
+    public ResponseInfo validateCode(String mobile, String verifycode) throws Exception {
+        ResponseInfo rspInfo;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("mobilenumber", mobile));
+        pairs.add(new BasicNameValuePair("verifycode", verifycode));
+        String result = sendRequest("TBEAYUN003001005001", pairs);
+        rspInfo = gson.fromJson(result, ResponseInfo.class);
+        return rspInfo;
+    }
+
+    /**
+     * 忘记密码（修改密码）
+     */
+    public ResponseInfo resetPwd(String mobile, String password) throws Exception {
+        ResponseInfo rspInfo;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("mobilenumber", mobile));
+        pairs.add(new BasicNameValuePair("password", MD5Util.getMD5String(password)));
+        String result = sendRequest("TBEAYUN003001005002", pairs);
         rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;
     }

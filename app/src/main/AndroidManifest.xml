@@ -28,9 +28,8 @@
     <application
         android:name=".activity.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_main"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -107,6 +106,9 @@
         <activity android:name=".activity.user.CompletionDataActivity" />
         <activity android:name=".activity.user.RegisterSuccessActivity" />
         <activity android:name=".activity.user.RealNameAuthenticationActivity" />
+        <activity android:name=".activity.user.ForgetPwdPhoneActivity" />
+        <activity android:name=".activity.user.ForgetPwdEditActivity" />
+        <activity android:name=".activity.my.main.activity.PersonInfoActivity"/>
 
         <activity android:name=".activity.tbea.activity.CompanyIntroActivity" />
         <activity android:name=".activity.tbea.activity.ProductPresentationListActivity" />

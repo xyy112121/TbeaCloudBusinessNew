@@ -92,6 +92,13 @@ public class LoginActivity extends PermissionActivity {
             }
         });
 
+        findViewById(R.id.login_forget_pwd).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgetPwdPhoneActivity.class);
+                startActivity(intent);
+            }
+        });
 
         findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
             @Override

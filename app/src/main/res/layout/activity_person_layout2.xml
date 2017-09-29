@@ -7,16 +7,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_gravity="center_vertical"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center_vertical">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:gravity="center_vertical"
             android:layout_gravity="center"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
             <com.example.programmer.tbeacloudbusiness.component.CircleImageView
@@ -47,23 +47,21 @@
                     android:ellipsize="end"
                     android:maxEms="13"
                     android:textColor="@color/tab_text_normal"
-                    android:textSize="16sp"
-                    android:text="名字"/>
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/person_info_personjobtitle"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerInside"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginLeft="5dp"
+                    android:scaleType="centerInside" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/person_info_companyname"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
-                android:text="44"
                 android:textColor="@color/text_color" />
         </LinearLayout>
 
@@ -72,6 +70,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
-            android:src="@drawable/icon_arrow_right"/>
+            android:src="@drawable/icon_arrow_right" />
     </LinearLayout>
 </FrameLayout>
