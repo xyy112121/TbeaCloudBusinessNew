@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.MessageListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.OtherResponseModel;
@@ -155,7 +156,7 @@ public class UserAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public FranchiserSelectListResponseModel getAffiliationList(String province ,String  city) throws Exception {
+    public FranchiserSelectListResponseModel getAffiliationList(String province, String city) throws Exception {
         FranchiserSelectListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("province", province));
@@ -236,5 +237,27 @@ public class UserAction extends BaseAction {
         return rspInfo;
     }
 
+
+    /**
+     * 获取个人信息
+     */
+    public PersonInfoResponseModel getPersonInfo() throws Exception {
+        PersonInfoResponseModel rspInfo;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN011006001001", pairs);
+        rspInfo = gson.fromJson(result, PersonInfoResponseModel.class);
+        return rspInfo;
+    }
+
+    /**
+     * 获取认证信息
+     */
+    public ResponseInfo getDentifiedInfo() throws Exception {
+        ResponseInfo rspInfo;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN003004002000", pairs);
+        rspInfo = gson.fromJson(result, ResponseInfo.class);
+        return rspInfo;
+    }
 
 }

@@ -31,7 +31,8 @@
                 android:gravity="right|center_vertical"
                 android:text="预览"
                 android:textColor="@color/text_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <View style="@style/horizontal_view" />

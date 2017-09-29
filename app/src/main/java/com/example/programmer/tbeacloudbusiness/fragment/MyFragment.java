@@ -18,17 +18,20 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.PlumberMeetingListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.activity.FxMainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.BypassAccountManageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyFansActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.PersonInfoActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.RealNameAuthenticationDistributorActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.SetActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
+import com.example.programmer.tbeacloudbusiness.utils.Constants;
+import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.google.gson.Gson;
@@ -37,34 +40,59 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
+import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
+
 /**
  * Created by programmer on 2017/6/22.
  */
 
-public class MyFragment extends Fragment implements View.OnClickListener {
+public class MyFragment extends Fragment implements View.OnClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
+    Unbinder unbinder;
     private View mView;
+    @BindView(R.id.rl_recyclerview_refresh)
+    BGARefreshLayout mRefreshLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_my, null);
         listener();
-        getData();
+        unbinder = ButterKnife.bind(this, mView);
+        initView();
         return mView;
+    }
+
+    private void initView() {
+        mRefreshLayout.setDelegate(this);
+        mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(getActivity(), false));
+
+        mRefreshLayout.beginRefreshing();
+    }
+
+    @Override
+    public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
+        getData();
+    }
+
+    @Override
+    public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+        return false;
     }
 
     /**
      * 从服务器获取数据
      */
     private void getData() {
-        final CustomDialog mDialog = new CustomDialog(getActivity(), R.style.MyDialog, R.layout.tip_wait_dialog);
-        mDialog.setText("加载中...");
-        mDialog.show();
         try {
             final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
-                    mDialog.dismiss();
+                    mRefreshLayout.endLoadingMore();
+                    mRefreshLayout.endRefreshing();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
                             ResponseInfo re = (ResponseInfo) msg.obj;
@@ -106,6 +134,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 
     private void initItemView(List<List<MyMainResponseModel.Item>> modelList) {
         LinearLayout parentLayout = (LinearLayout) mView.findViewById(R.id.fragment_my_item_layout);
+        parentLayout.removeAllViews();
         for (int i = 0; i < modelList.size(); i++) {
             List<MyMainResponseModel.Item> list = modelList.get(i);
             for (final MyMainResponseModel.Item item : list) {
@@ -141,10 +170,14 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                         }
 
                         if ("companyidentify".equals(item.id)) {//实名认证
-                            startActivity(new Intent(getActivity(), CompletionDataActivity.class));
-//                            startActivity(new Intent(getActivity(), RealNameAuthenticationPlumberActivity.class));
+                            String identify = ShareConfig.getConfigString(getActivity(), Constants.whetheridentifiedid, "");
+                            if ("identified".equals(identify)) {
+//                                startActivity(new Intent(getActivity(), RealNameAuthenticationPlumberActivity.class));
+                                startActivity(new Intent(getActivity(), RealNameAuthenticationDistributorActivity.class));
+                            } else {
+                                startActivity(new Intent(getActivity(), CompletionDataActivity.class));
+                            }
                         }
-
                         if ("marketer_shuidiangonghuiyi".equals(item.id) || "shuidiangonghuiyi".equals(item.id)) {
 
                             //水电工会议
@@ -179,7 +212,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 
     private void listener() {
         mView.findViewById(R.id.my_set).setOnClickListener(this);
-
+        mView.findViewById(R.id.my_person_info).setOnClickListener(this);
     }
 
 
@@ -189,23 +222,15 @@ public class MyFragment extends Fragment implements View.OnClickListener {
             case R.id.my_set:
                 startActivity(new Intent(getActivity(), SetActivity.class));
                 break;
-//            case R.id.my_relaname_authentication:
-//                startActivity(new Intent(getActivity(), RealNameAuthenticationDistributorActivity.class));
-//                break;
-//            case R.id.my_attention:
-//                startActivity(new Intent(getActivity(), MyAttentionActivity.class));
-//                break;
-//            case R.id.my_fans:
-//                startActivity(new Intent(getActivity(), MyFansActivity.class));
-//                break;
-//            case R.id.my_bypass_account_manage:
-//                startActivity(new Intent(getActivity(), BypassAccountManageListActivity.class));
-//                break;
-//            case R.id.fragment_mian_account_layout:
-//                startActivity(new Intent(getActivity(), MemberListActivity.class));
-//                break;
-
-
+            case R.id.my_person_info:
+                startActivity(new Intent(getActivity(), PersonInfoActivity.class));
+                break;
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

@@ -92,15 +92,21 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
                             MeetingGalleryListResponseModel model = (MeetingGalleryListResponseModel) msg.obj;
-                            if (model.isSuccess() && model.data != null) {
-                                if (model.data.picturelist != null) {
-                                    mGridAdapter.addAll(model.data.picturelist);
-                                    mGalleryImageView.setVisibility(View.GONE);
-                                    mGridView.setVisibility(View.VISIBLE);
-                                }else {
+                            if (model.isSuccess()) {
+                                if(model.data != null){
                                     mGalleryImageView.setVisibility(View.VISIBLE);
                                     mGridView.setVisibility(View.GONE);
+                                }else {
+                                    if (model.data.picturelist != null) {
+                                        mGridAdapter.addAll(model.data.picturelist);
+                                        mGalleryImageView.setVisibility(View.GONE);
+                                        mGridView.setVisibility(View.VISIBLE);
+                                    }else {
+                                        mGalleryImageView.setVisibility(View.VISIBLE);
+                                        mGridView.setVisibility(View.GONE);
+                                    }
                                 }
+
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
                             }

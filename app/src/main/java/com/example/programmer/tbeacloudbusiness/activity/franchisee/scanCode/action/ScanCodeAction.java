@@ -14,6 +14,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.mod
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateHistoryListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateResponseModel;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
 import org.apache.http.NameValuePair;
@@ -221,7 +222,7 @@ public class ScanCodeAction extends BaseAction {
     /**
      * 获取提现历史
      */
-    public WithdrawDepositDateHistoryListResponseModel getWithdrawDepositDateHistoryList(String personorcompany, String payeeid,String starttime, String endtime, String orderitem, String order, int page, int pagesize) throws Exception {
+    public WithdrawDepositDateHistoryListResponseModel getWithdrawDepositDateHistoryList(String personorcompany, String payeeid, String starttime, String endtime, String orderitem, String order, int page, int pagesize) throws Exception {
         WithdrawDepositDateHistoryListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("personorcompany", personorcompany));
@@ -233,7 +234,23 @@ public class ScanCodeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
         String result = sendRequest("TBEAYUN004002003000", pairs);
-           model = gson.fromJson(result, WithdrawDepositDateHistoryListResponseModel.class);
+        model = gson.fromJson(result, WithdrawDepositDateHistoryListResponseModel.class);
+        return model;
+    }
+
+
+    /**
+     * 获取历史记录查看
+     */
+    public ResponseInfo getScanCodeInfo(String rebateqrcodegenerateid, String activitystatusid, int page, int pagesize) throws Exception {
+        ResponseInfo model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("rebateqrcodegenerateid", rebateqrcodegenerateid));
+        pairs.add(new BasicNameValuePair("activitystatusid", activitystatusid));
+        pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
+        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
+        String result = sendRequest("TBEAYUN004002006002", pairs);
+        model = gson.fromJson(result, ResponseInfo.class);
         return model;
     }
 

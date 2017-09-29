@@ -14,7 +14,7 @@ public class WithdrawDepositDateResponseModel extends BaseResponseModel {
 
     public class WithdrawDepositDate {
         public List<TakeMoney> takemoneylist;
-        public TakeMoneyTotleInfo takemoneytotleinfo;
+        public TakeMoneyTotleInfo totlemoneyinfo;
     }
 
     public class TakeMoney {

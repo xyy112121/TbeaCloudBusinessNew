@@ -41,7 +41,7 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 提现历史
+ * 提现历史(分销商)
  */
 
 public class DbWithdrawDepositDateHistoryActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
@@ -100,7 +100,7 @@ public class DbWithdrawDepositDateHistoryActivity extends BaseActivity implement
                             WithdrawDepositDateHistoryListResponseModel model = (WithdrawDepositDateHistoryListResponseModel) msg.obj;
                             if (model.isSuccess()) {
                                 if (model.data != null)
-                                    mAdapter.addAll(model.data.takemoneyrankinglist);
+                                    mAdapter.addAll(model.data.takemoneylist);
                                 initPayeeInfo(model.data.payeeinfo);
                             } else {
                                 ToastUtil.showMessage(model.getMsg());

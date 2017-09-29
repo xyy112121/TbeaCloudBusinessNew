@@ -11,7 +11,9 @@
 
         <include layout="@layout/activity_page_top" />
 
-        <LinearLayout style="@style/my_text_layout">
+        <LinearLayout style="@style/my_text_layout"
+            android:layout_height="60dp"
+            android:gravity="center_vertical">
 
             <TextView
                 style="@style/my_text_style"
@@ -31,14 +33,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/icon_arrow_right" />
+                android:src="@drawable/icon_arrow_right"
+                android:visibility="gone" />
 
 
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
 
-        <LinearLayout style="@style/my_text_layout">
+        <LinearLayout style="@style/my_text_layout"
+            android:layout_height="60dp"
+            android:gravity="center_vertical">
 
             <TextView
                 style="@style/my_text_style"
@@ -59,7 +64,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/icon_arrow_right" />
+                android:src="@drawable/icon_arrow_right"
+                android:visibility="gone" />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -73,7 +79,7 @@
 
             <TextView
                 android:id="@+id/withdrow_deposit_view_takemoneycode"
-                style="@style/my_right_text_style" />
+                style="@style/my_right_text_style1" />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -87,7 +93,7 @@
 
             <TextView
                 android:id="@+id/withdrow_deposit_view_generatecodetime"
-                style="@style/my_right_text_style" />
+                style="@style/my_right_text_style1" />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -111,7 +117,7 @@
 
                 <TextView
                     android:id="@+id/withdrow_deposit_view_money"
-                    style="@style/my_right_text_style"
+                    style="@style/my_right_text_style1"
                     android:layout_width="wrap_content" />
             </LinearLayout>
 
@@ -124,7 +130,9 @@
             android:background="@color/interval_color" />
 
 
-        <LinearLayout style="@style/my_text_layout">
+        <LinearLayout style="@style/my_text_layout"
+            android:layout_height="60dp"
+            android:gravity="center_vertical">
 
             <TextView
                 style="@style/my_text_style"
@@ -145,7 +153,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/icon_arrow_right" />
+                android:src="@drawable/icon_arrow_right"
+                android:visibility="gone"/>
 
 
         </LinearLayout>

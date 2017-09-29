@@ -7,10 +7,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,15 +20,19 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.act
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.PayStatusResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.PayeeTypeResponeModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateResponseModel;
+import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
@@ -51,15 +55,17 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
     private final int RESULT_DATA_SELECT = 1000;
     private TextView mState1View;
     private TextView mState1View1;
+    private  int mViewId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_code_withdraw_deposit_list);
-        initTopbar("提现数据");
-        initView();
+        initTopbar("支付明细");
         getPayStatus();
         getPayeeType();
+        initView();
+
     }
 
     private void initView() {
@@ -69,11 +75,10 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
-        mRefreshLayout.beginRefreshing();
         initDate();
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
-        addDateItem(expandTabView, mDateLists, "默认", "时间");
+//        addDateItem(expandTabView, mDateLists, "默认", "时间");
         addUserItem(expandTabView, null, "", "用户");
 
         mState1View = (TextView) findViewById(R.id.take_money_pay_state1);
@@ -116,7 +121,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                 mRefreshLayout.beginRefreshing();
             }
         });
-        expandTabView.addItemToExpandTab(defaultShowText, mUserView);
+        expandTabView.addItemToExpandTab(defaultShowText, mUserView, Gravity.LEFT);
 
     }
 
@@ -177,7 +182,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                             if (model.isSuccess()) {
                                 if (model.data != null) {
                                     KeyValueBean bean = model.data.paystatuslist.get(0);
-
+                                    paystatusid = bean.getKey();
                                     mState1View.setText(bean.getValue());
                                     mState1View.setTag(bean.getKey());
 
@@ -185,6 +190,8 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
 
                                     mState1View1.setText(bean1.getValue());
                                     mState1View1.setTag(bean1.getKey());
+
+                                    mRefreshLayout.beginRefreshing();
                                 }
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
@@ -231,8 +238,8 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                                 if (model.isSuccess()) {
                                     if (model.data != null)
                                         mAdapter.addAll(model.data.takemoneylist);
-                                    if(model.data.takemoneytotleinfo != null){
-                                        ((TextView) findViewById(R.id.take_money_pay_money)).setText(model.data.takemoneytotleinfo.totlemoney);
+                                    if (model.data.totlemoneyinfo != null) {
+                                        ((TextView) findViewById(R.id.take_money_pay_money)).setText(model.data.totlemoneyinfo.totlemoney);
                                     }
                                 } else {
                                     ToastUtil.showMessage(model.getMsg());
@@ -292,6 +299,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
 
     @Override
     public void onClick(View v) {
+        mViewId = v.getId();
         if (v.getId() == R.id.take_money_pay_state1) {
             mState1View.setTextColor(ContextCompat.getColor(mContext, R.color.black));
             mState1View.setTextSize(18);
@@ -309,7 +317,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
         mRefreshLayout.beginRefreshing();
     }
 
-    private class MyAdapter extends BaseAdapter {
+     class MyAdapter extends BaseAdapter {
         /**
          * android 上下文环境
          */
@@ -345,26 +353,42 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater layoutInflater = (LayoutInflater) context
-                    .getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            View view = layoutInflater.inflate(
-                    R.layout.activity_scan_code_withdraw_deposit_list_item, null);
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(
+                        R.layout.activity_scan_code_withdraw_deposit_list_item, null);
+                holder = new ViewHolder(convertView);
+                convertView.setTag(holder);
+
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
 
             final WithdrawDepositDateResponseModel.TakeMoney obj = mList.get(position);
-            ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_time)).setText(obj.time);
-            ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_name)).setText(obj.payeename);
-            ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_money)).setText(obj.money);
+//            ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_time)).setText(obj.time);
+//            ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_name)).setText(obj.personname);
+//            ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_money)).setText(obj.money);
+            ImageLoader.getInstance().displayImage(obj.thumbpicture, holder.mHeadView);
+            ImageLoader.getInstance().displayImage(obj.persontypeicon, holder.mPersonjobtitleView);
+            holder.mCompanynameView.setText(obj.companyname);
+            holder.mNameView.setText(obj.personname);
+            holder.mRightView.setVisibility(View.GONE);
+            holder.mDepositMoneyView.setText(obj.money);
 
-            view.setOnClickListener(new View.OnClickListener() {
+
+            convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, WithdrawDepositDateInfoActivity.class);
-                    intent.putExtra("takeMoneyId", obj.takemoneyid);
-                    startActivity(intent);
+                    if (v.getId() == R.id.take_money_pay_state1) {
+                        Intent intent = new Intent(mContext, WithdrawDepositDateInfoActivity.class);
+                        intent.putExtra("takeMoneyId", obj.takemoneyid);
+                        startActivity(intent);
+                    }
+
                 }
             });
 
-            return view;
+            return convertView;
         }
 
 
@@ -383,6 +407,25 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
         public void removeAll() {
             mList.clear();
             notifyDataSetChanged();
+        }
+
+        class ViewHolder {
+            @BindView(R.id.person_info_head)
+            CircleImageView mHeadView;
+            @BindView(R.id.person_info_name)
+            TextView mNameView;
+            @BindView(R.id.person_info_personjobtitle)
+            ImageView mPersonjobtitleView;
+            @BindView(R.id.person_info_companyname)
+            TextView mCompanynameView;
+            @BindView(R.id.person_info_right)
+            ImageView mRightView;
+            @BindView(R.id.scan_code_withdraw_deposit_money)
+            TextView mDepositMoneyView;
+
+            ViewHolder(View view) {
+                ButterKnife.bind(this, view);
+            }
         }
     }
 

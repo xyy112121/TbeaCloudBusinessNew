@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.tbea.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +17,9 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.zhouwei.library.CustomPopWindow;
 
@@ -118,6 +122,36 @@ public class ProductPresentationInfoActivity extends BaseActivity implements Vie
                 .setBgDarkAlpha(0.5f) // 控制亮度
                 .create()
                 .showAsDropDown(v,-200,-30);
+    }
+
+    private void handleLogic(View contentView) {
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCustomPopWindow != null) {
+                    mCustomPopWindow.dissmiss();
+                }
+                switch (v.getId()) {
+                    case R.id.menu2://首页
+                        Intent intent = new Intent(mContext, MainActivity.class);
+                        startActivity(intent);
+                        MyApplication.instance.exit();
+                        break;
+                    case R.id.menu1://消息
+                        intent = new Intent(mContext, MessageListActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.menu3://分享
+//                        intent = new Intent(mContext, MessageListActivity.class);
+//                        startActivity(intent);
+                        break;
+                }
+
+            }
+        };
+        contentView.findViewById(R.id.menu1).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu2).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu3).setOnClickListener(listener);
     }
 
     /**

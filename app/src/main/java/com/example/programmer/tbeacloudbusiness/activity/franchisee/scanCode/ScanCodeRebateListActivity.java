@@ -247,7 +247,7 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext,WithdrawDepositDateHistoryActivity.class);
                     intent.putExtra("personOrCompany",obj.personorcompany);
-                    intent.putExtra("payeeId ",obj.electricianid);
+                    intent.putExtra("payeeId",obj.electricianid);
                     startActivity(intent);
                 }
             });

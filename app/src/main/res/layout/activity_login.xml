@@ -64,7 +64,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/login_show_pwd_ck"
                     android:button="@null"
-                    android:visibility="invisible"/>
+                    />
             </LinearLayout>
             <View
                 style="@style/horizontal_view"

@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * 型号规格
  */
 
-public class ScanCodeCreateSelectActivity extends BaseActivity {
+public class ScanCodeCreateSelectActivity extends BaseActivity implements View.OnClickListener {
     private final int RESULT_TYPE = 1000;//型号
     private final int RESULT_NORMS = 1001;//规格
     @BindView(R.id.create_code_select_type)
@@ -35,7 +35,7 @@ public class ScanCodeCreateSelectActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_code_select);
         ButterKnife.bind(this);
-        initTopbar("型号选择");
+        initTopbar("型号选择", "保存", this);
         initView();
     }
 
@@ -73,16 +73,7 @@ public class ScanCodeCreateSelectActivity extends BaseActivity {
             }
         });
 
-        findViewById(R.id.top_left).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra("type", mType);
-                intent.putExtra("norms", mNorms);
-                setResult(RESULT_OK, intent);
-                finish();
-            }
-        });
+        findViewById(R.id.top_left).setOnClickListener(this);
     }
 
     @Override
@@ -100,5 +91,14 @@ public class ScanCodeCreateSelectActivity extends BaseActivity {
             }
             mSelectView.setText(mTypeView.getText() + "   " + mNormsView.getText());
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        intent.putExtra("type", mType);
+        intent.putExtra("norms", mNorms);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

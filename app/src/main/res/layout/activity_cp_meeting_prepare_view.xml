@@ -160,7 +160,7 @@
                 android:id="@+id/cp_meeting_prepare_plan"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
-                app:PublishTextRowViewIsBottomLineShow="false"
+                app:PublishTextRowViewIsBottomLineShow="true"
                 app:PublishTextRowViewIsSelect="true"
                 app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewState="read"

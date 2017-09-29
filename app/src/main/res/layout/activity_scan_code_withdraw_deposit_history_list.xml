@@ -14,15 +14,16 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-       <include layout="@layout/activity_person_layout2"/>
+        <include layout="@layout/activity_person_layout2" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true">
-            <TextView
-                style="@style/money_logo_style" />
+
+            <TextView style="@style/money_logo_style" />
+
             <TextView
                 android:id="@+id/scan_code_withdraw_deposit_history_list_money"
                 android:layout_width="wrap_content"
@@ -36,39 +37,43 @@
     </RelativeLayout>
 
     <View style="@style/horizontal_view" />
+
     <LinearLayout
         android:id="@+id/scan_code_top_layout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal">
+
         <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
             android:id="@+id/expandtab_view"
             android:layout_width="0dp"
-            android:layout_weight="0.7"
             android:layout_height="48dp"
             android:layout_marginLeft="15dp"
-            />
+            android:layout_weight="0.7" />
+
         <LinearLayout
             android:id="@+id/scan_code_top_money_layout"
             android:layout_width="0dp"
-            android:layout_weight="0.3"
             android:layout_height="match_parent"
-            android:gravity="center|right"
-            android:layout_marginRight="15dp">
+            android:layout_marginRight="15dp"
+            android:layout_weight="0.3"
+            android:gravity="center|right">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="金额"
-                />
+                android:text="金额" />
+
             <ImageView
                 android:id="@+id/scan_code_top_money_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/icon_arraw"/>
+                android:src="@drawable/icon_arraw" />
         </LinearLayout>
 
     </LinearLayout>
+
     <View style="@style/horizontal_view" />
 
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout
@@ -81,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:scrollbars="none"></ListView>
+            android:scrollbars="none"/>
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
 
 </LinearLayout>

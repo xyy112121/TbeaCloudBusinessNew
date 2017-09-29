@@ -77,7 +77,7 @@ public class CommoditySalesListActivity extends BaseActivity implements BGARefre
 
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
-        mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, false));
+        mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
         mRefreshLayout.beginRefreshing();
     }
 

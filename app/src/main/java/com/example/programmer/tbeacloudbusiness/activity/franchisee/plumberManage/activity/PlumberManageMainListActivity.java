@@ -355,8 +355,6 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-
                     Intent intent = new Intent(mContext, PlumberManageWithdrawalHistoryListActivity.class);
                     intent.putExtra("id", obj.userid);
                     startActivity(intent);

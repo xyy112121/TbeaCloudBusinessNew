@@ -192,8 +192,8 @@ public class MeetingPrepareActivity extends BaseActivity {
                     String startTime = data.getStringExtra("startTime");
                     String endTime = data.getStringExtra("endTime");
                     String endTime2 = "";
-                    if (endTime.length() > 12) {
-                        endTime2 = endTime.substring(12, endTime.length());
+                    if (endTime.length() > 11) {
+                        endTime2 = endTime.substring(11, endTime.length());
                     }
                     mHoldTimeView.setValueText(startTime + "-" + endTime2);
                     mRequest.meetingstarttime = startTime;

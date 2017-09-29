@@ -119,7 +119,6 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
             }
         });
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
-        mRefreshLayout.beginRefreshing();
 
 
         mListView1 = (ListView) findViewById(R.id.listview1);
@@ -255,6 +254,7 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
                             if (model.isSuccess()) {
                                 if (model.data != null) {
                                     KeyValueBean bean = model.data.paystatuslist.get(0);
+                                    paystatusid = bean.getKey();
 
                                     mState1View.setText(bean.getValue());
                                     mState1View.setTag(bean.getKey());
@@ -263,6 +263,8 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
 
                                     mState1View1.setText(bean1.getValue());
                                     mState1View1.setTag(bean1.getKey());
+
+                                    mRefreshLayout.beginRefreshing();
                                 }
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
@@ -312,8 +314,8 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
                                     if (model.data != null)
                                         if (mFlag == 1) {//已支付
                                             mAdapter.addAll(model.data.takemoneylist);
-                                            if (model.data.takemoneytotleinfo != null) {
-                                                ((TextView) findViewById(R.id.take_money_pay_money)).setText(model.data.takemoneytotleinfo.totlemoney);
+                                            if (model.data.totlemoneyinfo != null) {
+                                                ((TextView) findViewById(R.id.take_money_pay_money)).setText(model.data.totlemoneyinfo.totlemoney);
                                             }
                                         } else {
                                             mAdapter1.addAll(model.data.takemoneylist);
@@ -410,7 +412,7 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.scan_code_top_money_layout:
-                if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null ) {//升
+                if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null) {//升
                     mMoneyOrder = "desc";
                     mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {

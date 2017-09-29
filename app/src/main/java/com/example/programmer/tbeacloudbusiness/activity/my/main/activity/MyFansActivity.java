@@ -72,12 +72,14 @@ public class MyFansActivity extends BaseActivity implements View.OnClickListener
         }
 
         initUI();
+
     }
 
     /**
      * 实例化组件
      */
     private void initUI() {
+        mFansCancelView.setText("删除");
         mSelectAllLayout = findViewById(R.id.fans_select_all_layout);
         rightView = (TextView) findViewById(R.id.top_right_text);
         mListView = (ListView) findViewById(R.id.listview);

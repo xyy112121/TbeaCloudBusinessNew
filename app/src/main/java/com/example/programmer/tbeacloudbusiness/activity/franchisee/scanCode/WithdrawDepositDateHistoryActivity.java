@@ -39,7 +39,7 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 提现历史
+ * 提现历史（总经销商）
  */
 
 public class WithdrawDepositDateHistoryActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
@@ -47,7 +47,6 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
     private ListView mListView;
     private MyAdapter mAdapter;
     private int mPage = 1;
-    private int mPagesiz = 10;
 
     @BindView(R.id.scan_code_top_money_iv)
     ImageView mScanCodeTopMoneyIv;
@@ -98,7 +97,7 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
                             WithdrawDepositDateHistoryListResponseModel model = (WithdrawDepositDateHistoryListResponseModel) msg.obj;
                             if (model.isSuccess()) {
                                 if (model.data != null)
-                                    mAdapter.addAll(model.data.takemoneyrankinglist);
+                                    mAdapter.addAll(model.data.takemoneylist);
                                 initPayeeInfo(model.data.payeeinfo);
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
@@ -118,7 +117,7 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
                         ScanCodeAction action = new ScanCodeAction();
                         String personOrCompany = getIntent().getStringExtra("personOrCompany");
                         String payeeId = getIntent().getStringExtra("payeeId");
-                        WithdrawDepositDateHistoryListResponseModel model = action.getWithdrawDepositDateHistoryList(personOrCompany, payeeId, starttime, endtime, mOrderitem, mOrder, mPage++, mPagesiz);
+                        WithdrawDepositDateHistoryListResponseModel model = action.getWithdrawDepositDateHistoryList(personOrCompany, payeeId, starttime, endtime, mOrderitem, mOrder, mPage++, 14);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

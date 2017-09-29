@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="15dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:layout_weight="0.5"
+            android:gravity="left">
+
+            <TextView
+                android:id="@+id/code_info_item_code"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:gravity="right|center_vertical"
+                android:text="编码"
+                android:textColor="@color/tab_text_normal" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:layout_weight="0.25"
+            android:gravity="right"
+            android:tag="desc">
+
+            <TextView
+                android:id="@+id/code_info_item_state"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:gravity="right|center_vertical"
+                android:text="状态"
+                android:textColor="@color/tab_text_normal" />
+
+            <ImageView
+                android:id="@+id/code_info_item_state_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_arrow_right" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

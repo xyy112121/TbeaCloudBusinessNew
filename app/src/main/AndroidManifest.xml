@@ -228,12 +228,14 @@
         <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.SaleWaterListActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.set.SpecificationsAndModelsSelectListActivity" />
 
-       <activity android:name=".activity.distributorManage.activity.DistributorListActivity"/>
-       <activity android:name=".activity.distributorManage.activity.DustributorWithdrawalHistoryListActivity"/>
-       <activity android:name=".activity.franchisee.storeManage.activity.order.OrderListActivity"/>
+        <activity android:name=".activity.distributorManage.activity.DistributorListActivity" />
+        <activity android:name=".activity.distributorManage.activity.DustributorWithdrawalHistoryListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.order.OrderListActivity" />
 
-     <activity android:name=".activity.franchisee.tbws.activity.MyTaskListActivity"/>
-     <activity android:name=".activity.franchisee.tbws.activity.PendingViewActivity"/>
+        <activity android:name=".activity.my.main.activity.PersonInfoActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.MyTaskListActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.PendingViewActivity" />
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateInfoActivity"/>
     </application>
 
 </manifest>

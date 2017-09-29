@@ -20,6 +20,7 @@ public class ScanCodeMainResponseModel extends BaseResponseModel {
         public String electricianid;
         public String personjobtitle;
         public String personname;
+        public String personorcompany;
         public String sequence;
         public String thumbpicture;
         public String totlemoney;

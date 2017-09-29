@@ -207,10 +207,6 @@ public class StoreManageMainActivity extends BaseActivity implements BGARefreshL
         }
     }
 
-    private void  openActivity(){
-
-    }
-
     /**
      * 附近商家
      */

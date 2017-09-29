@@ -323,7 +323,7 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.setClass(mContext, ScanCodeStateListActivity.class);
+                    intent.setClass(mContext, ScanCodeCreateInfoActivity.class);
                     intent.putExtra("id",obj.id);
                     startActivity(intent);
                 }

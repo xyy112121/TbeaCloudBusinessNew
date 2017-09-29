@@ -21,22 +21,25 @@
             android:text="2017-05-01 18:55:55"
             android:textColor="@color/tab_text_normal"
             android:layout_marginLeft="15dp"
+            android:visibility="gone"
             />
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
+            android:layout_weight="0.7"
+            android:layout_marginLeft="8dp"
            android:gravity="center">
-            <TextView
-                android:id="@+id/scan_code_withdraw_deposit_name"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="蒲常亮"
-                android:drawablePadding="5dp"
-                android:drawableRight="@drawable/icon_scanre_bateheader1"
-                android:textColor="@color/tab_text_normal"
-                />
+            <include layout="@layout/activity_person_layout2"/>
+
+            <!--<TextView-->
+                <!--android:id="@+id/scan_code_withdraw_deposit_name"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:drawablePadding="5dp"-->
+                <!--android:drawableRight="@drawable/icon_scanre_bateheader1"-->
+                <!--android:gravity="center"-->
+                <!--android:text="蒲常亮"-->
+                <!--android:textColor="@color/tab_text_normal" />-->
         </LinearLayout>
 
 

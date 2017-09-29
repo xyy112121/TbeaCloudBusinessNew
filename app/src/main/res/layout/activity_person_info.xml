@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/head_color"
+                android:gravity="center_vertical"
+                android:paddingLeft="25dp"
+                android:text="个人资料"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/person_info_account"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="用户名"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <LinearLayout
+                style="@style/my_text_layout"
+                android:layout_marginLeft="15dp">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/my_text_style"
+                    android:layout_width="100dp"
+                    android:gravity="left"
+                    android:paddingLeft="8dp"
+                    android:text="头像"
+                    android:textColor="@color/text_color" />
+
+                <RelativeLayout
+                    android:id="@+id/person_info_header_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8">
+
+                    <ImageView
+                        android:id="@+id/person_info_header"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:src="@drawable/icon_head" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/icon_arrow_right" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/person_info_name"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="用户类别"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/person_info_sex"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="性别"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/person_info_age"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewInputType="number"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="年龄"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/person_info_addr"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="地址"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/person_info_phone"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewInputType="phone"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="电话"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/person_info_zone"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="店铺"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/person_info_state"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="认证状态"
+                app:PublishTextRowViewTextColor="@color/text_color" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

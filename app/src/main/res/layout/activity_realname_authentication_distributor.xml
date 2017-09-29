@@ -34,9 +34,9 @@
             android:text="企业名称" />
 
         <TextView
+            android:id="@+id/identification_companyName"
             style="@style/my_right_text_style1"
-            android:gravity="right|center_vertical"
-            android:text="绵阳城五金机电经营部" />
+            android:gravity="right|center_vertical" />
     </LinearLayout>
 
     <View style="@style/horizontal_view" />
@@ -48,9 +48,9 @@
             android:text="注册号" />
 
         <TextView
+            android:id="@+id/identification_companyCode"
             style="@style/my_right_text_style1"
-            android:gravity="right|center_vertical"
-            android:text="5***************8" />
+            android:gravity="right|center_vertical" />
     </LinearLayout>
 
     <View style="@style/horizontal_view" />
@@ -62,9 +62,9 @@
             android:text="注册地址" />
 
         <TextView
+            android:id="@+id/identification_companyAddr"
             style="@style/my_right_text_style1"
-            android:gravity="right|center_vertical"
-            android:text="绵阳城五金机电经营部地址" />
+            android:gravity="right|center_vertical" />
     </LinearLayout>
 
     <View
@@ -79,9 +79,9 @@
             android:text="法人姓名" />
 
         <TextView
+            android:id="@+id/identification_personName"
             style="@style/my_right_text_style1"
-            android:gravity="right|center_vertical"
-            android:text="张明" />
+            android:gravity="right|center_vertical" />
     </LinearLayout>
 
     <View style="@style/horizontal_view" />
@@ -93,9 +93,9 @@
             android:text="身份证号" />
 
         <TextView
+            android:id="@+id/identification_cardId"
             style="@style/my_right_text_style1"
-            android:gravity="right|center_vertical"
-            android:text="5**************5" />
+            android:gravity="right|center_vertical" />
     </LinearLayout>
 
     <View
@@ -110,9 +110,9 @@
             android:text="证件审核" />
 
         <TextView
-            style="@style/my_right_text_style"
-            android:gravity="right|center_vertical"
-            android:text="已通过" />
+            android:id="@+id/identification_state"
+            style="@style/my_right_text_style1"
+            android:gravity="right|center_vertical" />
     </LinearLayout>
 
     <View style="@style/horizontal_view" />

@@ -206,7 +206,7 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
             FrameLayout view = (FrameLayout) layoutInflater.inflate(
                     R.layout.activity_scan_code_main_list_item, null);
-            ScanCodeMainResponseModel.TakeMoneyRanking obj = mList.get(position);
+           final ScanCodeMainResponseModel.TakeMoneyRanking obj = mList.get(position);
             CircleImageView headView = (CircleImageView) view.findViewById(R.id.scan_code_main_item_thumbpicture);
             ImageView personJobTitleView = (ImageView) view.findViewById(R.id.scan_code_main_item_personjobtitle);
             TextView nameView = (TextView) view.findViewById(R.id.scan_code_main_item_name);
@@ -217,17 +217,27 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
             nameView.setText(obj.personname);
             moneyView.setText(obj.totlemoney);
             ImageView rankingView = (ImageView) view.findViewById(R.id.scan_code_main_item_ranking);
-            if(position == 1){
+            if(position == 0){
                 rankingView.setImageResource(R.drawable.icon_scanre_batesort1);
-            }else if(position == 2){
+            }else if(position == 1){
                 rankingView.setImageResource(R.drawable.icon_scanre_batesort2);
-            }else if(position == 3){
+            }else if(position == 2){
                 rankingView.setImageResource(R.drawable.icon_scanre_batesort3);
-            }else if(position == 4){
+            }else if(position == 3){
                 rankingView.setImageResource(R.drawable.icon_scanre_batesort4);
             }else {
                 rankingView.setImageResource(R.drawable.icon_scanre_batesort4);
             }
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext,WithdrawDepositDateHistoryActivity.class);
+                    intent.putExtra("personOrCompany",obj.personorcompany);
+                    intent.putExtra("payeeId",obj.electricianid);
+                    startActivity(intent);
+                }
+            });
             return view;
         }
 

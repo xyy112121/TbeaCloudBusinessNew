@@ -385,7 +385,7 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
 
             //水电工会议
             startActivity(new Intent(getActivity(), PlumberMeetingListActivity.class));
-        } else if ("marketer_shuidiangongguanli".equals(moduleid)) {
+        } else if ("marketer_shuidiangongguanli".equals(moduleid)) {//外勤人员
             //水电工管理
             startActivity(new Intent(getActivity(), DranchiseeSeleteActivity.class));
         } else if ("fenxiaoshang".equals(moduleid)) {
