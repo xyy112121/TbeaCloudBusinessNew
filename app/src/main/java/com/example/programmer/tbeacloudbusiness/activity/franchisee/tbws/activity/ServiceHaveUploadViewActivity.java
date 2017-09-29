@@ -6,63 +6,40 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.action.SubscribeAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.PendingInfoResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.HaveFinishedResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
-import com.example.programmer.tbeacloudbusiness.model.EventCity;
-import com.example.programmer.tbeacloudbusiness.model.EventFlag;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 待处理详情
+ * 已上传
  */
 
-public class PendingViewActivity extends BaseActivity implements View.OnClickListener {
-    private String mCode;
+public class ServiceHaveUploadViewActivity extends BaseActivity {
     private String mId;
+    private String mCheckResultId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sr_view_pendind);
+        setContentView(R.layout.activity_sr_view_have_upload);
         ButterKnife.bind(this);
-        if("finised".equals(getIntent().getStringExtra("flag"))){
-            initTopbar("预约详情");
-            findViewById(R.id.sr_view_sendOrders).setVisibility(View.GONE);
-        }else {
-            initTopbar("预约详情", "取消", this);
-        }
-        EventBus.getDefault().register(this);
+        initTopbar("检测详情");
         getDate();
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Subscribe
-    public void onEventMainThread(EventCity event) {
-        if (event == null) return;
-        if (EventFlag.EVENT_FINISED_ACTIVITY1.equals(event.getEventFlag())) {
-            finish();
-        }
     }
 
     public void getDate() {
@@ -79,25 +56,24 @@ public class PendingViewActivity extends BaseActivity implements View.OnClickLis
                         if (re.isSuccess()) {
                             Gson gson = new GsonBuilder().serializeNulls().create();
                             String json = gson.toJson(re.data);
-                            PendingInfoResponseModel model = gson.fromJson(json, PendingInfoResponseModel.class);
+                            HaveFinishedResponseModel model = gson.fromJson(json, HaveFinishedResponseModel.class);
                             if (model.electricalcheckinfo != null) {
-                                PendingInfoResponseModel.ElectricalcheckinfoBean info = model.electricalcheckinfo;
-                                setViewText(R.id.sr_view_personName, info.subscribeuser);
-                                setViewText(R.id.sr_view_code, info.subscribecode);
-                                setViewText(R.id.sr_view_time, info.subscribetime);
-                                mCode = info.vouchercode;
-                                setViewText(R.id.sr_view_VoucherCode, info.vouchercode);
-                                setViewText(R.id.sr_view_customername, info.customername);
-                                setViewText(R.id.sr_view_customermobile, info.customermobile);
-                                setViewText(R.id.sr_view_customerAddr, info.customeraddress);
-                                setViewText(R.id.sr_view_note, info.subscribenote);
+                                HaveFinishedResponseModel.ElectricalcheckinfoBean info = model.electricalcheckinfo;
+
+                                ImageView headView = (ImageView) findViewById(R.id.person_info_head);
+                                ImageLoader.getInstance().displayImage(info.thumbpicture, headView);
+                                ((TextView) findViewById(R.id.person_info_name)).setText(info.name);
+                                ((TextView) findViewById(R.id.person_info_companyname)).setText(info.info);
+                                findViewById(R.id.person_info_personjobtitle).setVisibility(View.GONE);
+
+                                setViewText(R.id.sr_view_assign_time, info.assigntime);
+                                setViewText(R.id.sr_view_assign_state, info.checkstatus);
+                                setViewText(R.id.sr_view_finish_time, info.uploadtime);
+//                                mCode = info.vouchercode;
+                                setViewText(R.id.sr_view_state_subscribeCode, info.subscribecode);
+                                mCheckResultId = info.checkresultid;
                             }
 
-                            if (model.orderinfo != null) {
-                                PendingInfoResponseModel.OrderinfoBean info = model.orderinfo;
-                                setViewText(R.id.sr_view_orderCompany, info.ordercompany);
-                                setViewText(R.id.sr_view_orderTime, info.ordertime);
-                            }
                         }
 
                         break;
@@ -114,7 +90,7 @@ public class PendingViewActivity extends BaseActivity implements View.OnClickLis
                 try {
                     SubscribeAction action = new SubscribeAction();
                     mId = getIntent().getStringExtra("id");
-                    ResponseInfo re = action.getPendingInfo(mId);
+                    ResponseInfo re = action.getHaveUpload(mId);
                     if (re == null) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
                     } else {
@@ -131,24 +107,21 @@ public class PendingViewActivity extends BaseActivity implements View.OnClickLis
         ((PublishTextRowView) findViewById(id)).setValueText(text);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @OnClick({R.id.sr_view_orderCommdity, R.id.sr_view_sendOrders})
+    @OnClick({R.id.sr_view_state_subscribeCode, R.id.sr_view_state_checkResult})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.sr_view_orderCommdity:
-                Intent intent = new Intent(mContext, CommdityListActivity.class);
-                intent.putExtra("code", mCode);
+            case R.id.sr_view_state_subscribeCode:
+                Intent intent = new Intent(mContext, PendingViewActivity.class);
+                intent.putExtra("id", mId);
+                intent.putExtra("flag","finised");
                 startActivity(intent);
                 break;
-            case R.id.sr_view_sendOrders:
-                intent = new Intent(mContext, SendOrdersPersonSelectActivity.class);
-                intent.putExtra("id", mId);
+            case R.id.sr_view_state_checkResult:
+                intent = new Intent(mContext, UploadPictureListActivity.class);
+                intent.putExtra("checkResultId", mCheckResultId);
                 startActivity(intent);
                 break;
         }
     }
 }
+

@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info;
+package com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.info;
 
 /**
  * Created by programmer on 2017/9/25.
@@ -38,6 +38,7 @@ public class PendingInfoResponseModel {
         public String customermobile;//联系电话
         public String customeraddress;//地址
         public String subscribetime;//预约时间
+        public String assigntime ;//派单时间
         public String electricalcheckstatusid;
         public String electricalcheckstatus;
         public String subscribenote;//预约说明

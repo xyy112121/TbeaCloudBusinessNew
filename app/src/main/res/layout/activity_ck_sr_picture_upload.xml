@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_page_top" />
+
+
+    <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+        android:id="@+id/sr_upload_code"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:PublishTextRowViewIsBottomLineShow="true"
+        app:PublishTextRowViewState="read"
+        app:PublishTextRowViewText="预约编号"
+        app:PublishTextRowViewRightTextColor="@color/text_color"/>
+
+    <GridView
+        android:id="@+id/sr_upload_image_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:numColumns="4" />
+
+    <View
+        style="@style/horizontal_view"
+        android:layout_marginTop="5dp" />
+
+</LinearLayout>

@@ -34,7 +34,7 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 总经销选择（外勤人员）
+ * Created by programmer on 2017/8/15.
  */
 
 public class DranchiseeSeleteActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {

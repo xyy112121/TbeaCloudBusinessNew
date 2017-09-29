@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.activity;
+package com.example.programmer.tbeacloudbusiness.activity.check.tbws.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,11 +6,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.action.SubscribeAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.PendingInfoResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.action.SubscribeAction;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.info.PendingInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.model.EventCity;
@@ -20,6 +22,7 @@ import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,27 +31,21 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 待处理详情
+ * 已接单
  */
 
-public class PendingViewActivity extends BaseActivity implements View.OnClickListener {
+public class ServiceHaveAssignViewActivity extends BaseActivity implements View.OnClickListener {
     private String mCode;
     private String mId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sr_view_pendind);
+        setContentView(R.layout.activity_sr_view_assignr);
         ButterKnife.bind(this);
-        if("finised".equals(getIntent().getStringExtra("flag"))){
-            initTopbar("预约详情");
-            findViewById(R.id.sr_view_sendOrders).setVisibility(View.GONE);
-        }else {
-            initTopbar("预约详情", "取消", this);
-        }
+        initTopbar("接单详情");
         EventBus.getDefault().register(this);
         getDate();
-
     }
 
     @Override
@@ -98,6 +95,17 @@ public class PendingViewActivity extends BaseActivity implements View.OnClickLis
                                 setViewText(R.id.sr_view_orderCompany, info.ordercompany);
                                 setViewText(R.id.sr_view_orderTime, info.ordertime);
                             }
+
+                            if(model.assigninfo != null){
+                                PendingInfoResponseModel.AssigninfoBean info = model.assigninfo;
+
+                                ImageView headView = (ImageView) findViewById(R.id.person_info_head);
+                                ImageLoader.getInstance().displayImage(info.thumbpicture, headView);
+                                ( (TextView)findViewById(R.id.person_info_name)).setText(info.name);
+                                ( (TextView)findViewById(R.id.person_info_companyname)).setText(info.info);
+                                findViewById(R.id.person_info_personjobtitle).setVisibility(View.GONE);
+                                setViewText(R.id.sr_view_assign_time, info.assigntime);
+                            }
                         }
 
                         break;
@@ -114,7 +122,7 @@ public class PendingViewActivity extends BaseActivity implements View.OnClickLis
                 try {
                     SubscribeAction action = new SubscribeAction();
                     mId = getIntent().getStringExtra("id");
-                    ResponseInfo re = action.getPendingInfo(mId);
+                    ResponseInfo re = action.getHaveAssignr(mId);
                     if (re == null) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
                     } else {
@@ -136,17 +144,12 @@ public class PendingViewActivity extends BaseActivity implements View.OnClickLis
 
     }
 
-    @OnClick({R.id.sr_view_orderCommdity, R.id.sr_view_sendOrders})
+    @OnClick({R.id.sr_view_orderCommdity})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sr_view_orderCommdity:
                 Intent intent = new Intent(mContext, CommdityListActivity.class);
                 intent.putExtra("code", mCode);
-                startActivity(intent);
-                break;
-            case R.id.sr_view_sendOrders:
-                intent = new Intent(mContext, SendOrdersPersonSelectActivity.class);
-                intent.putExtra("id", mId);
                 startActivity(intent);
                 break;
         }

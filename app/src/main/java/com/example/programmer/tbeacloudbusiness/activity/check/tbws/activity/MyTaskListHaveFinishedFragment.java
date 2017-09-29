@@ -1,4 +1,4 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.activity;
+package com.example.programmer.tbeacloudbusiness.activity.check.tbws.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +19,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.action.SubscribeAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.MyTaskListHaveFinishedResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.action.SubscribeAction;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.MyTaskListHaveFinishedResponseModel;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
@@ -80,7 +80,7 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
     private void initView() {
 
         mCodeTv.setText("预约编号");
-        mStatusTv.setText("操作人员");
+        mStatusLayout.setVisibility(View.GONE);
         mTimeTv.setText("上传日期");
         mAdapter = new MyAdapter(getActivity(), R.layout.activity_my_free_test_list_item);
         mListView.setAdapter(mAdapter);
@@ -212,7 +212,7 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
             }
 //            holder.mIsMoneyView.setVisibility(View.VISIBLE);
             holder.mCodeView.setText(getItem(position).subscribecode);
-            holder.mStatusView.setText(getItem(position).electricianname);
+            holder.mStatusView.setVisibility(View.GONE);
             holder.mDateView.setText(getItem(position).uploadtime);
 
             convertView.setOnClickListener(new View.OnClickListener() {

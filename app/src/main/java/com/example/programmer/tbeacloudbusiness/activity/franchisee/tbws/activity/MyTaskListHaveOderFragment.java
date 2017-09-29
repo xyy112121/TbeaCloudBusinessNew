@@ -216,20 +216,8 @@ public class MyTaskListHaveOderFragment extends Fragment implements BGARefreshLa
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    String checkstatusid = getItem(position).;
                     Intent intent = new Intent();
-//                    if ("new".equals(checkstatusid)) {//待接单
-//                        intent.setClass(getActivity(), MyTaskViewWaitingActivity.class);
-//                    }
-//                    if ("assigned".equals(checkstatusid)) {//已接单
-//                        intent.setClass(getActivity(), MyTaskViewHaveOrderActivity.class);
-//                    }
-//                    if ("finishedbutneedappraise".equals(checkstatusid)) {//待评价
-//                        intent.setClass(getActivity(), MyTaskViewRemainEvaluatedActivity.class);
-//                    }
-//                    if ("finished".equals(checkstatusid)) {//已结束
-//                        intent.setClass(getActivity(), MyTaskViewHaveFinishedActivity.class);
-//                    }
+                    intent.setClass(getActivity(), ServiceHaveAssignViewActivity.class);
                     intent.putExtra("id", getItem(position).electricalcheckid);
                     startActivity(intent);
                 }

@@ -1,15 +1,14 @@
-package com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.action;
+package com.example.programmer.tbeacloudbusiness.activity.check.tbws.action;
 
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.CommdityListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.MyTaskListAllResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.MyTaskListHaveEvaluationResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.MyTaskListHaveFinishedResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.MyTaskListHaveOrderResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.MyTaskListWaitingResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.TaskStateResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.CommdityListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.MyTaskListAllResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.MyTaskListHaveEvaluationResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.MyTaskListHaveFinishedResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.MyTaskListHaveOrderResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.MyTaskListWaitingResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.TaskStateResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.info.TestDetailsResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.MyPictureListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.SendOrdersPersonSelectResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.TestDetailsResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by DELL on 2017/9/24.
+ * 检测人员的预约检测
  */
 
 public class SubscribeAction extends BaseAction {
@@ -30,7 +29,7 @@ public class SubscribeAction extends BaseAction {
     public TaskStateResponseModel getState() throws Exception {
         TaskStateResponseModel rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
-        String result = sendRequest("TBEAYUN004006001000", pairs);
+        String result = sendRequest("TBEAYUN012001001000", pairs);
         rspInfo = gson.fromJson(result, TaskStateResponseModel.class);
         return rspInfo;
     }
@@ -49,7 +48,7 @@ public class SubscribeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
-        String result = sendRequest("TBEAYUN004006002000", pairs);
+        String result = sendRequest("TBEAYUN012001002000", pairs);
         rspInfo = gson.fromJson(result, MyTaskListAllResponseModel.class);
         return rspInfo;
     }
@@ -68,7 +67,7 @@ public class SubscribeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
-        String result = sendRequest("TBEAYUN004006003000", pairs);
+        String result = sendRequest("TBEAYUN012001003000", pairs);
         rspInfo = gson.fromJson(result, MyTaskListWaitingResponseModel.class);
         return rspInfo;
     }
@@ -87,7 +86,7 @@ public class SubscribeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
-        String result = sendRequest("TBEAYUN004006004000", pairs);
+        String result = sendRequest("TBEAYUN012001004000", pairs);
         rspInfo = gson.fromJson(result, MyTaskListHaveOrderResponseModel.class);
         return rspInfo;
     }
@@ -106,7 +105,7 @@ public class SubscribeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
-        String result = sendRequest("TBEAYUN004006005000", pairs);
+        String result = sendRequest("TBEAYUN012001005000", pairs);
         rspInfo = gson.fromJson(result, MyTaskListHaveEvaluationResponseModel.class);
         return rspInfo;
     }
@@ -144,13 +143,13 @@ public class SubscribeAction extends BaseAction {
     }
 
     /**
-     * 已派单
+     * 已接单
      */
     public ResponseInfo getHaveAssignr(String id) throws Exception {
         ResponseInfo rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("electricalcheckid", id));
-        String result = sendRequest("TBEAYUN004006011000", pairs);
+        String result = sendRequest("TBEAYUN012001011000", pairs);
         rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;
     }
@@ -162,7 +161,7 @@ public class SubscribeAction extends BaseAction {
         ResponseInfo rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("electricalcheckid", id));
-        String result = sendRequest("TBEAYUN004006012000", pairs);
+        String result = sendRequest("TBEAYUN012001012000", pairs);
         rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;
     }
@@ -174,7 +173,7 @@ public class SubscribeAction extends BaseAction {
         ResponseInfo rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("electricalcheckid", id));
-        String result = sendRequest("TBEAYUN004006014000", pairs);
+        String result = sendRequest("TBEAYUN012001014000", pairs);
         rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;
     }
@@ -188,19 +187,8 @@ public class SubscribeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("vouchercode", code));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
-        String result = sendRequest("TBEAYUN004006008000", pairs);
+        String result = sendRequest("TBEAYUN012001008000", pairs);
         rspInfo = gson.fromJson(result, CommdityListResponseModel.class);
-        return rspInfo;
-    }
-
-    /**
-     * 获得服务凭证对应的购买产品列表。
-     */
-    public SendOrdersPersonSelectResponseModel getSendOrdersPerson() throws Exception {
-        SendOrdersPersonSelectResponseModel rspInfo;
-        List<NameValuePair> pairs = new ArrayList<>();
-        String result = sendRequest("TBEAYUN004006009000", pairs);
-        rspInfo = gson.fromJson(result, SendOrdersPersonSelectResponseModel.class);
         return rspInfo;
     }
 
@@ -209,12 +197,11 @@ public class SubscribeAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ResponseInfo sendOrder(String electricalCheckId,String electricianId) throws Exception {
+    public ResponseInfo OrderReceiving(String electricalCheckId) throws Exception {
         ResponseInfo rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("electricalcheckid", electricalCheckId));
-        pairs.add(new BasicNameValuePair("electricianid", electricianId));
-        String result = sendRequest("TBEAYUN004006010000", pairs);
+        String result = sendRequest("TBEAYUN012001010000", pairs);
         rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;
     }
@@ -226,7 +213,7 @@ public class SubscribeAction extends BaseAction {
         TestDetailsResponseModel rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("checkresultid", checkresultid));
-        String result = sendRequest("TBEAYUN004006013000", pairs);
+        String result = sendRequest("TBEAYUN012001013000", pairs);
         rspInfo = gson.fromJson(result, TestDetailsResponseModel.class);
         return rspInfo;
     }
@@ -238,11 +225,24 @@ public class SubscribeAction extends BaseAction {
         MyPictureListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("checkresultid", checkresultid));
-        String result = sendRequest("TBEAYUN004006015000", pairs);
+        String result = sendRequest("TBEAYUN012001015000", pairs);
         model = gson.fromJson(result, MyPictureListResponseModel.class);
         return model;
     }
 
+
+    /**
+     * 检测图片数据上传。
+     */
+    public ResponseInfo uploadPicture(String assignid, String pictureList) throws Exception {
+        ResponseInfo resultModel;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("assignid", assignid));
+        pairs.add(new BasicNameValuePair("picturelist", pictureList));
+        String result = sendRequest("TBEAYUN012001013002", pairs);
+        resultModel = gson.fromJson(result, ResponseInfo.class);
+        return resultModel;
+    }
 
 
 }
