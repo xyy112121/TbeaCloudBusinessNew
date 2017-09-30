@@ -175,7 +175,7 @@ public class ExpandPopTabView extends LinearLayout implements OnDismissListener 
             @Override
             public void onClick(View v) {
                 onExpandPopView();
-                setViewColor(ContextCompat.getColor(mContext,R.color.blue));
+//                setViewColor(ContextCompat.getColor(mContext,R.color.blue));
             }
         });
 
@@ -185,6 +185,12 @@ public class ExpandPopTabView extends LinearLayout implements OnDismissListener 
     public  void setViewColor(int color){
         if(mSelectedToggleBtn != null){
             mSelectedToggleBtn.setViewColor(color);
+        }
+    }
+
+    public  void setViewColor(int color,int id){
+        if(mSelectedToggleBtn != null){
+            mSelectedToggleBtn.setViewColor(color,id);
         }
     }
 

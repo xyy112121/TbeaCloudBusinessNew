@@ -97,7 +97,8 @@
                 app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewState="read"
                 app:PublishTextRowViewText="性别"
-                app:PublishTextRowViewTextColor="@color/text_color" />
+                app:PublishTextRowViewTextColor="@color/text_color"
+                app:PublishTextRowViewIsSelect="true"/>
 
             <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
                 android:id="@+id/person_info_age"
@@ -118,6 +119,7 @@
                 app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewState="read"
                 app:PublishTextRowViewText="地址"
+                app:PublishTextRowViewIsSelect="true"
                 app:PublishTextRowViewTextColor="@color/text_color" />
 
             <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
@@ -146,7 +148,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 app:PublishTextRowViewIsBottomLineShow="true"
-                app:PublishTextRowViewIsSelect="true"
                 app:PublishTextRowViewLeftWidth="100dp"
                 app:PublishTextRowViewState="read"
                 app:PublishTextRowViewText="认证状态"

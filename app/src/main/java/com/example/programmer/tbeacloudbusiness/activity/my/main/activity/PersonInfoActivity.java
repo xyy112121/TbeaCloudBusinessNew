@@ -7,17 +7,26 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.AddrSelectActivity;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.model.UploadImageResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
+import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
@@ -37,7 +46,7 @@ import butterknife.OnClick;
  * 个人信息
  */
 
-public class PersonInfoActivity extends BaseActivity implements View.OnClickListener {
+public class PersonInfoActivity extends BaseActivity {
     @BindView(R.id.person_info_account)
     PublishTextRowView mAccountView;
     @BindView(R.id.person_info_header)
@@ -70,131 +79,65 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_info);
         ButterKnife.bind(this);
-//        initTopbar("", "编辑", this);
         initTopbar("");
         getDate();
     }
 
-    @Override
-    public void onClick(View view) {
-//        String text = mRightTv.getText() + "";
-//        if ("编辑".equals(text)) {
-//            mRightTv.setText("保存");
-//            mHeaderLayout.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    showImage();
-//                }
-//            });
-//
-//            mNameView.setEditable(true);
-//            mSexView.setClickEnable(true);
-//           mSexView.setOnClickListener(new View.OnClickListener() {
-//               @Override
-//               public void onClick(View v) {
-//                   showSexPicker();
-//               }
-//           });
-//
-//            mAddrView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(mContext, AddrSelectActivity.class);
-//                    intent.putExtra("province", mModel.province);
-//                    intent.putExtra("city", mModel.city);
-//                    intent.putExtra("county", mModel.zone);
-//                    intent.putExtra("addr", mModel.address);
-//                    startActivityForResult(intent, RESULT_ADDR);
-//                }
-//            });
-//            mAgeView.setEditable(true);
-//            mAddrView.setClickEnable(true);
-//            mZoneView.setEditable(true);
-//        } else if ("保存".equals(text)) {
-//            save();
-//        }
-    }
 
-    public void save() {
-//        mRequest.username = mNameView.getValueText();
-//        mRequest.age = mAgeView.getValueText();
-//        mRequest.buildingzoneid = mZoneView.getValueText();
-//        if (UtilAssistants.isNotEmpty(mRequest.username)) {
-//            ToastUtil.showMessage("请输入名称！");
-//            return;
-//        }
-//
-//        if (UtilAssistants.isNotEmpty(mRequest.age)) {
-//            int age = Integer.parseInt(mRequest.age);
-//            if (age < 10 || age > 100) {
-//                ToastUtil.showMessage("输入年龄不合法！");
-//                return;
-//            }
-//        }
-//
-//        if (UtilAssistants.isNotEmpty(mRequest.address) || UtilAssistants.isNotEmpty(mRequest.province)) {
-//            ToastUtil.showMessage("请输入地址！");
-//            return;
-//        }
-//
-//        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
-//        dialog.setText("请等待...");
-//        dialog.show();
-//        try {
-//            final Handler handler = new Handler() {
-//                @Override
-//                public void handleMessage(Message msg) {
-//                    dialog.dismiss();
-//                    switch (msg.what) {
-//                        case ThreadState.SUCCESS:
-//                            ResponseInfo re = (ResponseInfo) msg.obj;
-//                            if (re.isSuccess()) {
-//                                mNameView.setEditable(false);
-//                                mSexView.setClickEnable(false);
-//                                mAgeView.setEditable(false);
-//                                mAddrView.setClickEnable(false);
-//                                mPhoneView.setEditable(false);
-//                                mZoneView.setEditable(false);
-//                                mRightTv.setText("编辑");
-//                                mSexView.setOnClickListener(null);
-//                                mAddrView.setOnClickListener(null);
-//                            } else {
-//                                ToastUtil.showMessage(re.getMsg());
-//                            }
-//                            break;
-//                        case ThreadState.ERROR:
-//                            ToastUtil.showMessage("操作失败！");
-//                            break;
-//                    }
-//                }
-//            };
-//
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        UserAction action = new UserAction();
-//                        if (mSelectList.size() > 0) {
-//                            MeetingGalleryUpdateResponseModel model = action.uploadImage(mSelectList);
-//                            if (model.isSuccess() && model.data.pictureinfo != null) {
-//                                mRequest.thumbpicture = model.data.pictureinfo.picturesavenames;
-//                                ResponseInfo re = action.setPersonInfo(mRequest);
-//                                handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
-//                            } else {
-//                                handler.sendEmptyMessage(ThreadState.ERROR);
-//                            }
-//                        } else {
-//                            ResponseInfo re = action.setPersonInfo(mRequest);
-//                            handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
-//                        }
-//                    } catch (Exception e) {
-//                        handler.sendEmptyMessage(ThreadState.ERROR);
-//                    }
-//                }
-//            }).start();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    public void save(final PersonInfoRequestModel request, final String flag) {
+        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+        dialog.setText("请等待...");
+        dialog.show();
+        try {
+            final Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    dialog.dismiss();
+                    switch (msg.what) {
+                        case ThreadState.SUCCESS:
+                            ResponseInfo re = (ResponseInfo) msg.obj;
+                            ToastUtil.showMessage(re.getMsg());
+                            break;
+                        case ThreadState.ERROR:
+                            ToastUtil.showMessage("操作失败！");
+                            break;
+                    }
+                }
+            };
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        UserAction action = new UserAction();
+                        if (mSelectList.size() > 0 && "picture".equals(flag)) {
+                            ResponseInfo re = action.uploadImage(mSelectList);
+                            if (re.isSuccess()) {
+                                Gson gson = new GsonBuilder().create();
+                                String json = gson.toJson(re.data);
+                                UploadImageResponseModel model = gson.fromJson(json, UploadImageResponseModel.class);
+                                if (model.pictureinfo != null) {
+                                    request.picture = model.pictureinfo.picturesavenames;
+                                    ResponseInfo result = action.setPersonInfo(request);
+                                    handler.obtainMessage(ThreadState.SUCCESS, result).sendToTarget();
+                                } else {
+                                    handler.sendEmptyMessage(ThreadState.ERROR);
+                                }
+                            } else {
+                                handler.sendEmptyMessage(ThreadState.ERROR);
+                            }
+                        } else {
+                            ResponseInfo re = action.setPersonInfo(request);
+                            handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
+                        }
+                    } catch (Exception e) {
+                        handler.sendEmptyMessage(ThreadState.ERROR);
+                    }
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -263,31 +206,24 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
         }).start();
     }
 
-    @OnClick({R.id.top_left})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.top_left:
-                finish();
-                break;
-        }
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case RESULT_ADDR://举办地点
+                case RESULT_ADDR://地址
                     mRequest.province = data.getStringExtra("province");
                     mRequest.city = data.getStringExtra("city");
                     mRequest.zone = data.getStringExtra("county");
                     mRequest.address = data.getStringExtra("addrInfo");
                     String addr = data.getStringExtra("addr");
                     mAddrView.setValueText(addr);
+                    save(mRequest, "");
                     break;
                 case PictureConfig.CHOOSE_REQUEST:
                     // 图片选择结果回调
                     mSelectList = PictureSelector.obtainMultipleResult(data);
                     ImageLoader.getInstance().displayImage("file://" + mSelectList.get(0).getCompressPath(), mHeaderView);
+                    save(mRequest, "picture");
                     break;
             }
         }
@@ -298,19 +234,20 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
      * 显示性别
      */
     private void showSexPicker() {
-//        LinearLayout parentLayout = (LinearLayout) findViewById(R.id.parentLayout);
-//        List<KeyValueBean> sexList = new ArrayList<>();
-//        sexList.add(new KeyValueBean("male", "男"));
-//        sexList.add(new KeyValueBean("femal", "女"));
-//        CustomPopWindow1 popWindow1 = new CustomPopWindow1(mContext);
-//        popWindow1.init(parentLayout, R.layout.pop_window_header1, R.layout.pop_window_tv, sexList, "");
-//        popWindow1.setItemClick2(new CustomPopWindow1.ItemClick2() {
-//            @Override
-//            public void onItemClick2(KeyValueBean bean) {
-//                mRequest.sex = bean.getValue();
-//                mSexView.setValueText(bean.getValue());
-//            }
-//        });
+        LinearLayout parentLayout = (LinearLayout) findViewById(R.id.parentLayout);
+        List<KeyValueBean> sexList = new ArrayList<>();
+        sexList.add(new KeyValueBean("male", "先生"));
+        sexList.add(new KeyValueBean("female", "女士"));
+        CustomPopWindow1 popWindow1 = new CustomPopWindow1(mContext);
+        popWindow1.init(parentLayout, R.layout.pop_window_header1, R.layout.pop_window_tv, sexList, "");
+        popWindow1.setItemClick2(new CustomPopWindow1.ItemClick2() {
+            @Override
+            public void onItemClick2(KeyValueBean bean) {
+                mRequest.sex = bean.getKey();
+                mSexView.setValueText(bean.getValue());
+                save(mRequest, "");
+            }
+        });
     }
 
 
@@ -318,26 +255,26 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
      * 显示选择拍照，图库
      */
     private void showImage() {
-//        LinearLayout parentLayout = (LinearLayout) findViewById(R.id.parentLayout);
-//        List<String> photoOperationList = new ArrayList<>();
-//        photoOperationList.add("拍照上传");
-//        photoOperationList.add("本地上传");
-//        CustomPopWindow1 popWindow1 = new CustomPopWindow1(mContext);
-//        popWindow1.init(parentLayout, R.layout.pop_window_header1, R.layout.pop_window_tv, photoOperationList);
-//        popWindow1.setItemClick(new CustomPopWindow1.ItemClick() {
-//            @Override
-//            public void onItemClick(String text) {
-//                if ("本地上传".equals(text)) {
-//                    openImage();
-//                } else {
-//                    PictureSelector.create(mContext)
-//                            .openCamera(PictureMimeType.ofImage())
-//                            .compress(true)
-//                            .forResult(PictureConfig.CHOOSE_REQUEST);
-//                }
-//
-//            }
-//        });
+        LinearLayout parentLayout = (LinearLayout) findViewById(R.id.parentLayout);
+        List<String> photoOperationList = new ArrayList<>();
+        photoOperationList.add("拍照上传");
+        photoOperationList.add("本地上传");
+        CustomPopWindow1 popWindow1 = new CustomPopWindow1(mContext);
+        popWindow1.init(parentLayout, R.layout.pop_window_header1, R.layout.pop_window_tv, photoOperationList);
+        popWindow1.setItemClick(new CustomPopWindow1.ItemClick() {
+            @Override
+            public void onItemClick(String text) {
+                if ("本地上传".equals(text)) {
+                    openImage();
+                } else {
+                    PictureSelector.create(mContext)
+                            .openCamera(PictureMimeType.ofImage())
+                            .compress(true)
+                            .forResult(PictureConfig.CHOOSE_REQUEST);
+                }
+
+            }
+        });
     }
 
     private void openImage() {
@@ -351,5 +288,30 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
                 .compressGrade(Luban.THIRD_GEAR)// luban压缩档次，默认3档 Luban.THIRD_GEAR、Luban.FIRST_GEAR、Luban.CUSTOM_GEAR
                 .selectionMedia(mSelectList)// 是否传入已选图片 List<LocalMedia> list
                 .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
+    }
+
+    @OnClick({R.id.top_left, R.id.person_info_header_layout, R.id.person_info_sex, R.id.person_info_addr, R.id.person_info_phone})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.person_info_header_layout:
+                showImage();
+                break;
+            case R.id.person_info_sex:
+                showSexPicker();
+                break;
+            case R.id.person_info_addr:
+                Intent intent = new Intent(mContext, AddrSelectActivity.class);
+                intent.putExtra("province", mModel.province);
+                intent.putExtra("city", mModel.city);
+                intent.putExtra("county", mModel.zone);
+                intent.putExtra("addr", mModel.addr);
+                startActivityForResult(intent, RESULT_ADDR);
+                break;
+            case R.id.person_info_phone:
+                break;
+            case R.id.top_left:
+                finish();
+                break;
+        }
     }
 }

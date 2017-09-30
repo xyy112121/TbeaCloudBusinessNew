@@ -3,7 +3,9 @@ package com.example.programmer.tbeacloudbusiness.activity.user.action;
 import android.util.Log;
 
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.MessageListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.TbMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataRequestModel;
@@ -15,12 +17,15 @@ import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuth
 import com.example.programmer.tbeacloudbusiness.http.MD5Util;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
+import com.luck.picture.lib.entity.LocalMedia;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by DELL on 2017/7/9.
@@ -243,6 +248,41 @@ public class UserAction extends BaseAction {
         String result = sendRequest("TBEAYUN011006001001", pairs);
         rspInfo = gson.fromJson(result, PersonInfoResponseModel.class);
         return rspInfo;
+    }
+
+    public ResponseInfo setPersonInfo(PersonInfoRequestModel obj) throws Exception {
+        ResponseInfo rspInfo;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("picture", obj.picture));
+        pairs.add(new BasicNameValuePair("sex", obj.sex));
+        pairs.add(new BasicNameValuePair("province", obj.province));
+        pairs.add(new BasicNameValuePair("city", obj.city));
+        pairs.add(new BasicNameValuePair("zone", obj.zone));
+        pairs.add(new BasicNameValuePair("addr", obj.address));
+        String result = sendRequest("TBEAYUN011006002001", pairs);
+        rspInfo = gson.fromJson(result, ResponseInfo.class);
+        return rspInfo;
+    }
+
+    /**
+     * 图片上传
+     *
+     */
+    public ResponseInfo uploadImage(List<LocalMedia> list) throws Exception {
+        ResponseInfo model;
+        Map<String, String> paramsIn = new HashMap<>();
+        Map<String, String> fileIn = new HashMap<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getCompressPath() != null) {
+                fileIn.put("file" + i, list.get(i).getCompressPath());
+            } else {
+                fileIn.put("file" + i, list.get(i).getPath());
+            }
+
+        }
+        String result = uploadImage("TBEAYUN001007001000", paramsIn, fileIn);
+        model = gson.fromJson(result, ResponseInfo.class);
+        return model;
     }
 
     /**

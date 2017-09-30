@@ -52,6 +52,12 @@ public class DropdownButton extends RelativeLayout {
         textView.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
     }
 
+    public void setViewColor(int color,int id){
+        Drawable icon = getResources().getDrawable(id);
+        textView.setTextColor(color);
+        textView.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
+    }
+
 
     public void setText(CharSequence text) {
         textView.setText(text);

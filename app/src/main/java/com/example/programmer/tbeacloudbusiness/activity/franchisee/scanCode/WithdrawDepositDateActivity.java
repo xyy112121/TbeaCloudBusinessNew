@@ -33,6 +33,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
@@ -51,17 +52,21 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
     private MyAdapter mAdapter;
     private int mPage = 1;
     private int mPagesiz = 10;
-    private String paystatusid, payeetypeid, starttime, endtime, orderitem, order;
+    private String paystatusid, payeetypeid, starttime, endtime, orderitem, order,mMoneyOrder;
     private final int RESULT_DATA_SELECT = 1000;
     private TextView mState1View;
     private TextView mState1View1;
-    private  int mViewId;
+    private  int mViewId =R.id.take_money_pay_state1;
+
+    @BindView(R.id.scan_code_top_money_iv)
+    ImageView mScanCodeTopMoneyIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_code_withdraw_deposit_list);
         initTopbar("支付明细");
+        ButterKnife.bind(this);
         getPayStatus();
         getPayeeType();
         initView();
@@ -117,6 +122,8 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
             @Override
             public void getValue(String key, String value) {
                 expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw);
+                mScanCodeTopMoneyIv.setTag("asc");
                 payeetypeid = key;
                 mRefreshLayout.beginRefreshing();
             }
@@ -236,11 +243,16 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                             WithdrawDepositDateResponseModel model = (WithdrawDepositDateResponseModel) msg.obj;
                             if (model != null) {
                                 if (model.isSuccess()) {
-                                    if (model.data != null)
-                                        mAdapter.addAll(model.data.takemoneylist);
-                                    if (model.data.totlemoneyinfo != null) {
-                                        ((TextView) findViewById(R.id.take_money_pay_money)).setText(model.data.totlemoneyinfo.totlemoney);
+                                    if (model.data != null){
+                                        if(model.data.takemoneylist != null){
+                                            mAdapter.addAll(model.data.takemoneylist);
+                                        }
+
+                                        if (model.data.totlemoneyinfo != null) {
+                                            ((TextView) findViewById(R.id.take_money_pay_money)).setText(model.data.totlemoneyinfo.totlemoney);
+                                        }
                                     }
+
                                 } else {
                                     ToastUtil.showMessage(model.getMsg());
                                 }
@@ -294,6 +306,25 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                 order = "";
             }
             mRefreshLayout.beginRefreshing();
+        }
+    }
+
+    @OnClick({R.id.scan_code_top_money_layout})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.scan_code_top_money_layout:
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.text_color), R.drawable.icon_arrow_gray);
+                if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null) {//升
+                    mMoneyOrder = "desc";
+                    mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_grayblue);
+                } else {
+                    mMoneyOrder = "asc";
+                    mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_bluegray);
+                }
+                order = mMoneyOrder;
+                orderitem = "money";
+                mRefreshLayout.beginRefreshing();
+                break;
         }
     }
 
@@ -379,7 +410,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (v.getId() == R.id.take_money_pay_state1) {
+                    if (mViewId== R.id.take_money_pay_state1) {
                         Intent intent = new Intent(mContext, WithdrawDepositDateInfoActivity.class);
                         intent.putExtra("takeMoneyId", obj.takemoneyid);
                         startActivity(intent);

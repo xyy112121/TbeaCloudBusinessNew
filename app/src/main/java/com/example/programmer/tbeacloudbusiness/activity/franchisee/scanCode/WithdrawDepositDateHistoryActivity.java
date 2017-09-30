@@ -96,8 +96,11 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
                         case ThreadState.SUCCESS:
                             WithdrawDepositDateHistoryListResponseModel model = (WithdrawDepositDateHistoryListResponseModel) msg.obj;
                             if (model.isSuccess()) {
-                                if (model.data != null)
-                                    mAdapter.addAll(model.data.takemoneylist);
+                                if (model.data != null) {
+                                    if (model.data.takemoneylist != null) {
+                                        mAdapter.addAll(model.data.takemoneylist);
+                                    }
+                                }
                                 initPayeeInfo(model.data.payeeinfo);
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
@@ -118,7 +121,12 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
                         String personOrCompany = getIntent().getStringExtra("personOrCompany");
                         String payeeId = getIntent().getStringExtra("payeeId");
                         WithdrawDepositDateHistoryListResponseModel model = action.getWithdrawDepositDateHistoryList(personOrCompany, payeeId, starttime, endtime, mOrderitem, mOrder, mPage++, 14);
-                        handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+                        if (model == null) {
+                            handler.sendEmptyMessage(ThreadState.ERROR);
+                        } else {
+                            handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+                        }
+
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
                     }
@@ -149,6 +157,8 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
             @Override
             public void getValue(String key, String value) {
                 expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw);
+                mScanCodeTopMoneyIv.setTag("asc");
                 if ("Custom".equals(key)) {//时间自定义
                     Intent intent = new Intent(mContext, DateSelectActivity.class);
                     startActivityForResult(intent, RESULT_DATA_SELECT);
@@ -200,7 +210,7 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.scan_code_top_money_layout:
-                mOrderitem = "money";
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.text_color), R.drawable.icon_arrow_gray);
                 if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null) {//升
                     mMoneyOrder = "desc";
                     mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_grayblue);
@@ -280,10 +290,18 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
             FrameLayout view = (FrameLayout) layoutInflater.inflate(
                     R.layout.activity_scan_code_withdraw_deposit_history_list_item, null);
-            WithdrawDepositDateHistoryListResponseModel.TakeMoneyRanking obj = mList.get(position);
+            final WithdrawDepositDateHistoryListResponseModel.TakeMoneyRanking obj = mList.get(position);
             ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_history_list_item_time)).setText(obj.time);
             ((TextView) view.findViewById(R.id.scan_code_withdraw_deposit_history_list_item_money)).setText(obj.money);
 
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, WithdrawDepositDateInfoActivity.class);
+                    intent.putExtra("takeMoneyId", obj.dataid);
+                    startActivity(intent);
+                }
+            });
             return view;
         }
 
