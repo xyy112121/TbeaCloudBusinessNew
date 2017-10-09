@@ -18,9 +18,12 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.LoginUserModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.UpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.Installation;
+import com.example.programmer.tbeacloudbusiness.utils.AppUpdateUtils;
+import com.example.programmer.tbeacloudbusiness.utils.AppVersion;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.DeviceIdUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
@@ -64,6 +67,72 @@ public class LoginActivity extends PermissionActivity {
             }, "请求获取电话权限", Manifest.permission.READ_PHONE_STATE);
 
             listener();
+            getUpdateInfo();
+        }
+    }
+
+    /**
+     * 从服务器获取是否更新
+     */
+    private void getUpdateInfo() {
+        try {
+            final Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    switch (msg.what) {
+                        case ThreadState.SUCCESS:
+                            ResponseInfo re = (ResponseInfo) msg.obj;
+                            if (re.isSuccess()) {
+                                Gson gson = new GsonBuilder().serializeNulls().create();
+                                String json = gson.toJson(re.data);
+                                UpdateResponseModel model = gson.fromJson(json, UpdateResponseModel.class);
+                                if (model.versioninfo != null) {
+                                    UpdateResponseModel.VersioninfoBean info = model.versioninfo;
+                                    if ("on".equals(info.tipswitch) && info.jumpurl != null && !"".equals(info.jumpurl)) {
+                                        AppVersion av = new AppVersion();
+                                        av.setApkName("tbeacloudbusiness.apk");
+//                                av.setSha1("FCDA0D0E1E7D620A75DA02A131E2FFEDC1742AC8");
+                                        av.setUrl("http://down.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk");
+//                                        av.setUrl(info.jumpurl);
+                                        av.setContent(info.upgradedescription);
+                                        av.setVerCode(info.versioncode);
+                                        av.setVersionName(info.versionname);
+                                        if ("yes".equals(info.mustupgrade)) {
+                                            AppUpdateUtils.init(mContext, av, true, false, false);//强制升级
+                                        } else {
+                                            AppUpdateUtils.init(mContext, av, true, false, true);
+                                        }
+                                        AppUpdateUtils.upDate();
+                                    }
+                                } else {
+                                    ToastUtil.showMessage(re.getMsg());
+                                }
+
+                            } else {
+                                ToastUtil.showMessage(re.getMsg());
+                            }
+                            break;
+                        case ThreadState.ERROR:
+                            ToastUtil.showMessage("操作失败！");
+                            break;
+                    }
+                }
+            };
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        UserAction userAction = new UserAction();
+                        ResponseInfo model = userAction.getUpdate();
+                        handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+                    } catch (Exception e) {
+                        handler.sendEmptyMessage(ThreadState.ERROR);
+                    }
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

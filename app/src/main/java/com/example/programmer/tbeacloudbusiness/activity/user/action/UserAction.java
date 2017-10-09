@@ -62,6 +62,20 @@ public class UserAction extends BaseAction {
     }
 
     /**
+     * 获取是否有app更新
+     * @return
+     * @throws Exception
+     */
+    public ResponseInfo getUpdate() throws Exception {
+        ResponseInfo model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("terminaltype", "android"));
+        String result = sendRequest("TBEAYUN015001001000", pairs);
+        model = gson.fromJson(result, ResponseInfo.class);
+        return model;
+    }
+
+    /**
      * 获取其他用数据
      */
     public OtherResponseModel getOtherData() throws Exception {

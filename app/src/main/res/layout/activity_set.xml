@@ -89,6 +89,20 @@
     </LinearLayout>
 
     <View style="@style/horizontal_view" />
+    <LinearLayout style="@style/my_text_layout">
+
+        <TextView
+            style="@style/my_text_style"
+            android:text="检查更新" />
+
+        <TextView
+            android:id="@+id/set_update"
+            style="@style/my_right_text_style"
+            />
+
+    </LinearLayout>
+
+    <View style="@style/horizontal_view" />
 
 </LinearLayout>
     <Button
