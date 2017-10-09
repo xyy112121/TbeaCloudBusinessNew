@@ -137,7 +137,6 @@ public class AppUpdateUtils {
      * 更新应用
      */
     public static void upDate() {
-        ToastUtil.showMessage(mVersionCode+""+mAppVersion.getVerCode()+""+mIsAuto+"");
         Log.e("更新",mVersionCode+"");
         Log.e("更新版本",mAppVersion.getVerCode()+"");
         Log.e("是否更新",mIsAuto+"");
@@ -153,7 +152,6 @@ public class AppUpdateUtils {
      */
     private static void notNewVersionShow() {
         // 如果不是自动升级
-        ToastUtil.showMessage(mIsAuto+"");
         if (!mIsAuto) {
             StringBuffer sb = new StringBuffer();
             sb.append("当前版本,");
