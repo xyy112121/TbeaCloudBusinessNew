@@ -170,8 +170,8 @@ public class SetActivity extends BaseActivity {
                                         AppVersion av = new AppVersion();
                                         av.setApkName("tbeacloudbusiness.apk");
 //                                av.setSha1("FCDA0D0E1E7D620A75DA02A131E2FFEDC1742AC8");
-                                        av.setUrl("http://down.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk");
-//                                        av.setUrl(info.jumpurl);
+//                                        av.setUrl("http://down.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk");
+                                        av.setUrl(info.jumpurl);
                                         av.setContent(info.upgradedescription);
                                         av.setVerCode(info.versioncode);
                                         av.setVersionName(info.versionname);
