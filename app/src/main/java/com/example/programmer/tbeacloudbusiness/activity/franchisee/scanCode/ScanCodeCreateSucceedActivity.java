@@ -25,6 +25,7 @@ public class ScanCodeCreateSucceedActivity extends BaseActivity implements View.
         findViewById(R.id.create_code_succeed_finish_bth).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(mContext, ScanCodeHistoryListActivity.class));
                 finish();
             }
         });
@@ -33,8 +34,7 @@ public class ScanCodeCreateSucceedActivity extends BaseActivity implements View.
     @Override
     public void onClick(View view) {
         String id = getIntent().getStringExtra("id");
-        Intent intent = new Intent();
-        intent.setClass(mContext, ScanCodeCreateInfoActivity.class);
+        Intent intent = new Intent(mContext, ScanCodeCreateInfoActivity.class);
         intent.putExtra("id", id);
         startActivity(intent);
         finish();

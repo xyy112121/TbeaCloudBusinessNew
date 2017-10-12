@@ -229,6 +229,7 @@
         <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.CommoditySalesInfoActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.SaleWaterListActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.set.SpecificationsAndModelsSelectListActivity" />
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateInfoActivity"/>
 
        <activity android:name=".activity.distributorManage.activity.DistributorListActivity"/>
        <activity android:name=".activity.distributorManage.activity.DustributorWithdrawalHistoryListActivity"/>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color">
@@ -53,6 +54,7 @@
                 android:id="@+id/create_code_money"
                 style="@style/my_right_text_style1"
                 android:background="@null"
+                android:inputType="numberDecimal"
                 android:hint="请输入本次单张返利二维码的金额" />
         </LinearLayout>
 
@@ -75,6 +77,7 @@
                 android:id="@+id/create_code_number"
                 style="@style/my_right_text_style1"
                 android:background="@null"
+                android:inputType="number"
                 android:hint="请输入本次生成返利二维码的数量" />
         </LinearLayout>
 
