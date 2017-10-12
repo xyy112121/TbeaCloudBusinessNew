@@ -97,6 +97,8 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(mContext, ScanCodeCreateSelectActivity.class);
+                intent.putExtra("norms",mNorms);
+                intent.putExtra("type",mType);
                 startActivityForResult(intent, REQEST_TYPE_NORMS);
             }
         });

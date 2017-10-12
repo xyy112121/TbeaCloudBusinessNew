@@ -65,6 +65,10 @@ public class PopOneListView extends RelativeLayout {
         });
     }
 
+    public void setSelectPostion(){
+        mAdapter.setSelectedPositionNotify(0);
+    }
+
     /**
      * 关闭弹窗，显示选中项
      * @param showValue

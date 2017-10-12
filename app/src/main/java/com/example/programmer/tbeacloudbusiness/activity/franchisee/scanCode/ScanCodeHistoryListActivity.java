@@ -46,6 +46,8 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
     private PopOneListView mStateView,mDateView,mMoneyView,mNumberView;
     private String starttime, endtime, activitystatusid, orderitem, order;
     private final  int RESULT_DATA_SELECT = 1000;
+    List<String> mTopList = new ArrayList<>();
+    private int mIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +69,21 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
         mRefreshLayout.beginRefreshing();
         initDate();
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
-        addDateItem(expandTabView, mDateLists, "默认排序", "时间");
-        addMoneyItem(expandTabView, mMoneyLists, "默认排序", "金额");
-        addNumberItem(expandTabView, mNumberLists, "默认排序", "数量");
+        mTopList.add("时间");
+        mTopList.add("金额");
+        mTopList.add("数量");
+        mTopList.add("激活");
+        expandTabView.addTopList(mTopList);
+        expandTabView.setOnCloseListener(new ExpandPopTabView.OnClose() {
+            @Override
+            public void onCloseListener() {
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue),"");
+//                expandTabView.setViewColor();
+            }
+        });
+        addDateItem(expandTabView, mDateLists, "默认", "时间");
+        addMoneyItem(expandTabView, mMoneyLists, "默认", "金额");
+        addNumberItem(expandTabView, mNumberLists, "默认", "数量");
         addStateItem(expandTabView, null, "", "激活");
     }
 
@@ -79,9 +93,14 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
         mDateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue),value);
+                mMoneyView.setSelectPostion();
+                mNumberView.setSelectPostion();
+                mStateView.setSelectPostion();
                 if("custom".equals(key)){
                     Intent intent = new Intent(mContext,DateSelectActivity.class);
+                    intent.putExtra("startTime",starttime);
+                    intent.putExtra("endTime",endtime);
                     startActivityForResult(intent,RESULT_DATA_SELECT);
                 }else {
                     orderitem = "time";
@@ -101,7 +120,10 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
         mMoneyView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue),value);
+                mNumberView.setSelectPostion();
+                mStateView.setSelectPostion();
+                mDateView.setSelectPostion();
                 orderitem = "money";
                 order = key;
                 mRefreshLayout.beginRefreshing();
@@ -117,7 +139,10 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
         mNumberView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue),value);
+                mMoneyView.setSelectPostion();
+                mStateView.setSelectPostion();
+                mDateView.setSelectPostion();
                 orderitem = "count";
                 order = key;
                 mRefreshLayout.beginRefreshing();
@@ -132,7 +157,10 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
         mStateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue),value);
+                mMoneyView.setSelectPostion();
+                mNumberView.setSelectPostion();
+                mDateView.setSelectPostion();
                 activitystatusid = key;
                 mRefreshLayout.beginRefreshing();
             }

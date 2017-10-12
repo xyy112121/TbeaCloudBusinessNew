@@ -18,10 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by DELL on 2017/8/12.
- */
-
 public class CpDateSelectActivity extends BaseActivity {
     Calendar mStartCalendar;
     Calendar mEndCalendar;
