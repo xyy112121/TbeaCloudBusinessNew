@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -25,7 +26,7 @@ import java.util.List;
 public class ExpandPopTabView extends LinearLayout implements OnDismissListener {
     private ArrayList<RelativeLayout> mViewLists = new ArrayList<RelativeLayout>();
     private DropdownButton mSelectedToggleBtn;
-    private PopupWindow mPopupWindow;
+    private CustomPopw mPopupWindow;
     private Context mContext;
     private int mDisplayWidth;
     private int mDisplayHeight;
@@ -249,10 +250,10 @@ public class ExpandPopTabView extends LinearLayout implements OnDismissListener 
 
     private void expandPopView() {
         if (mPopupWindow == null) {
-            mPopupWindow = new PopupWindow(mViewLists.get(mSelectPosition), mDisplayWidth, mDisplayHeight);
+            mPopupWindow = new CustomPopw(mViewLists.get(mSelectPosition), mDisplayWidth, mDisplayHeight);
             mPopupWindow.setAnimationStyle(R.style.PopupWindowAnimation);
             mPopupWindow.setFocusable(false);
-            mPopupWindow.setOutsideTouchable(true);
+            mPopupWindow.setOutsideTouchable(false);
         }
 
         if (mSelectedToggleBtn.isCheck) {
@@ -289,8 +290,18 @@ public class ExpandPopTabView extends LinearLayout implements OnDismissListener 
         if (mPopupWindow.getContentView() != mViewLists.get(mSelectPosition)) {
             mPopupWindow.setContentView(mViewLists.get(mSelectPosition));
         }
+//        mPopupWindow.showAsDropDown(this);
         mPopupWindow.showAsDropDown(this, 0, 0);
+//        if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.M) {
+//            int[] location = new int[2];
+//            this.getLocationOnScreen(location);
+//            int y = location[1];
+//            mPopupWindow.showAtLocation(this, Gravity.NO_GRAVITY, 0, y);
+//        } else {
+//            mPopupWindow.showAsDropDown(this);
+//        }
     }
+
 
     @Override
     public void onDismiss() {
