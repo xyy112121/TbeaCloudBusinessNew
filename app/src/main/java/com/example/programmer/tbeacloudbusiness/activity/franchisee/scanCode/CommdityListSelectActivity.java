@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action.ScanCodeAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeNormsSelectReponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.CommdityCreateListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.Condition;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
@@ -28,22 +28,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 规格选择
+ * 生成二维码时对应的产品列表
  */
 
-public class ScanCodeNormsSelectActivity extends BaseActivity {
+public class CommdityListSelectActivity extends BaseActivity {
     private ListView mListView;
     private MyAdapter mAdapter;
-    Condition mNorms;
+    private Condition mCommdity;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activty_create_code_select_type_list);
-        initTopbar("规格选择");
-        mNorms = (Condition) getIntent().getSerializableExtra("norms");
-        mListView = (ListView)findViewById(R.id.listview);
+        initTopbar("产品名称");
+        mCommdity = (Condition) getIntent().getSerializableExtra("commdity");
+        mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new MyAdapter(mContext);
         mListView.setAdapter(mAdapter);
         getData();
@@ -54,7 +54,7 @@ public class ScanCodeNormsSelectActivity extends BaseActivity {
      */
     private void getData() {
         try {
-            final CustomDialog dialog = new CustomDialog(mContext,R.style.MyDialog,R.layout.tip_wait_dialog);
+            final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
             dialog.setText("加载中...");
             dialog.show();
             final Handler handler = new Handler() {
@@ -63,10 +63,10 @@ public class ScanCodeNormsSelectActivity extends BaseActivity {
                     dialog.dismiss();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
-                            ScanCodeNormsSelectReponseModel model = (ScanCodeNormsSelectReponseModel) msg.obj;
+                            CommdityCreateListResponseModel model = (CommdityCreateListResponseModel) msg.obj;
                             if (model.isSuccess()) {
-                                if (model.data.commodityspecificationlist != null && model.data.commodityspecificationlist.size() > 0) {
-                                    mAdapter.addAll(model.data.commodityspecificationlist);
+                                if (model.data.tbeacommoditycaterogylist != null && model.data.tbeacommoditycaterogylist.size() > 0) {
+                                    mAdapter.addAll(model.data.tbeacommoditycaterogylist);
                                 }
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
@@ -84,7 +84,7 @@ public class ScanCodeNormsSelectActivity extends BaseActivity {
                 public void run() {
                     try {
                         ScanCodeAction action = new ScanCodeAction();
-                        ScanCodeNormsSelectReponseModel model = action.getScanCodeNormsSelect();
+                        CommdityCreateListResponseModel model = action.getCommdityList();
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -134,20 +134,20 @@ public class ScanCodeNormsSelectActivity extends BaseActivity {
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
             FrameLayout view = (FrameLayout) layoutInflater.inflate(
                     R.layout.activty_create_code_select_type_list_item, null);
-            ((TextView)view.findViewById(R.id.label)).setText(mList.get(position).getName());
-            CheckBox checkBox = (CheckBox)view.findViewById(R.id.item_ck);
+            ((TextView) view.findViewById(R.id.label)).setText(mList.get(position).getName());
+            CheckBox checkBox = (CheckBox) view.findViewById(R.id.item_ck);
             checkBox.setVisibility(View.VISIBLE);
-            if(mNorms != null && mList.get(position).getId().equals(mNorms.getId())){
+            if (mCommdity != null && mList.get(position).getId().equals(mCommdity.getId())) {
                 checkBox.setChecked(true);
-            }else {
+            } else {
                 checkBox.setVisibility(View.GONE);
             }
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent();
-                    intent.putExtra("obj",mList.get(position));
-                    setResult(RESULT_OK,intent);
+                    intent.putExtra("commdity", mList.get(position));
+                    setResult(RESULT_OK, intent);
                     finish();
                 }
             });

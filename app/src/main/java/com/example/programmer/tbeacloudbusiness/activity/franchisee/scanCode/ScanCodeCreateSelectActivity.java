@@ -60,6 +60,7 @@ public class ScanCodeCreateSelectActivity extends BaseActivity implements View.O
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(mContext, ScanCodeTypeSelectActivity.class);
+                intent.putExtra("type",mType);
                 startActivityForResult(intent, RESULT_TYPE);
             }
         });
@@ -69,6 +70,7 @@ public class ScanCodeCreateSelectActivity extends BaseActivity implements View.O
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(mContext, ScanCodeNormsSelectActivity.class);
+                intent.putExtra("norms",mNorms);
                 startActivityForResult(intent, RESULT_NORMS);
             }
         });

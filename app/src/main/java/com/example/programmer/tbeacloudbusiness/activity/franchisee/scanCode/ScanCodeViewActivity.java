@@ -48,6 +48,7 @@ public class ScanCodeViewActivity extends BaseActivity {
                                 if(model.data != null && model.data.rebateqrcodeinfo != null){
                                     setViewText(R.id.scan_code_info_code,model.data.rebateqrcodeinfo.rebatecode);
                                     setViewText(R.id.scan_code_info_generatetime,model.data.rebateqrcodeinfo.generatetime);
+                                    setViewText(R.id.scan_code_info_name,model.data.rebateqrcodeinfo.commoditycategory);
                                     setViewText(R.id.scan_code_info_type,model.data.rebateqrcodeinfo.commodityspecificationandmodel);
                                     setViewText(R.id.scan_code_info_confirmstatus,model.data.rebateqrcodeinfo.confirmstatus);
                                     setViewText(R.id.scan_code_info_money,model.data.rebateqrcodeinfo.money);

@@ -92,6 +92,27 @@
             <TextView
                 style="@style/my_text_style"
                 android:layout_height="wrap_content"
+                android:text="产品名称"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/create_code_name"
+                style="@style/my_right_text_style"
+                android:hint="请选择"
+                android:textColorHint="@color/black" />
+        </LinearLayout>
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/my_select_btn"
+            android:paddingRight="10dp">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
                 android:text="产品规格"
                 android:textColor="@color/black"
                  />

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ import java.util.List;
 public class ScanCodeTypeSelectActivity extends BaseActivity {
     private ListView mListView;
     private MyAdapter mAdapter;
+    Condition mType;
 
 
     @Override
@@ -40,6 +42,7 @@ public class ScanCodeTypeSelectActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activty_create_code_select_type_list);
         initTopbar("型号规格");
+        mType = (Condition) getIntent().getSerializableExtra("type");
         mListView = (ListView)findViewById(R.id.listview);
         mAdapter = new MyAdapter(mContext);
         mListView.setAdapter(mAdapter);
@@ -132,6 +135,13 @@ public class ScanCodeTypeSelectActivity extends BaseActivity {
             FrameLayout view = (FrameLayout) layoutInflater.inflate(
                     R.layout.activty_create_code_select_type_list_item, null);
             ((TextView)view.findViewById(R.id.label)).setText(mList.get(position).getName());
+            CheckBox checkBox = (CheckBox)view.findViewById(R.id.item_ck);
+            checkBox.setVisibility(View.VISIBLE);
+            if(mType != null && mList.get(position).getId().equals(mType.getId())){
+                checkBox.setChecked(true);
+            }else {
+                checkBox.setVisibility(View.GONE);
+            }
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

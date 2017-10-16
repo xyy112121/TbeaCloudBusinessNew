@@ -1,5 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action;
 
+import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.CommdityListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.CommdityCreateListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.PayStatusResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.PayeeTypeResponeModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeActivityStatusResponseModel;
@@ -60,12 +62,13 @@ public class ScanCodeAction extends BaseAction {
     }
 
     //生成二维码
-    public ScanCodeCreateResponseModel createScanCode(String money, String number, String typeId, String normsId) throws Exception {
+    public ScanCodeCreateResponseModel createScanCode(String money, String number, String typeId, String normsId,String commdityId) throws Exception {
         ScanCodeCreateResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("money", money));
         pairs.add(new BasicNameValuePair("number", number));
         pairs.add(new BasicNameValuePair("commoditymodelid", typeId));
+        pairs.add(new BasicNameValuePair("commoditycategoryid", commdityId));
         pairs.add(new BasicNameValuePair("commodityspecificationid", normsId));//规格id
         String result = sendRequest("TBEAYUN004002006000", pairs);
         model = gson.fromJson(result, ScanCodeCreateResponseModel.class);
@@ -252,6 +255,20 @@ public class ScanCodeAction extends BaseAction {
         String result = sendRequest("TBEAYUN004002006002", pairs);
         model = gson.fromJson(result, ResponseInfo.class);
         return model;
+    }
+
+    /**
+     * 获得服务凭证对应的购买产品列表。
+     */
+    public CommdityCreateListResponseModel getCommdityList() throws Exception {
+        CommdityCreateListResponseModel rspInfo;
+        List<NameValuePair> pairs = new ArrayList<>();
+//        pairs.add(new BasicNameValuePair("vouchercode", code));
+//        pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
+//        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
+        String result = sendRequest("TBEAYUN001002004000", pairs);
+        rspInfo = gson.fromJson(result, CommdityCreateListResponseModel.class);
+        return rspInfo;
     }
 
 }

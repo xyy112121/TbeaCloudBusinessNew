@@ -30,6 +30,7 @@ public class ScanCodeInfoResponseModel extends BaseResponseModel {
         public String confirmstatus;
         public String generateid;
         public String generatetime;
+        public String commoditycategory;
         public String money;
         public String rebatecode;
     }

@@ -15,7 +15,7 @@
 
             <TextView
                 style="@style/my_text_style"
-                android:text="返利编码" />
+                android:text="编码" />
 
             <TextView
                 android:id="@+id/scan_code_info_code"
@@ -37,6 +37,21 @@
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="产品名称" />
+
+            <TextView
+                android:id="@+id/scan_code_info_name"
+                style="@style/my_right_text_style1" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view"
+            />
 
         <LinearLayout style="@style/my_text_layout">
 

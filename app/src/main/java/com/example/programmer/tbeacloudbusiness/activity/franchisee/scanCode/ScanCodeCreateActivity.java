@@ -31,14 +31,18 @@ import butterknife.ButterKnife;
 
 public class ScanCodeCreateActivity extends BaseActivity implements View.OnClickListener {
     private final int REQEST_TYPE_NORMS = 1004;
+    private final int REQEST_COMMDITY_NAME = 1005;
     @BindView(R.id.create_code_money)
     EditText mMoneyView;
     @BindView(R.id.create_code_number)
     EditText mNumberView;
     @BindView(R.id.create_code_type_norms)
     TextView mTypeNormsView;
+    @BindView(R.id.create_code_name)
+    TextView mCommdityNameView;
     private Condition mType;
     private Condition mNorms;
+    private Condition mCommdity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,9 +101,19 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(mContext, ScanCodeCreateSelectActivity.class);
-                intent.putExtra("norms",mNorms);
-                intent.putExtra("type",mType);
+                intent.putExtra("norms", mNorms);
+                intent.putExtra("type", mType);
                 startActivityForResult(intent, REQEST_TYPE_NORMS);
+            }
+        });
+
+        findViewById(R.id.create_code_name).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("commdity", mCommdity);
+                intent.setClass(mContext, CommdityListSelectActivity.class);
+                startActivityForResult(intent, REQEST_COMMDITY_NAME);
             }
         });
 
@@ -116,20 +130,27 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
                     ToastUtil.showMessage("请输入数量");
                     return;
                 }
+
+                if (mCommdity == null) {
+                    ToastUtil.showMessage("请选择产品");
+                    return;
+                }
+
                 if (mType == null || mNorms == null) {
                     ToastUtil.showMessage("请选择产品规格");
                     return;
                 }
-                showAlert(money,number);
+
+                showAlert(money, number);
             }
         });
     }
 
-    private void showAlert(final String money,final String number ) {
+    private void showAlert(final String money, final String number) {
         View parentLayout = findViewById(R.id.parentLayout);
         final CustomPopWindow1 popWindow1 = new CustomPopWindow1(mContext);
         popWindow1.init(parentLayout, R.layout.pop_window_header,
-                R.layout.activity_scancode_pay_confirm_tip, "确认提示", "是否生成返利二维码，请确认！", "确认",0);
+                R.layout.activity_scancode_pay_confirm_tip, "确认提示", "是否生成返利二维码，请确认！", "确认", 0);
         popWindow1.setItemClick(new CustomPopWindow1.ItemClick() {
             @Override
             public void onItemClick(String text) {
@@ -147,12 +168,22 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK && requestCode == REQEST_TYPE_NORMS) {
-            mType = (Condition) data.getSerializableExtra("type");
-            mNorms = (Condition) data.getSerializableExtra("norms");
-            String type = mType != null ? mType.getName() + "  " : "";
-            String norm = mNorms != null ? mNorms.getName() : "";
-            mTypeNormsView.setText(type + norm);
+
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQEST_TYPE_NORMS:
+                    mType = (Condition) data.getSerializableExtra("type");
+                    mNorms = (Condition) data.getSerializableExtra("norms");
+                    String type = mType != null ? mType.getName() + "  " : "";
+                    String norm = mNorms != null ? mNorms.getName() : "";
+                    mTypeNormsView.setText(type + norm);
+                    break;
+                case REQEST_COMMDITY_NAME:
+                    mCommdity = (Condition) data.getSerializableExtra("commdity");
+                    mCommdityNameView.setText(mCommdity.getName());
+                    break;
+            }
+
         }
     }
 
@@ -193,7 +224,7 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
                 public void run() {
                     try {
                         ScanCodeAction action = new ScanCodeAction();
-                        ScanCodeCreateResponseModel model = action.createScanCode(money, number, mType.getId(), mNorms.getId());
+                        ScanCodeCreateResponseModel model = action.createScanCode(money, number, mType.getId(), mNorms.getId(),mCommdity.getId());
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

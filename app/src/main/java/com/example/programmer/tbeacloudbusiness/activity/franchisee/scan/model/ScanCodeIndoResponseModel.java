@@ -7,13 +7,8 @@ import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
  * Created by programmer on 2017/7/21.
  */
 
-public class ScanCodeIndoResponseModel extends BaseResponseModel {
-    public ScanCodeIndoModel data;
-
-    public class ScanCodeIndoModel {
-        public TakeMoneyInfo takemoneyinfo;
-    }
-
+public class ScanCodeIndoResponseModel {
+    public TakeMoneyInfo takemoneyinfo;
 
     public class TakeMoneyInfo {
         public String companyname;
