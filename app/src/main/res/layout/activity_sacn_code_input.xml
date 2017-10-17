@@ -7,11 +7,13 @@
     <include layout="@layout/activity_page_top" />
 
     <EditText
+        android:id="@+id/scan_code_input_text"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="@null"
+        android:text="08381152085245973077"
         android:hint="请输入编码"/>
 
     <View

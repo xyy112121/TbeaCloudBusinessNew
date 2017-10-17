@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.action;
 
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.model.ScanCodeIndoResponseModel;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
@@ -23,6 +24,7 @@ public class ScanAction extends BaseAction{
         ResponseInfo model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("qrcode", code));
+        pairs.add(new BasicNameValuePair("scanaddress", MyApplication.instance.getAddrsss()));
         String result = sendRequest("TBEAYUN002003001000", pairs);
         model = gson.fromJson(result, ResponseInfo.class);
         return model;
