@@ -13,7 +13,6 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="@null"
-        android:text="08381152085245973077"
         android:hint="请输入编码"/>
 
     <View

@@ -21,7 +21,6 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 public class ScanCodeAcctivity extends BaseActivity {
     private boolean  mFlag = false;//控制是否打开闪关灯
-    private String mScanCodeType = "fanli";
     private final  int REQUEST_IMAGE = 100;
 
     @Override
