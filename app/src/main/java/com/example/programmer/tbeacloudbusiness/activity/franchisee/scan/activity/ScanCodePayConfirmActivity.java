@@ -123,7 +123,7 @@ public class ScanCodePayConfirmActivity extends BaseActivity {
             View parentLayout = findViewById(R.id.parentLayout);
             final CustomPopWindow1 popWindow1 = new CustomPopWindow1(mContext);
             popWindow1.init(parentLayout, R.layout.pop_window_header,
-                    R.layout.activity_scancode_pay_confirm_tip, "确认提示", "支付用户：" + mObj.takemoneyinfo.personname, "支付金额：" + mObj.takemoneyinfo.money, "确认");
+                    R.layout.activity_scancode_pay_confirm_tip, "确认提示", "支付用户：" + mObj.takemoneyinfo.personname, "支付金额：" + "￥" + mObj.takemoneyinfo.money, "确认");
             popWindow1.setItemClick(new CustomPopWindow1.ItemClick() {
                 @Override
                 public void onItemClick(String text) {

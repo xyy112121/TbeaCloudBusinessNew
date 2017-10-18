@@ -38,7 +38,7 @@ public class ScanCodeInputActivity extends BaseActivity {
                     return;
                 }
 
-                provingScanCode(result);
+                provingScanCode("tbscrfl_" + result);
             }
         });
     }
