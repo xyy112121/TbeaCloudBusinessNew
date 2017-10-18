@@ -38,7 +38,8 @@ public class RegisterSuccessActivity extends BaseActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.completion_data:
-                Intent intent = new Intent(mContext, CompletionDataActivity.class);
+                Intent intent = getIntent();
+                intent.setClass(mContext, CompletionDataActivity.class);
                 startActivity(intent);
                 break;
         }

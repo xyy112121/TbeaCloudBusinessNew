@@ -231,9 +231,10 @@ public class UserAction extends BaseAction {
     /**
      * 获取补全资料信息
      */
-    public CompletionDataResponseModel getCompletionData() throws Exception {
+    public CompletionDataResponseModel getCompletionData(String mobilenumber) throws Exception {
         CompletionDataResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("mobilenumber", mobilenumber));
         String result = sendRequest("TBEAYUN003002002000", pairs);
         model = gson.fromJson(result, CompletionDataResponseModel.class);
         return model;

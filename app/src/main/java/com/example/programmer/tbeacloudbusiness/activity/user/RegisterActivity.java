@@ -25,6 +25,8 @@ import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
+import com.example.programmer.tbeacloudbusiness.utils.Constants;
+import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
@@ -294,9 +296,12 @@ public class RegisterActivity extends Activity {
                     case ThreadState.SUCCESS:
                         ResponseInfo re = (ResponseInfo) msg.obj;
                         if (re.isSuccess()) {
+//                            ShareConfig.setConfig(RegisterActivity.this, Constants.USERTYPE, mRequest.usertypeid);
                             Intent intent = new Intent(RegisterActivity.this, RegisterSuccessActivity.class);
+                            intent.putExtra("mobilenumber",mRequest.mobilenumber);
                             startActivity(intent);
                             finish();
+
                         } else {
                             ToastUtil.showMessage(re.getMsg());
                         }

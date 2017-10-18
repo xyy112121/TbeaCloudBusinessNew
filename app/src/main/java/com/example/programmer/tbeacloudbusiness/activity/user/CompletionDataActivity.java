@@ -107,11 +107,12 @@ public class CompletionDataActivity extends BaseActivity {
 
     private void initView() {
         String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-        if ("notidentify".equals(identify)) {//未认证
+        if ("notidentify".equals(identify) || identify == null || "".equals(identify)) {//未认证
             getUserTypeList();
-        }else {
-            getDate();
         }
+//        else {
+            getDate();
+//        }
 
     }
 
@@ -157,7 +158,7 @@ public class CompletionDataActivity extends BaseActivity {
                                 rightView.setVisibility(View.GONE);
                                 mAffiliationLayoutView.addView(pernsonLayout);
                                 String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-                                if (!"notidentify".equals(identify)) {//未认证
+                                if (!"notidentify".equals(identify)|| identify == null || "".equals(identify)) {//未认证
                                     setView();
                                 }
 
@@ -177,7 +178,8 @@ public class CompletionDataActivity extends BaseActivity {
                 public void run() {
                     try {
                         UserAction action = new UserAction();
-                        CompletionDataResponseModel model = action.getCompletionData();
+                        String mobilenumber = getIntent().getStringExtra("mobilenumber");
+                        CompletionDataResponseModel model = action.getCompletionData(mobilenumber);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -265,7 +267,7 @@ public class CompletionDataActivity extends BaseActivity {
                 break;
             case R.id.completion_data_next:
                 String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-                if ("notidentify".equals(identify)) {//未认证
+                if ("notidentify".equals(identify) || identify == null || "".equals(identify)) {//未认证
                     uploadImage();
                 } else {
                     intent = new Intent(mContext, RealNameAuthenticationActivity.class);
