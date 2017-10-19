@@ -85,6 +85,8 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
     Button mSaveView;
 
 
+
+
     private CustomPopWindow mCustomPopWindow;
     private boolean mIsEdit = false;//是否可编辑 true可编辑
     private boolean mIsUpdate = false;//是否可更新 true可更新
@@ -285,11 +287,17 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
             case R.id.cp_meeting_prepare_plan:
                 intent = new Intent(mContext, MeetingPreparePlanActivity.class);
                 intent.putExtra("text", mPlanView.getValueText());
-                if (mIsEdit == false) {
+                if (mIsEditOnClick == false) {
                     intent.putExtra("flag", "view");
                 }
                 startActivityForResult(intent, RESULT_PLAN);
 
+                break;
+            case R.id.cp_meeting_prepare_hold_monad:
+                intent = new Intent(mContext, FranchiserSelectListActivity.class);
+                intent.putExtra("flag", true);
+                intent.putExtra("ids", mRequest.organizecompanylist);
+                startActivityForResult(intent, RESULT_COMPANY);
                 break;
             case R.id.cp_meeting_prepare_sign:
                 intent = new Intent(mContext, PlumberMeetingViewSignlnActivity.class);
@@ -319,6 +327,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                     mRequest.meetingendtime = endTime;
                     break;
                 case RESULT_COMPANY://举报单位
+                    mHoldMonadView.removeAllViews();
                     List<FranchiserSelectListResponseModel.DataBean.DistributorlistBean> mSelectList = (List<FranchiserSelectListResponseModel.DataBean.DistributorlistBean>) data.getSerializableExtra("selectObj");
                     String companyIds = "";
                     for (FranchiserSelectListResponseModel.DataBean.DistributorlistBean item : mSelectList) {
@@ -447,6 +456,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                 Intent intent = new Intent(mContext, MeetingSponsorSuccessActivity.class);
                                 intent.putExtra("id", model.data.meetinginfo.meetingid);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
                             }

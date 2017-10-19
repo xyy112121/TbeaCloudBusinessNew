@@ -149,6 +149,7 @@
                 android:layout_height="49dp"
                 app:PublishTextRowViewIsBottomLineShow="true"
                 app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewIsSelect="true"
                 app:PublishTextRowViewState="read"
                 app:PublishTextRowViewText="认证状态"
                 app:PublishTextRowViewTextColor="@color/text_color" />

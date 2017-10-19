@@ -12,6 +12,7 @@ import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDa
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.OtherResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RegisterRequestModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.RegisterResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationResponseModel;
 import com.example.programmer.tbeacloudbusiness.http.MD5Util;
@@ -130,15 +131,15 @@ public class UserAction extends BaseAction {
     /**
      * 注册
      */
-    public ResponseInfo register(RegisterRequestModel obj) throws Exception {
-        ResponseInfo model;
+    public RegisterResponseModel register(RegisterRequestModel obj) throws Exception {
+        RegisterResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("mobilenumber", obj.mobilenumber));
         pairs.add(new BasicNameValuePair("password", MD5Util.getMD5String(obj.password)));
         pairs.add(new BasicNameValuePair("verifycode", obj.verifycode));
         pairs.add(new BasicNameValuePair("usertypeid", obj.usertypeid));
         String result = sendRequest("TBEAYUN003001002000", pairs);
-        model = gson.fromJson(result, ResponseInfo.class);
+        model = gson.fromJson(result, RegisterResponseModel.class);
         return model;
     }
 

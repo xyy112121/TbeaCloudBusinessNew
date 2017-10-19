@@ -41,6 +41,7 @@ public class RegisterSuccessActivity extends BaseActivity implements View.OnClic
                 Intent intent = getIntent();
                 intent.setClass(mContext, CompletionDataActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }
@@ -51,10 +52,12 @@ public class RegisterSuccessActivity extends BaseActivity implements View.OnClic
             case R.id.completion_finish:
                 Intent intent = new Intent(mContext, LoginActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.completion_data:
                  intent = new Intent(mContext, CompletionDataActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

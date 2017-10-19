@@ -213,6 +213,7 @@ public class MyFragment extends Fragment implements View.OnClickListener, BGARef
     private void listener() {
         mView.findViewById(R.id.my_set).setOnClickListener(this);
         mView.findViewById(R.id.my_person_info).setOnClickListener(this);
+        mView.findViewById(R.id.fragment_mian_account_layout).setOnClickListener(this);
     }
 
 
@@ -223,6 +224,7 @@ public class MyFragment extends Fragment implements View.OnClickListener, BGARef
                 startActivity(new Intent(getActivity(), SetActivity.class));
                 break;
             case R.id.my_person_info:
+            case R.id.fragment_mian_account_layout:
                 startActivity(new Intent(getActivity(), PersonInfoActivity.class));
                 break;
         }

@@ -26,6 +26,7 @@ import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuth
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.picker.CustomAddressPicker;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.AssetsUtils;
@@ -104,7 +105,10 @@ public class RealNameAuthenticationActivity extends BaseActivity {
 
     private void initView() {
         String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-        if (!"notidentify".equals(identify)) {//未认证
+        mRequest.province = MyApplication.instance.getProvince();
+        mRequest.city = MyApplication.instance.getCity();
+        mRequest.zone = MyApplication.instance.getDistrict();
+        if (!"notidentify".equals(identify) && identify != null && !"".equals(identify)) {//未认证
             getDate();
         }
     }
@@ -215,13 +219,38 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                 break;
             case R.id.real_name_companyPhoto_finish:
                 String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-                if ("notidentify".equals(identify)) {//未认证
-                    attestation();
+                if ("notidentify".equals(identify) || identify == null || "".equals(identify) ) {//未认证
+                    mRequest.companyname = mCompanyNameView.getText() + "";
+                    mRequest.companylisencecode = mCompanyLisenceCodeView.getText() + "";
+                    mRequest.address = mAddr2View.getText() + "";
+                    mRequest.businessscope = mBusinessScopeView.getText() + "";
+                    mRequest.masterperson = mMasterPersonView.getText() + "";
+                    mRequest.masterpersonid = mMasterPersonIDView.getText() + "";
+                    if ("".equals(mRequest.address) || "".equals(mRequest.companyname) || "".equals(mRequest.companylisencecode) || mRequest.province == null || "".equals(mRequest.address) ||
+                            "".equals(mRequest.businessscope) || mRequest.companylisencepicture == null || "".equals(mRequest.masterperson) || "".equals(mRequest.masterpersonid) || mRequest.masterpersonidcard1 == null || mRequest.masterpersonidcard2 == null || mRequest.companyphoto == null) {
+                        ToastUtil.showMessage("请补全资料");
+                        return;
+                    }
+                    showAlert();
+
                 } else {
                     getAttestationstate();
                 }
                 break;
         }
+    }
+
+    private void showAlert() {
+        View parentLayout = findViewById(R.id.parentLayout);
+        final CustomPopWindow1 popWindow1 = new CustomPopWindow1(mContext);
+        popWindow1.init(parentLayout, R.layout.pop_window_header,
+                R.layout.activity_scancode_pay_confirm_tip, "确认提示", "信息提交后，在审核结果中不能修改，请核对信息无误后，按确认提交！", "确认", 0);
+        popWindow1.setItemClick(new CustomPopWindow1.ItemClick() {
+            @Override
+            public void onItemClick(String text) {
+                attestation();
+            }
+        });
     }
 
     /**
@@ -268,18 +297,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
      * 认证
      */
     private void attestation() {
-        mRequest.companyname = mCompanyNameView.getText() + "";
-        mRequest.companylisencecode = mCompanyLisenceCodeView.getText() + "";
-        mRequest.address = mAddr2View.getText() + "";
-        mRequest.businessscope = mBusinessScopeView.getText() + "";
-        mRequest.masterperson = mMasterPersonView.getText() + "";
-        mRequest.masterpersonid = mMasterPersonIDView.getText() + "";
-        if ("".equals(mRequest.address) || "".equals(mRequest.companyname) || "".equals(mRequest.companylisencecode) || mRequest.province == null || "".equals(mRequest.address) ||
-                "".equals(mRequest.businessscope) || mRequest.companylisencepicture == null || "".equals(mRequest.masterperson) || "".equals(mRequest.masterpersonid) || mRequest.masterpersonidcard1 == null || mRequest.masterpersonidcard2 == null || mRequest.companyphoto == null) {
-            ToastUtil.showMessage("请补全资料");
-            return;
 
-        }
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         dialog.setText("请等待...");
         dialog.show();
@@ -293,6 +311,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                         case ThreadState.SUCCESS:
                             ResponseInfo model = (ResponseInfo) msg.obj;
                             if (model.isSuccess()) {
+                                ToastUtil.showMessage("提交成功，请等待认证！");
                                 ShareConfig.setConfig(mContext, Constants.whetheridentifiedid, "identifying");
                                 setResult(RESULT_OK);
                                 finish();

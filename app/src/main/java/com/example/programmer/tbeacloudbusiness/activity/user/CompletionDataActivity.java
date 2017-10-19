@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -131,34 +132,43 @@ public class CompletionDataActivity extends BaseActivity {
                             CompletionDataResponseModel model = (CompletionDataResponseModel) msg.obj;
                             if (model.isSuccess() && model.data != null) {
                                 CompletionDataResponseModel.DataBean.PersoninfoBean obj = model.data.personinfo;
+//                                mAccountView.setText(obj.mobilenumber);
                                 mAreaView.setText(obj.province + obj.city + obj.zone);
                                 mNameView.setText(obj.realname);
-                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.picture, mHeadView1);
+                                if(!"".equals(obj.picture)){
+                                    ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.picture, mHeadView1);
+                                }
+
                                 if ("male".equals(obj.sexid)) {
                                     mSexView.setText("男");
                                 } else {
                                     mSexView.setText("女");
+                                    mRequest.sexid = "femal";
                                 }
-                                mBirthdayView.setText(obj.birthyear + "-" + obj.birthmonth + "-" + obj.birthday);
+                                if(!TextUtils.isEmpty(obj.birthday)){
+                                    mBirthdayView.setText(obj.birthyear + "-" + obj.birthmonth + "-" + obj.birthday);
+                                }
+
                                 CompletionDataResponseModel.DataBean.PersoninfoBean.FirstdistributorinfoBean item = obj.firstdistributorinfo;
                                 if(item != null){
                                     mAffiliationView.setVisibility(View.GONE);
                                     mAffiliationLayoutView.setVisibility(View.VISIBLE);
+                                    View pernsonLayout = getLayoutInflater().inflate(R.layout.activity_person_layout2, null);
+                                    CircleImageView headView = (CircleImageView) pernsonLayout.findViewById(R.id.person_info_head);
+                                    ImageView typwView = (ImageView) pernsonLayout.findViewById(R.id.person_info_personjobtitle);
+                                    ImageView rightView = (ImageView) pernsonLayout.findViewById(R.id.person_info_right);
+                                    TextView nameView = (TextView) pernsonLayout.findViewById(R.id.person_info_name);
+                                    TextView companyNameView = (TextView) pernsonLayout.findViewById(R.id.person_info_companyname);
+                                    ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.thumbpicture, headView);
+                                    typwView.setVisibility(View.GONE);
+                                    nameView.setText(item.personname);
+                                    companyNameView.setText(item.companyname);
+                                    rightView.setVisibility(View.GONE);
+                                    mAffiliationLayoutView.addView(pernsonLayout);
                                 }
-                                View pernsonLayout = getLayoutInflater().inflate(R.layout.activity_person_layout2, null);
-                                CircleImageView headView = (CircleImageView) pernsonLayout.findViewById(R.id.person_info_head);
-                                ImageView typwView = (ImageView) pernsonLayout.findViewById(R.id.person_info_personjobtitle);
-                                ImageView rightView = (ImageView) pernsonLayout.findViewById(R.id.person_info_right);
-                                TextView nameView = (TextView) pernsonLayout.findViewById(R.id.person_info_name);
-                                TextView companyNameView = (TextView) pernsonLayout.findViewById(R.id.person_info_companyname);
-                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + item.thumbpicture, headView);
-                                typwView.setVisibility(View.GONE);
-                                nameView.setText(item.personname);
-                                companyNameView.setText(item.companyname);
-                                rightView.setVisibility(View.GONE);
-                                mAffiliationLayoutView.addView(pernsonLayout);
+
                                 String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-                                if (!"notidentify".equals(identify)|| identify == null || "".equals(identify)) {//未认证
+                                if (!"notidentify".equals(identify)&& identify != null && !"".equals(identify)) {//未认证
                                     setView();
                                 }
 
@@ -405,7 +415,7 @@ public class CompletionDataActivity extends BaseActivity {
         try {
             Calendar calendar = Calendar.getInstance();
             CustomDatePicker picker = new CustomDatePicker(mContext);
-            picker.setRange(1990, calendar.get(Calendar.YEAR));
+            picker.setRange(1950, calendar.get(Calendar.YEAR));
             picker.setTextSize(14);
             picker.setSelectedItem(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
             picker.setOnDatePickListener(new CustomDatePicker.OnYearMonthDayPickListener() {

@@ -13,16 +13,18 @@ import android.widget.RelativeLayout;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.AddrSelectActivity;
-import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.UploadImageResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
+import com.example.programmer.tbeacloudbusiness.utils.Constants;
+import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.google.gson.Gson;
@@ -312,6 +314,17 @@ public class PersonInfoActivity extends BaseActivity {
             case R.id.top_left:
                 finish();
                 break;
+        }
+    }
+
+    @OnClick(R.id.person_info_state)
+    public void onViewClicked() {
+        String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
+        if ("identified".equals(identify)) {
+//                                startActivity(new Intent(getActivity(), RealNameAuthenticationPlumberActivity.class));
+            startActivity(new Intent(mContext, RealNameAuthenticationDistributorActivity.class));
+        } else {
+            startActivity(new Intent(mContext, CompletionDataActivity.class));
         }
     }
 }

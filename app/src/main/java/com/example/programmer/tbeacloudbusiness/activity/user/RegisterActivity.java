@@ -20,6 +20,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.action.SetAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RegisterRequestModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.RegisterResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.UserTypeResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
@@ -294,9 +295,13 @@ public class RegisterActivity extends Activity {
                 dialog.dismiss();
                 switch (msg.what) {
                     case ThreadState.SUCCESS:
-                        ResponseInfo re = (ResponseInfo) msg.obj;
+                        RegisterResponseModel re = (RegisterResponseModel) msg.obj;
                         if (re.isSuccess()) {
-//                            ShareConfig.setConfig(RegisterActivity.this, Constants.USERTYPE, mRequest.usertypeid);
+                            RegisterResponseModel.DataBean.UserinfoBean model = re.data.userinfo;
+                            ShareConfig.setConfig(RegisterActivity.this, Constants.USERTYPE, model.usertypeid);
+                            ShareConfig.setConfig(RegisterActivity.this, Constants.whetheridentifiedid, model.whetheridentifiedid);
+                            ShareConfig.setConfig(RegisterActivity.this, Constants.USERID, model.id);
+                            ShareConfig.setConfig(RegisterActivity.this, Constants.ACCOUNT, model.account);
                             Intent intent = new Intent(RegisterActivity.this, RegisterSuccessActivity.class);
                             intent.putExtra("mobilenumber",mRequest.mobilenumber);
                             startActivity(intent);
@@ -318,7 +323,7 @@ public class RegisterActivity extends Activity {
             public void run() {
                 try {
                     UserAction userAction = new UserAction();
-                    ResponseInfo re = userAction.register(mRequest);
+                    RegisterResponseModel re = userAction.register(mRequest);
                     handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);
