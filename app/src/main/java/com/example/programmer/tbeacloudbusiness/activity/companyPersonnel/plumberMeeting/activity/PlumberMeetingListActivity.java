@@ -81,6 +81,11 @@ public class PlumberMeetingListActivity extends BaseActivity implements BGARefre
         initDate();
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
+        List<String> mTopList = new ArrayList<>();
+        mTopList.add("区域");
+        mTopList.add("状态");
+        mTopList.add("时间");
+        expandTabView.addTopList(mTopList);
         addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
         addStateItem(expandTabView, null, "", "状态");
         addDateItem(expandTabView, mDateLists, "默认排序", "时间");
@@ -107,7 +112,9 @@ public class PlumberMeetingListActivity extends BaseActivity implements BGARefre
         mRegionView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue),value);
+                mDateView.setSelectPostion();
+                mStateView.setSelectPostion();
                 if ("regionSelect".equals(key)) {
                     Intent intent = new Intent(mContext, RegionSelectActivity.class);
                     startActivityForResult(intent, 10001);
@@ -127,7 +134,9 @@ public class PlumberMeetingListActivity extends BaseActivity implements BGARefre
         mStateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue),value);
+                mDateView.setSelectPostion();
+                mRegionView.setSelectPostion();
                 mStatusid = key;
                 mRefreshLayout.beginRefreshing();
             }
@@ -141,7 +150,9 @@ public class PlumberMeetingListActivity extends BaseActivity implements BGARefre
         mDateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue),value);
+                mStateView.setSelectPostion();
+                mRegionView.setSelectPostion();
                 if ("custom".equals(key)) {
                     Intent intent = new Intent(mContext, DateSelectActivity.class);
                     startActivityForResult(intent, RESULT_DATA_SELECT);

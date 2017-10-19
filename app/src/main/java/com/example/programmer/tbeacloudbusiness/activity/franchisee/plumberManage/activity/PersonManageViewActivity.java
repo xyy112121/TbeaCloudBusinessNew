@@ -85,7 +85,7 @@ public class PersonManageViewActivity extends BaseActivity {
             @Override
             public void onClick() {
                 Intent intent = new Intent(mContext, MyFansActivity.class);
-                intent.putExtra("id",mId );
+                intent.putExtra("id", mId);
                 startActivity(intent);
             }
         });
@@ -94,10 +94,31 @@ public class PersonManageViewActivity extends BaseActivity {
             @Override
             public void onClick() {
                 Intent intent = new Intent(mContext, MyAttentionActivity.class);
-                intent.putExtra("id",mId );
+                intent.putExtra("id", mId);
                 startActivity(intent);
             }
         });
+
+//        mRebatescaninfoView.setText4Click(new PersonManageItemView.Text4Click() {
+//            @Override
+//            public void onClick() {
+//                ddd
+//                Intent intent = new Intent(mContext, MyFansActivity.class);
+//                intent.putExtra("id",mId );
+//                startActivity(intent);
+//            }
+//        });
+//
+//        mRebatescaninfoView.setText5Click(new PersonManageItemView.Text5Click() {
+//            @Override
+//            public void onClick() {
+//                Intent intent = new Intent(mContext, MyFansActivity.class);
+//                intent.putExtra("id",mId );
+//                startActivity(intent);
+//            }
+//        });
+
+
     }
 
     private void getData() {
@@ -186,6 +207,7 @@ public class PersonManageViewActivity extends BaseActivity {
 
     }
 
+
     @OnClick({R.id.pm_view_thumbpicture, R.id.pm_view_rebatescaninfo, R.id.pm_view_electricianmeetingattendinfo, R.id.pm_view_orderingserviceinfo, R.id.pm_view_commodityorderinfo, R.id.pm_view_logininfo_layout, R.id.top_left})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -204,21 +226,27 @@ public class PersonManageViewActivity extends BaseActivity {
                 break;
             case R.id.pm_view_commodityorderinfo:
                 intent = new Intent(mContext, OrderListActivity.class);
-                intent.putExtra("id", getIntent().getStringExtra("id"));
+                intent.putExtra("id", mId);
                 startActivity(intent);
                 break;
             case R.id.pm_view_logininfo_layout:
                 //登录统计
                 intent = new Intent(mContext, PlumberManageLoginDatailsActivity.class);
-                intent.putExtra("id", getIntent().getStringExtra("id"));
+                intent.putExtra("id", mId);
                 startActivity(intent);
                 break;
             case R.id.top_left:
                 finish();
                 break;
             case R.id.pm_view_thumbpicture:
+            case R.id.pm_view_personname:
                 intent = new Intent(mContext, PlumberManagePersonViewActivity.class);
                 intent.putExtra("id", getIntent().getStringExtra("id"));
+                startActivity(intent);
+                break;
+            case R.id.pm_view_socialinfo:
+                intent = new Intent(mContext, MyAttentionActivity.class);
+                intent.putExtra("id", mId);
                 startActivity(intent);
                 break;
         }

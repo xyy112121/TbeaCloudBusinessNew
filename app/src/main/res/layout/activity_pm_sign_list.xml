@@ -44,13 +44,22 @@
             android:layout_weight="0.4"
             android:gravity="left|center_vertical"
             android:text="会议编号"
-            android:textColor="@color/text_color2" />
+            android:textColor="@color/text_color" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="0.3"
+            android:gravity="left|center_vertical"
+            android:text="区域"
+            android:textColor="@color/text_color" />
 
         <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
             android:id="@+id/expandtab_view"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="0.6" />
+            android:layout_weight="0.3" />
     </LinearLayout>
 
     <View style="@style/horizontal_view" />

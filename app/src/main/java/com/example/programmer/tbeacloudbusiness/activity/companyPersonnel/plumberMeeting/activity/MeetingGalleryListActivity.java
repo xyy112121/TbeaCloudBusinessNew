@@ -93,7 +93,7 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
                         case ThreadState.SUCCESS:
                             MeetingGalleryListResponseModel model = (MeetingGalleryListResponseModel) msg.obj;
                             if (model.isSuccess()) {
-                                if(model.data != null){
+                                if(model.data == null){
                                     mGalleryImageView.setVisibility(View.VISIBLE);
                                     mGridView.setVisibility(View.GONE);
                                 }else {

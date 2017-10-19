@@ -79,7 +79,7 @@ public class PersonManageItemView  extends LinearLayout{
         /**
          * 显示的视图
          */
-        FrameLayout layout = (FrameLayout) View.inflate(context, R.layout.activity_plumber_manage_person_manage_item_view, null);;
+        final FrameLayout layout = (FrameLayout) View.inflate(context, R.layout.activity_plumber_manage_person_manage_item_view, null);;
         TextView text1Tv = (TextView) layout.findViewById(R.id.person_manage_item_tv1);
         TextView text2Tv = (TextView) layout.findViewById(R.id.person_manage_item_tv2);
         TextView text3Tv = (TextView) layout.findViewById(R.id.person_manage_item_tv3);
@@ -90,42 +90,54 @@ public class PersonManageItemView  extends LinearLayout{
         ImageView leftIv = (ImageView)layout.findViewById(R.id.person_manage_item_iv);
 
         LinearLayout layout4 = (LinearLayout)layout.findViewById(R.id.person_manage_item_tv4_layout);
-        layout4.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mText4Click != null){
-                    mText4Click.onClick();
+//        if(mText4Click != null){
+            layout4.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mText4Click != null){
+                        mText4Click.onClick();
+                    }else {
+                        performClick();
+                    }
                 }
-            }
-        });
+            });
 
-        text2Tv.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mText4Click != null){
-                    mText4Click.onClick();
+            text2Tv.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mText4Click != null){
+                        mText4Click.onClick();
+                    }else {
+                        performClick();
+                    }
                 }
-            }
-        });
+            });
+//        }
 
-        LinearLayout layout5 = (LinearLayout)layout.findViewById(R.id.person_manage_item_tv5_layout);
-        layout5.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mText5Click != null){
-                    mText5Click.onClick();
+//        if(mText5Click != null){
+            LinearLayout layout5 = (LinearLayout)layout.findViewById(R.id.person_manage_item_tv5_layout);
+            layout5.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mText5Click != null){
+                        mText5Click.onClick();
+                    }else {
+                        performClick();
+                    }
                 }
-            }
-        });
+            });
 
-        text3Tv.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mText5Click != null){
-                    mText5Click.onClick();
+            text3Tv.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mText5Click != null){
+                        mText5Click.onClick();
+                    }else {
+                        performClick();
+                    }
                 }
-            }
-        });
+            });
+//        }
 
         if (isMoney){
             text4LabelTv.setVisibility(VISIBLE);

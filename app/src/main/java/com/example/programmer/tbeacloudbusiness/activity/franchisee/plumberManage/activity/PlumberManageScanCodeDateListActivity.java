@@ -97,6 +97,8 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
     }
 
     private void initView() {
+        electricianid = getIntent().getStringExtra("id");
+        electricianid1 = getIntent().getStringExtra("id");
 
         mListView = (ListView) findViewById(R.id.listview);///扫码的ListView
         mAdapter = new MyAdapter(mContext, R.layout.activity_pm_scan_code_list_item);

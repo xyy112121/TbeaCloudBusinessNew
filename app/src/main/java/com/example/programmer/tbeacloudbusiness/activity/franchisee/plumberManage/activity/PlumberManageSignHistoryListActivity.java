@@ -86,7 +86,7 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
         initDate();
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
-        addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
+//        addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
         addDateItem(expandTabView, mDateLists, "默认排序", "时间");
 
     }
@@ -115,6 +115,7 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
                                         ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + info.thumbpicture, mHeadView);
                                         ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + info.persontypeicon, mPersonjobtitleView);
                                         mNameView.setText(info.personname);
+                                        mTotalView.setText(info.totleattendtimes);
                                     }
 //
 //

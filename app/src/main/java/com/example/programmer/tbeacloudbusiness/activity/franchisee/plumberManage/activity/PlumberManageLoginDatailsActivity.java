@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.action.PlumberManageAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PlumberManageLoginDataResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.DateSelectActivity;
@@ -124,7 +125,11 @@ public class PlumberManageLoginDatailsActivity extends BaseActivity implements B
                 public void run() {
                     try {
                         PlumberManageAction action = new PlumberManageAction();
-                        PlumberManageLoginDataResponseModel model = action.getLoginDataList(startdate, enddate, orderitem, order, mPage++, mPagesiz);
+                        String id = getIntent().getStringExtra("id");
+                        if (id == null) {
+                            id = MyApplication.instance.getUserId();
+                        }
+                        PlumberManageLoginDataResponseModel model = action.getLoginDataList(id, startdate, enddate, orderitem, order, mPage++, mPagesiz);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -163,7 +168,7 @@ public class PlumberManageLoginDatailsActivity extends BaseActivity implements B
         }
     }
 
-     class MyAdapter extends BaseAdapter {
+    class MyAdapter extends BaseAdapter {
 
         public List<PlumberManageLoginDataResponseModel.DataBean.LoginlistBean> mList = new ArrayList<>();
 

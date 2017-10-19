@@ -185,10 +185,10 @@ public class PlumberManageAction extends BaseAction {
      * enddate orderitem order page pagesize
      */
     public PlumberManageLoginDataResponseModel getLoginDataList
-    (String startdate, String enddate, String orderitem, String order, int page, int pagesize) throws Exception {
+    (String id,String startdate, String enddate, String orderitem, String order, int page, int pagesize) throws Exception {
         PlumberManageLoginDataResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new BasicNameValuePair("userid", MyApplication.instance.getUserId()));
+        pairs.add(new BasicNameValuePair("userid",id));
         pairs.add(new BasicNameValuePair("startdate", startdate));
         pairs.add(new BasicNameValuePair("enddate", enddate));
         pairs.add(new BasicNameValuePair("orderitem", orderitem));

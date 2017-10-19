@@ -74,7 +74,7 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dsitributor_list);
-        initTopbar("水电工列表", "时间选择", this);
+        initTopbar("分销商列表", "时间选择", this);
         ButterKnife.bind(this);
         initView();
 

@@ -84,9 +84,6 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
     @BindView(R.id.cp_meeting_prepare_finish)
     Button mSaveView;
 
-
-
-
     private CustomPopWindow mCustomPopWindow;
     private boolean mIsEdit = false;//是否可编辑 true可编辑
     private boolean mIsUpdate = false;//是否可更新 true可更新
@@ -109,12 +106,15 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
 
     MeetingPrepareRequestModel mRequest = new MeetingPrepareRequestModel();
 
+    private String mId;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cp_meeting_prepare_view);
         initTopbar("会议详情", this, R.drawable.icon_morepointwhite);
         ButterKnife.bind(this);
+        mId = getIntent().getStringExtra("id");
         getData();
     }
 
@@ -227,8 +227,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                 public void run() {
                     try {
                         PlumberMeetingAction action = new PlumberMeetingAction();
-                        String id = getIntent().getStringExtra("id");
-                        PlumberMeetingViewResponseModel model = action.getPlumberMeetingView(id);
+                        PlumberMeetingViewResponseModel model = action.getPlumberMeetingView(mId);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -249,7 +248,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                     intent.putExtra("flag", "view");
                 }
                 intent.putExtra("text", mMeetingPrepareSummary.getValueText());
-                intent.putExtra("meetingid", getIntent().getStringExtra("id"));
+                intent.putExtra("meetingid", mId);
                 startActivityForResult(intent, RESULT_SUMMARY);
                 break;
             case R.id.cp_meeting_prepare_gallery:
@@ -257,7 +256,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                 if (!"开会中".equals(mState)) {
                     intent.putExtra("flag", "view");
                 }
-                intent.putExtra("meetingid", getIntent().getStringExtra("id"));
+                intent.putExtra("meetingid", mId);
                 startActivityForResult(intent, RESULT_GALLERY);
                 break;
             case R.id.cp_meeting_prepare_hold_time:
@@ -280,7 +279,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                     intent.putExtra("ids", "");
                     intent.setClass(mContext, ParticipantSelectActivity.class);
                 }
-                intent.putExtra("meetingId", getIntent().getStringExtra("id"));
+                intent.putExtra("meetingId", mId);
                 startActivityForResult(intent, RESULT_PARTICIPANT);
 
                 break;
@@ -301,7 +300,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.cp_meeting_prepare_sign:
                 intent = new Intent(mContext, PlumberMeetingViewSignlnActivity.class);
-                intent.putExtra("meetingId", getIntent().getStringExtra("id"));
+                intent.putExtra("meetingId", mId);
                 startActivity(intent);
                 break;
             case R.id.cp_meeting_prepare_finish:
@@ -426,8 +425,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                 public void run() {
                     try {
                         CpPlumberMeetingAction action = new CpPlumberMeetingAction();
-                        String id = getIntent().getStringExtra("id");
-                        BaseResponseModel model = action.deleteMeeting(id);
+                        BaseResponseModel model = action.deleteMeeting(mId);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -562,7 +560,9 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                         break;
                     case R.id.menu3://更新
                         Intent intent = new Intent(mContext, MeetingViewUpdateActivity.class);
-                        intent.putExtra("meetingid", getIntent().getStringExtra("id"));
+                        intent.putExtra("text", mMeetingPrepareSummary.getValueText());
+                        intent.putExtra("gallery", mMeetingPrepareGallery.getValueText());
+                        intent.putExtra("meetingid", mId);
                         startActivityForResult(intent, RESULT_UPDATE);
 
                         break;

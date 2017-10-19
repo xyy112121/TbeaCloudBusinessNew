@@ -10,16 +10,13 @@ import java.util.List;
  */
 
 public class MeetingGalleryListResponseModel extends BaseResponseModel {
-
-
-
     public DataBean data;
 
-    public static class DataBean {
+    public  class DataBean {
         public MeetinginfoBean meetinginfo;
         public List<PictureBean> picturelist;
 
-        public static class MeetinginfoBean {
+        public  class MeetinginfoBean {
             public String meetingname;
             public String primarypicture;
         }

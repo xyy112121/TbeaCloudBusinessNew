@@ -2,8 +2,6 @@ package com.example.programmer.tbeacloudbusiness.activity.distributorManage.acti
 
 import com.example.programmer.tbeacloudbusiness.activity.distributorManage.model.DMMainListReponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.distributorManage.model.DMWithdrawalHistoryListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmMainListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmWithdrawalHistoryListResponseModel;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
 import org.apache.http.NameValuePair;
@@ -12,9 +10,6 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by programmer on 2017/9/6.
- */
 
 public class DistributorManageAction extends BaseAction {
     /**

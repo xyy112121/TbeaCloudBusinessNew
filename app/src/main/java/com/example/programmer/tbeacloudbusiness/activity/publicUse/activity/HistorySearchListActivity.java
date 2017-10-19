@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.MeetingViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PersonManageViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.action.PublicAction;
@@ -148,7 +149,7 @@ public class HistorySearchListActivity extends BaseActivity implements BGARefres
                         intent.putExtra("id",id);
 
                     }else if("servicemeeting".equals(type)){//水电工会议
-                        intent.setClass(mContext, PlumberMeetingViewActivity.class);
+                        intent.setClass(mContext, MeetingViewActivity.class);
                         intent.putExtra("id",id);
 
                     }else if("distributor".equals(type)){//分销商

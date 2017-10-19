@@ -196,14 +196,14 @@ public class MeetingGalleryUploadActivity extends BaseActivity implements View.O
 
         @Override
         public View getView(final int postion, View view, ViewGroup viewGroup) {
-            ViewHolder holder;
-            if (view == null) {
+//            ViewHolder holder;
+//            if (view == null) {
                 view = getLayoutInflater().inflate(R.layout.activity_shop_dynamic_add_image_item, null);
-                holder = new ViewHolder(view);
+            ViewHolder holder = new ViewHolder(view);
                 view.setTag(holder);
-            } else {
-                holder = (ViewHolder) view.getTag();
-            }
+//            } else {
+//                holder = (ViewHolder) view.getTag();
+//            }
             final LocalMedia obj = mList.get(postion);
             int displayWidth = UtilAssistants.getDisplayWidth(mContext);
             holder.mImageView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (displayWidth / 4)));

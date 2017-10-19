@@ -36,8 +36,9 @@ public class MeetingSponsorSuccessActivity extends BaseActivity implements View.
 
     @OnClick(R.id.completion_finish)
     public void onViewClicked() {
-//        Intent intent = new Intent(mContext,PlumberMeetingListActivity.class);
-//        startActivity(intent);
+        Intent intent = getIntent();
+        intent.setClass(mContext,MeetingViewActivity.class);
+        startActivity(intent);
         finish();
     }
 }
