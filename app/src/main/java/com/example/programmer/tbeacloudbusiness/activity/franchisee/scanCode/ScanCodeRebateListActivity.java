@@ -237,7 +237,7 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
             CircleImageView headView = (CircleImageView) view.findViewById(R.id.person_info_head);
             ImageView jobImageView = (ImageView) view.findViewById(R.id.person_info_personjobtitle);
             ((TextView) view.findViewById(R.id.person_info_name)).setText(obj.personname);
-            ((TextView) view.findViewById(R.id.scanCode_rebate_money)).setText(obj.personorcompany);
+            ((TextView) view.findViewById(R.id.scanCode_rebate_money)).setText(obj.totlemoney);
             ((TextView) view.findViewById(R.id.scanCode_rebate_zone)).setText(obj.zone);
             String url = MyApplication.instance.getImgPath();
             ImageLoader.getInstance().displayImage(url + obj.thumbpicture, headView);

@@ -65,10 +65,13 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
     private ExpandPopTabView expandTabView;
     private List<KeyValueBean> mRegionLists;//区域
     private PopOneListView mUserTypeView;
+    private PopOneListView mRegionView;
 
     private String mName, mElectricianownertypeid, mZoneid, mOrderItem, mOrder;
     ImageView moneyView;
     LinearLayout moenyLayout;
+
+    List<String> mTopList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,6 +97,7 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
 
         if (!"distributor".equals(getIntent().getStringExtra("type"))) {//总经销商
             expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
+            mTopList.add("用户");
             addUserTypeItem(expandTabView, null, "", "用户");
             mTopLayout.setVisibility(View.VISIBLE);
             mTopLayout1.setVisibility(View.GONE);
@@ -108,6 +112,8 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
             moenyLayout = getViewById(R.id.pm_main_list_money_image_layout1);
         }
         addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
+        mTopList.add("区域");
+        expandTabView.addTopList(mTopList);
 
 
 //        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -136,6 +142,9 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
         moenyLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                expandTabView.setViewColor();
+                mUserTypeView.setSelectPostion();
+                mRegionView.setSelectPostion();
                 if ("".equals(mOrder) || "asc".equals(mOrder) || mOrder == null) {//升
                     mOrder = "desc";
                     moneyView.setImageResource(R.drawable.icon_arraw_grayblue);
@@ -159,7 +168,7 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
                         PlumberMeetingUserTypeResonpseModel model = (PlumberMeetingUserTypeResonpseModel) msg.obj;
                         if (model.isSuccess() && model.data != null) {
                             if (model.data.electricianownertypelist != null)
-                            mUserTypeView.setAdapterData(model.data.electricianownertypelist);
+                                mUserTypeView.setAdapterData(model.data.electricianownertypelist);
 
                         } else {
                             ToastUtil.showMessage(model.getMsg());
@@ -244,7 +253,11 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
         mUserTypeView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue), value);
+                mRegionView.setSelectPostion();
+                mOrder = "";
+                moneyView.setImageResource(R.drawable.icon_arraw);
+
                 mElectricianownertypeid = key;
                 mRefreshLayout.beginRefreshing();
             }
@@ -256,12 +269,15 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
     }
 
     private void addRegionItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-        PopOneListView regionView = new PopOneListView(this);
-        regionView.setDefaultSelectByValue(defaultSelect);
-        regionView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
+        mRegionView = new PopOneListView(this);
+        mRegionView.setDefaultSelectByValue(defaultSelect);
+        mRegionView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue), value);
+                mUserTypeView.setSelectPostion();
+                mOrder = "";
+                moneyView.setImageResource(R.drawable.icon_arraw);
                 if ("regionSelect".equals(key)) {
                     Intent intent = new Intent(mContext, RegionSelectActivity.class);
                     startActivityForResult(intent, 1000);
@@ -275,7 +291,7 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
         float displayWidth = UtilAssistants.getWidth(mContext);
         double wid = displayWidth / 4;
         int width = (int) wid;
-        expandTabView.addItemToExpandTab(defaultShowText, regionView, width, Gravity.CENTER);
+        expandTabView.addItemToExpandTab(defaultShowText, mRegionView, width, Gravity.CENTER);
     }
 
 

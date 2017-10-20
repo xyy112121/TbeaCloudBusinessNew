@@ -239,7 +239,7 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
             mDateLists.add(new KeyValueBean("", "默认"));
             mDateLists.add(new KeyValueBean("asc", "正序"));//小到大
             mDateLists.add(new KeyValueBean("desc", "倒序"));
-            mDateLists.add(new KeyValueBean("custom", "自定义"));
+            mDateLists.add(new KeyValueBean("Custom", "自定义"));
 
             mPriceLists = new ArrayList<>();
             mPriceLists.add(new KeyValueBean("", "默认排序"));
@@ -249,6 +249,19 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == RESULT_DATA_SELECT) {
+            starttime = data.getStringExtra("startTime");
+            endtime = data.getStringExtra("endTime");
+            if ("time".equals(mOrderitem)) {
+                mOrderitem = "";
+                mOrder = "";
+            }
+            mRefreshLayout.beginRefreshing();
         }
     }
 

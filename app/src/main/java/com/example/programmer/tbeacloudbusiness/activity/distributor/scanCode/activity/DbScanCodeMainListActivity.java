@@ -20,8 +20,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.action.DBScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.model.DBScanCodeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity.ScanCodeAcctivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeCreateActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeRebateListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateHistoryActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
@@ -104,12 +103,12 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
                                     mAdapter.addAll(model.data.takemoneyrankinglist);
                                 }
 
-                                DBScanCodeMainResponseModel.TakeMoneyTotleInfo info = model.data.takemoneytotleinfo;
+                                DBScanCodeMainResponseModel.PayandincomestaticinfoBean info = model.data.payandincomestaticinfo;
                                 if (info != null) {
                                     mHeadView.findViewById(R.id.top_text4_label).setVisibility(View.VISIBLE);
                                     mHeadView.findViewById(R.id.top_text5_label).setVisibility(View.VISIBLE);
-                                    ((TextView) mHeadView.findViewById(R.id.top_text4)).setText(info.havepayed);
-                                    ((TextView) mHeadView.findViewById(R.id.top_text5)).setText(info.needpay);
+                                    ((TextView) mHeadView.findViewById(R.id.top_text4)).setText(info.totleincome);
+                                    ((TextView) mHeadView.findViewById(R.id.top_text5)).setText(info.totlepayed);
                                 }
 
                             } else {
@@ -199,7 +198,7 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
             FrameLayout view = (FrameLayout) layoutInflater.inflate(
                     R.layout.activity_scan_code_main_list_item, null);
-            DBScanCodeMainResponseModel.TakeMoneyRanking obj = mList.get(position);
+            final DBScanCodeMainResponseModel.TakeMoneyRanking obj = mList.get(position);
             CircleImageView headView = (CircleImageView) view.findViewById(R.id.scan_code_main_item_thumbpicture);
             ImageView personJobTitleView = (ImageView) view.findViewById(R.id.scan_code_main_item_personjobtitle);
             TextView nameView = (TextView) view.findViewById(R.id.scan_code_main_item_name);
@@ -209,7 +208,29 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
             ImageLoader.getInstance().displayImage(path + obj.personjobtitle, personJobTitleView);
             nameView.setText(obj.personname);
             moneyView.setText(obj.totlemoney);
+            
+            ImageView rankingView = (ImageView) view.findViewById(R.id.scan_code_main_item_ranking);
+            if (position == 0) {
+                rankingView.setImageResource(R.drawable.icon_scanre_batesort1);
+            } else if (position == 1) {
+                rankingView.setImageResource(R.drawable.icon_scanre_batesort2);
+            } else if (position == 2) {
+                rankingView.setImageResource(R.drawable.icon_scanre_batesort3);
+            } else if (position == 3) {
+                rankingView.setImageResource(R.drawable.icon_scanre_batesort4);
+            } else {
+                rankingView.setImageResource(R.drawable.icon_scanre_batesort4);
+            }
 
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, WithdrawDepositDateHistoryActivity.class);
+                    intent.putExtra("personOrCompany", obj.personorcompany);
+                    intent.putExtra("payeeId", obj.electricianid);
+                    startActivity(intent);
+                }
+            });
             return view;
         }
 

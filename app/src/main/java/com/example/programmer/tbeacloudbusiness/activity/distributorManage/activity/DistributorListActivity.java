@@ -70,6 +70,8 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
     ExpandPopTabView expandTabView;
     private final int RESULT_DATA_SELECT = 1000;
 
+    PopOneListView regionView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +92,9 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
         mRefreshLayout.beginRefreshing();
         initDate();
+        List<String> mTopList = new ArrayList<>();
+        mTopList.add("地区");
+        expandTabView.addTopList(mTopList);
         addRegionItem(expandTabView, mRegionLists, "全部区域", "地区");
 
         mMoenyLayout.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +113,8 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
 
                 mUserOrder = "";
                 mUserView.setImageResource(R.drawable.icon_arraw);
+                expandTabView.setViewColor();
+                regionView.setSelectPostion();
             }
         });
 
@@ -123,13 +130,43 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
                 }
 
                 mOrder = mUserOrder;
-                mOrderItem = "money";
+                mOrderItem = "user";
                 mRefreshLayout.beginRefreshing();
 
                 mMoneyOrder = "";
                 mMoneyView.setImageResource(R.drawable.icon_arraw);
+                expandTabView.setViewColor();
+                regionView.setSelectPostion();
             }
         });
+    }
+
+    private void addRegionItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
+         regionView = new PopOneListView(this);
+        regionView.setDefaultSelectByValue(defaultSelect);
+        regionView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
+            @Override
+            public void getValue(String key, String value) {
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue),value);
+                mMoneyOrder = "";
+                mMoneyView.setImageResource(R.drawable.icon_arraw);
+                mUserOrder = "";
+                mUserView.setImageResource(R.drawable.icon_arraw);
+
+                if ("regionSelect".equals(key)) {
+                    Intent intent = new Intent(mContext, RegionSelectActivity.class);
+                    startActivityForResult(intent, 1000);
+                } else {
+                    mZoneid = "";
+                    mRefreshLayout.beginRefreshing();
+                }
+            }
+        });
+
+        float displayWidth = UtilAssistants.getWidth(mContext);
+        double wid = displayWidth / 4;
+        int width = (int) wid;
+        expandTabView.addItemToExpandTab(defaultShowText, regionView, width, Gravity.CENTER);
     }
 
     /**
@@ -176,30 +213,6 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-
-    private void addRegionItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-        PopOneListView regionView = new PopOneListView(this);
-        regionView.setDefaultSelectByValue(defaultSelect);
-        regionView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
-            @Override
-            public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
-                if ("regionSelect".equals(key)) {
-                    Intent intent = new Intent(mContext, RegionSelectActivity.class);
-                    startActivityForResult(intent, 1000);
-                } else {
-                    mZoneid = "";
-                    mRefreshLayout.beginRefreshing();
-                }
-            }
-        });
-
-        float displayWidth = UtilAssistants.getWidth(mContext);
-        double wid = displayWidth / 4;
-        int width = (int) wid;
-        expandTabView.addItemToExpandTab(defaultShowText, regionView, width, Gravity.CENTER);
     }
 
     @Override

@@ -9,11 +9,9 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,8 +21,6 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.action.DBScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.RegionSelectActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateHistoryActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action.ScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeRebateListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
@@ -47,6 +43,8 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  */
 
 public class DbScanCodeRebateListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
+    @BindView(R.id.scan_code_rebate_list_money_image)
+    ImageView moneyView;
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;
@@ -62,6 +60,7 @@ public class DbScanCodeRebateListActivity extends BaseActivity implements BGARef
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_code_rebate_list);
+        ButterKnife.bind(this);
         initTopbar("提现排名");
         initView();
     }
@@ -79,12 +78,11 @@ public class DbScanCodeRebateListActivity extends BaseActivity implements BGARef
         mExpandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
         addItem(mExpandTabView, mRegionLists, "默认排序", "区域");
 
-        final ImageView moneyView = (ImageView) findViewById(R.id.scan_code_rebate_list_money_image);
-
 
         findViewById(R.id.scan_code_rebate_list_money_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mExpandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.text_color), R.drawable.icon_arrow_gray);
                 mOrderitem = "money";
                 if ("".equals(mOrder) || "asc".equals(mOrder) || mOrder == null) {//升
                     mOrder = "desc";
@@ -148,6 +146,8 @@ public class DbScanCodeRebateListActivity extends BaseActivity implements BGARef
             @Override
             public void getValue(String key, String value) {
                 expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                moneyView.setImageResource(R.drawable.icon_arraw);
+                moneyView.setTag("asc");
                 if ("regionSelect".equals(key)) {
                     Intent intent = new Intent(mContext, RegionSelectActivity.class);
                     startActivityForResult(intent, 1000);

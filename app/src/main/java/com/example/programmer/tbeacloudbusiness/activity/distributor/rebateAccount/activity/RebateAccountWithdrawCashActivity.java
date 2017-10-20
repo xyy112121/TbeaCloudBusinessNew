@@ -15,6 +15,7 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.action.RebateAccountAction;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.model.RebateAccountInfoResponseModel;
+import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
@@ -55,10 +56,7 @@ public class RebateAccountWithdrawCashActivity extends BaseActivity {
                         ToastUtil.showMessage("不能大于最大提现金额！");
                         return;
                     }
-                    Intent intent = new Intent(RebateAccountWithdrawCashActivity.this, WithdrawCashViewActivity.class);
-                    intent.putExtra("money", money);
-                    intent.putExtra("distributorid", mDistributorid);
-                    startActivity(intent);
+                    showAlert(money);
                 } catch (Exception e) {
 
                 }
@@ -74,6 +72,23 @@ public class RebateAccountWithdrawCashActivity extends BaseActivity {
         });
     }
 
+    private void showAlert(final String money) {
+        View parentLayout = findViewById(R.id.parentLayout);
+        final CustomPopWindow1 popWindow1 = new CustomPopWindow1(mContext);
+        popWindow1.init(parentLayout, R.layout.pop_window_header,
+                R.layout.activity_scancode_pay_confirm_tip, "确认提示", "是否提现，请确认！", "确认", 0);
+        popWindow1.setItemClick(new CustomPopWindow1.ItemClick() {
+            @Override
+            public void onItemClick(String text) {
+                Intent intent = new Intent(RebateAccountWithdrawCashActivity.this, WithdrawCashViewActivity.class);
+                intent.putExtra("money", money);
+                intent.putExtra("distributorid", mDistributorid);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
     /**
      * 获取数据
      */
@@ -84,11 +99,11 @@ public class RebateAccountWithdrawCashActivity extends BaseActivity {
                 switch (msg.what) {
                     case ThreadState.SUCCESS:
                         ResponseInfo model = (ResponseInfo) msg.obj;
-                        if(model.isSuccess()){
+                        if (model.isSuccess()) {
                             if (model.isSuccess() && model.data != null) {
                                 Gson gson = new GsonBuilder().serializeNulls().create();
                                 String json = gson.toJson(model.data);
-                                RebateAccountInfoResponseModel obj =  gson.fromJson(json, RebateAccountInfoResponseModel.class);
+                                RebateAccountInfoResponseModel obj = gson.fromJson(json, RebateAccountInfoResponseModel.class);
                                 if (obj != null) {
                                     mCanexChangeMoney = obj.mymoneyinfo.canexchangemoney;
                                     ((TextView) findViewById(R.id.rebate_account_withdraw_cash_info)).setText("当前可提现金额：￥" + obj.mymoneyinfo.canexchangemoney);
@@ -107,7 +122,7 @@ public class RebateAccountWithdrawCashActivity extends BaseActivity {
                                 }
 
                             }
-                        }else {
+                        } else {
                             ToastUtil.showMessage(model.getMsg());
                             findViewById(R.id.rebate_account_withdraw_cash_top).setVisibility(View.GONE);
                         }

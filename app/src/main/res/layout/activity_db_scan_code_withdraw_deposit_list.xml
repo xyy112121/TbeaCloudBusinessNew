@@ -48,12 +48,20 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:text="水电工"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="15dp"
+            />
         <com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView
             android:id="@+id/expandtab_view"
             android:layout_width="0dp"
-            android:layout_weight="0.7"
+            android:layout_weight="0.2"
             android:layout_height="48dp"
-            android:layout_marginLeft="15dp"
             />
         <LinearLayout
             android:id="@+id/scan_code_top_money_layout"

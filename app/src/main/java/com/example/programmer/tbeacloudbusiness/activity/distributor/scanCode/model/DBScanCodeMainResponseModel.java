@@ -9,25 +9,29 @@ import java.util.List;
  */
 
 public class DBScanCodeMainResponseModel extends BaseResponseModel {
-    public ScanCodeMainModel data;
 
-    public class ScanCodeMainModel{
+
+    public DataBean data;
+
+
+    public class DataBean {
+        public PayandincomestaticinfoBean payandincomestaticinfo;
         public List<TakeMoneyRanking> takemoneyrankinglist;
-        public TakeMoneyTotleInfo takemoneytotleinfo;
     }
 
-    public class TakeMoneyRanking{
+    public class PayandincomestaticinfoBean {
+        public String totlepayed;
+        public String totleincome;
+    }
+
+    public class TakeMoneyRanking {
         public String electricianid;
-        public String personjobtitle;
-        public String personname;
-        public String sequence;
+        public String payeeid;
+        public String personorcompany;
+        public int sequence;
         public String thumbpicture;
+        public String personname;
+        public String personjobtitle;
         public String totlemoney;
     }
-
-    public class TakeMoneyTotleInfo{
-        public String havepayed;
-        public String needpay;
-    }
-
 }

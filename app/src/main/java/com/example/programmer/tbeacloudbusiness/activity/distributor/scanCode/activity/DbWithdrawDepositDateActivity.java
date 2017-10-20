@@ -95,7 +95,7 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
         initTopbar("提现数据");
         initView();
         getPayStatus();
-        getUserType();
+//        getUserType();
     }
 
     private void initView() {
@@ -145,7 +145,7 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
 
-        addUserItem(expandTabView, null, "", "用户");
+//        addUserItem(expandTabView, null, "", "用户");
         addDateItem(expandTabView, mDateLists, "默认", "支付时间");
 
         mState1View = (TextView) findViewById(R.id.take_money_pay_state1);
@@ -162,6 +162,8 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
             @Override
             public void getValue(String key, String value) {
                 expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                mMoneyOrder1 = "";
+                mScanCodeTopMoneyIv1.setImageResource(R.drawable.icon_arraw);
                 if ("custom".equals(key)) {
                     Intent intent = new Intent(mContext, DateSelectActivity.class);
                     startActivityForResult(intent, RESULT_DATA_SELECT);
@@ -430,6 +432,7 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
 
                 mMoneyOrder1 = "";
                 mScanCodeTopMoneyIv1.setImageResource(R.drawable.icon_arraw);
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.text_color), R.drawable.icon_arrow_gray);
                 break;
             case R.id.scan_code_top_money_layout1:
                 if ("".equals(mMoneyOrder1) || "asc".equals(mMoneyOrder1) || mMoneyOrder1 == null) {//升

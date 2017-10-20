@@ -198,6 +198,7 @@ public class ExpandPopTabView extends LinearLayout implements OnDismissListener 
         mViewLists.add(popContainerView);
     }
 
+    //同一个界面上有多个下拉框时调用
     public void setViewColor(int color, String value) {
         for (int i = 0; i < mLayout.size(); i++) {
             LinearLayout parentLayout = mLayout.get(i);
@@ -215,6 +216,8 @@ public class ExpandPopTabView extends LinearLayout implements OnDismissListener 
         }
     }
 
+
+    //同一个界面上有一个或者多个下拉框时,并且还有其他选项,并且是选中其他选项时调用
     public void setViewColor() {
         for (int i = 0; i < mLayout.size(); i++) {
             LinearLayout parentLayout = mLayout.get(i);
@@ -240,6 +243,7 @@ public class ExpandPopTabView extends LinearLayout implements OnDismissListener 
         }
     }
 
+    //同一个界面上有一个下拉框时调用
     public void setViewColor(int color, int id) {
         for (int i = 0; i < mLayout.size(); i++) {
             LinearLayout parentLayout = mLayout.get(i);

@@ -42,7 +42,7 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * 经销商-扫码返利-提现数据-用户历史-
+ * 经销商-扫码返利-提现数据-用户历史
  */
 
 public class DustributorWithdrawalHistoryListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
@@ -63,10 +63,15 @@ public class DustributorWithdrawalHistoryListActivity extends BaseActivity imple
     private List<KeyValueBean> mDateLists;//时间
     MyAdapter mAdapter;
     private final int RESULT_DATA_SELECT = 1000;
-    private String distributorid, startdate, enddate, orderitem, order;
+    private String distributorid, startdate, enddate, orderitem, order,mMoneyOrder;
     private int mPage = 1;
     private int mPagesiz = 10;
     DMWithdrawalHistoryListResponseModel model;
+
+    @BindView(R.id.activity_pm_withdrawal_history_list_money)
+    ImageView moneyView;
+
+    PopOneListView mDateView;
 
 
     @Override
@@ -87,21 +92,29 @@ public class DustributorWithdrawalHistoryListActivity extends BaseActivity imple
         mRefreshLayout.beginRefreshing();
         initDate();
 
+        List<String> mTopList = new ArrayList<>();
+        mTopList.add("时间");
+        expandTabView.addTopList(mTopList);
         addDateItem(expandTabView, mDateLists, "默认", "时间");
 
-        final ImageView moneyView = (ImageView) findViewById(R.id.activity_pm_withdrawal_history_list_money);
+
         findViewById(R.id.activity_pm_withdrawal_history_list_money_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 orderitem = "money";
-                if ("".equals(order) || "asc".equals(order) || order == null) {//升
-                    order = "desc";
+                if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null) {//升
+                    mMoneyOrder = "desc";
                     moneyView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
-                    order = "asc";
+                    mMoneyOrder = "asc";
                     moneyView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
+                order = mMoneyOrder;
                 mRefreshLayout.beginRefreshing();
+
+                expandTabView.setViewColor();
+                mDateView.setSelectPostion();
+
             }
         });
 
@@ -116,12 +129,15 @@ public class DustributorWithdrawalHistoryListActivity extends BaseActivity imple
     }
 
     private void addDateItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-        PopOneListView mDateView = new PopOneListView(this);
+         mDateView = new PopOneListView(this);
         mDateView.setDefaultSelectByValue(defaultSelect);
         mDateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue), value);
+                moneyView.setImageResource(R.drawable.icon_arraw);
+                mMoneyOrder = "";
+
                 if ("Custom".equals(key)) {
                     Intent intent = new Intent(mContext, DateSelectActivity.class);
                     startActivityForResult(intent, RESULT_DATA_SELECT);
@@ -159,6 +175,7 @@ public class DustributorWithdrawalHistoryListActivity extends BaseActivity imple
                                         ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + info.persontypeicon, mPersonjobtitleView);
                                         mNameView.setText(info.mastername);
                                         mCompanynameView.setText(info.companyname);
+                                        findViewById(R.id.person_info_right).setVisibility(View.GONE);
                                     }
                                 } else {
                                     ToastUtil.showMessage(model.getMsg());

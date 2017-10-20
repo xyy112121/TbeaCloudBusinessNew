@@ -67,16 +67,21 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(mContext,WithdrawDepositDateActivity.class);
+                intent.setClass(mContext, WithdrawDepositDateActivity.class);
                 startActivity(intent);
             }
         });
+
+        mHeadView.findViewById(R.id.top_text2).setOnClickListener(this);//已支付
+        mHeadView.findViewById(R.id.top_text3).setOnClickListener(this);//待支付
+        mHeadView.findViewById(R.id.top_text4_layout).setOnClickListener(this);//已支付
+        mHeadView.findViewById(R.id.top_text5_layout).setOnClickListener(this);//待支付
 
         mHeadView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(mContext,ScanCodeRebateListActivity.class);
+                intent.setClass(mContext, ScanCodeRebateListActivity.class);
                 startActivity(intent);
             }
         });
@@ -162,10 +167,29 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
 
     @Override
     public void onClick(View view) {
-        //生成
         Intent intent = new Intent();
-        intent.setClass(mContext, ScanCodeCreateActivity.class);
-        startActivity(intent);
+        switch (view.getId()) {
+
+            case R.id.top_text2:
+            case R.id.top_text4_layout:
+                intent.setClass(mContext, WithdrawDepositDateActivity.class);
+                startActivity(intent);
+                //已支付
+                break;
+            case R.id.top_text3:
+            case R.id.top_text5_layout:
+                //待支付
+                intent.setClass(mContext, WithdrawDepositDateActivity.class);
+                intent.putExtra("flag","1");
+                startActivity(intent);
+                break;
+            case R.id.top_right_text:
+                //生成
+                intent.setClass(mContext, ScanCodeCreateActivity.class);
+                startActivity(intent);
+                break;
+        }
+
     }
 
     private class MyAdapter extends BaseAdapter {
@@ -206,7 +230,7 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
                     .getSystemService(context.LAYOUT_INFLATER_SERVICE);
             FrameLayout view = (FrameLayout) layoutInflater.inflate(
                     R.layout.activity_scan_code_main_list_item, null);
-           final ScanCodeMainResponseModel.TakeMoneyRanking obj = mList.get(position);
+            final ScanCodeMainResponseModel.TakeMoneyRanking obj = mList.get(position);
             CircleImageView headView = (CircleImageView) view.findViewById(R.id.scan_code_main_item_thumbpicture);
             ImageView personJobTitleView = (ImageView) view.findViewById(R.id.scan_code_main_item_personjobtitle);
             TextView nameView = (TextView) view.findViewById(R.id.scan_code_main_item_name);
@@ -217,24 +241,24 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
             nameView.setText(obj.personname);
             moneyView.setText(obj.totlemoney);
             ImageView rankingView = (ImageView) view.findViewById(R.id.scan_code_main_item_ranking);
-            if(position == 0){
+            if (position == 0) {
                 rankingView.setImageResource(R.drawable.icon_scanre_batesort1);
-            }else if(position == 1){
+            } else if (position == 1) {
                 rankingView.setImageResource(R.drawable.icon_scanre_batesort2);
-            }else if(position == 2){
+            } else if (position == 2) {
                 rankingView.setImageResource(R.drawable.icon_scanre_batesort3);
-            }else if(position == 3){
+            } else if (position == 3) {
                 rankingView.setImageResource(R.drawable.icon_scanre_batesort4);
-            }else {
+            } else {
                 rankingView.setImageResource(R.drawable.icon_scanre_batesort4);
             }
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext,WithdrawDepositDateHistoryActivity.class);
-                    intent.putExtra("personOrCompany",obj.personorcompany);
-                    intent.putExtra("payeeId",obj.electricianid);
+                    Intent intent = new Intent(mContext, WithdrawDepositDateHistoryActivity.class);
+                    intent.putExtra("personOrCompany", obj.personorcompany);
+                    intent.putExtra("payeeId", obj.electricianid);
                     startActivity(intent);
                 }
             });

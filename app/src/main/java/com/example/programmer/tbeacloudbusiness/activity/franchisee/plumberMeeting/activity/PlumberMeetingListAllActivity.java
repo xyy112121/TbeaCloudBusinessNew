@@ -52,7 +52,12 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
     private MyAdapter mAdapter;
     private int mPage = 1;
     private int mPagesiz = 10;
-    private String mCode, mZoneid, mStatusid, mStartTime, mEndTime, mOrderItem, mOrder, mCodeOrder, mTimeOrder;
+    private String mCode, mZoneid, mStatusid, mOrderItem, mOrder, mCodeOrder, mTimeOrder, mStartTime, mEndTime;
+
+    @BindView(R.id.activity_plumber_meeting_main_list_code)
+    ImageView codeView;
+    @BindView(R.id.activity_plumber_meeting_main_list_time)
+    ImageView timeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,21 +83,12 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
         initDate();
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
+        List<String> mTopList = new ArrayList<>();
+        mTopList.add("区域");
+        mTopList.add("激活");
+        expandTabView.addTopList(mTopList);
         addRegionItem(expandTabView, mRegionLists, "全部区域", "区域");
         addStateItem(expandTabView, null, "", "激活");
-
-//        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId,
-//                                          KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    mCode = mSearchTextView.getText() + "";
-//                    mRefreshLayout.beginRefreshing();
-//                }
-//
-//                return false;
-//            }
-//        });
 
         mSearchTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,8 +99,6 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
             }
         });
 
-        final ImageView codeView = getViewById(R.id.activity_plumber_meeting_main_list_code);
-        final ImageView timeView = getViewById(R.id.activity_plumber_meeting_main_list_time);
 
         findViewById(R.id.activity_plumber_meeting_main_list_code_layout).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +116,9 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
 
                 mTimeOrder = "";
                 timeView.setImageResource(R.drawable.icon_arraw);
+                expandTabView.setViewColor();
+                mRegionView.setSelectPostion();
+                mStateView.setSelectPostion();
             }
         });
 
@@ -143,10 +140,62 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
 
                 mCodeOrder = "";
                 codeView.setImageResource(R.drawable.icon_arraw);
+                expandTabView.setViewColor();
+                mRegionView.setSelectPostion();
+                mStateView.setSelectPostion();
             }
         });
 
     }
+
+    public void addRegionItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
+        mRegionView = new PopOneListView(this);
+        mRegionView.setDefaultSelectByValue(defaultSelect);
+        mRegionView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
+            @Override
+            public void getValue(String key, String value) {
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue), value);
+                mStateView.setSelectPostion();
+                mCodeOrder = "";
+                codeView.setImageResource(R.drawable.icon_arraw);
+                mTimeOrder = "";
+                timeView.setImageResource(R.drawable.icon_arraw);
+                mStatusid = "";
+
+                if ("regionSelect".equals(key)) {
+                    Intent intent = new Intent(mContext, RegionSelectActivity.class);
+                    startActivityForResult(intent, 1000);
+                } else {
+                    mZoneid = "";
+                    mRefreshLayout.beginRefreshing();
+                }
+            }
+        });
+
+        expandTabView.addItemToExpandTab(defaultShowText, mRegionView);
+    }
+
+    private void addStateItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
+        mStateView = new PopOneListView(this);
+        mStateView.setDefaultSelectByValue(defaultSelect);
+        mStateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
+            @Override
+            public void getValue(String key, String value) {
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue), value);
+                mRegionView.setSelectPostion();
+                mCodeOrder = "";
+                codeView.setImageResource(R.drawable.icon_arraw);
+                mTimeOrder = "";
+                timeView.setImageResource(R.drawable.icon_arraw);
+                mZoneid = "";
+
+                mStatusid = key;
+                mRefreshLayout.beginRefreshing();
+            }
+        });
+        expandTabView.addItemToExpandTab(defaultShowText, mStateView, Gravity.RIGHT);
+    }
+
 
     private void getStatusList() {
         try {
@@ -228,40 +277,6 @@ public class PlumberMeetingListAllActivity extends BaseActivity implements BGARe
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void addRegionItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-        mRegionView = new PopOneListView(this);
-        mRegionView.setDefaultSelectByValue(defaultSelect);
-        mRegionView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
-            @Override
-            public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
-                if ("regionSelect".equals(key)) {
-                    Intent intent = new Intent(mContext, RegionSelectActivity.class);
-                    startActivityForResult(intent, 1000);
-                } else {
-                    mZoneid = "";
-                    mRefreshLayout.beginRefreshing();
-                }
-            }
-        });
-
-        expandTabView.addItemToExpandTab(defaultShowText, mRegionView);
-    }
-
-    private void addStateItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-        mStateView = new PopOneListView(this);
-        mStateView.setDefaultSelectByValue(defaultSelect);
-        mStateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
-            @Override
-            public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
-                mStatusid = key;
-                mRefreshLayout.beginRefreshing();
-            }
-        });
-        expandTabView.addItemToExpandTab(defaultShowText, mStateView, Gravity.RIGHT);
     }
 
     private void initDate() {

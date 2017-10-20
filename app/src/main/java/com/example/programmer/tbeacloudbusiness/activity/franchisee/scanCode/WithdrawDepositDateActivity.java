@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action.ScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.PayStatusResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.PayeeTypeResponeModel;
@@ -42,7 +43,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 提现数据列表
  */
 
-public class WithdrawDepositDateActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
+public  class WithdrawDepositDateActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
     private ExpandPopTabView expandTabView;
     private List<KeyValueBean> mDateLists;//扫码时间
 
@@ -55,7 +56,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
     private String paystatusid, payeetypeid, starttime, endtime, orderitem, order,mMoneyOrder;
     private final int RESULT_DATA_SELECT = 1000;
     private TextView mState1View;
-    private TextView mState1View1;
+    public  TextView mState1View1;
     private  int mViewId =R.id.take_money_pay_state1;
 
     @BindView(R.id.scan_code_top_money_iv)
@@ -72,6 +73,7 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
         initView();
 
     }
+
 
     private void initView() {
         mListView = (ListView) findViewById(R.id.listview);
@@ -91,6 +93,10 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
 
         mState1View.setOnClickListener(this);
         mState1View1.setOnClickListener(this);
+
+        if("1".equals(getIntent().getStringExtra("flag"))){//待支付
+            mState1View1.performClick();
+        }
     }
 
     private void addDateItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {

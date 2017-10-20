@@ -7,12 +7,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -54,6 +51,11 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
     @BindView(R.id.rl_recyclerview_refresh)
     BGARefreshLayout mRefreshLayout;
 
+    @BindView(R.id.activity_plumber_meeting_main_list_user)
+    ImageView codeView;
+    @BindView(R.id.activity_plumber_meeting_main_list_time)
+    ImageView timeView;
+
     private ExpandPopTabView expandTabView;
     private PopOneListView mUserTypeView;
 
@@ -80,19 +82,6 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, true));
         mRefreshLayout.beginRefreshing();
 
-//        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId,
-//                                          KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    name = mSearchTextView.getText()+"";
-//                    mRefreshLayout.beginRefreshing();
-//                }
-//
-//                return false;
-//            }
-//        });
-
         mSearchTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,10 +93,12 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
 
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
+        List<String> mTopList = new ArrayList<>();
+        mTopList.add("用户");
+        expandTabView.addTopList(mTopList);
         addUserTypeItem(expandTabView, null, "", "用户");
 
-        final ImageView codeView = getViewById(R.id.activity_plumber_meeting_main_list_user);
-        final ImageView timeView = getViewById(R.id.activity_plumber_meeting_main_list_time);
+
 
         findViewById(R.id.activity_plumber_meeting_main_list_user_layout).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +116,8 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
 
                 mTimeOrder = "";
                 timeView.setImageResource(R.drawable.icon_arraw);
+                expandTabView.setViewColor();
+                mUserTypeView.setSelectPostion();
             }
         });
 
@@ -145,8 +138,29 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
 
                 mCodeOrder = "";
                 codeView.setImageResource(R.drawable.icon_arraw);
+                expandTabView.setViewColor();
+                mUserTypeView.setSelectPostion();
             }
         });
+    }
+
+    private void addUserTypeItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
+        mUserTypeView = new PopOneListView(this);
+        mUserTypeView.setDefaultSelectByValue(defaultSelect);
+        mUserTypeView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
+            @Override
+            public void getValue(String key, String value) {
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue),value);
+                mCodeOrder = "";
+                codeView.setImageResource(R.drawable.icon_arraw);
+                mTimeOrder = "";
+                timeView.setImageResource(R.drawable.icon_arraw);
+
+                electricianownertypeid = key;
+                mRefreshLayout.beginRefreshing();
+            }
+        });
+        expandTabView.addItemToExpandTab(defaultShowText, mUserTypeView, Gravity.LEFT);
     }
 
     private void getUserTypeList() {
@@ -229,19 +243,7 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
 
     }
 
-    private void addUserTypeItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-        mUserTypeView = new PopOneListView(this);
-        mUserTypeView.setDefaultSelectByValue(defaultSelect);
-        mUserTypeView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
-            @Override
-            public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
-                electricianownertypeid = key;
-                mRefreshLayout.beginRefreshing();
-            }
-        });
-        expandTabView.addItemToExpandTab(defaultShowText, mUserTypeView, Gravity.LEFT);
-    }
+
 
 
     @Override

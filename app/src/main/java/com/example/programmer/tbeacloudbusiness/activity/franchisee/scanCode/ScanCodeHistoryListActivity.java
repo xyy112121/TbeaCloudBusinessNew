@@ -47,7 +47,6 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
     private String starttime, endtime, activitystatusid, orderitem, order;
     private final  int RESULT_DATA_SELECT = 1000;
     List<String> mTopList = new ArrayList<>();
-    private int mIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

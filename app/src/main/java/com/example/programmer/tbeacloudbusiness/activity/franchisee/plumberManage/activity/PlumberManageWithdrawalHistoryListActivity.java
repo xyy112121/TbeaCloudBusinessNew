@@ -56,6 +56,8 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
     ListView mListView;
     @BindView(R.id.rl_recyclerview_refresh)
     BGARefreshLayout mRefreshLayout;
+    @BindView(R.id.activity_pm_withdrawal_history_list_money)
+    ImageView moneyView;
     private List<KeyValueBean> mDateLists;//时间
     MyAdapter mAdapter;
     private final int RESULT_DATA_SELECT = 1000;
@@ -63,6 +65,7 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
     private int mPage = 1;
     private int mPagesiz = 10;
     PmWithdrawalHistoryListResponseModel model;
+    PopOneListView mDateView;
 
 
     @Override
@@ -83,13 +86,16 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
         mRefreshLayout.beginRefreshing();
         initDate();
 
+        List<String> mTopList = new ArrayList<>();
+        mTopList.add("时间");
+        expandTabView.addTopList(mTopList);
         addDateItem(expandTabView, mDateLists, "默认", "时间");
 
-        final ImageView moneyView = (ImageView) findViewById(R.id.activity_pm_withdrawal_history_list_money);
         findViewById(R.id.activity_pm_withdrawal_history_list_money_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                expandTabView.setViewColor(R.color.text_color,"时间");
+                expandTabView.setViewColor();
+                mDateView.setSelectPostion();
                 orderitem = "money";
                 if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null) {//升
                     mMoneyOrder = "desc";
@@ -114,12 +120,14 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
     }
 
     private void addDateItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-        PopOneListView mDateView = new PopOneListView(this);
+        mDateView = new PopOneListView(this);
         mDateView.setDefaultSelectByValue(defaultSelect);
         mDateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue), value);
+                mMoneyOrder = "";
+                moneyView.setImageResource(R.drawable.icon_arraw);
                 if ("Custom".equals(key)) {
                     Intent intent = new Intent(mContext, DateSelectActivity.class);
                     startActivityForResult(intent, RESULT_DATA_SELECT);

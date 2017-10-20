@@ -21,8 +21,10 @@ import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccou
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.model.RebateAccountListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateActivity;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,8 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
     private BGARefreshLayout mRefreshLayout;
     private int mCurrentMoney;
     private boolean isFirst = true;
+    private int mPage = 1;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +69,7 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
                         RebateAccountListResponseModel model = (RebateAccountListResponseModel) msg.obj;
                         if (model.isSuccess() && model.data != null) {
                             mCurrentMoney = model.data.mymoneyinfo.currentmoney;
-                            if(isFirst == true){
+                            if (isFirst == true) {
                                 LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_rebate_account_list_head, null);
                                 mListView.addHeaderView(layout);
                                 FrameLayout layout1 = (FrameLayout) getLayoutInflater().inflate(R.layout.activity_rebate_account_list_item_head, null);
@@ -76,7 +80,7 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
                                         if (mCurrentMoney == 0) {
                                             ToastUtil.showMessage("你当前可提现金额为0");
                                         } else {
-                                            startActivity(new Intent(mContext,RebateAccountWithdrawCashActivity.class));
+                                            startActivity(new Intent(mContext, RebateAccountWithdrawCashActivity.class));
                                         }
 
                                     }
@@ -102,7 +106,7 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
             public void run() {
                 try {
                     RebateAccountAction action = new RebateAccountAction();
-                    RebateAccountListResponseModel re = action.getRebateAccountList();
+                    RebateAccountListResponseModel re = action.getRebateAccountList(mPage++, 10);
                     handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);
@@ -127,6 +131,7 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         mAdapter.removeAll();
+        mPage = 1;
         getDate();
 
     }
@@ -201,7 +206,7 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
                         @Override
                         public void onClick(View view) {
                             dialog.dismiss();
-//                            delect(mList.get(position).getId());
+                            delect(mList.get(position).id);
                         }
                     }, "删除");
                     dialog.show();
@@ -212,10 +217,10 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Intent intent = new Intent(mContext,WalletWithdrawCashViewActivity.class);
-//                    intent.putExtra("money","");
-//                    intent.putExtra("takemoneycodeid",mList.get(position).getId());
-//                    startActivity(intent);
+                    Intent intent = new Intent(mContext, WithdrawCashViewActivity.class);
+                    intent.putExtra("takemoneycodeid", mList.get(position).id);
+                    intent.putExtra("money", "");
+                    startActivity(intent);
                 }
             });
             return view;
@@ -243,43 +248,43 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
      * 删除数据
      */
     public void delect(final String id) {
-//        final CustomDialog dialog = new CustomDialog(mContext,R.style.MyDialog,R.layout.tip_wait_dialog);
-//        dialog.setText("请等待...");
-//        dialog.show();
-//        final Handler handler = new Handler(){
-//            @Override
-//            public void handleMessage(Message msg) {
-//                dialog.dismiss();
-//                switch (msg.what){
-//                    case ThreadState.SUCCESS:
-//                        RspInfo1 re = (RspInfo1)msg.obj;
-//                        if(re.isSuccess()){
-//                            UtilAssistants.showToast(re.getMsg());
-//                            mRefreshLayout.beginRefreshing();
-//                        }else {
-//                            UtilAssistants.showToast(re.getMsg());
-//                        }
-//
-//                        break;
-//                    case ThreadState.ERROR:
-//                        UtilAssistants.showToast("操作失败！");
-//                        break;
-//                }
-//            }
-//        };
-//
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    UserAction userAction = new UserAction();
-//                    RspInfo1 re = userAction.delectTakeMoneyCodeId(id);
-//                    handler.obtainMessage(ThreadState.SUCCESS,re).sendToTarget();
-//                } catch (Exception e) {
-//                    handler.sendEmptyMessage(ThreadState.ERROR);
-//                }
-//            }
-//        }).start();
+        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+        dialog.setText("请等待...");
+        dialog.show();
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                dialog.dismiss();
+                switch (msg.what) {
+                    case ThreadState.SUCCESS:
+                        ResponseInfo re = (ResponseInfo) msg.obj;
+                        if (re.isSuccess()) {
+                            ToastUtil.showMessage(re.getMsg());
+                            mRefreshLayout.beginRefreshing();
+                        } else {
+                            ToastUtil.showMessage(re.getMsg());
+                        }
+
+                        break;
+                    case ThreadState.ERROR:
+                        ToastUtil.showMessage("操作失败！");
+                        break;
+                }
+            }
+        };
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    RebateAccountAction userAction = new RebateAccountAction();
+                    ResponseInfo re = userAction.delectTakeMoneyCodeId(id);
+                    handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
+                } catch (Exception e) {
+                    handler.sendEmptyMessage(ThreadState.ERROR);
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -291,7 +296,7 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();
-        intent.setClass(mContext,WithdrawDepositDateActivity.class);
+        intent.setClass(mContext, WithdrawDepositDateActivity.class);
         startActivity(intent);
 
     }
