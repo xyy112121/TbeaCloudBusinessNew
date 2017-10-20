@@ -59,7 +59,7 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
     private List<KeyValueBean> mDateLists;//时间
     MyAdapter mAdapter;
     private final int RESULT_DATA_SELECT = 1000;
-    private String electricianid, startdate, enddate, orderitem, order;
+    private String electricianid, startdate, enddate, orderitem, order, mMoneyOrder;
     private int mPage = 1;
     private int mPagesiz = 10;
     PmWithdrawalHistoryListResponseModel model;
@@ -89,14 +89,16 @@ public class PlumberManageWithdrawalHistoryListActivity extends BaseActivity imp
         findViewById(R.id.activity_pm_withdrawal_history_list_money_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                expandTabView.setViewColor(R.color.text_color,"时间");
                 orderitem = "money";
-                if ("".equals(order) || "asc".equals(order) || order == null) {//升
-                    order = "desc";
+                if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null) {//升
+                    mMoneyOrder = "desc";
                     moneyView.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
-                    order = "asc";
+                    mMoneyOrder = "asc";
                     moneyView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
+                order = mMoneyOrder;
                 mRefreshLayout.beginRefreshing();
             }
         });

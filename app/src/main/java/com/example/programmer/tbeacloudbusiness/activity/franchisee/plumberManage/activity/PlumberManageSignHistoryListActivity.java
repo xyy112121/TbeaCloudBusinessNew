@@ -167,10 +167,10 @@ public class PlumberManageSignHistoryListActivity extends BaseActivity implement
                 }
             }
         });
-        float displayWidth = UtilAssistants.getWidth(mContext);
-        double wid = displayWidth * 0.4;
-        int width = (int) wid - DensityUtil.dip2px(mContext, 15);
-        expandTabView.addItemToExpandTab(defaultShowText, mDateView, width, Gravity.RIGHT);
+//        float displayWidth = UtilAssistants.getWidth(mContext);
+//        double wid = displayWidth * 0.4;
+//        int width = (int) wid - DensityUtil.dip2px(mContext, 15);
+        expandTabView.addItemToExpandTab(defaultShowText, mDateView, Gravity.RIGHT);
     }
 
     private void addRegionItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {

@@ -49,8 +49,9 @@ public class WithdrawDepositDateInfoActivity extends BaseActivity {
                             WithdrawDepositDateInfoResponseModel model = (WithdrawDepositDateInfoResponseModel) msg.obj;
                             if (model.isSuccess() && model.data != null) {
                                 String imagePath = MyApplication.instance.getImgPath();
-                                WithdrawDepositDateInfoResponseModel.OwnerInfo ownerInfo = model.data.ownerinfo;
-                                WithdrawDepositDateInfoResponseModel.PayeeInfo payeeInfo = model.data.payeeinfo;
+//                                WithdrawDepositDateInfoResponseModel.OwnerInfo ownerInfo = model.data.ownerinfo;
+                                WithdrawDepositDateInfoResponseModel.PayeeInfo ownerInfo = model.data.payeeinfo;
+                                WithdrawDepositDateInfoResponseModel.OwnerInfo payeeInfo = model.data.ownerinfo;
                                 WithdrawDepositDateInfoResponseModel.PayMoneyInfo payMoneyInfo = model.data.paymoneyinfo;
                                 WithdrawDepositDateInfoResponseModel.TakeMoneyCodeInfo takeMoneyCodeInfo = model.data.takemoneycodeinfo;
 

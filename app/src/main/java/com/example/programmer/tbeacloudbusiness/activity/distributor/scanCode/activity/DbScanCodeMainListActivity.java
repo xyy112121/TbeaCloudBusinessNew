@@ -19,6 +19,7 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.action.DBScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.model.DBScanCodeMainResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity.ScanCodeAcctivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeCreateActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeRebateListActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
@@ -49,7 +50,7 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_code_main_list);
         mContext = this;
-        initTopbar("扫码返利", this,R.drawable.icon_sacncode);
+        initTopbar("扫码返利", this, R.drawable.icon_sacncode);
         intiView();
     }
 
@@ -69,7 +70,7 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(mContext,DbWithdrawDepositDateActivity.class);
+                intent.setClass(mContext, DbWithdrawDepositDateActivity.class);
                 startActivity(intent);
             }
         });
@@ -78,7 +79,7 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(mContext,DbScanCodeRebateListActivity.class);
+                intent.setClass(mContext, DbScanCodeRebateListActivity.class);
                 startActivity(intent);
             }
         });
@@ -156,9 +157,7 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
 
     @Override
     public void onClick(View view) {
-        //生成
-        Intent intent = new Intent();
-        intent.setClass(mContext, ScanCodeCreateActivity.class);
+        Intent intent = new Intent(mContext, ScanCodeAcctivity.class);
         startActivity(intent);
     }
 

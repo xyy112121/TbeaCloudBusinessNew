@@ -150,6 +150,7 @@ public class ScanCodeAcctivity extends BaseActivity {
             Intent intent = new Intent(mContext,ScanCodePayConfirmActivity.class);
             intent.putExtra("code",result);
             startActivity(intent);
+            finish();
         }else {
             //二维码无效
             Intent intent = new Intent(mContext,CodeBraceActivity.class);

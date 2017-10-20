@@ -312,14 +312,19 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
                             if (model != null) {
                                 if (model.isSuccess()) {
                                     if (model.data != null)
-                                        if (mFlag == 1) {//已支付
+                                        if (mFlag == 1) {
+                                        //已支付
                                             mAdapter.addAll(model.data.takemoneylist);
+                                            if (model.data.takemoneytotleinfo != null) {
+                                                ((TextView) findViewById(R.id.take_money_pay_money)).setText(model.data.takemoneytotleinfo.totlemoney);
+                                            }
+                                        } else {
+                                            //已提现
+                                            mAdapter1.addAll(model.data.takemoneylist);
+//                                            (findViewById(R.id.take_money_pay_money)).setVisibility(View.GONE);
                                             if (model.data.totlemoneyinfo != null) {
                                                 ((TextView) findViewById(R.id.take_money_pay_money)).setText(model.data.totlemoneyinfo.totlemoney);
                                             }
-                                        } else {
-                                            mAdapter1.addAll(model.data.takemoneylist);
-                                            (findViewById(R.id.take_money_pay_money)).setVisibility(View.GONE);
                                         }
                                 } else {
                                     ToastUtil.showMessage(model.getMsg());

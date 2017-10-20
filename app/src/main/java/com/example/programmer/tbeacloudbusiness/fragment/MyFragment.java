@@ -18,6 +18,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.PlumberMeetingListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.activity.FxMainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.BypassAccountManageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
@@ -169,6 +170,9 @@ public class MyFragment extends Fragment implements View.OnClickListener, BGARef
                             startActivity(new Intent(getActivity(), MyFansActivity.class));
                         }
 
+                        if ("myorder".equals(item.id)) {
+                            startActivity(new Intent(getActivity(), OrderListActivity.class));
+                        }
                         if ("companyidentify".equals(item.id)) {//实名认证
                             String identify = ShareConfig.getConfigString(getActivity(), Constants.whetheridentifiedid, "");
                             if ("identified".equals(identify)) {

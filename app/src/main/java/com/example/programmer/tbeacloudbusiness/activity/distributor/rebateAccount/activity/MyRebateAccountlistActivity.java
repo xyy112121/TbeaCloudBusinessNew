@@ -19,6 +19,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.action.RebateAccountAction;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.model.RebateAccountListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateActivity;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
@@ -289,7 +290,9 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
 
     @Override
     public void onClick(View view) {
-//        startActivity(new Intent(mContext,WalletIncomeAndExpensesActivity.class));
+        Intent intent = new Intent();
+        intent.setClass(mContext,WithdrawDepositDateActivity.class);
+        startActivity(intent);
 
     }
 }

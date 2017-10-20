@@ -187,7 +187,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="提现金额"
+            android:text="提现总额"
             android:textColor="@color/white"
             android:layout_marginLeft="15dp"
             android:layout_centerVertical="true"/>

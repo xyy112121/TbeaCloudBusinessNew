@@ -19,11 +19,9 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.action.PlumberManageAction;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmMainListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmScanCodeResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmScanCodeStateResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmWithdrawListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.DateSelectActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateInfoActivity;
@@ -80,7 +78,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
     private int mPagesize1 = 10;
     PopOneListView mDateView, mStateView;
     private final int RESULT_DATA_SELECT = 1000;
-    public String electricianid, startdate, enddate, confirmstatusid, mOrderItem, order;//查询参数
+    public String electricianid, startdate, enddate, confirmstatusid, mOrderItem, order, mTimeOrder, mTimeOrder1, mStateOrder;//查询参数
     public String electricianid1, startdate1, enddate1, mOrderItem1, order1;//查询参数
     private String mMoneyOrder1, mMoneyOrder;
     private int mFlag = 1;//1是扫码，2是提现
@@ -150,6 +148,15 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
         expandTabView1 = (ExpandPopTabView) findViewById(R.id.expandtab_view1);
+        List<String> mTopList = new ArrayList<>();
+        mTopList.add("时间");
+        mTopList.add("状态");
+        expandTabView.addTopList(mTopList);
+
+        List<String> mTopList1 = new ArrayList<>();
+        mTopList1.add("时间");
+        expandTabView1.addTopList(mTopList1);
+
         addDateItem(expandTabView, mDateLists, "默认", "时间");
         addStateItem(expandTabView, null, "", "状态");
 
@@ -294,7 +301,10 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
         mStateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue), value);
+                mDateView.setSelectPostion();
+                mMoneyOrder = "";
+                mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw);
                 confirmstatusid = key;
                 mRefreshLayout.beginRefreshing();
             }
@@ -311,8 +321,14 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
         mDateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
-                if ("custom".equals(key)) {
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue), value);
+                mStateView.setSelectPostion();
+                mMoneyOrder1 = "";
+                mWithdrawDepositTopMoenyIv.setImageResource(R.drawable.icon_arraw);
+                confirmstatusid = "";
+                mMoneyOrder = "";
+                mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw);
+                if ("Custom".equals(key)) {
                     Intent intent = new Intent(mContext, DateSelectActivity.class);
                     startActivityForResult(intent, RESULT_DATA_SELECT);
                 } else {
@@ -329,7 +345,6 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                         enddate1 = "";
                         mRefreshLayout1.beginRefreshing();
                     }
-
                 }
             }
         });
@@ -368,32 +383,37 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
             case R.id.pm_scan_code_top_money_layout://扫码的金额
                 if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null) {//升
                     mMoneyOrder = "desc";
-                    mWithdrawDepositTopMoenyIv.setImageResource(R.drawable.icon_arraw_grayblue);
+                    mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
                     mMoneyOrder = "asc";
-                    mWithdrawDepositTopMoenyIv.setImageResource(R.drawable.icon_arraw_bluegray);
+                    mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 order = mMoneyOrder;
                 mOrderItem = "money";
                 mRefreshLayout.beginRefreshing();
 
+                expandTabView.setViewColor();
+                mDateView.setSelectPostion();
+                mStateView.setSelectPostion();
                 mMoneyOrder1 = "";
-                mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw);
+                mWithdrawDepositTopMoenyIv.setImageResource(R.drawable.icon_arraw);
                 break;
             case R.id.pm_withdraw_deposit_top_moeny_layout://提现的金额
                 if ("".equals(mMoneyOrder1) || "asc".equals(mMoneyOrder1) || mMoneyOrder1 == null) {//升
                     mMoneyOrder1 = "desc";
-                    mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_grayblue);
+                    mWithdrawDepositTopMoenyIv.setImageResource(R.drawable.icon_arraw_grayblue);
                 } else {
                     mMoneyOrder1 = "asc";
-                    mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_bluegray);
+                    mWithdrawDepositTopMoenyIv.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 order1 = mMoneyOrder1;
                 mOrderItem1 = "money";
                 mRefreshLayout1.beginRefreshing();
 
+                expandTabView1.setViewColor();
+                mDateView.setSelectPostion();
                 mMoneyOrder = "";
-                mWithdrawDepositTopMoenyIv.setImageResource(R.drawable.icon_arraw);
+                mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw);
                 break;
         }
     }
@@ -537,6 +557,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
         mDateLists.add(new KeyValueBean("PositiveSequence", "正序"));
         mDateLists.add(new KeyValueBean("InvertedOrder", "倒序"));
         mDateLists.add(new KeyValueBean("Custom", "自定义"));
+
     }
 
 }

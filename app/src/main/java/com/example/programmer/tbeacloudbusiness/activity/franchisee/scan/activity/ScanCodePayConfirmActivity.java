@@ -78,6 +78,7 @@ public class ScanCodePayConfirmActivity extends BaseActivity {
                             if (!"".equals(obj.persontypeicon) && obj.persontypeicon != null) {
                                 ImageLoader.getInstance().displayImage(imagePath + obj.persontypeicon, ((ImageView) findViewById(R.id.person_info_personjobtitle)));
                             }
+                            findViewById(R.id.person_info_right).setVisibility(View.GONE);
 
                             setTextViewValue(R.id.scancode_pay_confirm_code, obj.qrcode);
                             setTextViewValue(R.id.scancode_pay_confirm_money, obj.money);
@@ -145,6 +146,7 @@ public class ScanCodePayConfirmActivity extends BaseActivity {
                         if (model.isSuccess()) {
                             Intent intent = new Intent(mContext, ScanCodePaySucceedActivity.class);
                             intent.putExtra("money", mObj.takemoneyinfo.money);
+                            intent.putExtra("takeMoneyId", mObj.takemoneyinfo.takemoneyid);
                             startActivity(intent);
                             finish();
                         } else {

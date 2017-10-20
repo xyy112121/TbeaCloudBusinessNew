@@ -99,26 +99,6 @@ public class PersonManageViewActivity extends BaseActivity {
             }
         });
 
-//        mRebatescaninfoView.setText4Click(new PersonManageItemView.Text4Click() {
-//            @Override
-//            public void onClick() {
-//                ddd
-//                Intent intent = new Intent(mContext, MyFansActivity.class);
-//                intent.putExtra("id",mId );
-//                startActivity(intent);
-//            }
-//        });
-//
-//        mRebatescaninfoView.setText5Click(new PersonManageItemView.Text5Click() {
-//            @Override
-//            public void onClick() {
-//                Intent intent = new Intent(mContext, MyFansActivity.class);
-//                intent.putExtra("id",mId );
-//                startActivity(intent);
-//            }
-//        });
-
-
     }
 
     private void getData() {
@@ -214,11 +194,13 @@ public class PersonManageViewActivity extends BaseActivity {
             case R.id.pm_view_rebatescaninfo:
                 //扫码返利
                 Intent intent = new Intent(mContext, PlumberManageScanCodeDateListActivity.class);
+                intent.putExtra("id", mId);
                 startActivity(intent);
                 break;
             case R.id.pm_view_electricianmeetingattendinfo:
                 //签到历史
                 intent = new Intent(mContext, PlumberManageSignHistoryListActivity.class);
+                intent.putExtra("id", mId);
                 startActivity(intent);
 
                 break;
@@ -241,7 +223,7 @@ public class PersonManageViewActivity extends BaseActivity {
             case R.id.pm_view_thumbpicture:
             case R.id.pm_view_personname:
                 intent = new Intent(mContext, PlumberManagePersonViewActivity.class);
-                intent.putExtra("id", getIntent().getStringExtra("id"));
+                intent.putExtra("id", mId);
                 startActivity(intent);
                 break;
             case R.id.pm_view_socialinfo:

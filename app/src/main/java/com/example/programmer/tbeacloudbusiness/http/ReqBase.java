@@ -38,24 +38,24 @@ public class ReqBase {
 		HttpPost request=new HttpPost(url);
 		Header[] headers=reqHead.getHeaders();
 		Log.d(TAG, "Requery Hearders:");
-		for(Header header:headers){
-			String value=header.getValue();
-			if(value==null){
-				Log.d(TAG, header.getName()+":NULL");
-			}else{
-				Log.d(TAG, header.getName()+":"+value);
-			}
-		}
-		if(params != null){
-			for(NameValuePair param:params){
-				String value=param.getValue();
-				if(value==null){
-					Log.d(TAG, param.getName()+":NULL");
-				}else{
-					Log.d(TAG, param.getName()+":"+value);
-				}
-			}
-		}
+//		for(Header header:headers){
+//			String value=header.getValue();
+//			if(value==null){
+//				Log.d(TAG, header.getName()+":NULL");
+//			}else{
+//				Log.d(TAG, header.getName()+":"+value);
+//			}
+//		}
+//		if(params != null){
+//			for(NameValuePair param:params){
+//				String value=param.getValue();
+//				if(value==null){
+//					Log.d(TAG, param.getName()+":NULL");
+//				}else{
+//					Log.d(TAG, param.getName()+":"+value);
+//				}
+//			}
+//		}
 
 		request.setHeaders(headers);
 		UrlEncodedFormEntity entity=new UrlEncodedFormEntity(params, HTTP.UTF_8);
