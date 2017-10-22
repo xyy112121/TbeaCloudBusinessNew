@@ -22,6 +22,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.RegionSelectActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action.ScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeRebateListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
@@ -52,6 +53,8 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
     private String mRegionId;//区域id
     private String mOrderitem, mOrder;
 
+    ImageView moneyView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +74,19 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
         initDate();
 
         mExpandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
+        List<String> mTopList = new ArrayList<>();
+        mTopList.add("区域");
+        mExpandTabView.addTopList(mTopList);
         addItem(mExpandTabView, mRegionLists, "默认排序", "区域");
 
-        final ImageView moneyView = (ImageView) findViewById(R.id.scan_code_rebate_list_money_image);
+        moneyView = (ImageView) findViewById(R.id.scan_code_rebate_list_money_image);
 
 
         findViewById(R.id.scan_code_rebate_list_money_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mExpandTabView.setViewColor();
+                mRegionView.setSelectPostion();
                 mOrderitem = "money";
                 if ("".equals(mOrder) || "asc".equals(mOrder) || mOrder == null) {//升
                     mOrder = "desc";
@@ -88,6 +96,15 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
                     moneyView.setImageResource(R.drawable.icon_arraw_bluegray);
                 }
                 mRefreshLayout.beginRefreshing();
+            }
+        });
+
+        findViewById(R.id.top_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, HistorySearchActivity.class);
+                intent.putExtra("type", "all");
+                startActivity(intent);
             }
         });
     }
@@ -141,7 +158,10 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
         mRegionView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue), value);
+                mOrder = "";
+                moneyView.setImageResource(R.drawable.icon_arraw);
+
                 if ("regionSelect".equals(key)) {
                     Intent intent = new Intent(mContext, RegionSelectActivity.class);
                     startActivityForResult(intent, 1000);
@@ -245,9 +265,9 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext,WithdrawDepositDateHistoryActivity.class);
-                    intent.putExtra("personOrCompany",obj.personorcompany);
-                    intent.putExtra("payeeId",obj.electricianid);
+                    Intent intent = new Intent(mContext, WithdrawDepositDateHistoryActivity.class);
+                    intent.putExtra("personOrCompany", obj.personorcompany);
+                    intent.putExtra("payeeId", obj.electricianid);
                     startActivity(intent);
                 }
             });

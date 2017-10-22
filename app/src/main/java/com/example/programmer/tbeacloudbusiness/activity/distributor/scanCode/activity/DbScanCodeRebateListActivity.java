@@ -22,6 +22,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.action.DBScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.RegionSelectActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeRebateListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
@@ -76,13 +77,26 @@ public class DbScanCodeRebateListActivity extends BaseActivity implements BGARef
         initDate();
 
         mExpandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
+        List<String> mTopList = new ArrayList<>();
+        mTopList.add("区域");
+        mExpandTabView.addTopList(mTopList);
         addItem(mExpandTabView, mRegionLists, "默认排序", "区域");
 
+
+        findViewById(R.id.top_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, HistorySearchActivity.class);
+                intent.putExtra("type", "all");
+                startActivity(intent);
+            }
+        });
 
         findViewById(R.id.scan_code_rebate_list_money_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mExpandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.text_color), R.drawable.icon_arrow_gray);
+                mRegionView.setSelectPostion();
                 mOrderitem = "money";
                 if ("".equals(mOrder) || "asc".equals(mOrder) || mOrder == null) {//升
                     mOrder = "desc";
@@ -235,7 +249,7 @@ public class DbScanCodeRebateListActivity extends BaseActivity implements BGARef
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, DbWithdrawDepositDateHistoryActivity.class);
                     intent.putExtra("personOrCompany", obj.personorcompany);
-                    intent.putExtra("payeeId ", obj.electricianid);
+                    intent.putExtra("payeeId", obj.electricianid);
                     startActivity(intent);
                 }
             });

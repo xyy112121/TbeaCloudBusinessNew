@@ -244,18 +244,18 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
         switch (view.getId()) {
             case R.id.cp_meeting_prepare_summary:
                 Intent intent = new Intent(mContext, MeetingPrepareSummaryActivity.class);
-                if (!"开会中".equals(mState)) {
+//                if (!"开会中".equals(mState)) {
                     intent.putExtra("flag", "view");
-                }
+//                }
                 intent.putExtra("text", mMeetingPrepareSummary.getValueText());
                 intent.putExtra("meetingid", mId);
                 startActivityForResult(intent, RESULT_SUMMARY);
                 break;
             case R.id.cp_meeting_prepare_gallery:
                 intent = new Intent(mContext, MeetingGalleryListActivity.class);
-                if (!"开会中".equals(mState)) {
+//                if (!"开会中".equals(mState)) {
                     intent.putExtra("flag", "view");
-                }
+//                }
                 intent.putExtra("meetingid", mId);
                 startActivityForResult(intent, RESULT_GALLERY);
                 break;

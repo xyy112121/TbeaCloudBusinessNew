@@ -20,12 +20,17 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.MyPictureListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.PictureShowActivity;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.io.Serializable;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +46,8 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
     @BindView(R.id.cp_meeting_gallery_image)
     ImageView mGalleryImageView;
     private String mFlag;
+
+    public List<MyPictureListResponseModel.DataBean.PicturelistBean> picturelist;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,6 +105,7 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
                                     mGridView.setVisibility(View.GONE);
                                 }else {
                                     if (model.data.picturelist != null) {
+                                        picturelist = model.data.picturelist;
                                         mGridAdapter.addAll(model.data.picturelist);
                                         mGalleryImageView.setVisibility(View.GONE);
                                         mGridView.setVisibility(View.VISIBLE);
@@ -145,7 +153,7 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
     }
 
 
-    public class GridAdapter extends ArrayAdapter<MeetingGalleryListResponseModel.DataBean.PictureBean> {
+    public class GridAdapter extends ArrayAdapter<MyPictureListResponseModel.DataBean.PicturelistBean> {
         int resourceId;
 
 
@@ -166,7 +174,7 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
             }
             int displayWidth = UtilAssistants.getDisplayWidth(mContext);
             holder.mImageView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (displayWidth / 4)));
-            final MeetingGalleryListResponseModel.DataBean.PictureBean obj = getItem(postion);
+            final MyPictureListResponseModel.DataBean.PicturelistBean  obj = getItem(postion);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpictureurl, holder.mImageView);
             if (!"view".equals(mFlag)) {
                 holder.mDeleteView.setVisibility(View.VISIBLE);
@@ -177,6 +185,16 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
                 @Override
                 public void onClick(View v) {
                     delete(obj.pictureid);
+                }
+            });
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, PictureShowActivity.class);
+                    intent.putExtra("images", (Serializable) picturelist);
+                    intent.putExtra("index", postion);
+                    startActivity(intent);
                 }
             });
             return view;

@@ -21,7 +21,9 @@ public class MyPictureListResponseModel extends BaseResponseModel {
         public  class PicturelistBean implements Serializable {
             public String pictureid;
             public String thumbpicture;
+            public String thumbpictureurl;
             public String largepicture;
+            public String largepictureurl;
         }
     }
 }

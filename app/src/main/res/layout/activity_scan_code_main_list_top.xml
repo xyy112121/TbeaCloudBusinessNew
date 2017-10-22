@@ -36,11 +36,13 @@
                 android:textColor="@color/text_color1" />
 
             <ImageView
+                android:id="@+id/top_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="right"
+                android:padding="10dp"
                 android:src="@drawable/icon_more" />
 
         </RelativeLayout>
@@ -102,7 +104,8 @@
                 android:id="@+id/top_text5_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                >
 
                 <TextView
                     android:id="@+id/top_text5_label"

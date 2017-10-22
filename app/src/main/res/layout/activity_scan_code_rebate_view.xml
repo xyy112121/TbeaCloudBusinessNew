@@ -7,7 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <include layout="@layout/activity_page_top" />
 
@@ -113,7 +115,15 @@
                 android:layout_height="wrap_content"
                 android:text="扫码用户" />
 
-            <include layout="@layout/activity_person_layout" />
+            <LinearLayout
+                android:id="@+id/withdrow_deposit_view_payeeInfo"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center_vertical"
+               >
+                <include layout="@layout/activity_person_layout2" />
+                </LinearLayout>
+
 
         </LinearLayout>
 

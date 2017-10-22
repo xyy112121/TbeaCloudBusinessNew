@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,13 +56,19 @@ public class ScanCodeViewActivity extends BaseActivity {
                                 }
 
                                 if (model.data != null && model.data.rebateqrcodeactivityinfo != null){
-                                    CircleImageView headView = (CircleImageView)findViewById(R.id.person_info_head);
-                                    ImageView jobView = (ImageView)findViewById(R.id.person_info_personjobtitle);
-                                    String imagePath = MyApplication.instance.getImgPath();
-                                    ImageLoader.getInstance().displayImage(imagePath+model.data.rebateqrcodeactivityinfo.actuvityuserpicture,headView);
-                                    ImageLoader.getInstance().displayImage(imagePath+model.data.rebateqrcodeactivityinfo.personjobtitle,jobView);
-                                    setViewText(R.id.scan_code_info_activitytime,model.data.rebateqrcodeactivityinfo.activitytime);
-                                    setViewText(R.id.scan_code_info_activityplace,model.data.rebateqrcodeactivityinfo.activityplace);
+                                    ScanCodeInfoResponseModel.RebateqrCodeActivity info = model.data.rebateqrcodeactivityinfo;
+                                    ((TextView)findViewById(R.id.person_info_name)).setText(info.actuvityusername);
+                                    ((TextView)findViewById(R.id.person_info_companyname)).setText(info.activityplace);
+                                    ImageLoader.getInstance().displayImage(info.actuvityuserpicture, ((ImageView)findViewById(R.id.person_info_head)));
+                                    ImageLoader.getInstance().displayImage(info.personjobtitle, ((ImageView)findViewById(R.id.person_info_personjobtitle)));
+
+//                                    CircleImageView headView = (CircleImageView)findViewById(R.id.person_info_head);
+//                                    ImageView jobView = (ImageView)findViewById(R.id.person_info_personjobtitle);
+//                                    String imagePath = MyApplication.instance.getImgPath();
+//                                    ImageLoader.getInstance().displayImage(imagePath+.actuvityuserpicture,headView);
+//                                    ImageLoader.getInstance().displayImage(imagePath+model.data.rebateqrcodeactivityinfo.personjobtitle,jobView);
+//                                    setViewText(R.id.scan_code_info_activitytime,model.data.rebateqrcodeactivityinfo.activitytime);
+//                                    setViewText(R.id.scan_code_info_activityplace,model.data.rebateqrcodeactivityinfo.activityplace);
                                 }
                             } else {
                                 ToastUtil.showMessage(model.getMsg());

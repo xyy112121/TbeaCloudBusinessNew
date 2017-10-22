@@ -78,6 +78,9 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
         initDate();
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
+        List<String> mTopList = new ArrayList<>();
+        mTopList.add("时间");
+        expandTabView.addTopList(mTopList);
         addDateItem(expandTabView, mDateLists, "默认排序", "时间");
 //        addPriceItem(expandTabView, mPriceLists, "默认排序", "金额");
     }
@@ -156,7 +159,7 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
         mDateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue));
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue),value);
                 mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw);
                 mScanCodeTopMoneyIv.setTag("asc");
                 if ("Custom".equals(key)) {//时间自定义
@@ -211,6 +214,7 @@ public class WithdrawDepositDateHistoryActivity extends BaseActivity implements 
         switch (view.getId()) {
             case R.id.scan_code_top_money_layout:
                 expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.text_color), R.drawable.icon_arrow_gray);
+                mDateView.setSelectPostion();
                 if ("".equals(mMoneyOrder) || "asc".equals(mMoneyOrder) || mMoneyOrder == null) {//升
                     mMoneyOrder = "desc";
                     mScanCodeTopMoneyIv.setImageResource(R.drawable.icon_arraw_grayblue);

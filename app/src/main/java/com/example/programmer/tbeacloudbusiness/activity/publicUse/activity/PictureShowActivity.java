@@ -109,7 +109,11 @@ public class PictureShowActivity extends BaseActivity implements View.OnClickLis
             ImageView im = new ImageView(mContext);
             try {
                 im.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                ImageLoader.getInstance().displayImage(images.get(position).largepicture, im);
+                String url = images.get(position).largepicture;
+                if (images.get(position).largepicture == null || "".equals(images.get(position).largepicture)) {
+                    url = images.get(position).largepictureurl;
+                }
+                ImageLoader.getInstance().displayImage(url, im);
                 container.addView(im);
                 mImageViews.add(im);
             } catch (Exception e) {

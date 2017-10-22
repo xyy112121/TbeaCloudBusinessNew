@@ -21,6 +21,7 @@ import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.ac
 import com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.model.DBScanCodeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scan.activity.ScanCodeAcctivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateHistoryActivity;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
@@ -74,6 +75,11 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
             }
         });
 
+        mHeadView.findViewById(R.id.top_text2).setOnClickListener(this);//已支付
+        mHeadView.findViewById(R.id.top_text3).setOnClickListener(this);//已提现
+        mHeadView.findViewById(R.id.top_text4_layout).setOnClickListener(this);//已支付
+        mHeadView.findViewById(R.id.top_text5_layout).setOnClickListener(this);//已提现
+
         mHeadView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +88,16 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
                 startActivity(intent);
             }
         });
+
+        findViewById(R.id.top_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, HistorySearchActivity.class);
+                intent.putExtra("type", "all");
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -107,8 +123,8 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
                                 if (info != null) {
                                     mHeadView.findViewById(R.id.top_text4_label).setVisibility(View.VISIBLE);
                                     mHeadView.findViewById(R.id.top_text5_label).setVisibility(View.VISIBLE);
-                                    ((TextView) mHeadView.findViewById(R.id.top_text4)).setText(info.totleincome);
-                                    ((TextView) mHeadView.findViewById(R.id.top_text5)).setText(info.totlepayed);
+                                    ((TextView) mHeadView.findViewById(R.id.top_text4)).setText(info.totlepayed);
+                                    ((TextView) mHeadView.findViewById(R.id.top_text5)).setText(info.totleincome);
                                 }
 
                             } else {
@@ -154,10 +170,30 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
         return true;
     }
 
+
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(mContext, ScanCodeAcctivity.class);
-        startActivity(intent);
+        Intent intent = new Intent();
+        switch (view.getId()) {
+            case R.id.top_text2:
+            case R.id.top_text4_layout:
+                intent.setClass(mContext, DbWithdrawDepositDateActivity.class);
+                startActivity(intent);
+                //已支付
+                break;
+            case R.id.top_text3:
+            case R.id.top_text5_layout:
+                //已提现
+                intent.setClass(mContext, DbWithdrawDepositDateActivity.class);
+                intent.putExtra("flag", "1");
+                startActivity(intent);
+                break;
+            case R.id.top_right_text:
+                //生成
+                intent.setClass(mContext, ScanCodeAcctivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     private class MyAdapter extends BaseAdapter {
@@ -208,7 +244,7 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
             ImageLoader.getInstance().displayImage(path + obj.personjobtitle, personJobTitleView);
             nameView.setText(obj.personname);
             moneyView.setText(obj.totlemoney);
-            
+
             ImageView rankingView = (ImageView) view.findViewById(R.id.scan_code_main_item_ranking);
             if (position == 0) {
                 rankingView.setImageResource(R.drawable.icon_scanre_batesort1);

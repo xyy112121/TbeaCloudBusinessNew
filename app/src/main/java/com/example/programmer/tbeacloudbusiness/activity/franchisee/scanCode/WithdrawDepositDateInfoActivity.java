@@ -55,15 +55,16 @@ public class WithdrawDepositDateInfoActivity extends BaseActivity {
                                 WithdrawDepositDateInfoResponseModel.PayMoneyInfo payMoneyInfo = model.data.paymoneyinfo;
                                 WithdrawDepositDateInfoResponseModel.TakeMoneyCodeInfo takeMoneyCodeInfo = model.data.takemoneycodeinfo;
 
-                                if (ownerInfo != null) {
+                                if (ownerInfo != null) {//提现用户
                                     LinearLayout layout = (LinearLayout) findViewById(R.id.withdrow_deposit_view_ownerInfo);
-                                    ((TextView) findViewById(R.id.person_info_name)).setText(ownerInfo.personname);
-                                    layout.findViewById(R.id.person_info_personjobtitle).setVisibility(View.GONE);
+
+                                    ((TextView)layout. findViewById(R.id.person_info_name)).setText(ownerInfo.personname);
+                                    ((TextView)layout. findViewById(R.id.person_info_companyname)).setText(ownerInfo.companyname);
                                     ImageLoader.getInstance().displayImage(imagePath + ownerInfo.thumbpicture, ((ImageView) layout.findViewById(R.id.person_info_head)));
-//                                    ImageLoader.getInstance().displayImage(imagePath + ownerInfo.persontypeicon, ((ImageView) layout.findViewById(R.id.person_info_personjobtitle)));
+                                    ImageLoader.getInstance().displayImage(imagePath + ownerInfo.persontypeicon, ((ImageView) layout.findViewById(R.id.person_info_personjobtitle)));
                                 }
 
-                                if (payeeInfo != null) {
+                                if (payeeInfo != null) {//隶属关系
                                     LinearLayout layout = (LinearLayout) findViewById(R.id.withdrow_deposit_view_payeeInfo);
                                     ((TextView)layout. findViewById(R.id.person_info_name)).setText(payeeInfo.personname);
                                     ((TextView)layout. findViewById(R.id.person_info_companyname)).setText(payeeInfo.companyname);
@@ -78,7 +79,7 @@ public class WithdrawDepositDateInfoActivity extends BaseActivity {
                                     ((TextView) findViewById(R.id.withdrow_deposit_view_money)).setText(takeMoneyCodeInfo.money);
                                 }
 
-                                if (payMoneyInfo != null) {
+                                if (payMoneyInfo != null) {//支付单位
                                     ((TextView) findViewById(R.id.withdrow_deposit_view_paytime)).setText(payMoneyInfo.paytime);
                                     ((TextView) findViewById(R.id.withdrow_deposit_view_payplace)).setText(payMoneyInfo.payplace);
 

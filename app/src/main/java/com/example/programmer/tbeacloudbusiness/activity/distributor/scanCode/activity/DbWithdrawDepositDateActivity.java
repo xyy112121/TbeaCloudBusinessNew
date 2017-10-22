@@ -145,6 +145,9 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
 
         expandTabView = (ExpandPopTabView) findViewById(R.id.expandtab_view);
 
+        List<String> mTopList = new ArrayList<>();
+        mTopList.add("支付时间");
+        expandTabView.addTopList(mTopList);
 //        addUserItem(expandTabView, null, "", "用户");
         addDateItem(expandTabView, mDateLists, "默认", "支付时间");
 
@@ -153,6 +156,10 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
 
         mState1View.setOnClickListener(this);
         mState1View1.setOnClickListener(this);
+
+        if("1".equals(getIntent().getStringExtra("flag"))){//待支付
+            mState1View1.performClick();
+        }
     }
 
     private void addDateItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
@@ -433,6 +440,7 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
                 mMoneyOrder1 = "";
                 mScanCodeTopMoneyIv1.setImageResource(R.drawable.icon_arraw);
                 expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.text_color), R.drawable.icon_arrow_gray);
+                mDateView.setSelectPostion();
                 break;
             case R.id.scan_code_top_money_layout1:
                 if ("".equals(mMoneyOrder1) || "asc".equals(mMoneyOrder1) || mMoneyOrder1 == null) {//升

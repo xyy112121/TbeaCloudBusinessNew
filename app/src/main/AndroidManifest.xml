@@ -73,6 +73,7 @@
         <activity android:name=".activity.franchisee.scanCode.ScanCodeMainListActivity" />
 
         <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateSelectActivity" />
+        <activity android:name=".activity.publicUse.activity.PictureShowActivity"/>
 
         <activity android:name=".activity.franchisee.scanCode.ScanCodeTypeSelectActivity" />
         <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateSucceedActivity" />

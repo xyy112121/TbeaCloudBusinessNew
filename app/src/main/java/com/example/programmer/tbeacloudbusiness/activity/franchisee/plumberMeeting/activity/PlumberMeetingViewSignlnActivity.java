@@ -36,7 +36,7 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 /**
- * Created by DELL on 2017/8/3.
+ * 会议签到
  */
 
 public class PlumberMeetingViewSignlnActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {

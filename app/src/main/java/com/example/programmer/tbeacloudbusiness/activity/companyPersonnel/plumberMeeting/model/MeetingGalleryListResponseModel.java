@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model;
 
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.MyPictureListResponseModel;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.google.gson.annotations.SerializedName;
 
@@ -14,17 +15,11 @@ public class MeetingGalleryListResponseModel extends BaseResponseModel {
 
     public  class DataBean {
         public MeetinginfoBean meetinginfo;
-        public List<PictureBean> picturelist;
+        public List<MyPictureListResponseModel.DataBean.PicturelistBean> picturelist;
 
         public  class MeetinginfoBean {
             public String meetingname;
             public String primarypicture;
-        }
-
-        public class PictureBean{
-            public String pictureid;
-            public String thumbpictureurl;//缩略图
-            public String largepictureurl;
         }
     }
 }

@@ -249,6 +249,7 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
         mView.findViewById(R.id.mian_home_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //首页搜索
                 Intent intent = new Intent(getActivity(), HistorySearchActivity.class);
                 intent.putExtra("type", "all");
                 startActivity(intent);

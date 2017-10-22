@@ -7,12 +7,9 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -115,23 +112,10 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
         mTopList.add("区域");
         expandTabView.addTopList(mTopList);
 
-
-//        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId,
-//                                          KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    mName = mSearchTextView.getText() + "";
-//                    mRefreshLayout.beginRefreshing();
-//                }
-//
-//                return false;
-//            }
-//        });
-
         mSearchTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //水电工管理
                 Intent intent = new Intent(mContext, HistorySearchActivity.class);
                 intent.putExtra("type", "electrician");
                 startActivity(intent);

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.MeetingGalleryListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingViewResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.WebViewActivity;
@@ -54,12 +55,15 @@ public class PlumberMeetingViewActivity extends BaseActivity {
     @BindView(R.id.pm_view_meetingsigninfo)
     TextView mMeetingsigninfoView;
 
+    private String mId;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plumber_meeting_view);
         ButterKnife.bind(this);
+        mId = getIntent().getStringExtra("id");
         initTopbar("会议详情");
         listener();
         getData();
@@ -70,7 +74,7 @@ public class PlumberMeetingViewActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PlumberMeetingParticipantListActivity.class);
-                intent.putExtra("meetingId", getIntent().getStringExtra("id"));
+                intent.putExtra("meetingId", mId);
                 startActivity(intent);
             }
         });
@@ -79,7 +83,7 @@ public class PlumberMeetingViewActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PlumberMeetingViewSignlnActivity.class);
-                intent.putExtra("meetingId", getIntent().getStringExtra("id"));
+                intent.putExtra("meetingId", mId);
                 startActivity(intent);
             }
         });
@@ -89,7 +93,7 @@ public class PlumberMeetingViewActivity extends BaseActivity {
             public void onClick(View v) {
                 //会议安排
                 Intent intent = new Intent(mContext, WebViewActivity.class);
-                String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/meetingprepareinfo?meetingid="+ getIntent().getStringExtra("id");
+                String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/meetingprepareinfo?meetingid=" + mId;
                 intent.putExtra("url", url);
                 intent.putExtra("title", "会议安排");
                 startActivity(intent);
@@ -100,12 +104,23 @@ public class PlumberMeetingViewActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, WebViewActivity.class);
-                String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/meetingsummary?meetingid="+ getIntent().getStringExtra("id");
+                String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/meetingsummary?meetingid=" + mId;
                 intent.putExtra("url", url);
                 intent.putExtra("title", "会议纪要");
                 startActivity(intent);
             }
         });
+
+        mMeetingpicturenumberView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MeetingGalleryListActivity.class);
+                intent.putExtra("flag", "view");
+                intent.putExtra("meetingid", mId);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -139,8 +154,7 @@ public class PlumberMeetingViewActivity extends BaseActivity {
                 public void run() {
                     try {
                         PlumberMeetingAction action = new PlumberMeetingAction();
-                        String id = getIntent().getStringExtra("id");
-                        PlumberMeetingViewResponseModel model = action.getPlumberMeetingView(id);
+                        PlumberMeetingViewResponseModel model = action.getPlumberMeetingView(mId);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -191,12 +205,12 @@ public class PlumberMeetingViewActivity extends BaseActivity {
             ImageLoader.getInstance().displayImage(path + model.headpicture, mHodePersonHeadView);
             ImageLoader.getInstance().displayImage(path + model.persontypeicon, mHodePersonPersonjobtitleView);
             mHodePersonNameView.setText(model.name);
-            mHodePersonCompanyNameView.setText(model.company + "  "+model.jobposition);
+            mHodePersonCompanyNameView.setText(model.company + "  " + model.jobposition);
             mHodePersonInfoRightView.setVisibility(View.GONE);
         }
 
         if (obj.participantlist != null) {
-            mParticipantlistView.setText(obj.participantlist.participantnumber+"");
+            mParticipantlistView.setText(obj.participantlist.participantnumber + "");
         }
 
         if (obj.meetinginfo != null) {

@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 现场图片查看（网络）
+ * 现场图片查看（本地）
  */
 
 public class MeetingGalleryImageShowActivity extends BaseActivity implements View.OnClickListener {

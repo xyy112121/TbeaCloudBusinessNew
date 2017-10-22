@@ -18,6 +18,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageLoginStatisticsActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageSignHistoryListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingSignListReponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingUserTypeResonpseModel;
@@ -301,7 +302,7 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.setClass(mContext, PlumberManageLoginStatisticsActivity.class);
+                    intent.setClass(mContext, PlumberManageSignHistoryListActivity.class);
                     startActivity(intent);
                 }
             });

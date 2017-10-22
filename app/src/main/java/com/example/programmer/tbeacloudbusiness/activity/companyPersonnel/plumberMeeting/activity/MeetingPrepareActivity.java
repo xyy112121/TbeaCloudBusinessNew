@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -178,6 +179,31 @@ public class MeetingPrepareActivity extends BaseActivity {
                 startActivityForResult(intent, RESULT_PLAN);
                 break;
             case R.id.cp_meeting_prepare_finish:
+                if(TextUtils.isEmpty(mRequest.meetingstarttime)||TextUtils.isEmpty(mRequest.meetingendtime)){
+                    ToastUtil.showMessage("请选择举办时间！");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(mRequest.organizecompanylist)){
+                    ToastUtil.showMessage("请选择举办单位！");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(mRequest.meetingprovince)){
+                    ToastUtil.showMessage("请选择举办地点！");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(mRequest.participantlist)){
+                    ToastUtil.showMessage("请选择参与人员！");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(mRequest.meetingitems)){
+                    ToastUtil.showMessage("请输入会议安排！");
+                    return;
+                }
+
                 showAlert();
                 break;
         }
@@ -258,6 +284,8 @@ public class MeetingPrepareActivity extends BaseActivity {
      * 显示警示框
      */
     private void showAlert() {
+
+
         View parentLayout = findViewById(R.id.parentLayout);
         final CustomPopWindow1 popWindow1 = new CustomPopWindow1(mContext);
         popWindow1.init(parentLayout, R.layout.pop_window_header,
@@ -288,6 +316,7 @@ public class MeetingPrepareActivity extends BaseActivity {
                                 Intent intent = new Intent(mContext, MeetingSponsorSuccessActivity.class);
                                 intent.putExtra("id", model.data.meetinginfo.meetingid);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
                             }

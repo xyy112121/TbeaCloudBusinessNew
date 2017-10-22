@@ -18,7 +18,7 @@
 
 
         <TextView
-            android:id="@+id/expert_search_text"
+            android:id="@+id/top_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

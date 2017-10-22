@@ -19,6 +19,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action.ScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeMainResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
@@ -82,6 +83,15 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(mContext, ScanCodeRebateListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.top_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, HistorySearchActivity.class);
+                intent.putExtra("type", "all");
                 startActivity(intent);
             }
         });
@@ -169,7 +179,6 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
-
             case R.id.top_text2:
             case R.id.top_text4_layout:
                 intent.setClass(mContext, WithdrawDepositDateActivity.class);
@@ -180,7 +189,7 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
             case R.id.top_text5_layout:
                 //待支付
                 intent.setClass(mContext, WithdrawDepositDateActivity.class);
-                intent.putExtra("flag","1");
+                intent.putExtra("flag", "1");
                 startActivity(intent);
                 break;
             case R.id.top_right_text:
