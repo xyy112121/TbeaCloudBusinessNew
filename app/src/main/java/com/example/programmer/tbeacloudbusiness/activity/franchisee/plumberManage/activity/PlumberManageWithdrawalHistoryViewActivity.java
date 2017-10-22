@@ -48,11 +48,14 @@ public class PlumberManageWithdrawalHistoryViewActivity extends BaseActivity {
     @BindView(R.id.pm_withdrawal_history_view_webView)
     WebView mWebView;
 
+    private String mId;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pm_withdrawal_history_view);
         StatusBarUtil.setTranslucent(this, 0);
+        mId = getIntent().getStringExtra("id");
         ButterKnife.bind(this);
         getData();
         showWebView("http://121.42.193.154:6696/index.php/h5forapp/Index/electricianserviceintroduce");
@@ -142,20 +145,21 @@ public class PlumberManageWithdrawalHistoryViewActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.top_right_text, R.id.top_left,R.id.pm_view_thumbpicture})
+    @OnClick({R.id.pm_view_personname,R.id.top_right_text, R.id.top_left,R.id.pm_view_thumbpicture})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.top_right_text:
                 Intent intent = new Intent(mContext, PersonManageViewActivity.class);
-                intent.putExtra("id", getIntent().getStringExtra("id"));
+                intent.putExtra("id",mId );
                 startActivity(intent);
                 break;
             case R.id.top_left:
                 finish();
                 break;
             case R.id.pm_view_thumbpicture:
+            case R.id.pm_view_personname:
                  intent = new Intent(mContext, PlumberManagePersonViewActivity.class);
-                intent.putExtra("id", getIntent().getStringExtra("id"));
+                intent.putExtra("id", mId);
                 startActivity(intent);
                 break;
         }

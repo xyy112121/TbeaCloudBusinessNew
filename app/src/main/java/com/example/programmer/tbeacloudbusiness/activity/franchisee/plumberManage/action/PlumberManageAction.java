@@ -1,7 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.action;
 
-import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PersonManageViewResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PlumberInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PlumberManageLoginDataResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmMainListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmScanCodeResponseModel;
@@ -48,6 +48,18 @@ public class PlumberManageAction extends BaseAction {
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
         String result = sendRequest("TBEAYUN004003001000", pairs);
         model = gson.fromJson(result, PmMainListResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 水电工个人资料
+     */
+    public PlumberInfoResponseModel getPersonInfo(String electricianid) throws Exception {
+        PlumberInfoResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("electricianid", electricianid));
+        String result = sendRequest("TBEAYUN004003004000", pairs);
+        model = gson.fromJson(result, PlumberInfoResponseModel.class);
         return model;
     }
 

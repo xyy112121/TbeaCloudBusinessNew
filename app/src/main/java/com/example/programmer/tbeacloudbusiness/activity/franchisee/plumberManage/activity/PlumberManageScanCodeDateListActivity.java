@@ -554,8 +554,8 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
     private void initDate() {
         mDateLists = new ArrayList<>();
         mDateLists.add(new KeyValueBean("", "默认排序"));
-        mDateLists.add(new KeyValueBean("PositiveSequence", "正序"));
-        mDateLists.add(new KeyValueBean("InvertedOrder", "倒序"));
+        mDateLists.add(new KeyValueBean("asc", "正序"));
+        mDateLists.add(new KeyValueBean("desc", "倒序"));
         mDateLists.add(new KeyValueBean("Custom", "自定义"));
 
     }

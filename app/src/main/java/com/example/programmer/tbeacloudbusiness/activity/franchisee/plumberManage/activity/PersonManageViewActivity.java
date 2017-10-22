@@ -188,7 +188,7 @@ public class PersonManageViewActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.pm_view_thumbpicture, R.id.pm_view_rebatescaninfo, R.id.pm_view_electricianmeetingattendinfo, R.id.pm_view_orderingserviceinfo, R.id.pm_view_commodityorderinfo, R.id.pm_view_logininfo_layout, R.id.top_left})
+    @OnClick({R.id.pm_view_personname,R.id.pm_view_thumbpicture, R.id.pm_view_rebatescaninfo, R.id.pm_view_electricianmeetingattendinfo, R.id.pm_view_orderingserviceinfo, R.id.pm_view_commodityorderinfo, R.id.pm_view_logininfo_layout, R.id.top_left,R.id.pm_view_socialinfo})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.pm_view_rebatescaninfo:

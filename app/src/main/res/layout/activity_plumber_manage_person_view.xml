@@ -35,9 +35,9 @@
                 android:text="姓名" />
 
             <TextView
-                android:id="@+id/create_code_type_norms"
-                style="@style/my_right_text_style"
-                android:text="刘涛（13888697542）" />
+                android:id="@+id/plumber_info_name"
+                style="@style/my_right_text_style1"
+                />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -50,8 +50,8 @@
                 android:text="性别" />
 
             <TextView
-                style="@style/my_right_text_style"
-                android:text="男"
+                android:id="@+id/plumber_info_sex"
+                style="@style/my_right_text_style1"
                 />
         </LinearLayout>
 
@@ -65,12 +65,41 @@
                 android:text="年龄" />
 
             <TextView
-                android:id="@+id/textView2"
-                style="@style/my_right_text_style"
-                android:text="48"
+                android:id="@+id/plumber_info_age"
+                style="@style/my_right_text_style1"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="工龄" />
+
+            <TextView
+                android:id="@+id/plumber_info_workAge"
+                style="@style/my_right_text_style1"
                 android:textStyle="bold"/>
         </LinearLayout>
 
+
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="所在地区" />
+
+            <TextView
+                android:id="@+id/plumber_info_area"
+                style="@style/my_right_text_style1"
+                android:textStyle="bold"/>
+        </LinearLayout>
 
 
 
@@ -84,21 +113,10 @@
                 android:text="认证状态" />
 
             <TextView
-                style="@style/my_right_text_style1"
-                android:text="已认证" />
-        </LinearLayout>
-
-        <View style="@style/horizontal_view" />
-        <LinearLayout style="@style/my_text_layout">
-
-            <TextView
-                style="@style/my_text_style"
-                android:layout_height="wrap_content"
-                android:text="隶属" />
-
-            <TextView
-                style="@style/my_right_text_style1"
-                android:text="[分销商]四川省德阳市小明五金" />
+                android:id="@+id/plumber_info_whetheridentify"
+                style="@style/my_right_text_style"
+                android:gravity="right|center"
+                />
         </LinearLayout>
 
         <View style="@style/horizontal_view" />
@@ -111,10 +129,10 @@
                 android:text="个人介绍" />
 
             <TextView
-                android:id="@+id/create_code_number"
+                android:id="@+id/plumber_info_intro"
                 style="@style/my_right_text_style1"
                 android:maxLines="20"
-                android:text="专业承接水电安装专业承接水电安装专业承接水电安装专业承接水电安装" />
+                />
         </LinearLayout>
         <View style="@style/horizontal_view" />
     </LinearLayout>
