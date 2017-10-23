@@ -38,7 +38,7 @@ public class MyTaskListActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sr_my_task_list);
-        initTopbar("我发布的任务");
+        initTopbar("特变卫士管理");
         //获取屏幕的宽度
         DisplayMetrics outMetrics = new DisplayMetrics();
         getWindow().getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
