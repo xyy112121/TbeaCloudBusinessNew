@@ -86,6 +86,12 @@ public class MyTaskListHaveEvaluationFragment extends Fragment implements BGARef
 
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(getActivity(), true));
+//        mRefreshLayout.beginRefreshing();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mRefreshLayout.beginRefreshing();
     }
 

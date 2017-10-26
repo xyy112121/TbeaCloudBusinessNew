@@ -239,6 +239,8 @@
        <activity android:name="com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.activity.SendOrdersPersonSelectActivity"/>
      <activity android:name=".activity.franchisee.tbws.activity.MyTaskListActivity"/>
      <activity android:name=".activity.franchisee.tbws.activity.PendingViewActivity"/>
+     <activity android:name=".activity.publicUse.activity.SuccessActivity"/>
+     <activity android:name=".activity.franchisee.tbws.activity.ServiceHaveAssignViewActivity"/>
     </application>
 
 </manifest>

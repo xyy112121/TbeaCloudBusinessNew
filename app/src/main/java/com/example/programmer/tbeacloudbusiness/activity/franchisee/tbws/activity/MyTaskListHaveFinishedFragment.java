@@ -87,6 +87,12 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
 
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(getActivity(), true));
+//        mRefreshLayout.beginRefreshing();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mRefreshLayout.beginRefreshing();
     }
 

@@ -86,6 +86,12 @@ public class MyTaskListHaveOderFragment extends Fragment implements BGARefreshLa
 
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(getActivity(), true));
+//        mRefreshLayout.beginRefreshing();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mRefreshLayout.beginRefreshing();
     }
 
