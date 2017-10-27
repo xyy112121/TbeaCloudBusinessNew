@@ -18,6 +18,7 @@ import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuth
 import com.example.programmer.tbeacloudbusiness.http.MD5Util;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
+import com.google.gson.reflect.TypeToken;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import org.apache.http.NameValuePair;
@@ -64,6 +65,7 @@ public class UserAction extends BaseAction {
 
     /**
      * 获取是否有app更新
+     *
      * @return
      * @throws Exception
      */
@@ -282,7 +284,6 @@ public class UserAction extends BaseAction {
 
     /**
      * 图片上传
-     *
      */
     public ResponseInfo uploadImage(List<LocalMedia> list) throws Exception {
         ResponseInfo model;
@@ -341,4 +342,14 @@ public class UserAction extends BaseAction {
         return rspInfo;
     }
 
+    /**
+     * 获取客服中心
+     */
+    public ResponseInfo getServiceCenterInfo() throws Exception {
+        ResponseInfo rspInfo;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAENG005001014000", pairs);
+        rspInfo = gson.fromJson(result, ResponseInfo.class);
+        return rspInfo;
+    }
 }

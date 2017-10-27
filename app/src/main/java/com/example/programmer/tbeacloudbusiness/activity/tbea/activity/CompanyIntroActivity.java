@@ -21,6 +21,8 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.action.PublicAction;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.model.NetUrlResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.action.TbeaAction;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CompanyIntroListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
@@ -40,13 +42,55 @@ public class CompanyIntroActivity extends BaseActivity {
     private int mIndex2 = -1;//前一次点击的下标
     private List<FrameLayout> mListLayout = new ArrayList<>();
     private WebView mWebView;
-    private String mUrl = "http://121.42.193.154:6696/index.php/h5forapp/Index/companyprofile?categoryid=";
+//    private String mUrl = "http://121.42.193.154:6696/index.php/h5forapp/Index/companyprofile?categoryid=";
+    private String mUrl = "";
+
+     CustomDialog mDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tbea_company_intro);
         initView();
+    }
+
+    /**
+     * 获取url
+     */
+    public void getDate() {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case ThreadState.SUCCESS:
+                        NetUrlResponseModel re = (NetUrlResponseModel) msg.obj;
+                        if (re.isSuccess() && re.data != null) {
+                            mUrl = re.data.url;
+                            showWebView(mUrl+ "tbeaintro");
+                        } else {
+                            ToastUtil.showMessage(re.getMsg());
+                        }
+
+                        break;
+                    case ThreadState.ERROR:
+                        ToastUtil.showMessage("操作失败！");
+                        break;
+                }
+            }
+        };
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    PublicAction userAction = new PublicAction();
+                    NetUrlResponseModel re = userAction.getUrl();
+                    handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
+                } catch (Exception e) {
+                    handler.sendEmptyMessage(ThreadState.ERROR);
+                }
+            }
+        }).start();
     }
 
     public void initView() {
@@ -56,8 +100,10 @@ public class CompanyIntroActivity extends BaseActivity {
         ListView listView = (ListView) findViewById(R.id.listview);
         mWebView.setVisibility(View.VISIBLE);
         listView.setVisibility(View.GONE);
-
-        showWebView(mUrl+ "abouttbea");
+        mDialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+        mDialog.setText("加载中...");
+        mDialog.show();
+        getDate();
     }
 
     /**
@@ -96,15 +142,16 @@ public class CompanyIntroActivity extends BaseActivity {
                     String url = "";
                     switch (mIndex) {
                         case 0:
-                            url = mUrl + "abouttbea";
+                            url = mUrl + "tbeaintro";
                             break;
                         case 1:
-                            url = mUrl + "corporateculture";
+                            url = mUrl + "tbeaculture";
                             break;
                         case 2:
-                            url = mUrl + "responsibility";
+                            url = mUrl + "tbearesponsibility";
                             break;
                     }
+                    mDialog.show();
                     showWebView(url);
                 }
             });
@@ -114,9 +161,6 @@ public class CompanyIntroActivity extends BaseActivity {
     }
 
     private void showWebView(String url) {
-        final CustomDialog mDialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
-        mDialog.setText("加载中...");
-        mDialog.show();
         WebSettings settings = mWebView.getSettings();
         //自适应屏幕
         settings.setUseWideViewPort(true);

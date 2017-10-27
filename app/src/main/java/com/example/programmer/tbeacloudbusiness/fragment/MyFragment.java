@@ -25,8 +25,11 @@ import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAtte
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyFansActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.PersonInfoActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.RealNameAuthenticationDistributorActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.ServiceCenterActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.SetActivity;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.NetWebViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
+import com.example.programmer.tbeacloudbusiness.activity.user.RegisterActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
@@ -151,6 +154,22 @@ public class MyFragment extends Fragment implements View.OnClickListener, BGARef
                 layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        if ("platformhelp".equals(item.id)) {
+//                            Intent intent = new Intent(getActivity(), NetWebViewActivity.class);
+//                            intent.putExtra("title", "帮助中心");
+//                            String par = "userhelpdetail?questionid=" + MyApplication.instance.getUserId();
+//                            intent.putExtra("parameter", par);//URL后缀
+//                            startActivity(intent);
+                            startActivity(new Intent(getActivity(), ServiceCenterActivity.class));
+
+                        }
+                        if ("aboutplatform".equals(item.id)) {
+                            Intent intent = new Intent(getActivity(), NetWebViewActivity.class);
+                            intent.putExtra("title", "关于我们");
+                            intent.putExtra("parameter", "aboutplatform");//URL后缀
+                            startActivity(intent);
+                        }
 
                         if ("mymessage".equals(item.id)) {
                             startActivity(new Intent(getActivity(), MessageListActivity.class));

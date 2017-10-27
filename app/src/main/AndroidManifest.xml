@@ -73,7 +73,7 @@
         <activity android:name=".activity.franchisee.scanCode.ScanCodeMainListActivity" />
 
         <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateSelectActivity" />
-        <activity android:name=".activity.publicUse.activity.PictureShowActivity"/>
+        <activity android:name=".activity.publicUse.activity.PictureShowActivity" />
 
         <activity android:name=".activity.franchisee.scanCode.ScanCodeTypeSelectActivity" />
         <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateSucceedActivity" />
@@ -109,7 +109,7 @@
         <activity android:name=".activity.user.RealNameAuthenticationActivity" />
         <activity android:name=".activity.user.ForgetPwdPhoneActivity" />
         <activity android:name=".activity.user.ForgetPwdEditActivity" />
-        <activity android:name=".activity.my.main.activity.PersonInfoActivity"/>
+        <activity android:name=".activity.my.main.activity.PersonInfoActivity" />
 
         <activity android:name=".activity.tbea.activity.CompanyIntroActivity" />
         <activity android:name=".activity.tbea.activity.ProductPresentationListActivity" />
@@ -230,17 +230,19 @@
         <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.CommoditySalesInfoActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.commodityManage.SaleWaterListActivity" />
         <activity android:name=".activity.franchisee.storeManage.activity.set.SpecificationsAndModelsSelectListActivity" />
-        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateInfoActivity"/>
-       <activity android:name=".activity.franchisee.scanCode.CommdityListSelectActivity"/>
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeCreateInfoActivity" />
+        <activity android:name=".activity.franchisee.scanCode.CommdityListSelectActivity" />
 
-       <activity android:name=".activity.distributorManage.activity.DistributorListActivity"/>
-       <activity android:name=".activity.distributorManage.activity.DustributorWithdrawalHistoryListActivity"/>
-       <activity android:name=".activity.franchisee.storeManage.activity.order.OrderListActivity"/>
-       <activity android:name="com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.activity.SendOrdersPersonSelectActivity"/>
-     <activity android:name=".activity.franchisee.tbws.activity.MyTaskListActivity"/>
-     <activity android:name=".activity.franchisee.tbws.activity.PendingViewActivity"/>
-     <activity android:name=".activity.publicUse.activity.SuccessActivity"/>
-     <activity android:name=".activity.franchisee.tbws.activity.ServiceHaveAssignViewActivity"/>
+        <activity android:name=".activity.distributorManage.activity.DistributorListActivity" />
+        <activity android:name=".activity.distributorManage.activity.DustributorWithdrawalHistoryListActivity" />
+        <activity android:name=".activity.franchisee.storeManage.activity.order.OrderListActivity" />
+        <activity android:name="com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.activity.SendOrdersPersonSelectActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.MyTaskListActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.PendingViewActivity" />
+        <activity android:name=".activity.publicUse.activity.SuccessActivity" />
+        <activity android:name=".activity.franchisee.tbws.activity.ServiceHaveAssignViewActivity" />
+        <activity android:name=".activity.publicUse.activity.NetWebViewActivity" />
+        <activity android:name=".activity.my.main.activity.ServiceCenterActivity"/>
     </application>
 
 </manifest>

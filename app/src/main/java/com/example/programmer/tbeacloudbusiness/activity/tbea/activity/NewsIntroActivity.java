@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.NetWebViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.WebViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.action.TbeaAction;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CompanyIntroListResponseModel;
@@ -112,7 +113,7 @@ public class NewsIntroActivity extends BaseActivity implements BGARefreshLayout.
                             mType = "decorationnews";
                             break;
                     }
-                   mRefreshLayout.beginRefreshing();
+                    mRefreshLayout.beginRefreshing();
 
                 }
             });
@@ -214,10 +215,9 @@ public class NewsIntroActivity extends BaseActivity implements BGARefreshLayout.
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, WebViewActivity.class);
-                    String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/viewnews?newsid=" + obj.id;
-                    intent.putExtra("url", url);
+                    Intent intent = new Intent(mContext, NetWebViewActivity.class);
                     intent.putExtra("title", "新闻资讯");
+                    intent.putExtra("parameter", "tbeanewsdetail?newsid=" + obj.id);//URL后缀
                     startActivity(intent);
                 }
             });

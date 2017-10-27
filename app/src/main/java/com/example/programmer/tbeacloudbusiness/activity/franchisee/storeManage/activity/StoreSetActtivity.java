@@ -7,12 +7,14 @@ import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.RotateADListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.SetVisualGraphActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.SpecificationsAndModelsListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.SpecificationsAndModelsSelectListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.StoreCodeActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.StoreIntroduceActivity;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.NetWebViewActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -38,11 +40,16 @@ public class StoreSetActtivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.store_set_rotate_ad:
-                 intent = new Intent(mContext, RotateADListActivity.class);
+                intent = new Intent(mContext, RotateADListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.store_set_store_code:
-                intent = new Intent(mContext, StoreCodeActivity.class);
+//                intent = new Intent(mContext, StoreCodeActivity.class);
+//                startActivity(intent);
+                intent = new Intent(mContext, NetWebViewActivity.class);
+                intent.putExtra("title", "店铺二维码");
+                String par = "companyqrcode?companyid=" + MyApplication.instance.getUserId();
+                intent.putExtra("parameter", par);//URL后缀
                 startActivity(intent);
                 break;
             case R.id.store_set_store_introduce:

@@ -16,6 +16,8 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.action.PlumberManageAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PersonManageViewResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.action.PublicAction;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.model.NetUrlResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.StarBar;
@@ -58,9 +60,47 @@ public class PlumberManageWithdrawalHistoryViewActivity extends BaseActivity {
         mId = getIntent().getStringExtra("id");
         ButterKnife.bind(this);
         getData();
-        showWebView("http://121.42.193.154:6696/index.php/h5forapp/Index/electricianserviceintroduce");
+        getUrl();
     }
 
+    /**
+     * 获取url
+     */
+    public void getUrl() {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case ThreadState.SUCCESS:
+                        NetUrlResponseModel re = (NetUrlResponseModel) msg.obj;
+                        if (re.isSuccess() && re.data != null) {
+                            String url = re.data.url + "electricianhomepageinfo?electricianid=" + mId;
+                            showWebView(url);
+                        } else {
+                            ToastUtil.showMessage(re.getMsg());
+                        }
+
+                        break;
+                    case ThreadState.ERROR:
+                        ToastUtil.showMessage("操作失败！");
+                        break;
+                }
+            }
+        };
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    PublicAction userAction = new PublicAction();
+                    NetUrlResponseModel re = userAction.getUrl();
+                    handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
+                } catch (Exception e) {
+                    handler.sendEmptyMessage(ThreadState.ERROR);
+                }
+            }
+        }).start();
+    }
 
     private void showWebView(String url) {
         final CustomDialog mDialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
@@ -145,12 +185,12 @@ public class PlumberManageWithdrawalHistoryViewActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.pm_view_personname,R.id.top_right_text, R.id.top_left,R.id.pm_view_thumbpicture})
+    @OnClick({R.id.pm_view_personname, R.id.top_right_text, R.id.top_left, R.id.pm_view_thumbpicture})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.top_right_text:
                 Intent intent = new Intent(mContext, PersonManageViewActivity.class);
-                intent.putExtra("id",mId );
+                intent.putExtra("id", mId);
                 startActivity(intent);
                 break;
             case R.id.top_left:
@@ -158,7 +198,7 @@ public class PlumberManageWithdrawalHistoryViewActivity extends BaseActivity {
                 break;
             case R.id.pm_view_thumbpicture:
             case R.id.pm_view_personname:
-                 intent = new Intent(mContext, PlumberManagePersonViewActivity.class);
+                intent = new Intent(mContext, PlumberManagePersonViewActivity.class);
                 intent.putExtra("id", mId);
                 startActivity(intent);
                 break;

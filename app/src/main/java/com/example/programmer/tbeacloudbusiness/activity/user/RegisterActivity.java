@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.action.SetAction;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.NetWebViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RegisterRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RegisterResponseModel;
@@ -97,6 +98,16 @@ public class RegisterActivity extends Activity {
                     //默认状态显示密码--设置文本 要一起写才能起作用 InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
                     mPwdView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 }
+            }
+        });
+
+        findViewById(R.id.register_text).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, NetWebViewActivity.class);
+                intent.putExtra("title","用户注册协议");
+                intent.putExtra("parameter","userregisteragreement");//URL后缀
+                startActivity(intent);
             }
         });
     }
