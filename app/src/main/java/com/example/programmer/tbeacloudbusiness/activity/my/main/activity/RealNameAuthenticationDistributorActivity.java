@@ -1,31 +1,42 @@
 package com.example.programmer.tbeacloudbusiness.activity.my.main.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.RealNameAuthenticationDistributorResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
+import com.example.programmer.tbeacloudbusiness.utils.Constants;
+import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 实名认证—商家分销商
  */
 
 public class RealNameAuthenticationDistributorActivity extends BaseActivity {
+    private String mState;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_realname_authentication_distributor);
+        ButterKnife.bind(this);
         initTopbar("实名认证");
         getDate();
     }
@@ -54,7 +65,19 @@ public class RealNameAuthenticationDistributorActivity extends BaseActivity {
                             ((TextView) findViewById(R.id.identification_companyAddr)).setText(info.companyaddress);
                             ((TextView) findViewById(R.id.identification_personName)).setText(info.masterperson);
                             ((TextView) findViewById(R.id.identification_cardId)).setText(info.masterpersoncardid);
-                            ((TextView) findViewById(R.id.identification_state)).setText("已通过");
+                            ImageView iv = (ImageView) findViewById(R.id.identification_image);
+                            TextView tittleView = (TextView) findViewById(R.id.identification_title);
+                            mState = info.identifystatusid;
+                            ShareConfig.setConfig(mContext, Constants.whetheridentifiedid, mState);
+                            if ("notidentify".equals(info.identifystatusid)) {//没有通过认证
+                                iv.setImageResource(R.drawable.icon_my_relaname_unapprove);
+                                tittleView.setText("你未通过实名认证");
+
+                            } else if ("identifying".equals(info.identifystatusid)) {//正在认证
+                                iv.setImageResource(R.drawable.icon_my_relaname_audit);
+                                tittleView.setText("证件审核中");
+                            }
+                            ((TextView) findViewById(R.id.identification_state)).setText(info.identifystatus);
 
                         } else {
                             ToastUtil.showMessage(re.getMsg());
@@ -80,5 +103,15 @@ public class RealNameAuthenticationDistributorActivity extends BaseActivity {
                 }
             }
         }).start();
+    }
+
+    @OnClick(R.id.identification_state)
+    public void onViewClicked() {
+        if ("notidentify".equals(mState)) {//没有通过认证
+            startActivity(new Intent(mContext, RealNameAuthenticationFailActivity.class));
+
+        } else {//已通过和审核中的，就显示认证信息
+            startActivity(new Intent(mContext, CompletionDataActivity.class));
+        }
     }
 }

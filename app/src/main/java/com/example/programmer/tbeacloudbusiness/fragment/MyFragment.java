@@ -192,14 +192,17 @@ public class MyFragment extends Fragment implements View.OnClickListener, BGARef
                         if ("myorder".equals(item.id)) {
                             startActivity(new Intent(getActivity(), OrderListActivity.class));
                         }
+
+
                         if ("companyidentify".equals(item.id)) {//实名认证
+                            startActivity(new Intent(getActivity(), RealNameAuthenticationDistributorActivity.class));
                             String identify = ShareConfig.getConfigString(getActivity(), Constants.whetheridentifiedid, "");
-                            if ("identified".equals(identify)) {
-//                                startActivity(new Intent(getActivity(), RealNameAuthenticationPlumberActivity.class));
-                                startActivity(new Intent(getActivity(), RealNameAuthenticationDistributorActivity.class));
-                            } else {
-                                startActivity(new Intent(getActivity(), CompletionDataActivity.class));
-                            }
+//                            if ("identified".equals(identify)) {
+////                                startActivity(new Intent(getActivity(), RealNameAuthenticationPlumberActivity.class));
+//                                startActivity(new Intent(getActivity(), RealNameAuthenticationDistributorActivity.class));
+//                            } else {
+//                                startActivity(new Intent(getActivity(), CompletionDataActivity.class));
+//                            }
                         }
                         if ("marketer_shuidiangonghuiyi".equals(item.id) || "shuidiangonghuiyi".equals(item.id)) {
 

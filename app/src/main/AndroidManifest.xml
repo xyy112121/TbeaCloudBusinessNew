@@ -242,7 +242,8 @@
         <activity android:name=".activity.publicUse.activity.SuccessActivity" />
         <activity android:name=".activity.franchisee.tbws.activity.ServiceHaveAssignViewActivity" />
         <activity android:name=".activity.publicUse.activity.NetWebViewActivity" />
-        <activity android:name=".activity.my.main.activity.ServiceCenterActivity"/>
+        <activity android:name=".activity.my.main.activity.ServiceCenterActivity" />
+        <activity android:name=".activity.my.main.activity.RealNameAuthenticationFailActivity" />
     </application>
 
 </manifest>
