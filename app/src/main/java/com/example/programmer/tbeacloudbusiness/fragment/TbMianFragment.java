@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageTypeListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.CompanyIntroActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.NewsIntroActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationContactInfoActivity;
@@ -198,7 +198,7 @@ public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefr
                 startActivity(intent);
                 break;
             case R.id.tb_mian_top_message:
-                intent = new Intent(getActivity(), MessageListActivity.class);
+                intent = new Intent(getActivity(), MessageTypeListActivity.class);
                 startActivity(intent);
                 break;
 

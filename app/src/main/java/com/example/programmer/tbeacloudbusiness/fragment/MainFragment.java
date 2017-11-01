@@ -38,13 +38,12 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.Sca
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.StoreManageMainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.activity.MyTaskListActivity;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageTypeListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.LoginActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.HomeMainResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.user.model.LoginUserModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.MyGridView;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
@@ -168,7 +167,7 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(new Intent(getActivity(), MessageListActivity.class));
+                        startActivity(new Intent(getActivity(), MessageTypeListActivity.class));
                     }
                 });
                 view.addView(itemView);
@@ -260,7 +259,7 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
         mView.findViewById(R.id.mian_home_message).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MessageListActivity.class));
+                startActivity(new Intent(getActivity(), MessageTypeListActivity.class));
             }
         });
     }

@@ -12,6 +12,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.RealNameAuthenticationDistributorResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
+import com.example.programmer.tbeacloudbusiness.activity.user.RealNameAuthenticationActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
@@ -111,7 +112,7 @@ public class RealNameAuthenticationDistributorActivity extends BaseActivity {
             startActivity(new Intent(mContext, RealNameAuthenticationFailActivity.class));
 
         } else {//已通过和审核中的，就显示认证信息
-            startActivity(new Intent(mContext, CompletionDataActivity.class));
+            startActivity(new Intent(mContext, RealNameAuthenticationActivity.class));
         }
     }
 }

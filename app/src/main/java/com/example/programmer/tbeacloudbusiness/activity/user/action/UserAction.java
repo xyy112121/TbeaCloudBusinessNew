@@ -3,8 +3,8 @@ package com.example.programmer.tbeacloudbusiness.activity.user.action;
 import android.util.Log;
 
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.MessageListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.model.MessageTypeListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.TbMainResponseModel;
@@ -18,7 +18,6 @@ import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuth
 import com.example.programmer.tbeacloudbusiness.http.MD5Util;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
-import com.google.gson.reflect.TypeToken;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import org.apache.http.NameValuePair;
@@ -244,14 +243,28 @@ public class UserAction extends BaseAction {
     }
 
     /**
-     * 获取消息列表
+     * 获取消息类型列表
      */
-    public MessageListResponseModel getMessageList(int page, int pageSize) throws Exception {
-        MessageListResponseModel rspInfo;
+    public MessageTypeListResponseModel getMessageTypeList(int page, int pageSize) throws Exception {
+        MessageTypeListResponseModel rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pageSize)));
         String result = sendRequest("TBEAYUN011005001001", pairs);
+        rspInfo = gson.fromJson(result, MessageTypeListResponseModel.class);
+        return rspInfo;
+    }
+
+    /**
+     * 获取消息列表
+     */
+    public MessageListResponseModel getMessageList(String categoryid, int page, int pageSize) throws Exception {
+        MessageListResponseModel rspInfo;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("categoryid", categoryid));
+        pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
+        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pageSize)));
+        String result = sendRequest("TBEAYUN011005002001", pairs);
         rspInfo = gson.fromJson(result, MessageListResponseModel.class);
         return rspInfo;
     }
@@ -309,6 +322,14 @@ public class UserAction extends BaseAction {
         ResponseInfo rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN003004002000", pairs);
+        rspInfo = gson.fromJson(result, ResponseInfo.class);
+        return rspInfo;
+    }
+
+    public ResponseInfo getDentifiedFailInfo() throws Exception {
+        ResponseInfo rspInfo;
+        List<NameValuePair> pairs = new ArrayList<>();
+        String result = sendRequest("TBEAYUN003004003000", pairs);
         rspInfo = gson.fromJson(result, ResponseInfo.class);
         return rspInfo;
     }

@@ -102,7 +102,8 @@ public class BadgeView extends TextView {
         init(context, target, tabIndex);
     }
 
-    private void init(Context context, View target, int tabIndex) {
+    private void
+    init(Context context, View target, int tabIndex) {
 
         this.context = context;
         this.target = target;

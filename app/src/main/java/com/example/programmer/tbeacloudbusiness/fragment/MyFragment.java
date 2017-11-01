@@ -20,7 +20,7 @@ import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.acti
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.BypassAccountManageListActivity;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageTypeListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyFansActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.PersonInfoActivity;
@@ -28,14 +28,9 @@ import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.RealNa
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.ServiceCenterActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.SetActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.NetWebViewActivity;
-import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
-import com.example.programmer.tbeacloudbusiness.activity.user.RegisterActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;
-import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
-import com.example.programmer.tbeacloudbusiness.utils.Constants;
-import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.google.gson.Gson;
@@ -172,7 +167,7 @@ public class MyFragment extends Fragment implements View.OnClickListener, BGARef
                         }
 
                         if ("mymessage".equals(item.id)) {
-                            startActivity(new Intent(getActivity(), MessageListActivity.class));
+                            startActivity(new Intent(getActivity(), MessageTypeListActivity.class));
                         }
                         if ("mymoneyaccount".equals(item.id)) {//我的返利账户
                             startActivity(new Intent(getActivity(), MyRebateAccountlistActivity.class));
@@ -196,7 +191,7 @@ public class MyFragment extends Fragment implements View.OnClickListener, BGARef
 
                         if ("companyidentify".equals(item.id)) {//实名认证
                             startActivity(new Intent(getActivity(), RealNameAuthenticationDistributorActivity.class));
-                            String identify = ShareConfig.getConfigString(getActivity(), Constants.whetheridentifiedid, "");
+//                            String identify = ShareConfig.getConfigString(getActivity(), Constants.whetheridentifiedid, "");
 //                            if ("identified".equals(identify)) {
 ////                                startActivity(new Intent(getActivity(), RealNameAuthenticationPlumberActivity.class));
 //                                startActivity(new Intent(getActivity(), RealNameAuthenticationDistributorActivity.class));

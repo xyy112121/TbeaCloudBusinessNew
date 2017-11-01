@@ -21,7 +21,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageTypeListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.action.PublicAction;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.model.NetUrlResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
@@ -164,7 +164,7 @@ public class ProductPresentationInfoActivity extends BaseActivity implements Vie
                         MyApplication.instance.exit();
                         break;
                     case R.id.menu1://消息
-                        intent = new Intent(mContext, MessageListActivity.class);
+                        intent = new Intent(mContext, MessageTypeListActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.menu3://分享

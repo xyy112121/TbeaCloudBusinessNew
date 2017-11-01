@@ -23,8 +23,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
-import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.MeetingViewUpdateActivity;
-import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageTypeListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.action.TbeaAction;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityCategoryResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityModelResponseModel;
@@ -242,7 +241,7 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
                         MyApplication.instance.exit();
                         break;
                     case R.id.menu1://消息
-                         intent = new Intent(mContext, MessageListActivity.class);
+                         intent = new Intent(mContext, MessageTypeListActivity.class);
                         startActivity(intent);
                         break;
                 }

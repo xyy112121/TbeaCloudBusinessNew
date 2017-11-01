@@ -216,6 +216,7 @@
         <activity android:name=".activity.distributionSystem.activity.ActivityFxZxxdTjCxJG" />
         <activity android:name=".activity.distributionSystem.activity.ActivityFxZxxdTjTj" />
         <activity android:name=".activity.distributionSystem.activity.ActivityUserInfoChang6" />
+        <activity android:name=".activity.my.main.activity.MessageTypeListActivity" />
         <activity android:name=".activity.my.main.activity.MessageListActivity" />
         <activity android:name=".activity.my.main.activity.MessageViewActivity" />
 
