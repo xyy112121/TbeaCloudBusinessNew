@@ -147,7 +147,7 @@ public class MessageListActivity extends BaseActivity implements BGARefreshLayou
             final MessageListResponseModel.DataBean.MessagelistBean obj = mList.get(i);
             ((TextView) view.findViewById(R.id.message_item_title)).setText(obj.messagetime);
             TextView timeView = ((TextView) view.findViewById(R.id.message_item_time));
-            ((TextView) view.findViewById(R.id.message_item_content)).setText(obj.content);
+            ((TextView) view.findViewById(R.id.message_item_content)).setText(obj.title);
 
             if (!"0".equals(obj.content) && !"".equals(obj.content)) {
                 BadgeView badgeView = new BadgeView(mContext, timeView);
