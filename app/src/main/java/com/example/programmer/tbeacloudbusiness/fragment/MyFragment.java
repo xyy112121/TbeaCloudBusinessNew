@@ -68,7 +68,11 @@ public class MyFragment extends Fragment implements View.OnClickListener, BGARef
     private void initView() {
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(getActivity(), false));
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
         mRefreshLayout.beginRefreshing();
     }
 

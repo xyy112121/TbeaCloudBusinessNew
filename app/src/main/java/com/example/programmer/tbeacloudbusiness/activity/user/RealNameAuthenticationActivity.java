@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -104,13 +105,13 @@ public class RealNameAuthenticationActivity extends BaseActivity {
     }
 
     private void initView() {
-        String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
+//        String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
         mRequest.province = MyApplication.instance.getProvince();
         mRequest.city = MyApplication.instance.getCity();
         mRequest.zone = MyApplication.instance.getDistrict();
-        if (!"notidentify".equals(identify) && identify != null && !"".equals(identify)) {//未认证
-            getDate();
-        }
+//        if (!"notidentify".equals(identify) && identify != null && !"".equals(identify)) {//未认证
+        getDate();
+//        }
     }
 
     public void getDate() {
@@ -134,11 +135,19 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                                 mAddrView.setText(obj.companyaddress);
                                 mAddr2View.setText(obj.address);
                                 mBusinessScopeView.setText(obj.businessscope);
-                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.companylisencepicture, mCompanyLisencePictureView);
+                                if(!TextUtils.isEmpty(obj.companylisencepicture)){
+                                    ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.companylisencepicture, mCompanyLisencePictureView);
+                                }
                                 mMasterPersonView.setText(obj.masterperson);
                                 mMasterPersonIDView.setText(obj.masterpersonid);
-                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.masterpersonidcard1, mMasterPersonIdCard1View);
-                                ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.masterpersonidcard2, mMasterPersonIdCard2View);
+                                if(!TextUtils.isEmpty(obj.masterpersonidcard1)){
+                                    ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.masterpersonidcard1, mMasterPersonIdCard1View);
+                                }
+
+                                if(!TextUtils.isEmpty(obj.masterpersonidcard2)){
+                                    ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.masterpersonidcard2, mMasterPersonIdCard2View);
+                                }
+
                                 if (obj.companypicture.length() > 0) {
                                     String[] pictures = obj.companypicture.split(",");
                                     mCompanyPhotoParentView.removeAllViews();
@@ -149,8 +158,11 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                                         mCompanyPhotoParentView.addView(v);
                                     }
                                 }
+                                String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
+                                if (!"notidentify".equals(identify) && identify != null && !"".equals(identify)) {//未认证
+                                    setView();
+                                }
 
-                                setView();
                             } else {
                                 ToastUtil.showMessage(model.getMsg());
                             }
@@ -219,7 +231,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                 break;
             case R.id.real_name_companyPhoto_finish:
                 String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-                if ("notidentify".equals(identify) || identify == null || "".equals(identify) ) {//未认证
+                if ("notidentify".equals(identify) || identify == null || "".equals(identify)) {//未认证
                     mRequest.companyname = mCompanyNameView.getText() + "";
                     mRequest.companylisencecode = mCompanyLisenceCodeView.getText() + "";
                     mRequest.address = mAddr2View.getText() + "";

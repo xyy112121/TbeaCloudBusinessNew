@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.MessageListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.NetWebViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.component.BadgeView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
@@ -68,7 +69,11 @@ public class MessageListActivity extends BaseActivity implements BGARefreshLayou
                         MessageListResponseModel re = (MessageListResponseModel) msg.obj;
                         if (re.isSuccess()) {
                             if (re.data != null) {
-                                mAdapter.addAll(re.data.messagelist);
+                                if (re.data.pageinfo != null) {
+                                    ((TextView) findViewById(R.id.top_center)).setText(re.data.pageinfo.title);
+                                }
+                                if (re.data.messagelist != null)
+                                    mAdapter.addAll(re.data.messagelist);
                             } else {
                                 mListView.setSelection(mAdapter.getCount());
                                 if (mPage > 1) {//防止分页的时候没有加载数据，但是页数已经增加，导致下一次查询不正确
@@ -149,11 +154,10 @@ public class MessageListActivity extends BaseActivity implements BGARefreshLayou
             TextView timeView = ((TextView) view.findViewById(R.id.message_item_time));
             ((TextView) view.findViewById(R.id.message_item_content)).setText(obj.title);
 
-            if (!"0".equals(obj.content) && !"".equals(obj.content)) {
+            if ("1".equals(obj.isnew)) {
                 BadgeView badgeView = new BadgeView(mContext, timeView);
-                badgeView.setText(obj.content);
-                badgeView.setWidth(10);
-                badgeView.setHeight(10);
+                badgeView.setWidth(20);
+                badgeView.setHeight(20);
                 badgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
                 badgeView.setBadgeMargin(0, 0); // 水平和竖直方向的间距
                 badgeView.show();
@@ -162,8 +166,10 @@ public class MessageListActivity extends BaseActivity implements BGARefreshLayou
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, MessageViewActivity.class);
-                    intent.putExtra("id", obj.id);
+                    Intent intent = new Intent(mContext, NetWebViewActivity.class);
+                    intent.putExtra("title", obj.title);
+                    String par = "messagedetail?id=" + obj.id;
+                    intent.putExtra("parameter", par);//URL后缀
                     startActivity(intent);
                 }
             });

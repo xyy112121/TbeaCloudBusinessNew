@@ -11,15 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.MessageCategory;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.model.ServiceCenterResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.NetWebViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.http.RspInfo;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
@@ -36,6 +39,7 @@ import java.util.List;
 public class ServiceCenterActivity extends BaseActivity {
     private ListView mListView;
     private MyAdapter mAdapter;
+    private String mPhone;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +54,7 @@ public class ServiceCenterActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:" + "0838-28022916"));
+                intent.setData(Uri.parse("tel:" + mPhone));
                 //开启系统拨号器
                 startActivity(intent);
             }
@@ -71,15 +75,16 @@ public class ServiceCenterActivity extends BaseActivity {
                 dialog.dismiss();
                 switch (msg.what) {
                     case ThreadState.SUCCESS:
-                        ResponseInfo re = (ResponseInfo) msg.obj;
+                        ServiceCenterResponseModel re = (ServiceCenterResponseModel) msg.obj;
                         if (re.isSuccess()) {
-                            Gson gson = new GsonBuilder().serializeNulls().create();
-                            String json = gson.toJson(re.data);
-                            MessageCategory model = gson.fromJson(json, MessageCategory.class);
-//                            List<MessageCategory> list = (List<MessageCategory>) re.getDateObj("questionlist");
-//                            if (list != null) {
-//                                mAdapter.addAll(list);
-//                            }
+                            if (re.data.questionlist != null)
+                                mAdapter.addAll(re.data.questionlist);
+
+                            if (re.data.hotlineinfo != null) {
+                                ((Button) findViewById(R.id.service_center_call_phone)).setText(re.data.hotlineinfo.mobilenumber);
+                                mPhone = re.data.hotlineinfo.mobilenumber;
+                            }
+
 
                         } else {
                             ToastUtil.showMessage(re.getMsg());
@@ -98,7 +103,7 @@ public class ServiceCenterActivity extends BaseActivity {
             public void run() {
                 try {
                     UserAction userAction = new UserAction();
-                    ResponseInfo re = userAction.getServiceCenterInfo();
+                    ServiceCenterResponseModel re = userAction.getServiceCenterInfo();
                     handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);

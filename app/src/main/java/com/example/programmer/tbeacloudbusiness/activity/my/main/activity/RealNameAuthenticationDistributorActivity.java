@@ -39,6 +39,12 @@ public class RealNameAuthenticationDistributorActivity extends BaseActivity {
         setContentView(R.layout.activity_realname_authentication_distributor);
         ButterKnife.bind(this);
         initTopbar("实名认证");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getDate();
     }
 

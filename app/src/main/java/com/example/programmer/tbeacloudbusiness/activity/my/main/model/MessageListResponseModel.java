@@ -11,17 +11,22 @@ import java.util.List;
 
 public class MessageListResponseModel extends BaseResponseModel {
 
-
     public DataBean data;
 
-    public static class DataBean {
+
+    public class DataBean {
+        public PageinfoBean pageinfo;
         public List<MessagelistBean> messagelist;
 
-        public static class MessagelistBean {
+        public class PageinfoBean {
+            public String title;
+        }
+
+        public class MessagelistBean {
             public String id;
             public String messagetime;
             public String title;
-            public String content;
+            public String isnew;
         }
     }
 }

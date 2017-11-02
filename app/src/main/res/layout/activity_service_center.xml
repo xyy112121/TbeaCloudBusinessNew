@@ -21,7 +21,6 @@
             android:background="@drawable/service_center_phone_bg"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="0838-28022916"
             android:textColor="@color/white"
             android:textSize="14sp"
 

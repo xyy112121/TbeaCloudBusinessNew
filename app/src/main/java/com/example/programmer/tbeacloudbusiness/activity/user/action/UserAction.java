@@ -3,10 +3,12 @@ package com.example.programmer.tbeacloudbusiness.activity.user.action;
 import android.util.Log;
 
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.FranchiserSelectListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.model.MessageCategory;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.MessageListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.MessageTypeListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.my.main.model.ServiceCenterResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.TbMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataResponseModel;
@@ -16,8 +18,10 @@ import com.example.programmer.tbeacloudbusiness.activity.user.model.RegisterResp
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationResponseModel;
 import com.example.programmer.tbeacloudbusiness.http.MD5Util;
+import com.example.programmer.tbeacloudbusiness.http.RspInfo;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
+import com.google.gson.reflect.TypeToken;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import org.apache.http.NameValuePair;
@@ -366,11 +370,11 @@ public class UserAction extends BaseAction {
     /**
      * 获取客服中心
      */
-    public ResponseInfo getServiceCenterInfo() throws Exception {
-        ResponseInfo rspInfo;
+    public ServiceCenterResponseModel getServiceCenterInfo() throws Exception {
+        ServiceCenterResponseModel rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
-        String result = sendRequest("TBEAENG005001014000", pairs);
-        rspInfo = gson.fromJson(result, ResponseInfo.class);
+        String result = sendRequest("TBEAYUN015003001000", pairs);
+        rspInfo = gson.fromJson(result,  ServiceCenterResponseModel.class);
         return rspInfo;
     }
 }
