@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info;
 
+import com.example.programmer.tbeacloudbusiness.activity.user.model.PicturelistBean;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.google.gson.annotations.SerializedName;
 
@@ -17,13 +18,7 @@ public class MyPictureListResponseModel extends BaseResponseModel {
 
     public  class DataBean {
         public List<PicturelistBean> picturelist;
-
-        public  class PicturelistBean implements Serializable {
-            public String pictureid;
-            public String thumbpicture;
-            public String thumbpictureurl;
-            public String largepicture;
-            public String largepictureurl;
-        }
     }
+
+
 }

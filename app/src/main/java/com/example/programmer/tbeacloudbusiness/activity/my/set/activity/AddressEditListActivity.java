@@ -137,7 +137,7 @@ public class AddressEditListActivity extends BaseActivity implements View.OnClic
             }
             final AddressModel obj = mList.get(i);
             holder.mNameView.setText(obj.contactperson);
-            holder.mAddressView.setText(obj.address);
+            holder.mAddressView.setText(obj.province + obj.city + obj.zone + obj.address);
             holder.mMobileView.setText(obj.contactmobile);
             if ("1".equals(obj.isdefault)) {
                 holder.mIsdefaultView.setVisibility(View.VISIBLE);

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by programmer on 2017/8/17.
+ * 我的
  */
 
 public class MyAction extends BaseAction {
@@ -41,9 +41,10 @@ public class MyAction extends BaseAction {
     /**
      * 用户中心-­‐我的-­‐子帐号-­‐功能模块列表
      */
-    public BypassAccountFunctionListResponseModel getFunctionList() throws Exception {
+    public BypassAccountFunctionListResponseModel getFunctionList(String id) throws Exception {
         BypassAccountFunctionListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("personid", id));
         String result = sendRequest("TBEAYUN011004003001", pairs);
         model = gson.fromJson(result, BypassAccountFunctionListResponseModel.class);
         return model;

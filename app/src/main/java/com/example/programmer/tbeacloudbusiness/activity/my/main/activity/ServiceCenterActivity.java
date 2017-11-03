@@ -114,7 +114,7 @@ public class ServiceCenterActivity extends BaseActivity {
 
     private class MyAdapter extends BaseAdapter {
         private Context mContext;
-        private List<MessageCategory> mList = new ArrayList<>();
+        private List<ServiceCenterResponseModel.DataBean.QuestionlistBean> mList = new ArrayList<>();
 
         public MyAdapter(Context context) {
             this.mContext = context;
@@ -139,14 +139,14 @@ public class ServiceCenterActivity extends BaseActivity {
         public View getView(int i, View v, ViewGroup viewGroup) {
             final LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.activity_service_center_list_item, null);
-            final MessageCategory obj = mList.get(i);
-            ((TextView) view.findViewById(R.id.text)).setText(obj.getQuestion());
+            final ServiceCenterResponseModel.DataBean.QuestionlistBean obj = mList.get(i);
+            ((TextView) view.findViewById(R.id.text)).setText(obj.question);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, NetWebViewActivity.class);
-                    intent.putExtra("title", "客服中心");
-                    String par = "userhelpdetail?questionid=" + obj.getId();
+                    intent.putExtra("title", obj.question);
+                    String par = "userhelpdetail?questionid=" + obj.id;
                     intent.putExtra("parameter", par);//URL后缀
                     startActivity(intent);
 
@@ -155,7 +155,7 @@ public class ServiceCenterActivity extends BaseActivity {
             return view;
         }
 
-        public void addAll(List<MessageCategory> list) {
+        public void addAll(List<ServiceCenterResponseModel.DataBean.QuestionlistBean> list) {
             mList.addAll(list);
             notifyDataSetChanged();
         }

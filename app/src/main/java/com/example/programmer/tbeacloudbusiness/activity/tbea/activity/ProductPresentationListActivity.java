@@ -241,7 +241,7 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
                         MyApplication.instance.exit();
                         break;
                     case R.id.menu1://消息
-                         intent = new Intent(mContext, MessageTypeListActivity.class);
+                        intent = new Intent(mContext, MessageTypeListActivity.class);
                         startActivity(intent);
                         break;
                 }
@@ -257,7 +257,7 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
     public void showOptionPicker(final int id, String text, List<Condition> list) {
         CustomOptionObjPicker optionPicker = new CustomOptionObjPicker(mContext, text, list);
         optionPicker.setTextSize(14);
-        if (list.size() > 2) {
+        if (list.size() > 1) {
             optionPicker.setSelectedIndex(1);
         }
         optionPicker.setOnOptionPickListener(new CustomOptionObjPicker.OnOptionPickListener() {
@@ -306,7 +306,7 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
 
             ImageView imageView = (ImageView) view.findViewById(R.id.product_presentation_list_item_thumbpicture);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, imageView);
-            if(obj.specification != null){
+            if (obj.specification != null) {
                 ((TextView) view.findViewById(R.id.product_presentation_list_item_specification)).setText("规格型号：" + obj.specification);
             }
 

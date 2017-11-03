@@ -184,6 +184,10 @@ public class SetActivity extends BaseActivity {
                                         }
 
                                     }
+
+//                                    else {
+//                                        ToastUtil.showMessage("检测更新失败，请稍后重试！");
+//                                    }
                                 } else {
                                     ToastUtil.showMessage(re.getMsg());
                                 }

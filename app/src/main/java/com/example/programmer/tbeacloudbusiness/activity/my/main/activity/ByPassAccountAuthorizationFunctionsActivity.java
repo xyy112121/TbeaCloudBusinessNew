@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -32,6 +33,7 @@ import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -51,16 +53,29 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
     ListView mListView;
     MyAdapter mAdapter;
     List<AuthorizationModel> mSelectList = new ArrayList<>();
+    List<AuthorizationModel> mSelectList2 = new ArrayList<>();
+    private String mId;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bypass_account_authorization_functions);
         ButterKnife.bind(this);
+        mId = getIntent().getStringExtra("id");
         initTopbar("授权功能");
         getListDate();
         mAdapter = new MyAdapter(mContext, R.layout.activity_bypass_account_authorization_functions_item);
         mListView.setAdapter(mAdapter);
+        String authorizationList = getIntent().getStringExtra("authorizationList");
+        if (!TextUtils.isEmpty(authorizationList)) {
+            Gson gson = new GsonBuilder().serializeNulls().create();
+            List<AuthorizationModel> list = gson.fromJson(authorizationList, new TypeToken<List<AuthorizationModel>>() {
+            }.getType());
+            if (list != null && list.size() > 0) {
+                mSelectList2.addAll(list);
+            }
+        }
     }
 
 
@@ -100,7 +115,7 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
             public void run() {
                 try {
                     MyAction userAction = new MyAction();
-                    BypassAccountFunctionListResponseModel re = userAction.getFunctionList();
+                    BypassAccountFunctionListResponseModel re = userAction.getFunctionList(mId);
                     handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);
@@ -146,6 +161,9 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
             final BypassAccountFunctionListResponseModel.DataBean.ModulelistBean obj = getItem(i);
             holder.mNameView.setText(obj.modulename);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.moduleicon, holder.mIconView);
+            AuthorizationModel item = new AuthorizationModel();
+            mSelectList.add(item);
+
             if ("yes".equals(obj.canview)) {
                 holder.mCanviewView.setChecked(true);
             } else {
@@ -158,8 +176,27 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
                 holder.mCanoperationView.setChecked(false);
             }
 
-            AuthorizationModel item = new AuthorizationModel();
-            mSelectList.add(item);
+            if(mSelectList2.size() >0){
+                for (AuthorizationModel model : mSelectList2) {
+                    if (model.moduleid.equals(obj.moduleid)) {
+                        if ("yes".equals(model.canview)) {
+                            holder.mCanviewView.setChecked(true);
+                            mSelectList.get(i).moduleid = obj.moduleid;
+                            mSelectList.get(i).canview = "yes";
+                        }
+
+                        if ("yes".equals(model.canoperation)) {
+                            holder.mCanoperationView.setChecked(true);
+                            mSelectList.get(i).moduleid = obj.moduleid;
+                            mSelectList.get(i).canoperation = "yes";
+                        }
+                        break;
+                    }
+                }
+            }
+
+
+
 
             holder.mCanoperationView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -169,6 +206,7 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
                         mSelectList.get(i).canview = "yes";
                     } else {
                         mSelectList.get(i).canview = "no";
+
                     }
                 }
             });

@@ -59,10 +59,8 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
             mObj = (AddressModel) getIntent().getSerializableExtra("model");
             initTopbar("收货地址管理", "删除", this);
             initData();
-            mSaveView.setVisibility(View.VISIBLE);
         } else {
-            initTopbar("收货地址管理", "保存", this);
-            mSaveView.setVisibility(View.GONE);
+            initTopbar("收货地址管理");
         }
     }
 
@@ -82,11 +80,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if ("edit".equals(getIntent().getStringExtra("flag"))) {
-            delete();
-        } else {
-            save();
-        }
+        delete();
     }
 
     /**

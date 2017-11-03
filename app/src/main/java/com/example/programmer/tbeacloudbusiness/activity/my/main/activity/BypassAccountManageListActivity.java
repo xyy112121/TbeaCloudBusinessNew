@@ -147,7 +147,7 @@ public class BypassAccountManageListActivity extends BaseActivity implements Vie
             }
 
 //            view.findViewById(R.id.item_type).setVisibility(View.GONE);
-            BypassAccountListResponseModel.DataBean.SubaccountlistBean obj = getItem(position);
+            final BypassAccountListResponseModel.DataBean.SubaccountlistBean obj = getItem(position);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, holder.mHeadView);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, holder.mPersontypeiconView);
             holder.mNameView.setText(obj.name);
@@ -156,7 +156,9 @@ public class BypassAccountManageListActivity extends BaseActivity implements Vie
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivityForResult(new Intent(mContext, ByPassAccountAuthorizationFunctionsActivity.class), 1000);
+                    Intent intent = new Intent(mContext, ByPassAccountAuthorizationFunctionsActivity.class);
+                    intent.putExtra("id",obj.userid);
+                    startActivityForResult(intent, 1000);
                 }
             });
             return convertView;

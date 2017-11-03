@@ -97,6 +97,19 @@
             </LinearLayout>
 
             <View style="@style/horizontal_view" />
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:text="确认密码" />
+
+                <EditText
+                    android:id="@+id/my_bypass_account_edit_pwd2"
+                    style="@style/my_right_text_style1"
+                    android:inputType="textPassword"/>
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
 
             <LinearLayout style="@style/my_text_layout">
 

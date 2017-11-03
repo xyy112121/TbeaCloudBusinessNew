@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.MyPictureListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.PicturelistBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class PictureShowActivity extends BaseActivity implements View.OnClickLis
     TextView mTopCenterView;
     @BindView(R.id.viewpager1)
     ViewPager viewPager;
-    private List<MyPictureListResponseModel.DataBean.PicturelistBean> images;
+    private List<PicturelistBean> images;
 
     private int currentPage = 0;//当前展示的页码
 
@@ -45,7 +46,7 @@ public class PictureShowActivity extends BaseActivity implements View.OnClickLis
         ButterKnife.bind(this);
         currentPage = getIntent().getIntExtra("index", 0);
         //初始化图片资源
-        images = (List<MyPictureListResponseModel.DataBean.PicturelistBean>) getIntent().getSerializableExtra("images");
+        images = (List<PicturelistBean>) getIntent().getSerializableExtra("images");
         initTopbar(currentPage + 1 + "/" + images.size(), "全部图片", this);
         //-----初始化PagerAdapter------
         mAdapter = new MyAdapter();

@@ -14,13 +14,17 @@ public class ServiceCenterResponseModel extends BaseResponseModel {
 
     public DataBean data;
 
-
     public class DataBean {
         public HotlineinfoBean hotlineinfo;
-        public List<MessageCategory> questionlist;
+        public List<QuestionlistBean> questionlist;
 
         public class HotlineinfoBean {
             public String mobilenumber;
+        }
+
+        public class QuestionlistBean {
+            public String id;
+            public String question;
         }
     }
 }

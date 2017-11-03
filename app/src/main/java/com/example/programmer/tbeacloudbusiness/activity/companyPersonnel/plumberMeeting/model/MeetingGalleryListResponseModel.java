@@ -1,6 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model;
 
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.MyPictureListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.PicturelistBean;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.google.gson.annotations.SerializedName;
 
@@ -15,7 +16,7 @@ public class MeetingGalleryListResponseModel extends BaseResponseModel {
 
     public  class DataBean {
         public MeetinginfoBean meetinginfo;
-        public List<MyPictureListResponseModel.DataBean.PicturelistBean> picturelist;
+        public List<PicturelistBean> picturelist;
 
         public  class MeetinginfoBean {
             public String meetingname;

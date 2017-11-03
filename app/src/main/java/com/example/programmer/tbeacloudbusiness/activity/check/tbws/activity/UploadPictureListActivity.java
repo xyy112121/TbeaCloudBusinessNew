@@ -20,6 +20,7 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.check.tbws.action.SubscribeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.MyPictureListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.PictureShowActivity;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.PicturelistBean;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
@@ -44,7 +45,7 @@ public class UploadPictureListActivity extends BaseActivity implements View.OnCl
     ImageView mGalleryImageView;
     private String mFlag;
 
-    public List<MyPictureListResponseModel.DataBean.PicturelistBean> picturelist;
+    public List<PicturelistBean> picturelist;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -139,7 +140,7 @@ public class UploadPictureListActivity extends BaseActivity implements View.OnCl
     }
 
 
-    public class GridAdapter extends ArrayAdapter<MyPictureListResponseModel.DataBean.PicturelistBean> {
+    public class GridAdapter extends ArrayAdapter<PicturelistBean> {
         int resourceId;
 
 
@@ -160,7 +161,7 @@ public class UploadPictureListActivity extends BaseActivity implements View.OnCl
             }
             int displayWidth = UtilAssistants.getDisplayWidth(mContext);
             holder.mImageView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (displayWidth / 4)));
-            final MyPictureListResponseModel.DataBean.PicturelistBean obj = getItem(postion);
+            final PicturelistBean obj = getItem(postion);
             ImageLoader.getInstance().displayImage(obj.thumbpicture, holder.mImageView);
             holder.mDeleteView.setVisibility(View.GONE);
 

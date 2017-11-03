@@ -21,8 +21,11 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.MyPictureListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.PictureShowActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.PicturelistBean;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
@@ -42,6 +45,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,6 +98,9 @@ public class RealNameAuthenticationActivity extends BaseActivity {
     List<LocalMedia> mSelectCompanyPhotoList = new ArrayList<>();
     List<LocalMedia> mSelectList = new ArrayList<>();
     RelaNameAuthenticationRequestModel mRequest = new RelaNameAuthenticationRequestModel();
+    String mIdentify;
+
+    RelaNameAuthenticationResponseModel.DataBean.CompanyidentifyinfoBean mObj;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -105,7 +112,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
     }
 
     private void initView() {
-//        String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
+        mIdentify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
         mRequest.province = MyApplication.instance.getProvince();
         mRequest.city = MyApplication.instance.getCity();
         mRequest.zone = MyApplication.instance.getDistrict();
@@ -129,22 +136,23 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                             RelaNameAuthenticationResponseModel model = (RelaNameAuthenticationResponseModel) msg.obj;
                             if (model.isSuccess() && model.data != null) {
                                 RelaNameAuthenticationResponseModel.DataBean.CompanyidentifyinfoBean obj = model.data.companyidentifyinfo;
+                                mObj = obj;
                                 ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, obj.whetheridentifiedid);
                                 mCompanyNameView.setText(obj.companyname);
                                 mCompanyLisenceCodeView.setText(obj.companylisencecode);
                                 mAddrView.setText(obj.companyaddress);
                                 mAddr2View.setText(obj.address);
                                 mBusinessScopeView.setText(obj.businessscope);
-                                if(!TextUtils.isEmpty(obj.companylisencepicture)){
+                                if (!TextUtils.isEmpty(obj.companylisencepicture)) {
                                     ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.companylisencepicture, mCompanyLisencePictureView);
                                 }
                                 mMasterPersonView.setText(obj.masterperson);
                                 mMasterPersonIDView.setText(obj.masterpersonid);
-                                if(!TextUtils.isEmpty(obj.masterpersonidcard1)){
+                                if (!TextUtils.isEmpty(obj.masterpersonidcard1)) {
                                     ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.masterpersonidcard1, mMasterPersonIdCard1View);
                                 }
 
-                                if(!TextUtils.isEmpty(obj.masterpersonidcard2)){
+                                if (!TextUtils.isEmpty(obj.masterpersonidcard2)) {
                                     ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.masterpersonidcard2, mMasterPersonIdCard2View);
                                 }
 
@@ -158,8 +166,8 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                                         mCompanyPhotoParentView.addView(v);
                                     }
                                 }
-                                String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-                                if (!"notidentify".equals(identify) && identify != null && !"".equals(identify)) {//未认证
+//                                String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
+                                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//未认证
                                     setView();
                                 }
 
@@ -197,12 +205,12 @@ public class RealNameAuthenticationActivity extends BaseActivity {
         mAddrView.setClickable(false);
         mAddr2View.setFocusable(false);
         mBusinessScopeView.setFocusable(false);
-        mCompanyLisencePictureView.setClickable(false);
+//        mCompanyLisencePictureView.setClickable(false);
         mMasterPersonView.setFocusable(false);
         mMasterPersonIDView.setFocusable(false);
-        mMasterPersonIdCard1View.setClickable(false);
-        mMasterPersonIdCard2View.setClickable(false);
-        mCompanyPhotoParentView.setClickable(false);
+//        mMasterPersonIdCard1View.setClickable(false);
+//        mMasterPersonIdCard2View.setClickable(false);
+//        mCompanyPhotoParentView.setClickable(false);
         mFinishView.setText("查看认证状态");
     }
 
@@ -214,20 +222,56 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                 showAddrPicker();
                 break;
             case R.id.real_name_companyLisencePicture:
-                mFlag = "LisencePicture";
-                openImage();
+                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//未认证
+                    mFlag = "LisencePicture";
+                } else {
+                    List<PicturelistBean> picturelist = new ArrayList<>();
+                    PicturelistBean bean = new PicturelistBean();
+                    bean.largepicture = mObj.companylisencepicture;
+                    picturelist.add(bean);
+                    openImage(picturelist,0);
+                }
+
                 break;
             case R.id.real_name_masterPersonIdCard1:
-                mFlag = "IdCard1";
-                openImage();
+                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//未认证
+                    mFlag = "IdCard1";
+                } else {
+                    List<PicturelistBean> picturelist = new ArrayList<>();
+                    PicturelistBean bean = new PicturelistBean();
+                    bean.largepicture = mObj.masterpersonidcard1;
+                    picturelist.add(bean);
+                    openImage(picturelist,0);
+                }
+
                 break;
             case R.id.real_name_masterPersonIdCard2:
-                mFlag = "IdCard2";
-                openImage();
+                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//未认证
+                    mFlag = "IdCard2";
+                }else {
+                    List<PicturelistBean> picturelist = new ArrayList<>();
+                    PicturelistBean bean = new PicturelistBean();
+                    bean.largepicture = mObj.masterpersonidcard2;
+                    picturelist.add(bean);
+                    openImage(picturelist,0);
+                }
+
                 break;
             case R.id.real_name_companyPhoto_layout:
-                mFlag = "CompanyPhoto";
-                openImage();
+                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//未认证
+                    mFlag = "CompanyPhoto";
+                } else {
+                    String[] pictures = mObj.companypicture.split(",");
+                    List<PicturelistBean> picturelist = new ArrayList<>();
+                    for (int i = 0;i<pictures.length;i++){
+                        PicturelistBean bean = new PicturelistBean();
+                        bean.largepicture = pictures[i];
+                        picturelist.add(bean);
+
+                    }
+                    openImage(picturelist,0);
+                }
+
                 break;
             case R.id.real_name_companyPhoto_finish:
                 String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
@@ -249,6 +293,17 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                     getAttestationstate();
                 }
                 break;
+        }
+    }
+
+    private void openImage(List<PicturelistBean> picturelist,int index) {
+        if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//未认证
+            openImage();
+        } else {
+            Intent intent = new Intent(mContext, PictureShowActivity.class);
+            intent.putExtra("images", (Serializable) picturelist);
+            intent.putExtra("index", index);
+            startActivity(intent);
         }
     }
 

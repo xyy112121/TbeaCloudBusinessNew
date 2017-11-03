@@ -58,6 +58,8 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
     EditText mNameView;
     @BindView(R.id.my_bypass_account_edit_pwd)
     EditText mPwdView;
+    @BindView(R.id.my_bypass_account_edit_pwd2)
+    EditText mPwdView2;
     @BindView(R.id.my_bypass_account_edit_JobTitle)
     EditText mJobTitleView;
     @BindView(R.id.my_bypass_account_edit_head)
@@ -74,6 +76,7 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
     List<LocalMedia> mSelectList = new ArrayList<>();
     BypassAccountEditRequestModel mRequest = new BypassAccountEditRequestModel();
     CustomDialog mDialog;
+    private String mId;
 
 
     @Override
@@ -81,6 +84,7 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bypass_account_manage_edit);
         ButterKnife.bind(this);
+        mId = getIntent().getStringExtra(mId);
         if ("edit".equals(getIntent().getStringExtra("flag"))) {
             initTopbar("子账号管理", "删除", this);
         } else {
@@ -156,7 +160,9 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
                 uploadImage();
                 break;
             case R.id.authorization_functions:
-                startActivityForResult(new Intent(mContext, ByPassAccountAuthorizationFunctionsActivity.class), 1000);
+                Intent intent = new Intent(mContext, ByPassAccountAuthorizationFunctionsActivity.class);
+                intent.putExtra("authorizationList", mRequest.authorizationlist);
+                startActivityForResult(intent, 1000);
                 break;
         }
     }
@@ -165,6 +171,7 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
         mRequest.realname = mNameView.getText() + "";
         mRequest.mobilenumber = mPhoneView.getText() + "";
         mRequest.password = mPwdView.getText() + "";
+        String pwd = mPwdView2.getText() + "";
         mRequest.jobtitle = mJobTitleView.getText() + "";
         if (isMobileNO(mRequest.mobilenumber) == false) {
             ToastUtil.showMessage("请输入正确的手机号码");
@@ -190,8 +197,14 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
             return;
         }
 
+
         if (mRequest.password.length() < 6 || mRequest.password.length() > 32) {
             ToastUtil.showMessage("密码长度6到32位！");
+            return;
+        }
+
+        if (!mRequest.password.equals(pwd)) {
+            ToastUtil.showMessage("两次密码输入不一致！");
             return;
         }
 
@@ -354,7 +367,7 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
             Calendar calendar = Calendar.getInstance();
             CustomDatePicker picker = new CustomDatePicker((Activity) mContext);
             Calendar c = Calendar.getInstance();//首先要获取日历对象
-            picker.setRange(1990, c.get(Calendar.YEAR));
+            picker.setRange(1949, c.get(Calendar.YEAR));
             picker.setTextSize(14);
             picker.setSelectedItem(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
             picker.setOnDatePickListener(new CustomDatePicker.OnYearMonthDayPickListener() {
