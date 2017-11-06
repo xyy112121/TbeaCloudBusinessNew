@@ -1,6 +1,5 @@
 package com.example.programmer.tbeacloudbusiness.activity;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
@@ -23,9 +22,7 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.programmer.tbeacloudbusiness.utils.permissonutil.PermissionActivity;
-import com.example.programmer.tbeacloudbusiness.utils.permissonutil.PermissionUtil;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
@@ -44,7 +41,7 @@ import java.util.List;
 
 public class MyApplication extends Application implements BDLocationListener {
 
-    private static final String SERVICE_PATH = "http://121.42.193.154:6696/index.php/tbyuninterface/Index/index";
+    private static final String SERVICE_PATH = "www.u-shang.net/tbyun/index.php/tbyuninterface/index/";
     private static final String IMG_SERVICE_PATH = "";
 
     private static final String SERVICE_PATH1 = "http://www.u-shang.net/interface/index.php";
