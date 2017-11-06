@@ -33,6 +33,8 @@ import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.zhouwei.library.CustomPopWindow;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -108,6 +110,8 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
 
     private String mId;
 
+    public List<PlumberMeetingViewResponseModel.OrganizeCompany> mOrganizeCompanyList;//举办单位
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,6 +171,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                 }
                                 //举办单位
                                 if (model.data.organizecompanylist != null) {
+                                    mOrganizeCompanyList = model.data.organizecompanylist;
                                     String companyIds = "";
                                     for (PlumberMeetingViewResponseModel.OrganizeCompany item : model.data.organizecompanylist) {
                                         View pernsonLayout = getLayoutInflater().inflate(R.layout.activity_person_layout2, null);
@@ -239,13 +244,13 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    @OnClick({R.id.cp_meeting_prepare_gallery,R.id.cp_meeting_prepare_summary, R.id.cp_meeting_prepare_sign, R.id.cp_meeting_prepare_hold_time, R.id.cp_meeting_prepare_hold_monad, R.id.cp_meeting_prepare_participant, R.id.cp_meeting_prepare_plan, R.id.cp_meeting_prepare_finish, R.id.cp_meeting_prepare_hold_addr})
+    @OnClick({R.id.cp_meeting_prepare_gallery, R.id.cp_meeting_prepare_summary, R.id.cp_meeting_prepare_sign, R.id.cp_meeting_prepare_hold_time, R.id.cp_meeting_prepare_hold_monad, R.id.cp_meeting_prepare_participant, R.id.cp_meeting_prepare_plan, R.id.cp_meeting_prepare_finish, R.id.cp_meeting_prepare_hold_addr})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cp_meeting_prepare_summary:
                 Intent intent = new Intent(mContext, MeetingPrepareSummaryActivity.class);
 //                if (!"开会中".equals(mState)) {
-                    intent.putExtra("flag", "view");
+                intent.putExtra("flag", "view");
 //                }
                 intent.putExtra("text", mMeetingPrepareSummary.getValueText());
                 intent.putExtra("meetingid", mId);
@@ -254,7 +259,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
             case R.id.cp_meeting_prepare_gallery:
                 intent = new Intent(mContext, MeetingGalleryListActivity.class);
 //                if (!"开会中".equals(mState)) {
-                    intent.putExtra("flag", "view");
+                intent.putExtra("flag", "view");
 //                }
                 intent.putExtra("meetingid", mId);
                 startActivityForResult(intent, RESULT_GALLERY);
@@ -283,7 +288,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                 startActivityForResult(intent, RESULT_PARTICIPANT);
 
                 break;
-            case R.id.cp_meeting_prepare_plan:
+            case R.id.cp_meeting_prepare_plan://会议安排
                 intent = new Intent(mContext, MeetingPreparePlanActivity.class);
                 intent.putExtra("text", mPlanView.getValueText());
                 if (mIsEditOnClick == false) {
@@ -293,10 +298,20 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
 
                 break;
             case R.id.cp_meeting_prepare_hold_monad:
-                intent = new Intent(mContext, FranchiserSelectListActivity.class);
-                intent.putExtra("flag", true);
-                intent.putExtra("ids", mRequest.organizecompanylist);
-                startActivityForResult(intent, RESULT_COMPANY);
+                if (mIsEditOnClick == false) {
+                    Gson gson = new GsonBuilder().serializeNulls().create();
+                    String json = gson.toJson(mOrganizeCompanyList);
+                    intent = new Intent(mContext, FranchiserSelectViewListActivity.class);
+                    intent.putExtra("lists", json);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(mContext, FranchiserSelectListActivity.class);
+                    intent.putExtra("flag", true);
+                    intent.putExtra("ids", mRequest.organizecompanylist);
+                    startActivityForResult(intent, RESULT_COMPANY);
+
+                }
+
                 break;
             case R.id.cp_meeting_prepare_sign:
                 intent = new Intent(mContext, PlumberMeetingViewSignlnActivity.class);
@@ -555,15 +570,21 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                         }
                         break;
                     case R.id.menu2://删除
-                        deleteMeeting();
+                        if (mIsDelete == true) {
+                            deleteMeeting();
+                        }
+
 
                         break;
                     case R.id.menu3://更新
-                        Intent intent = new Intent(mContext, MeetingViewUpdateActivity.class);
-                        intent.putExtra("text", mMeetingPrepareSummary.getValueText());
-                        intent.putExtra("gallery", mMeetingPrepareGallery.getValueText());
-                        intent.putExtra("meetingid", mId);
-                        startActivityForResult(intent, RESULT_UPDATE);
+                        if (mIsUpdate == true) {
+                            Intent intent = new Intent(mContext, MeetingViewUpdateActivity.class);
+                            intent.putExtra("text", mMeetingPrepareSummary.getValueText());
+                            intent.putExtra("gallery", mMeetingPrepareGallery.getValueText());
+                            intent.putExtra("meetingid", mId);
+                            startActivityForResult(intent, RESULT_UPDATE);
+                        }
+
 
                         break;
                 }

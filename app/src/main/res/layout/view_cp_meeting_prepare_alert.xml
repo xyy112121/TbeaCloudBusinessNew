@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="【进行状态】议开始至结束24小时内，可编辑，删除，不可删除，更新"
+            android:text="【进行状态】会议开始至结束24小时内，可编辑，删除，不可删除，更新"
             android:textColor="@color/text_color"
             android:textSize="12sp" />
 

@@ -245,6 +245,7 @@
         <activity android:name=".activity.publicUse.activity.NetWebViewActivity" />
         <activity android:name=".activity.my.main.activity.ServiceCenterActivity" />
         <activity android:name=".activity.my.main.activity.RealNameAuthenticationFailActivity" />
+        <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.FranchiserSelectViewListActivity" />
     </application>
 
 </manifest>

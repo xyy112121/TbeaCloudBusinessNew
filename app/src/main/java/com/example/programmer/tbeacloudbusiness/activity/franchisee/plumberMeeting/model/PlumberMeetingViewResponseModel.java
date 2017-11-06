@@ -3,10 +3,11 @@ package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeet
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
- *会议详细
+ * 会议详细
  */
 
 public class PlumberMeetingViewResponseModel extends BaseResponseModel {
@@ -20,7 +21,7 @@ public class PlumberMeetingViewResponseModel extends BaseResponseModel {
         public MeetingSignInfo meetingsigninfo;//会议签到
         public List<OrganizeCompany> organizecompanylist;//举办单位
 
-        public  class MeetingbaseinfoBean {
+        public class MeetingbaseinfoBean {
             public String id;
             public String meetingcode;
             public String meetingtime;
@@ -36,7 +37,7 @@ public class PlumberMeetingViewResponseModel extends BaseResponseModel {
             public String originatoruserid;
         }
 
-        public  class MeetingoriginatorinfoBean {
+        public class MeetingoriginatorinfoBean {
             public String userid;
             public String headpicture;
             public String name;
@@ -45,14 +46,14 @@ public class PlumberMeetingViewResponseModel extends BaseResponseModel {
             public String persontypeicon;
         }
 
-        public  class ParticipantlistBean {
+        public class ParticipantlistBean {
             public int participantnumber;
             public String participantlist;
         }
     }
 
 
-    public class OrganizeCompany {
+    public class OrganizeCompany implements Serializable {
         public String id;
         public String name;
         public String mastername;
@@ -69,13 +70,13 @@ public class PlumberMeetingViewResponseModel extends BaseResponseModel {
         public String persontypeicon;
     }
 
-    public  class MeetingInfo{
+    public class MeetingInfo {
         public String meetingitems;
         public String meetingsummary;
         public String meetingpicturenumber;
     }
 
-    public  class MeetingSignInfo{
+    public class MeetingSignInfo {
         public String signnumber;
     }
 

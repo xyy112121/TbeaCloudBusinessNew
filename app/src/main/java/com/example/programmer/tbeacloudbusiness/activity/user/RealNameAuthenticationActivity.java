@@ -21,14 +21,11 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.info.MyPictureListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.PictureShowActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
-import com.example.programmer.tbeacloudbusiness.activity.user.model.CompletionDataResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.PicturelistBean;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.RelaNameAuthenticationResponseModel;
-import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.picker.CustomAddressPicker;
@@ -89,6 +86,14 @@ public class RealNameAuthenticationActivity extends BaseActivity {
     ProgressBar mPersonIdCard2PbView;
     @BindView(R.id.real_name_companyPhoto_finish)
     Button mFinishView;
+    @BindView(R.id.real_name_companyLisencePicture_tv)
+    TextView mCompanyLisencePictureTvView;
+    @BindView(R.id.real_name_masterPersonIdCard1_tv)
+    TextView mPersonIdCard1TvView;
+    @BindView(R.id.real_name_masterPersonIdCard2_tv)
+    TextView mPersonIdCard2TvView;
+    @BindView(R.id.real_name_companyPhoto_tv)
+    TextView mcompanyPhotoTvView;
 
 
     private String mFlag;//判断当前选择的是什么 LisencePicture（营业执照） IdCard1（身份证正面）IdCard2（身份证反面）CompanyPhoto（实景照片）
@@ -116,9 +121,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
         mRequest.province = MyApplication.instance.getProvince();
         mRequest.city = MyApplication.instance.getCity();
         mRequest.zone = MyApplication.instance.getDistrict();
-//        if (!"notidentify".equals(identify) && identify != null && !"".equals(identify)) {//未认证
         getDate();
-//        }
     }
 
     public void getDate() {
@@ -143,20 +146,25 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                                 mAddrView.setText(obj.companyaddress);
                                 mAddr2View.setText(obj.address);
                                 mBusinessScopeView.setText(obj.businessscope);
+
                                 if (!TextUtils.isEmpty(obj.companylisencepicture)) {
+                                    mRequest.companylisencepicture = obj.companylisencepicture;
                                     ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.companylisencepicture, mCompanyLisencePictureView);
                                 }
                                 mMasterPersonView.setText(obj.masterperson);
                                 mMasterPersonIDView.setText(obj.masterpersonid);
                                 if (!TextUtils.isEmpty(obj.masterpersonidcard1)) {
+                                    mRequest.masterpersonidcard1 = obj.masterpersonidcard1;
                                     ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.masterpersonidcard1, mMasterPersonIdCard1View);
                                 }
 
                                 if (!TextUtils.isEmpty(obj.masterpersonidcard2)) {
+                                    mRequest.masterpersonidcard2 = obj.masterpersonidcard2;
                                     ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.masterpersonidcard2, mMasterPersonIdCard2View);
                                 }
 
                                 if (obj.companypicture.length() > 0) {
+                                    mRequest.companyphoto = obj.companypicture;
                                     String[] pictures = obj.companypicture.split(",");
                                     mCompanyPhotoParentView.removeAllViews();
                                     for (String s : pictures) {
@@ -166,9 +174,13 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                                         mCompanyPhotoParentView.addView(v);
                                     }
                                 }
-//                                String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-                                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//未认证
+
+                                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//已认证，或者正在认证
                                     setView();
+                                    mCompanyLisencePictureTvView.setVisibility(View.INVISIBLE);
+                                    mPersonIdCard1TvView.setVisibility(View.INVISIBLE);
+                                    mPersonIdCard2TvView.setVisibility(View.INVISIBLE);
+                                    mcompanyPhotoTvView.setVisibility(View.INVISIBLE);
                                 }
 
                             } else {
@@ -214,63 +226,92 @@ public class RealNameAuthenticationActivity extends BaseActivity {
         mFinishView.setText("查看认证状态");
     }
 
-
-    @OnClick({R.id.real_name_addr, R.id.real_name_companyLisencePicture, R.id.real_name_masterPersonIdCard1, R.id.real_name_masterPersonIdCard2, R.id.real_name_companyPhoto_layout, R.id.real_name_companyPhoto_finish})
+    @OnClick({R.id.real_name_addr, R.id.real_name_companyLisencePicture_tv, R.id.real_name_masterPersonIdCard1_tv,
+            R.id.real_name_masterPersonIdCard2_tv, R.id.real_name_companyPhoto_tv, R.id.real_name_companyLisencePicture, R.id.real_name_masterPersonIdCard1, R.id.real_name_masterPersonIdCard2, R.id.real_name_companyPhoto_layout, R.id.real_name_companyPhoto_finish})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.real_name_addr:
                 showAddrPicker();
                 break;
-            case R.id.real_name_companyLisencePicture:
-                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//未认证
+            case R.id.real_name_companyLisencePicture_tv:
+                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
                     mFlag = "LisencePicture";
-                } else {
-                    List<PicturelistBean> picturelist = new ArrayList<>();
-                    PicturelistBean bean = new PicturelistBean();
-                    bean.largepicture = mObj.companylisencepicture;
-                    picturelist.add(bean);
-                    openImage(picturelist,0);
+                    openImage();
                 }
+                break;
+            case R.id.real_name_companyLisencePicture:
+//                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
+//                    mFlag = "LisencePicture";
+//                    openImage();
+//                } else {
+                List<PicturelistBean> picturelist = new ArrayList<>();
+                PicturelistBean bean = new PicturelistBean();
+                bean.largepicture = mObj.companylisencepicture;
+                picturelist.add(bean);
+                openImage(picturelist, 0);
+//                }
 
+                break;
+            case R.id.real_name_masterPersonIdCard1_tv:
+                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
+                    mFlag = "IdCard1";
+                    openImage();
+                }
                 break;
             case R.id.real_name_masterPersonIdCard1:
-                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//未认证
-                    mFlag = "IdCard1";
-                } else {
-                    List<PicturelistBean> picturelist = new ArrayList<>();
-                    PicturelistBean bean = new PicturelistBean();
-                    bean.largepicture = mObj.masterpersonidcard1;
-                    picturelist.add(bean);
-                    openImage(picturelist,0);
-                }
+//                if ("notidentify".equals(mIdentify) || mIdentify != null || "".equals(mIdentify)) {//未认证
+//                    mFlag = "IdCard1";
+//                    openImage();
+//                } else {
+//                    List<PicturelistBean> picturelist = new ArrayList<>();
+                picturelist = new ArrayList<>();
+                bean = new PicturelistBean();
+                bean.largepicture = mObj.masterpersonidcard1;
+                picturelist.add(bean);
+                openImage(picturelist, 0);
+//                }
 
+                break;
+            case R.id.real_name_masterPersonIdCard2_tv:
+                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
+                    mFlag = "IdCard2";
+                    openImage();
+                }
                 break;
             case R.id.real_name_masterPersonIdCard2:
-                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//未认证
-                    mFlag = "IdCard2";
-                }else {
-                    List<PicturelistBean> picturelist = new ArrayList<>();
-                    PicturelistBean bean = new PicturelistBean();
-                    bean.largepicture = mObj.masterpersonidcard2;
-                    picturelist.add(bean);
-                    openImage(picturelist,0);
-                }
+//                if ("notidentify".equals(mIdentify) || mIdentify != null || "".equals(mIdentify)) {//未认证
+//                    mFlag = "IdCard2";
+//                    openImage();
+//                } else {
+                picturelist = new ArrayList<>();
+                bean = new PicturelistBean();
+                bean.largepicture = mObj.masterpersonidcard2;
+                picturelist.add(bean);
+                openImage(picturelist, 0);
+//                }
 
                 break;
-            case R.id.real_name_companyPhoto_layout:
-                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//未认证
+            case R.id.real_name_companyPhoto_tv:
+                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
                     mFlag = "CompanyPhoto";
-                } else {
-                    String[] pictures = mObj.companypicture.split(",");
-                    List<PicturelistBean> picturelist = new ArrayList<>();
-                    for (int i = 0;i<pictures.length;i++){
-                        PicturelistBean bean = new PicturelistBean();
-                        bean.largepicture = pictures[i];
-                        picturelist.add(bean);
-
-                    }
-                    openImage(picturelist,0);
+                    openImage();
                 }
+                break;
+            case R.id.real_name_companyPhoto_layout:
+//                if ("notidentify".equals(mIdentify) || mIdentify != null || "".equals(mIdentify)) {//未认证
+//                    mFlag = "CompanyPhoto";
+//                    openImage();
+//                } else {
+                String[] pictures = mObj.companypicture.split(",");
+                picturelist = new ArrayList<>();
+                for (int i = 0; i < pictures.length; i++) {
+                    bean = new PicturelistBean();
+                    bean.largepicture = pictures[i];
+                    picturelist.add(bean);
+
+                }
+                openImage(picturelist, 0);
+//                }
 
                 break;
             case R.id.real_name_companyPhoto_finish:
@@ -282,9 +323,56 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                     mRequest.businessscope = mBusinessScopeView.getText() + "";
                     mRequest.masterperson = mMasterPersonView.getText() + "";
                     mRequest.masterpersonid = mMasterPersonIDView.getText() + "";
-                    if ("".equals(mRequest.address) || "".equals(mRequest.companyname) || "".equals(mRequest.companylisencecode) || mRequest.province == null || "".equals(mRequest.address) ||
-                            "".equals(mRequest.businessscope) || mRequest.companylisencepicture == null || "".equals(mRequest.masterperson) || "".equals(mRequest.masterpersonid) || mRequest.masterpersonidcard1 == null || mRequest.masterpersonidcard2 == null || mRequest.companyphoto == null) {
-                        ToastUtil.showMessage("请补全资料");
+                    if (TextUtils.isEmpty(mRequest.companyname)) {
+                        ToastUtil.showMessage("请填写企业名称！");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(mRequest.companylisencecode)) {
+                        ToastUtil.showMessage("请填写营业执照上的注册号！");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(mRequest.province)) {
+                        ToastUtil.showMessage("请填写企业所在地");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(mRequest.address)) {
+                        ToastUtil.showMessage("请填写企业详细地址");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(mRequest.businessscope)) {
+                        ToastUtil.showMessage("请填写企业经营范围");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(mRequest.companylisencepicture)) {
+                        ToastUtil.showMessage("请上传营业执照！");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(mRequest.masterperson)) {
+                        ToastUtil.showMessage("请输入法人姓名！");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(mRequest.masterpersonid)) {
+                        ToastUtil.showMessage("请输入法人身份证号！");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(mRequest.masterpersonidcard1)) {
+                        ToastUtil.showMessage("请上传法人身份证正面(个人信息页)！");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(mRequest.masterpersonidcard2)) {
+                        ToastUtil.showMessage("请上传法人身份证反面(国徽页)！");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(mRequest.companyphoto)) {
+                        ToastUtil.showMessage("请上传公司实景照片！");
                         return;
                     }
                     showAlert();
@@ -296,15 +384,15 @@ public class RealNameAuthenticationActivity extends BaseActivity {
         }
     }
 
-    private void openImage(List<PicturelistBean> picturelist,int index) {
-        if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//未认证
-            openImage();
-        } else {
-            Intent intent = new Intent(mContext, PictureShowActivity.class);
-            intent.putExtra("images", (Serializable) picturelist);
-            intent.putExtra("index", index);
-            startActivity(intent);
-        }
+    private void openImage(List<PicturelistBean> picturelist, int index) {
+//        if ("notidentify".equals(mIdentify) || mIdentify != null || "".equals(mIdentify)) {//未认证
+//            openImage();
+//        } else {
+        Intent intent = new Intent(mContext, PictureShowActivity.class);
+        intent.putExtra("images", (Serializable) picturelist);
+        intent.putExtra("index", index);
+        startActivity(intent);
+//        }
     }
 
     private void showAlert() {
@@ -530,7 +618,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                 .openGallery(PictureMimeType.ofImage())//全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()
                 .theme(R.style.picture_default_style)//主题样式(不设置为默认样式) 也可参考demo values/styles下 例如：R.style.picture.white.style
                 .compress(true)
-                .isCamera(false)
+                .isCamera(true)
                 .maxSelectNum(number)
                 .selectionMode(pictureConfig)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
                 .compressGrade(Luban.THIRD_GEAR)// luban压缩档次，默认3档 Luban.THIRD_GEAR、Luban.FIRST_GEAR、Luban.CUSTOM_GEAR

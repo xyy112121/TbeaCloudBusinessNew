@@ -154,6 +154,7 @@
                         android:visibility="gone"/>
 
                     <TextView
+                        android:id="@+id/real_name_companyLisencePicture_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -161,7 +162,7 @@
                         android:layout_marginRight="8dp"
                         android:drawablePadding="10dp"
                         android:drawableRight="@drawable/icon_arrow_right"
-                        android:text="示例"
+                        android:text="上传"
                         android:textColor="@color/black" />
                 </RelativeLayout>
 
@@ -251,6 +252,7 @@
                         android:indeterminateDrawable="@drawable/tip_drawable_progress"
                         android:visibility="gone"/>
                     <TextView
+                        android:id="@+id/real_name_masterPersonIdCard1_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -258,7 +260,7 @@
                         android:layout_marginRight="8dp"
                         android:drawablePadding="10dp"
                         android:drawableRight="@drawable/icon_arrow_right"
-                        android:text="示例"
+                        android:text="上传"
                         android:textColor="@color/black" />
                 </RelativeLayout>
 
@@ -298,6 +300,7 @@
                         android:visibility="gone"/>
 
                     <TextView
+                        android:id="@+id/real_name_masterPersonIdCard2_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -305,7 +308,7 @@
                         android:layout_marginRight="8dp"
                         android:drawablePadding="10dp"
                         android:drawableRight="@drawable/icon_arrow_right"
-                        android:text="示例"
+                        android:text="上传"
                         android:textColor="@color/black" />
                 </RelativeLayout>
 
@@ -350,6 +353,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/real_name_companyPhoto_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -357,7 +361,7 @@
                         android:layout_marginRight="8dp"
                         android:drawablePadding="10dp"
                         android:drawableRight="@drawable/icon_arrow_right"
-                        android:text="示例"
+                        android:text="上传"
                         android:textColor="@color/black" />
                 </RelativeLayout>
 

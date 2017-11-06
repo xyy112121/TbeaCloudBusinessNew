@@ -17,6 +17,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInf
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.PersonInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.UploadImageResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
+import com.example.programmer.tbeacloudbusiness.activity.user.RealNameAuthenticationActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
@@ -82,9 +83,13 @@ public class PersonInfoActivity extends BaseActivity {
         setContentView(R.layout.activity_person_info);
         ButterKnife.bind(this);
         initTopbar("");
-        getDate();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDate();
+    }
 
     public void save(final PersonInfoRequestModel request, final String flag) {
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
@@ -320,11 +325,11 @@ public class PersonInfoActivity extends BaseActivity {
     @OnClick(R.id.person_info_state)
     public void onViewClicked() {
         String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-        if ("identified".equals(identify)) {
-//                                startActivity(new Intent(getActivity(), RealNameAuthenticationPlumberActivity.class));
-            startActivity(new Intent(mContext, RealNameAuthenticationDistributorActivity.class));
-        } else {
-            startActivity(new Intent(mContext, CompletionDataActivity.class));
+        if ("notidentify".equals(identify)) {//没有通过认证
+            startActivity(new Intent(mContext, RealNameAuthenticationFailActivity.class));
+
+        } else {//已通过和审核中的，就显示认证信息
+            startActivity(new Intent(mContext, RealNameAuthenticationActivity.class));
         }
     }
 }

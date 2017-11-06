@@ -41,7 +41,8 @@ import java.util.List;
 
 public class MyApplication extends Application implements BDLocationListener {
 
-    private static final String SERVICE_PATH = "www.u-shang.net/tbyun/index.php/tbyuninterface/index/";
+//    private static final String SERVICE_PATH = "http://www.u-shang.net/tbyun/index.php/tbyuninterface/index/";
+    private static final String SERVICE_PATH = "http://121.42.193.154:6696/index.php/tbyuninterface/Index/index";//测试
     private static final String IMG_SERVICE_PATH = "";
 
     private static final String SERVICE_PATH1 = "http://www.u-shang.net/interface/index.php";

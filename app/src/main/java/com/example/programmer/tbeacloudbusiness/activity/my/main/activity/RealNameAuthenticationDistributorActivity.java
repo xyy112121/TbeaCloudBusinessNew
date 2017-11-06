@@ -22,6 +22,9 @@ import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,6 +42,7 @@ public class RealNameAuthenticationDistributorActivity extends BaseActivity {
         setContentView(R.layout.activity_realname_authentication_distributor);
         ButterKnife.bind(this);
         initTopbar("实名认证");
+        getDate();
 
     }
 
@@ -111,6 +115,7 @@ public class RealNameAuthenticationDistributorActivity extends BaseActivity {
             }
         }).start();
     }
+
 
     @OnClick(R.id.identification_state)
     public void onViewClicked() {
