@@ -1,5 +1,8 @@
 package com.example.programmer.tbeacloudbusiness.service.impl;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.http.ReqBase;
 import com.example.programmer.tbeacloudbusiness.http.ReqBase1;
@@ -11,6 +14,9 @@ import com.google.gson.Gson;
 import org.apache.http.NameValuePair;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -86,4 +92,6 @@ public class BaseAction {
         new Thread(task).start();
         return (String)task.get();
     }
+
+
 }

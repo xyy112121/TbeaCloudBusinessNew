@@ -509,12 +509,15 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
         ((TextView) contentView.findViewById(R.id.menu2_tv)).setText("删除");
         ((TextView) contentView.findViewById(R.id.menu3_tv)).setText("更新");
         contentView.findViewById(R.id.menu3_view).setVisibility(View.VISIBLE);
+        contentView.findViewById(R.id.menu4_view).setVisibility(View.VISIBLE);
 
 
         View menu1 = contentView.findViewById(R.id.menu1);
         View menu2 = contentView.findViewById(R.id.menu2);
         View menu3 = contentView.findViewById(R.id.menu3);
+        View menu4 = contentView.findViewById(R.id.menu4);
         menu3.setVisibility(View.VISIBLE);
+        menu4.setVisibility(View.VISIBLE);
 
         // //新会议：可编辑，删除，准备中：可编辑 开会中：可更新
         if (mIsEdit == true && mIsDelete == true) {
@@ -549,6 +552,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                 .enableBackgroundDark(true) //弹出popWindow时，背景是否变暗
                 .setBgDarkAlpha(0.5f) // 控制亮度
                 .create()
+//                .showAsDropDown(view);
                 .showAsDropDown(view, DensityUtil.px2dip(mContext, -600), DensityUtil.px2dip(mContext, -90));
     }
 
@@ -584,8 +588,11 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                             intent.putExtra("meetingid", mId);
                             startActivityForResult(intent, RESULT_UPDATE);
                         }
-
-
+                        break;
+                    case R.id.menu4:
+                        Intent intent = new Intent(mContext, SignInCodeActivity.class);
+                        intent.putExtra("id", mId);
+                        startActivity(intent);
                         break;
                 }
 
@@ -594,5 +601,6 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
         contentView.findViewById(R.id.menu1).setOnClickListener(listener);
         contentView.findViewById(R.id.menu2).setOnClickListener(listener);
         contentView.findViewById(R.id.menu3).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu4).setOnClickListener(listener);
     }
 }

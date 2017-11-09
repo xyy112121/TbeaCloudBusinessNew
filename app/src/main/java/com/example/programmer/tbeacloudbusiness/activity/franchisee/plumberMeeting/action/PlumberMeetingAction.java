@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action;
 
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.SignInCodeResonseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListMainResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingListStateResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingParticipantResponseModel;
@@ -122,6 +123,18 @@ public class PlumberMeetingAction extends BaseAction {
         pairs.add(new BasicNameValuePair("meetingid", meetingid));
         String result = sendRequest("TBEAYUN004004003001", pairs);
         model = gson.fromJson(result, PlumberMeetingParticipantResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 获取会议的签到码
+     */
+    public SignInCodeResonseModel getSignInCode(String meetingid) throws Exception {
+        SignInCodeResonseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("meetingid", meetingid));
+        String result = sendRequest("TBEAYUN008003006000", pairs);
+        model = gson.fromJson(result, SignInCodeResonseModel.class);
         return model;
     }
 

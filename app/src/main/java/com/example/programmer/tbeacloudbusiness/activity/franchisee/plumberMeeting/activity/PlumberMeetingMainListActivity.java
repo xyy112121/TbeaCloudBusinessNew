@@ -69,7 +69,6 @@ public class PlumberMeetingMainListActivity extends BaseActivity implements BGAR
         initTopbar("水电工会议");
         intiView();
         getStatusList();
-        getListData();
     }
 
     public void intiView() {
