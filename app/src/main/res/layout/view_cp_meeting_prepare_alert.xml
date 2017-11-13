@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="【发起状态】会议开始前24小时，可编辑，删除，不可更新"
+            android:text="【新会议状态】会议开始前24小时: 可编辑,可删除，不可更新"
             android:textColor="@color/text_color"
             android:textSize="12sp" />
 
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="【进行状态】会议开始至结束24小时内，可编辑，删除，不可删除，更新"
+            android:text="【准备中状态】会议开始前24小时到会议开始: 不可编辑,不可删除，不可更新"
             android:textColor="@color/text_color"
             android:textSize="12sp" />
 
@@ -37,9 +37,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="【结束状态】会议结束后，可更新，不可编辑，删除"
+            android:text="【会议中状态】会议开始到会议结束: 不可编辑,不可删除，可更新"
             android:textColor="@color/text_color"
             android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="【已结束状态】会议结束到会议结束后72小时: 不可编辑,不可删除，可更新"
+            android:textColor="@color/text_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="【已关闭状态】会议已结束后的状态: 不可编辑,不可删除，不可更新"
+            android:textColor="@color/text_color"
+            android:textSize="12sp" />
+
 
         <View
             style="@style/horizontal_view"

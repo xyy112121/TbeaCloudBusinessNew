@@ -140,8 +140,8 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                     mCodeView.setValueText(meetingbaseinfo.meetingcode);
                                     mRequest.meetingcode = meetingbaseinfo.meetingcode;
                                     String endTime = "";
-                                    if (meetingbaseinfo.meetingendtime.length() > 12) {
-                                        endTime = meetingbaseinfo.meetingendtime.substring(12, meetingbaseinfo.meetingendtime.length());
+                                    if (meetingbaseinfo.meetingendtime.length() > 11) {
+                                        endTime = meetingbaseinfo.meetingendtime.substring(11, meetingbaseinfo.meetingendtime.length());
                                     }
                                     mRequest.meetingstarttime = meetingbaseinfo.meetingstarttime;
                                     mRequest.meetingendtime = meetingbaseinfo.meetingendtime;
@@ -154,7 +154,10 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
 
                                     mMeetingPrepareState.setValueText(meetingbaseinfo.meetingstatus);
                                     mState = meetingbaseinfo.meetingstatus;
-                                    //新会议：可编辑，删除，准备中：可编辑 开会中：可更新
+
+                                    //新会议：可编辑,可删除，不可更新，准备中：不可编辑,不可删除，不可更新
+                                    // 会议中：不可编辑,不可删除，可更新 已结束：不可编辑,不可删除，可更新
+                                    //已关闭:不可编辑,不可删除，不可更新
                                     if ("新会议".equals(meetingbaseinfo.meetingstatus)) {
                                         mIsEdit = true;
                                         mIsDelete = true;
@@ -162,10 +165,11 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                         mMeetingPrepareGallery.setVisibility(View.GONE);
                                         mMeetingPrepareSign.setVisibility(View.GONE);
                                     } else if ("准备中".equals(meetingbaseinfo.meetingstatus)) {
-                                        mIsEdit = true;
                                         mMeetingPrepareSummary.setVisibility(View.GONE);
                                         mMeetingPrepareGallery.setVisibility(View.GONE);
-                                    } else if ("开会中".equals(meetingbaseinfo.meetingstatus)) {
+                                    } else if ("会议中".equals(meetingbaseinfo.meetingstatus)) {
+                                        mIsUpdate = true;
+                                    }else if ("已结束".equals(meetingbaseinfo.meetingstatus)) {
                                         mIsUpdate = true;
                                     }
                                 }

@@ -28,6 +28,7 @@ public class ScanCodeCreateSelectActivity extends BaseActivity implements View.O
     TextView mSelectView;
     private Condition mType;
     private Condition mNorms;
+    private String mCommodityId;
 
 
     @Override
@@ -42,6 +43,7 @@ public class ScanCodeCreateSelectActivity extends BaseActivity implements View.O
     private void initView() {
         mType = (Condition) getIntent().getSerializableExtra("type");
         mNorms = (Condition) getIntent().getSerializableExtra("norms");
+        mCommodityId = getIntent().getStringExtra("commodityId");
         String type = "";
         String norm = "";
         if (mType != null) {
@@ -61,6 +63,7 @@ public class ScanCodeCreateSelectActivity extends BaseActivity implements View.O
                 Intent intent = new Intent();
                 intent.setClass(mContext, ScanCodeTypeSelectActivity.class);
                 intent.putExtra("type",mType);
+                intent.putExtra("commodityId",mCommodityId);
                 startActivityForResult(intent, RESULT_TYPE);
             }
         });
@@ -71,6 +74,7 @@ public class ScanCodeCreateSelectActivity extends BaseActivity implements View.O
                 Intent intent = new Intent();
                 intent.setClass(mContext, ScanCodeNormsSelectActivity.class);
                 intent.putExtra("norms",mNorms);
+                intent.putExtra("commodityId",mCommodityId);
                 startActivityForResult(intent, RESULT_NORMS);
             }
         });

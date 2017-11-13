@@ -99,9 +99,14 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
         findViewById(R.id.create_code_type_norms).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mCommdity == null) {
+                    ToastUtil.showMessage("请先选择产品名称！");
+                    return;
+                }
                 Intent intent = new Intent();
                 intent.setClass(mContext, ScanCodeCreateSelectActivity.class);
                 intent.putExtra("norms", mNorms);
+                intent.putExtra("commodityId", mCommdity.getId());
                 intent.putExtra("type", mType);
                 startActivityForResult(intent, REQEST_TYPE_NORMS);
             }
@@ -224,7 +229,7 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
                 public void run() {
                     try {
                         ScanCodeAction action = new ScanCodeAction();
-                        ScanCodeCreateResponseModel model = action.createScanCode(money, number, mType.getId(), mNorms.getId(),mCommdity.getId());
+                        ScanCodeCreateResponseModel model = action.createScanCode(money, number, mType.getId(), mNorms.getId(), mCommdity.getId());
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

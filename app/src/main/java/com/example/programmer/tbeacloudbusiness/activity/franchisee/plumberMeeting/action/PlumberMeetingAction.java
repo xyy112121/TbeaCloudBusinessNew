@@ -144,8 +144,8 @@ public class PlumberMeetingAction extends BaseAction {
     public PlumberMeetingSignListReponseModel getViewSignList(String id, String zoneid, String orderitem, String order, int page, int pagesize) throws Exception {
         PlumberMeetingSignListReponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new BasicNameValuePair("meetingid ", id));
-        pairs.add(new BasicNameValuePair("zoneid ", zoneid));
+        pairs.add(new BasicNameValuePair("meetingid", id));
+        pairs.add(new BasicNameValuePair("zoneid", zoneid));
         pairs.add(new BasicNameValuePair("orderitem", orderitem));
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
@@ -182,10 +182,10 @@ public class PlumberMeetingAction extends BaseAction {
     (String name, String electricianownertypeid, String starttime, String endtime, String orderitem, String order, int page, int pagesize) throws Exception {
         PlumberMeetingSignListReponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new BasicNameValuePair("name ", name));
-        pairs.add(new BasicNameValuePair("electricianownertypeid ", electricianownertypeid));
-        pairs.add(new BasicNameValuePair("starttime ", starttime));
-        pairs.add(new BasicNameValuePair("endtime ", endtime));
+        pairs.add(new BasicNameValuePair("name", name));
+        pairs.add(new BasicNameValuePair("electricianownertypeid", electricianownertypeid));
+        pairs.add(new BasicNameValuePair("starttime", starttime));
+        pairs.add(new BasicNameValuePair("endtime", endtime));
         pairs.add(new BasicNameValuePair("orderitem", orderitem));
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
