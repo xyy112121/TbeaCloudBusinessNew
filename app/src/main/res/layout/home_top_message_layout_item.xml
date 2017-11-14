@@ -14,20 +14,20 @@
 
         <ImageView
             android:id="@+id/top_imgae"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:src="@drawable/icon_distribution" />
         <TextView
             android:id="@+id/top_text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="提现数据"
-            android:textColor="@color/text_color1"
+            android:textColor="#4C4C4C"
             android:layout_toRightOf="@id/top_imgae"
             android:gravity="center_vertical"
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             />
         <ImageView
             android:layout_width="wrap_content"

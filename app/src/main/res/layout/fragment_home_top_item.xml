@@ -25,8 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dip"
-            android:textColor="@color/text_color"
-            android:textSize="11.0sp"
+            android:textColor="#878787"
+            android:textSize="12.0sp"
             android:text="特变电工"
             android:layout_marginTop="4dp"/>
     </LinearLayout>

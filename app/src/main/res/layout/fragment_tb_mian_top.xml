@@ -113,20 +113,30 @@
         style="@style/horizontal_view"
         android:background="@color/interval_color"
         android:layout_height="8dp"/>
-
-    <TextView
-        android:id="@+id/tb_mian_top_message"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:drawableLeft="@drawable/icon_tbea_bells"
-        android:drawablePadding="8dp"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:drawableRight="@drawable/icon_arrow_right"
-        android:gravity="left|center_vertical"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:text="55555555555555555555555555555555555555555555555" />
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/icon_tbea_bells"/>
+        <TextView
+            android:id="@+id/tb_mian_top_message"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:drawablePadding="8dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:drawableRight="@drawable/icon_arrow_right"
+            android:gravity="left|center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="8dp"
+            android:text="55555555555555555555555555555555555555555555555" />
+    </LinearLayout>
+
+
     <View
         style="@style/horizontal_view"
         android:background="@color/interval_color"
