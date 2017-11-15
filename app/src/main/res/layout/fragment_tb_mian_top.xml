@@ -133,7 +133,7 @@
             android:gravity="left|center_vertical"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="8dp"
-            android:text="55555555555555555555555555555555555555555555555" />
+         />
     </LinearLayout>
 
 

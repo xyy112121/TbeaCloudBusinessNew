@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:gravity="center"
-            android:text="广汉市"
+
             android:textColor="@color/tab_text_normal" />
 
         <TextView
@@ -38,7 +38,6 @@
             android:layout_height="match_parent"
             android:layout_weight="0.4"
             android:gravity="center"
-            android:text="2014-01-12 12:45:00"
             android:textColor="@color/tab_text_normal" />
     </LinearLayout>
 </FrameLayout>

@@ -41,7 +41,7 @@
 
                 <TextView
                     style="@style/my_right_text_style1"
-                    android:text="张明" />
+                    android:text="" />
             </LinearLayout>
 
             <View style="@style/horizontal_view" />
@@ -85,7 +85,7 @@
 
                 <TextView
                     style="@style/my_right_text_style1"
-                    android:text="水电工" />
+                    android:text="" />
             </LinearLayout>
 
             <View style="@style/horizontal_view" />
@@ -98,7 +98,7 @@
 
                 <TextView
                     style="@style/my_right_text_style1"
-                    android:text="男" />
+                    android:text="" />
             </LinearLayout>
 
             <View style="@style/horizontal_view" />
@@ -111,7 +111,7 @@
 
                 <TextView
                     style="@style/my_right_text_style1"
-                    android:text="48" />
+                    android:text="" />
             </LinearLayout>
 
             <View style="@style/horizontal_view" />
@@ -124,7 +124,7 @@
 
                 <TextView
                     style="@style/my_right_text_style1"
-                    android:text="四川省 德阳市 旌阳区" />
+                    android:text="" />
             </LinearLayout>
 
             <View style="@style/horizontal_view" />
@@ -137,7 +137,7 @@
 
                 <TextView
                     style="@style/my_right_text_style1"
-                    android:text="138888888" />
+                    android:text="" />
             </LinearLayout>
 
             <View style="@style/horizontal_view" />
@@ -151,7 +151,7 @@
                 <TextView
                     style="@style/my_right_text_style"
                     android:gravity="right|center_vertical"
-                    android:text="已认证" />
+                    android:text="" />
             </LinearLayout>
 
             <View style="@style/horizontal_view" />
@@ -189,7 +189,7 @@
 
                 <TextView
                     style="@style/my_right_text_style1"
-                    android:text="张明" />
+                    android:text="" />
             </LinearLayout>
 
             <View style="@style/horizontal_view" />
@@ -203,7 +203,7 @@
                 <TextView
                     style="@style/my_right_text_style"
                     android:gravity="right|center_vertical"
-                    android:text="0" />
+                    android:text="" />
             </LinearLayout>
 
             <View style="@style/horizontal_view" />
@@ -217,7 +217,7 @@
                 <TextView
                     style="@style/my_right_text_style"
                     android:gravity="right|center_vertical"
-                    android:text="0" />
+                    android:text="" />
             </LinearLayout>
 
             <View style="@style/horizontal_view" />
@@ -231,7 +231,7 @@
                 <TextView
                     style="@style/my_right_text_style"
                     android:gravity="right|center_vertical"
-                    android:text="0" />
+                    android:text="" />
             </LinearLayout>
 
             <View style="@style/horizontal_view" />
@@ -245,7 +245,7 @@
                 <TextView
                     style="@style/my_right_text_style"
                     android:gravity="right|center_vertical"
-                    android:text="0" />
+                    android:text="" />
             </LinearLayout>
 
             <View style="@style/horizontal_view" />

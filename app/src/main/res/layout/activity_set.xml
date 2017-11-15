@@ -21,7 +21,6 @@
             android:id="@+id/set_phone"
             style="@style/my_right_text_style"
             android:gravity="right|center_vertical"
-            android:text="138****888"
             android:textColor="@color/text_color" />
 
     </LinearLayout>
@@ -53,7 +52,6 @@
             android:id="@+id/set_address"
             style="@style/my_right_text_style"
             android:gravity="right|center_vertical"
-            android:text="2"
             />
 
     </LinearLayout>

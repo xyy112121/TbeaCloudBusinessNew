@@ -26,7 +26,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="2017-05-01"
             android:textColor="@color/tab_text_normal"
             android:gravity="center"
             android:maxLines="1"
@@ -47,7 +46,6 @@
                 android:id="@+id/scan_code_withdraw_deposit_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2555"
                 android:textStyle="bold"
                 android:textColor="@color/tab_text_normal"
                 />

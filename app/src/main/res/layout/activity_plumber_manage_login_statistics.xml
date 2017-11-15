@@ -22,7 +22,7 @@
             <TextView
                 android:id="@+id/login_number_tv"
                 style="@style/my_right_text_style"
-                android:text="265次"
+                android:text=""
                 android:textColor="@color/text_color" />
         </LinearLayout>
 
@@ -38,7 +38,7 @@
 
             <TextView
                 style="@style/my_right_text_style1"
-                android:text="71分钟"
+                android:text=""
                 android:textColor="@color/text_color" />
         </LinearLayout>
 
@@ -55,7 +55,7 @@
             <TextView
                 android:id="@+id/create_code_type_norms"
                 style="@style/my_right_text_style1"
-                android:text="JHSY-BHU-7"
+                android:text=""
                 android:textColor="@color/text_color" />
         </LinearLayout>
 
@@ -71,7 +71,7 @@
 
             <TextView
                 style="@style/my_right_text_style1"
-                android:text="四川省德阳市旌阳区长白山路2号"
+                android:text=""
                 android:textColor="@color/text_color" />
         </LinearLayout>
 

@@ -185,14 +185,15 @@ public class StoreCommodityManageListActivity extends BaseActivity implements BG
             layout.setLayoutParams(lp);
             TextView t = (TextView) layout.findViewById(R.id.fragment_company_top_tv);
             t.setText(topTexts[i]);
+            t.setTextColor(ContextCompat.getColor(mContext,R.color.text_color3));
             if (i == 0) {
-                ((TextView) layout.findViewById(R.id.fragment_company_top_tv)).setTextColor(ContextCompat.getColor(mContext, R.color.blue));
+                t.setTextColor(ContextCompat.getColor(mContext, R.color.blue));
 //
             }
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mPriceTv.setTextColor(ContextCompat.getColor(mContext, R.color.text_color));
+                    mPriceTv.setTextColor(ContextCompat.getColor(mContext, R.color.text_color3));
                     mPriceIv.setImageResource(R.drawable.icon_arraw);
                     mIndex2 = mIndex;
                     mIndex = index;
@@ -221,12 +222,12 @@ public class StoreCommodityManageListActivity extends BaseActivity implements BG
 
     private void setViewColor() {
         FrameLayout layout = mListLayout.get(mIndex2);
-        ((TextView) layout.findViewById(R.id.fragment_company_top_tv)).setTextColor(ContextCompat.getColor(mContext, R.color.text_color));
+        ((TextView) layout.findViewById(R.id.fragment_company_top_tv)).setTextColor(ContextCompat.getColor(mContext, R.color.text_color3));
     }
 
     private void setViewColor(int index) {
         FrameLayout layout = mListLayout.get(index);
-        ((TextView) layout.findViewById(R.id.fragment_company_top_tv)).setTextColor(ContextCompat.getColor(mContext, R.color.text_color));
+        ((TextView) layout.findViewById(R.id.fragment_company_top_tv)).setTextColor(ContextCompat.getColor(mContext, R.color.text_color3));
     }
 
     @Override

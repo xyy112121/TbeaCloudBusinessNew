@@ -19,7 +19,7 @@
             android:layout_height="49dp"
             app:PublishTextRowViewHiht="请输入标题内容"
             app:PublishTextRowViewIsBottomLineShow="true"
-            app:PublishTextRowViewIsSelect="true"
+            app:PublishTextRowViewIsSelect="false"
             app:PublishTextRowViewText="标题" />
 
         <GridView
@@ -39,7 +39,7 @@
             android:layout_height="49dp"
             app:PublishTextRowViewHiht="请输入文章内容"
             app:PublishTextRowViewIsBottomLineShow="true"
-            app:PublishTextRowViewIsSelect="true"
+            app:PublishTextRowViewIsSelect="false"
             app:PublishTextRowViewText="内容" />
     </LinearLayout>
 

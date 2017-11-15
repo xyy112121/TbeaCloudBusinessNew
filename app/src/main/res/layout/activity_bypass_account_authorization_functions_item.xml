@@ -24,7 +24,6 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="0.5"
             android:gravity="center_vertical"
-            android:text="水电工"
             android:textColor="@color/tab_text_normal" />
 
         <LinearLayout

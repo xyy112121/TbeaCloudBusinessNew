@@ -102,7 +102,7 @@
                     android:id="@+id/person_manage_item_tv4"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="2555"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
@@ -131,7 +131,7 @@
                     android:id="@+id/person_manage_item_tv5"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="2555"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />

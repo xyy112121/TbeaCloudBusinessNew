@@ -68,7 +68,7 @@
                         android:layout_centerVertical="true"
                         android:drawablePadding="8dp"
                         android:drawableRight="@drawable/icon_water_right"
-                        android:text="刘心茹"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
@@ -103,7 +103,7 @@
                         android:layout_marginLeft="15dp"
                         android:drawableLeft="@drawable/icon_water_location_blue"
                         android:drawablePadding="5dp"
-                        android:text="四川省 德阳市 广汉市"
+                        android:text=""
                         android:textColor="@color/text_color"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="15dp"
-                    android:text="工龄：12年"
+                    android:text=""
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
 
@@ -148,7 +148,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="15dp"
-                    android:text="粉丝：12"
+                    android:text=""
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
 

@@ -6,7 +6,6 @@
     <TextView
         android:id="@+id/plumber_meeting_sign_signnumber"
         android:layout_height="45dp"
-        android:text="签到人数：46"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:layout_width="wrap_content"

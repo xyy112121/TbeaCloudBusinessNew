@@ -22,7 +22,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="8dp"
                 android:gravity="right|center_vertical"
-                android:text="编码"
                 android:textColor="@color/tab_text_normal" />
         </LinearLayout>
 
@@ -41,7 +40,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
                 android:gravity="right|center_vertical"
-                android:text="状态"
                 android:textColor="@color/tab_text_normal" />
 
             <ImageView

@@ -18,7 +18,6 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_marginTop="9dp"
-            android:text="待评价"
             android:textColor="@color/text_color"/>
 
     </LinearLayout>

@@ -30,7 +30,6 @@
             android:layout_weight="0.25"
             android:gravity="center"
             android:paddingLeft="20dp"
-            android:text="广州市"
             android:textColor="@color/text_color" />
 
         <LinearLayout
@@ -52,7 +51,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="2555"
                 android:textColor="@color/tab_text_normal"
                 android:textStyle="bold"
                 android:textSize="18sp"/>

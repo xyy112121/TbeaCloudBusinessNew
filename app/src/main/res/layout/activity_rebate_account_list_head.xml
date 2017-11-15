@@ -35,7 +35,6 @@
             android:id="@+id/my_rebate_account_list_currentmoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="111"
             android:textColor="@color/tab_text_normal"
             android:textSize="18sp" />
     </LinearLayout>

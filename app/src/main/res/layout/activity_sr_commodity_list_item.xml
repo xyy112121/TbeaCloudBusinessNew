@@ -31,7 +31,6 @@
                 android:id="@+id/sr_commdity_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="名称"
                 android:textColor="@color/tab_text_normal" />
 
             <TextView
@@ -39,7 +38,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sr_commdity_item_name"
-                android:text="规格型号"
                 android:textColor="@color/text_color" />
 
             <TextView
@@ -47,7 +45,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:text="数量"
                 android:textColor="@color/text_color" />
 
         </RelativeLayout>

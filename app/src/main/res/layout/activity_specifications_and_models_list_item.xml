@@ -10,7 +10,6 @@
         android:layout_height="48dp"
         android:layout_marginLeft="15dp"
         android:gravity="center_vertical"
-        android:text="ddd"
         android:textColor="@color/tab_text_normal" />
 
     <ImageView

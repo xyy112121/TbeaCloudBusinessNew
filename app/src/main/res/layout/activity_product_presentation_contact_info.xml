@@ -24,7 +24,6 @@
         android:layout_height="48dp"
         android:layout_marginLeft="15dp"
         android:gravity="center_vertical"
-        android:text="特变电工电缆股份有限公司"
         android:textColor="@color/tab_text_normal" />
 
     <View style="@style/horizontal_view" />

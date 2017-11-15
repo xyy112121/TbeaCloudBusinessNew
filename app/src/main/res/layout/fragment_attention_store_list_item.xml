@@ -57,7 +57,6 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="绵阳城区五金经营部"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -74,7 +73,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:maxLines="2"
-                    android:text="122 粉丝"
                     android:textColor="@color/gray"
                     android:textSize="12sp" />
 

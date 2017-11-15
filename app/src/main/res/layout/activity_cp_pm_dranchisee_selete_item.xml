@@ -24,7 +24,6 @@
             android:layout_marginRight="20dp"
             android:layout_weight="0.25"
             android:gravity="right|center_vertical"
-            android:text="1122"
             android:textColor="@color/black"
             android:textStyle="bold" />
     </LinearLayout>

@@ -22,7 +22,6 @@
             android:id="@+id/pm_sign_list_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2140"
             android:textSize="16sp"
             android:textColor="@color/text_color1"
             android:layout_gravity="center_vertical"

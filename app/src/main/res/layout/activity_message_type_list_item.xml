@@ -59,7 +59,6 @@
                         android:drawablePadding="5dp"
                         android:ellipsize="end"
                         android:maxEms="13"
-                        android:text="物流通知"
                         android:textColor="@color/tab_text_normal"
                         android:textSize="14sp" />
 
@@ -69,7 +68,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginBottom="2dp"
-                        android:text="2017年7月23日"
                         android:textColor="@color/text_color"
                         android:textSize="13sp"
                         android:maxEms="7"
@@ -84,7 +82,6 @@
                     android:maxLines="2"
                     android:textColor="@color/text_color"
                     android:textSize="13sp"
-                    android:text="dd"
                     />
             </LinearLayout>
         </LinearLayout>

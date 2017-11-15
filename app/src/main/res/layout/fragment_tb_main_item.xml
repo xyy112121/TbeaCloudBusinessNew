@@ -37,7 +37,6 @@
             android:ellipsize="end"
             android:gravity="left"
             android:maxLines="2"
-            android:text="电工"
             android:textColor="@color/tab_text_normal"
             android:textSize="15sp" />
 
@@ -46,7 +45,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="JSVZ-HHH-88"
             android:textColor="@color/text_color"
             android:textSize="11sp" />
 

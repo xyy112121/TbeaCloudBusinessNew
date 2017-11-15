@@ -34,7 +34,7 @@
             android:layout_gravity="bottom"
             android:layout_marginLeft="8dp"
             android:layout_weight="0.4"
-            android:text="时间" />
+            />
     </LinearLayout>
 
 </LinearLayout>

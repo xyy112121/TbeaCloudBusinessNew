@@ -91,7 +91,6 @@
                     android:id="@+id/top_text4"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="2555"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -116,7 +115,6 @@
                     android:id="@+id/top_text5"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="2555"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -174,7 +172,6 @@
                     android:id="@+id/top_text8"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="2555"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -199,7 +196,6 @@
                     android:id="@+id/top_text9"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="2555"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>

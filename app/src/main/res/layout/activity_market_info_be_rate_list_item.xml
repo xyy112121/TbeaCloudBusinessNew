@@ -32,7 +32,6 @@
                 android:id="@+id/evaluate_item_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="评价内容"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:textColor="@color/tab_text_normal" />
@@ -41,7 +40,6 @@
                 android:id="@+id/evaluate_item_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2017-08-09 16:09:59"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:textColor="@color/text_color" />

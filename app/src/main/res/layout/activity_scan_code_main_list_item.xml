@@ -56,7 +56,6 @@
                     android:drawablePadding="5dp"
                     android:ellipsize="end"
                     android:maxEms="13"
-                    android:text="薄常亮"
                     android:textColor="@color/tab_text_normal"
                     android:textSize="18sp" />
 
@@ -92,7 +91,6 @@
                     android:maxLines="1"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:text="6666"
                    />
             </LinearLayout>
 

@@ -14,6 +14,6 @@
         android:background="@null"
         android:minLines="3"
         android:gravity="left|top"
-        android:text="介绍" />
+        />
 
 </LinearLayout>

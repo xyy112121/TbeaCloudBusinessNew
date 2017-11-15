@@ -113,7 +113,6 @@
             android:id="@+id/scancode_pay_confirm_state"
             style="@style/my_right_text_style1"
             android:layout_width="wrap_content"
-            android:text="未使用"
             android:textColor="@color/text_color"
             android:textSize="12sp" />
 
@@ -137,7 +136,6 @@
             android:id="@+id/scancode_pay_confirm_validexpiredtime"
             style="@style/my_right_text_style1"
             android:layout_width="wrap_content"
-            android:text="剩余3小时"
             android:textColor="@color/text_color"
             android:textSize="12sp" />
 

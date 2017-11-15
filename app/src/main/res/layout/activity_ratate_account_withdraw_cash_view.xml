@@ -33,7 +33,6 @@
                 android:textColor="@color/white"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="时间 "
                 android:layout_marginRight="5dp"
                 android:maxEms="16"
                 android:ellipsize="end"
@@ -89,7 +88,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:textStyle="bold"
-                    android:text="121"/>
+                />
             </LinearLayout>
         </LinearLayout>
 

@@ -42,7 +42,6 @@
                     android:id="@+id/sacn_code_pay_succeed_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="500.00"
                     android:textColor="@color/tab_text_normal"
                     android:textSize="20sp"
                     android:textStyle="bold" />

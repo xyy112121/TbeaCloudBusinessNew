@@ -52,7 +52,6 @@
                 <TextView
                     android:id="@+id/my_bypass_account_edit_type"
                     style="@style/my_right_text_style1"
-                    android:text="总经销 子账号"
                     android:textColor="@color/text_color" />
             </LinearLayout>
 

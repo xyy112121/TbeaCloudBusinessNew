@@ -31,7 +31,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
-                android:text="商品名称"
                 android:textColor="@color/tab_text_normal"
                 android:textSize="14sp" />
 
@@ -62,7 +61,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
-                        android:text="112"
                         android:textColor="@color/red"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -78,7 +76,6 @@
                 android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="发布时间"
                 android:textColor="@color/text_color"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -109,7 +106,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="用户"
-                android:textColor="@color/text_color" />
+                android:textColor="@color/tab_text_normal" />
 
             <ImageView
                 android:id="@+id/marker_info_list_user_iv"

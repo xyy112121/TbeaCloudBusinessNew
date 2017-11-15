@@ -2,10 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_top_layout_hight"
+        android:background="@color/head_color"
+        android:paddingTop="@dimen/discover_top_hight">
+        <ImageButton
+            android:id="@+id/top_left"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:scaleType="center"
+            android:src="@drawable/icon_back" />
 
-    <include layout="@layout/activity_page_top" />
+        <TextView
+            android:id="@+id/top_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:text="其他应用"/>
+    </RelativeLayout>
 
     <com.example.programmer.tbeacloudbusiness.component.MyGridView
         android:id="@+id/gridView"

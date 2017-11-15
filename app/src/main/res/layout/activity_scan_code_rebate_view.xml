@@ -98,7 +98,6 @@
                 style="@style/money_logo_style" />
             <TextView
                 android:id="@+id/scan_code_info_money"
-                android:text="11"
                 style="@style/my_right_text_style1" />
         </LinearLayout>
 

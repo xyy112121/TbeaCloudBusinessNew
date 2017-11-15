@@ -22,7 +22,7 @@
             android:textColor="@color/tab_text_normal"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="sss"/>
+           />
 
         <TextView
             android:id="@+id/wallet_item_money"
@@ -33,7 +33,7 @@
             android:textColor="@color/tab_text_normal"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="sss"/>
+           />
 
         <TextView
             android:id="@+id/wallet_item_validexpiredtime"
@@ -44,7 +44,6 @@
             android:textColor="@color/tab_text_normal"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="sss"
             android:gravity="right"
             android:layout_marginRight="8dp"
             />
