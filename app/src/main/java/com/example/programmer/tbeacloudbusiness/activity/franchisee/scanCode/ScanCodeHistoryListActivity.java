@@ -55,7 +55,7 @@ public class ScanCodeHistoryListActivity extends BaseActivity implements BGARefr
         initTopbar("历史记录");
         initView();
         getActivityStatus();
-        getListData();
+//        getListData();
     }
 
     private void initView(){

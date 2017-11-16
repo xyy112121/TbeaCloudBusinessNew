@@ -58,13 +58,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.8">
 
-                    <ImageView
+                    <com.example.programmer.tbeacloudbusiness.component.CircleImageView
                         android:id="@+id/person_info_header"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="left"
-                        android:src="@drawable/icon_head" />
+                        android:src="@drawable/icon_head"
+                        app:border_width="0dp" />
+
 
                     <ImageView
                         android:layout_width="wrap_content"

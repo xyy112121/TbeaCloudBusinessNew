@@ -122,6 +122,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
         mRequest.city = MyApplication.instance.getCity();
         mRequest.zone = MyApplication.instance.getDistrict();
         getDate();
+
     }
 
     public void getDate() {
@@ -181,6 +182,13 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                                     mPersonIdCard1TvView.setVisibility(View.INVISIBLE);
                                     mPersonIdCard2TvView.setVisibility(View.INVISIBLE);
                                     mcompanyPhotoTvView.setVisibility(View.INVISIBLE);
+                                }
+
+                                if ("identifying".equals(mIdentify)){
+                                    mFinishView.setEnabled(false);
+                                    mFinishView.setText("认证中");
+                                }else {
+                                    mFinishView.setText("重新认证");
                                 }
 
                             } else {

@@ -19,6 +19,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.main.model.UploadIma
 import com.example.programmer.tbeacloudbusiness.activity.user.CompletionDataActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.RealNameAuthenticationActivity;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
+import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
@@ -53,7 +54,7 @@ public class PersonInfoActivity extends BaseActivity {
     @BindView(R.id.person_info_account)
     PublishTextRowView mAccountView;
     @BindView(R.id.person_info_header)
-    ImageView mHeaderView;
+    CircleImageView mHeaderView;
     @BindView(R.id.person_info_header_layout)
     RelativeLayout mHeaderLayout;
     @BindView(R.id.person_info_name)

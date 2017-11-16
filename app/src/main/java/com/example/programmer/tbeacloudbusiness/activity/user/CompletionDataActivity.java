@@ -74,7 +74,7 @@ public class CompletionDataActivity extends BaseActivity {
     @BindView(R.id.completion_data_head)
     TextView mHeadView;
     @BindView(R.id.completion_data_head_iv)
-    ImageView mHeadView1;
+    CircleImageView mHeadView1;
     @BindView(R.id.completion_data_sex)
     TextView mSexView;
     @BindView(R.id.completion_data_birthday)
