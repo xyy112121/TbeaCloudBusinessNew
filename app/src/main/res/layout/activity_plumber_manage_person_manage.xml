@@ -197,7 +197,8 @@
                 app:text2="一年接单此商户"
                 app:text3="三月接单次数"
                 app:text4="30"
-                app:text5="12" />
+                app:text5="12"
+                android:visibility="gone"/>
 
             <View
                 style="@style/horizontal_view"
@@ -214,17 +215,20 @@
                 app:text2="一年接单次数"
                 app:text3="三月接单次数"
                 app:text4="20"
-                app:text5="12" />
+                app:text5="12"
+                android:visibility="gone"/>
 
             <View
                 style="@style/horizontal_view"
-                android:layout_height="8dp" />
+                android:layout_height="8dp"
+                android:visibility="gone"/>
 
             <FrameLayout
                 android:id="@+id/pm_view_logininfo_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -295,7 +299,8 @@
 
             <View
                 style="@style/horizontal_view"
-                android:layout_height="8dp" />
+                android:layout_height="8dp"
+                android:visibility="gone"/>
 
             <com.example.programmer.tbeacloudbusiness.component.PersonManageItemView
                 android:id="@+id/pm_view_socialinfo"
@@ -307,11 +312,13 @@
                 app:text2="粉丝"
                 app:text3="关注"
                 app:text4="1200.00"
-                app:text5="500.00" />
+                app:text5="500.00"
+                android:visibility="gone"/>
 
             <View
                 style="@style/horizontal_view"
-                android:layout_height="8dp" />
+                android:layout_height="8dp"
+                android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

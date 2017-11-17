@@ -43,6 +43,7 @@ public class PlumberManagePersonViewActivity extends BaseActivity {
                                 PlumberInfoResponseModel.DataBean.ElectricianpersonalinfoBean info = model.data.electricianpersonalinfo;
                                 setTextView(R.id.plumber_info_name, info.personname);
                                 setTextView(R.id.plumber_info_sex, info.sex);
+                                setTextView(R.id.plumber_info_phone, info.mobilenumber);
                                 setTextView(R.id.plumber_info_age, info.age);
                                 setTextView(R.id.plumber_info_workAge, info.workyear);
                                 setTextView(R.id.plumber_info_area, info.belongtocompany);

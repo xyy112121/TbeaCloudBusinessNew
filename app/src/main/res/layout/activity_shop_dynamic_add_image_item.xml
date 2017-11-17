@@ -14,12 +14,10 @@
 
         <ImageView
             android:id="@+id/shop_dynamic_add_list_item_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:maxHeight="218dp"
-            android:maxWidth="218dp"
             android:scaleType="fitXY"
             android:src="@drawable/icon_take_photos" />
 

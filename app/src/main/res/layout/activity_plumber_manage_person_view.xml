@@ -93,7 +93,7 @@
             <TextView
                 style="@style/my_text_style"
                 android:layout_height="wrap_content"
-                android:text="所在地区" />
+                android:text="隶属" />
 
             <TextView
                 android:id="@+id/plumber_info_area"
@@ -101,7 +101,21 @@
                 android:textStyle="bold"/>
         </LinearLayout>
 
+        <View style="@style/horizontal_view" />
 
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="电话号码" />
+
+            <TextView
+                android:id="@+id/plumber_info_phone"
+                style="@style/my_right_text_style"
+                android:gravity="right|center"
+                />
+        </LinearLayout>
 
         <View style="@style/horizontal_view" />
 
@@ -118,7 +132,21 @@
                 android:gravity="right|center"
                 />
         </LinearLayout>
+        <View style="@style/horizontal_view" />
 
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:layout_height="wrap_content"
+                android:text="服务范围" />
+
+            <TextView
+                android:id="@+id/plumber_info_service"
+                style="@style/my_right_text_style"
+                android:gravity="right|center"
+                />
+        </LinearLayout>
         <View style="@style/horizontal_view" />
 
         <LinearLayout style="@style/my_text_layout">

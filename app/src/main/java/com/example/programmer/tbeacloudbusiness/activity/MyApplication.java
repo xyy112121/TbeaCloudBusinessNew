@@ -61,23 +61,23 @@ public class MyApplication extends Application implements BDLocationListener {
         super.onCreate();
         instance = this;
         initUniversalImageLoader();
-        SDKInitializer.initialize(getApplicationContext());
-        mLocationClient = new LocationClient(getApplicationContext());
-        mLocationClient.registerLocationListener(MyApplication.instance);
-        //百度定位
-        LocationClientOption option = new LocationClientOption();
-        option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
-        option.setIsNeedAddress(true);
-        option.setOpenGps(true);// 打开gps
-        option.setAddrType("all");// 返回的定位结果包含地址信息
-        option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(60 * 1000);
-        mLocationClient.setLocOption(option);
-        mLocationClient.start();
-        mLocationClient.requestLocation();
-
-        //加载保存的位置信息
-        loadLoaclInfo();
+//        SDKInitializer.initialize(getApplicationContext());
+//        mLocationClient = new LocationClient(getApplicationContext());
+//        mLocationClient.registerLocationListener(MyApplication.instance);
+//        //百度定位
+//        LocationClientOption option = new LocationClientOption();
+//        option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
+//        option.setIsNeedAddress(true);
+//        option.setOpenGps(true);// 打开gps
+//        option.setAddrType("all");// 返回的定位结果包含地址信息
+//        option.setCoorType("bd09ll"); // 设置坐标类型
+//        option.setScanSpan(60 * 1000);
+//        mLocationClient.setLocOption(option);
+//        mLocationClient.start();
+//        mLocationClient.requestLocation();
+//
+//        //加载保存的位置信息
+//        loadLoaclInfo();
 
         //初始化二维码工具类
         ZXingLibrary.initDisplayOpinion(this);
