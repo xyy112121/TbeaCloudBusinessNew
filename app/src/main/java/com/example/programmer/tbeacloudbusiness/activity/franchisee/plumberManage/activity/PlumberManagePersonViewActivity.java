@@ -47,6 +47,7 @@ public class PlumberManagePersonViewActivity extends BaseActivity {
                                 setTextView(R.id.plumber_info_age, info.age);
                                 setTextView(R.id.plumber_info_workAge, info.workyear);
                                 setTextView(R.id.plumber_info_area, info.belongtocompany);
+                                setTextView(R.id.plumber_info_service, info.servicescope);
                                 setTextView(R.id.plumber_info_whetheridentify, info.whetheridentifyname);
                                 setTextView(R.id.plumber_info_intro, info.introduce);
                             } else {

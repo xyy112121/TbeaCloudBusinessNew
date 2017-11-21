@@ -20,6 +20,7 @@ public class PlumberInfoResponseModel extends BaseResponseModel {
             public String whetheridentifyname;
             public String introduce;
             public String belongtocompany;
+            public String servicescope;
             public String sex;
             public String age;
             public String workyear;
