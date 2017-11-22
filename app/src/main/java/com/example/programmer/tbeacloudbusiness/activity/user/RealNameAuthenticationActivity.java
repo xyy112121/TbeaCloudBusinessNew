@@ -176,18 +176,27 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                                     }
                                 }
 
-                                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//已认证，或者正在认证
+//                                if (!"notidentify".equals(mIdentify) && mIdentify != null && !"".equals(mIdentify)) {//已认证，或者正在认证
+//                                    setView();
+//                                mCompanyLisencePictureTvView.setVisibility(View.INVISIBLE);
+//                                mPersonIdCard1TvView.setVisibility(View.INVISIBLE);
+//                                mPersonIdCard2TvView.setVisibility(View.INVISIBLE);
+//                                mcompanyPhotoTvView.setVisibility(View.INVISIBLE);
+//                                }
+
+                                if ("identifying".equals(mIdentify)) {//正在认证
                                     setView();
                                     mCompanyLisencePictureTvView.setVisibility(View.INVISIBLE);
                                     mPersonIdCard1TvView.setVisibility(View.INVISIBLE);
                                     mPersonIdCard2TvView.setVisibility(View.INVISIBLE);
                                     mcompanyPhotoTvView.setVisibility(View.INVISIBLE);
-                                }
-
-                                if ("identifying".equals(mIdentify)){
                                     mFinishView.setEnabled(false);
                                     mFinishView.setText("认证中");
-                                }else {
+                                }
+
+                                //认证失败和认证通过
+                                if ("identifyfailed".equals(mIdentify) || "identified".equals(mIdentify)) {
+                                    mFinishView.setBackgroundResource(R.drawable.btn_bg_red);
                                     mFinishView.setText("重新认证");
                                 }
 
@@ -242,10 +251,10 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                 showAddrPicker();
                 break;
             case R.id.real_name_companyLisencePicture_tv:
-                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
-                    mFlag = "LisencePicture";
-                    openImage();
-                }
+//                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
+                mFlag = "LisencePicture";
+                openImage();
+//                }
                 break;
             case R.id.real_name_companyLisencePicture:
 //                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
@@ -261,10 +270,10 @@ public class RealNameAuthenticationActivity extends BaseActivity {
 
                 break;
             case R.id.real_name_masterPersonIdCard1_tv:
-                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
-                    mFlag = "IdCard1";
-                    openImage();
-                }
+//                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
+                mFlag = "IdCard1";
+                openImage();
+//                }
                 break;
             case R.id.real_name_masterPersonIdCard1:
 //                if ("notidentify".equals(mIdentify) || mIdentify != null || "".equals(mIdentify)) {//未认证
@@ -281,10 +290,10 @@ public class RealNameAuthenticationActivity extends BaseActivity {
 
                 break;
             case R.id.real_name_masterPersonIdCard2_tv:
-                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
-                    mFlag = "IdCard2";
-                    openImage();
-                }
+//                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
+                mFlag = "IdCard2";
+                openImage();
+//                }
                 break;
             case R.id.real_name_masterPersonIdCard2:
 //                if ("notidentify".equals(mIdentify) || mIdentify != null || "".equals(mIdentify)) {//未认证
@@ -300,10 +309,10 @@ public class RealNameAuthenticationActivity extends BaseActivity {
 
                 break;
             case R.id.real_name_companyPhoto_tv:
-                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
-                    mFlag = "CompanyPhoto";
-                    openImage();
-                }
+//                if ("notidentify".equals(mIdentify) || mIdentify == null || "".equals(mIdentify)) {//未认证
+                mFlag = "CompanyPhoto";
+                openImage();
+//                }
                 break;
             case R.id.real_name_companyPhoto_layout:
 //                if ("notidentify".equals(mIdentify) || mIdentify != null || "".equals(mIdentify)) {//未认证
@@ -324,70 +333,70 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                 break;
             case R.id.real_name_companyPhoto_finish:
                 String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-                if ("notidentify".equals(identify) || identify == null || "".equals(identify)) {//未认证
-                    mRequest.companyname = mCompanyNameView.getText() + "";
-                    mRequest.companylisencecode = mCompanyLisenceCodeView.getText() + "";
-                    mRequest.address = mAddr2View.getText() + "";
-                    mRequest.businessscope = mBusinessScopeView.getText() + "";
-                    mRequest.masterperson = mMasterPersonView.getText() + "";
-                    mRequest.masterpersonid = mMasterPersonIDView.getText() + "";
-                    if (TextUtils.isEmpty(mRequest.companyname)) {
-                        ToastUtil.showMessage("请填写企业名称！");
-                        return;
-                    }
-                    if (TextUtils.isEmpty(mRequest.companylisencecode)) {
-                        ToastUtil.showMessage("请填写营业执照上的注册号！");
-                        return;
-                    }
-                    if (TextUtils.isEmpty(mRequest.province)) {
-                        ToastUtil.showMessage("请填写企业所在地");
-                        return;
-                    }
-
-                    if (TextUtils.isEmpty(mRequest.address)) {
-                        ToastUtil.showMessage("请填写企业详细地址");
-                        return;
-                    }
-
-                    if (TextUtils.isEmpty(mRequest.businessscope)) {
-                        ToastUtil.showMessage("请填写企业经营范围");
-                        return;
-                    }
-
-                    if (TextUtils.isEmpty(mRequest.companylisencepicture)) {
-                        ToastUtil.showMessage("请上传营业执照！");
-                        return;
-                    }
-
-                    if (TextUtils.isEmpty(mRequest.masterperson)) {
-                        ToastUtil.showMessage("请输入法人姓名！");
-                        return;
-                    }
-
-                    if (TextUtils.isEmpty(mRequest.masterpersonid)) {
-                        ToastUtil.showMessage("请输入法人身份证号！");
-                        return;
-                    }
-
-                    if (TextUtils.isEmpty(mRequest.masterpersonidcard1)) {
-                        ToastUtil.showMessage("请上传法人身份证正面(个人信息页)！");
-                        return;
-                    }
-
-                    if (TextUtils.isEmpty(mRequest.masterpersonidcard2)) {
-                        ToastUtil.showMessage("请上传法人身份证反面(国徽页)！");
-                        return;
-                    }
-
-                    if (TextUtils.isEmpty(mRequest.companyphoto)) {
-                        ToastUtil.showMessage("请上传公司实景照片！");
-                        return;
-                    }
-                    showAlert();
-
-                } else {
-                    getAttestationstate();
+//                if ("notidentify".equals(identify) || identify == null || "".equals(identify)) {//未认证
+                mRequest.companyname = mCompanyNameView.getText() + "";
+                mRequest.companylisencecode = mCompanyLisenceCodeView.getText() + "";
+                mRequest.address = mAddr2View.getText() + "";
+                mRequest.businessscope = mBusinessScopeView.getText() + "";
+                mRequest.masterperson = mMasterPersonView.getText() + "";
+                mRequest.masterpersonid = mMasterPersonIDView.getText() + "";
+                if (TextUtils.isEmpty(mRequest.companyname)) {
+                    ToastUtil.showMessage("请填写企业名称！");
+                    return;
                 }
+                if (TextUtils.isEmpty(mRequest.companylisencecode)) {
+                    ToastUtil.showMessage("请填写营业执照上的注册号！");
+                    return;
+                }
+                if (TextUtils.isEmpty(mRequest.province)) {
+                    ToastUtil.showMessage("请填写企业所在地");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mRequest.address)) {
+                    ToastUtil.showMessage("请填写企业详细地址");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mRequest.businessscope)) {
+                    ToastUtil.showMessage("请填写企业经营范围");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mRequest.companylisencepicture)) {
+                    ToastUtil.showMessage("请上传营业执照！");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mRequest.masterperson)) {
+                    ToastUtil.showMessage("请输入法人姓名！");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mRequest.masterpersonid)) {
+                    ToastUtil.showMessage("请输入法人身份证号！");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mRequest.masterpersonidcard1)) {
+                    ToastUtil.showMessage("请上传法人身份证正面(个人信息页)！");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mRequest.masterpersonidcard2)) {
+                    ToastUtil.showMessage("请上传法人身份证反面(国徽页)！");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mRequest.companyphoto)) {
+                    ToastUtil.showMessage("请上传公司实景照片！");
+                    return;
+                }
+                showAlert();
+
+//                } else {
+//                    getAttestationstate();
+//                }
                 break;
         }
     }
@@ -475,7 +484,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                             ResponseInfo model = (ResponseInfo) msg.obj;
                             if (model.isSuccess()) {
                                 ToastUtil.showMessage("提交成功，请等待认证！");
-                                ShareConfig.setConfig(mContext, Constants.whetheridentifiedid, "identifying");
+//                                ShareConfig.setConfig(mContext, Constants.whetheridentifiedid, "identifying");
                                 setResult(RESULT_OK);
                                 finish();
                             } else {

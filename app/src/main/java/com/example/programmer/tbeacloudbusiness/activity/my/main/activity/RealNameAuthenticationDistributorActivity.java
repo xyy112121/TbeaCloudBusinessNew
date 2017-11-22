@@ -80,7 +80,7 @@ public class RealNameAuthenticationDistributorActivity extends BaseActivity {
                             TextView tittleView = (TextView) findViewById(R.id.identification_title);
                             mState = info.identifystatusid;
                             ShareConfig.setConfig(mContext, Constants.whetheridentifiedid, mState);
-                            if ("notidentify".equals(info.identifystatusid)) {//没有通过认证
+                            if ("notidentify".equals(info.identifystatusid) || "identifyfailed".equals(info.identifystatusid)) {//没有通过认证
                                 iv.setImageResource(R.drawable.icon_my_relaname_unapprove);
                                 tittleView.setText("你未通过实名认证");
 
@@ -119,7 +119,8 @@ public class RealNameAuthenticationDistributorActivity extends BaseActivity {
 
     @OnClick(R.id.identification_state)
     public void onViewClicked() {
-        if ("notidentify".equals(mState)) {//没有通过认证
+//        if ("notidentify".equals(mState)) {//没有通过认证
+        if ("identifyfailed".equals(mState)) {//没有通过认证
             startActivity(new Intent(mContext, RealNameAuthenticationFailActivity.class));
 
         } else {//已通过和审核中的，就显示认证信息

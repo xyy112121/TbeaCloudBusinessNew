@@ -192,7 +192,6 @@ public class MyFragment extends Fragment implements View.OnClickListener, BGARef
                             startActivity(new Intent(getActivity(), OrderListActivity.class));
                         }
 
-
                         if ("companyidentify".equals(item.id)) {//实名认证
                             startActivity(new Intent(getActivity(), RealNameAuthenticationDistributorActivity.class));
 //                            String identify = ShareConfig.getConfigString(getActivity(), Constants.whetheridentifiedid, "");

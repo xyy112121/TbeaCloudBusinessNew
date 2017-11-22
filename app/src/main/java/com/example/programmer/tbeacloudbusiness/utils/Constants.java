@@ -10,7 +10,7 @@ public class Constants {
     public static final String USERID = "userID";
     public static final String USERTYPE = "usertypeid";
     public static final String ACCOUNT = "account";
-    //已经认证 identified 没有认证：notidentify 正在认证中 identifying
+    //已经认证 identified 没有认证：notidentify 正在认证中 identifying 认证失败：identifyfailed
     public static final String whetheridentifiedid = "whetheridentifiedid";
 
 }

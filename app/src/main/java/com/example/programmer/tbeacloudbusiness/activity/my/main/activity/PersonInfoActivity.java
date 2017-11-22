@@ -325,12 +325,14 @@ public class PersonInfoActivity extends BaseActivity {
 
     @OnClick(R.id.person_info_state)
     public void onViewClicked() {
-        String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
-        if ("notidentify".equals(identify)) {//没有通过认证
-            startActivity(new Intent(mContext, RealNameAuthenticationFailActivity.class));
+        startActivity(new Intent(mContext, RealNameAuthenticationDistributorActivity.class));
 
-        } else {//已通过和审核中的，就显示认证信息
-            startActivity(new Intent(mContext, RealNameAuthenticationActivity.class));
-        }
+//        String identify = ShareConfig.getConfigString(mContext, Constants.whetheridentifiedid, "");
+//        if ("notidentify".equals(identify)) {//没有通过认证
+//            startActivity(new Intent(mContext, RealNameAuthenticationFailActivity.class));
+//
+//        } else {//已通过和审核中的，就显示认证信息
+//            startActivity(new Intent(mContext, RealNameAuthenticationActivity.class));
+//        }
     }
 }
