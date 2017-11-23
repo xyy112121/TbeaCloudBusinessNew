@@ -24,6 +24,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.action.StoreManageAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.DynamicListRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.model.set.DynamicListResponseModel1;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.NetWebViewActivity;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
@@ -166,7 +167,7 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
         return true;
     }
 
-    @OnClick({R.id.shop_dynamic_add_list_delete,R.id.shop_dynamic_list_delete, R.id.top_right_text, R.id.shop_dynamic_add_list_item_all_layout})
+    @OnClick({R.id.shop_dynamic_add_list_delete, R.id.shop_dynamic_list_delete, R.id.top_right_text, R.id.shop_dynamic_add_list_item_all_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.shop_dynamic_list_delete:
@@ -215,7 +216,7 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
                         ids += item.newsid;
                     }
                     delete(ids);
-                }else {
+                } else {
                     ToastUtil.showMessage("请选择需要删除的动态！");
                 }
                 break;
@@ -238,43 +239,43 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
-        dialog.setText("请等待...");
-        dialog.show();
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                dialog.dismiss();
-                switch (msg.what) {
-                    case ThreadState.SUCCESS:
-                        ResponseInfo re = (ResponseInfo) msg.obj;
-                        if(re.isSuccess()){
-                            mAdapter.selectNotAll();
-                            mSelectList.clear();
-                            mRefreshLayout.beginRefreshing();
-                        }else {
-                            ToastUtil.showMessage("操作失败!");
+                final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+                dialog.setText("请等待...");
+                dialog.show();
+                final Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        dialog.dismiss();
+                        switch (msg.what) {
+                            case ThreadState.SUCCESS:
+                                ResponseInfo re = (ResponseInfo) msg.obj;
+                                if (re.isSuccess()) {
+                                    mAdapter.selectNotAll();
+                                    mSelectList.clear();
+                                    mRefreshLayout.beginRefreshing();
+                                } else {
+                                    ToastUtil.showMessage("操作失败!");
+                                }
+                                break;
+                            case ThreadState.ERROR:
+                                ToastUtil.showMessage("操作失败!");
+                                break;
                         }
-                        break;
-                    case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败!");
-                        break;
-                }
-            }
-        };
+                    }
+                };
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    StoreManageAction action = new StoreManageAction();
-                    ResponseInfo re = action.deleteDynamic(ids);
-                    handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
-                } catch (Exception e) {
-                    handler.sendEmptyMessage(ThreadState.ERROR);
-                }
-            }
-        }).start();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            StoreManageAction action = new StoreManageAction();
+                            ResponseInfo re = action.deleteDynamic(ids);
+                            handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
+                        } catch (Exception e) {
+                            handler.sendEmptyMessage(ThreadState.ERROR);
+                        }
+                    }
+                }).start();
 
             }
         }, "是");
@@ -358,11 +359,11 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Intent intent = new Intent();
-//                    intent.putExtra("type", mFlag);
-//                    intent.putExtra("obj", getItem(position));
-//                    setResult(RESULT_OK, intent);
-//                    finish();
+                    Intent intent = new Intent(mContext, NetWebViewActivity.class);
+                    intent.putExtra("title", "店铺动态");
+                    String par = "shopnewsdetail?id=" + getItem(position).newsid;
+                    intent.putExtra("parameter", par);//URL后缀
+                    startActivity(intent);
                 }
             });
             return convertView;
