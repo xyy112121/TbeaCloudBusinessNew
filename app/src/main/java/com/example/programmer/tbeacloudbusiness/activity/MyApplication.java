@@ -50,7 +50,7 @@ public class MyApplication extends Application implements BDLocationListener {
 
 
     public static MyApplication instance;
-    private List<SoftReference<Activity>> activitys = new ArrayList<SoftReference<Activity>>();
+    private List<SoftReference<Activity>> activitys = new ArrayList<>();
     private boolean mOnline = false;
 
 

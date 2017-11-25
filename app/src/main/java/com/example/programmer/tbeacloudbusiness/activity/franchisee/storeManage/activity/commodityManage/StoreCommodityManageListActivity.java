@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -99,6 +100,7 @@ public class StoreCommodityManageListActivity extends BaseActivity implements BG
                 }
                 mOrderItem = "price";
                 mRefreshLayout.beginRefreshing();
+                mIndex = 0;
                 if (mListLayout.size() > 0) {
                     for (int i = 0; i < mListLayout.size(); i++) {
                         setViewColor(i);
@@ -185,7 +187,7 @@ public class StoreCommodityManageListActivity extends BaseActivity implements BG
             layout.setLayoutParams(lp);
             TextView t = (TextView) layout.findViewById(R.id.fragment_company_top_tv);
             t.setText(topTexts[i]);
-            t.setTextColor(ContextCompat.getColor(mContext,R.color.text_color3));
+            t.setTextColor(ContextCompat.getColor(mContext, R.color.text_color3));
             if (i == 0) {
                 t.setTextColor(ContextCompat.getColor(mContext, R.color.blue));
 //
@@ -197,9 +199,14 @@ public class StoreCommodityManageListActivity extends BaseActivity implements BG
                     mPriceIv.setImageResource(R.drawable.icon_arraw);
                     mIndex2 = mIndex;
                     mIndex = index;
-                    if (mIndex2 != -1 && mIndex != mIndex2) {
+                    Log.e("前一次点击的下标", mIndex2 + "");
+                    Log.e("这一次点击的下标", mIndex + "");
+                    if ((mIndex2 != -1 && mIndex != mIndex2)) {
                         ((TextView) view.findViewById(R.id.fragment_company_top_tv)).setTextColor(ContextCompat.getColor(mContext, R.color.blue));
                         setViewColor();
+                    }
+                    if ((mIndex2 == 0 && mIndex == 0)) {
+                        ((TextView) view.findViewById(R.id.fragment_company_top_tv)).setTextColor(ContextCompat.getColor(mContext, R.color.blue));
                     }
                     switch (mIndex) {
                         case 0:
