@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -23,6 +24,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageTypeListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.action.PublicAction;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.JsToJava;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.model.NetUrlResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
@@ -64,6 +66,7 @@ public class ProductPresentationInfoActivity extends BaseActivity implements Vie
         mDialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         mDialog.setText("加载中...");
         mDialog.show();
+        initWebView();
         getDate();
     }
 
@@ -107,8 +110,7 @@ public class ProductPresentationInfoActivity extends BaseActivity implements Vie
         }).start();
     }
 
-
-    private void showWebView(String url) {
+    private void initWebView() {
         WebSettings settings = mWebView.getSettings();
         //自适应屏幕
         settings.setUseWideViewPort(true);
@@ -116,10 +118,12 @@ public class ProductPresentationInfoActivity extends BaseActivity implements Vie
         //启用支持javascript
         settings.setJavaScriptEnabled(true);
         settings.setBlockNetworkImage(false);//解决图片加载不出来的问题
-        settings.setJavaScriptEnabled(true);
         settings.setAllowFileAccess(true);
         settings.setDomStorageEnabled(true);//允许DCOM
+        mWebView.addJavascriptInterface(new JsToJava(this), "Android");
+    }
 
+    private void showWebView(String url) {
         mWebView.loadUrl(url);
 
         mWebView.setWebChromeClient(new WebChromeClient() {

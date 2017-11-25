@@ -9,4 +9,5 @@ public  class PicturelistBean implements Serializable {
     public String thumbpictureurl;
     public String largepicture;
     public String largepictureurl;
+    public String picture;
 }

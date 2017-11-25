@@ -2,12 +2,14 @@ package com.example.programmer.tbeacloudbusiness.activity.tbea.action;
 
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeTypeSelectReponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateHistoryListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.model.TbeaPictrueResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityCategoryResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityModelResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommoditySpecificationResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CompanyIntroListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.ContactInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.ProductPresentationListResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.model.PicturelistBean;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
@@ -96,6 +98,17 @@ public class TbeaAction extends BaseAction {
         List<NameValuePair> pairs = new ArrayList<>();
         String result = sendRequest("TBEAYUN002002005000", pairs);
         model = gson.fromJson(result, ContactInfoResponseModel.class);
+        return model;
+    }
+
+
+    //获取商品图片大图
+    public TbeaPictrueResponseModel getCommodityPicture(String id) throws Exception {
+        TbeaPictrueResponseModel model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("commodityid", id));
+        String result = sendRequest("TBEAYUN002002004003", pairs);
+        model = gson.fromJson(result, TbeaPictrueResponseModel.class);
         return model;
     }
 }

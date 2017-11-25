@@ -114,6 +114,10 @@ public class PictureShowActivity extends BaseActivity implements View.OnClickLis
                 if (images.get(position).largepicture == null || "".equals(images.get(position).largepicture)) {
                     url = images.get(position).largepictureurl;
                 }
+                if ((images.get(position).largepicture == null || "".equals(images.get(position).largepicture))&&
+                        (images.get(position).largepictureurl == null || "".equals(images.get(position).largepictureurl))) {
+                    url = images.get(position).picture;
+                }
                 ImageLoader.getInstance().displayImage(url, im);
                 container.addView(im);
                 mImageViews.add(im);
