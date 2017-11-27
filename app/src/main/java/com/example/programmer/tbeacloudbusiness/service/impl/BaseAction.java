@@ -2,6 +2,7 @@ package com.example.programmer.tbeacloudbusiness.service.impl;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.http.ReqBase;
@@ -46,6 +47,7 @@ public class BaseAction {
                         ReqBase req = new ReqBase(rh, pairs);
                         req.req(url);
                         String rspContext = req.getRspContext();
+                        Log.d("返回的json",rspContext);
                         return rspContext;
                     }
                 });

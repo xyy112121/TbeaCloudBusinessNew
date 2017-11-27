@@ -30,7 +30,7 @@
             style="@style/my_right_text_style"
             android:layout_alignParentRight="true"
             android:gravity="right|center_vertical"
-            android:text="12"/>
+            />
     </LinearLayout>
 
     <View

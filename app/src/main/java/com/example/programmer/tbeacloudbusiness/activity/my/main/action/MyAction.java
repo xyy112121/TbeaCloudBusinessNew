@@ -83,16 +83,25 @@ public class MyAction extends BaseAction {
         return model;
     }
 
+    public ResponseInfo updateBypassAccount(String json) throws Exception {
+        ResponseInfo model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("moduleauthlist", json));
+        String result = sendRequest("TBEAYUN011004004001", pairs);
+        model = gson.fromJson(result, ResponseInfo.class);
+        return model;
+    }
+
     /**
      * 关注的商品
      */
     public AttentionCommodityResponseModel getAttentionCommodityList
-    (String  userId,int page, int pagesize) throws Exception {
+    (String userId, int page, int pagesize) throws Exception {
         AttentionCommodityResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
-        if (userId != null){
+        if (userId != null) {
             pairs.add(new BasicNameValuePair("userid", userId));
-        }else {
+        } else {
             pairs.add(new BasicNameValuePair("userid", MyApplication.instance.getUserId()));
         }
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
@@ -106,12 +115,12 @@ public class MyAction extends BaseAction {
      * 关注的店铺
      */
     public AttentionStoreResponseModel getAttentionStoreList
-    (String userId,int page, int pagesize) throws Exception {
+    (String userId, int page, int pagesize) throws Exception {
         AttentionStoreResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
-        if (userId != null){
+        if (userId != null) {
             pairs.add(new BasicNameValuePair("userid", userId));
-        }else {
+        } else {
             pairs.add(new BasicNameValuePair("userid", MyApplication.instance.getUserId()));
         }
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
@@ -125,12 +134,12 @@ public class MyAction extends BaseAction {
      * 关注的个人
      */
     public AttentionPersonResponseModel getAttentionPersonList
-    (String userId,int page, int pagesize) throws Exception {
+    (String userId, int page, int pagesize) throws Exception {
         AttentionPersonResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
-        if (userId != null){
+        if (userId != null) {
             pairs.add(new BasicNameValuePair("userid", userId));
-        }else {
+        } else {
             pairs.add(new BasicNameValuePair("userid", MyApplication.instance.getUserId()));
         }
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
@@ -156,12 +165,12 @@ public class MyAction extends BaseAction {
      * 我的粉丝
      */
     public FansListResponseModel getFansList
-    (String userId,int page, int pagesize) throws Exception {
+    (String userId, int page, int pagesize) throws Exception {
         FansListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
-        if (userId != null){
+        if (userId != null) {
             pairs.add(new BasicNameValuePair("userid", userId));
-        }else {
+        } else {
             pairs.add(new BasicNameValuePair("userid", MyApplication.instance.getUserId()));
         }
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));

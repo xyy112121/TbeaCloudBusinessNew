@@ -87,6 +87,9 @@ public class RealNameAuthenticationDistributorActivity extends BaseActivity {
                             } else if ("identifying".equals(info.identifystatusid)) {//正在认证
                                 iv.setImageResource(R.drawable.icon_my_relaname_audit);
                                 tittleView.setText("证件审核中");
+                            } else {//通过
+                                iv.setImageResource(R.drawable.icon_my_relaname_verified);
+                                tittleView.setText("你已通过实名认证");
                             }
                             ((TextView) findViewById(R.id.identification_state)).setText(info.identifystatus);
 

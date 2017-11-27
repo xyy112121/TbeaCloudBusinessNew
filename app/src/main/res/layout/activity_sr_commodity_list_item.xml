@@ -20,7 +20,7 @@
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/icon_tbea_producttestpic" />
+            android:src="@drawable/icon_defult" />
 
         <RelativeLayout
             android:layout_width="match_parent"

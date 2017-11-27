@@ -17,7 +17,7 @@
         android:id="@+id/scan_code_pay_confirm_tip_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="支付金额：￥555.00"
+        android:text="支付金额:"
         android:textSize="12sp"
         android:textColor="@color/tab_text_normal"
         android:layout_marginLeft="15dp"

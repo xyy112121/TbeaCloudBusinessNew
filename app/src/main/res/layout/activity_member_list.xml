@@ -58,7 +58,6 @@
             android:layout_marginRight="25dp"
             android:layout_weight="1"
             android:gravity="right|center_vertical"
-            android:text="5998"
             android:textColor="@color/black"
             android:textStyle="bold" />
 

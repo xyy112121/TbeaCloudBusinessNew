@@ -29,6 +29,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.main.model.BypassAcc
 import com.example.programmer.tbeacloudbusiness.activity.my.set.activity.AddressEditActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.AddressModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.google.gson.Gson;
@@ -126,18 +127,74 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
 
     @OnClick(R.id.my_bypass_account_functions_save)
     public void onViewClicked() {
-        List<AuthorizationModel> list = new ArrayList<>();
-        for (AuthorizationModel model : mSelectList) {
-            if ("yes".equals(model.canview) || "yes".equals(model.canoperation)) {
-                list.add(model);
-            }
-        }
         Gson gson = new GsonBuilder().serializeNulls().create();
-        String json = gson.toJson(list);
-        Intent intent = new Intent();
-        intent.putExtra("authorizationList", json);
-        setResult(RESULT_OK, intent);
-        finish();
+        if (mId == null || mId.isEmpty()) {//新增
+            List<AuthorizationModel> list = new ArrayList<>();
+            for (AuthorizationModel model : mSelectList) {
+                if ("yes".equals(model.canview) || "yes".equals(model.canoperation)) {
+                    list.add(model);
+                }
+            }
+            String json = gson.toJson(list);
+            Intent intent = new Intent();
+            intent.putExtra("authorizationList", json);
+            setResult(RESULT_OK, intent);
+            finish();
+        } else {
+            List<AuthorizationModelUpdate> list = new ArrayList<>();
+            for (AuthorizationModel model : mSelectList) {
+                AuthorizationModelUpdate updateModel = new AuthorizationModelUpdate();
+                updateModel.canoperation = model.canoperation;
+                updateModel.canview = model.canview;
+                updateModel.moduleid = model.moduleid;
+                if ("yes".equals(model.canview) || "yes".equals(model.canoperation)) {
+                    updateModel.personid = mId;
+                    list.add(updateModel);
+                }
+            }
+            String json = gson.toJson(list);
+            update(json);
+        }
+
+    }
+
+    private void update(final String json) {
+        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+        dialog.setText("加载中...");
+        dialog.show();
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                dialog.dismiss();
+                switch (msg.what) {
+                    case ThreadState.SUCCESS:
+                        ResponseInfo model = (ResponseInfo) msg.obj;
+                        if (model.isSuccess()) {
+                            ToastUtil.showMessage("操作成功！");
+                            finish();
+                        } else {
+                            ToastUtil.showMessage(model.getMsg());
+                        }
+                        break;
+                    case ThreadState.ERROR:
+                        ToastUtil.showMessage("操作失败！");
+                        break;
+                }
+            }
+        };
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    MyAction action = new MyAction();
+                    ResponseInfo model = action.updateBypassAccount(json);
+                    handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+                } catch (Exception e) {
+                    handler.sendEmptyMessage(ThreadState.ERROR);
+                }
+            }
+        }).start();
     }
 
     class MyAdapter extends ArrayAdapter<BypassAccountFunctionListResponseModel.DataBean.ModulelistBean> {
@@ -162,6 +219,9 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
             holder.mNameView.setText(obj.modulename);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.moduleicon, holder.mIconView);
             AuthorizationModel item = new AuthorizationModel();
+            item.moduleid = obj.moduleid;
+            item.canoperation = obj.canoperation;
+            item.canview = obj.canview;
             mSelectList.add(item);
 
             if ("yes".equals(obj.canview)) {
@@ -176,7 +236,7 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
                 holder.mCanoperationView.setChecked(false);
             }
 
-            if(mSelectList2.size() >0){
+            if (mSelectList2.size() > 0) {
                 for (AuthorizationModel model : mSelectList2) {
                     if (model.moduleid.equals(obj.moduleid)) {
                         if ("yes".equals(model.canview)) {
@@ -196,16 +256,14 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
             }
 
 
-
-
             holder.mCanoperationView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         mSelectList.get(i).moduleid = obj.moduleid;
-                        mSelectList.get(i).canview = "yes";
+                        mSelectList.get(i).canoperation = "yes";
                     } else {
-                        mSelectList.get(i).canview = "no";
+                        mSelectList.get(i).canoperation = "no";
 
                     }
                 }
@@ -216,9 +274,9 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         mSelectList.get(i).moduleid = obj.moduleid;
-                        mSelectList.get(i).canoperation = "yes";
+                        mSelectList.get(i).canview = "yes";
                     } else {
-                        mSelectList.get(i).canoperation = "no";
+                        mSelectList.get(i).canview = "no";
                     }
                 }
             });
@@ -241,4 +299,12 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
             }
         }
     }
+
+    private final class AuthorizationModelUpdate {
+        public String moduleid;//功能模块Id
+        public String personid;//子账号功能模块
+        public String canview = "no";//  可查看 Yes or no
+        public String canoperation = "no";//操作  Yes or no
+    }
+
 }
