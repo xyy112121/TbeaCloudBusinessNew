@@ -473,7 +473,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ScanCodeViewActivity.class);
-                    intent.putExtra("id", obj.rebatescanid);
+                    intent.putExtra("id", obj.qrcode);
                     startActivity(intent);
                 }
             });

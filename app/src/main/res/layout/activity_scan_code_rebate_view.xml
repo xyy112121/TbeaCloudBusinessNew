@@ -117,7 +117,7 @@
             <LinearLayout
                 android:id="@+id/withdrow_deposit_view_payeeInfo"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="70dp"
                 android:layout_gravity="center_vertical"
                >
                 <include layout="@layout/activity_person_layout2" />

@@ -19,6 +19,7 @@ public class PmWithdrawListResponseModel extends BaseResponseModel {
         public  class TakeMoneyBean {
             public String takemoneyid;
             public String time;
+            public String qrcode;
             public String zone;
             public String money;
         }

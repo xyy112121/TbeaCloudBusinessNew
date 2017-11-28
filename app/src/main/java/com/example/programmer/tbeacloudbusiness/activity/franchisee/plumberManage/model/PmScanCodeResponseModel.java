@@ -18,6 +18,7 @@ public class PmScanCodeResponseModel extends BaseResponseModel {
 
         public static class RebatescanlistBean {
             public String rebatescanid;
+            public String qrcode;
             public String scantime;
             public String confirmstatus;
             public String money;
