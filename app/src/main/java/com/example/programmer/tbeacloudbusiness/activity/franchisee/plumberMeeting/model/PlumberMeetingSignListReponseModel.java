@@ -18,6 +18,7 @@ public class PlumberMeetingSignListReponseModel extends BaseResponseModel {
 
     public class MeetingSign {
         public String name;
+        public String id;
         public String persontypeicon;
         public String signtime;
         public String thumbpicture;

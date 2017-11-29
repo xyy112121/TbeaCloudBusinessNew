@@ -303,7 +303,7 @@ public class PlumberMeetingSignInListActivity extends BaseActivity implements BG
                 public void onClick(View v) {
                     Intent intent = new Intent();
                     intent.setClass(mContext, PlumberManageSignHistoryListActivity.class);
-                    intent.putExtra("id", obj.userid);
+                    intent.putExtra("id", obj.id);
                     startActivity(intent);
                 }
             });
