@@ -240,7 +240,7 @@ public class PlumberMeetingViewSignlnActivity extends BaseActivity implements BG
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            PlumberMeetingSignListReponseModel.MeetingSign obj = mList.get(position);
+            final PlumberMeetingSignListReponseModel.MeetingSign obj = mList.get(position);
 
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, holder.mHeadView);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, holder.mPersonjobtitleView);
@@ -254,6 +254,7 @@ public class PlumberMeetingViewSignlnActivity extends BaseActivity implements BG
                 public void onClick(View v) {
                     Intent intent = new Intent();
                     intent.setClass(mContext, PlumberManageSignHistoryListActivity.class);
+                    intent.putExtra("id",obj.userid);
                     startActivity(intent);
                 }
             });

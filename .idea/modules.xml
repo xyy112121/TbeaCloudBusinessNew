@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TbeaCloudBusiness.iml" filepath="$PROJECT_DIR$/TbeaCloudBusiness.iml" />
+      <module fileurl="file://F:\jz\TbeaCloudBusinessNew\TbeaCloudBusiness.iml" filepath="F:\jz\TbeaCloudBusinessNew\TbeaCloudBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/TbeaCloudBusinessNew.iml" filepath="$PROJECT_DIR$/TbeaCloudBusinessNew.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

@@ -14,6 +14,8 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.MeetingGalleryListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.MeetingPreparePlanActivity;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.MeetingPrepareSummaryActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingViewResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.WebViewActivity;
@@ -92,10 +94,9 @@ public class PlumberMeetingViewActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //会议安排
-                Intent intent = new Intent(mContext, WebViewActivity.class);
-                String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/meetingprepareinfo?meetingid=" + mId;
-                intent.putExtra("url", url);
-                intent.putExtra("title", "会议安排");
+                Intent intent = new Intent(mContext, MeetingPreparePlanActivity.class);
+                intent.putExtra("text", mMeetingitemsView.getText() + "");
+                intent.putExtra("flag", "view");
                 startActivity(intent);
             }
         });
@@ -103,11 +104,17 @@ public class PlumberMeetingViewActivity extends BaseActivity {
         mMeetingsummaryView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, WebViewActivity.class);
-                String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/meetingsummary?meetingid=" + mId;
-                intent.putExtra("url", url);
-                intent.putExtra("title", "会议纪要");
+                Intent intent = new Intent(mContext, MeetingPrepareSummaryActivity.class);
+                intent.putExtra("flag", "view");
+                intent.putExtra("text", mMeetingsummaryView.getText() + "");
+                intent.putExtra("meetingid", mId);
                 startActivity(intent);
+
+//                Intent intent = new Intent(mContext, WebViewActivity.class);
+//                String url = "http://121.42.193.154:6696/index.php/h5forapp/Index/meetingsummary?meetingid=" + mId;
+//                intent.putExtra("url", url);
+//                intent.putExtra("title", "会议纪要");
+//                startActivity(intent);
             }
         });
 
