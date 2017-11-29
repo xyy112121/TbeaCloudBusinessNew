@@ -68,6 +68,12 @@ public class OtherFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        getData();
+    }
+
     private void initView() {
         mGridAdapter = new GridAdapter();
         gridView.setAdapter(mGridAdapter);
@@ -80,7 +86,7 @@ public class OtherFragment extends Fragment {
      * 从服务器获取数据
      */
     private void getData() {
-        final CustomDialog dialog = new CustomDialog(getActivity(),R.style.MyDialog,R.layout.tip_wait_dialog);
+        final CustomDialog dialog = new CustomDialog(getActivity(), R.style.MyDialog, R.layout.tip_wait_dialog);
         dialog.setText("加载中...");
         dialog.show();
         try {
@@ -189,13 +195,11 @@ public class OtherFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), PlumberManageMainListActivity.class);
                         intent.putExtra("type", "");
                         startActivity(intent);
-                    }
-                    else if ("tebianfenxiao".equals(obj.moduleid)) {
+                    } else if ("tebianfenxiao".equals(obj.moduleid)) {
                         //分销系统
                         Intent intent = new Intent(getActivity(), FxMainActivity.class);
                         startActivity(intent);
-                    }
-                    else if ("shuidiangonghuiyi".equals(obj.moduleid)) {
+                    } else if ("shuidiangonghuiyi".equals(obj.moduleid)) {
                         //水电工会议
                         startActivity(new Intent(getActivity(), PlumberMeetingMainListActivity.class));
                     } else if ("shangchengxitong".equals(obj.moduleid)) {
