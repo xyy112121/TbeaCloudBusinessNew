@@ -24,7 +24,7 @@ public class DMMainListReponseModel extends BaseResponseModel {
             public String persontypeicon;
             public String companyname;
             public String zone;
-            public int totletakemoney;
+            public String totletakemoney;
         }
     }
 }

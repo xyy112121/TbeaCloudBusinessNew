@@ -24,6 +24,7 @@ public class ScanCodeMainResponseModel extends BaseResponseModel {
         public String sequence;
         public String thumbpicture;
         public String totlemoney;
+        public String rankingorder;
     }
 
     public class TakeMoneyTotleInfo{

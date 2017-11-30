@@ -3,7 +3,8 @@
     android:id="@+id/topbar"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@color/head_color" >
+    android:background="@color/head_color">
+
     <ImageButton
         android:id="@+id/top_left"
         android:layout_width="70dp"
@@ -18,8 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textColor="#fff"
-        android:textSize="18sp"
-        />
+        android:textSize="18sp" />
 
     <ImageButton
         android:id="@+id/top_right"
@@ -33,13 +33,14 @@
 
     <ImageButton
         android:id="@+id/top_right_text_image"
-        android:layout_width="10dp"
+        android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
         android:layout_marginRight="5dp"
         android:background="@null"
-        android:scaleType="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_search_white"
         android:visibility="invisible" />
 
     <TextView
@@ -47,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="8dp"
         android:layout_toLeftOf="@id/top_right_text_image"
         android:ellipsize="end"
         android:maxEms="4"

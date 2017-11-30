@@ -23,6 +23,7 @@ import com.example.programmer.tbeacloudbusiness.activity.distributorManage.model
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmMainListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.RegionSelectActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.DateSelectActivity;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPopTabView;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
@@ -76,7 +77,14 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dsitributor_list);
-        initTopbar("分销商列表", "时间选择", this);
+        initTopbar("分销商列表", "时间选择", this, R.drawable.icon_search_white, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, HistorySearchActivity.class);
+                intent.putExtra("type", "all");
+                startActivity(intent);
+            }
+        });
         ButterKnife.bind(this);
         initView();
 
@@ -142,12 +150,12 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
     }
 
     private void addRegionItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-         regionView = new PopOneListView(this);
+        regionView = new PopOneListView(this);
         regionView.setDefaultSelectByValue(defaultSelect);
         regionView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
             public void getValue(String key, String value) {
-                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue),value);
+                expandTabView.setViewColor(ContextCompat.getColor(mContext, R.color.blue), value);
                 mMoneyOrder = "";
                 mMoneyView.setImageResource(R.drawable.icon_arraw);
                 mUserOrder = "";
@@ -299,7 +307,7 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, holder.mJobtitleView);
             holder.mNameView.setText(obj.mastername);
             holder.mCityzoneView.setText(obj.zone);
-            holder.mTotlemoneyView.setText(obj.totletakemoney + "");
+            holder.mTotlemoneyView.setText(obj.totletakemoney);
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
