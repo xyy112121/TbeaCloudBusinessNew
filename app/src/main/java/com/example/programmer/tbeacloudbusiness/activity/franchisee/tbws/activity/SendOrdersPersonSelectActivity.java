@@ -32,7 +32,7 @@ import com.example.programmer.tbeacloudbusiness.model.EventCity;
 import com.example.programmer.tbeacloudbusiness.model.EventFlag;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.greenrobot.eventbus.EventBus;
@@ -98,7 +98,7 @@ public class SendOrdersPersonSelectActivity extends BaseActivity implements BGAR
 
             });
         } else {
-            ToastUtil.showMessage("请选择派单人员！");
+            showMessage("请选择派单人员！");
         }
 
     }
@@ -128,15 +128,15 @@ public class SendOrdersPersonSelectActivity extends BaseActivity implements BGAR
                                 EventBus.getDefault().post(new EventCity(EventFlag.EVENT_FINISED_ACTIVITY1));
                                 finish();
                             } else {
-                                ToastUtil.showMessage(re.getMsg());
+                                showMessage(re.getMsg());
                             }
                         } else {
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }
@@ -173,12 +173,12 @@ public class SendOrdersPersonSelectActivity extends BaseActivity implements BGAR
                                 mAdapter.addAll(re.data.electricianlist);
                             }
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

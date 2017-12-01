@@ -23,7 +23,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.main.action.MyAction
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.BypassAccountListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;
@@ -100,11 +100,11 @@ public class BypassAccountManageListActivity extends BaseActivity implements Vie
                             if (model.isSuccess()) {
                                 mAdapter.addAll(model.data.subaccountlist);
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

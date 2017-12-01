@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,8 +22,9 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.action.SubscribeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.MyTaskListWaitingResponseModel;
+import com.example.programmer.tbeacloudbusiness.fragment.BaseFragmentV;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +37,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 获得我发布的任务列表-­‐待处理
  */
 
-public class MyTaskListWaitingFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class MyTaskListWaitingFragment extends BaseFragmentV implements BGARefreshLayout.BGARefreshLayoutDelegate {
 
     Unbinder unbinder;
     @BindView(R.id.my_task_list_code_tv)
@@ -98,7 +100,7 @@ public class MyTaskListWaitingFragment extends Fragment implements BGARefreshLay
      * 获取数据
      */
     public void getDate() {
-        final Handler handler = new Handler() {
+        @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 mRefreshLayout.endLoadingMore();
@@ -111,12 +113,12 @@ public class MyTaskListWaitingFragment extends Fragment implements BGARefreshLay
                                 mAdapter.addAll(re.data.electricalchecklist);
                             }
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg(), getActivity());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！", getActivity());
                         break;
                 }
             }

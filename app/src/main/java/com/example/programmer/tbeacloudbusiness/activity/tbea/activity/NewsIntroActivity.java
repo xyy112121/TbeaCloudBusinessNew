@@ -26,7 +26,7 @@ import com.example.programmer.tbeacloudbusiness.activity.tbea.action.TbeaAction;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CompanyIntroListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -141,11 +141,11 @@ public class NewsIntroActivity extends BaseActivity implements BGARefreshLayout.
                                 if (model.data != null && model.data.newslist != null)
                                     mAdapter.addAll(model.data.newslist);
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

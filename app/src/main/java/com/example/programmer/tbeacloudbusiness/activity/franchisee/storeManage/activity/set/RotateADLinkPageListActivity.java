@@ -31,7 +31,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -218,11 +218,11 @@ public class RotateADLinkPageListActivity extends BaseActivity implements BGARef
                                     mAdapter1.addAll(model.data.newslist);
                                 }
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -265,11 +265,11 @@ public class RotateADLinkPageListActivity extends BaseActivity implements BGARef
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

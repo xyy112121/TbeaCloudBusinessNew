@@ -18,7 +18,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
@@ -68,12 +68,12 @@ public class SetVisualGraphActivity extends BaseActivity implements View.OnClick
                             }
 
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败!");
+                        showMessage("操作失败!");
 
                         break;
                 }
@@ -155,13 +155,13 @@ public class SetVisualGraphActivity extends BaseActivity implements View.OnClick
                             case ThreadState.SUCCESS:
                                 ResponseInfo model = (ResponseInfo) msg.obj;
                                 if (model.isSuccess()) {
-                                    ToastUtil.showMessage("操作成功！");
+                                    showMessage("操作成功！");
                                 } else {
-                                    ToastUtil.showMessage(model.getMsg());
+                                    showMessage(model.getMsg());
                                 }
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败！");
+                                showMessage("操作失败！");
                                 break;
                         }
                     }
@@ -189,7 +189,7 @@ public class SetVisualGraphActivity extends BaseActivity implements View.OnClick
                 e.printStackTrace();
             }
         } else {
-            ToastUtil.showMessage("请选择需要上传的图片");
+            showMessage("请选择需要上传的图片");
         }
     }
 
@@ -221,12 +221,12 @@ public class SetVisualGraphActivity extends BaseActivity implements View.OnClick
                                 if (re.isSuccess()) {
                                     mImageView.setImageResource(R.drawable.icon_defult);
                                 } else {
-                                    ToastUtil.showMessage(re.getMsg());
+                                    showMessage(re.getMsg());
                                 }
 
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败!");
+                                showMessage("操作失败!");
                                 break;
                         }
                     }

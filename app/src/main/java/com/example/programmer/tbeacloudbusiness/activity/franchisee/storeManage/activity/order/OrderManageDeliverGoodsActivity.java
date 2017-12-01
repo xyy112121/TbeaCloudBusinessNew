@@ -9,7 +9,7 @@ import android.view.View;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.component.picker.CustomOptionPicker;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import cn.qqtheme.framework.picker.OptionPicker;
 
@@ -36,7 +36,7 @@ public class OrderManageDeliverGoodsActivity extends BaseActivity implements Vie
                 optionPicker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
                     @Override
                     public void onOptionPicked(String option) {
-                        ToastUtil.showMessage(option);
+                        showMessage(option);
                     }
                 });
                 optionPicker.show();

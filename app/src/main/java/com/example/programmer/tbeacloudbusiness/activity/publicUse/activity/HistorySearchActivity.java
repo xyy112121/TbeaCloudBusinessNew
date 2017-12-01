@@ -17,7 +17,7 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -98,7 +98,7 @@ public class HistorySearchActivity extends BaseActivity {
                             save(text);
                             search(text);
                         } else {
-                            ToastUtil.showMessage("搜索内容至少需要两个字符！");
+                            showMessage("搜索内容至少需要两个字符！");
                         }
                     }
                 });
@@ -114,7 +114,7 @@ public class HistorySearchActivity extends BaseActivity {
                         save(text);
                         search(text);
                     } else {
-                        ToastUtil.showMessage("搜索内容至少需要两个字符！");
+                        showMessage("搜索内容至少需要两个字符！");
                     }
                 }
                 return false;

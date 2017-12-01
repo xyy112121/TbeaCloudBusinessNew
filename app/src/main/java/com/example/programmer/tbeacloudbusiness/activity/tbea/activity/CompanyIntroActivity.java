@@ -27,7 +27,7 @@ import com.example.programmer.tbeacloudbusiness.activity.tbea.action.TbeaAction;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CompanyIntroListResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -68,12 +68,12 @@ public class CompanyIntroActivity extends BaseActivity {
                             mUrl = re.data.url;
                             showWebView(mUrl+ "tbeaintro");
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

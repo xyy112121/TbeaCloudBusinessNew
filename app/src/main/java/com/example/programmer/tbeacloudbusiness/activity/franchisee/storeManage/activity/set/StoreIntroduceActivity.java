@@ -14,7 +14,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,11 +57,11 @@ public class StoreIntroduceActivity extends BaseActivity implements View.OnClick
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -103,13 +103,13 @@ public class StoreIntroduceActivity extends BaseActivity implements View.OnClick
                         case ThreadState.SUCCESS:
                             ResponseInfo model = (ResponseInfo) msg.obj;
                             if (model.isSuccess()) {
-                                ToastUtil.showMessage("操作成功！");
+                                showMessage("操作成功！");
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

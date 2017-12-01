@@ -30,7 +30,7 @@ import com.example.programmer.tbeacloudbusiness.component.picker.CustomDatePicke
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
@@ -119,12 +119,12 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
                             }
 
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }
@@ -174,52 +174,52 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
         String pwd = mPwdView2.getText() + "";
         mRequest.jobtitle = mJobTitleView.getText() + "";
         if (isMobileNO(mRequest.mobilenumber) == false) {
-            ToastUtil.showMessage("请输入正确的手机号码");
+            showMessage("请输入正确的手机号码");
             return;
         }
 
         if ("".equals(mRequest.realname)) {
-            ToastUtil.showMessage("请输入真实姓名");
+            showMessage("请输入真实姓名");
             return;
         }
 
         if (mRequest.sex == null) {
-            ToastUtil.showMessage("请选择性别");
+            showMessage("请选择性别");
             return;
         }
         if (mRequest.birthday == null) {
-            ToastUtil.showMessage("请输入生日");
+            showMessage("请输入生日");
             return;
         }
 
         if ("".equals(mRequest.password)) {
-            ToastUtil.showMessage("请输入登录密码");
+            showMessage("请输入登录密码");
             return;
         }
 
 
         if (mRequest.password.length() < 6 || mRequest.password.length() > 32) {
-            ToastUtil.showMessage("密码长度6到32位！");
+            showMessage("密码长度6到32位！");
             return;
         }
 
         if (!mRequest.password.equals(pwd)) {
-            ToastUtil.showMessage("两次密码输入不一致！");
+            showMessage("两次密码输入不一致！");
             return;
         }
 
         if ("".equals(mRequest.jobtitle)) {
-            ToastUtil.showMessage("请输入职务");
+            showMessage("请输入职务");
             return;
         }
 
         if (mSelectList.size() < 0) {
-            ToastUtil.showMessage("请选择头像");
+            showMessage("请选择头像");
             return;
         }
 
         if ("".equals(mRequest.authorizationlist) || mRequest.authorizationlist == null) {
-            ToastUtil.showMessage("请选择授权功能");
+            showMessage("请选择授权功能");
             return;
         }
 
@@ -262,14 +262,14 @@ public class BypassAccountManageEditActivity extends BaseActivity implements Vie
                 case ThreadState.SUCCESS:
                     ResponseInfo model = (ResponseInfo) msg.obj;
                     if (model.isSuccess()) {
-                        ToastUtil.showMessage("操作成功！");
+                        showMessage("操作成功！");
                         finish();
                     } else {
-                        ToastUtil.showMessage(model.getMsg());
+                        showMessage(model.getMsg());
                     }
                     break;
                 case ThreadState.ERROR:
-                    ToastUtil.showMessage("操作失败！");
+                    showMessage("操作失败！");
                     break;
             }
         }

@@ -23,7 +23,7 @@ import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.Pict
 import com.example.programmer.tbeacloudbusiness.activity.user.model.PicturelistBean;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -103,11 +103,11 @@ public class UploadPictureListActivity extends BaseActivity implements View.OnCl
                                     mGridView.setVisibility(View.GONE);
                                 }
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

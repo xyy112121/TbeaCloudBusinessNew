@@ -20,7 +20,7 @@ import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -90,12 +90,12 @@ public class ScanCodePayConfirmActivity extends BaseActivity {
                                 ((Button) findViewById(R.id.scancode_pay_confirm_btn)).setTextColor(ContextCompat.getColor(mContext, R.color.text_color1));
                             }
                         } else {
-                            ToastUtil.showMessage(result.getMsg());
+                            showMessage(result.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }
@@ -132,7 +132,7 @@ public class ScanCodePayConfirmActivity extends BaseActivity {
                 }
             });
         } else {
-            ToastUtil.showMessage("操作失败！");
+            showMessage("操作失败！");
         }
     }
 
@@ -150,12 +150,12 @@ public class ScanCodePayConfirmActivity extends BaseActivity {
                             startActivity(intent);
                             finish();
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

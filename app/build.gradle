@@ -75,4 +75,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
     compile 'com.contrarywind:Android-PickerView:3.2.6'
     compile 'org.greenrobot:eventbus:3.0.0'
+    //toast通知，关闭通知权限也可以显示
+    compile 'com.github.Blincheng:EToast2:v2.1.1'
 }

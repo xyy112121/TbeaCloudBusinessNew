@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 /**
  * 编码输入
@@ -29,12 +29,12 @@ public class ScanCodeInputActivity extends BaseActivity {
             public void onClick(View v) {
                 String result = ((TextView) findViewById(R.id.scan_code_input_text)).getText() + "";
                 if ("".equals(result)) {
-                    ToastUtil.showMessage("请输入扫描码！");
+                    showMessage("请输入扫描码！");
                     return;
                 }
 
                 if (result.length() < 5) {
-                    ToastUtil.showMessage("扫描码必须大于5位！");
+                    showMessage("扫描码必须大于5位！");
                     return;
                 }
 

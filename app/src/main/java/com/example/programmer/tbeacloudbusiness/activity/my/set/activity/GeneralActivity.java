@@ -16,7 +16,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.set.action.SetAction
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.NotifyInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.programmer.tbeacloudbusiness.utils.cache.DataCleanManager;
 
 import butterknife.BindView;
@@ -61,12 +61,12 @@ public class GeneralActivity extends BaseActivity {
                                 mNotifyView.setChecked(false);
                             }
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败!");
+                        showMessage("操作失败!");
 
                         break;
                 }
@@ -151,7 +151,7 @@ public class GeneralActivity extends BaseActivity {
 //                        String size = getCacheSize(getApplicationContext().getExternalCacheDir());
 
                         ((TextView) findViewById(R.id.cache_size)).setText("0KB");
-                        ToastUtil.showMessage("清除成功！");
+                        showMessage("清除成功！");
                     }
                 }, "确定");
                 dialog.setConfirmBtnClickListener(new View.OnClickListener() {

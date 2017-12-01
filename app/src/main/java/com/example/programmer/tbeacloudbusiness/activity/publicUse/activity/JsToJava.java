@@ -5,15 +5,11 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.webkit.JavascriptInterface;
-import android.widget.Toast;
 
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.model.JsToJavaPictureTbeaModuel;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.model.TbeaPictrueResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.action.TbeaAction;
-import com.example.programmer.tbeacloudbusiness.activity.tbea.model.ProductPresentationListResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.user.model.PicturelistBean;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -25,8 +21,9 @@ import java.io.Serializable;
 
 public class JsToJava {
     Context mContext;
+
     public JsToJava(Context c) {
-        mContext= c;
+        mContext = c;
     }
 
     /**
@@ -34,17 +31,17 @@ public class JsToJava {
      */
     @JavascriptInterface
     public void showlargepicture(String value) {
-        if(value != null ||!value.isEmpty()){
+        if (value != null || !value.isEmpty()) {
             Gson gson = new GsonBuilder().serializeNulls().create();
-            final JsToJavaPictureTbeaModuel moduel = gson.fromJson(value,JsToJavaPictureTbeaModuel.class);
-            final Handler handler = new Handler(){
+            final JsToJavaPictureTbeaModuel moduel = gson.fromJson(value, JsToJavaPictureTbeaModuel.class);
+            final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
                             TbeaPictrueResponseModel model = (TbeaPictrueResponseModel) msg.obj;
                             if (model.isSuccess()) {
-                                if (model.data != null ){
+                                if (model.data != null) {
                                     Intent intent = new Intent(mContext, PictureShowActivity.class);
                                     intent.putExtra("images", (Serializable) model.data.picturelist);
                                     intent.putExtra("index", moduel.sequence);
@@ -52,11 +49,11 @@ public class JsToJava {
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg(), mContext);
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！", mContext);
                             break;
                     }
                 }
@@ -75,5 +72,9 @@ public class JsToJava {
                 }
             }).start();
         }
+    }
+
+    private void showMessage(String msg, Context context) {
+        com.mic.etoast2.Toast.makeText(context, msg, android.widget.Toast.LENGTH_SHORT);
     }
 }

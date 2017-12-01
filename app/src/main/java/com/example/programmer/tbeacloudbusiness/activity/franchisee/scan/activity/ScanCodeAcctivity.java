@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
@@ -49,7 +49,7 @@ public class ScanCodeAcctivity extends BaseActivity {
             public void Denied() {
                 //如果选择不在提示
                 finish();
-                ToastUtil.showMessage("请开启权限！");
+                showMessage("请开启权限！");
             }
         }, "请求获取照相机和读取文件权限", Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
@@ -118,7 +118,7 @@ public class ScanCodeAcctivity extends BaseActivity {
 
                         @Override
                         public void onAnalyzeFailed() {
-                            ToastUtil.showMessage("解析二维码失败");
+                            showMessage("解析二维码失败");
                         }
                     });
 
@@ -141,7 +141,7 @@ public class ScanCodeAcctivity extends BaseActivity {
 
         @Override
         public void onAnalyzeFailed() {
-            ToastUtil.showMessage("解析二维码失败");
+            showMessage("解析二维码失败");
         }
     };
 

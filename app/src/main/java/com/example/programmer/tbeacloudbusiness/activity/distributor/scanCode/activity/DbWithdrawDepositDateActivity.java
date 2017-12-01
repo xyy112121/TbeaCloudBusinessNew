@@ -33,7 +33,7 @@ import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueB
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -221,12 +221,12 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
                                 if (model.isSuccess()) {
                                     mUserView.setAdapterData(model.data.getpayeetypelist);
                                 } else {
-                                    ToastUtil.showMessage(model.getMsg());
+                                    showMessage(model.getMsg());
                                 }
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -276,11 +276,11 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
                                     mRefreshLayout.beginRefreshing();
                                 }
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -336,13 +336,13 @@ public class DbWithdrawDepositDateActivity extends BaseActivity implements View.
                                             }
                                         }
                                 } else {
-                                    ToastUtil.showMessage(model.getMsg());
+                                    showMessage(model.getMsg());
                                 }
                             }
 
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

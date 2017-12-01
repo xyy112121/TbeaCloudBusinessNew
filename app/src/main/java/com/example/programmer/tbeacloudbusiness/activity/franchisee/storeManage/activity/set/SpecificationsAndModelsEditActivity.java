@@ -13,7 +13,7 @@ import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +46,7 @@ public class SpecificationsAndModelsEditActivity extends BaseActivity implements
     private void save() {
         final String name = mNameView.getValueText();
         if ("".equals(name)) {
-            ToastUtil.showMessage("请型号规格名称");
+            showMessage("请型号规格名称");
             return;
         }
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
@@ -63,11 +63,11 @@ public class SpecificationsAndModelsEditActivity extends BaseActivity implements
                             setResult(RESULT_OK);
                             finish();
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败!");
+                        showMessage("操作失败!");
                         break;
                 }
             }

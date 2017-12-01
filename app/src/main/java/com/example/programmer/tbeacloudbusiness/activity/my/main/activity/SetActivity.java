@@ -28,7 +28,7 @@ import com.example.programmer.tbeacloudbusiness.utils.AppVersion;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -72,11 +72,11 @@ public class SetActivity extends BaseActivity {
                                 ((TextView) findViewById(R.id.set_address)).setText(model.data.baseinfo.recvaddrnumber + "");
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -186,18 +186,18 @@ public class SetActivity extends BaseActivity {
                                     }
 
 //                                    else {
-//                                        ToastUtil.showMessage("检测更新失败，请稍后重试！");
+//                                        showMessage("检测更新失败，请稍后重试！");
 //                                    }
                                 } else {
-                                    ToastUtil.showMessage(re.getMsg());
+                                    showMessage(re.getMsg());
                                 }
 
                             } else {
-                                ToastUtil.showMessage(re.getMsg());
+                                showMessage(re.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

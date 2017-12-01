@@ -17,7 +17,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.mod
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
@@ -71,11 +71,11 @@ public class ScanCodeViewActivity extends BaseActivity {
 //                                    setViewText(R.id.scan_code_info_activityplace,model.data.rebateqrcodeactivityinfo.activityplace);
                                 }
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             dialog.dismiss();
                             break;
                     }
@@ -96,7 +96,7 @@ public class ScanCodeViewActivity extends BaseActivity {
                 }
             }).start();
         } catch (Exception e) {
-            ToastUtil.showMessage("操作失败！");
+            showMessage("操作失败！");
             dialog.dismiss();
         }
     }

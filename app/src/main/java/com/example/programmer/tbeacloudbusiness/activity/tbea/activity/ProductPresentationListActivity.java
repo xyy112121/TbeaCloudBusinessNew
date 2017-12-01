@@ -34,7 +34,7 @@ import com.example.programmer.tbeacloudbusiness.component.picker.CustomOptionObj
 import com.example.programmer.tbeacloudbusiness.model.Condition;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.zhouwei.library.CustomPopWindow;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -142,11 +142,11 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
                                 if (model.data != null && model.data.commoditylist != null)
                                     mAdapter.addAll(model.data.commoditylist);
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.action.AsyncListener;
 import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.action.TBEA11020000;
 import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.view.PDUtil;
+import com.mic.etoast2.Toast;
 
 
 public class ActivityFxGgXQ extends Activity implements AsyncListener {
@@ -68,9 +68,10 @@ public class ActivityFxGgXQ extends Activity implements AsyncListener {
 			if(!req.isHasError() && req.rspInfo.rspSuccess){
 				fullData();
 			}else if(!req.isHasError()){
-				Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+
+				com.mic.etoast2.Toast.makeText(this, req.rspInfo.RspDesc, android.widget.Toast.LENGTH_SHORT).show();
 			}else{
-				Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+				com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", android.widget.Toast.LENGTH_SHORT).show();
 			}		
 		}
 	}

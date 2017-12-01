@@ -23,7 +23,7 @@ import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPop
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,12 +109,12 @@ public class PlumberManageLoginDatailsActivity extends BaseActivity implements B
                                 if (model.isSuccess() && model.data != null) {
                                     mAdapter.addAll(model.data.loginlist);
                                 } else {
-                                    ToastUtil.showMessage(model.getMsg());
+                                    showMessage(model.getMsg());
                                 }
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

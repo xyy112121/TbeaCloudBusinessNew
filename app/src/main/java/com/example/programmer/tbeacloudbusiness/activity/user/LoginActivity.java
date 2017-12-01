@@ -28,10 +28,11 @@ import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.DeviceIdUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.programmer.tbeacloudbusiness.utils.permissonutil.PermissionActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mic.etoast2.Toast;
 
 /**
  * 登录
@@ -105,15 +106,15 @@ public class LoginActivity extends PermissionActivity {
                                         AppUpdateUtils.upDate();
                                     }
                                 } else {
-                                    ToastUtil.showMessage(re.getMsg());
+                                    showMessage(re.getMsg());
                                 }
 
                             } else {
-                                ToastUtil.showMessage(re.getMsg());
+                                showMessage(re.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -175,11 +176,11 @@ public class LoginActivity extends PermissionActivity {
                 final String mobile = ((TextView) findViewById(R.id.login_phone)).getText() + "";
                 final String pwd = ((TextView) findViewById(R.id.login_pwd)).getText() + "";
                 if (isMobileNO(mobile) == false) {
-                    ToastUtil.showMessage("请输入正确的手机号码！");
+                    showMessage("请输入正确的手机号码！");
                     return;
                 }
                 if ("".equals(pwd)) {
-                    ToastUtil.showMessage("请输入密码！");
+                    showMessage("请输入密码！");
                     return;
 
                 }
@@ -207,14 +208,14 @@ public class LoginActivity extends PermissionActivity {
                                         startActivity(intent);
                                         finish();
                                     } else {
-                                        ToastUtil.showMessage("操作失败！");
+                                        showMessage("操作失败！");
                                     }
                                 } else {
-                                    ToastUtil.showMessage(re.getMsg());
+                                    showMessage(re.getMsg());
                                 }
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败！");
+                                showMessage("操作失败！");
                                 break;
                         }
                     }
@@ -250,6 +251,10 @@ public class LoginActivity extends PermissionActivity {
         String telRegex = "[1][73458]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
         if (mobiles.equals("")) return false;
         else return mobiles.matches(telRegex);
+    }
+
+    private void  showMessage(String msg){
+         Toast.makeText(LoginActivity.this, msg , android.widget.Toast.LENGTH_SHORT).show();
     }
 
 }

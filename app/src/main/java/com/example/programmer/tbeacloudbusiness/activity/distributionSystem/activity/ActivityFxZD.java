@@ -88,9 +88,9 @@ public class ActivityFxZD extends Activity implements AsyncListener, OnScrollLis
             if (!req.isHasError() && req.rspInfo.rspSuccess) {
                 fullTitle();
             } else if (!req.isHasError()) {
-                Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
         if (serviceCode.equals(TBEA12020000.SERVICE_CODE)) {
@@ -98,9 +98,9 @@ public class ActivityFxZD extends Activity implements AsyncListener, OnScrollLis
                 if (req2.RuleList.size() < req2.PageSize) isEnd = true;
                 fullData();
             } else if (!req2.isHasError()) {
-                Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
         if (serviceCode.equals(DownFileTask.SERVICE_CODE)) {
@@ -109,7 +109,7 @@ public class ActivityFxZD extends Activity implements AsyncListener, OnScrollLis
                 intent.setData(Uri.parse("file://" + downTask.localPath));
                 startActivity(intent);
             } else {
-                Toast.makeText(this, "下载文件失败", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "下载文件失败", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -246,7 +246,7 @@ public class ActivityFxZD extends Activity implements AsyncListener, OnScrollLis
                 downTask.fileUrl = MyApplication.instance.getImgPath(item.Attachment);
                 downTask.execute();
             } else {
-                Toast.makeText(this, "找不到存储卡,不能下载文件", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "找不到存储卡,不能下载文件", Toast.LENGTH_SHORT).show();
             }
         }
     }

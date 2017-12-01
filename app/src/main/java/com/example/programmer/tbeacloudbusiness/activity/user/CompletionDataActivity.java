@@ -37,7 +37,7 @@ import com.example.programmer.tbeacloudbusiness.utils.AssetsUtils;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
@@ -173,11 +173,11 @@ public class CompletionDataActivity extends BaseActivity {
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -228,11 +228,11 @@ public class CompletionDataActivity extends BaseActivity {
                                 userTypeList = model.data.usertypelist;
                             }
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                         }
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }
@@ -351,7 +351,7 @@ public class CompletionDataActivity extends BaseActivity {
         mRequest.mobilenumber = mAccountView.getText() + "";
         mRequest.realname = mNameView.getText() + "";
         if ("".equals(mRequest.mobilenumber) || "".equals(mRequest.realname) || mRequest.province == null || mRequest.uplevelcompanyid == null || mRequest.sexid == null || mRequest.birthyear == null) {
-            ToastUtil.showMessage("请补全资料");
+            showMessage("请补全资料");
             return;
         }
 
@@ -371,11 +371,11 @@ public class CompletionDataActivity extends BaseActivity {
                                     Intent intent = new Intent(mContext, RealNameAuthenticationActivity.class);
                                     startActivityForResult(intent,1001);
                                 } else {
-                                    ToastUtil.showMessage(model.getMsg());
+                                    showMessage(model.getMsg());
                                 }
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败！");
+                                showMessage("操作失败！");
                                 break;
                         }
                     }
@@ -404,7 +404,7 @@ public class CompletionDataActivity extends BaseActivity {
                 e.printStackTrace();
             }
         } else {
-            ToastUtil.showMessage("请选择需要上传的图片");
+            showMessage("请选择需要上传的图片");
         }
     }
 

@@ -129,18 +129,18 @@ public class ActivityFxOrder extends Activity implements AsyncListener, OnScroll
                 if (req.OrderList.size() < req.PageSize) isEnd = true;
                 fullData();
             } else if (!req.isHasError()) {
-                Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
         if (serviceCode.equals(TBEA07010100.SERVICE_CODE)) {
             if (!req2.isHasError() && req2.rspInfo.rspSuccess) {
                 _toZT();
             } else if (!req2.isHasError()) {
-                Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.utils.permissonutil.PermissionActivity;
 import com.jaeger.library.StatusBarUtil;
+import com.mic.etoast2.Toast;
 
 import java.util.List;
 
@@ -175,6 +178,76 @@ public class BaseActivity extends PermissionActivity {
 			}
 		}
 		return false;
+	}
+
+	private  Handler handler = new Handler(Looper.getMainLooper());
+
+	private  Toast toast = null;
+
+	private  Object synObj = new Object();
+
+	public  void showMessage(final String msg) {
+		showMessage( msg, android.widget.Toast.LENGTH_SHORT);
+	}
+
+	/**
+	 * 根据设置的文本显示
+	 *
+	 * @param msg
+	 */
+	public  void showMessage(final int msg) {
+		showMessage( msg, android.widget.Toast.LENGTH_SHORT);
+	}
+
+	/**
+	 * 显示一个文本并且设置时长
+	 *
+	 * @param msg
+	 * @param len
+	 */
+	public  void showMessage( final CharSequence msg, final int len) {
+		if (msg == null || msg.equals("")) {
+			return;
+		}
+		handler.post(new Runnable() {
+			@Override
+			public void run() {
+				synchronized (synObj) { //加上同步是为了每个toast只要有机会显示出来
+					if (toast != null) {
+						//toast.cancel();
+						toast.setText(msg);
+//                        toast.setDuration(len);
+					} else {
+						toast = Toast.makeText(mContext, msg + "", len);
+					}
+					toast.show();
+				}
+			}
+		});
+	}
+
+	/**
+	 * 资源文件方式显示文本
+	 *
+	 * @param msg
+	 * @param len
+	 */
+	public  void showMessage( final int msg, final int len) {
+		handler.post(new Runnable() {
+			@Override
+			public void run() {
+				synchronized (synObj) {
+//                    if (toast != null) {
+//                        //toast.cancel();
+//                        toast.setText(msg);
+//                        toast.setDuration(len);
+//                    } else {
+					toast = Toast.makeText(mContext, msg, len);
+//                    }
+					toast.show();
+				}
+			}
+		});
 	}
 
 	public void setTextViewValue(int id,String value){

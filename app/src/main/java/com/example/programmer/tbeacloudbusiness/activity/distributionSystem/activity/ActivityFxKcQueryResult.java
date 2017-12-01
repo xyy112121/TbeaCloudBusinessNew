@@ -96,9 +96,9 @@ public class ActivityFxKcQueryResult extends Activity implements AsyncListener, 
                 if (req.KucunList.size() < req.PageSize) isEnd = true;
                 fullData();
             } else if (!req.isHasError()) {
-                Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
     }

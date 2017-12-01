@@ -27,7 +27,7 @@ import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -116,11 +116,11 @@ public class MeetingPrepareActivity extends BaseActivity {
                                     mRightView.setVisibility(View.GONE);
                                 }
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -180,27 +180,27 @@ public class MeetingPrepareActivity extends BaseActivity {
                 break;
             case R.id.cp_meeting_prepare_finish:
                 if(TextUtils.isEmpty(mRequest.meetingstarttime)||TextUtils.isEmpty(mRequest.meetingendtime)){
-                    ToastUtil.showMessage("请选择举办时间！");
+                    showMessage("请选择举办时间！");
                     return;
                 }
 
                 if(TextUtils.isEmpty(mRequest.organizecompanylist)){
-                    ToastUtil.showMessage("请选择举办单位！");
+                    showMessage("请选择举办单位！");
                     return;
                 }
 
                 if(TextUtils.isEmpty(mRequest.meetingprovince)){
-                    ToastUtil.showMessage("请选择举办地点！");
+                    showMessage("请选择举办地点！");
                     return;
                 }
 
                 if(TextUtils.isEmpty(mRequest.participantlist)){
-                    ToastUtil.showMessage("请选择参与人员！");
+                    showMessage("请选择参与人员！");
                     return;
                 }
 
                 if(TextUtils.isEmpty(mRequest.meetingitems)){
-                    ToastUtil.showMessage("请输入会议安排！");
+                    showMessage("请输入会议安排！");
                     return;
                 }
 
@@ -318,11 +318,11 @@ public class MeetingPrepareActivity extends BaseActivity {
                                 startActivity(intent);
                                 finish();
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

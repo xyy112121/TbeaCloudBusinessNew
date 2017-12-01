@@ -84,19 +84,19 @@ public class ActivityFxOrderFYMX extends Activity implements AsyncListener, OnSc
                 if (req.TransitionList.size() < req.PageSize) isEnd = true;
                 fullData();
             } else if (!req.isHasError()) {
-                Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
         if (serviceCode.equals(TBEA07020300.SERVICE_CODE)) {
             if (!req2.isHasError() && req2.rspInfo.rspSuccess) {
                 //onRefresh();
-                Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else if (!req2.isHasError()) {
-                Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
     }

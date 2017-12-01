@@ -17,7 +17,7 @@ import com.example.programmer.tbeacloudbusiness.model.EventCity;
 import com.example.programmer.tbeacloudbusiness.model.EventFlag;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -102,7 +102,7 @@ public class PendingViewActivity extends BaseActivity implements View.OnClickLis
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

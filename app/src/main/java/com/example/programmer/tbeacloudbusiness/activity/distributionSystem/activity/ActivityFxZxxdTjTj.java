@@ -69,13 +69,13 @@ public class ActivityFxZxxdTjTj extends Activity implements AsyncListener, OnCli
         PDUtil.hidePD(this);
         if (serviceCode.equals(TBEA07030600.SERVICE_CODE)) {
             if (!req.isHasError() && req.rspInfo.rspSuccess) {
-                Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK);
                 finish();
             } else if (!req.isHasError()) {
-                Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
     }

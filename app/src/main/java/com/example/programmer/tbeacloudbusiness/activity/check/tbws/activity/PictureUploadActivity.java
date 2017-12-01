@@ -16,14 +16,12 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.check.tbws.action.SubscribeAction;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.action.CpPlumberMeetingAction;
-import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.MeetingGalleryImageShowActivity;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingGalleryUpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.SuccessActivity;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
@@ -32,7 +30,6 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,11 +88,11 @@ public class PictureUploadActivity extends BaseActivity implements View.OnClickL
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    ToastUtil.showMessage(model.getMsg());
+                                    showMessage(model.getMsg());
                                 }
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败！");
+                                showMessage("操作失败！");
                                 break;
                         }
                     }
@@ -124,7 +121,7 @@ public class PictureUploadActivity extends BaseActivity implements View.OnClickL
                 e.printStackTrace();
             }
         } else {
-            ToastUtil.showMessage("请选择需要上传的图片");
+            showMessage("请选择需要上传的图片");
         }
     }
 
@@ -235,7 +232,7 @@ public class PictureUploadActivity extends BaseActivity implements View.OnClickL
                 @Override
                 public void onClick(View v) {
 //                    if (postion == mList.size() - 1) {
-                        openImage();
+                    openImage();
 //                    }
 //                    else {
 //                        Intent intent = new Intent(mContext, MeetingGalleryImageShowActivity.class);

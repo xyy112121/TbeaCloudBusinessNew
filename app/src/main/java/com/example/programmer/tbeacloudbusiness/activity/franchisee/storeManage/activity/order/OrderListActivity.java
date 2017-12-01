@@ -27,7 +27,7 @@ import com.example.programmer.tbeacloudbusiness.activity.publicUse.action.Public
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.model.NetUrlResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,12 +83,12 @@ public class OrderListActivity extends BaseActivity {
                             String url = mUrl + "orderlist_all?userid=" + mId;
                             showWebView(url);
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

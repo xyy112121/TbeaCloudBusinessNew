@@ -28,7 +28,7 @@ import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.luck.picture.lib.PictureSelector;
@@ -104,10 +104,10 @@ public class PersonInfoActivity extends BaseActivity {
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
                             ResponseInfo re = (ResponseInfo) msg.obj;
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -189,12 +189,12 @@ public class PersonInfoActivity extends BaseActivity {
 //                            mRequest.thumbpicture = mModel.thumbpicture;
 
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

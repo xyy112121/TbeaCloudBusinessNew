@@ -26,7 +26,7 @@ import com.example.programmer.tbeacloudbusiness.activity.user.model.PicturelistB
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -117,11 +117,11 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -230,12 +230,12 @@ public class MeetingGalleryListActivity extends BaseActivity implements View.OnC
                                         mGridAdapter.clear();
                                         getData();
                                     } else {
-                                        ToastUtil.showMessage(re.getMsg());
+                                        showMessage(re.getMsg());
                                     }
 
                                     break;
                                 case ThreadState.ERROR:
-                                    ToastUtil.showMessage("操作失败!");
+                                    showMessage("操作失败!");
                                     break;
                             }
                         }

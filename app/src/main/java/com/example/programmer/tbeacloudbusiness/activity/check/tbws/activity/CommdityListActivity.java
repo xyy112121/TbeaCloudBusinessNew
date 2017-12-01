@@ -16,7 +16,6 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.check.tbws.action.SubscribeAction;
 import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.CommdityListResponseModel;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -80,12 +79,12 @@ public class CommdityListActivity extends BaseActivity implements BGARefreshLayo
                                 }
                             }
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

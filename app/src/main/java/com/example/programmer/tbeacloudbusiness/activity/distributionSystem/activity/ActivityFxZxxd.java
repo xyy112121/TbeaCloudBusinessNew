@@ -90,29 +90,29 @@ public class ActivityFxZxxd extends Activity implements AsyncListener, OnScrollL
                 if (req.PreOrderList.size() < req.PageSize) isEnd = true;
                 fullData();
             } else if (!req.isHasError()) {
-                Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
         if (serviceCode.equals(TBEA07030200.SERVICE_CODE)) {
             if (!req2.isHasError() && req2.rspInfo.rspSuccess) {
-                Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
                 onRefresh();
             } else if (!req2.isHasError()) {
-                Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
         if (serviceCode.equals(TBEA07030300.SERVICE_CODE)) {
             if (!req3.isHasError() && req3.rspInfo.rspSuccess) {
-                Toast.makeText(this, req3.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req3.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
                 onRefresh();
             } else if (!req3.isHasError()) {
-                Toast.makeText(this, req3.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req3.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
     }

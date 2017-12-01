@@ -15,12 +15,12 @@ public class MainActivity extends PermissionActivity {
         checkPermission(new CheckPermListener() {
             @Override
             public void Granted() {
-                Toast.makeText(MainActivity.this, "通过", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "通过", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void Denied() {
-                Toast.makeText(MainActivity.this, "失败", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "失败", Toast.LENGTH_SHORT).show();
                 //检查是否选择了不再提醒
             }
         }, "请求获取照相机权限", Manifest.permission.CAMERA);
@@ -29,12 +29,12 @@ public class MainActivity extends PermissionActivity {
         checkPermission(new CheckPermListener() {
             @Override
             public void Granted() {
-                Toast.makeText(MainActivity.this, "通过", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "通过", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void Denied() {
-                Toast.makeText(MainActivity.this, "失败", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "失败", Toast.LENGTH_SHORT).show();
                 //如果选择不在提示
             }
         }, "请求获取照相机和读取文件权限", Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);

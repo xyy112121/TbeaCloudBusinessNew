@@ -31,7 +31,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.set.model.AddressMod
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -100,12 +100,12 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
                             }
 
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }
@@ -170,14 +170,14 @@ public class ByPassAccountAuthorizationFunctionsActivity extends BaseActivity {
                     case ThreadState.SUCCESS:
                         ResponseInfo model = (ResponseInfo) msg.obj;
                         if (model.isSuccess()) {
-                            ToastUtil.showMessage("操作成功！");
+                            showMessage("操作成功！");
                             finish();
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                         }
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

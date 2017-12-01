@@ -1,6 +1,5 @@
 package com.example.programmer.tbeacloudbusiness.fragment;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,12 +22,11 @@ import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.NewsIntro
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationContactInfoActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationInfoActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationListActivity;
-import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.TbMainResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.component.HeaderGridView;
 import com.example.programmer.tbeacloudbusiness.utils.BannerImageLoader;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -43,7 +41,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 特变电工
  */
 
-public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
+public class TbMianFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
 
     private View mView;
     private HeaderGridView mGridView;
@@ -79,11 +77,11 @@ public class TbMianFragment extends Fragment implements BGARefreshLayout.BGARefr
                                     mAdapter.addAll(model.data.productlist);
                                 }
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg(),getActivity());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！",getActivity());
                             break;
                     }
                 }

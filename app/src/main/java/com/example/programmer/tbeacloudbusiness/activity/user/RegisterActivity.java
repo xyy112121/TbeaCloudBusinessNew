@@ -30,7 +30,8 @@ import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+import com.mic.etoast2.Toast;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,11 +126,11 @@ public class RegisterActivity extends Activity {
                             }
 
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                         }
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }
@@ -188,7 +189,7 @@ public class RegisterActivity extends Activity {
     private void sendCode() {
         final String mobile = mPhoneView.getText() + "";
         if (isMobileNO(mobile) == false) {
-            ToastUtil.showMessage("请输入正确的手机号码");
+            showMessage("请输入正确的手机号码");
             return;
         }
         mc = new MyCount(60000, 1000);//倒计时60秒
@@ -204,10 +205,10 @@ public class RegisterActivity extends Activity {
                             mc.cancel();
                             mSendView.setText("获取验证码");
                         }
-                        ToastUtil.showMessage(re.getMsg());
+                        showMessage(re.getMsg());
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("获取验证失败，请重试！");
+                        showMessage("获取验证失败，请重试！");
                         mc.cancel();
                         mSendView.setText("获取验证码");
                         break;
@@ -265,35 +266,35 @@ public class RegisterActivity extends Activity {
         mRequest.verifycode = mCodeView.getText() + "";
         mRequest.password = mPwdView.getText() + "";
         if (isMobileNO(mRequest.mobilenumber) == false) {
-            ToastUtil.showMessage("请输入正确的手机号码！");
+            showMessage("请输入正确的手机号码！");
             return;
         }
         if ("".equals(mRequest.verifycode)) {
-            ToastUtil.showMessage("验证码不能为空！");
+            showMessage("验证码不能为空！");
             return;
         }
         if ("".equals(mRequest.password)) {
-            ToastUtil.showMessage("密码不能为空！");
+            showMessage("密码不能为空！");
             return;
         }
 
         if (mRequest.password.length() < 6 || mRequest.password.length() > 32) {
-            ToastUtil.showMessage("密码长度6到32位！");
+            showMessage("密码长度6到32位！");
             return;
         }
 
         if (!mRequest.password.equals(mConfirmPwdView.getText() + "")) {
-            ToastUtil.showMessage("两次密码输入不一致！");
+            showMessage("两次密码输入不一致！");
             return;
         }
 
         if ("".equals(mRequest.usertypeid) || mRequest.usertypeid == null) {
-            ToastUtil.showMessage("用户类型不能为空！");
+            showMessage("用户类型不能为空！");
             return;
         }
 
         if (mAgreeView.isChecked() == false) {
-            ToastUtil.showMessage("你需同意用户协议");
+            showMessage("你需同意用户协议");
             return;
         }
 
@@ -319,11 +320,11 @@ public class RegisterActivity extends Activity {
                             finish();
 
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("注册失败！");
+                        showMessage("注册失败！");
                         break;
                 }
             }
@@ -341,5 +342,9 @@ public class RegisterActivity extends Activity {
                 }
             }
         }).start();
+    }
+
+    private void  showMessage(String msg){
+        Toast.makeText(RegisterActivity.this, msg , android.widget.Toast.LENGTH_SHORT).show();
     }
 }

@@ -19,7 +19,6 @@ import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.TaskSt
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.Condition;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,12 +95,12 @@ public class MyTaskListActivity extends BaseActivity {
 
                             }
                         } else {
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

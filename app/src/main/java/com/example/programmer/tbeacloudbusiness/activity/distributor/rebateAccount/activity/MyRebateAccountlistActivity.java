@@ -23,7 +23,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.Wit
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
                                     @Override
                                     public void onClick(View view) {
                                         if (mCurrentMoney == 0) {
-                                            ToastUtil.showMessage("你当前可提现金额为0");
+                                            showMessage("你当前可提现金额为0");
                                         } else {
                                             startActivity(new Intent(mContext, RebateAccountWithdrawCashActivity.class));
                                         }
@@ -91,11 +91,11 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
                             mAdapter.addAll(model.data.nottakemoneylist);
                             isFirst = false;
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                         }
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }
@@ -259,15 +259,15 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
                     case ThreadState.SUCCESS:
                         ResponseInfo re = (ResponseInfo) msg.obj;
                         if (re.isSuccess()) {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                             mRefreshLayout.beginRefreshing();
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

@@ -34,7 +34,7 @@ import com.example.programmer.tbeacloudbusiness.utils.AssetsUtils;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
@@ -197,11 +197,11 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -371,55 +371,55 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                     mRequest.masterperson = mMasterPersonView.getText() + "";
                     mRequest.masterpersonid = mMasterPersonIDView.getText() + "";
                     if (TextUtils.isEmpty(mRequest.companyname)) {
-                        ToastUtil.showMessage("请填写企业名称！");
+                        showMessage("请填写企业名称！");
                         return;
                     }
                     if (TextUtils.isEmpty(mRequest.companylisencecode)) {
-                        ToastUtil.showMessage("请填写营业执照上的注册号！");
+                        showMessage("请填写营业执照上的注册号！");
                         return;
                     }
                     if (TextUtils.isEmpty(mRequest.province)) {
-                        ToastUtil.showMessage("请填写企业所在地");
+                        showMessage("请填写企业所在地");
                         return;
                     }
 
                     if (TextUtils.isEmpty(mRequest.address)) {
-                        ToastUtil.showMessage("请填写企业详细地址");
+                        showMessage("请填写企业详细地址");
                         return;
                     }
 
                     if (TextUtils.isEmpty(mRequest.businessscope)) {
-                        ToastUtil.showMessage("请填写企业经营范围");
+                        showMessage("请填写企业经营范围");
                         return;
                     }
 
                     if (TextUtils.isEmpty(mRequest.companylisencepicture)) {
-                        ToastUtil.showMessage("请上传营业执照！");
+                        showMessage("请上传营业执照！");
                         return;
                     }
 
                     if (TextUtils.isEmpty(mRequest.masterperson)) {
-                        ToastUtil.showMessage("请输入法人姓名！");
+                        showMessage("请输入法人姓名！");
                         return;
                     }
 
                     if (TextUtils.isEmpty(mRequest.masterpersonid)) {
-                        ToastUtil.showMessage("请输入法人身份证号！");
+                        showMessage("请输入法人身份证号！");
                         return;
                     }
 
                     if (TextUtils.isEmpty(mRequest.masterpersonidcard1)) {
-                        ToastUtil.showMessage("请上传法人身份证正面(个人信息页)！");
+                        showMessage("请上传法人身份证正面(个人信息页)！");
                         return;
                     }
 
                     if (TextUtils.isEmpty(mRequest.masterpersonidcard2)) {
-                        ToastUtil.showMessage("请上传法人身份证反面(国徽页)！");
+                        showMessage("请上传法人身份证反面(国徽页)！");
                         return;
                     }
 
                     if (TextUtils.isEmpty(mRequest.companyphoto)) {
-                        ToastUtil.showMessage("请上传公司实景照片！");
+                        showMessage("请上传公司实景照片！");
                         return;
                     }
                     showAlert();
@@ -467,11 +467,11 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                 switch (msg.what) {
                     case ThreadState.SUCCESS:
                         ResponseInfo model = (ResponseInfo) msg.obj;
-                        ToastUtil.showMessage(model.getMsg());
+                        showMessage(model.getMsg());
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }
@@ -510,16 +510,16 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                         case ThreadState.SUCCESS:
                             ResponseInfo model = (ResponseInfo) msg.obj;
                             if (model.isSuccess()) {
-                                ToastUtil.showMessage("提交成功，请等待认证！");
+                                showMessage("提交成功，请等待认证！");
 //                                ShareConfig.setConfig(mContext, Constants.whetheridentifiedid, "identifying");
                                 setResult(RESULT_OK);
                                 finish();
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -613,11 +613,11 @@ public class RealNameAuthenticationActivity extends BaseActivity {
                                         mRequest.companyphoto = name;
                                     }
                                 } else {
-                                    ToastUtil.showMessage(model.getMsg());
+                                    showMessage(model.getMsg());
                                 }
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败！");
+                                showMessage("操作失败！");
                                 break;
                         }
                     }

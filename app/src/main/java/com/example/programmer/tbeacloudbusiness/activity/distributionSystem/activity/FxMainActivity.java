@@ -17,7 +17,7 @@ import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.mode
 import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.view.CircularImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;
@@ -75,11 +75,11 @@ public class FxMainActivity extends BaseActivity implements View.OnClickListener
                             if (model.HomepageInfo != null) {
                                 setData(model);
                             } else {
-                                ToastUtil.showMessage("操作失败！");
+                                showMessage("操作失败！");
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

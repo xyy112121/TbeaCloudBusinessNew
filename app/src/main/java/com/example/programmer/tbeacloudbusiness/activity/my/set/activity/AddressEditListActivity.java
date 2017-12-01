@@ -21,7 +21,7 @@ import com.example.programmer.tbeacloudbusiness.activity.my.set.model.AddrListRe
 import com.example.programmer.tbeacloudbusiness.activity.my.set.model.AddressModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,12 +75,12 @@ public class AddressEditListActivity extends BaseActivity implements View.OnClic
                             }
 
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

@@ -27,7 +27,7 @@ import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -117,12 +117,12 @@ public class MyFansActivity extends BaseActivity implements View.OnClickListener
                         }
                     }
                     if ("".equals(ids)) {
-                        ToastUtil.showMessage("请选择需要取消关注的粉丝");
+                        showMessage("请选择需要取消关注的粉丝");
                     } else {
                         cancelAttention(ids);
                     }
                 } else {
-                    ToastUtil.showMessage("没有粉丝");
+                    showMessage("没有粉丝");
                 }
             }
         });
@@ -158,11 +158,11 @@ public class MyFansActivity extends BaseActivity implements View.OnClickListener
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -336,11 +336,11 @@ public class MyFansActivity extends BaseActivity implements View.OnClickListener
                             if (model.isSuccess()) {
                                 mRefreshLayout.beginRefreshing();
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

@@ -22,9 +22,10 @@ import com.example.programmer.tbeacloudbusiness.activity.my.main.action.MyAction
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionStoreResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
+import com.example.programmer.tbeacloudbusiness.fragment.BaseFragmentV;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ import butterknife.ButterKnife;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
-public class StoreFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class StoreFragment extends BaseFragmentV implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private View mView;
     private ListView mListView;
     private MyAdapter mAdapter;
@@ -100,11 +101,11 @@ public class StoreFragment extends Fragment implements BGARefreshLayout.BGARefre
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg(),getActivity());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！",getActivity());
                             break;
                     }
                 }
@@ -182,12 +183,12 @@ public class StoreFragment extends Fragment implements BGARefreshLayout.BGARefre
                                 }
                             }
                             if ("".equals(ids)) {
-                                ToastUtil.showMessage("请选择需要取消关注的店铺");
+                                showMessage("请选择需要取消关注的店铺",getActivity());
                             } else {
                                 ((MyAttentionActivity) getActivity()).cancelAttention(ids);
                             }
                         } else {
-                            ToastUtil.showMessage("没有关注的店铺");
+                            showMessage("没有关注的店铺",getActivity());
                         }
                     }
                 });

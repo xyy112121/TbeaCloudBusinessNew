@@ -8,7 +8,6 @@ import android.os.Message;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +20,8 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.check.tbws.action.SubscribeAction;
 import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.MyTaskListHaveFinishedResponseModel;
+import com.example.programmer.tbeacloudbusiness.fragment.BaseFragmentV;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,11 +30,12 @@ import butterknife.Unbinder;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
+
 /**
  * 获得我发布的任务列表-­‐已上传
  */
 
-public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class MyTaskListHaveFinishedFragment extends BaseFragmentV implements BGARefreshLayout.BGARefreshLayoutDelegate {
 
     Unbinder unbinder;
     @BindView(R.id.my_task_list_code_tv)
@@ -107,12 +107,12 @@ public class MyTaskListHaveFinishedFragment extends Fragment implements BGARefre
                                 mAdapter.addAll(re.data.electricalchecklist);
                             }
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg(),getActivity());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！",getActivity());
                         break;
                 }
             }

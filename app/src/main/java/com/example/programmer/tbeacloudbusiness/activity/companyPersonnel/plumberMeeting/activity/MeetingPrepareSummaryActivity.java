@@ -15,7 +15,7 @@ import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumbe
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,11 +70,11 @@ public class MeetingPrepareSummaryActivity extends BaseActivity implements View.
                                 setResult(RESULT_OK, intent);
                                 finish();
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

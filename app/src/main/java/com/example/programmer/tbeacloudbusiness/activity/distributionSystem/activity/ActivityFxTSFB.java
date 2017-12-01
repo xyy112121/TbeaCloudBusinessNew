@@ -59,12 +59,12 @@ public class ActivityFxTSFB extends Activity implements AsyncListener,OnClickLis
 		PDUtil.hidePD(this);
 		if(serviceCode.equals(TBEA14010000.SERVICE_CODE)){
 			if(!req.isHasError() && req.rspInfo.rspSuccess){
-				Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+				com.mic.etoast2.Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
 				finish();
 			}else if(!req.isHasError()){
-				Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+				com.mic.etoast2.Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
 			}else{
-				Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+				com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
 			}		
 		}
 	}
@@ -80,11 +80,11 @@ public class ActivityFxTSFB extends Activity implements AsyncListener,OnClickLis
 		String nr=edtNR.getText().toString();
 		
 		if(dhhm.trim().length()==0){
-			Toast.makeText(this,"联系电话不能为空", Toast.LENGTH_SHORT).show();
+			com.mic.etoast2.Toast.makeText(this,"联系电话不能为空", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if(nr.trim().length()==0){
-			Toast.makeText(this,"投诉内容不能为空", Toast.LENGTH_SHORT).show();
+			com.mic.etoast2.Toast.makeText(this,"投诉内容不能为空", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		req.Content=nr;

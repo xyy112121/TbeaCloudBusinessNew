@@ -28,7 +28,7 @@ import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.JsTo
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.model.NetUrlResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.zhouwei.library.CustomPopWindow;
 
 import java.util.ArrayList;
@@ -85,12 +85,12 @@ public class ProductPresentationInfoActivity extends BaseActivity implements Vie
                             String url = mUrl + "tbeaproductdescription?productid=" + mId;
                             showWebView(url);
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

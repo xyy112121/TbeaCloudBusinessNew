@@ -21,8 +21,9 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.action.SubscribeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.tbws.model.MyTaskListAllResponseModel;
+import com.example.programmer.tbeacloudbusiness.fragment.BaseFragmentV;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +36,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 获得我发布的任务列表-­‐全部
  */
 
-public class MyTaskAllListFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class MyTaskAllListFragment extends BaseFragmentV implements BGARefreshLayout.BGARefreshLayoutDelegate {
 
     Unbinder unbinder;
     @BindView(R.id.my_task_list_code_tv)
@@ -108,12 +109,12 @@ public class MyTaskAllListFragment extends Fragment implements BGARefreshLayout.
                                 mAdapter.addAll(re.data.electricalchecklist);
                             }
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg(),getActivity());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！",getActivity());
                         break;
                 }
             }

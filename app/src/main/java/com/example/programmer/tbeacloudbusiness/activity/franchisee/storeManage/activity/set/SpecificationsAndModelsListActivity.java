@@ -22,7 +22,7 @@ import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.Condition;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,11 +81,11 @@ public class SpecificationsAndModelsListActivity extends BaseActivity implements
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -237,11 +237,11 @@ public class SpecificationsAndModelsListActivity extends BaseActivity implements
                                         mList.remove(postion);
                                         notifyDataSetChanged();
                                     } else {
-                                        ToastUtil.showMessage(re.getMsg());
+                                        showMessage(re.getMsg());
                                     }
                                     break;
                                 case ThreadState.ERROR:
-                                    ToastUtil.showMessage("操作失败!");
+                                    showMessage("操作失败!");
                                     break;
                             }
                         }

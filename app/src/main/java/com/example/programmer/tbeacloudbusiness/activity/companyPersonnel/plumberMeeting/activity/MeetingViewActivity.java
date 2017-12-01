@@ -31,7 +31,7 @@ import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.zhouwei.library.CustomPopWindow;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -167,7 +167,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                     } else if ("准备中".equals(meetingbaseinfo.meetingstatus)) {
                                         mMeetingPrepareSummary.setVisibility(View.GONE);
                                         mMeetingPrepareGallery.setVisibility(View.GONE);
-                                    } else if ("会议中".equals(meetingbaseinfo.meetingstatus)) {
+                                    } else if ("开会中".equals(meetingbaseinfo.meetingstatus)) {
                                         mIsUpdate = true;
                                     }else if ("已结束".equals(meetingbaseinfo.meetingstatus)) {
                                         mIsUpdate = true;
@@ -221,11 +221,11 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                     mMeetingPrepareSign.setValueText(model.data.meetingsigninfo.signnumber);
                                 }
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -429,11 +429,11 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                             if (model.isSuccess()) {
                                 finish();
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -475,11 +475,11 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                 startActivity(intent);
                                 finish();
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

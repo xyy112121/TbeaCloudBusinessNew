@@ -16,7 +16,7 @@ import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccou
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -76,13 +76,13 @@ public class WithdrawCashViewActivity extends BaseActivity implements View.OnCli
                                 ((TextView) findViewById(R.id.wallet_withdraw_cash_view_note)).setText("提现单位：" + info.note);
                             }
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                             finish();
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         finish();
                         break;
                 }
@@ -130,13 +130,13 @@ public class WithdrawCashViewActivity extends BaseActivity implements View.OnCli
                                 ((TextView) findViewById(R.id.wallet_withdraw_cash_view_note)).setText("提现单位：" + info.note);
                             }
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                             finish();
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         finish();
                         break;
                 }
@@ -172,15 +172,15 @@ public class WithdrawCashViewActivity extends BaseActivity implements View.OnCli
                     case ThreadState.SUCCESS:
                         ResponseInfo re = (ResponseInfo) msg.obj;
                         if (re.isSuccess()) {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                             finish();
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }
@@ -221,7 +221,7 @@ public class WithdrawCashViewActivity extends BaseActivity implements View.OnCli
             public void onClick(View view) {
                 dialog.dismiss();
                 if ("".equals(mId)) {
-                    ToastUtil.showMessage("删除失败！");
+                    showMessage("删除失败！");
                 } else {
                     delect(mId);
                 }

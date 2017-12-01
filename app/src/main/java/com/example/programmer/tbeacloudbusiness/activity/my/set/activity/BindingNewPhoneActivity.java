@@ -11,7 +11,7 @@ import android.widget.EditText;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 /**
  *Created by cy on 2017/1/19.更改绑定手机号(新的号码获取验证码)
@@ -47,7 +47,7 @@ public class BindingNewPhoneActivity extends BaseActivity {
             public void onClick(View v) {
                 final  String mobile = ((EditText)findViewById(R.id.new_phone)).getText()+"";
                 if(isMobileNO(mobile) == false){
-                    ToastUtil.showMessage("请输入正确的手机号码");
+                    showMessage("请输入正确的手机号码");
                     return;
                 }
                 mc = new MyCount(60000, 1000);//倒计时60秒
@@ -123,11 +123,11 @@ public class BindingNewPhoneActivity extends BaseActivity {
 
     public  void updateNewPhone(final String mobile, final String verifycode){
         if(isMobileNO(mobile) == false){
-            ToastUtil.showMessage("请输入正确的手机号码！");
+            showMessage("请输入正确的手机号码！");
             return;
         }
         if("".equals(verifycode)){
-            ToastUtil.showMessage("验证码不能为空！");
+            showMessage("验证码不能为空！");
             return;
         }
         final CustomDialog dialog = new CustomDialog(mContext,R.style.MyDialog,R.layout.tip_wait_dialog);

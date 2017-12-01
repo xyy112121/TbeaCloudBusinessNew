@@ -33,7 +33,7 @@ import com.example.programmer.tbeacloudbusiness.activity.user.model.OtherRespons
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.MyGridView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ import butterknife.Unbinder;
  * 全部应用
  */
 
-public class OtherFragment extends Fragment {
+public class OtherFragment extends BaseFragment {
 
     @BindView(R.id.top_left)
     ImageButton topLeft;
@@ -101,11 +101,11 @@ public class OtherFragment extends Fragment {
                                 initFunctionModel(model.data.functionmodulelist);
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg(),getActivity());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！",getActivity());
                             break;
                     }
                 }

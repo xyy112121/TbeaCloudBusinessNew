@@ -22,9 +22,10 @@ import com.example.programmer.tbeacloudbusiness.activity.my.main.action.MyAction
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MyAttentionActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.model.AttentionCommodityResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationInfoActivity;
+import com.example.programmer.tbeacloudbusiness.fragment.BaseFragmentV;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 /**
  * 关注的商品
  */
-public class CommodityFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class CommodityFragment extends BaseFragmentV implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private View mView;
     private ListView mListView;
     private MyAdapter mAdapter;
@@ -101,11 +102,11 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg(),getActivity());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！",getActivity());
                             break;
                     }
                 }
@@ -184,12 +185,12 @@ public class CommodityFragment extends Fragment implements BGARefreshLayout.BGAR
                                 }
                             }
                             if ("".equals(ids)) {
-                                ToastUtil.showMessage("请选择需要取消关注的商品");
+                                showMessage("请选择需要取消关注的商品",getActivity());
                             } else {
                                 ((MyAttentionActivity) getActivity()).cancelAttention(ids);
                             }
                         } else {
-                            ToastUtil.showMessage("没有关注的商品");
+                            showMessage("没有关注的商品",getActivity());
                         }
                     }
                 });

@@ -28,7 +28,7 @@ import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.NetW
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -127,11 +127,11 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
                                     mAdapter.addAll(model.data.newslist);
                                 }
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -217,7 +217,7 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
                     }
                     delete(ids);
                 } else {
-                    ToastUtil.showMessage("请选择需要删除的动态！");
+                    showMessage("请选择需要删除的动态！");
                 }
                 break;
         }
@@ -254,11 +254,11 @@ public class ShopDynamicListActivity extends BaseActivity implements BGARefreshL
                                     mSelectList.clear();
                                     mRefreshLayout.beginRefreshing();
                                 } else {
-                                    ToastUtil.showMessage("操作失败!");
+                                    showMessage("操作失败!");
                                 }
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败!");
+                                showMessage("操作失败!");
                                 break;
                         }
                     }

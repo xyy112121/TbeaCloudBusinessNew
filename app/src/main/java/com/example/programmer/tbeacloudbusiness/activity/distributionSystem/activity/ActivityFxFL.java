@@ -100,18 +100,18 @@ public class ActivityFxFL extends Activity implements AsyncListener,RefreshableV
 			if(!req.isHasError() && req.rspInfo.rspSuccess){
 				fullData1();
 			}else if(!req.isHasError()){
-				Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+				com.mic.etoast2.Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
 			}else{
-				Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+				com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
 			}		
 		}
 		if(serviceCode.equals(TBEA10020000.SERVICE_CODE)){
 			if(!req2.isHasError() && req2.rspInfo.rspSuccess){
 				fullData2();
 			}else if(!req2.isHasError()){
-				Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+				com.mic.etoast2.Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
 			}else{
-				Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+				com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
 			}		
 		}
 	}

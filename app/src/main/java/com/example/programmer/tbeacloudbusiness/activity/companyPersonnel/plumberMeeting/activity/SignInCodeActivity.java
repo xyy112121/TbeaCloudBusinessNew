@@ -27,7 +27,7 @@ import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.programmer.tbeacloudbusiness.utils.permissonutil.MainActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -93,11 +93,11 @@ public class SignInCodeActivity extends BaseActivity implements View.OnClickList
                                     pictureUrl = info.meetingqrcodepicture;
                                 }
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -129,13 +129,13 @@ public class SignInCodeActivity extends BaseActivity implements View.OnClickList
                 if (!TextUtils.isEmpty(pictureUrl)) {
                     saveBitmap(pictureUrl);
                 } else {
-                    ToastUtil.showMessage("下载失败！");
+                    showMessage("下载失败！");
                 }
             }
 
             @Override
             public void Denied() {
-                Toast.makeText(mContext, "请开启权限，才可以正常操作！", Toast.LENGTH_SHORT).show();
+                showMessage("请开启权限，才可以正常操作！");
                 //如果选择不在提示
             }
         }, "请求获取读取文件权限", Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -157,7 +157,7 @@ public class SignInCodeActivity extends BaseActivity implements View.OnClickList
                 dialog.dismiss();
                 switch (msg.what) {
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("下载失败！");
+                        showMessage("下载失败！");
                         break;
                     case ThreadState.SUCCESS:
                         Bitmap bm = (Bitmap) msg.obj;
@@ -187,7 +187,7 @@ public class SignInCodeActivity extends BaseActivity implements View.OnClickList
                             // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
-                        ToastUtil.showMessage("下载成功！");
+                        showMessage("下载成功！");
                         break;
                 }
             }

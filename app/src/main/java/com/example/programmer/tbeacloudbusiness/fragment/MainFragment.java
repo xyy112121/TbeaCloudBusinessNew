@@ -50,7 +50,7 @@ import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -65,7 +65,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 首页
  */
 
-public class MainFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class MainFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private ListView mListView;
     private MyAdapter mAdapter;
     private LayoutInflater mInflater;
@@ -118,11 +118,11 @@ public class MainFragment extends Fragment implements BGARefreshLayout.BGARefres
                                 initStaticsItem(model.staticsitemlist);
                                 initMessage(model.systemmessagelist);
                             } else {
-                                ToastUtil.showMessage(re.getMsg());
+                                showMessage(re.getMsg(),getActivity());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！",getActivity());
                             break;
                     }
                 }

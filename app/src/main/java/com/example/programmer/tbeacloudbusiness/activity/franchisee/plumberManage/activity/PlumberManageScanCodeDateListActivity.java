@@ -30,7 +30,7 @@ import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueB
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 
 import java.util.ArrayList;
@@ -183,11 +183,11 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -232,11 +232,11 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -270,11 +270,11 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                             mStateView.setAdapterData(model.data.confirmstatuslist);
 
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                         }
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

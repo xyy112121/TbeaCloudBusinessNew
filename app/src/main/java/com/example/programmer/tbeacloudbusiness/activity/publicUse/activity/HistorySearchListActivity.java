@@ -23,7 +23,7 @@ import com.example.programmer.tbeacloudbusiness.activity.publicUse.action.Public
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.model.SearchResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;
@@ -73,12 +73,12 @@ public class HistorySearchListActivity extends BaseActivity implements BGARefres
                         if (re.isSuccess() && re.data != null) {
                             mAdapter.addAll(re.data.searchresultlist);
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

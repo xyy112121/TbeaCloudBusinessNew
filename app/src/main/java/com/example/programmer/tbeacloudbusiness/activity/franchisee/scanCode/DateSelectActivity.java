@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -89,7 +89,7 @@ public class DateSelectActivity extends BaseActivity {
                 String startTime = mBeginView.getText() + "";
                 String endTime = mEndView.getText() + "";
                 if (compareTime(startTime, endTime) == 1) {
-                    ToastUtil.showMessage("开始时间不能大于结束时间！");
+                    showMessage("开始时间不能大于结束时间！");
                 } else {
                     Intent intent = new Intent();
                     intent.putExtra("startTime", startTime);

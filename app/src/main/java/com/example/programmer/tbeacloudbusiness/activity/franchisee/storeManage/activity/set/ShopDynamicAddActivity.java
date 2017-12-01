@@ -22,7 +22,7 @@ import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
@@ -80,11 +80,11 @@ public class ShopDynamicAddActivity extends BaseActivity implements View.OnClick
 //                                }
 //
 //                            } else {
-//                                ToastUtil.showMessage(model.getMsg());
+//                                showMessage(model.getMsg());
 //                            }
 //                            break;
 //                        case ThreadState.ERROR:
-//                            ToastUtil.showMessage("操作失败！");
+//                            showMessage("操作失败！");
 //                            break;
 //                    }
 //                }
@@ -124,11 +124,11 @@ public class ShopDynamicAddActivity extends BaseActivity implements View.OnClick
         final String title = ((PublishTextRowView) findViewById(R.id.activity_shop_dynamic_add_title)).getValueText();
         final String content = ((PublishTextRowView) findViewById(R.id.activity_shop_dynamic_add_content)).getValueText();
         if ("".equals(title)) {
-            ToastUtil.showMessage("请输入标题");
+            showMessage("请输入标题");
             return;
         }
         if ("".equals(content)) {
-            ToastUtil.showMessage("请输入内容");
+            showMessage("请输入内容");
             return;
         }
         if (mSelectList.size() > 0) {
@@ -144,14 +144,14 @@ public class ShopDynamicAddActivity extends BaseActivity implements View.OnClick
                             case ThreadState.SUCCESS:
                                 ResponseInfo model = (ResponseInfo) msg.obj;
                                 if (model.isSuccess()) {
-                                    ToastUtil.showMessage("操作成功！");
+                                    showMessage("操作成功！");
                                     finish();
                                 } else {
-                                    ToastUtil.showMessage(model.getMsg());
+                                    showMessage(model.getMsg());
                                 }
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败！");
+                                showMessage("操作失败！");
                                 break;
                         }
                     }
@@ -180,7 +180,7 @@ public class ShopDynamicAddActivity extends BaseActivity implements View.OnClick
                 e.printStackTrace();
             }
         } else {
-            ToastUtil.showMessage("请选择需要上传的图片");
+            showMessage("请选择需要上传的图片");
         }
     }
 

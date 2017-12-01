@@ -12,7 +12,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManag
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PlumberInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 /**
  * 水电工个人资料
@@ -51,11 +51,11 @@ public class PlumberManagePersonViewActivity extends BaseActivity {
                                 setTextView(R.id.plumber_info_whetheridentify, info.whetheridentifyname);
                                 setTextView(R.id.plumber_info_intro, info.introduce);
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

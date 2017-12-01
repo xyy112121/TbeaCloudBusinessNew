@@ -121,32 +121,32 @@ public class ActivityFxZxxdTj extends Activity implements AsyncListener, OnScrol
                 if (req.PreOrderProductList.size() < req.PageSize) isEnd = true;
                 fullData();
             } else if (!req.isHasError()) {
-                Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
 
         if (serviceCode.equals(TBEA07030501.SERVICE_CODE)) {
             if (!req2.isHasError() && req2.rspInfo.rspSuccess) {
-                Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
                 onRefresh();
             } else if (!req2.isHasError()) {
-                Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req2.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
 
         if (serviceCode.equals(TBEA07030000.SERVICE_CODE)) {
             if (!req3.isHasError() && req3.rspInfo.rspSuccess) {
-                Toast.makeText(this, req3.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req3.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK);
                 finish();
             } else if (!req3.isHasError()) {
-                Toast.makeText(this, req3.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req3.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -154,9 +154,9 @@ public class ActivityFxZxxdTj extends Activity implements AsyncListener, OnScrol
             if (!req4.isHasError() && req4.rspInfo.rspSuccess) {
                 _toJGLX();
             } else if (!req4.isHasError()) {
-                Toast.makeText(this, req4.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, req4.rspInfo.RspDesc, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
+                com.mic.etoast2.Toast.makeText(this, "网络或服务器错误", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -264,11 +264,11 @@ public class ActivityFxZxxdTj extends Activity implements AsyncListener, OnScrol
         String jhrq = edtJHRQ.getText().toString();
         String bz = edtBZ.getText().toString();
         if (jhrq.isEmpty()) {
-            Toast.makeText(this, "交货日期必须填写", Toast.LENGTH_SHORT).show();
+            com.mic.etoast2.Toast.makeText(this, "交货日期必须填写", Toast.LENGTH_SHORT).show();
             return;
         }
         if (req3.PriceType == null || req3.PriceType.isEmpty()) {
-            Toast.makeText(this, "请选择价格类型", Toast.LENGTH_SHORT).show();
+            com.mic.etoast2.Toast.makeText(this, "请选择价格类型", Toast.LENGTH_SHORT).show();
             return;
         }
         req3.CustomerId = kfbm;

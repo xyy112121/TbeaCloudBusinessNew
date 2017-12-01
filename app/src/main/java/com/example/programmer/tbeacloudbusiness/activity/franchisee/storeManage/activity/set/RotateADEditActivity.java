@@ -28,7 +28,7 @@ import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
@@ -132,11 +132,11 @@ public class RotateADEditActivity extends BaseActivity implements View.OnClickLi
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -202,11 +202,11 @@ public class RotateADEditActivity extends BaseActivity implements View.OnClickLi
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    ToastUtil.showMessage(model.getMsg());
+                                    showMessage(model.getMsg());
                                 }
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败！");
+                                showMessage("操作失败！");
                                 break;
                         }
                     }
@@ -235,7 +235,7 @@ public class RotateADEditActivity extends BaseActivity implements View.OnClickLi
                 e.printStackTrace();
             }
         } else {
-            ToastUtil.showMessage("请选择图片！");
+            showMessage("请选择图片！");
         }
     }
 
@@ -280,12 +280,12 @@ public class RotateADEditActivity extends BaseActivity implements View.OnClickLi
                                 if (re.isSuccess()) {
                                     finish();
                                 } else {
-                                    ToastUtil.showMessage(re.getMsg());
+                                    showMessage(re.getMsg());
                                 }
 
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败!");
+                                showMessage("操作失败!");
                                 break;
                         }
                     }

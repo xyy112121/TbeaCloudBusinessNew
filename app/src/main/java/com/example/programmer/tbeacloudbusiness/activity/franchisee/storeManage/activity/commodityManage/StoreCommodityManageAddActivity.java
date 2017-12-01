@@ -32,7 +32,7 @@ import com.example.programmer.tbeacloudbusiness.model.Condition;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
@@ -165,11 +165,11 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -235,11 +235,11 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                             }
 
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                         }
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }
@@ -338,7 +338,7 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                 "".equals(mRequest.unit) || "".equals(mRequest.description)
                 || "".equals(mRequest.thumblist) || mRequest.thumblist == null || mRequest.picturelist == null || "".equals(mRequest.picturelist) ||
                 mRequest.categoryid == null || mRequest.moditymodelid == null || mRequest.modityspecid == null) {
-            ToastUtil.showMessage("请补全资料");
+            showMessage("请补全资料");
             return;
         }
 
@@ -356,10 +356,10 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                             if (model.isSuccess()) {
                                 finish();
                             }
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -491,11 +491,11 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                                         mRequest.picturelist = name;
                                     }
                                 } else {
-                                    ToastUtil.showMessage(model.getMsg());
+                                    showMessage(model.getMsg());
                                 }
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败！");
+                                showMessage("操作失败！");
                                 break;
                         }
                     }
@@ -549,12 +549,12 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    ToastUtil.showMessage(re.getMsg());
+                                    showMessage(re.getMsg());
                                 }
 
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败!");
+                                showMessage("操作失败!");
                                 break;
                         }
                     }

@@ -18,7 +18,7 @@ import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccou
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -47,13 +47,13 @@ public class RebateAccountWithdrawCashActivity extends BaseActivity {
                 try {
                     String money = ((EditText) findViewById(R.id.rebate_account_withdraw_cash_money)).getText() + "";
                     if ("".equals(money) || "0".equals(money)) {
-                        ToastUtil.showMessage("请填写提现金额！");
+                        showMessage("请填写提现金额！");
                         return;
                     }
 
                     Double mo = Double.parseDouble(money);
                     if (mo > mCanexChangeMoney) {
-                        ToastUtil.showMessage("不能大于最大提现金额！");
+                        showMessage("不能大于最大提现金额！");
                         return;
                     }
                     showAlert(money);
@@ -123,14 +123,14 @@ public class RebateAccountWithdrawCashActivity extends BaseActivity {
 
                             }
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                             findViewById(R.id.rebate_account_withdraw_cash_top).setVisibility(View.GONE);
                         }
 
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

@@ -1,6 +1,5 @@
 package com.example.programmer.tbeacloudbusiness.fragment;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,7 +31,6 @@ import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.MyMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -49,7 +47,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * Created by programmer on 2017/6/22.
  */
 
-public class MyFragment extends Fragment implements View.OnClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
+public class MyFragment extends BaseFragment implements View.OnClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
     Unbinder unbinder;
     private View mView;
     @BindView(R.id.rl_recyclerview_refresh)
@@ -107,12 +105,12 @@ public class MyFragment extends Fragment implements View.OnClickListener, BGARef
                                 initPersonInfo(model.userpersoninfo);
 
                             } else {
-                                ToastUtil.showMessage(re.getMsg());
+                                showMessage(re.getMsg(),getActivity());
                             }
 
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！",getActivity());
                             break;
                     }
                 }

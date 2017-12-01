@@ -14,7 +14,6 @@ import com.example.programmer.tbeacloudbusiness.activity.check.tbws.action.Subsc
 import com.example.programmer.tbeacloudbusiness.activity.check.tbws.model.info.TestDetailsResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 
 
 /**
@@ -72,12 +71,12 @@ public class MyFreeTestViewDetectionActivity extends BaseActivity {
                             }
 
                         } else {
-                            ToastUtil.showMessage(model.getMsg());
+                            showMessage(model.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

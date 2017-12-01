@@ -20,7 +20,7 @@ import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
@@ -69,12 +69,12 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                                 ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + re.data.backgroundinfo.picture, mImageView);
                             }
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败!");
+                        showMessage("操作失败!");
 
                         break;
                 }
@@ -162,13 +162,13 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                             case ThreadState.SUCCESS:
                                 ResponseInfo model = (ResponseInfo) msg.obj;
                                 if (model.isSuccess()) {
-                                    ToastUtil.showMessage("操作成功！");
+                                    showMessage("操作成功！");
                                 } else {
-                                    ToastUtil.showMessage(model.getMsg());
+                                    showMessage(model.getMsg());
                                 }
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败！");
+                                showMessage("操作失败！");
                                 break;
                         }
                     }
@@ -196,7 +196,7 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                 e.printStackTrace();
             }
         } else {
-            ToastUtil.showMessage("请选择需要上传的图片");
+            showMessage("请选择需要上传的图片");
         }
     }
 
@@ -228,12 +228,12 @@ public class SetBackgroundActivity extends BaseActivity implements View.OnClickL
                                 if (re.isSuccess()) {
                                     mImageView.setImageResource(R.drawable.icon_defult);
                                 } else {
-                                    ToastUtil.showMessage(re.getMsg());
+                                    showMessage(re.getMsg());
                                 }
 
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败!");
+                                showMessage("操作失败!");
                                 break;
                         }
                     }

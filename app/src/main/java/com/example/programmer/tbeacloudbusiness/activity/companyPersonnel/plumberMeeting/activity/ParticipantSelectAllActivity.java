@@ -25,7 +25,7 @@ import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumbe
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.Serializable;
@@ -100,11 +100,11 @@ public class ParticipantSelectAllActivity extends BaseActivity implements View.O
                                 }
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -141,7 +141,7 @@ public class ParticipantSelectAllActivity extends BaseActivity implements View.O
             setResult(RESULT_OK, in);
             finish();
         } else {
-            ToastUtil.showMessage("未选择用户");
+            showMessage("未选择用户");
         }
     }
 

@@ -17,7 +17,7 @@ import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 
 /**
@@ -54,7 +54,7 @@ public class ForgetPwdPhoneActivity extends BaseActivity {
             public void onClick(View v) {
                 final String mobile = ((EditText) findViewById(R.id.myphone_edit_old_phone)).getText() + "";
                 if (isMobileNO(mobile) == false) {
-                    ToastUtil.showMessage("请输入正确的手机号码");
+                    showMessage("请输入正确的手机号码");
                     return;
                 }
                 mc = new MyCount(120000, 1000);//倒计时120秒
@@ -70,10 +70,10 @@ public class ForgetPwdPhoneActivity extends BaseActivity {
                                     mc.cancel();
                                     button.setText("获取验证码");
                                 }
-                                ToastUtil.showMessage(re.getMsg());
+                                showMessage(re.getMsg());
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("获取验证失败，请重试！");
+                                showMessage("获取验证失败，请重试！");
                                 mc.cancel();
                                 button.setText("获取验证码");
                                 break;
@@ -136,11 +136,11 @@ public class ForgetPwdPhoneActivity extends BaseActivity {
      */
     public void validateCode(final String mobile, final String verifycode) {
         if (isMobileNO(mobile) == false) {
-            ToastUtil.showMessage("请输入正确的手机号码！");
+            showMessage("请输入正确的手机号码！");
             return;
         }
         if ("".equals(verifycode)) {
-            ToastUtil.showMessage("验证码不能为空！");
+            showMessage("验证码不能为空！");
             return;
         }
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
@@ -160,11 +160,11 @@ public class ForgetPwdPhoneActivity extends BaseActivity {
                             startActivity(intent);
                             finish();
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

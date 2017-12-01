@@ -20,7 +20,7 @@ import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.model.Condition;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,21 +70,21 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
                                 s.toString().indexOf(".") + 3);
                         mMoneyView.setText(s);
                         mMoneyView.setSelection(s.length());
-                        ToastUtil.showMessage("输入值只能小数点后两位");
+                        showMessage("输入值只能小数点后两位");
                     }
                 }
                 if (s.toString().trim().substring(0).equals(".")) {
                     s = "0" + s;
                     mMoneyView.setText(s);
                     mMoneyView.setSelection(2);
-                    ToastUtil.showMessage("输入值只能小数点后两位");
+                    showMessage("输入值只能小数点后两位");
                 }
 
                 if (s.toString().startsWith("0") && s.toString().trim().length() > 1) {
                     if (!s.toString().substring(1, 2).equals(".")) {
                         mMoneyView.setText(s.subSequence(0, 1));
                         mMoneyView.setSelection(1);
-                        ToastUtil.showMessage("输入值只能小数点后两位");
+                        showMessage("输入值只能小数点后两位");
                         return;
                     }
                 }
@@ -100,7 +100,7 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
                 if (mCommdity == null) {
-                    ToastUtil.showMessage("请先选择产品名称！");
+                    showMessage("请先选择产品名称！");
                     return;
                 }
                 Intent intent = new Intent();
@@ -128,21 +128,21 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
                 String money = mMoneyView.getText() + "";
                 String number = mNumberView.getText() + "";
                 if (TextUtils.isEmpty(money)) {
-                    ToastUtil.showMessage("请输入金额");
+                    showMessage("请输入金额");
                     return;
                 }
                 if (TextUtils.isEmpty(number)) {
-                    ToastUtil.showMessage("请输入数量");
+                    showMessage("请输入数量");
                     return;
                 }
 
                 if (mCommdity == null) {
-                    ToastUtil.showMessage("请选择产品");
+                    showMessage("请选择产品");
                     return;
                 }
 
                 if (mType == null || mNorms == null) {
-                    ToastUtil.showMessage("请选择产品规格");
+                    showMessage("请选择产品规格");
                     return;
                 }
 
@@ -214,11 +214,11 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
                                 finish();
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

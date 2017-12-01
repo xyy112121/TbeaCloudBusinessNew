@@ -3,13 +3,10 @@ package com.example.programmer.tbeacloudbusiness.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.user.action.UserAction;
-import com.example.programmer.tbeacloudbusiness.activity.user.model.HomeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.user.model.UpdateResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.MainNavigateTabBar;
 import com.example.programmer.tbeacloudbusiness.fragment.MainFragment;
@@ -20,7 +17,6 @@ import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.AppUpdateUtils;
 import com.example.programmer.tbeacloudbusiness.utils.AppVersion;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jaeger.library.StatusBarUtil;
@@ -73,23 +69,23 @@ public class MainActivity extends BaseActivity {
                                         av.setContent(info.upgradedescription);
                                         av.setVerCode(info.versioncode);
                                         av.setVersionName(info.versionname);
-                                        if("yes".equals(info.mustupgrade)){
-                                            AppUpdateUtils.init(MainActivity.this, av, true, false,false);//强制升级
-                                        }else {
-                                            AppUpdateUtils.init(MainActivity.this, av, true, false,true);
+                                        if ("yes".equals(info.mustupgrade)) {
+                                            AppUpdateUtils.init(MainActivity.this, av, true, false, false);//强制升级
+                                        } else {
+                                            AppUpdateUtils.init(MainActivity.this, av, true, false, true);
                                         }
                                         AppUpdateUtils.upDate();
                                     }
                                 } else {
-                                    ToastUtil.showMessage(re.getMsg());
+                                    showMessage(re.getMsg());
                                 }
 
                             } else {
-                                ToastUtil.showMessage(re.getMsg());
+                                showMessage(re.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

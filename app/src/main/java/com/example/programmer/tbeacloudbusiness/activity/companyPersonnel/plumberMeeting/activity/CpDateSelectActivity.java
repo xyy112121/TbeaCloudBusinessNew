@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -81,7 +81,7 @@ public class CpDateSelectActivity extends BaseActivity {
                 String startTime = ((TextView) findViewById(R.id.date_select_begin)).getText() + "";
                 String endTime = ((TextView) findViewById(R.id.date_select_end)).getText() + "";
                 if (compareTime(startTime, endTime) == 1) {
-                    ToastUtil.showMessage("起始时间不能大于终止时间！");
+                    showMessage("起始时间不能大于终止时间！");
                 } else {
                     intent.putExtra("startTime", startTime);
                     intent.putExtra("endTime", endTime);

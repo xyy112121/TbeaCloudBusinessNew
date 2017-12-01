@@ -16,7 +16,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.act
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
@@ -91,11 +91,11 @@ public class WithdrawDepositDateInfoActivity extends BaseActivity {
                                     layout.findViewById(R.id.person_info_right).setVisibility(View.GONE);
                                 }
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }

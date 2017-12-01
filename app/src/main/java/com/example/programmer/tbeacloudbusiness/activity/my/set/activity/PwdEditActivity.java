@@ -17,7 +17,7 @@ import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 /**
  * 修改密码
@@ -42,22 +42,22 @@ public class PwdEditActivity extends BaseActivity {
                 String confirmPwd = ((TextView) findViewById(R.id.pwd_edit_confirm)).getText() + "";
 
                 if ("".equals(oldpwd)) {
-                    ToastUtil.showMessage("当前密码不能为空！");
+                    showMessage("当前密码不能为空！");
                     return;
                 }
 
                 if ("".equals(newPwd)) {
-                    ToastUtil.showMessage("新密码不能为空！");
+                    showMessage("新密码不能为空！");
                     return;
                 }
 
                 if (newPwd.length() < 6 || newPwd.length() > 32) {
-                    ToastUtil.showMessage("密码长度6到32位！");
+                    showMessage("密码长度6到32位！");
                     return;
                 }
 
                 if (!newPwd.equals(confirmPwd)) {
-                    ToastUtil.showMessage("两次密码不一致！");
+                    showMessage("两次密码不一致！");
                     return;
                 }
                 updatePwd(oldpwd, newPwd);
@@ -82,11 +82,11 @@ public class PwdEditActivity extends BaseActivity {
                             startActivity(intent);
                             finish();
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败！");
+                        showMessage("操作失败！");
                         break;
                 }
             }

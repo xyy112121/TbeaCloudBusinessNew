@@ -18,7 +18,7 @@ import com.example.programmer.tbeacloudbusiness.activity.tbea.action.TbeaAction;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.ContactInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,11 +80,11 @@ public class ProductPresentationContactInfoActivity extends BaseActivity {
                                 mTbeatelView.setText("集团电话：" + mObj.tbeatel);
 
                             } else {
-                                ToastUtil.showMessage(model.getMsg());
+                                showMessage(model.getMsg());
                             }
                             break;
                         case ThreadState.ERROR:
-                            ToastUtil.showMessage("操作失败！");
+                            showMessage("操作失败！");
                             break;
                     }
                 }
@@ -141,7 +141,7 @@ public class ProductPresentationContactInfoActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.product_presentation_contact_info_platformservicetel_layout:
                 if("".equals(mObj.platformservicetel)){
-                    ToastUtil.showMessage("号码为空");
+                    showMessage("号码为空");
                 }else {
                     callPhone(mObj.platformservicetel);
                 }
@@ -149,14 +149,14 @@ public class ProductPresentationContactInfoActivity extends BaseActivity {
                 break;
             case R.id.product_presentation_contact_info_delantel_layout:
                 if("".equals(mObj.delantel)){
-                    ToastUtil.showMessage("号码为空");
+                    showMessage("号码为空");
                 }else {
                     callPhone(mObj.delantel);
                 }
                 break;
             case R.id.product_presentation_contact_info_tbeatel_layout:
                 if("".equals(mObj.tbeatel)){
-                    ToastUtil.showMessage("号码为空");
+                    showMessage("号码为空");
                 }else {
                     callPhone(mObj.delantel);
                 }

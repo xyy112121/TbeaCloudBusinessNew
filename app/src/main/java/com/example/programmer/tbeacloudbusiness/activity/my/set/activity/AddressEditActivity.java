@@ -21,7 +21,7 @@ import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-import com.example.programmer.tbeacloudbusiness.utils.ToastUtil;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -95,12 +95,12 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         CheckBox ck = (CheckBox) findViewById(R.id.addr_edit_isdefault);
 
         if ("".equals(name) || "".equals(contactmobile) || "".equals(address) || "".equals(citys)) {
-            ToastUtil.showMessage("请填写完整的地址信息");
+            showMessage("请填写完整的地址信息");
             return;
         }
 
         if (isMobileNO(contactmobile) == false) {
-            ToastUtil.showMessage("请输入正确的手机号码");
+            showMessage("请输入正确的手机号码");
             return;
         }
 
@@ -127,12 +127,12 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
                             setResult(RESULT_OK);
                             finish();
                         } else {
-                            ToastUtil.showMessage(re.getMsg());
+                            showMessage(re.getMsg());
                         }
 
                         break;
                     case ThreadState.ERROR:
-                        ToastUtil.showMessage("操作失败!");
+                        showMessage("操作失败!");
 
                         break;
                 }
@@ -184,12 +184,12 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
                                 if (re.isSuccess()) {
                                     finish();
                                 } else {
-                                    ToastUtil.showMessage(re.getMsg());
+                                    showMessage(re.getMsg());
                                 }
 
                                 break;
                             case ThreadState.ERROR:
-                                ToastUtil.showMessage("操作失败!");
+                                showMessage("操作失败!");
                                 break;
                         }
                     }
