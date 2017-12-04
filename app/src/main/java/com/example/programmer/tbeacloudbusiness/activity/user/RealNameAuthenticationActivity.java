@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.user;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -131,7 +132,7 @@ public class RealNameAuthenticationActivity extends BaseActivity {
         dialog.show();
 
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
@@ -184,9 +185,8 @@ public class RealNameAuthenticationActivity extends BaseActivity {
 //                                mcompanyPhotoTvView.setVisibility(View.INVISIBLE);
 //                                }
 
-                                if ("identifying".equals(mIdentify) || "identified".equals(mIdentify)) {//正在认证
+                                if ("identifying".equals(mIdentify) || "identified".equals(mIdentify)) {//正在认证和认证通过
                                     setView();
-
                                 }
 
                                 //认证失败和认证通过
@@ -343,10 +343,6 @@ public class RealNameAuthenticationActivity extends BaseActivity {
 //                }
                 break;
             case R.id.real_name_companyPhoto_layout:
-//                if ("notidentify".equals(mIdentify) || mIdentify != null || "".equals(mIdentify)) {//未认证
-//                    mFlag = "CompanyPhoto";
-//                    openImage();
-//                } else {
                 String[] pictures = mObj.companypicture.split(",");
                 picturelist = new ArrayList<>();
                 for (int i = 0; i < pictures.length; i++) {
@@ -356,7 +352,6 @@ public class RealNameAuthenticationActivity extends BaseActivity {
 
                 }
                 openImage(picturelist, 0);
-//                }
 
                 break;
             case R.id.real_name_companyPhoto_finish:

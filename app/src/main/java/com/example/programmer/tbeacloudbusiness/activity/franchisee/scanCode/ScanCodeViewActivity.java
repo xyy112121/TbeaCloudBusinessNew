@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,11 +35,11 @@ public class ScanCodeViewActivity extends BaseActivity {
     }
 
     private void getData() {
-        final CustomDialog dialog = new CustomDialog(mContext,R.style.MyDialog,R.layout.tip_wait_dialog);
+        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         dialog.setText("加载中...");
         dialog.show();
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     switch (msg.what) {
@@ -46,29 +47,23 @@ public class ScanCodeViewActivity extends BaseActivity {
                             dialog.dismiss();
                             ScanCodeInfoResponseModel model = (ScanCodeInfoResponseModel) msg.obj;
                             if (model.isSuccess()) {
-                                if(model.data != null && model.data.rebateqrcodeinfo != null){
-                                    setViewText(R.id.scan_code_info_code,model.data.rebateqrcodeinfo.rebatecode);
-                                    setViewText(R.id.scan_code_info_generatetime,model.data.rebateqrcodeinfo.generatetime);
-                                    setViewText(R.id.scan_code_info_name,model.data.rebateqrcodeinfo.commoditycategory);
-                                    setViewText(R.id.scan_code_info_type,model.data.rebateqrcodeinfo.commodityspecificationandmodel);
-                                    setViewText(R.id.scan_code_info_confirmstatus,model.data.rebateqrcodeinfo.confirmstatus);
-                                    setViewText(R.id.scan_code_info_money,model.data.rebateqrcodeinfo.money);
+                                if (model.data != null && model.data.rebateqrcodeinfo != null) {
+                                    setViewText(R.id.scan_code_info_code, model.data.rebateqrcodeinfo.rebatecode);
+                                    setViewText(R.id.scan_code_info_generatetime, model.data.rebateqrcodeinfo.generatetime);
+                                    setViewText(R.id.scan_code_info_name, model.data.rebateqrcodeinfo.commoditycategory);
+                                    setViewText(R.id.scan_code_info_type, model.data.rebateqrcodeinfo.commodityspecificationandmodel);
+                                    setViewText(R.id.scan_code_info_confirmstatus, model.data.rebateqrcodeinfo.confirmstatus);
+                                    setViewText(R.id.scan_code_info_money, model.data.rebateqrcodeinfo.money);
                                 }
 
-                                if (model.data != null && model.data.rebateqrcodeactivityinfo != null){
+                                if (model.data != null && model.data.rebateqrcodeactivityinfo != null) {
                                     ScanCodeInfoResponseModel.RebateqrCodeActivity info = model.data.rebateqrcodeactivityinfo;
-                                    ((TextView)findViewById(R.id.person_info_name)).setText(info.actuvityusername);
-                                    ((TextView)findViewById(R.id.person_info_companyname)).setText(info.activityplace);
-                                    ImageLoader.getInstance().displayImage(info.actuvityuserpicture, ((ImageView)findViewById(R.id.person_info_head)));
-                                    ImageLoader.getInstance().displayImage(info.personjobtitle, ((ImageView)findViewById(R.id.person_info_personjobtitle)));
-
-//                                    CircleImageView headView = (CircleImageView)findViewById(R.id.person_info_head);
-//                                    ImageView jobView = (ImageView)findViewById(R.id.person_info_personjobtitle);
-//                                    String imagePath = MyApplication.instance.getImgPath();
-//                                    ImageLoader.getInstance().displayImage(imagePath+.actuvityuserpicture,headView);
-//                                    ImageLoader.getInstance().displayImage(imagePath+model.data.rebateqrcodeactivityinfo.personjobtitle,jobView);
-//                                    setViewText(R.id.scan_code_info_activitytime,model.data.rebateqrcodeactivityinfo.activitytime);
-//                                    setViewText(R.id.scan_code_info_activityplace,model.data.rebateqrcodeactivityinfo.activityplace);
+                                    ((TextView) findViewById(R.id.person_info_name)).setText(info.actuvityusername);
+                                    ((TextView) findViewById(R.id.person_info_companyname)).setText(info.activityplace);
+                                    ImageLoader.getInstance().displayImage(info.actuvityuserpicture, ((ImageView) findViewById(R.id.person_info_head)));
+                                    ImageLoader.getInstance().displayImage(info.personjobtitle, ((ImageView) findViewById(R.id.person_info_personjobtitle)));
+                                    setViewText(R.id.scan_code_info_activitytime, model.data.rebateqrcodeactivityinfo.activitytime);
+                                    setViewText(R.id.scan_code_info_activityplace, model.data.rebateqrcodeactivityinfo.activityplace);
                                 }
                             } else {
                                 showMessage(model.getMsg());
@@ -101,7 +96,7 @@ public class ScanCodeViewActivity extends BaseActivity {
         }
     }
 
-    private void setViewText(int id,String text){
-        ((TextView)findViewById(id)).setText(text);
+    private void setViewText(int id, String text) {
+        ((TextView) findViewById(id)).setText(text);
     }
 }
