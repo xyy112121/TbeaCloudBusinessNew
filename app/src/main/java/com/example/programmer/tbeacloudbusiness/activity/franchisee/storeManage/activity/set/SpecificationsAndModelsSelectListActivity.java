@@ -32,6 +32,7 @@ public class SpecificationsAndModelsSelectListActivity extends BaseActivity {
                 intent.putExtra("title", "型号");
                 intent.putExtra("method", "TBEAYUN001002001000");
                 intent.putExtra("methodName", "TBEAYUN001002001001");
+                intent.putExtra("withall", "1");
                 startActivity(intent);
 
 //                Intent intent = new Intent(mContext, SpecificationsAndModelsEditActivity.class);
@@ -49,6 +50,7 @@ public class SpecificationsAndModelsSelectListActivity extends BaseActivity {
                 intent.putExtra("title", "规格");
                 intent.putExtra("method", "TBEAYUN001002002000");
                 intent.putExtra("methodName", "TBEAYUN001002002001");
+                intent.putExtra("withall", "1");
                 startActivity(intent);
 
 //                Intent intent = new Intent(mContext, SpecificationsAndModelsEditActivity.class);

@@ -226,6 +226,10 @@ public class BaseActivity extends PermissionActivity {
 		});
 	}
 
+	public  void showMessage( final CharSequence msg, Context context) {
+		Toast.makeText(context, msg + "", android.widget.Toast.LENGTH_SHORT).show();
+	}
+
 	/**
 	 * 资源文件方式显示文本
 	 *

@@ -100,12 +100,13 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
                 if (mCommdity == null) {
-                    showMessage("请先选择产品名称！");
+                    showMessage("请先选择产品名称！",mContext);
                     return;
                 }
                 Intent intent = new Intent();
                 intent.setClass(mContext, ScanCodeCreateSelectActivity.class);
                 intent.putExtra("norms", mNorms);
+                intent.putExtra("withall", "0");
                 intent.putExtra("commodityId", mCommdity.getId());
                 intent.putExtra("type", mType);
                 startActivityForResult(intent, REQEST_TYPE_NORMS);

@@ -295,6 +295,7 @@ public class StoreCommodityManageAddActivity extends BaseActivity implements Vie
             case R.id.commdity_add_modespec:
                 Intent intent = new Intent(mContext, ScanCodeCreateSelectActivity.class);
                 intent.putExtra("type", mType);
+                intent.putExtra("withall", "1");
                 intent.putExtra("norms", mNorms);
                 startActivityForResult(intent, REQEST_TYPE_NORMS);
                 break;

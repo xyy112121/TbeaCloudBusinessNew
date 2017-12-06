@@ -42,22 +42,25 @@ public class ScanCodeAction extends BaseAction {
     }
 
     //获取选择型号
-    public ScanCodeTypeSelectReponseModel getScanCodeTypeSelect(String commodityId) throws Exception {
+    //withall是否返回全部（生成返利不返回全部）
+    public ScanCodeTypeSelectReponseModel getScanCodeTypeSelect(String commodityId,String withall) throws Exception {
         ScanCodeTypeSelectReponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("flag", "1"));
         pairs.add(new BasicNameValuePair("commoditycategoryid", commodityId));
+        pairs.add(new BasicNameValuePair("withall", withall));
         String result = sendRequest("TBEAYUN001002001000", pairs);
         model = gson.fromJson(result, ScanCodeTypeSelectReponseModel.class);
         return model;
     }
 
     //获取选择规格
-    public ScanCodeNormsSelectReponseModel getScanCodeNormsSelect(String commodityId) throws Exception {
+    public ScanCodeNormsSelectReponseModel getScanCodeNormsSelect(String commodityId,String withall) throws Exception {
         ScanCodeNormsSelectReponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("flag", "1"));
         pairs.add(new BasicNameValuePair("commoditycategoryid", commodityId));
+        pairs.add(new BasicNameValuePair("withall", withall));
         String result = sendRequest("TBEAYUN001002002000", pairs);
         model = gson.fromJson(result, ScanCodeNormsSelectReponseModel.class);
         return model;

@@ -10,9 +10,7 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.RotateADListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.SetVisualGraphActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.SpecificationsAndModelsListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.SpecificationsAndModelsSelectListActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.StoreCodeActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.set.StoreIntroduceActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.NetWebViewActivity;
 

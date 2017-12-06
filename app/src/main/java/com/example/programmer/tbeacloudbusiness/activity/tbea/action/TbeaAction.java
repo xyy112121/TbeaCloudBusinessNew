@@ -36,28 +36,6 @@ public class TbeaAction extends BaseAction {
         return model;
     }
 
-
-    //获取商品介绍里面的产品规格
-    public CommoditySpecificationResponseModel getCommoditySpecification(String id) throws Exception {
-        CommoditySpecificationResponseModel model;
-        List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new BasicNameValuePair("parentcategoryid", id));
-        String result = sendRequest("TBEAYUN001002002000", pairs);
-        model = gson.fromJson(result, CommoditySpecificationResponseModel.class);
-        return model;
-    }
-
-
-    //获取商品介绍里面的产品类型
-    public CommodityModelResponseModel getCommodityModelList(String id) throws Exception {
-        CommodityModelResponseModel model;
-        List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new BasicNameValuePair("parentcategoryid", id));
-        String result = sendRequest("TBEAYUN001002001000", pairs);
-        model = gson.fromJson(result, CommodityModelResponseModel.class);
-        return model;
-    }
-
     /**
      * 获取产品介绍列表
      */

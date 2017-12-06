@@ -436,10 +436,11 @@ public class StoreManageAction extends BaseAction {
 
     //获取选择型号 TBEAYUN001002001000
     //TBEAYUN001002002000  获取选择规格
-    public ScanCodeTypeSelectReponseModel getTypeSelect(String method) throws Exception {
+    public ScanCodeTypeSelectReponseModel getTypeSelect(String method,String withall) throws Exception {
         ScanCodeTypeSelectReponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("flag", "1"));
+        pairs.add(new BasicNameValuePair("withall", withall));//是否返回全部
         String result = sendRequest(method, pairs);
         model = gson.fromJson(result, ScanCodeTypeSelectReponseModel.class);
         return model;

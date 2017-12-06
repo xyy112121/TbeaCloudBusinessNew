@@ -43,6 +43,7 @@ public class SpecificationsAndModelsListActivity extends BaseActivity implements
     BGARefreshLayout mRefreshLayout;
     private MyAdapter mAdapter;
     private String method;
+    private String mWithall;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class SpecificationsAndModelsListActivity extends BaseActivity implements
         String title = getIntent().getStringExtra("title");
         initTopbar(title, "添加", this);
         method = getIntent().getStringExtra("method");
+        mWithall = getIntent().getStringExtra("withall");
         initView();
     }
 
@@ -96,7 +98,7 @@ public class SpecificationsAndModelsListActivity extends BaseActivity implements
                 public void run() {
                     try {
                         StoreManageAction action = new StoreManageAction();
-                        ScanCodeTypeSelectReponseModel model = action.getTypeSelect(method);
+                        ScanCodeTypeSelectReponseModel model = action.getTypeSelect(method,mWithall);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

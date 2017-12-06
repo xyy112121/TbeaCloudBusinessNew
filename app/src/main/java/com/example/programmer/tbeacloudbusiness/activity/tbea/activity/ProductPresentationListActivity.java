@@ -23,6 +23,9 @@ import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action.ScanCodeAction;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeNormsSelectReponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeTypeSelectReponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageTypeListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.action.TbeaAction;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityCategoryResponseModel;
@@ -109,9 +112,11 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
                         if (model.isSuccess()) {
                             mCategoryList = model.data.commoditycategorylist;
                             if (mCategoryList != null && mCategoryList.size() > 0) {
-                                CommoditySpecificationResponseModel model1 = action.getCommoditySpecification(mCategoryList.get(0).getId());
+                                ScanCodeAction action1 = new ScanCodeAction();
+                                ScanCodeNormsSelectReponseModel model1 = action1.getScanCodeNormsSelect(mCategoryList.get(0).getId(),"1");
                                 mSpecificationList = model1.data.commodityspecificationlist;
-                                CommodityModelResponseModel model2 = action.getCommodityModelList(mCategoryList.get(0).getId());
+
+                                ScanCodeTypeSelectReponseModel model2 = action1.getScanCodeTypeSelect(mCategoryList.get(0).getId(),"1");
                                 mModelList = model2.data.commoditymodellist;
                             }
                         }

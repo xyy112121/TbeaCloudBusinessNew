@@ -85,7 +85,8 @@ public class ScanCodeNormsSelectActivity extends BaseActivity {
                     try {
                         ScanCodeAction action = new ScanCodeAction();
                         String commodityId = getIntent().getStringExtra("commodityId");
-                        ScanCodeNormsSelectReponseModel model = action.getScanCodeNormsSelect(commodityId);
+                        String withall = getIntent().getStringExtra("withall");
+                        ScanCodeNormsSelectReponseModel model = action.getScanCodeNormsSelect(commodityId,withall);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

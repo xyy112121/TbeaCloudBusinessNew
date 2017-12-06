@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 型号选择
+ * 扫码型号选择
  */
 
 public class ScanCodeTypeSelectActivity extends BaseActivity {
@@ -85,7 +85,8 @@ public class ScanCodeTypeSelectActivity extends BaseActivity {
                     try {
                         ScanCodeAction action = new ScanCodeAction();
                         String commodityId = getIntent().getStringExtra("commodityId");
-                        ScanCodeTypeSelectReponseModel model = action.getScanCodeTypeSelect(commodityId);
+                        String withall = getIntent().getStringExtra("withall");
+                        ScanCodeTypeSelectReponseModel model = action.getScanCodeTypeSelect(commodityId,withall);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
