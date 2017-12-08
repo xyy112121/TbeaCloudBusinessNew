@@ -17,7 +17,7 @@
         android:orientation="horizontal">
 
 
-        <EditText
+        <TextView
             android:id="@+id/product_presentation_list_search_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

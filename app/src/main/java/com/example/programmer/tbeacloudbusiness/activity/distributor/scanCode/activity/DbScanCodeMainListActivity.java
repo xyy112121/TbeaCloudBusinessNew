@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.distributor.scanCode.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -93,7 +94,7 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, HistorySearchActivity.class);
-                intent.putExtra("type", "all");
+                intent.putExtra("type", "scanrebate");
                 startActivity(intent);
             }
         });
@@ -106,7 +107,7 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
      */
     private void getData() {
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     mRefreshLayout.endRefreshing();
@@ -246,17 +247,8 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
             moneyView.setText(obj.totlemoney);
 
             ImageView rankingView = (ImageView) view.findViewById(R.id.scan_code_main_item_ranking);
-            if (position == 0) {
-                rankingView.setImageResource(R.drawable.icon_scanre_batesort1);
-            } else if (position == 1) {
-                rankingView.setImageResource(R.drawable.icon_scanre_batesort2);
-            } else if (position == 2) {
-                rankingView.setImageResource(R.drawable.icon_scanre_batesort3);
-            } else if (position == 3) {
-                rankingView.setImageResource(R.drawable.icon_scanre_batesort4);
-            } else {
-                rankingView.setImageResource(R.drawable.icon_scanre_batesort4);
-            }
+
+            ImageLoader.getInstance().displayImage(obj.rankingorder, rankingView);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -82,7 +83,7 @@ public class StoreManageMainActivity extends BaseActivity implements BGARefreshL
 
     private void getData() {
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     mRefreshLayout.endRefreshing();
@@ -258,11 +259,11 @@ public class StoreManageMainActivity extends BaseActivity implements BGARefreshL
                 holder.topText1.setText(obj.name);
                 holder.topText2.setText(obj.subitemlist.get(0).name);
                 holder.topText3.setText(obj.subitemlist.get(1).name);
-                if ("0".equals(obj.subitemlist.get(0).ismoney)) {
+                if ("1".equals(obj.subitemlist.get(0).ismoney)) {
                     holder.topText4Label.setVisibility(View.VISIBLE);
                 }
                 holder.topText4.setText(obj.subitemlist.get(0).value);
-                if ("0".equals(obj.subitemlist.get(1).ismoney)) {
+                if ("1".equals(obj.subitemlist.get(1).ismoney)) {
                     holder.topText5Label.setVisibility(View.VISIBLE);
                 }
                 holder.topText5.setText(obj.subitemlist.get(1).value);

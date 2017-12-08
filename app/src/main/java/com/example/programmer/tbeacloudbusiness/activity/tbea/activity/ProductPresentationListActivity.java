@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.tbea.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.act
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeNormsSelectReponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeTypeSelectReponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageTypeListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.action.TbeaAction;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityCategoryResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.model.CommodityModelResponseModel;
@@ -84,16 +86,12 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
         findViewById(R.id.product_presentation_model_layout).setOnClickListener(this);
         findViewById(R.id.product_presentation_more).setOnClickListener(this);
 
-        final EditText searchEditText = (EditText) findViewById(R.id.product_presentation_list_search_text);
-        searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        findViewById(R.id.product_presentation_list_search_text).setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
-                // TODO Auto-generated method stub
-                if (arg1 == EditorInfo.IME_ACTION_SEARCH) {
-                    name = searchEditText.getText() + "";
-                    mRefreshLayout.beginRefreshing();
-                }
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, HistorySearchActivity.class);
+                intent.putExtra("type", "tbeaproduct");
+                startActivity(intent);
             }
         });
     }
@@ -135,7 +133,7 @@ public class ProductPresentationListActivity extends BaseActivity implements BGA
      */
     private void getListData() {
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     mRefreshLayout.endRefreshing();

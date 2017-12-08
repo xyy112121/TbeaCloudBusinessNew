@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberManage.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -88,7 +89,7 @@ public class DranchiseeSeleteActivity extends BaseActivity implements BGARefresh
      */
     private void getListData() {
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     mRefreshLayout.endLoadingMore();

@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -90,7 +91,7 @@ public class OtherFragment extends BaseFragment {
         dialog.setText("加载中...");
         dialog.show();
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
@@ -218,6 +219,7 @@ public class OtherFragment extends BaseFragment {
                         //水电工管理
                         startActivity(new Intent(getActivity(), DranchiseeSeleteActivity.class));
                     } else if ("fenxiaoshang".equals(obj.moduleid)) {
+                        //分销商管理
                         startActivity(new Intent(getActivity(), DistributorListActivity.class));
                     }
                 }

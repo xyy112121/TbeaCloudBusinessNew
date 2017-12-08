@@ -30,6 +30,8 @@ public class HistorySearchActivity extends BaseActivity {
     private EditText searchTV;
     private ListView mListView;
     private MyAdapter mAdapter;
+    private String mType;
+    private String mHistoryKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +39,12 @@ public class HistorySearchActivity extends BaseActivity {
         setContentView(R.layout.activity_history_search);
         searchTV = (EditText) findViewById(R.id.expert_search_text);
         mListView = (ListView) findViewById(R.id.search_history_list);
-
-//        String searchValue = getIntent().getStringExtra("searchValue");
-//        searchTV.setText(searchValue);
+        mType = getIntent().getStringExtra("type");
+        mHistoryKey = "yunshan" + mType;
         mAdapter = new MyAdapter();
         // 获取搜索记录文件内容
         SharedPreferences sp = getSharedPreferences("yunshan_search", 0);
-        String history = sp.getString("yunshan", "");
+        String history = sp.getString(mHistoryKey, "");
         if (!"".equals(history)) {
             // 用逗号分割内容返回数组
             String[] history_arr = history.split(",");
@@ -84,7 +85,7 @@ public class HistorySearchActivity extends BaseActivity {
 
                     @Override
                     public void onClick(View v) {
-                       finish();
+                        finish();
                     }
                 });
 
@@ -128,7 +129,7 @@ public class HistorySearchActivity extends BaseActivity {
                 findViewById(R.id.search_history_view).setVisibility(View.GONE);
                 SharedPreferences mysp = getSharedPreferences("yunshan_search", 0);
                 SharedPreferences.Editor myeditor = mysp.edit();
-                myeditor.putString("yunshan", "").commit();
+                myeditor.putString(mHistoryKey, "").commit();
                 mAdapter.removeAll();
             }
         });
@@ -147,7 +148,7 @@ public class HistorySearchActivity extends BaseActivity {
     public void search(String keyword) {
         Intent intent = new Intent(HistorySearchActivity.this, HistorySearchListActivity.class);
         intent.putExtra("keyword", keyword);
-        intent.putExtra("type", getIntent().getStringExtra("type"));
+        intent.putExtra("type", mType);
         startActivity(intent);
     }
 
@@ -178,7 +179,7 @@ public class HistorySearchActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     SharedPreferences mysp = getSharedPreferences("yunshan_search", 0);
-                    String old_text = mysp.getString("yunshan", "");
+                    String old_text = mysp.getString(mHistoryKey, "");
                     // 用逗号分割内容返回数组
                     String[] history_arr = old_text.split(",");
                     List<String> hisList = new ArrayList<>();
@@ -196,7 +197,7 @@ public class HistorySearchActivity extends BaseActivity {
 
                     // 判断搜索内容是否已经存在于历史文件，已存在则不重复添加
                     SharedPreferences.Editor myeditor = mysp.edit();
-                    myeditor.putString("expert", builder.toString()).commit();
+                    myeditor.putString(mHistoryKey, builder.toString()).commit();
                     list.remove(position);
                     notifyDataSetChanged();
 //			        } 
@@ -227,7 +228,7 @@ public class HistorySearchActivity extends BaseActivity {
             findViewById(R.id.search_history_text).setVisibility(View.VISIBLE);
             // 获取搜索框信息
             SharedPreferences mysp = getSharedPreferences("yunshan_search", 0);
-            String old_text = mysp.getString("yunshan", "");
+            String old_text = mysp.getString(mHistoryKey, "");
 
             // 利用StringBuilder.append新增内容，逗号便于读取内容时用逗号拆分开
             StringBuilder builder = new StringBuilder(old_text);
@@ -236,7 +237,7 @@ public class HistorySearchActivity extends BaseActivity {
             // 判断搜索内容是否已经存在于历史文件，已存在则不重复添加
             if (!old_text.contains(text + ",")) {
                 SharedPreferences.Editor myeditor = mysp.edit();
-                myeditor.putString("yunshan", builder.toString());
+                myeditor.putString(mHistoryKey, builder.toString());
                 myeditor.commit();
                 mAdapter.add(text);
             }

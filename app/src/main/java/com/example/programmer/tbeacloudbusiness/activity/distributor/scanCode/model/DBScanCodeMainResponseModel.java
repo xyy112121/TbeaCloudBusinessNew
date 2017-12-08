@@ -33,5 +33,6 @@ public class DBScanCodeMainResponseModel extends BaseResponseModel {
         public String personname;
         public String personjobtitle;
         public String totlemoney;
+        public String rankingorder;
     }
 }

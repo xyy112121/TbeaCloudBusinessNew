@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.distributorManage.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -81,7 +82,7 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, HistorySearchActivity.class);
-                intent.putExtra("type", "all");
+                intent.putExtra("type", "distributor");
                 startActivity(intent);
             }
         });
@@ -182,7 +183,7 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
      */
     private void getListData() {
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     mRefreshLayout.endRefreshing();

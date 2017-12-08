@@ -17,10 +17,13 @@ import android.widget.TextView;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.MeetingViewActivity;
+import com.example.programmer.tbeacloudbusiness.activity.distributorManage.activity.DustributorWithdrawalHistoryListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PersonManageViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingViewActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateHistoryActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.action.PublicAction;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.model.SearchResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationInfoActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 
@@ -50,7 +53,7 @@ public class HistorySearchListActivity extends BaseActivity implements BGARefres
         mKeyword = getIntent().getStringExtra("keyword");
         mType = getIntent().getStringExtra("type");
         mListView = (ListView) findViewById(R.id.listview);
-        mAdapter = new MyAdapter(mContext,R.layout.activity_history_search_list_item);
+        mAdapter = new MyAdapter(mContext, R.layout.activity_history_search_list_item);
         mListView.setAdapter(mAdapter);
         mRefreshLayout = (BGARefreshLayout) findViewById(R.id.rl_recyclerview_refresh);
         mRefreshLayout.setDelegate(this);
@@ -142,20 +145,30 @@ public class HistorySearchListActivity extends BaseActivity implements BGARefres
                 public void onClick(View view) {
                     String type = getItem(position).objecttype;
                     String id = getItem(position).objectprimarykey;
-                    //水电工： 分销商： ：
+                    //全部(all)，水电工 (electrician)，分销商(distributor)，水电工会议 (servicemeeting)，
+                    // 扫码返利(scanrebate)，特变卫士服务单(tbeaservice)，订单(tbeaorder)，
+                    // 特变电工内的产品搜索(tbeaproduct)
                     Intent intent = new Intent();
-                    if("electrician".equals(type)){//水电工
+                    if ("electrician".equals(type)) {//水电工
                         intent.setClass(mContext, PersonManageViewActivity.class);
-                        intent.putExtra("id",id);
+                        intent.putExtra("id", id);
 
-                    }else if("servicemeeting".equals(type)){//水电工会议
+                    } else if ("servicemeeting".equals(type)) {//水电工会议
                         intent.setClass(mContext, MeetingViewActivity.class);
-                        intent.putExtra("id",id);
+                        intent.putExtra("id", id);
 
-                    }else if("distributor".equals(type)){//分销商
-//                        intent.setClass(mContext, PlumberMeetingViewActivity.class);
-//                        intent.putExtra("id",id);
+                    } else if ("distributor".equals(type)) {//分销商
+                        intent.setClass(mContext, DustributorWithdrawalHistoryListActivity.class);
+                        intent.putExtra("id", id);
+                        
+                    } else if ("scanrebate".equals(type)) {//扫码返利
+//                        intent.setClass(mContext, WithdrawDepositDateHistoryActivity.class);
+//                        intent.putExtra("personOrCompany", getItem(position).personorcompany);
+//                        intent.putExtra("payeeId", obj.electricianid);
 
+                    } else if ("tbeaproduct".equals(type)) {//特变电工内的产品搜索
+                        intent.setClass(mContext, ProductPresentationInfoActivity.class);
+                        intent.putExtra("id", id);
                     }
                     startActivity(intent);
                 }
