@@ -17,6 +17,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.PlumberMeetingListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.activity.FxMainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeHistoryListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.BypassAccountManageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageTypeListActivity;
@@ -105,12 +106,12 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, BG
                                 initPersonInfo(model.userpersoninfo);
 
                             } else {
-                                showMessage(re.getMsg(),getActivity());
+                                showMessage(re.getMsg(), getActivity());
                             }
 
                             break;
                         case ThreadState.ERROR:
-                            showMessage("操作失败！",getActivity());
+                            showMessage("操作失败！", getActivity());
                             break;
                     }
                 }
@@ -153,11 +154,6 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, BG
                     public void onClick(View v) {
 
                         if ("platformhelp".equals(item.id)) {
-//                            Intent intent = new Intent(getActivity(), NetWebViewActivity.class);
-//                            intent.putExtra("title", "帮助中心");
-//                            String par = "userhelpdetail?questionid=" + MyApplication.instance.getUserId();
-//                            intent.putExtra("parameter", par);//URL后缀
-//                            startActivity(intent);
                             startActivity(new Intent(getActivity(), ServiceCenterActivity.class));
 
                         }
@@ -174,6 +170,12 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, BG
                         if ("mymoneyaccount".equals(item.id)) {//我的返利账户
                             startActivity(new Intent(getActivity(), MyRebateAccountlistActivity.class));
                         }
+                        if ("scanrebatetasklist".equals(item.id)) {
+                            Intent intent = new Intent(getActivity(), ScanCodeHistoryListActivity.class);
+                            intent.putExtra("flag","my");
+                            startActivity(intent);
+                        }
+
                         if ("mysubaccount".equals(item.id)) {//我的子账号
                             startActivity(new Intent(getActivity(), BypassAccountManageListActivity.class));
                         }

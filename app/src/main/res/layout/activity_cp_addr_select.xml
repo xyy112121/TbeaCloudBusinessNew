@@ -28,7 +28,7 @@
         app:PublishTextRowViewIsSelect="false"
         app:PublishTextRowViewLeftWidth="100dp"
         app:PublishTextRowViewState="write"
-        app:PublishTextRowViewText="举办地点"
+        app:PublishTextRowViewText="详细地址"
         app:PublishTextRowViewTextColor="@color/text_color" />
 
 </LinearLayout>

@@ -244,8 +244,8 @@ public class PersonInfoActivity extends BaseActivity {
     private void showSexPicker() {
         LinearLayout parentLayout = (LinearLayout) findViewById(R.id.parentLayout);
         List<KeyValueBean> sexList = new ArrayList<>();
-        sexList.add(new KeyValueBean("male", "先生"));
-        sexList.add(new KeyValueBean("female", "女士"));
+        sexList.add(new KeyValueBean("male", "男"));
+        sexList.add(new KeyValueBean("female", "女"));
         CustomPopWindow1 popWindow1 = new CustomPopWindow1(mContext);
         popWindow1.init(parentLayout, R.layout.pop_window_header1, R.layout.pop_window_tv, sexList, "");
         popWindow1.setItemClick2(new CustomPopWindow1.ItemClick2() {

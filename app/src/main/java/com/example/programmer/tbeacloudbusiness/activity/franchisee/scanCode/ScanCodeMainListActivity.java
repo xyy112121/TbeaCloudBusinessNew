@@ -22,8 +22,11 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.act
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
+import com.example.programmer.tbeacloudbusiness.utils.Constants;
+import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 
+import com.luck.picture.lib.tools.Constant;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -49,7 +52,12 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_code_main_list);
         mContext = this;
-        initTopbar("扫码返利", "生成", this);
+        if("marketer".equals(ShareConfig.getConfigString(mContext, Constants.USERTYPE,""))){
+            initTopbar("扫码返利");
+        }else {
+            initTopbar("扫码返利", "生成", this);
+        }
+
         intiView();
     }
 

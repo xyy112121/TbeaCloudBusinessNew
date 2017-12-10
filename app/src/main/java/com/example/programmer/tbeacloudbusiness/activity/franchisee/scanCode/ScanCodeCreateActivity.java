@@ -50,7 +50,12 @@ public class ScanCodeCreateActivity extends BaseActivity implements View.OnClick
         setContentView(R.layout.activity_create_code);
         ButterKnife.bind(this);
         mContext = this;
-        initTopbar("生成返利二维码", "历史记录", this);
+        String flag = getIntent().getStringExtra("flag");
+        if ("my".equals(flag)) {
+            initTopbar("生成返利二维码");
+        }else {
+            initTopbar("生成返利二维码", "历史记录", this);
+        }
         initView();
     }
 

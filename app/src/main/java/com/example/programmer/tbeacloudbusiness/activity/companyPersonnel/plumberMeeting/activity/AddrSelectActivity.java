@@ -40,6 +40,11 @@ public class AddrSelectActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.activity_cp_addr_select);
         ButterKnife.bind(this);
         initTopbar("地址选择", "保存", this);
+        String title = getIntent().getStringExtra("title");
+        if(title != null || !"".equals(title)){
+            mAddrInfoView.setValueHint("请输入"+title);
+            mAddrInfoView.setLeftext(title);
+        }
         if ("addrEdit".equals(getIntent().getStringExtra("flag"))) {
             mAddrInfoView.setVisibility(View.GONE);
         }

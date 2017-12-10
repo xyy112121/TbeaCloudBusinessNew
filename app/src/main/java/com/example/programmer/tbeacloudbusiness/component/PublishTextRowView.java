@@ -33,6 +33,7 @@ public class PublishTextRowView extends LinearLayout {
     private boolean mIsSelect;//true 是，
     private TextView mValueView;
     private ClearEditText mValueView2;
+    private TextView mLeftView;
     private ImageView mRightView;
     View mBottomView;
     private int mWidth;
@@ -82,6 +83,9 @@ public class PublishTextRowView extends LinearLayout {
             return mValueView2.getText() + "";
         }
     }
+    public void setLeftext(String text) {
+        mLeftView.setText(text);
+    }
 
     /**
      * 设置可编辑（可点击）
@@ -108,12 +112,12 @@ public class PublishTextRowView extends LinearLayout {
 
     public void initView(Context context) {
         View view = ((Activity) context).getLayoutInflater().inflate(R.layout.view_pulish_text_row, null);
-        TextView leftView = (TextView) view.findViewById(R.id.left);
+        mLeftView = (TextView) view.findViewById(R.id.left);
         mValueView2 = (ClearEditText) view.findViewById(R.id.rowvalue);
         mValueView = (TextView) view.findViewById(R.id.row_value);
         mBottomView = view.findViewById(R.id.bottom_line);
         mRightView = (ImageView) view.findViewById(R.id.right_image);
-        leftView.setText(mTitleText);
+        mLeftView.setText(mTitleText);
         mValueView.setTextColor(mRightTextColor);
         mValueView2.setTextColor(mRightTextColor);
         mValueView2.setHint(mHiht);
@@ -135,9 +139,9 @@ public class PublishTextRowView extends LinearLayout {
         } else if (mGravity == 1) {
             mValueView.setGravity(Gravity.RIGHT | Gravity.CENTER);
         }
-        leftView.setTextColor(mTextColor);
+        mLeftView.setTextColor(mTextColor);
         LayoutParams params = new LayoutParams(mWidth, LayoutParams.MATCH_PARENT);
-        leftView.setLayoutParams(params);
+        mLeftView.setLayoutParams(params);
 
         if (mIsBottomLineShow == false) {
             mBottomView.setVisibility(INVISIBLE);

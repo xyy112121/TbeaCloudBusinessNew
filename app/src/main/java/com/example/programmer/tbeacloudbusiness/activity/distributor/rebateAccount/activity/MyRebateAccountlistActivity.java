@@ -22,6 +22,8 @@ import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccou
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateActivity;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
+import com.example.programmer.tbeacloudbusiness.utils.Constants;
+import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
@@ -37,7 +39,6 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  */
 
 public class MyRebateAccountlistActivity extends BaseActivity implements View.OnClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
-    private Context mContext;
     private ListView mListView;
     private MyAdapter mAdapter;
     private BGARefreshLayout mRefreshLayout;
@@ -51,7 +52,6 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rebate_account_list);
         initTopbar("返利账户", "收支明细", this);
-        mContext = this;
         initUI();
     }
 
@@ -72,23 +72,32 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
                             if (isFirst == true) {
                                 LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_rebate_account_list_head, null);
                                 mListView.addHeaderView(layout);
-                                FrameLayout layout1 = (FrameLayout) getLayoutInflater().inflate(R.layout.activity_rebate_account_list_item_head, null);
-                                mListView.addHeaderView(layout1);
-                                findViewById(R.id.my_rebate_account_withdraw_cash).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        if (mCurrentMoney == 0) {
-                                            showMessage("你当前可提现金额为0");
-                                        } else {
-                                            startActivity(new Intent(mContext, RebateAccountWithdrawCashActivity.class));
-                                        }
+                                String userType = ShareConfig.getConfigString(mContext, Constants.USERTYPE,"");
+                                if("firstleveldistributor".equals(userType)){//总经销商不能提现
+                                    layout.findViewById(R.id.my_rebate_account_withdraw_cash).setVisibility(View.GONE);
+                                    ((TextView) findViewById(R.id.my_rebate_account_list_currentmoney_title)).setText("总支出");
+                                    mListView.setDivider(null);
+                                    mListView.setDividerHeight(0);
+                                }else {
+                                    FrameLayout layout1 = (FrameLayout) getLayoutInflater().inflate(R.layout.activity_rebate_account_list_item_head, null);
+                                    mListView.addHeaderView(layout1);
+                                    findViewById(R.id.my_rebate_account_withdraw_cash).setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            if (mCurrentMoney == 0) {
+                                                showMessage("你当前可提现金额为0");
+                                            } else {
+                                                startActivity(new Intent(mContext, RebateAccountWithdrawCashActivity.class));
+                                            }
 
-                                    }
-                                });
+                                        }
+                                    });
+                                    mAdapter.addAll(model.data.nottakemoneylist);
+                                }
+
                             }
                             ((TextView) findViewById(R.id.my_rebate_account_list_currentmoney)).setText(mCurrentMoney + "");
 
-                            mAdapter.addAll(model.data.nottakemoneylist);
                             isFirst = false;
                         } else {
                             showMessage(model.getMsg());

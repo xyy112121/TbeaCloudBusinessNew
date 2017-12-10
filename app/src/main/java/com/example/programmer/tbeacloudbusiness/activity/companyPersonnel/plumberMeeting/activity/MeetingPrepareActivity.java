@@ -165,6 +165,7 @@ public class MeetingPrepareActivity extends BaseActivity {
                 intent.putExtra("city",mRequest.meetingcity);
                 intent.putExtra("county",mRequest.meetingzone);
                 intent.putExtra("addr",mRequest.meetingaddr);
+                intent.putExtra("title","举办地点");
                 startActivityForResult(intent, RESULT_ADDR);
                 break;
             case R.id.cp_meeting_prepare_participant:
