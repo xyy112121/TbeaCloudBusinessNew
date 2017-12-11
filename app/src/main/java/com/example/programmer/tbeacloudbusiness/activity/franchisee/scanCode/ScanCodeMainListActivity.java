@@ -16,8 +16,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
-import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.action.ScanCodeAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeMainResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
@@ -25,8 +25,6 @@ import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.utils.Constants;
 import com.example.programmer.tbeacloudbusiness.utils.ShareConfig;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-
-import com.luck.picture.lib.tools.Constant;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -45,19 +43,18 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
     private View mHeadView;
     private View mHeadView1;
     private MyAdapter mAdapter;
-    private Context mContext;
+    private String mFdistributorid = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_code_main_list);
-        mContext = this;
-        if("marketer".equals(ShareConfig.getConfigString(mContext, Constants.USERTYPE,""))){
+        if ("marketer".equals(ShareConfig.getConfigString(mContext, Constants.USERTYPE, ""))) {
             initTopbar("扫码返利");
-        }else {
+        } else {
             initTopbar("扫码返利", "生成", this);
         }
-
+        mFdistributorid = getIntent().getStringExtra("id");
         intiView();
     }
 
@@ -78,6 +75,7 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(mContext, WithdrawDepositDateActivity.class);
+                intent.putExtra("fdistributorid", mFdistributorid);
                 startActivity(intent);
             }
         });
@@ -92,6 +90,7 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(mContext, ScanCodeRebateListActivity.class);
+                intent.putExtra("fdistributorid", mFdistributorid);
                 startActivity(intent);
             }
         });
@@ -157,7 +156,7 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
                 public void run() {
                     try {
                         ScanCodeAction action = new ScanCodeAction();
-                        ScanCodeMainResponseModel model = action.getMainData();
+                        ScanCodeMainResponseModel model = action.getMainData(mFdistributorid);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -191,6 +190,7 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
             case R.id.top_text2:
             case R.id.top_text4_layout:
                 intent.setClass(mContext, WithdrawDepositDateActivity.class);
+                intent.putExtra("fdistributorid", mFdistributorid);
                 startActivity(intent);
                 //已支付
                 break;
@@ -198,6 +198,7 @@ public class ScanCodeMainListActivity extends BaseActivity implements BGARefresh
             case R.id.top_text5_layout:
                 //待支付
                 intent.setClass(mContext, WithdrawDepositDateActivity.class);
+                intent.putExtra("fdistributorid", mFdistributorid);
                 intent.putExtra("flag", "1");
                 startActivity(intent);
                 break;

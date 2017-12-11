@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.my.main.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -97,14 +98,15 @@ public class PersonInfoActivity extends BaseActivity {
         dialog.setText("请等待...");
         dialog.show();
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
                             ResponseInfo re = (ResponseInfo) msg.obj;
-                            showMessage(re.getMsg());
+                            if (re != null)
+                                showMessage(re.getMsg());
                             break;
                         case ThreadState.ERROR:
                             showMessage("操作失败！");
@@ -156,7 +158,7 @@ public class PersonInfoActivity extends BaseActivity {
         final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
         dialog.setText("加载中...");
         dialog.show();
-        final Handler handler = new Handler() {
+        @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 dialog.dismiss();
@@ -179,8 +181,6 @@ public class PersonInfoActivity extends BaseActivity {
                                 mZoneView.setValueText(mModel.companyname);
                                 mStateView.setValueText(mModel.identifystatus);
                             }
-
-
 //                            mRequest.address = mModel.address;
 //                            mRequest.province = mModel.province;
 //                            mRequest.city = mModel.city;
@@ -313,6 +313,7 @@ public class PersonInfoActivity extends BaseActivity {
                 intent.putExtra("city", mModel.city);
                 intent.putExtra("county", mModel.zone);
                 intent.putExtra("addr", mModel.addr);
+                intent.putExtra("title", "详细地址");
                 startActivityForResult(intent, RESULT_ADDR);
                 break;
             case R.id.person_info_phone:

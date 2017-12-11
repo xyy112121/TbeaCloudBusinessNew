@@ -116,11 +116,11 @@ public class MainFragment extends BaseFragment implements BGARefreshLayout.BGARe
                                 initStaticsItem(model.staticsitemlist);
                                 initMessage(model.systemmessagelist);
                             } else {
-                                showMessage(re.getMsg(),getActivity());
+                                showMessage(re.getMsg(), getActivity());
                             }
                             break;
                         case ThreadState.ERROR:
-                            showMessage("操作失败！",getActivity());
+                            showMessage("操作失败！", getActivity());
                             break;
                     }
                 }
@@ -348,10 +348,9 @@ public class MainFragment extends BaseFragment implements BGARefreshLayout.BGARe
         if ("distributor_shaomafanli".equals(moduleid)) {//分销商
             //扫码返利
             startActivity(new Intent(getActivity(), DbScanCodeMainListActivity.class));
-        } else if("electricalcheckor_tebianweishi".equals(moduleid)){
+        } else if ("electricalcheckor_tebianweishi".equals(moduleid)) {
             startActivity(new Intent(getActivity(), com.example.programmer.tbeacloudbusiness.activity.check.tbws.activity.MyTaskListActivity.class));
-        }else
-            if ("tebianweishi".equals(moduleid)) {
+        } else if ("tebianweishi".equals(moduleid)) {
             startActivity(new Intent(getActivity(), MyTaskListActivity.class));
         } else if ("shaomafanli".equals(moduleid)) {
             //扫码返利
@@ -393,6 +392,10 @@ public class MainFragment extends BaseFragment implements BGARefreshLayout.BGARe
             startActivity(new Intent(getActivity(), DistributorListActivity.class));
         } else if ("dingdanguanli".equals(moduleid)) {//订单管理
             Intent intent = new Intent(getActivity(), OrderListActivity.class);
+            startActivity(intent);
+        } else if ("marketer_shaomafanli".equals(moduleid)) {
+            Intent intent = new Intent(getActivity(), DranchiseeSeleteActivity.class);
+            intent.putExtra("flag", moduleid);
             startActivity(intent);
         }
     }

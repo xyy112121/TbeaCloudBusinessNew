@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,7 +44,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 提现数据列表
  */
 
-public  class WithdrawDepositDateActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
+public class WithdrawDepositDateActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
     private ExpandPopTabView expandTabView;
     private List<KeyValueBean> mDateLists;//扫码时间
 
@@ -52,12 +53,11 @@ public  class WithdrawDepositDateActivity extends BaseActivity implements BGARef
     private ListView mListView;
     private MyAdapter mAdapter;
     private int mPage = 1;
-    private int mPagesiz = 10;
-    private String paystatusid, payeetypeid, starttime, endtime, orderitem, order,mMoneyOrder;
+    private String paystatusid, payeetypeid, starttime, endtime, orderitem, order, mMoneyOrder;
     private final int RESULT_DATA_SELECT = 1000;
     private TextView mState1View;
-    public  TextView mState1View1;
-    private  int mViewId =R.id.take_money_pay_state1;
+    public TextView mState1View1;
+    private int mViewId = R.id.take_money_pay_state1;
 
     @BindView(R.id.scan_code_top_money_iv)
     ImageView mScanCodeTopMoneyIv;
@@ -94,7 +94,7 @@ public  class WithdrawDepositDateActivity extends BaseActivity implements BGARef
         mState1View.setOnClickListener(this);
         mState1View1.setOnClickListener(this);
 
-        if("1".equals(getIntent().getStringExtra("flag"))){//待支付
+        if ("1".equals(getIntent().getStringExtra("flag"))) {//待支付
             mState1View1.performClick();
         }
     }
@@ -186,14 +186,14 @@ public  class WithdrawDepositDateActivity extends BaseActivity implements BGARef
      */
     private void getPayStatus() {
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     switch (msg.what) {
                         case ThreadState.SUCCESS:
                             PayStatusResponseModel model = (PayStatusResponseModel) msg.obj;
                             if (model.isSuccess()) {
-                                if (model.data != null) {
+                                if (model.data != null && model.data.paystatuslist.size() > 2) {
                                     KeyValueBean bean = model.data.paystatuslist.get(0);
                                     paystatusid = bean.getKey();
                                     mState1View.setText(bean.getValue());
@@ -239,7 +239,7 @@ public  class WithdrawDepositDateActivity extends BaseActivity implements BGARef
      */
     private void getListData() {
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     mRefreshLayout.endRefreshing();
@@ -249,8 +249,8 @@ public  class WithdrawDepositDateActivity extends BaseActivity implements BGARef
                             WithdrawDepositDateResponseModel model = (WithdrawDepositDateResponseModel) msg.obj;
                             if (model != null) {
                                 if (model.isSuccess()) {
-                                    if (model.data != null){
-                                        if(model.data.takemoneylist != null){
+                                    if (model.data != null) {
+                                        if (model.data.takemoneylist != null) {
                                             mAdapter.addAll(model.data.takemoneylist);
                                         }
 
@@ -277,7 +277,8 @@ public  class WithdrawDepositDateActivity extends BaseActivity implements BGARef
                 public void run() {
                     try {
                         ScanCodeAction action = new ScanCodeAction();
-                        WithdrawDepositDateResponseModel model = action.getWithdrawDepositDateList(paystatusid, payeetypeid, starttime, endtime, orderitem, order, mPage++, mPagesiz);
+                        String fdistributorid = getIntent().getStringExtra("fdistributorid");
+                        WithdrawDepositDateResponseModel model = action.getWithdrawDepositDateList(paystatusid, payeetypeid, starttime, endtime, orderitem, order, mPage++, 10, fdistributorid);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);
@@ -354,7 +355,7 @@ public  class WithdrawDepositDateActivity extends BaseActivity implements BGARef
         mRefreshLayout.beginRefreshing();
     }
 
-     class MyAdapter extends BaseAdapter {
+    class MyAdapter extends BaseAdapter {
         /**
          * android 上下文环境
          */
@@ -416,7 +417,7 @@ public  class WithdrawDepositDateActivity extends BaseActivity implements BGARef
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mViewId== R.id.take_money_pay_state1) {
+                    if (mViewId == R.id.take_money_pay_state1) {
                         Intent intent = new Intent(mContext, WithdrawDepositDateInfoActivity.class);
                         intent.putExtra("takeMoneyId", obj.takemoneyid);
                         startActivity(intent);

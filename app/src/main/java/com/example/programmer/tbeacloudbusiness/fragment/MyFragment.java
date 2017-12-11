@@ -14,10 +14,12 @@ import android.widget.TextView;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
+import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberManage.activity.DranchiseeSeleteActivity;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.PlumberMeetingListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributionSystem.activity.FxMainActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.MyRebateAccountlistActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeHistoryListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.storeManage.activity.order.OrderListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.BypassAccountManageListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.my.main.activity.MessageTypeListActivity;
@@ -172,7 +174,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, BG
                         }
                         if ("scanrebatetasklist".equals(item.id)) {
                             Intent intent = new Intent(getActivity(), ScanCodeHistoryListActivity.class);
-                            intent.putExtra("flag","my");
+                            intent.putExtra("flag", "my");
                             startActivity(intent);
                         }
 
@@ -194,19 +196,19 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, BG
 
                         if ("companyidentify".equals(item.id)) {//实名认证
                             startActivity(new Intent(getActivity(), RealNameAuthenticationDistributorActivity.class));
-//                            String identify = ShareConfig.getConfigString(getActivity(), Constants.whetheridentifiedid, "");
-//                            if ("identified".equals(identify)) {
-////                                startActivity(new Intent(getActivity(), RealNameAuthenticationPlumberActivity.class));
-//                                startActivity(new Intent(getActivity(), RealNameAuthenticationDistributorActivity.class));
-//                            } else {
-//                                startActivity(new Intent(getActivity(), CompletionDataActivity.class));
-//                            }
                         }
                         if ("marketer_shuidiangonghuiyi".equals(item.id) || "shuidiangonghuiyi".equals(item.id)) {
-
                             //水电工会议
                             startActivity(new Intent(getActivity(), PlumberMeetingListActivity.class));
                         }
+
+                        if ("marketer_shaomafanli".equals(item.id)) {//外勤人员
+                            Intent intent = new Intent(getActivity(), DranchiseeSeleteActivity.class);
+                            intent.putExtra("flag", item.id);
+                            startActivity(intent);
+                        }
+
+
 
                         if ("tebianfenxiao".equals(item.id) || "fxsubsystem".equals(item.id)) {
                             //分销系统

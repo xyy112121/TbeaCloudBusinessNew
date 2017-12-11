@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -114,7 +115,7 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
      */
     private void getListData() {
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     mRefreshLayout.endRefreshing();
@@ -140,7 +141,9 @@ public class ScanCodeRebateListActivity extends BaseActivity implements BGARefre
                 public void run() {
                     try {
                         ScanCodeAction action = new ScanCodeAction();
-                        ScanCodeRebateListResponseModel model = action.getWithdrawDepositDateList(mRegionId, mOrderitem, mOrder, mPage++, mPagesiz);
+                        String fdistributorid = getIntent().getStringExtra("fdistributorid");
+                        ScanCodeRebateListResponseModel model = action.getWithdrawDepositDateList(mRegionId, mOrderitem,
+                                mOrder, mPage++, mPagesiz,fdistributorid);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

@@ -23,6 +23,7 @@ import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberManage.action.PlumberManageAction;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberManage.model.DranchiseeSeleteResonpseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PlumberManageMainListActivity;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.ScanCodeMainListActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
@@ -169,10 +170,16 @@ public class DranchiseeSeleteActivity extends BaseActivity implements BGARefresh
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, PlumberManageMainListActivity.class);
-                    intent.putExtra("type", "");
-                    intent.putExtra("id", obj.fdistributorid);
-                    startActivity(intent);
+                    if ("marketer_shaomafanli".equals(getIntent().getStringExtra("flag"))) {
+                        Intent intent = new Intent(mContext, ScanCodeMainListActivity.class);
+                        intent.putExtra("id", obj.fdistributorid);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(mContext, PlumberManageMainListActivity.class);
+                        intent.putExtra("type", "");
+                        intent.putExtra("id", obj.fdistributorid);
+                        startActivity(intent);
+                    }
                 }
             });
             return convertView;

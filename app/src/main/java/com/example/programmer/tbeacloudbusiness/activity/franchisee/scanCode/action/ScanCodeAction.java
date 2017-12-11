@@ -33,9 +33,10 @@ public class ScanCodeAction extends BaseAction {
     /**
      * 获取主页显示数据
      */
-    public ScanCodeMainResponseModel getMainData() throws Exception {
+    public ScanCodeMainResponseModel getMainData(String fdistributorid) throws Exception {
         ScanCodeMainResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("fdistributorid", fdistributorid));
         String result = sendRequest("TBEAYUN004002001000", pairs);
         model = gson.fromJson(result, ScanCodeMainResponseModel.class);
         return model;
@@ -43,7 +44,7 @@ public class ScanCodeAction extends BaseAction {
 
     //获取选择型号
     //withall是否返回全部（生成返利不返回全部）
-    public ScanCodeTypeSelectReponseModel getScanCodeTypeSelect(String commodityId,String withall) throws Exception {
+    public ScanCodeTypeSelectReponseModel getScanCodeTypeSelect(String commodityId, String withall) throws Exception {
         ScanCodeTypeSelectReponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("flag", "1"));
@@ -55,7 +56,7 @@ public class ScanCodeAction extends BaseAction {
     }
 
     //获取选择规格
-    public ScanCodeNormsSelectReponseModel getScanCodeNormsSelect(String commodityId,String withall) throws Exception {
+    public ScanCodeNormsSelectReponseModel getScanCodeNormsSelect(String commodityId, String withall) throws Exception {
         ScanCodeNormsSelectReponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("flag", "1"));
@@ -67,7 +68,7 @@ public class ScanCodeAction extends BaseAction {
     }
 
     //生成二维码
-    public ScanCodeCreateResponseModel createScanCode(String money, String number, String typeId, String normsId,String commdityId) throws Exception {
+    public ScanCodeCreateResponseModel createScanCode(String money, String number, String typeId, String normsId, String commdityId) throws Exception {
         ScanCodeCreateResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("money", money));
@@ -183,7 +184,8 @@ public class ScanCodeAction extends BaseAction {
      * page
      */
     public WithdrawDepositDateResponseModel getWithdrawDepositDateList(String paystatusid, String payeetypeid,
-                                                                       String starttime, String endtime, String orderitem, String order, int page, int pagesize) throws Exception {
+                                                                       String starttime, String endtime, String orderitem,
+                                                                       String order, int page, int pagesize,String fdistributorid) throws Exception {
         WithdrawDepositDateResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("paystatusid", paystatusid));
@@ -194,6 +196,7 @@ public class ScanCodeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
+        pairs.add(new BasicNameValuePair("fdistributorid", fdistributorid));
         String result = sendRequest("TBEAYUN004002004000", pairs);
         model = gson.fromJson(result, WithdrawDepositDateResponseModel.class);
         return model;
@@ -202,7 +205,8 @@ public class ScanCodeAction extends BaseAction {
     /**
      * 获取提现排名
      */
-    public ScanCodeRebateListResponseModel getWithdrawDepositDateList(String zoneids, String orderitem, String order, int page, int pagesize) throws Exception {
+    public ScanCodeRebateListResponseModel getWithdrawDepositDateList(String zoneids, String orderitem, String order,
+                                                                      int page, int pagesize,String fdistributorid) throws Exception {
         ScanCodeRebateListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("zoneids", zoneids));
@@ -210,6 +214,7 @@ public class ScanCodeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("order", order));
         pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
+        pairs.add(new BasicNameValuePair("fdistributorid", fdistributorid));
         String result = sendRequest("TBEAYUN004002002000", pairs);
         model = gson.fromJson(result, ScanCodeRebateListResponseModel.class);
         return model;
