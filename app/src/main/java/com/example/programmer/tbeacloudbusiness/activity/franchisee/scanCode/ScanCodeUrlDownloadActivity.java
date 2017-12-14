@@ -35,6 +35,7 @@ public class ScanCodeUrlDownloadActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_code_url_download);
+        initTopbar("Excel文件链接");
         ButterKnife.bind(this);
         mId = getIntent().getStringExtra("id");
         getData();
