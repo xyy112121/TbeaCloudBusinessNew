@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_page_top" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="编码"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/scan_code_image_code_tv"
+                style="@style/my_right_text_style1"
+                android:textColor="@color/text_color" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="金额"
+                android:textColor="@color/black" />
+
+            <TextView
+                style="@style/money_logo_style"
+                android:layout_gravity="top"
+                android:gravity="center_vertical"
+                android:textColor="@color/text_color"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/scan_code_image_money_tv"
+                style="@style/my_right_text_style1"
+                android:textColor="@color/text_color" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="状态"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/scan_code_image_status_tv"
+                style="@style/my_right_text_style1"
+                android:textColor="@color/text_color" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <ImageView
+            android:id="@+id/scan_code_image_url_iv"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

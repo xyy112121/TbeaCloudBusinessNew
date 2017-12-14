@@ -164,6 +164,18 @@ public class ScanCodeAction extends BaseAction {
     }
 
     /**
+     * 二维码图片
+     */
+    public ResponseInfo getCodeImage(String code) throws Exception {
+        ResponseInfo model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("rebateqrcode", code));
+        String result = sendRequest("TBEAYUN004002006003", pairs);
+        model = gson.fromJson(result, ResponseInfo.class);
+        return model;
+    }
+
+    /**
      * 获取提现数据列表中的用户类型
      */
     public PayeeTypeResponeModel getPayeeType() throws Exception {
@@ -198,7 +210,7 @@ public class ScanCodeAction extends BaseAction {
      */
     public WithdrawDepositDateResponseModel getWithdrawDepositDateList(String paystatusid, String payeetypeid,
                                                                        String starttime, String endtime, String orderitem,
-                                                                       String order, int page, int pagesize,String fdistributorid) throws Exception {
+                                                                       String order, int page, int pagesize, String fdistributorid) throws Exception {
         WithdrawDepositDateResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("paystatusid", paystatusid));
@@ -219,7 +231,7 @@ public class ScanCodeAction extends BaseAction {
      * 获取提现排名
      */
     public ScanCodeRebateListResponseModel getWithdrawDepositDateList(String zoneids, String orderitem, String order,
-                                                                      int page, int pagesize,String fdistributorid) throws Exception {
+                                                                      int page, int pagesize, String fdistributorid) throws Exception {
         ScanCodeRebateListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("zoneids", zoneids));

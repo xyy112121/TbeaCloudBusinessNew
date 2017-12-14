@@ -193,14 +193,22 @@ public class ScanCodeCreateInfoActivity extends BaseActivity implements BGARefre
                 holder.mStateView.setTextColor(ContextCompat.getColor(mContext, R.color.text_color));
             }
             holder.mStateView.setText(getItem(position).activitystatus);
-            convertView.setOnClickListener(new View.OnClickListener() {
+            holder.mStateView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
                     if ("activityed".equals(getItem(position).activitystatusid)) {
                         Intent intent = new Intent(mContext, ScanCodeViewActivity.class);
                         intent.putExtra("id", getItem(position).rebatecode);
                         startActivity(intent);
                     }
+                }
+            });
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, ScanCodeImageViewActivity.class);
+                    intent.putExtra("rebateqrcode", getItem(position).rebatecode);
+                    startActivity(intent);
                 }
             });
 
