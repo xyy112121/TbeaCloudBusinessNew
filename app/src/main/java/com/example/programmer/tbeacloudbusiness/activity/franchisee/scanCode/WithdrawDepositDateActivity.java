@@ -95,7 +95,11 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
         mState1View1.setOnClickListener(this);
 
         if ("1".equals(getIntent().getStringExtra("flag"))) {//待支付
-            mState1View1.performClick();
+            mState1View1.setTextColor(ContextCompat.getColor(mContext, R.color.black));
+            mState1View1.setTextSize(18);
+
+            mState1View.setTextColor(ContextCompat.getColor(mContext, R.color.text_color));
+            mState1View.setTextSize(16);
         }
     }
 
@@ -193,14 +197,16 @@ public class WithdrawDepositDateActivity extends BaseActivity implements BGARefr
                         case ThreadState.SUCCESS:
                             PayStatusResponseModel model = (PayStatusResponseModel) msg.obj;
                             if (model.isSuccess()) {
-                                if (model.data != null && model.data.paystatuslist.size() > 2) {
+                                if (model.data != null && model.data.paystatuslist.size() >= 2) {
                                     KeyValueBean bean = model.data.paystatuslist.get(0);
                                     paystatusid = bean.getKey();
                                     mState1View.setText(bean.getValue());
                                     mState1View.setTag(bean.getKey());
 
                                     KeyValueBean bean1 = model.data.paystatuslist.get(1);
-
+                                    if ("1".equals(getIntent().getStringExtra("flag"))) {//待支付
+                                        paystatusid = bean1.getKey();
+                                    }
                                     mState1View1.setText(bean1.getValue());
                                     mState1View1.setTag(bean1.getKey());
 

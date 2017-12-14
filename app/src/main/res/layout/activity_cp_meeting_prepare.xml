@@ -43,6 +43,19 @@
                 app:PublishTextRowViewRightTextColor="@color/text_color"/>
 
             <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
+                android:id="@+id/cp_meeting_prepare_hold_addr"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                app:PublishTextRowViewIsBottomLineShow="true"
+                app:PublishTextRowViewIsSelect="true"
+                app:PublishTextRowViewLeftWidth="100dp"
+                app:PublishTextRowViewState="read"
+                app:PublishTextRowViewText="举办地点"
+                app:PublishTextRowViewHiht="请选择"
+                app:PublishTextRowViewTextColor="@color/text_color"
+                app:PublishTextRowViewRightTextColor="@color/text_color"/>
+
+            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
                 android:id="@+id/cp_meeting_prepare_hold_company"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
@@ -92,22 +105,6 @@
                     android:layout_marginRight="8dp"
                     />
             </RelativeLayout>
-
-            <View style="@style/horizontal_view" />
-
-            <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
-                android:id="@+id/cp_meeting_prepare_hold_addr"
-                android:layout_width="match_parent"
-                android:layout_height="49dp"
-                app:PublishTextRowViewIsBottomLineShow="true"
-                app:PublishTextRowViewIsSelect="true"
-                app:PublishTextRowViewLeftWidth="100dp"
-                app:PublishTextRowViewState="read"
-                app:PublishTextRowViewText="举办地点"
-                app:PublishTextRowViewHiht="请选择"
-                app:PublishTextRowViewTextColor="@color/text_color"
-                app:PublishTextRowViewRightTextColor="@color/text_color"/>
-
 
             <com.example.programmer.tbeacloudbusiness.component.PublishTextRowView
                 android:id="@+id/cp_meeting_prepare_state"

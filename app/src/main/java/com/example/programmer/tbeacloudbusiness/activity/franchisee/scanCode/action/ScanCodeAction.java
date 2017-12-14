@@ -13,6 +13,7 @@ import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.mod
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeRebateListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeStateListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.ScanCodeTypeSelectReponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.UrlDownloadResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateHistoryListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateInfoResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.model.WithdrawDepositDateResponseModel;
@@ -147,6 +148,18 @@ public class ScanCodeAction extends BaseAction {
         pairs.add(new BasicNameValuePair("qrcode", id));
         String result = sendRequest("TBEAYUN004002009000", pairs);
         model = gson.fromJson(result, ScanCodeInfoResponseModel.class);
+        return model;
+    }
+
+    /**
+     * 下载链接
+     */
+    public ResponseInfo getUrlDownload(String id) throws Exception {
+        ResponseInfo model = null;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("generatetaskid", id));
+        String result = sendRequest("TBEAYUN004002006004", pairs);
+        model = gson.fromJson(result, ResponseInfo.class);
         return model;
     }
 

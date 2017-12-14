@@ -154,18 +154,23 @@ public class MeetingPrepareActivity extends BaseActivity {
                 break;
             case R.id.cp_meeting_prepare_hold_monad:
             case R.id.cp_meeting_prepare_hold_company:
+                if ("".equals(mRequest.meetingcity) || mRequest.meetingcity == null) {
+                    showMessage("请先选择举办地点！");
+                    return;
+                }
                 intent = new Intent(mContext, FranchiserSelectListActivity.class);
                 intent.putExtra("flag", true);
+                intent.putExtra("city", mRequest.meetingcity);
                 intent.putExtra("ids", mRequest.organizecompanylist);
                 startActivityForResult(intent, RESULT_COMPANY);
                 break;
             case R.id.cp_meeting_prepare_hold_addr:
                 intent = new Intent(mContext, AddrSelectActivity.class);
-                intent.putExtra("province",mRequest.meetingprovince);
-                intent.putExtra("city",mRequest.meetingcity);
-                intent.putExtra("county",mRequest.meetingzone);
-                intent.putExtra("addr",mRequest.meetingaddr);
-                intent.putExtra("title","举办地点");
+                intent.putExtra("province", mRequest.meetingprovince);
+                intent.putExtra("city", mRequest.meetingcity);
+                intent.putExtra("county", mRequest.meetingzone);
+                intent.putExtra("addr", mRequest.meetingaddr);
+                intent.putExtra("title", "举办地点");
                 startActivityForResult(intent, RESULT_ADDR);
                 break;
             case R.id.cp_meeting_prepare_participant:
@@ -176,31 +181,31 @@ public class MeetingPrepareActivity extends BaseActivity {
                 break;
             case R.id.cp_meeting_prepare_plan:
                 intent = new Intent(mContext, MeetingPreparePlanActivity.class);
-                intent.putExtra("text",mPlanView.getValueText());
+                intent.putExtra("text", mPlanView.getValueText());
                 startActivityForResult(intent, RESULT_PLAN);
                 break;
             case R.id.cp_meeting_prepare_finish:
-                if(TextUtils.isEmpty(mRequest.meetingstarttime)||TextUtils.isEmpty(mRequest.meetingendtime)){
+                if (TextUtils.isEmpty(mRequest.meetingstarttime) || TextUtils.isEmpty(mRequest.meetingendtime)) {
                     showMessage("请选择举办时间！");
                     return;
                 }
 
-                if(TextUtils.isEmpty(mRequest.organizecompanylist)){
+                if (TextUtils.isEmpty(mRequest.organizecompanylist)) {
                     showMessage("请选择举办单位！");
                     return;
                 }
 
-                if(TextUtils.isEmpty(mRequest.meetingprovince)){
+                if (TextUtils.isEmpty(mRequest.meetingprovince)) {
                     showMessage("请选择举办地点！");
                     return;
                 }
 
-                if(TextUtils.isEmpty(mRequest.participantlist)){
+                if (TextUtils.isEmpty(mRequest.participantlist)) {
                     showMessage("请选择参与人员！");
                     return;
                 }
 
-                if(TextUtils.isEmpty(mRequest.meetingitems)){
+                if (TextUtils.isEmpty(mRequest.meetingitems)) {
                     showMessage("请输入会议安排！");
                     return;
                 }

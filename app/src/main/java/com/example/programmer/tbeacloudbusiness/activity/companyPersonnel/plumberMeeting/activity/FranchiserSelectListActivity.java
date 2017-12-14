@@ -113,7 +113,8 @@ public class FranchiserSelectListActivity extends BaseActivity implements View.O
                 public void run() {
                     try {
                         CpPlumberMeetingAction action = new CpPlumberMeetingAction();
-                        FranchiserSelectListResponseModel model = action.getPrepareDistributorList();
+                        String city = getIntent().getStringExtra("city");
+                        FranchiserSelectListResponseModel model = action.getPrepareDistributorList(city);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

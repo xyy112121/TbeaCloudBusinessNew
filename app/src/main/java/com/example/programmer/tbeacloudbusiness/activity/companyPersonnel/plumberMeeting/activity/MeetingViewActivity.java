@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +22,6 @@ import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumbe
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListAllResponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingViewSignlnActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingViewResponseModel;
@@ -31,7 +31,6 @@ import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-
 import com.example.zhouwei.library.CustomPopWindow;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -85,6 +84,8 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
     PublishTextRowView mMeetingPrepareSummary;//会议纪要
     @BindView(R.id.cp_meeting_prepare_finish)
     Button mSaveView;
+    @BindView(R.id.cp_meeting_view_end)
+    Button mEndBtn;
 
     private CustomPopWindow mCustomPopWindow;
     private boolean mIsEdit = false;//是否可编辑 true可编辑
@@ -127,7 +128,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
         dialog.setText("加载中...");
         dialog.show();
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
@@ -169,7 +170,8 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                         mMeetingPrepareGallery.setVisibility(View.GONE);
                                     } else if ("开会中".equals(meetingbaseinfo.meetingstatus)) {
                                         mIsUpdate = true;
-                                    }else if ("已结束".equals(meetingbaseinfo.meetingstatus)) {
+                                        mEndBtn.setVisibility(View.VISIBLE);
+                                    } else if ("已结束".equals(meetingbaseinfo.meetingstatus)) {
                                         mIsUpdate = true;
                                     }
                                 }
@@ -248,7 +250,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    @OnClick({R.id.cp_meeting_prepare_gallery, R.id.cp_meeting_prepare_summary, R.id.cp_meeting_prepare_sign, R.id.cp_meeting_prepare_hold_time, R.id.cp_meeting_prepare_hold_monad, R.id.cp_meeting_prepare_participant, R.id.cp_meeting_prepare_plan, R.id.cp_meeting_prepare_finish, R.id.cp_meeting_prepare_hold_addr})
+    @OnClick({R.id.cp_meeting_view_end, R.id.cp_meeting_prepare_gallery, R.id.cp_meeting_prepare_summary, R.id.cp_meeting_prepare_sign, R.id.cp_meeting_prepare_hold_time, R.id.cp_meeting_prepare_hold_monad, R.id.cp_meeting_prepare_participant, R.id.cp_meeting_prepare_plan, R.id.cp_meeting_prepare_finish, R.id.cp_meeting_prepare_hold_addr})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cp_meeting_prepare_summary:
@@ -324,6 +326,10 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.cp_meeting_prepare_finish:
                 editMeeting();
+                break;
+            case R.id.cp_meeting_view_end:
+                //会议结束
+                finishMeeting();
                 break;
         }
     }
@@ -445,6 +451,49 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                     try {
                         CpPlumberMeetingAction action = new CpPlumberMeetingAction();
                         BaseResponseModel model = action.deleteMeeting(mId);
+                        handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
+                    } catch (Exception e) {
+                        handler.sendEmptyMessage(ThreadState.ERROR);
+                    }
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //会议结束
+    private void finishMeeting() {
+        final CustomDialog dialog = new CustomDialog(mContext, R.style.MyDialog, R.layout.tip_wait_dialog);
+        dialog.setText("请等待...");
+        dialog.show();
+        try {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    dialog.dismiss();
+                    switch (msg.what) {
+                        case ThreadState.SUCCESS:
+                            BaseResponseModel model = (BaseResponseModel) msg.obj;
+                            if (model.isSuccess()) {
+                                getData();
+                            } else {
+                                showMessage(model.getMsg());
+                            }
+                            break;
+                        case ThreadState.ERROR:
+                            showMessage("操作失败！");
+                            break;
+                    }
+                }
+            };
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        CpPlumberMeetingAction action = new CpPlumberMeetingAction();
+                        BaseResponseModel model = action.finishMeeting(mId);
                         handler.obtainMessage(ThreadState.SUCCESS, model).sendToTarget();
                     } catch (Exception e) {
                         handler.sendEmptyMessage(ThreadState.ERROR);

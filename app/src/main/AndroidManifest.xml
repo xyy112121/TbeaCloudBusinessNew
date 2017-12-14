@@ -261,6 +261,7 @@
         <activity android:name=".activity.my.main.activity.RealNameAuthenticationFailActivity" />
         <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.FranchiserSelectViewListActivity" />
         <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.SignInCodeActivity" />
+        <activity android:name=".activity.franchisee.scanCode.ScanCodeUrlDownloadActivity" />
     </application>
 
 </manifest>

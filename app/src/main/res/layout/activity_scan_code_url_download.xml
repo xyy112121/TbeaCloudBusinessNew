@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_page_top" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="单位"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/url_dowmload_companyname_tv"
+                style="@style/my_right_text_style1" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="产品名称"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/url_dowmload_commodityname_tv"
+                style="@style/my_right_text_style1" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="规格型号"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/url_dowmload_commodityspecificationandmodel_tv"
+                style="@style/my_right_text_style1" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="数量"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/url_dowmload_count_tv"
+                style="@style/my_right_text_style1"
+              />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="单价"
+                android:textColor="@color/black" />
+
+            <TextView
+                style="@style/money_logo_style"
+                android:layout_gravity="top"
+                android:gravity="center_vertical"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/url_dowmload_money_tv"
+                style="@style/my_right_text_style1" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="总额"
+                android:textColor="@color/black" />
+
+            <TextView
+                style="@style/money_logo_style"
+                android:layout_gravity="top"
+                android:gravity="center_vertical"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/url_dowmload_totlemoney_tv"
+                style="@style/my_right_text_style1" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <LinearLayout style="@style/my_text_layout">
+
+            <TextView
+                style="@style/my_text_style"
+                android:text="生成日期"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/url_dowmload_createtime_tv"
+                style="@style/my_right_text_style1" />
+        </LinearLayout>
+
+        <View style="@style/horizontal_view" />
+
+        <Button
+            android:id="@+id/url_dowmload_copy_btn"
+            style="@style/style_next_btn"
+            android:background="@drawable/btn_bg_blue"
+            android:text="复制链接" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="链接复制后，请用QQ、微信或短信等方式发送给二维码制作方，在浏览器上粘贴此链接即可下载包含此次返利生成编码的Excel文件。" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

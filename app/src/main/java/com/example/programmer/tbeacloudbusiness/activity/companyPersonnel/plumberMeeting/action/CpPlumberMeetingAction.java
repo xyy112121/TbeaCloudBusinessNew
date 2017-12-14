@@ -78,11 +78,12 @@ public class CpPlumberMeetingAction extends BaseAction {
      * provinceidwithuser   传 1
      * cityidwithuser  传 1
      */
-    public FranchiserSelectListResponseModel getPrepareDistributorList() throws Exception {
+    public FranchiserSelectListResponseModel getPrepareDistributorList(String city) throws Exception {
         FranchiserSelectListResponseModel model;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("provinceidwithuser", "1"));
         pairs.add(new BasicNameValuePair("cityidwithuser", "1"));
+        pairs.add(new BasicNameValuePair("city", city));
         String result = sendRequest("TBEAYUN001004002000", pairs);
         model = gson.fromJson(result, FranchiserSelectListResponseModel.class);
         return model;
@@ -90,6 +91,7 @@ public class CpPlumberMeetingAction extends BaseAction {
 
     /**
      * 获取参与人员(只是参与)
+     *
      * @return
      * @throws Exception
      */
@@ -104,6 +106,7 @@ public class CpPlumberMeetingAction extends BaseAction {
 
     /**
      * 获取参与人员全部
+     *
      * @return
      * @throws Exception
      */
@@ -150,6 +153,18 @@ public class CpPlumberMeetingAction extends BaseAction {
         return resultModel;
     }
 
+    /**
+     * 结束会议
+     */
+    public BaseResponseModel finishMeeting(String meetingid) throws Exception {
+        BaseResponseModel resultModel;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("meetingid", meetingid));
+        String result = sendRequest("TBEAYUN008003004000", pairs);
+        resultModel = gson.fromJson(result, BaseResponseModel.class);
+        return resultModel;
+    }
+
 
     /**
      * 删除会议
@@ -166,7 +181,7 @@ public class CpPlumberMeetingAction extends BaseAction {
     /**
      * 保存会议纪要
      */
-    public BaseResponseModel saveSummary(String meetingid,String meetingcontent ) throws Exception {
+    public BaseResponseModel saveSummary(String meetingid, String meetingcontent) throws Exception {
         BaseResponseModel resultModel;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("meetingid", meetingid));
@@ -179,7 +194,7 @@ public class CpPlumberMeetingAction extends BaseAction {
     /**
      * 获取现场图片
      */
-    public MeetingGalleryListResponseModel getGalleryList(String meetingid ) throws Exception {
+    public MeetingGalleryListResponseModel getGalleryList(String meetingid) throws Exception {
         MeetingGalleryListResponseModel resultModel;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("meetingid", meetingid));
@@ -196,11 +211,11 @@ public class CpPlumberMeetingAction extends BaseAction {
         MeetingGalleryUpdateResponseModel model;
         Map<String, String> paramsIn = new HashMap<>();
         Map<String, String> fileIn = new HashMap<>();
-        for(int i = 0;i< list.size();i++){
-            if(list.get(i).getCompressPath() != null){
-                fileIn.put("file"+i, list.get(i).getCompressPath());
-            }else {
-                fileIn.put("file"+i, list.get(i).getPath());
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getCompressPath() != null) {
+                fileIn.put("file" + i, list.get(i).getCompressPath());
+            } else {
+                fileIn.put("file" + i, list.get(i).getPath());
             }
 
         }

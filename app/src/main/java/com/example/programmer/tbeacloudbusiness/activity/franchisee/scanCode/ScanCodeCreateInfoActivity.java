@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * 历史记录详细界面
  */
 
-public class ScanCodeCreateInfoActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class ScanCodeCreateInfoActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
     @BindView(R.id.create_code_info_money)
     TextView mMoneyView;
     @BindView(R.id.create_code_info_number)
@@ -61,7 +62,7 @@ public class ScanCodeCreateInfoActivity extends BaseActivity implements BGARefre
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_code_info);
         ButterKnife.bind(this);
-        initTopbar("生成查看");
+        initTopbar("生成查看", "下载", this);
 
         mId = getIntent().getStringExtra("id");
         mState = "";//全部
@@ -97,7 +98,7 @@ public class ScanCodeCreateInfoActivity extends BaseActivity implements BGARefre
      * 获取数据
      */
     public void getDate() {
-        final Handler handler = new Handler() {
+        @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 mRefreshLayout.endLoadingMore();
@@ -136,7 +137,6 @@ public class ScanCodeCreateInfoActivity extends BaseActivity implements BGARefre
             public void run() {
                 try {
                     ScanCodeAction action = new ScanCodeAction();
-
                     ResponseInfo re = action.getScanCodeInfo(mId, mState, mPage++, 10);
                     handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                 } catch (Exception e) {
@@ -158,6 +158,14 @@ public class ScanCodeCreateInfoActivity extends BaseActivity implements BGARefre
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         getDate();
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(mContext, ScanCodeUrlDownloadActivity.class);
+        intent.putExtra("id", mId);
+        startActivity(intent);
+
     }
 
     class MyAdapter extends ArrayAdapter<ScanCodeHistoryInfoResponseModel.QrcodelistBean> {

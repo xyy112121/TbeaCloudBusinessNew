@@ -216,6 +216,13 @@
                 android:background="@drawable/btn_bg_blue"
                 android:visibility="gone"
                 android:text="保存" />
+
+            <Button
+                android:id="@+id/cp_meeting_view_end"
+                style="@style/style_next_btn"
+                android:background="@drawable/btn_bg_red"
+                android:visibility="gone"
+                android:text="会议结束" />
         </LinearLayout>
 
     </ScrollView>
