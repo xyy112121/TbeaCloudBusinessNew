@@ -42,7 +42,7 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
     private ListView mListView;
     private MyAdapter mAdapter;
     private BGARefreshLayout mRefreshLayout;
-    private int mCurrentMoney;
+    private String mCurrentMoney;
     private boolean isFirst = true;
     private int mPage = 1;
 
@@ -84,7 +84,7 @@ public class MyRebateAccountlistActivity extends BaseActivity implements View.On
                                     findViewById(R.id.my_rebate_account_withdraw_cash).setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            if (mCurrentMoney == 0) {
+                                            if (mCurrentMoney.equals("0.00") || mCurrentMoney.equals("0.0") ||mCurrentMoney.equals("0")) {
                                                 showMessage("你当前可提现金额为0");
                                             } else {
                                                 startActivity(new Intent(mContext, RebateAccountWithdrawCashActivity.class));

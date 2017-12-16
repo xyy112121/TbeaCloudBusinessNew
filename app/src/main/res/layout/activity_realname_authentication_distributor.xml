@@ -115,7 +115,8 @@
         <TextView
             android:id="@+id/identification_state"
             style="@style/my_right_text_style"
-            android:gravity="right|center_vertical" />
+            android:gravity="right|center_vertical"
+            />
     </LinearLayout>
 
     <View style="@style/horizontal_view" />

@@ -2,6 +2,7 @@ package com.example.programmer.tbeacloudbusiness.activity.distributorManage.acti
 
 import com.example.programmer.tbeacloudbusiness.activity.distributorManage.model.DMMainListReponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.distributorManage.model.DMWithdrawalHistoryListResponseModel;
+import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.service.impl.BaseAction;
 
 import org.apache.http.NameValuePair;
@@ -49,6 +50,20 @@ public class DistributorManageAction extends BaseAction {
         pairs.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
         String result = sendRequest("TBEAYUN004005002000", pairs);
         model = gson.fromJson(result, DMWithdrawalHistoryListResponseModel.class);
+        return model;
+    }
+
+
+    /**
+     * 总经销商-分销商-商家资料
+     * distributorid    startdate   enddate    orderitem   order    pagesize    page
+     */
+    public ResponseInfo getShopInfo(String distributorid) throws Exception {
+        ResponseInfo model;
+        List<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("distributorid", distributorid));
+        String result = sendRequest("TBEAYUN004005003000", pairs);
+        model = gson.fromJson(result, ResponseInfo.class);
         return model;
     }
 

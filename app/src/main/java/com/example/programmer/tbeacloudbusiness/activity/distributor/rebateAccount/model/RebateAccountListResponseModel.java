@@ -1,6 +1,5 @@
 package com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.model;
 
-import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class RebateAccountListResponseModel extends BaseResponseModel {
     }
 
     public class MyMoneyInfo {
-        public int currentmoney;
+        public String currentmoney;
     }
 
     public class NottakeMoney {

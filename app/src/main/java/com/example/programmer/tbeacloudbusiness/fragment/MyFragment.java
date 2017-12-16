@@ -208,8 +208,6 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, BG
                             startActivity(intent);
                         }
 
-
-
                         if ("tebianfenxiao".equals(item.id) || "fxsubsystem".equals(item.id)) {
                             //分销系统
                             Intent intent = new Intent(getActivity(), FxMainActivity.class);

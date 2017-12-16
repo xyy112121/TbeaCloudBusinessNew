@@ -1,6 +1,5 @@
 package com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +8,7 @@ import android.view.View;
 import com.alibaba.fastjson.JSON;
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
+import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.utils.AssetsUtils;
 
@@ -29,9 +29,9 @@ public class AddrSelectActivity extends BaseActivity implements View.OnClickList
     @BindView(R.id.cp_addr_info)
     PublishTextRowView mAddrInfoView;
 
-    private String mProvince = "四川省";
-    private String mCity = "德阳市";
-    private String mCounty = "旌阳区";
+    private String mProvince = MyApplication.instance.getProvince();
+    private String mCity = MyApplication.instance.getCity();
+    private String mCounty = MyApplication.instance.getDistrict();
 
 
     @Override

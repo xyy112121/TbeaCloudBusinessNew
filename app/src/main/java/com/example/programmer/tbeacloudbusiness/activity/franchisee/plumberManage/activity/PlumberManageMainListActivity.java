@@ -216,7 +216,7 @@ public class PlumberManageMainListActivity extends BaseActivity implements BGARe
                     try {
                         PlumberManageAction action = new PlumberManageAction();
                         String fdistributorid = getIntent().getStringExtra("id");
-                        if (!"distributor".equals(getIntent().getStringExtra("type"))) {//总经销商
+                        if ("distributor".equals(getIntent().getStringExtra("type"))) {//总经销商
                             fdistributorid = null;
                         }
 

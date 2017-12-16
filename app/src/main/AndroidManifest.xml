@@ -263,6 +263,8 @@
         <activity android:name=".activity.companyPersonnel.plumberMeeting.activity.SignInCodeActivity" />
         <activity android:name=".activity.franchisee.scanCode.ScanCodeUrlDownloadActivity" />
         <activity android:name=".activity.franchisee.scanCode.ScanCodeImageViewActivity" />
+
+        <activity android:name=".activity.distributorManage.activity.ShopInfoActivity"/>
     </application>
 
 </manifest>

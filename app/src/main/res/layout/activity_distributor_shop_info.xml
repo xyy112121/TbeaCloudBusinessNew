@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/activity_page_top" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+
+                android:background="@color/head_color">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:text="商家资料"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="商铺名称" />
+
+                <TextView
+                    android:id="@+id/distributor_shop_companyname_tv"
+                    style="@style/my_right_text_style1" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="法人" />
+
+                <TextView
+                    android:id="@+id/distributor_shop_mastername_tv"
+                    style="@style/my_right_text_style1" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="性别" />
+
+                <TextView
+                    android:id="@+id/distributor_shop_mastersex_tv"
+                    style="@style/my_right_text_style1"
+
+                    />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="年龄" />
+
+                <TextView
+                    android:id="@+id/distributor_shop_masterage_tv"
+                    style="@style/my_right_text_style1" />
+            </LinearLayout>
+
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="电话" />
+
+                <TextView
+                    android:id="@+id/distributor_shop_mobilenumber_tv"
+                    style="@style/my_right_text_style1" />
+
+                <ImageView
+                    android:id="@+id/distributor_shop_mobilenumber_iv"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/icon_telicon_blue" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="认证状态" />
+
+                <TextView
+                    android:id="@+id/distributor_shop_identifystatus_tv"
+                    style="@style/my_right_text_style1" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="隶属" />
+
+                <TextView
+                    android:id="@+id/distributor_shop_uplevelcompanyname_tv"
+                    style="@style/my_right_text_style1"
+                    android:maxLines="2" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="旗下水电工" />
+
+                <TextView
+                    android:id="@+id/distributor_shop_electriciannumber_tv"
+                    style="@style/my_right_text_style"
+                    android:gravity="right|center" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="扫码返利" />
+
+                <TextView
+                    android:id="@+id/distributor_shop_totletakemoney_tv"
+                    style="@style/my_right_text_style"
+                    android:gravity="right|center" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="举办的会议" />
+
+                <TextView
+                    android:id="@+id/distributor_shop_servicemeetingnumber_tv"
+                    style="@style/my_right_text_style"
+                    android:gravity="right|center" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="线上店铺" />
+
+                <TextView
+                    android:id="@+id/distributor_shop_onlineshop_tv"
+                    style="@style/my_right_text_style" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+
+            <LinearLayout style="@style/my_text_layout">
+
+                <TextView
+                    style="@style/my_text_style"
+                    android:layout_height="wrap_content"
+                    android:text="商家介绍" />
+
+                <TextView
+                    android:id="@+id/distributor_shop_introduce_tv"
+                    style="@style/my_right_text_style"
+                    android:maxLines="20" />
+            </LinearLayout>
+
+            <View style="@style/horizontal_view" />
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

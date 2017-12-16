@@ -33,6 +33,7 @@ public class PlumberMeetingViewResponseModel extends BaseResponseModel {
             public String meetingaddr;
             public String meetingplace;
             public String meetingstatus;
+            public String meetingsponsorid;//创建人
             public String participantlist;
             public String originatoruserid;
         }

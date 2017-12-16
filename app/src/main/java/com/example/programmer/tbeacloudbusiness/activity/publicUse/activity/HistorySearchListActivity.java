@@ -19,14 +19,11 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.activity.MeetingViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.distributorManage.activity.DustributorWithdrawalHistoryListActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.activity.PersonManageViewActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingViewActivity;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.WithdrawDepositDateHistoryActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.action.PublicAction;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.model.SearchResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.tbea.activity.ProductPresentationInfoActivity;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;

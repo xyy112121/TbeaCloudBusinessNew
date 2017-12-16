@@ -21,7 +21,6 @@ import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
 import com.example.programmer.tbeacloudbusiness.activity.MyApplication;
 import com.example.programmer.tbeacloudbusiness.activity.distributorManage.action.DistributorManageAction;
 import com.example.programmer.tbeacloudbusiness.activity.distributorManage.model.DMMainListReponseModel;
-import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberManage.model.PmMainListResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.RegionSelectActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.scanCode.DateSelectActivity;
 import com.example.programmer.tbeacloudbusiness.activity.publicUse.activity.HistorySearchActivity;
@@ -30,7 +29,6 @@ import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.ExpandPop
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.KeyValueBean;
 import com.example.programmer.tbeacloudbusiness.component.dropdownMenu.PopOneListView;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
-
 import com.example.programmer.tbeacloudbusiness.utils.UtilAssistants;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -48,6 +46,8 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 public class DistributorListActivity extends BaseActivity implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
 
+    @BindView(R.id.plumber_meeting_main_list_search_text)
+    TextView mSearchTextView;
     private BGARefreshLayout mRefreshLayout;
     private ListView mListView;
     private MyAdapter mAdapter;
@@ -77,15 +77,8 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dsitributor_list);
-        initTopbar("分销商列表", "时间选择", this, R.drawable.icon_search_white, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, HistorySearchActivity.class);
-                intent.putExtra("type", "distributor");
-                startActivity(intent);
-            }
-        });
+        setContentView(R.layout.activity_distributor_list);
+        initTopbar("分销商列表", "时间选择", this);
         ButterKnife.bind(this);
         initView();
 
@@ -146,6 +139,15 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
                 mMoneyView.setImageResource(R.drawable.icon_arraw);
                 expandTabView.setViewColor();
                 regionView.setSelectPostion();
+            }
+        });
+
+        mSearchTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, HistorySearchActivity.class);
+                intent.putExtra("type", "distributor");
+                startActivity(intent);
             }
         });
     }
@@ -316,6 +318,7 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
                     Intent intent = new Intent(mContext, DustributorWithdrawalHistoryListActivity.class);
                     intent.putExtra("id", obj.distributorid);
                     startActivity(intent);
+
                 }
             });
             return convertView;

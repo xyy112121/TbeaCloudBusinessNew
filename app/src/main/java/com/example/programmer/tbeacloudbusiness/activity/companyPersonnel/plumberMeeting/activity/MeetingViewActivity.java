@@ -91,6 +91,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
     private boolean mIsEdit = false;//是否可编辑 true可编辑
     private boolean mIsUpdate = false;//是否可更新 true可更新
     private boolean mIsDelete = false;//是否可删除 true可删除
+    private boolean mIsOperation = true;//是否可以操作 只有会议发起者本身有权操作，其他人无权操作 true 可编辑
 
     private boolean mIsEditOnClick = false;//是否已点击编辑 true可编辑
     private boolean mIsUpdateOnClick = false;//是否已点击可更新 true可更新
@@ -173,6 +174,10 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                         mEndBtn.setVisibility(View.VISIBLE);
                                     } else if ("已结束".equals(meetingbaseinfo.meetingstatus)) {
                                         mIsUpdate = true;
+                                    }
+
+                                    if (!MyApplication.instance.getUserId().equals(meetingbaseinfo.meetingsponsorid)) {
+                                        mIsOperation = false;
                                     }
                                 }
                                 //举办单位
@@ -595,6 +600,12 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
             menu1.setAlpha((float) 0.3);
             menu2.setAlpha((float) 0.3);
             menu3.setAlpha((float) 0.3);
+        }
+
+        if(mIsOperation == false){
+           menu1.setVisibility(View.GONE);
+           menu2.setVisibility(View.GONE);
+           menu3.setVisibility(View.GONE);
         }
 
         //处理popWindow 显示内容

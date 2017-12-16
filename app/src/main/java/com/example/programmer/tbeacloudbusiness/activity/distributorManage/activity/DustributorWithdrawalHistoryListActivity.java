@@ -63,7 +63,7 @@ public class DustributorWithdrawalHistoryListActivity extends BaseActivity imple
     private List<KeyValueBean> mDateLists;//时间
     MyAdapter mAdapter;
     private final int RESULT_DATA_SELECT = 1000;
-    private String distributorid, startdate, enddate, orderitem, order,mMoneyOrder;
+    private String distributorid, startdate, enddate, orderitem, order, mMoneyOrder;
     private int mPage = 1;
     private int mPagesiz = 10;
     DMWithdrawalHistoryListResponseModel model;
@@ -121,15 +121,15 @@ public class DustributorWithdrawalHistoryListActivity extends BaseActivity imple
         findViewById(R.id.pm_withdrawal_history_list_person).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(mContext, PlumberManageWithdrawalHistoryViewActivity.class);
-//                intent.putExtra("id", model.data.distributorinfo.distributorid);
-//                startActivity(intent);
+                Intent intent = new Intent(mContext, ShopInfoActivity.class);
+                intent.putExtra("id", model.data.distributorinfo.distributorid);
+                startActivity(intent);
             }
         });
     }
 
     private void addDateItem(final ExpandPopTabView expandTabView, List<KeyValueBean> lists, String defaultSelect, String defaultShowText) {
-         mDateView = new PopOneListView(this);
+        mDateView = new PopOneListView(this);
         mDateView.setDefaultSelectByValue(defaultSelect);
         mDateView.setCallBackAndData(lists, expandTabView, new PopOneListView.OnSelectListener() {
             @Override
