@@ -56,12 +56,14 @@ public class ScanCodeViewActivity extends BaseActivity {
                                     setViewText(R.id.scan_code_info_money, model.data.rebateqrcodeinfo.money);
                                 }
 
-                                if (model.data != null && model.data.rebateqrcodeactivityinfo != null) {
-                                    ScanCodeInfoResponseModel.RebateqrCodeActivity info = model.data.rebateqrcodeactivityinfo;
-                                    ((TextView) findViewById(R.id.person_info_name)).setText(info.actuvityusername);
-                                    ((TextView) findViewById(R.id.person_info_companyname)).setText(info.activityplace);
-                                    ImageLoader.getInstance().displayImage(info.actuvityuserpicture, ((ImageView) findViewById(R.id.person_info_head)));
-                                    ImageLoader.getInstance().displayImage(info.personjobtitle, ((ImageView) findViewById(R.id.person_info_personjobtitle)));
+                                if (model.data != null) {
+                                    if (model.data.rebateqrcodeactivityinfo != null) {
+                                        ScanCodeInfoResponseModel.RebateqrCodeActivity info = model.data.rebateqrcodeactivityinfo;
+                                        ((TextView) findViewById(R.id.person_info_name)).setText(info.actuvityusername);
+                                        ((TextView) findViewById(R.id.person_info_companyname)).setText(info.activityusercityzone);
+                                        ImageLoader.getInstance().displayImage(info.actuvityuserpicture, ((ImageView) findViewById(R.id.person_info_head)));
+                                        ImageLoader.getInstance().displayImage(info.personjobtitle, ((ImageView) findViewById(R.id.person_info_personjobtitle)));
+                                    }
                                     setViewText(R.id.scan_code_info_activitytime, model.data.rebateqrcodeactivityinfo.activitytime);
                                     setViewText(R.id.scan_code_info_activityplace, model.data.rebateqrcodeactivityinfo.activityplace);
                                 }

@@ -20,6 +20,7 @@ public class ScanCodeInfoResponseModel extends BaseResponseModel {
         public String activitytime;
         public String actuvityuserid;
         public String actuvityusername;
+        public String activityusercityzone;
         public String actuvityuserpicture;
         public String personjobtitle;
         public String qrcodeactivityid;

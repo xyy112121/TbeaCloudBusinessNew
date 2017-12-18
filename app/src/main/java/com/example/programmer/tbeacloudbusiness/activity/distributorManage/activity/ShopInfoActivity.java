@@ -1,10 +1,15 @@
 package com.example.programmer.tbeacloudbusiness.activity.distributorManage.activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.programmer.tbeacloudbusiness.R;
 import com.example.programmer.tbeacloudbusiness.activity.BaseActivity;
@@ -14,15 +19,21 @@ import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * 商家资料
  */
 
 public class ShopInfoActivity extends BaseActivity {
+    private String mMobileNumber;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distributor_shop_info);
+        ButterKnife.bind(this);
         initTopbar("");
         getData();
     }
@@ -32,7 +43,7 @@ public class ShopInfoActivity extends BaseActivity {
         dialog.setText("加载中...");
         dialog.show();
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
@@ -57,6 +68,7 @@ public class ShopInfoActivity extends BaseActivity {
                                     setTextView(R.id.distributor_shop_servicemeetingnumber_tv, info.servicemeetingnumber);
                                     setTextView(R.id.distributor_shop_onlineshop_tv, info.onlineshop);
                                     setTextView(R.id.distributor_shop_introduce_tv, info.introduce);
+                                    mMobileNumber = info.mobilenumber;
                                 }
 
                             } else {
@@ -88,7 +100,31 @@ public class ShopInfoActivity extends BaseActivity {
         }
     }
 
+    private void callPhone(final String number) {
+        //单个权限获取
+        checkPermission(new CheckPermListener() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void Granted() {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+
+            @Override
+            public void Denied() {
+                Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show();
+                //检查是否选择了不再提醒
+            }
+        }, "拨打电话权限", new String[]{Manifest.permission.CALL_PHONE});
+
+    }
+
     private void setTextView(int id, String text) {
         ((TextView) findViewById(id)).setText(text);
+    }
+
+    @OnClick(R.id.distributor_shop_mobilenumber_iv)
+    public void onViewClicked() {
+        callPhone(mMobileNumber);
     }
 }

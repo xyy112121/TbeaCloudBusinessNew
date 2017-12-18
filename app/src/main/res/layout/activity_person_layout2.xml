@@ -63,7 +63,9 @@
                 android:id="@+id/person_info_companyname"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
-                android:textColor="@color/text_color" />
+                android:textColor="@color/text_color"
+                android:maxLines="1"
+                android:ellipsize="end"/>
         </LinearLayout>
 
         <ImageView

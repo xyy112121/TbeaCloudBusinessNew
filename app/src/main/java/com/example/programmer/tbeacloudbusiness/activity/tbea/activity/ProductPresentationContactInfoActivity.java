@@ -1,6 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.activity.tbea.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -62,7 +63,7 @@ public class ProductPresentationContactInfoActivity extends BaseActivity {
         dialog.setText("加载中...");
         dialog.show();
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
