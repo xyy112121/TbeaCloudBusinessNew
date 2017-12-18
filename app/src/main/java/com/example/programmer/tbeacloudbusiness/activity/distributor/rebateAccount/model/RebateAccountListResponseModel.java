@@ -14,6 +14,7 @@ public class RebateAccountListResponseModel extends BaseResponseModel {
     public class RebateAccountListModel {
         public MyMoneyInfo mymoneyinfo;
         public List<NottakeMoney> nottakemoneylist;
+
     }
 
     public class MyMoneyInfo {

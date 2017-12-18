@@ -67,6 +67,9 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
         mRefreshLayout.setDelegate(this);
         mRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(mContext, false));
         mRefreshLayout.beginRefreshing();
+        ((TextView) mHeadView.findViewById(R.id.top_text2)).setText("支付");
+        ((TextView) mHeadView.findViewById(R.id.top_text3)).setText("提现");
+        ((TextView) mHeadView.findViewById(R.id.top_text1)).setText("收支明细");
         mHeadView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,7 +192,7 @@ public class DbScanCodeMainListActivity extends BaseActivity implements BGARefre
                 intent.putExtra("flag", "1");
                 startActivity(intent);
                 break;
-            case R.id.top_right_text:
+            case R.id.top_right:
                 //生成
                 intent.setClass(mContext, ScanCodeAcctivity.class);
                 startActivity(intent);

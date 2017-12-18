@@ -522,7 +522,7 @@ public class PlumberManageScanCodeDateListActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, WithdrawDepositDateInfoActivity.class);
-                    intent.putExtra("id", obj.takemoneyid);
+                    intent.putExtra("takeMoneyId", obj.takemoneyid);
                     startActivity(intent);
                 }
             });

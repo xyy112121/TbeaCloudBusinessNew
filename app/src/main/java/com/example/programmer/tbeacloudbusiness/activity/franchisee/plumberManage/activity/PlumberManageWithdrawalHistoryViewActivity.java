@@ -74,7 +74,9 @@ public class PlumberManageWithdrawalHistoryViewActivity extends BaseActivity {
                     case ThreadState.SUCCESS:
                         NetUrlResponseModel re = (NetUrlResponseModel) msg.obj;
                         if (re.isSuccess() && re.data != null) {
-                            String url = re.data.url + "electricianhomepageinfo?electricianid=" + mId;
+                            String url = re.data.url + "electricianhomepageinfo?electricianid=" + mId
+                                    + "&&longitude=" + MyApplication.instance.getLongitude()
+                                    + "&&latitude=" + MyApplication.instance.getLatitude();
                             showWebView(url);
                         } else {
                             showMessage(re.getMsg());
