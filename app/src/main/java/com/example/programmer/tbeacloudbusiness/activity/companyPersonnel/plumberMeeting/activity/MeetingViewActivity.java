@@ -22,11 +22,14 @@ import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumbe
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareRequestModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.MeetingPrepareResponseModel;
 import com.example.programmer.tbeacloudbusiness.activity.companyPersonnel.plumberMeeting.model.ParticipantSelectlListAllResponseModel;
+import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.RebateAccountWithdrawCashActivity;
+import com.example.programmer.tbeacloudbusiness.activity.distributor.rebateAccount.activity.WithdrawCashViewActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.action.PlumberMeetingAction;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.activity.PlumberMeetingViewSignlnActivity;
 import com.example.programmer.tbeacloudbusiness.activity.franchisee.plumberMeeting.model.PlumberMeetingViewResponseModel;
 import com.example.programmer.tbeacloudbusiness.component.CircleImageView;
 import com.example.programmer.tbeacloudbusiness.component.CustomDialog;
+import com.example.programmer.tbeacloudbusiness.component.CustomPopWindow1;
 import com.example.programmer.tbeacloudbusiness.component.PublishTextRowView;
 import com.example.programmer.tbeacloudbusiness.http.BaseResponseModel;
 import com.example.programmer.tbeacloudbusiness.utils.DensityUtil;
@@ -180,6 +183,8 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                                         mIsOperation = false;
                                     }
                                 }
+
+                                mHoldMonadView.removeAllViews();
                                 //举办单位
                                 if (model.data.organizecompanylist != null) {
                                     mOrganizeCompanyList = model.data.organizecompanylist;
@@ -333,10 +338,24 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                 editMeeting();
                 break;
             case R.id.cp_meeting_view_end:
-                //会议结束
-                finishMeeting();
+                showAlert();
+
                 break;
         }
+    }
+
+    private void showAlert() {
+        View parentLayout = findViewById(R.id.parentLayout);
+        final CustomPopWindow1 popWindow1 = new CustomPopWindow1(mContext);
+        popWindow1.init(parentLayout, R.layout.pop_window_header,
+                R.layout.activity_scancode_pay_confirm_tip, "确认提示", "是否结束会议，请确认！", "确认", 0);
+        popWindow1.setItemClick(new CustomPopWindow1.ItemClick() {
+            @Override
+            public void onItemClick(String text) {
+                //会议结束
+                finishMeeting();
+            }
+        });
     }
 
     @Override
@@ -481,6 +500,7 @@ public class MeetingViewActivity extends BaseActivity implements View.OnClickLis
                         case ThreadState.SUCCESS:
                             BaseResponseModel model = (BaseResponseModel) msg.obj;
                             if (model.isSuccess()) {
+
                                 getData();
                             } else {
                                 showMessage(model.getMsg());
