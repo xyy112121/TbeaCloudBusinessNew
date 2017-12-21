@@ -21,11 +21,13 @@ public class PublicAction extends BaseAction {
     /**
      * 获取输入搜索关键词接口
      */
-    public SearchResponseModel getSearchList(String searchtype, String keyword) throws Exception {
+    public SearchResponseModel getSearchList(String searchtype, String keyword, int page) throws Exception {
         SearchResponseModel rspInfo;
         List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("searchitem", searchtype));
         pairs.add(new BasicNameValuePair("keyword", keyword));
+        pairs.add(new BasicNameValuePair("page", String.valueOf(page)));
+        pairs.add(new BasicNameValuePair("pagesize", String.valueOf(10)));
         String result = sendRequest("TBEAYUN002005003000", pairs);
         rspInfo = gson.fromJson(result, SearchResponseModel.class);
         return rspInfo;

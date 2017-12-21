@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,8 +15,10 @@ import com.example.programmer.tbeacloudbusiness.fragment.MyFragment;
 import com.example.programmer.tbeacloudbusiness.fragment.OtherFragment;
 import com.example.programmer.tbeacloudbusiness.fragment.TbMianFragment;
 import com.example.programmer.tbeacloudbusiness.model.ResponseInfo;
+import com.example.programmer.tbeacloudbusiness.service.impl.Installation;
 import com.example.programmer.tbeacloudbusiness.utils.AppUpdateUtils;
 import com.example.programmer.tbeacloudbusiness.utils.AppVersion;
+import com.example.programmer.tbeacloudbusiness.utils.DeviceIdUtil;
 import com.example.programmer.tbeacloudbusiness.utils.ThreadState;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

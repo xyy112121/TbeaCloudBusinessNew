@@ -1,5 +1,6 @@
 package com.example.programmer.tbeacloudbusiness.activity.publicUse.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ public class HistorySearchListActivity extends BaseActivity implements BGARefres
     private MyAdapter mAdapter;
     private String mKeyword = "";
     private String mType;
+    private int mPage = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class HistorySearchListActivity extends BaseActivity implements BGARefres
      * 获取数据
      */
     public void getListDate() {
-        final Handler handler = new Handler() {
+        @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 mRefreshLayout.endLoadingMore();
@@ -89,7 +91,7 @@ public class HistorySearchListActivity extends BaseActivity implements BGARefres
             public void run() {
                 try {
                     PublicAction userAction = new PublicAction();
-                    SearchResponseModel re = userAction.getSearchList(mType, mKeyword);
+                    SearchResponseModel re = userAction.getSearchList(mType, mKeyword, mPage);
                     handler.obtainMessage(ThreadState.SUCCESS, re).sendToTarget();
                 } catch (Exception e) {
                     handler.sendEmptyMessage(ThreadState.ERROR);
@@ -101,13 +103,15 @@ public class HistorySearchListActivity extends BaseActivity implements BGARefres
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         //下拉刷新
-//        mAdapter.removeAll();
+        mAdapter.clear();
+        mPage = 1;
         getListDate();
     }
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         //上拉加载更多
+        getListDate();
         return false;
     }
 
@@ -157,7 +161,7 @@ public class HistorySearchListActivity extends BaseActivity implements BGARefres
                     } else if ("distributor".equals(type)) {//分销商
                         intent.setClass(mContext, DustributorWithdrawalHistoryListActivity.class);
                         intent.putExtra("id", id);
-                        
+
                     } else if ("scanrebate".equals(type)) {//扫码返利
 //                        intent.setClass(mContext, WithdrawDepositDateHistoryActivity.class);
 //                        intent.putExtra("personOrCompany", getItem(position).personorcompany);

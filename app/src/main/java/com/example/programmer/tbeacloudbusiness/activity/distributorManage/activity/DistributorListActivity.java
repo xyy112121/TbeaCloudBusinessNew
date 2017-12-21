@@ -308,6 +308,7 @@ public class DistributorListActivity extends BaseActivity implements BGARefreshL
             final DMMainListReponseModel.DataBean.DistributelistBean obj = mList.get(position);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.thumbpicture, holder.mHeadView);
             ImageLoader.getInstance().displayImage(MyApplication.instance.getImgPath() + obj.persontypeicon, holder.mJobtitleView);
+            holder.mJobtitleView.setVisibility(View.GONE);
             holder.mNameView.setText(obj.mastername);
             holder.mCityzoneView.setText(obj.zone);
             holder.mTotlemoneyView.setText(obj.totletakemoney);

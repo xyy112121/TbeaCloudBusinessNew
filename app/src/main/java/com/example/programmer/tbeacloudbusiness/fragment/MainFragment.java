@@ -1,6 +1,7 @@
 package com.example.programmer.tbeacloudbusiness.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -100,7 +101,7 @@ public class MainFragment extends BaseFragment implements BGARefreshLayout.BGARe
      */
     private void getData() {
         try {
-            final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     mRefreshLayout.endRefreshing();

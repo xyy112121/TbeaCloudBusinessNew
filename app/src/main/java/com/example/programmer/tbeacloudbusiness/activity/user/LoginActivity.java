@@ -48,28 +48,42 @@ public class LoginActivity extends PermissionActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mContext = this;
-        if (ShareConfig.getConfigBoolean(mContext, Constants.ONLINE, false)) {
-            Intent intent = new Intent(mContext, MainActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            //单个权限获取
-            checkPermission(new CheckPermListener() {
-                @Override
-                public void Granted() {
-                    mDeviceId = DeviceIdUtil.getDeviceId();
-                }
+        //单个权限获取
+        checkPermission(new CheckPermListener() {
+            @Override
+            public void Granted() {
+                if (ShareConfig.getConfigBoolean(mContext, Constants.ONLINE, false)) {
+                    Intent intent = new Intent(mContext, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    //单个权限获取
+                    checkPermission(new CheckPermListener() {
+                        @Override
+                        public void Granted() {
+                            mDeviceId = DeviceIdUtil.getDeviceId();
+                        }
 
-                @Override
-                public void Denied() {
-                    mDeviceId = Installation.id(mContext);
-                    //检查是否选择了不再提醒
-                }
-            }, "请求获取电话权限", Manifest.permission.READ_PHONE_STATE);
+                        @Override
+                        public void Denied() {
+                            mDeviceId = Installation.id(mContext);
+                            //检查是否选择了不再提醒
+                        }
+                    }, "请求获取权限", Manifest.permission.READ_PHONE_STATE);
 
-            listener();
-            getUpdateInfo();
-        }
+                    listener();
+                    getUpdateInfo();
+                }
+            }
+
+            @Override
+            public void Denied() {
+                finish();
+                showMessage("需要获取权限才可继续使用！");
+                //检查是否选择了不再提醒
+            }
+        }, "请求获取权限",Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
     }
 
     /**

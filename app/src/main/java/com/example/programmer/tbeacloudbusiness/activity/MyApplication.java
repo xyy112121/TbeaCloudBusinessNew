@@ -60,7 +60,7 @@ public class MyApplication extends Application implements BDLocationListener {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        initUniversalImageLoader();
+
         SDKInitializer.initialize(getApplicationContext());
         mLocationClient = new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(MyApplication.instance);
@@ -82,6 +82,7 @@ public class MyApplication extends Application implements BDLocationListener {
         //初始化二维码工具类
         ZXingLibrary.initDisplayOpinion(this);
 
+        initUniversalImageLoader();
     }
 
 
@@ -228,7 +229,7 @@ public class MyApplication extends Application implements BDLocationListener {
         dialog.show();
     }
 
-    private void initUniversalImageLoader() {
+    public void initUniversalImageLoader() {
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.icon_defult)
                 .showImageForEmptyUri(R.drawable.icon_defult)//设置图片Uri为空或是错误的时候显示的图片

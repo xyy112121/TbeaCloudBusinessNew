@@ -52,9 +52,8 @@ public class AddrSelectActivity extends BaseActivity implements View.OnClickList
             mProvince = getIntent().getStringExtra("province");
             mCity = getIntent().getStringExtra("city");
             mCounty = getIntent().getStringExtra("county");
-            mProvinceView.setValueText(mProvince+mCity+mCounty);
         }
-
+        mProvinceView.setValueText(mProvince+mCity+mCounty);
         mAddrInfoView.setValueText(getIntent().getStringExtra("addr"));
     }
 
